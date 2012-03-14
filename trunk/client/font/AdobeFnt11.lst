@@ -11,7 +11,7 @@ FullName:Berlin Sans FB Bold
 MenuName:Berlin Sans FB
 StyleBits:2
 WritingScript:Roman
-OutlineFileName:F:\flash\BattleFarm\source\client\Font\BRLNSB.TTF
+OutlineFileName:E:\i-card-v1\client\Font\BRLNSB.TTF
 DataFormat:sfntData
 FileLength:96880
 FileModTime:1298257392
@@ -30,7 +30,7 @@ FullName:Berlin Sans FB Demi Bold
 MenuName:Berlin Sans FB Demi
 StyleBits:2
 WritingScript:Roman
-OutlineFileName:F:\flash\BattleFarm\source\client\Font\BRLNSDB.TTF
+OutlineFileName:E:\i-card-v1\client\Font\BRLNSDB.TTF
 DataFormat:sfntData
 FileLength:96852
 FileModTime:1298257388
@@ -49,7 +49,7 @@ FullName:Berlin Sans FB
 MenuName:Berlin Sans FB
 StyleBits:0
 WritingScript:Roman
-OutlineFileName:F:\flash\BattleFarm\source\client\Font\BRLNSR.TTF
+OutlineFileName:E:\i-card-v1\client\Font\BRLNSR.TTF
 DataFormat:sfntData
 FileLength:97284
 FileModTime:1298257384

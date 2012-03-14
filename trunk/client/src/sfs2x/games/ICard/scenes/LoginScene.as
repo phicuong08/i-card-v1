@@ -36,7 +36,7 @@ package sfs2x.games.ICard.scenes
 		private var refDocument:*;
 
 		// Wnable/disable trace messages for this class
-		private var debugLogging: Boolean = false;
+		private var debugLogging: Boolean = true;
 
 		/**
 		 * Empty constructor
@@ -164,6 +164,7 @@ package sfs2x.games.ICard.scenes
 			// move the selector over the selected avatar and set player's avatar variable
 			avatarSelector.gotoAndStop(evt.target.name);
 			refDocument.myAvatar = evt.target.name;
+			d_trace("LoginScene - onChoseAvatar:"+evt.target.name);
 		}
 		
 		
