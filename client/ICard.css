@@ -1,0 +1,18 @@
+body 
+{
+	
+	background: #FFD005 url(images/main_bg.gif) repeat-x;
+	margin:20px;
+}
+
+table
+{
+	border-style: solid;
+	border-color: #FFB800;
+	border-width: 8px;
+}
+
+a, a:hover, a:visited {
+	text-decoration: none;
+	color:#FF3300;
+}
