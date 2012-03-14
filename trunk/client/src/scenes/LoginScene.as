@@ -10,7 +10,7 @@
 // (c) 2011 The gotoAndPlay() Team
 /***************************************************************/
 
-package sfs2x.games.battlefarm.scenes
+package sfs2x.games.ICard.scenes
 {
 	// Import Flash classes
 	import flash.media.*;

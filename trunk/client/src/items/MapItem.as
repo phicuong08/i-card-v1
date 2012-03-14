@@ -1,4 +1,4 @@
-﻿package sfs2x.games.battlefarm.items
+﻿package sfs2x.games.ICard.items
 {
 	import flash.display.*;
 	import flash.events.*;
