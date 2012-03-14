@@ -69,7 +69,7 @@ package sfs2x.games.ICard
 		public var soundEnabled      : Boolean = true;
 		
 		// Enable/disable trace messages
-		private var debugLogging     : Boolean = true;
+		private var debugLogging     : Boolean = false;
 		
 		// Sound handling
 		private var sndTrack         : Sound;
