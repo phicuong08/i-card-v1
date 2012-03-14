@@ -10,7 +10,7 @@
 	<!-- Mandatory Settings -->
 	<ip>127.0.0.1</ip>
 	<port>0000</port>
-	<zone>ICard</zone>
+	<zone>BattleFarm</zone>
 	<!-- End Mandatory Settings -->
 	
 	<debug>false</debug>
