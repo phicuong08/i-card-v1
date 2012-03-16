@@ -158,7 +158,7 @@ package sfs2x.games.ICard
 			d_trace("Main - showLoginScene");
 
 			connector_mc.visible  = true;
-			copyright_txt.visible = true;
+			
 			
 			if (!loginScene)
 			{
@@ -192,7 +192,7 @@ package sfs2x.games.ICard
 			
 			btnSoundOn.visible    = soundEnabled;
 			btnSoundOff.visible   = !soundEnabled;			
-			copyright_txt.visible = true;
+			
 			
 			// reset maps
 			availableMaps     = new Array();
@@ -226,7 +226,7 @@ package sfs2x.games.ICard
 
 			btnSoundOn.visible    = false;
 			btnSoundOff.visible   = false;			
-			copyright_txt.visible = false;
+		
 			
 			gameScene = new GameScene();
 			addChildAt(gameScene, numChildren-3);						
