@@ -158,6 +158,8 @@ package sfs2x.games.ICard
 			d_trace("Main - showLoginScene");
 
 			connector_mc.visible  = true;
+			connector_mc.x =690;
+			connector_mc.y =740;
 			
 			
 			if (!loginScene)
