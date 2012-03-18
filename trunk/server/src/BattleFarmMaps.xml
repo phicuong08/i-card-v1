@@ -1,0 +1,158 @@
+<!--
+	SmartFoxServer 
+	BattleFarm Extension maps file
+-->
+
+<ExtensionConfig>
+	
+	<!-- 
+		Non-walkable tiles (all uppercase letters, except X which is reserved to placed bombs)
+		A = cespuglio
+		B = pietra 1
+		C = tronco
+		D = fiore 1
+		E = fiore 2
+		F = balla di fieno 1
+		G = balla di fieno 2
+		H = cassa di legno
+		I = fiore 3
+		J = pietra 2
+		
+		Collectible items (all lowercase letters)
+		a = banana
+		b = ciliege
+		c = fragola
+		d = mirtillo
+		
+		Backgrounds
+		grass	= erba
+		stubble	= stoppie
+		soil	= terra
+		
+		Foregrounds
+		leafs	= foglie
+	-->
+	<Collectibles list="abcd" />
+	<Maps>
+		<!-- Level #1 -->
+		<MapData name="Chicken Yard" roomIcon="A" thumbnail="map1" background="grass" foreground="" matchTime="50" p1x="1" p1y="14" p2x="18" p2y="1">	
+			<mapLine>AAAAAAAAAAAAAAAAAAAA</mapLine>
+			<mapLine>A.....b....a.......A</mapLine>
+			<mapLine>A.AA.AAAAbACA.AAAA.A</mapLine>
+			<mapLine>A.....bb...........A</mapLine>
+			<mapLine>A.AAAAbAAA.AA.AAAA.A</mapLine>
+			<mapLine>Ab.............a...A</mapLine>
+			<mapLine>A.AAA.ACAA.AAAAaAA.A</mapLine>
+			<mapLine>A........aaa......bA</mapLine>
+			<mapLine>A.AA.AAAA.CCA.AAAA.A</mapLine>
+			<mapLine>A.aaa......bb..b...A</mapLine>
+			<mapLine>A.AAAA.CAA.AA.AAAC.A</mapLine>
+			<mapLine>A......b...........A</mapLine>
+			<mapLine>A.AAA.AAAA.AAAA.AA.A</mapLine>
+			<mapLine>A.....A.bA..AbA....A</mapLine>
+			<mapLine>A.A.Ab..........aAaA</mapLine>
+			<mapLine>AAAAAAAAAAAAAAAAAAAA</mapLine>
+		</MapData>
+	
+		<!-- Level #3 -->
+		<MapData name="Hay Fever" roomIcon="F" thumbnail="map2" background="stubble" foreground="" matchTime="50" p1x="1" p1y="14" p2x="18" p2y="1">	
+			<mapLine>AAAAAAAAAAAAAAAAAAAA</mapLine>
+			<mapLine>A...b.b...F........A</mapLine>
+			<mapLine>A.F.F.F.F...F.F.FF.A</mapLine>
+			<mapLine>A.d.F..dFdFdFd...d.A</mapLine>
+			<mapLine>A.F...F.......F.F.FA</mapLine>
+			<mapLine>A.F.F...F.F.F...F..A</mapLine>
+			<mapLine>A.F...F...c...F..c.A</mapLine>
+			<mapLine>Ac..F.FdFdFdFdF.FF.A</mapLine>
+			<mapLine>AFF...F...F...F....A</mapLine>
+			<mapLine>A.........c........A</mapLine>
+			<mapLine>A.F.FdF.F.F.F.F.FdFA</mapLine>
+			<mapLine>A.F...F.......F.F..A</mapLine>
+			<mapLine>A...F...FbFbF......A</mapLine>
+			<mapLine>A.F.F.FbF...FbF.F.FA</mapLine>
+			<mapLine>A.........F.....d.dA</mapLine>
+			<mapLine>AAAAAAAAAAAAAAAAAAAA</mapLine>
+		</MapData>
+		
+		<!-- Level #5 -->
+		<MapData name="Banana Split" roomIcon="B" thumbnail="map3" background="soil" foreground="leafs" matchTime="50" p1x="1" p1y="14" p2x="18" p2y="1">	
+			<mapLine>AAAAAAAAAAAAAAAAAAAA</mapLine>
+			<mapLine>A.B..B...B....B..B.A</mapLine>
+			<mapLine>A..aa..aa.aa...aa..A</mapLine>
+			<mapLine>A.BaaB.B.B.B..BaaB.A</mapLine>
+			<mapLine>A.BBBB........BBBB.A</mapLine>
+			<mapLine>A......A.AAAA......A</mapLine>
+			<mapLine>A.BBBB.A.aa.A.BBBB.A</mapLine>
+			<mapLine>A..cc..A.DD.A..cc..A</mapLine>
+			<mapLine>A.BBBB.A.aa.A.BBBB.A</mapLine>
+			<mapLine>A......AAAA.A......A</mapLine>
+			<mapLine>A.BBBB........BBBB.A</mapLine>
+			<mapLine>A.BaaB.B.B.B..BaaB.A</mapLine>
+			<mapLine>A..aa..aa.aa...aa..A</mapLine>
+			<mapLine>A.BBBB.B.B.B.BBBBB.A</mapLine>
+			<mapLine>A..................A</mapLine>
+			<mapLine>AAAAAAAAAAAAAAAAAAAA</mapLine>		
+		</MapData>
+		
+		<!-- Level #2 -->
+		<MapData name="Napalm Berries" roomIcon="C" thumbnail="map4" background="grass" foreground="leafs" matchTime="40" p1x="1" p1y="14" p2x="18" p2y="1">	
+			<mapLine>AAAAAAAAAAAAAAAAAAAA</mapLine>
+			<mapLine>A.dddd...AAd.......A</mapLine>
+			<mapLine>A.AA.C.C....CdC.AA.A</mapLine>
+			<mapLine>A.A......cc......AdA</mapLine>
+			<mapLine>Aa..A....DD....A..dA</mapLine>
+			<mapLine>Aa.AAA.I....D.AAA.dA</mapLine>
+			<mapLine>Aa..Ad..IccD..dA..dA</mapLine>
+			<mapLine>AA.....c.cc.c.....AA</mapLine>
+			<mapLine>AA......DccI......AA</mapLine>
+			<mapLine>A...Ad.D....I.dA..aA</mapLine>
+			<mapLine>A..AAA...II...AAA.aA</mapLine>
+			<mapLine>A...A...dddd...A..aA</mapLine>
+			<mapLine>A.A......DD......A.A</mapLine>
+			<mapLine>A.AA.CdC.cc.C.C.AA.A</mapLine>
+			<mapLine>A.......dAA...dddd.A</mapLine>
+			<mapLine>AAAAAAAAAAAAAAAAAAAA</mapLine>
+		</MapData>
+		
+		<!-- Level #4 -->
+		<MapData name="Fruit Loop" roomIcon="G" thumbnail="map5" background="stubble" foreground="leafs" matchTime="35" p1x="1" p1y="14" p2x="18" p2y="1">
+			<mapLine>FFFFFFFFFFFFFFFFFFFF</mapLine>
+			<mapLine>F..................F</mapLine>
+			<mapLine>F.G.G.GcGcGcG.G.G..F</mapLine>
+			<mapLine>F..G...........G.dGF</mapLine>
+			<mapLine>F.G.G.GcGcGcG.G.G..F</mapLine>
+			<mapLine>F..................F</mapLine>
+			<mapLine>FbG.G.G.G.G.G.G.G.bF</mapLine>
+			<mapLine>Fbb....Gb.bG.....bGF</mapLine>
+			<mapLine>FbG.G.G.G.G.G.G.G.bF</mapLine>
+			<mapLine>F..................F</mapLine>
+			<mapLine>F.G.G.G.GdG.G.G.G..F</mapLine>
+			<mapLine>F........G........GF</mapLine>
+			<mapLine>F.G.G.G.G.G.G.G.G..F</mapLine>
+			<mapLine>F..Gd.dGd.dGd.dG...F</mapLine>
+			<mapLine>F..................F</mapLine>
+			<mapLine>FFFFFFFFFFFFFFFFFFFF</mapLine>
+		</MapData>
+		
+		<!-- Level #6 -->
+		<MapData name="Cherry Attack" roomIcon="H" thumbnail="map6" background="soil" foreground="leafs" matchTime="40" p1x="1" p1y="14" p2x="18" p2y="1">	
+			<mapLine>AAAAAAAAAAAAAAAAAAAA</mapLine>
+			<mapLine>A..dAd...H.......B.A</mapLine>
+			<mapLine>A.A.b.A..d..BBBB.B.A</mapLine>
+			<mapLine>A..bAb...H..BaaB.B.A</mapLine>
+			<mapLine>A.A...A..d..BaBB.B.A</mapLine>
+			<mapLine>A..bAb..HdH.Bbbb.B.A</mapLine>
+			<mapLine>A.A.b.A..d..BBBBBB.A</mapLine>
+			<mapLine>A...A..............A</mapLine>
+			<mapLine>A.........d....A...A</mapLine>
+			<mapLine>A.BBBBBB.HdH.A.b.A.A</mapLine>
+			<mapLine>A.B.bbbB..d...bAb..A</mapLine>
+			<mapLine>A.B.BBaB..H..A...A.A</mapLine>
+			<mapLine>A.B.BaaB..d...bAb..A</mapLine>
+			<mapLine>A.B.BBBB..H..A.b.A.A</mapLine>
+			<mapLine>A.B.......d...dAd..A</mapLine>
+			<mapLine>AAAAAAAAAAAAAAAAAAAA</mapLine>		
+		</MapData>
+	</Maps>
+	
+</ExtensionConfig>
