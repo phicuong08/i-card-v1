@@ -41,6 +41,7 @@ package ICard {
         public function init(_arg1:View, _arg2:Controller):void{
             this._view = _arg1;
             this._ctrl = _arg2;
+			
         }
         protected function createObject(_arg1:Class, _arg2:String=""):Object{
             _arg2 = (_arg1 + "");
@@ -50,21 +51,21 @@ package ICard {
         protected function hasNotAllow(_arg1:int, _arg2:int):Boolean{
             var _local4:Object;
             var _local3:Number = ((this._notAllowList[Protocol.concat(_arg1, _arg2)]) || (0));
-            if ((((_local3 == 0)) || (((new Date().getTime() - _local3) > 900)))){
-                return (false);
-            };
+//            if ((((_local3 == 0)) || (((new Date().getTime() - _local3) > 900)))){
+//                return (false);
+//            };
             _local4 = Protocol.lookupProtocol(_arg1, _arg2);
             Helper.alert((Protocol.getProtocolDescription(_local4["request"]) + " 请求间隔太短。"));
             return (true);
         }
         protected function addNotAllow(_arg1:int, _arg2:int):void{
-            this._notAllowList[Protocol.concat(_arg1, _arg2)] = new Date().getTime();
+           // this._notAllowList[Protocol.concat(_arg1, _arg2)] = new Date().getTime();
         }
         protected function removeNotAllow(_arg1:int, _arg2:int):void{
         }
         public function call(_arg1:Object, _arg2:Function, _arg3:Array, _arg4:Boolean=true):void{
             if (this._sock.connected == false){
-                this._view.tip2.showAlert(DataBaseLang.connected);
+            //    this._view.tip2.showAlert(DataBaseLang.connected);
                 return;
             };
             var _local5:int = _arg1["module"];
@@ -160,7 +161,7 @@ package ICard {
         }
         private function onCloseHandler(_arg1:Event):void{
             Helper.backtrace("onCloseHandler");
-            this._view.tip2.showAlert(DataBaseLang.connected);
+            
             this._view.resetHost();
             if ((this._onClose is Function)){
                 this._onClose();
@@ -171,7 +172,7 @@ package ICard {
                 this.connectProxy();
             } else {
                 Helper.backtrace("onIoErrorHandler");
-                this._view.alert.socketClosed("连接不到服务器！", (((("Socket 错误。 URL: " + this._host) + ":") + this._port) + "，该地址没有提供Socket服务。"));
+                //this._view.alert.socketClosed("连接不到服务器！", (((("Socket 错误。 URL: " + this._host) + ":") + this._port) + "，该地址没有提供Socket服务。"));
                 this._view.resetHost();
             };
         }
@@ -180,13 +181,13 @@ package ICard {
                 this.connectProxy();
             } else {
                 Helper.backtrace("onSecurityErrorHandler");
-                this._view.alert.socketClosed("安全沙箱冲突！", (((("安全沙箱冲突: 不能从" + this._host) + ":") + this._port) + "加载数据。"));
+               // this._view.alert.socketClosed("安全沙箱冲突！", (((("安全沙箱冲突: 不能从" + this._host) + ":") + this._port) + "加载数据。"));
                 this._view.resetHost();
             };
         }
         private function connectProxy():void{
             if (true == this.connectSucceed){
-                this._view.tip2.showAlert(DataBaseLang.connected);
+               // this._view.tip2.showAlert(DataBaseLang.connected);
                 return;
             };
             this._sock.close();

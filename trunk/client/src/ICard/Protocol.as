@@ -1,24 +1,24 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com {
+package ICard {
     import flash.utils.*;
-    import com.assist.*;
-    import com.protocols.*;
-    import com.haloer.utils.*;
-
+    import ICard.assist.*;
+    import ICard.protocols.*;
+    import ICard.haloer.utils.*;
+	
     public class Protocol {
 
         private static var _wired:Dictionary;
         public static var modName:String;
         public static var funName:String;
-
+		
+		
         public static function init():void{
             if (_wired == null){
                 _wired = new Dictionary();
                 addWired(Mod_Town_Base.enter_town);
                 addWired(Mod_Town_Base.leave_town);
                 addWired(Mod_Town_Base.move_to);
-                addWired(Mod_Chat_Base.bro_to_players);
-                addWired(Mod_Player_Base.update_player_data);
+
             };
         }
         public static function addWired(_arg1:Object):void{

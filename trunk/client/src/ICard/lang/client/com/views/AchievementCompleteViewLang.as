@@ -1,5 +1,5 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com.lang.client.com.views {
+package ICard.lang.client.com.views {
 
     public class AchievementCompleteViewLang {
 
