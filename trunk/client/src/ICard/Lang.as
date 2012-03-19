@@ -1,7 +1,7 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package com {
+package ICard {
     import flash.utils.*;
-    import com.haloer.data.*;
+    import ICard.haloer.data.*;
 
     public class Lang {
 
