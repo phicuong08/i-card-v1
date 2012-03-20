@@ -25,7 +25,7 @@ package sfs2x.games.ICard
 	import flash.display.LoaderInfo;
 	import flash.media.SoundChannel;
 	import flash.net.LocalConnection;
-
+	import ICard.View;
     // Import SmartFoxServer 2X classes
 	import com.smartfoxserver.v2.SmartFox;
 	import com.smartfoxserver.v2.entities.*;
