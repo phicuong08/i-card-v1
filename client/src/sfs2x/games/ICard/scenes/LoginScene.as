@@ -43,6 +43,7 @@ package sfs2x.games.ICard.scenes
 		 */
 		public function LoginScene()
 		{
+			stage.align = StageAlign.TOP_LEFT;
 		}
 		
 		
