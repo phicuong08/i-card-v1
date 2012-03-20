@@ -1,7 +1,7 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard {
 
-    public class ControllerBase extends SuperBase {
+    public class ControllerBaseMgr extends SuperMgr {
 
         protected var _data:Data;
         protected var _lang:Lang;

@@ -2,14 +2,14 @@
 package ICard {
     import flash.utils.*;
 
-    public class SuperBase {
+    public class SuperMgr {
 
         private var _superSubBaseList:Object;
         private var _frameProcessList:Object;
         private var _timerProcessList:Object;
         private var _nameHash:Object;
 
-        public function SuperBase(){
+        public function SuperMgr(){
             this._superSubBaseList = {};
             this._frameProcessList = {};
             this._timerProcessList = {};

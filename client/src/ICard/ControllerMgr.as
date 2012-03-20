@@ -3,7 +3,7 @@ package ICard {
     import ICard.controllers.*;
 
 	
-    public class Controller extends ControllerBase {
+    public class ControllerMgr extends ControllerBaseMgr {
 
         public function get achievement():AchievementController{
             return ((createObject(AchievementController) as AchievementController));
