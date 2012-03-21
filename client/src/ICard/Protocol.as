@@ -200,7 +200,7 @@ package ICard {
             var _local6:int;
             var _local7:int;
             var _local8:Object;
-            var _local2 = "";
+            var _local2:String = "";
             for (_local3 in Mod.Modules) {
                 _local4 = Mod.Modules[_local3];
                 _local5 = _local4["Actions"];
@@ -221,6 +221,6 @@ package ICard {
         }
 
     }
-    var _local1:* = Protocol.init();
+   // var _local1:* = Protocol.init();
     //return (_local1);
 }//package com 

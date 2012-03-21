@@ -52,6 +52,7 @@ package adobe.serialization.json {
                 this.tokenizer.parseError(("Expecting ] or , but found " + this.token.value));
             };
             //unresolved jump
+			return _local1;
         }
         private function parseObject():Object{
             var _local2:String;
@@ -93,6 +94,7 @@ package adobe.serialization.json {
             } else {
                 this.tokenizer.parseError(("Expecting string but found " + this.token.value));
             };
+			return _local1;
             //unresolved jump
         }
         private function parseValue():Object{

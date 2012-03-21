@@ -191,8 +191,8 @@ package ICard.datas {
             this.isMinorAccount = _arg1[1];
         }
         public function server_time(_arg1:Array):void{
-            var _local2:Number = (new Date().getTime() / 1000);
-            this.diffServerTime = (_local2 - _arg1[0]);
+//            var _local2:Number = (new Date().getTime() / 1000);
+//            this.diffServerTime = (_local2 - _arg1[0]);
         }
         public function get_other_player_info(_arg1:Array):void{
             this.otherPlayerLv = _arg1[0];
@@ -252,15 +252,15 @@ package ICard.datas {
             this.originNickName = this.nickname;
             this.nickname = this.removeNickNameSuffix(this.nickname);
             this.avatarCD = ((this.avatarCD * 1000) + getTimer());
-            _data.town.setPlayerMount(this.mounts, this.playerId);
-            _data.town.setPlayerAvatar(this.avatar, this.playerId);
+       //     _data.town.setPlayerMount(this.mounts, this.playerId);
+       //     _data.town.setPlayerAvatar(this.avatar, this.playerId);
             if (URI.vipHidden){
                 this.vipLevel = -1;
             };
-            VIPType.level = this.vipLevel;
-            MissionType.lock = this.missionKey;
-            TownType.lock = this.townKey;
-            TownType.campSign = FactionType.campSign(this.campId);
+//            VIPType.level = this.vipLevel;
+//            MissionType.lock = this.missionKey;
+//            TownType.lock = this.townKey;
+//            TownType.campSign = FactionType.campSign(this.campId);
         }
         private function format_player_data(_arg1:Array):void{
             var _local2:int = _arg1.length;
@@ -315,16 +315,7 @@ package ICard.datas {
                     this.oldDatas[_arg1] = this.medicalMax;
                     this.medicalMax = _arg2;
                     break;
-                case Mod_Player_Base.PLAYER_TRANSPORT:
-                    this.oldDatas[_arg1] = this.mounts;
-                    this.mounts = _arg2;
-                    _data.town.setPlayerMount(this.mounts, this.playerId);
-                    break;
-                case Mod_Player_Base.PLAYER_AVATAR:
-                    this.oldDatas[_arg1] = this.avatar;
-                    this.avatar = _arg2;
-                    _data.town.setPlayerAvatar(this.avatar, this.playerId);
-                    break;
+
                 case Mod_Player_Base.PLAYER_AVATAR_CD:
                     this.oldDatas[_arg1] = this.avatarCD;
                     this.avatarCD = ((_arg2 * 1000) + getTimer());
@@ -342,11 +333,11 @@ package ICard.datas {
                 case Mod_Player_Base.PLAYER_ROLE_LEVEL:
                     this.upRoleList[_arg2] = _arg2;
                     break;
-                case Mod_Player_Base.PLAYER_TOWN_KEY:
-                    this.oldDatas[_arg1] = this.townKey;
-                    this.townKey = _arg2;
-                    TownType.lock = _arg2;
-                    break;
+//                case Mod_Player_Base.PLAYER_TOWN_KEY:
+//                    this.oldDatas[_arg1] = this.townKey;
+//                    this.townKey = _arg2;
+//                    TownType.lock = _arg2;
+//                    break;
                 case Mod_Player_Base.HEALTH_UP_SYS:
                     this.oldDatas[_arg1] = this.healthUpdateSys;
                     this.healthUpdateSys = (Math.random() * 100000);
@@ -381,21 +372,21 @@ package ICard.datas {
                     this.maxExtraPower = _arg2;
                     break;
                 case Mod_Player_Base.ONLINE_GIFT:
-                    _local3 = (new Date().getTime() / 1000);
-                    this.oldDatas[_arg1] = this.onlineGiftTime;
-                    this.onlineGiftTime = (_arg2 + _local3);
+//                    _local3 = (new Date().getTime() / 1000);
+//                    this.oldDatas[_arg1] = this.onlineGiftTime;
+//                    this.onlineGiftTime = (_arg2 + _local3);
                     break;
                 case Mod_Player_Base.GET_ONLINE_GIFT:
                     this.oldDatas[_arg1] = this.isGetOnlineGift;
                     this.isGetOnlineGift = _arg2;
                     break;
-                case Mod_Player_Base.VIP_LEVEL:
-                    if (URI.vipHidden == false){
-                        this.oldDatas[_arg1] = this.vipLevel;
-                        this.vipLevel = _arg2;
-                        VIPType.level = this.vipLevel;
-                    };
-                    break;
+//                case Mod_Player_Base.VIP_LEVEL:
+//                    if (URI.vipHidden == false){
+//                        this.oldDatas[_arg1] = this.vipLevel;
+//                        this.vipLevel = _arg2;
+//                        VIPType.level = this.vipLevel;
+//                    };
+//                    break;
                 case Mod_Player_Base.PLAYER_DAY_QUEST:
                     this.oldDatas[_arg1] = this.dayQuestState;
                     this.dayQuestState = _arg2;
@@ -413,10 +404,10 @@ package ICard.datas {
                     this.skillChange = (_arg2 - this.skill);
                     this.skill = _arg2;
                     break;
-                case Mod_Player_Base.MAX_MISSION_LOCK:
-                    this.missionKey = _arg2;
-                    MissionType.lock = _arg2;
-                    break;
+//                case Mod_Player_Base.MAX_MISSION_LOCK:
+//                    this.missionKey = _arg2;
+//                    MissionType.lock = _arg2;
+//                    break;
                 case Mod_Player_Base.STATE_POINT:
                     this.oldDatas[_arg1] = this.statePoint;
                     this.statePoint = _arg2;
@@ -454,17 +445,17 @@ package ICard.datas {
                     this.practiceChangeList.push(this.playerInfo);
                 };
             } else {
-                _local3 = _data.town.getPlayerInfo(_arg1[1]);
-                this.practiceChangeList.push(_local3);
-                if (_arg1[0] == Mod_Player_Base.START_PRACTICE){
-                    _local3.practice = Mod_Town_Base.ON_PRACTICE;
-                } else {
-                    if (_arg1[0] == Mod_Player_Base.FINISHED_PRACTICE){
-                        _local3.practice = Mod_Town_Base.FINISHED_PRACTICE;
-                    } else {
-                        _local3.practice = Mod_Town_Base.OFF_PRACTICE;
-                    };
-                };
+//                _local3 = _data.town.getPlayerInfo(_arg1[1]);
+//                this.practiceChangeList.push(_local3);
+//                if (_arg1[0] == Mod_Player_Base.START_PRACTICE){
+//                    _local3.practice = Mod_Town_Base.ON_PRACTICE;
+//                } else {
+//                    if (_arg1[0] == Mod_Player_Base.FINISHED_PRACTICE){
+//                        _local3.practice = Mod_Town_Base.FINISHED_PRACTICE;
+//                    } else {
+//                        _local3.practice = Mod_Town_Base.OFF_PRACTICE;
+//                    };
+//                };
             };
         }
         public function get_practice_data(_arg1:Array):void{
@@ -478,19 +469,19 @@ package ICard.datas {
             this.warCdTime = _arg1[0];
         }
         public function get_game_assistant_info(_arg1:Array):void{
-            var _local3:Array;
-            var _local4:Object;
-            this.getGameAssistantInfo = {};
-            oObject.list(_arg1, this.getGameAssistantInfo, ["sports_rank", "combat", "fame", "skill", "role_number", "max_role_number", "day_quest_number", "day_quest_finish", "buy_power_chance", "buy_power_value", "buy_power_ingot", "ingot_rune_chance", "camp_salary", "is_get_camp_salary", "free_fate_chance", "incense_chance", "medical_number", "next_medical_time", "medical_item_id", "super_sports_chance", "super_sports_cd_time", "takebible_chance", "takebible_arrival_remain", "send_flower_chance", "free_reset_chance", "coin_tree_chance", "buy_coin_tree_count_chance", "achievement_points", "state_point", "roll_cake_count", "worship_mars_times", "buy_fate_npc_times"]);
-            this.getGameAssistantInfo["medical_item_name"] = ItemType.getName(this.getGameAssistantInfo["medical_item_id"]);
-            var _local2:Array = [];
-            for each (_local3 in (_arg1[(_arg1.length - 1)] as Array)) {
-                _local4 = {};
-                oObject.list(_local3, _local4, ["back_times_type", "ingot", "is_can_back"]);
-                _local4["is_can_back"] = ((_local4["is_can_back"] == 0)) ? true : false;
-                _local2.push(_local4);
-            };
-            this.getGameAssistantInfo["back_times_list"] = _local2;
+//            var _local3:Array;
+//            var _local4:Object;
+//            this.getGameAssistantInfo = {};
+//            oObject.list(_arg1, this.getGameAssistantInfo, ["sports_rank", "combat", "fame", "skill", "role_number", "max_role_number", "day_quest_number", "day_quest_finish", "buy_power_chance", "buy_power_value", "buy_power_ingot", "ingot_rune_chance", "camp_salary", "is_get_camp_salary", "free_fate_chance", "incense_chance", "medical_number", "next_medical_time", "medical_item_id", "super_sports_chance", "super_sports_cd_time", "takebible_chance", "takebible_arrival_remain", "send_flower_chance", "free_reset_chance", "coin_tree_chance", "buy_coin_tree_count_chance", "achievement_points", "state_point", "roll_cake_count", "worship_mars_times", "buy_fate_npc_times"]);
+//            this.getGameAssistantInfo["medical_item_name"] = ItemType.getName(this.getGameAssistantInfo["medical_item_id"]);
+//            var _local2:Array = [];
+//            for each (_local3 in (_arg1[(_arg1.length - 1)] as Array)) {
+//                _local4 = {};
+//                oObject.list(_local3, _local4, ["back_times_type", "ingot", "is_can_back"]);
+//                _local4["is_can_back"] = ((_local4["is_can_back"] == 0)) ? true : false;
+//                _local2.push(_local4);
+//            };
+//            this.getGameAssistantInfo["back_times_list"] = _local2;
         }
         public function back_times(_arg1:Array):void{
             oObject.list(_arg1, this.backTimesResult, ["result", "back_times_type"]);

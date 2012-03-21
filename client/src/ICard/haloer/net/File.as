@@ -1,10 +1,10 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.haloer.net {
-    import flash.events.*;
     import flash.display.*;
-    import flash.utils.*;
-    import flash.system.*;
+    import flash.events.*;
     import flash.net.*;
+    import flash.system.*;
+    import flash.utils.*;
 
     public class File {
 
@@ -50,9 +50,9 @@ package ICard.haloer.net {
             var index:* = _arg2;
             var temp:* = _arg3;
             var callback:* = _arg4;
-            var progress = _arg5;
-            var oneCompleted = _arg6;
-            var error = _arg7;
+            var progress:Function = _arg5;
+            var oneCompleted:Function = _arg6;
+            var error:Function = _arg7;
             var id:int = _arg8;
             var file:* = new (File)();
             temp.push(file);
@@ -114,7 +114,7 @@ package ICard.haloer.net {
         }
         public function load(_arg1:String):void{
             this._uri = _arg1;
-            var _local2 = "";
+            var _local2:String = "";
             if ((onVersion is Function)){
                 _local2 = onVersion(_arg1);
                 if (_local2 != ""){

@@ -22,7 +22,7 @@ package ICard.haloer.net {
             try {
                 this._so.data[name] = value;
                 this._so.flush(5000);
-            } catch(e) {
+            } catch(e:Error) {
             };
         }
         public function getCookie(_arg1:String):Object{
