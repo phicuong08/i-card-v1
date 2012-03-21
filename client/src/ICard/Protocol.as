@@ -222,5 +222,5 @@ package ICard {
 
     }
     var _local1:* = Protocol.init();
-    return (_local1);
+    //return (_local1);
 }//package com 

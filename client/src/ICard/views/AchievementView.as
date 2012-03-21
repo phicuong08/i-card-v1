@@ -5,7 +5,7 @@ package ICard.views {
     import ICard.assist.server.*;
     import ICard.lang.client.com.views.*;
 
-    public class AchievementView extends Base implements IView {
+    public class AchievementView extends ICard.views.Base implements IView {
 
         private var _achievement:IAchievement;
         private var _delayGotoAchievementLabel:Function = null;
@@ -32,11 +32,11 @@ package ICard.views {
         }
         private function showUI():void{
             _popup.addView(this, this._achievement.content);
-            _view.center(sign, this._achievement.content);
+            _viewMgr.center(sign, this._achievement.content);
         }
         private function render():void{
             if (this._achievement == null){
-                this._achievement = (_view.getAssetsObject("Achievement", "Achievement") as IAchievement);
+                this._achievement = (_viewMgr.getAssetsObject("Achievement", "Achievement") as IAchievement);
             };
             this.init();
             this.getPlayerAchievementListCallBack();
@@ -46,8 +46,8 @@ package ICard.views {
             };
         }
         private function init():void{
-            this._achievement.tip = this._view.tip.iTip;
-            this._achievement.drag = this._view.drag.iDrag;
+//            this._achievement.tip = this._viewMgr.tip.iTip;
+//            this._achievement.drag = this._viewMgr.drag.iDrag;
             this._achievement.onClose = this.close;
             this._achievement.init();
         }

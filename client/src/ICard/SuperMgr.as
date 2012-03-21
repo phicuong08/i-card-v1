@@ -45,7 +45,7 @@ package ICard {
                 _local4[_local1]();
             };
         }
-        protected function createObjectBase(_arg1:Class, _arg2:String, _arg3:View, _arg4:Controller, _arg5:Data):Object{
+        protected function createObjectBase(_arg1:Class, _arg2:String, _arg3:ViewMgr, _arg4:ControllerMgr, _arg5:Data):Object{
             var _local6:String = this._nameHash[_arg2];
             if (null == _local6){
                 _local6 = _arg2.replace(/^\[class /, "");

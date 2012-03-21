@@ -1,14 +1,15 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard {
-    import flash.utils.*;
     import ICard.haloer.data.*;
+    
+    import flash.utils.*;
 
     public class Lang {
 
         public static function sprintf(_arg1:String, ... _args):String{
             var _local5:RegExp;
             var _local3:int = _args.length;
-            var _local4 = 1;
+            var _local4:int = 1;
             while (_local4 <= _local3) {
                 _local5 = new RegExp((("\\$<" + _local4) + ">"));
                 _arg1 = _arg1.replace(_local5, _args[(_local4 - 1)]);

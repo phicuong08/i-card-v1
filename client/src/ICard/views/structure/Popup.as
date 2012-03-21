@@ -7,7 +7,7 @@ package ICard.views.structure {
     import ICard.assist.view.*;
     import flash.utils.*;
     import ICard.haloer.data.*;
-
+	import ICard.views.Base;
     public class Popup extends Base {
 
         private var _superViews:Array;
@@ -43,7 +43,7 @@ package ICard.views.structure {
             this._superViews = this._view.superViews;
             this._coexistViews = this._view.coexistViews;
             this._exclusiveViews = this._view.exclusiveViews;
-            this._inTownViews = this._view.inTownViews;
+  //          this._inTownViews = this._view.inTownViews;
             this._freeViews = this._view.freeViews;
             this._view.addToFrameProcessList(this.toString(), this.process);
         }
@@ -169,7 +169,7 @@ package ICard.views.structure {
                 _local3++;
             };
         }
-        override public function closeAll():void{
+        public function closeAll():void{
             var _local3:IView;
             var _local1:Array = oObject.getKeys(this._views);
             var _local2:int;
