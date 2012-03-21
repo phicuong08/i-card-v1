@@ -9,10 +9,10 @@ package ICard {
     import ICard.haloer.utils.*;
     import flash.errors.*;
 
-    public class DataBase extends SuperBase {
+    public class DataBase extends BaseMgr {
 
-        protected var _ctrl:Controller;
-        protected var _view:View;
+        protected var _ctrl:ControllerMgr;
+        protected var _view:ViewMgr;
         protected var _notAllowList:Object;
         protected var _sock:Socket;
         private var _host:String;
@@ -35,10 +35,10 @@ package ICard {
             this._eventList = {};
             super();
         }
-        public function get controller():Controller{
+        public function get controller():ControllerMgr{
             return (this._ctrl);
         }
-        public function init(_arg1:View, _arg2:Controller):void{
+        public function init(_arg1:ViewMgr, _arg2:ControllerMgr):void{
             this._view = _arg1;
             this._ctrl = _arg2;
 			

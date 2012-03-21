@@ -17,7 +17,7 @@ package ICard.views {
         private static var _instance:Structure;
 
         private var _stage:Stage;
-        private var _view:View;
+        private var _view:ViewMgr;
         private var _mouse:Sprite;
         private var _tip:Tip;
         private var _alert:Alert;
@@ -28,10 +28,10 @@ package ICard.views {
 
         public function Structure(_arg1:Singleton){
         }
-        public static function getInstance(_arg1:Stage, _arg2:ViewBase):Structure{
+        public static function getInstance(_arg1:Stage, _arg2:ViewBaseMgr):Structure{
             if (null == Structure._instance){
                 Structure._instance = new Structure(new Singleton());
-                Structure._instance.init(_arg1, (_arg2 as View));
+                Structure._instance.init(_arg1, (_arg2 as ViewMgr));
             };
             return (Structure._instance);
         }
@@ -88,7 +88,7 @@ package ICard.views {
         public function get background():Sprite{
             return (this._background);
         }
-        private function init(_arg1:Stage, _arg2:View):void{
+        private function init(_arg1:Stage, _arg2:ViewMgr):void{
             this._stage = _arg1;
             this._view = _arg2;
             this._mouse = new Sprite();

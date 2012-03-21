@@ -1,7 +1,7 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard {
 
-    public class ControllerBaseMgr extends SuperMgr {
+    public class ControllerBaseMgr extends BaseMgr {
 
         protected var _data:Data;
         protected var _lang:Lang;
@@ -16,7 +16,7 @@ package ICard {
         protected function createObject(_arg1:Class, _arg2:String=""):Object{
             _arg2 = (_arg1 + "");
             _arg2 = _arg2.replace(/Controller\]$/, "");
-            return (createObjectBase(_arg1, _arg2, null, (this as Controller), this._data));
+            return (createObjectBase(_arg1, _arg2, null, (this as ControllerMgr), this._data));
         }
 
     }
