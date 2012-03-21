@@ -8,11 +8,11 @@ package ICard {
     import ICard.assist.*;
     import ICard.haloer.data.*;
 
-    public class ViewBase extends SuperBase {
+    public class ViewBase extends SuperMgr {
 
         protected var _stage:Stage;
         protected var _structure:Structure;
-        protected var _ctrl:Controller;
+        protected var _ctrl:ControllerMgr;
         protected var _data:Data;
         protected var _lang:Lang;
         private var _positionList:Object;
@@ -32,13 +32,13 @@ package ICard {
         public function get structure():Structure{
             return (this._structure);
         }
-        public function get ctrl():Controller{
+        public function get ctrl():ControllerMgr{
             return (this._ctrl);
         }
         public function get lang():Lang{
             return (this._lang);
         }
-        public function init(_arg1:Data, _arg2:Controller, _arg3:Lang):void{
+        public function init(_arg1:Data, _arg2:ControllerMgr, _arg3:Lang):void{
             this._data = _arg1;
             this._ctrl = _arg2;
             this._lang = _arg3;
