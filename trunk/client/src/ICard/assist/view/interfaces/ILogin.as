@@ -7,7 +7,6 @@ package ICard.assist.view.interfaces {
         function get content():Sprite;
         function set drag(_arg1:IDrag):void;
         function set onClose(_arg1:Function):void;
-        function set onRecharge(_arg1:Function):void;
         function clear():void;
 
     }

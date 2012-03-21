@@ -1,7 +1,8 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.assist.server {
     import ICard.haloer.net.*;
-    import ICard.adobe.serialization.json.*;
+    import adobe.serialization.json.*;
+	import adobe.serialization.json.JSON;
     import ICard.assist.*;
     import ICard.haloer.data.*;
 

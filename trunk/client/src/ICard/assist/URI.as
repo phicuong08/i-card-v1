@@ -44,7 +44,8 @@ package ICard.assist {
             return (((_args["port"]) || (0)));
         }
         public static function get gameVersion():int{
-            return (((((_args["game_version"]) || (Config.GameVersion))) || (0)));
+           // return (((((_args["game_version"]) || (Config.GameVersion))) || (0)));
+			return 0;
         }
         public static function get assetsRnd():String{
             return (((_args["assets_rnd"]) || ("")));
@@ -133,7 +134,7 @@ package ICard.assist {
         }
         public static function get weiBoGender():String{
             var _local1:String = _args["weibo_gender"];
-            return ((/^(?:m|f|n)$/.test(_local1)) ? _local1 : "n");
+            return 'm';//((/^(?:m|f|n)$/.test(_local1)) ? _local1 : "n");
         }
         public static function get domain():String{
             return (_domain);
@@ -333,8 +334,8 @@ package ICard.assist {
 
 import flash.events.*;
 import flash.display.*;
-import com.haloer.net.*;
-
+import ICard.haloer.net.*;
+import ICard.assist.URI;
 class TempSelectDomain {
 
     public static var stage:Stage;
