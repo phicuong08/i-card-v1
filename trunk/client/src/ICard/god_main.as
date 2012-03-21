@@ -24,9 +24,9 @@
             Instance = this;
             stage.align = StageAlign.TOP_LEFT;
             stage.scaleMode = StageScaleMode.NO_SCALE;
-            URI.test = Config.EnableDomainSelector;
+            URI.test = false;//Config.EnableDomainSelector;
             URI.analyze(this);
-            Helper.test = Config.EnableProtocolHelper;
+            Helper.test = false;//Config.EnableProtocolHelper;
             Helper.initStage(stage);
             this._data = new Data();
             this._ctrl = new ControllerMgr();
