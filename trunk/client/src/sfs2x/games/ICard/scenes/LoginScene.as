@@ -30,7 +30,10 @@ package sfs2x.games.ICard.scenes
 	import com.smartfoxserver.v2.core.SFSEvent;
 	import com.smartfoxserver.v2.entities.data.*;
 
-	public class LoginScene extends MovieClip
+  import ICard.assist.view.interfaces.*;
+  import ICard.assist.*;
+  
+	public class LoginScene extends MovieClip implements ILogin
 	{				
 		// Keeps the reference to the main document class
 		private var refDocument:*;
@@ -43,7 +46,7 @@ package sfs2x.games.ICard.scenes
 		 */
 		public function LoginScene()
 		{
-			stage.align = StageAlign.TOP_LEFT;
+
 		}
 		
 		

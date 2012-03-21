@@ -1,6 +1,6 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.protocols {
-    import com.*;
+    import ICard.*;
 
     public class Mod_Achievement {
 

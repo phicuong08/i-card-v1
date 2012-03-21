@@ -16,7 +16,7 @@ package ICard.views.structure {
         private var _inTownViews:Array;
         private var _freeViews:Array;
         public var structure:Structure;
-        private var _view:View;
+        private var _view:ViewMgr;
         private var _supers:Dictionary;
         private var _views:Dictionary;
         private var _frees:Dictionary;
@@ -30,7 +30,7 @@ package ICard.views.structure {
         private var _processList:Dictionary;
         private var _focusView:IView;
 
-        public function Popup(_arg1:View):void{
+        public function Popup(_arg1:ViewMgr):void{
             this._supers = new Dictionary();
             this._views = new Dictionary();
             this._frees = new Dictionary();

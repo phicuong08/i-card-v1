@@ -8,8 +8,8 @@ package ICard.views {
     public class Base extends SuperSubBase {
 
         protected var _instanceName:String;
-        protected var _view:View;
-        protected var _ctrl:Controller;
+        protected var _view:ViewMgr;
+        protected var _ctrl:ControllerMgr;
         protected var _data:IData;
         protected var _structure:Structure;
         protected var _popup:Popup;
@@ -35,7 +35,7 @@ package ICard.views {
         public function get ignoreKeyboardEvent():Boolean{
             return (this._ignoreKeyboardEvent);
         }
-        override public function settle(_arg1:String, _arg2:View, _arg3:Controller, _arg4:Data, _arg5:SuperBase):void{
+        override public function settle(_arg1:String, _arg2:ViewMgr, _arg3:ControllerMgr, _arg4:Data, _arg5:BaseMgr):void{
             if (null == this._view){
                 this._instanceName = _arg1;
                 this._view = _arg2;

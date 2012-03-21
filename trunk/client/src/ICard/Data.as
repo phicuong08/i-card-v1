@@ -25,7 +25,7 @@ package ICard {
             return ((createObject(AchievementData) as AchievementData));
         }
       
-        override public function init(_arg1:View, _arg2:Controller):void{
+        override public function init(_arg1:ViewMgr, _arg2:ControllerMgr):void{
             super.init(_arg1, _arg2);
 
             Mod_Achievement.register(this);

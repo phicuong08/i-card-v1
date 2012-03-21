@@ -6,10 +6,10 @@ package ICard.datas {
 
         protected var _instanceName:String;
         protected var _data:Data;
-        protected var _ctrl:Controller;
+        protected var _ctrl:ControllerMgr;
         protected var _loaded:Boolean = false;
 
-        override public function settle(_arg1:String, _arg2:View, _arg3:Controller, _arg4:Data, _arg5:SuperBase):void{
+        override public function settle(_arg1:String, _arg2:ViewMgr, _arg3:ControllerMgr, _arg4:Data, _arg5:BaseMgr):void{
             if (null == this._data){
                 this._instanceName = _arg1;
                 this._data = _arg4;

@@ -1,15 +1,15 @@
 ﻿package {
     import flash.events.*;
-    import com.*;
+    import ICard.*;
     import flash.display.*;
     import flash.utils.*;
-    import com.assist.*;
+    import ICard.assist.*;
 
     public class Main extends Sprite {
 
         public static var Instance:Main;
 
-        private var _ctrl:Controller;
+        private var _ctrl:ControllerMgr;
         private var _data:Data;
         private var _view:View;
         private var _lang:Lang;
@@ -29,7 +29,7 @@
             Helper.test = Config.EnableProtocolHelper;
             Helper.initStage(stage);
             this._data = new Data();
-            this._ctrl = new Controller();
+            this._ctrl = new ControllerMgr();
             this._view = new View(stage);
             this._lang = new Lang();
             this._data.onConnect = function ():void{
