@@ -1,6 +1,7 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.assist.server {
     import ICard.lang.client.com.assist.server.*;
+	
 
     public class ActivityType {
 
