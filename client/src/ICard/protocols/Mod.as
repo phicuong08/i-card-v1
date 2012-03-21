@@ -5,7 +5,7 @@ package ICard.protocols {
 
         public static const Modules:Object = {
             
-            1:Mod_Town_Base,
+            1:Mod_Town_Base
 //            28:Mod_SuperSport_Base,
 //            29:Mod_FactionWar_Base,
 //          
