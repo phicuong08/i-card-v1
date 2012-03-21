@@ -13,8 +13,8 @@
 package 
 {
 	// Import Flash classes
-	import flash.media.*;
-	import fl.controls.*;	
+	//import flash.media.*;
+	//import fl.controls.*;	
 	import flash.events.*;
 	import flash.display.Sprite;
 	import flash.text.TextFormat;
@@ -24,11 +24,11 @@ package
 	import flash.net.LocalConnection;
 
     // Import SmartFoxServer 2X classes
-	import com.smartfoxserver.v2.SmartFox;
-	import com.smartfoxserver.v2.entities.*;
-	import com.smartfoxserver.v2.requests.*;
+	//import com.smartfoxserver.v2.SmartFox;
+	//import com.smartfoxserver.v2.entities.*;
+	//import com.smartfoxserver.v2.requests.*;
 	import com.smartfoxserver.v2.core.SFSEvent;
-	import com.smartfoxserver.v2.entities.data.*;
+	//import com.smartfoxserver.v2.entities.data.*;
 
   	import ICard.assist.view.interfaces.*;
   	import ICard.assist.*;
