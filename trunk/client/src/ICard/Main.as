@@ -1,4 +1,4 @@
-﻿package {
+﻿package ICard{
     import flash.events.*;
     import ICard.*;
     import flash.display.*;
@@ -11,7 +11,7 @@
 
         private var _ctrl:ControllerMgr;
         private var _data:Data;
-        private var _view:View;
+        private var _view:ViewMgr;
         private var _lang:Lang;
         private var _timer:Timer;
         private var _target:Sprite;
@@ -30,7 +30,7 @@
             Helper.initStage(stage);
             this._data = new Data();
             this._ctrl = new ControllerMgr();
-            this._view = new View(stage);
+            this._view = new ViewMgr(stage);
             this._lang = new Lang();
             this._data.onConnect = function ():void{
                 Helper.backtrace("connected");

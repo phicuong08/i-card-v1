@@ -35,7 +35,7 @@ package ICard.views {
         public function get ignoreKeyboardEvent():Boolean{
             return (this._ignoreKeyboardEvent);
         }
-        override public function settle(_arg1:String, _arg2:ViewMgr, _arg3:ControllerMgr, _arg4:Data, _arg5:BaseMgr):void{
+        override public function settle(_arg1:String, _arg2:ViewMgr, _arg3:ControllerMgr, _arg4:Data, _arg5:SuperMgr):void{
             if (null == this._view){
                 this._instanceName = _arg1;
                 this._view = _arg2;

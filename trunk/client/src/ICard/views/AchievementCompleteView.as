@@ -13,7 +13,7 @@ package ICard.views {
     import ICard.assist.server.*;
     import ICard.lang.client.com.views.*;
     import ICard.assist.view.toolbar.*;
-
+	import ICard.views.Base;
     public class AchievementCompleteView extends Base {
 
         private var _aryNotifyData:Array;
@@ -27,21 +27,21 @@ package ICard.views {
             super();
         }
         public function close():void{
-            if (this._view.stage.contains(this._achievementComplete.content)){
-                this._view.stage.removeChild(this._achievementComplete.content);
+            if (this._viewMgr.stage.contains(this._achievementComplete.content)){
+                this._viewMgr.stage.removeChild(this._achievementComplete.content);
             };
-            if (this._view.stage.contains(this._mcButton)){
-                this._view.stage.removeChild(this._mcButton);
+            if (this._viewMgr.stage.contains(this._mcButton)){
+                this._viewMgr.stage.removeChild(this._mcButton);
             };
             this._mcButton.removeEventListener(MouseEvent.CLICK, this.onMcButtonMouseClick);
         }
         public function reposition(_arg1:Boolean=true):void{
             if (true == _arg1){
-                _view.toolbar.reposition();
+                _viewMgr.toolbar.reposition();
             } else {
-                if (((!((this._achievementComplete == null))) && (this._view.stage.contains(this._achievementComplete.content)))){
-                    this._achievementComplete.content.x = Math.max(350, (Math.floor(((this._view.stage.stageWidth - this._achievementComplete.content.width) / 2)) - Structure.stageClip.x));
-                    this._achievementComplete.content.y = Math.max((Structure.stageHeight - 160), ((this._view.stage.stageHeight - Structure.stageOffset.y) - 160));
+                if (((!((this._achievementComplete == null))) && (this._viewMgr.stage.contains(this._achievementComplete.content)))){
+                    this._achievementComplete.content.x = Math.max(350, (Math.floor(((this._viewMgr.stage.stageWidth - this._achievementComplete.content.width) / 2)) - Structure.stageClip.x));
+                    this._achievementComplete.content.y = Math.max((Structure.stageHeight - 160), ((this._viewMgr.stage.stageHeight - Structure.stageOffset.y) - 160));
                     this._mcButton.x = this._achievementComplete.content.x;
                     this._mcButton.y = this._achievementComplete.content.y;
                 };
@@ -87,13 +87,13 @@ package ICard.views {
             this._mcButton.addEventListener(MouseEvent.CLICK, this.onMcButtonMouseClick);
             this._achievementComplete.onShowTownCartoon = this.onShowTownCartoon;
             this._achievementComplete.onClose = this.close;
-            this._achievementComplete.onShowAchievement = this._view.achievement.gotoAchievementLabel;
+            this._achievementComplete.onShowAchievement = this._viewMgr.achievement.gotoAchievementLabel;
             this.isDelayShow();
         }
         private function isDelayShow():void{
-            if (_view.inWar){
-                _view.onWarClose = function ():void{
-                    _view.onWarClose = null;
+            if (_viewMgr.inWar){
+                _viewMgr.onWarClose = function ():void{
+                    _viewMgr.onWarClose = null;
                     showCartoon();
                 };
             } else {
@@ -115,9 +115,9 @@ package ICard.views {
             var _local12:String;
             for each (_local1 in this._aryNotifyData) {
                 if (_local1["player_id"] == this._ctrl.player.playerId){
-                    if (!this._view.stage.contains(this._achievementComplete.content)){
-                        this._view.stage.addChild(this._achievementComplete.content);
-                        this._view.stage.addChild(this._mcButton);
+                    if (!this._viewMgr.stage.contains(this._achievementComplete.content)){
+                        this._viewMgr.stage.addChild(this._achievementComplete.content);
+                        this._viewMgr.stage.addChild(this._mcButton);
                         this.reposition(false);
                     };
                     this._achievementComplete.show(_local1);
@@ -126,7 +126,7 @@ package ICard.views {
                     _local2 = (((((((("<a href='event:" + TextLinkType.Player) + "_") + _local1["player_id"]) + "_") + _local1["player_nickname"]) + "'><u>") + _local1["player_nickname"]) + "</u></a>");
                     _local3 = (((((("<a href='event:" + TextLinkType.Achievement) + "_") + _local1["achievement_id"]) + "'>[<u>") + AchievementType.getName(_local1["achievement_id"])) + "</u>]</a>");
                     _local4 = ((("<font color='#80c269'>[" + AchievementCompleteViewLang.Faction) + "]</font>") + Lang.sprintf(HtmlText.white(AchievementCompleteViewLang.GetAchievement), HtmlText.yellow(_local2), HtmlText.yellow(_local3), HtmlText.white(AchievementType.getPoint(_local1["achievement_id"]).toString())));
-                    _view.chat.receive(_local4, false, Mod_Chat_Base.FACTION);
+                    _viewMgr.chat.receive(_local4, false, Mod_Chat_Base.FACTION);
                 };
             };
             if (((!((URI.weiBoNickName == ""))) && ((this._aryNotifyData.length > 0)))){
@@ -138,12 +138,12 @@ package ICard.views {
                 _local10 = "http://game.weibo.com/shenxiandao";
                 _local11 = "http://game.weibo.com/shenxiandao";
                 _local12 = _local5["url"];
-                _view.sendWeiBo(_local6, _local7, _local8, _local9, _local10, _local11, _local12);
+                _viewMgr.sendWeiBo(_local6, _local7, _local8, _local9, _local10, _local11, _local12);
             };
             this._aryNotifyData = [];
         }
         private function onShowTownCartoon():void{
-            _view.townMap.showAchievement();
+            _viewMgr.townMap.showAchievement();
             SoundEffect.play(SoundEffect.AchievementComplete);
         }
         private function onMcButtonMouseClick(_arg1:MouseEvent):void{

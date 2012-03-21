@@ -70,9 +70,9 @@ package ICard.views {
         }
         public function get iAlert():IAlert{
             if (!this._alert){
-                this._alert = (_view.getAssetsObject("Alert", "oAlert") as IAlert);
+                this._alert = (_viewMgr.getAssetsObject("Alert", "oAlert") as IAlert);
                 this._alert.oParent = _structure.alert;
-                this._alert.tip = _view.tip.iTip;
+                this._alert.tip = _viewMgr.tip.iTip;
                 this.reposition();
             };
             return (this._alert);
