@@ -1,7 +1,7 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.assist {
     import flash.events.*;
-    import com.*;
+    import ICard.*;
     import flash.display.*;
     import ICard.haloer.net.*;
     import flash.geom.*;

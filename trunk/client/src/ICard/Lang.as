@@ -27,7 +27,7 @@ package ICard {
             var _local2:XML = describeType(_arg1);
             var _local3:XMLList = _local2.children();
             var _local4:Object = {};
-            var _local5 = "";
+            var _local5:String = "";
             for each (_local6 in _local3) {
                 _local11 = _local6.name();
                 if ((((_local11 == "constant")) || ((_local11 == "variable")))){

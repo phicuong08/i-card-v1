@@ -17,7 +17,7 @@ const Circle:Function = function (_arg1:Object, _arg2:int=1):String{
         if (_arg1 === null){
             return ("null");
         };
-        var _local3 = "";
+        var _local3:String = "";
 //        if ((_arg1 is String)){
 //            _local3 = (("\"" + Escape((_arg1 as String))) + "\"");
 //        } else {
@@ -67,7 +67,7 @@ const Circle:Function = function (_arg1:Object, _arg2:int=1):String{
         return (_local3);
     };
 const Space:Function = function (_arg1:int):String{
-        var _local2 = "";
+        var _local2:String = "";
         var _local3:int;
         while (_local3 < _arg1) {
             _local2 = (_local2 + " ");

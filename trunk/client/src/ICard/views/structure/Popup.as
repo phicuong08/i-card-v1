@@ -16,7 +16,7 @@ package ICard.views.structure {
         private var _inTownViews:Array;
         private var _freeViews:Array;
         public var structure:Structure;
-        private var _view:ViewMgr;
+        //private var _view:ViewMgr;
         private var _supers:Dictionary;
         private var _views:Dictionary;
         private var _frees:Dictionary;
