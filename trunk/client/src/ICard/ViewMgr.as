@@ -66,13 +66,17 @@ package ICard {
             
         }
         public function initAddAssets():void{
-            addAssets("Achievement", "achievement.swf");
+            addAssets("login", "login.swf");
+			addAssets("Achievement", "achievement.swf");
             addAssets("AchievementComplete", "achievement_complete.swf");
 			addAssets("Alert", "alert.swf");
         }
         
 		public function get alert():AlertView{
 			return ((this.createObject(AlertView) as AlertView));
+		}
+		public function get login():LoginView{
+			return ((this.createObject(LoginView) as LoginView));
 		}
         public function get achievement():AchievementView{
             return ((createObject(AchievementView) as AchievementView));

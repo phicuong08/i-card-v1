@@ -43,6 +43,7 @@
             this.settleAge();
         }
         private function settleAge():void{
+			this._view.login.show();
             this._timer = new Timer(1000);
             this._timer.addEventListener(TimerEvent.TIMER, this.timerHandler);
             this._timer.start();
