@@ -9,7 +9,7 @@ package ICard {
     import ICard.haloer.utils.*;
     import flash.errors.*;
 
-    public class DataBase extends BaseMgr {
+    public class DataBase extends SuperMgr {
 
         protected var _ctrl:ControllerMgr;
         protected var _view:ViewMgr;

@@ -8,7 +8,7 @@ package ICard.views.structure {
     import flash.utils.*;
     import ICard.haloer.data.*;
 	import ICard.views.Base;
-    public class Popup extends Base {
+    dynamic public class Popup extends Base {
 
         private var _superViews:Array;
         private var _coexistViews:Array;
