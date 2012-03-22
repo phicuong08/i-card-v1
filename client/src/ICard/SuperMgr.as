@@ -28,7 +28,7 @@ package ICard {
         public function frameProcess():void{
             var _local1:String;
             for (_local1 in this._frameProcessList) {
-                var _local4 = this._frameProcessList;
+                var _local4:Object = this._frameProcessList;
                 _local4[_local1]();
             };
         }
@@ -41,7 +41,7 @@ package ICard {
         public function timerProcess():void{
             var _local1:String;
             for (_local1 in this._timerProcessList) {
-                var _local4 = this._timerProcessList;
+                var _local4:Object = this._timerProcessList;
                 _local4[_local1]();
             };
         }
