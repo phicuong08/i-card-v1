@@ -22,7 +22,7 @@ package ICard.assist.server {
             url = (url + ("?v=" + URI.getVersion(url)));
             var http:* = new HTTP();
             http.onComplete = function (_arg1:String):void{
-                formatData(JSON.decode(_arg1));
+                //formatData(JSON.decode(_arg1));
                 callback();
             };
             http.load(url);

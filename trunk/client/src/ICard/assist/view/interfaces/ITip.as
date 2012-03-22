@@ -1,9 +1,9 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.assist.view.interfaces {
-    import flash.events.*;
     import flash.display.*;
-    import flash.utils.*;
+    import flash.events.*;
     import flash.geom.*;
+    import flash.utils.*;
 
     public interface ITip {
 
@@ -13,13 +13,13 @@ package ICard.assist.view.interfaces {
         function get targets():Dictionary;
         function addChild(_arg1:DisplayObject):DisplayObject;
         function addChildAt(_arg1:DisplayObject, _arg2:int):DisplayObject;
-        function addTarget(_arg1:DisplayObject, _arg2=null):void;
+        function addTarget(_arg1:DisplayObject, _arg2:Object=null):void;
         function addTargetMoreTips(_arg1:DisplayObject, ... _args):void;
-        function addFixedTarget(_arg1:DisplayObject, _arg2, _arg3:Point, _arg4:Boolean=true):void;
+        function addFixedTarget(_arg1:DisplayObject, _arg2:Object, _arg3:Point, _arg4:Boolean=true):void;
         function removeTarget(_arg1:DisplayObject):void;
         function updateTarget(_arg1:DisplayObject=null):void;
         function hide():void;
-        function clickToOpen(_arg1, _arg2:Event=null):Sprite;
+        function clickToOpen(_arg1:Object, _arg2:Event=null):Sprite;
         function hideOpened():void;
         function textTip(_arg1:DisplayObject, _arg2:String, _arg3:uint=0xFFFF00, _arg4:int=18):void;
 

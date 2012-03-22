@@ -1,9 +1,11 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.views {
-    import ICard.assist.view.interfaces.*;
     import ICard.assist.*;
     import ICard.assist.view.controls.*;
+    import ICard.assist.view.interfaces.*;
     import ICard.lang.client.com.views.*;
+    
+    import flash.events.ErrorEvent;
 
     public class AlertView extends Base implements IView {
 
@@ -64,7 +66,7 @@ package ICard.views {
             try {
                 this.iAlert.yesLabel = AlertViewLang.Confirm;
                 this.iAlert.show(((reason) || (AlertViewLang.Closed)), AlertButtonType.Yes);
-            } catch(e) {
+            } catch(e:ErrorEvent) {
                 Helper.alert(((reason2) || (AlertViewLang.Fault)));
             };
         }
@@ -72,7 +74,7 @@ package ICard.views {
             if (!this._alert){
                 this._alert = (_viewMgr.getAssetsObject("Alert", "oAlert") as IAlert);
                 this._alert.oParent = _structure.alert;
-                this._alert.tip = _viewMgr.tip.iTip;
+ //               this._alert.tip = _viewMgr.tip.iTip;
                 this.reposition();
             };
             return (this._alert);

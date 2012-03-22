@@ -4,7 +4,7 @@ package adobe.serialization.json {
     public class JSONDecoder {
 
         private var strict:Boolean;
-        private var value;
+        private var value:Object;
         private var tokenizer:JSONTokenizer;
         private var token:JSONToken;
 

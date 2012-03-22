@@ -1,13 +1,14 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.views.structure {
-    import flash.events.*;
     import ICard.*;
-    import flash.display.*;
-    import ICard.views.*;
     import ICard.assist.view.*;
-    import flash.utils.*;
     import ICard.haloer.data.*;
-	import ICard.views.Base;
+    import ICard.views.*;
+    import ICard.views.Base;
+    
+    import flash.display.*;
+    import flash.events.*;
+    import flash.utils.*;
     dynamic public class Popup extends Base {
 
         private var _superViews:Array;
@@ -16,7 +17,7 @@ package ICard.views.structure {
         private var _inTownViews:Array;
         private var _freeViews:Array;
         public var structure:Structure;
-        //private var _view:ViewMgr;
+ //       private var _view:ICard.ViewMgr;
         private var _supers:Dictionary;
         private var _views:Dictionary;
         private var _frees:Dictionary;
@@ -31,6 +32,7 @@ package ICard.views.structure {
         private var _focusView:IView;
 
         public function Popup(_arg1:ViewMgr):void{
+			trace("run pop win");
             this._supers = new Dictionary();
             this._views = new Dictionary();
             this._frees = new Dictionary();
@@ -111,9 +113,9 @@ package ICard.views.structure {
             if (this.hasViewIncluded(_arg1, this._superViews)){
                 _local4 = this._supers[_arg1];
                 if (_local4){
-                    if (!(_arg1 is WorldView)){
-                        this.startFadeOut(_arg1, true);
-                    };
+//                    if (!(_arg1 is WorldView)){
+//                        this.startFadeOut(_arg1, true);
+//                    };
                     this._view.cancelCenter(_arg1.sign);
                     delete this._supers[_arg1];
                     removeChild(_local4);
@@ -226,12 +228,12 @@ package ICard.views.structure {
                             _local6.push(_local7);
                         };
                     };
-                    if (_local6.length > 0){
-                        if ((((_local6.length == 1)) && ((_local6[0] is PanelLoadingView)))){
-                        } else {
-                            _local2.push(_local6);
-                        };
-                    };
+//                    if (_local6.length > 0){
+//                        if ((((_local6.length == 1)) && ((_local6[0] is PanelLoadingView)))){
+//                        } else {
+//                            _local2.push(_local6);
+//                        };
+//                    };
                 };
                 _local4++;
             };
@@ -334,9 +336,9 @@ package ICard.views.structure {
             if (this._fadeOutList[_arg1]){
                 removeChild(this._fadeOutList[_arg1]);
                 delete this._fadeOutList[_arg1];
-                if ((_arg1 is TakeBibleRoadView)){
-                    this._view.toolbar.functionBarParent = null;
-                };
+//                if ((_arg1 is TakeBibleRoadView)){
+//                    this._view.toolbar.functionBarParent = null;
+//                };
             };
         }
         private function startFadeOut(_arg1:IView, _arg2:Boolean=false):void{
@@ -409,15 +411,15 @@ package ICard.views.structure {
                 this._shape.graphics.drawRect(-50, -50, 1350, 750);
                 this._shape.graphics.endFill();
             };
-            var _local1 = 10;
+            var _local1:int = 10;
             var _local4:Number = 0;
             var _local5:int = this._viewsList.length;
             var _local6:int = (_local5 - 1);
             while (_local6 > -1) {
                 _local2 = this._viewsList[_local6];
-                if ((_local2 is WorldView)){
-                    return;
-                };
+//                if ((_local2 is WorldView)){
+//                    return;
+//                };
                 _local3 = this._views[_local2];
                 if (_local3){
                     _local4 = (_local4 + (_local3.width + ((_local6 > 0)) ? _local1 : 0));

@@ -90,7 +90,7 @@ package ICard.assist.view.sound {
             if (sound){
                 try {
                     sound.play(0, 0, new SoundTransform((SoundManage.gameVolume * 0.01)));
-                } catch(e) {
+                } catch(e:ErrorEvent) {
                 };
             };
         }

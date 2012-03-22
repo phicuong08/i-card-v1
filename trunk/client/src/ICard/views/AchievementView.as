@@ -32,7 +32,7 @@ package ICard.views {
         }
         private function showUI():void{
             _popup.addView(this, this._achievement.content);
-            _viewMgr.center(sign, this._achievement.content);
+			_viewMgr.center(sign, this._achievement.content);
         }
         private function render():void{
             if (this._achievement == null){

@@ -1,7 +1,7 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.assist {
-    import flash.events.*;
     import flash.display.*;
+    import flash.events.*;
     import flash.net.*;
 
     public class URI {
@@ -323,7 +323,7 @@ package ICard.assist {
             var name:* = ((serverName) ? (serverName + "_") : "" + serverName);
             try {
                 _lc.connect(name);
-            } catch(e) {
+            } catch(e:ErrorEvent) {
             };
         }
         private static function statusHandler(_arg1:StatusEvent):void{

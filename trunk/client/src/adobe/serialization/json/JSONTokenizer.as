@@ -213,7 +213,7 @@ package adobe.serialization.json {
         }
         private function readNumber():JSONToken{
             var _local3:JSONToken;
-            var _local1 = "";
+            var _local1:String = "";
             if (this.ch == "-"){
                 _local1 = (_local1 + "-");
                 this.nextChar();
