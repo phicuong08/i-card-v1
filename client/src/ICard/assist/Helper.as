@@ -1,13 +1,14 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.assist {
-    import flash.events.*;
     import ICard.*;
-    import flash.display.*;
-    import ICard.haloer.net.*;
-    import flash.geom.*;
-    import flash.text.*;
-    import flash.net.*;
     import ICard.haloer.data.*;
+    import ICard.haloer.net.*;
+    
+    import flash.display.*;
+    import flash.events.*;
+    import flash.geom.*;
+    import flash.net.*;
+    import flash.text.*;
 
     public class Helper {
 
@@ -285,7 +286,7 @@ package ICard.assist {
             };
             try {
                 _send.send(_rnd, "setModuleList", _pHash, _pList);
-            } catch(e) {
+            } catch(e:ErrorEvent) {
             };
         }
         public static function initStage(_arg1:Stage):void{

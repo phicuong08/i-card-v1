@@ -1,14 +1,17 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.views {
     import ICard.*;
-    import ICard.assist.view.*;
-    import ICard.views.structure.*;
     import ICard.assist.data.*;
+    import ICard.assist.view.*;
+    import ICard.controllers.Base;
+    import ICard.views.structure.*;
+    
+    import flash.display.DisplayObject;
 
     public class Base extends SuperSubBase {
 
         protected var _instanceName:String;
-        protected var _view:ViewMgr;
+        protected var _viewMgr:ICard.ViewMgr;
         protected var _ctrl:ControllerMgr;
         protected var _data:IData;
         protected var _structure:Structure;
@@ -25,7 +28,7 @@ package ICard.views {
         }
         public function get inStageWithTip():Boolean{
             if (((this.inStage) && (this._inStageTipTitle))){
-                this._view.showTip(this._inStageTipTitle, this._inStageTipContent);
+                this._viewMgr.showTip(this._inStageTipTitle, this._inStageTipContent);
             };
             return (this.inStage);
         }
@@ -36,10 +39,10 @@ package ICard.views {
             return (this._ignoreKeyboardEvent);
         }
         override public function settle(_arg1:String, _arg2:ViewMgr, _arg3:ControllerMgr, _arg4:Data, _arg5:SuperMgr):void{
-            if (null == this._view){
+            if (null == this._viewMgr){
                 this._instanceName = _arg1;
-                this._view = _arg2;
-                if (this._view != _arg5){
+                this._viewMgr = _arg2;
+                if (this._viewMgr != _arg5){
                     throw (new Error(inheritError()));
                 };
                 this._ctrl = _arg3;
@@ -48,11 +51,26 @@ package ICard.views {
                     this["ownCtrl"] = this._ctrl[_arg1];
                 };
             };
-            this._structure = this._view.structure;
-            this._popup = this._view.structure.popup;
+            this._structure = this._viewMgr.structure;
+            this._popup = this._viewMgr.structure.popup;
         }
+
+		public function addChild(_arg1:DisplayObject):void{
+			_viewMgr.stage.addChild(_arg1);
+		}
+		public function addChildAt(_arg1:DisplayObject,index:int):void{
+			_viewMgr.stage.addChildAt(_arg1,index);
+		}
+		public function getChildIndex(_arg1:DisplayObject):int{
+			return _viewMgr.stage.getChildIndex(_arg1);
+		}
+		public function removeChild(_arg1:DisplayObject):void{
+			_viewMgr.stage.removeChild(_arg1);
+		}
+		
+		
         public function destroy():void{
-            this._view.destroyObject(this._instanceName);
+            this._viewMgr.destroyObject(this._instanceName);
         }
         public function switchSelf():void{
             if (this._ignoreKeyboardEvent){
@@ -60,7 +78,7 @@ package ICard.views {
             };
             var _local1:Object = this;
             if (this._popup.hasView((_local1 as IView))){
-                var _local2 = this;
+                var _local2:Base = this;
                 _local2["close"]();
             } else {
                 _local2 = this;
@@ -85,7 +103,7 @@ package ICard.views {
             self = this;
             var allowToOpen:* = function ():Boolean{
                 if (false == hideLoading){
-                    _view.hideLoading();
+					_viewMgr.hideLoading();
                 };
                 if ((((false == ignoreCheck)) && ((_popup.allowToOpen((self as IView)) == false)))){
                     return (false);
@@ -102,7 +120,7 @@ package ICard.views {
                     };
                 };
             };
-            if (this._view.hasResource(sign)){
+            if (this._viewMgr.hasResource(sign)){
                 handler();
             } else {
                 if (allowToOpen() == false){
@@ -114,10 +132,10 @@ package ICard.views {
                 this._assetsLoaded = true;
                 lr = new LoadResponder(handler, function (_arg1:String, _arg2:int):void{
                     if (false == hideLoading){
-                        _view.showLoading(description, _arg2);
+						_viewMgr.showLoading(description, _arg2);
                     };
                 });
-                this._view.loadResources([sign], lr);
+                this._viewMgr.loadResources([sign], lr);
             };
         }
 

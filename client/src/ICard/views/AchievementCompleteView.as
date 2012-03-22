@@ -37,7 +37,7 @@ package ICard.views {
         }
         public function reposition(_arg1:Boolean=true):void{
             if (true == _arg1){
-                _viewMgr.toolbar.reposition();
+               // _viewMgr.toolbar.reposition();
             } else {
                 if (((!((this._achievementComplete == null))) && (this._viewMgr.stage.contains(this._achievementComplete.content)))){
                     this._achievementComplete.content.x = Math.max(350, (Math.floor(((this._viewMgr.stage.stageWidth - this._achievementComplete.content.width) / 2)) - Structure.stageClip.x));
@@ -114,19 +114,19 @@ package ICard.views {
             var _local11:String;
             var _local12:String;
             for each (_local1 in this._aryNotifyData) {
-                if (_local1["player_id"] == this._ctrl.player.playerId){
-                    if (!this._viewMgr.stage.contains(this._achievementComplete.content)){
-                        this._viewMgr.stage.addChild(this._achievementComplete.content);
-                        this._viewMgr.stage.addChild(this._mcButton);
-                        this.reposition(false);
-                    };
-                    this._achievementComplete.show(_local1);
-                };
+//                if (_local1["player_id"] == this._ctrl.player.playerId){
+//                    if (!this._viewMgr.stage.contains(this._achievementComplete.content)){
+//                        this._viewMgr.stage.addChild(this._achievementComplete.content);
+//                        this._viewMgr.stage.addChild(this._mcButton);
+//                        this.reposition(false);
+//                    };
+//                    this._achievementComplete.show(_local1);
+//                };
                 if (ActivityType.FactionLevel > 0){
-                    _local2 = (((((((("<a href='event:" + TextLinkType.Player) + "_") + _local1["player_id"]) + "_") + _local1["player_nickname"]) + "'><u>") + _local1["player_nickname"]) + "</u></a>");
-                    _local3 = (((((("<a href='event:" + TextLinkType.Achievement) + "_") + _local1["achievement_id"]) + "'>[<u>") + AchievementType.getName(_local1["achievement_id"])) + "</u>]</a>");
-                    _local4 = ((("<font color='#80c269'>[" + AchievementCompleteViewLang.Faction) + "]</font>") + Lang.sprintf(HtmlText.white(AchievementCompleteViewLang.GetAchievement), HtmlText.yellow(_local2), HtmlText.yellow(_local3), HtmlText.white(AchievementType.getPoint(_local1["achievement_id"]).toString())));
-                    _viewMgr.chat.receive(_local4, false, Mod_Chat_Base.FACTION);
+//                    _local2 = (((((((("<a href='event:" + TextLinkType.Player) + "_") + _local1["player_id"]) + "_") + _local1["player_nickname"]) + "'><u>") + _local1["player_nickname"]) + "</u></a>");
+//                    _local3 = (((((("<a href='event:" + TextLinkType.Achievement) + "_") + _local1["achievement_id"]) + "'>[<u>") + AchievementType.getName(_local1["achievement_id"])) + "</u>]</a>");
+//                    _local4 = ((("<font color='#80c269'>[" + AchievementCompleteViewLang.Faction) + "]</font>") + Lang.sprintf(HtmlText.white(AchievementCompleteViewLang.GetAchievement), HtmlText.yellow(_local2), HtmlText.yellow(_local3), HtmlText.white(AchievementType.getPoint(_local1["achievement_id"]).toString())));
+//                    _viewMgr.chat.receive(_local4, false, Mod_Chat_Base.FACTION);
                 };
             };
             if (((!((URI.weiBoNickName == ""))) && ((this._aryNotifyData.length > 0)))){
@@ -138,12 +138,12 @@ package ICard.views {
                 _local10 = "http://game.weibo.com/shenxiandao";
                 _local11 = "http://game.weibo.com/shenxiandao";
                 _local12 = _local5["url"];
-                _viewMgr.sendWeiBo(_local6, _local7, _local8, _local9, _local10, _local11, _local12);
+     //           _viewMgr.sendWeiBo(_local6, _local7, _local8, _local9, _local10, _local11, _local12);
             };
             this._aryNotifyData = [];
         }
         private function onShowTownCartoon():void{
-            _viewMgr.townMap.showAchievement();
+ //           _viewMgr.townMap.showAchievement();
             SoundEffect.play(SoundEffect.AchievementComplete);
         }
         private function onMcButtonMouseClick(_arg1:MouseEvent):void{

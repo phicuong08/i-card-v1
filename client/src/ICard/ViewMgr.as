@@ -6,7 +6,7 @@ package ICard {
     import ICard.haloer.net.*;
     import ICard.assist.view.*;
     import flash.ui.*;
-	import flash.ui.ContextMenu.*;
+//	import flash.ui.ContextMenu.*;
     import flash.utils.*;
    
     import flash.text.*;
@@ -86,7 +86,7 @@ package ICard {
             _local1.visible = false;
         }
         public function formatServerData():void{
-            var _local1 = "Templet";
+            var _local1:String = "Templet";
             ServerType.format(getAssetsObj(_local1));
             removeResource(_local1);
             //WarData.removeNickNameSuffix = _ctrl.player.removeNickNameSuffix;

@@ -1,10 +1,12 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard {
-    import flash.utils.*;
-    import ICard.datas.*;
     import ICard.assist.*;
     import ICard.assist.data.*;
+    import ICard.datas.*;
     import ICard.protocols.*;
+    
+    import flash.events.ErrorEvent;
+    import flash.utils.*;
 
     public class Data extends DataBase implements IData {
 
@@ -61,7 +63,7 @@ package ICard {
                 if (parseInt(id) == modId){
                     try {
                         result = this.analyze(Mod.Modules[id], modId, funId, buffer);
-                    } catch(e) {
+                    } catch(e:ErrorEvent) {
                         _view.alert.confirm(((((("[" + modId) + ",") + funId) + "]") + e));
                         p = Protocol.lookupProtocol(modId, funId);
                         Helper.error("[response]接口不匹配：", Protocol.getProtocolDescription(p["request"]), "\n", e);

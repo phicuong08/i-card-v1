@@ -1,9 +1,10 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard {
-    import flash.utils.*;
     import ICard.assist.*;
-    import ICard.protocols.*;
     import ICard.haloer.utils.*;
+    import ICard.protocols.*;
+    
+    import flash.utils.*;
 	
     public class Protocol {
 

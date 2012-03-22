@@ -12,7 +12,7 @@ package adobe.serialization.json {
         public function getString():String{
             return (this.jsonString);
         }
-        private function convertToString(_arg1):String{
+        private function convertToString(_arg1:Object):String{
             if ((_arg1 is String)){
                 return (this.escapeString((_arg1 as String)));
             };

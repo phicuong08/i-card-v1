@@ -100,7 +100,7 @@ package ICard.views {
             this._background = new Background();
             this._stage.addChild(this._background);
             this._stage.addChild(this._content);
-            this._stage.addChild(this._popup);
+ //           this._stage.addChild(this._popup);
             this._stage.addChild(this._alert);
             this._stage.addChild(this._load);
             this._stage.addChild(this._tip);
