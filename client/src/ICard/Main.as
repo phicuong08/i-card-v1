@@ -4,7 +4,8 @@
     import flash.display.*;
     import flash.utils.*;
     import ICard.assist.*;
-
+	import mx.binding.IBindingClient;
+	import mx.core.BitmapAsset;
     public class Main extends Sprite {
 
         public static var Instance:Main;

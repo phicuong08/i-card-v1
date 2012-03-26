@@ -5,6 +5,10 @@
 	xmlns:components="components.*"
 	layout="absolute"
 	creationPolicy="all"
+	initialize="init"
+	resize="stageResizeHanlder"
+	deactivate="application1_deactivateHandler"
+	applicationComplete ="createComplete"
 	creationComplete="init()" xmlns:flexlib="http://code.google.com/p/flexlib/">
 	
 	<mx:Style source="style/style.css"/>
@@ -25,12 +29,7 @@
 			<mx:VBox id="view_main" width="100%" height="100%" horizontalAlign="center" verticalAlign="middle">
 				<mx:HBox height="90%">
 					
-					<mx:VBox height="100%">
-						<mx:Panel width="100%" height="100%" layout="vertical" title="Chats">
-							<flexlib:SuperTabNavigator width="350" height="100%" id="stn_chats" editableTabLabels="false" popUpButtonPolicy="off" paddingBottom="5" paddingLeft="5" paddingRight="5" paddingTop="5"/>
-						</mx:Panel>
-						
-					</mx:VBox>
+
 				</mx:HBox>
 			</mx:VBox>
 			

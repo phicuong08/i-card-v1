@@ -70,6 +70,9 @@ package ICard {
 			addAssets("Achievement", "achievement.swf");
             addAssets("AchievementComplete", "achievement_complete.swf");
 			addAssets("Alert", "alert.swf");
+			addAssets("InitLoading", "init_loading.swf");
+			addAssets("InitLoadingBaidu", "init_loading_baidu.swf");
+			addAssets("InitLoadingMangguo", "init_loading_mangguo.swf");
         }
         
 		public function get alert():AlertView{
@@ -78,6 +81,10 @@ package ICard {
 		public function get login():LoginView{
 			return ((this.createObject(LoginView) as LoginView));
 		}
+		public function get initLoading():InitLoadingView{
+			return ((this.createObject(InitLoadingView) as InitLoadingView));
+		}
+		
         public function get achievement():AchievementView{
             return ((createObject(AchievementView) as AchievementView));
         }
@@ -308,6 +315,12 @@ package ICard {
 //            };
             return (true);
         }
+		public function firstLogin(_arg1:Boolean):void{
+			if (ExternalInterface.available){
+				ExternalInterface.call("firstLogin", ((_arg1) || (false)));
+			};
+		}
+		
         public function get inWar():Boolean{
             return false;//(((((((((((((((((((((this.dujieWar.opened) || (this.getPeachWar.opened))) || (this.inCampWar.opened))) || (this.multiWar.opened))) || (this.superSportWar.opened))) || (this.takeBibleWar.opened))) || (this.towerWar.opened))) || (this.war.opened))) || (this.worldBossWar.opened))) || (this.strategyWar.opened))) || (this.zodiacWar.opened)));
         }

@@ -129,7 +129,9 @@ public var judgeCard:JudgeCards;
 public var trainList:TrainListWindow;
 public var combatStage:CombatStage;
 public var stateWindowInfo:Object;
-mx_internal var _newTCGClient_StylesInit_done:Boolean = false;
+
+
+
 
 private var _93650647bgMap:SmoothImage;
 private var _97474bgg:UIComponent;
@@ -146,10 +148,6 @@ private var _335484983shakeEffect:Sequence;
 private var _embed_mxml_source_backgroundImages______png_432151424:Class;
 private var _embed_mxml_source_backgroundImages______jpg_979502484:Class;
 
-mx_internal var _bindings:Array;
-mx_internal var _watchers:Array;
-mx_internal var _bindingsByDestination:Object;
-mx_internal var _bindingsBeginWithWord:Object;
 
 
 
@@ -181,38 +179,6 @@ stateWindowInfo = {
 };
 _embed_mxml_source_backgroundImages______png_432151424 = newTCGClient__embed_mxml_source_backgroundImages______png_432151424;
 _embed_mxml_source_backgroundImages______jpg_979502484 = newTCGClient__embed_mxml_source_backgroundImages______jpg_979502484;
-_bindings = [];
-_watchers = [];
-_bindingsByDestination = {};
-_bindingsBeginWithWord = {};
-
-var bindings:* = _newTCGClient_bindingsSetup();
-var watchers:* = [];
-//target = this;
-if (_watcherSetupUtil == null){
-	watcherSetupUtilClass = getDefinitionByName("_newTCGClientWatcherSetupUtil");
-	var _local2 = watcherSetupUtilClass;
-	_local2["init"](null);
-};
-_watcherSetupUtil.setup(this, function (_arg1:String){
-	return (target[_arg1]);
-}, function (_arg1:String){
-	return (TCGClient[_arg1]);
-}, bindings, watchers);
-mx_internal::_bindings = mx_internal::_bindings.concat(bindings);
-mx_internal::_watchers = mx_internal::_watchers.concat(watchers);
-mxmlContentFactory = new DeferredInstanceFromFunction(_newTCGClient_Array2_c);
-_newTCGClient_Sequence1_i();
-addEventListener("initialize", ___newTCGClient_Application1_initialize);
-addEventListener("applicationComplete", ___newTCGClient_Application1_applicationComplete);
-addEventListener("resize", ___newTCGClient_Application1_resize);
-addEventListener("deactivate", ___newTCGClient_Application1_deactivate);
-var i:* = 0;
-while (i < bindings.length) {
-	Binding(bindings[i]).execute();
-	i = (i + 1);
-};
-
 
 
 
@@ -876,18 +842,7 @@ private function _newTCGClient_ChatWindow1_i():ChatWindow{
 	BindingManager.executeBindings(this, "chatWindow", this.chatWindow);
 	return (_local1);
 }
-public function ___newTCGClient_Application1_initialize(_arg1:FlexEvent):void{
-	this.init();
-}
-public function ___newTCGClient_Application1_applicationComplete(_arg1:FlexEvent):void{
-	this.createComplete();
-}
-public function ___newTCGClient_Application1_resize(_arg1:ResizeEvent):void{
-	this.stageResizeHanlder();
-}
-public function ___newTCGClient_Application1_deactivate(_arg1:Event):void{
-	this.application1_deactivateHandler(_arg1);
-}
+
 private function _newTCGClient_bindingsSetup():Array{
 	var result:* = [];
 	result[0] = new Binding(this, null, null, "shakeEffect.target", "mainGroup");
