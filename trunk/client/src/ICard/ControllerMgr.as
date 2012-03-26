@@ -8,7 +8,9 @@ package ICard {
         public function get achievement():AchievementController{
             return ((createObject(AchievementController) as AchievementController));
         }
-
+		public function get player():PlayerController{
+			return ((createObject(PlayerController) as PlayerController));
+		}
 
     }
 }//package com 

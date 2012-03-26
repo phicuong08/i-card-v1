@@ -132,6 +132,7 @@ package ICard.haloer.net {
             this._loader.load(_local3, _local4);
         }
         private function complete(_arg1:Event):void{
+			var obj1:Object =_arg1.currentTarget.content;
             this._applicationDomain = this._loader.contentLoaderInfo.applicationDomain;
             if ((this.onComplete is Function)){
                 this.onComplete();
