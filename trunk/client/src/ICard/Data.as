@@ -4,7 +4,7 @@ package ICard {
     import ICard.assist.data.*;
     import ICard.datas.*;
     import ICard.protocols.*;
-    
+
     import flash.events.ErrorEvent;
     import flash.utils.*;
 
@@ -13,9 +13,11 @@ package ICard {
         private var _callbackList:Object;
         private var _ignoreList:Object;
 
+		
         public function Data():void{
             this._callbackList = {};
             this._ignoreList = {};
+
             super();
         }
         
@@ -32,8 +34,10 @@ package ICard {
 
             Mod_Achievement.register(this);
 
-            Helper.backtrace("connecting", URI.domain, URI.serverPort);
-            this.connect(((URI.ip) || (URI.domain)), ((URI.port) || (URI.serverPort)));
+    		Helper.backtrace("connecting", URI.ip, URI.port);
+			
+			this.connect();
+			
         }
         override protected function parseSocketData(_arg1:ByteArray):void{
             var modId:* = 0;
