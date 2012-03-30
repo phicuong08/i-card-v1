@@ -8,7 +8,7 @@ package ICard.assist {
 
         private static var _domain:String = "4x001.xd.com";
         private static var _serverPort:int = 8000;
-        private static var _clientUrl:String = "http://sxd.xdcdn.net/2012020401/";
+        private static var _clientUrl:String = "";//"http://sxd.xdcdn.net/2012020401/";
         private static var _policyPort:int = 888;
         private static var _gateWayPort:int = 10010;
         private static var _args:Object = {};

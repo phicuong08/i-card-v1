@@ -70,6 +70,7 @@ package ICard {
 			addAssets("Achievement", "achievement.swf");
             addAssets("AchievementComplete", "achievement_complete.swf");
 			addAssets("Alert", "alert.swf");
+			addAssets("Tip2", "addons/tip2.swf");
 			addAssets("InitLoading", "init_loading.swf");
 			addAssets("InitLoadingBaidu", "init_loading_baidu.swf");
 			addAssets("InitLoadingMangguo", "init_loading_mangguo.swf");
@@ -83,6 +84,9 @@ package ICard {
 		}
 		public function get initLoading():InitLoadingView{
 			return ((this.createObject(InitLoadingView) as InitLoadingView));
+		}
+		public function get tip2():Tip2View{
+			return ((this.createObject(Tip2View) as Tip2View));
 		}
 		
         public function get achievement():AchievementView{
@@ -288,7 +292,7 @@ package ICard {
 //                    alert.close();
 //                    show();
 //                };
-                _data.connect(host, URI.serverPort);
+                _data.connect();
             };
             URI.selectDomain(callback);
         }

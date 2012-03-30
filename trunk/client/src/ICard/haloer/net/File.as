@@ -124,16 +124,15 @@ package ICard.haloer.net {
             if (this._urlRnd){
                 _local2 = (_local2 + (((_local2) ? "&" : "?" + "r=") + this._urlRnd));
             };
-            var _local3:URLRequest = new URLRequest((this._uri + _local2));
-            var _local4:LoaderContext = new LoaderContext();
-            _local4.checkPolicyFile = true;
-            _local4.applicationDomain = (this._useNewDomain) ? new ApplicationDomain() : new ApplicationDomain(ApplicationDomain.currentDomain);
-            this.addEvent();
-            this._loader.load(_local3, _local4);
+			var _local3:URLRequest = new URLRequest((this._uri + _local2));
+			var _local4:LoaderContext = new LoaderContext();
+			_local4.checkPolicyFile = true;
+			_local4.applicationDomain = (this._useNewDomain) ? new ApplicationDomain() : new ApplicationDomain(ApplicationDomain.currentDomain);
+			this.addEvent();
+			this._loader.load(_local3, _local4);
         }
         private function complete(_arg1:Event):void{
-			var obj1:Object =_arg1.currentTarget.content;
-            this._applicationDomain = this._loader.contentLoaderInfo.applicationDomain;
+			this._applicationDomain = this._loader.contentLoaderInfo.applicationDomain;
             if ((this.onComplete is Function)){
                 this.onComplete();
             };

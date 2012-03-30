@@ -36,8 +36,7 @@ package ICard.views {
         }
         private function render():void{
             if (null == this._il){
-				var obj1:Object = _viewMgr.getAssetsObject(("InitLoading" + this.logoSuffix), "InitLoading");
-                this._il = (_viewMgr.getAssetsObject(("InitLoading" + this.logoSuffix), "InitLoading") as IInitLoading);
+				this._il = (_viewMgr.getAssetsObject(("InitLoading" + this.logoSuffix), "InitLoading") as IInitLoading);
                 this._il.tip = InitLoadingViewLang.Tip;
             };
             _popup.addView(this, this._il.content);
