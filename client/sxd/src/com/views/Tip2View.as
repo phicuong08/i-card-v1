@@ -103,11 +103,10 @@ package com.views {
         }
         private function get iAlert():IAlert2{
             if (!this._alert){
-	
 				this._alert = (_view.getAssetsObject("Tip2", "Alert2") as IAlert2);
 				this._alert.oParent = _structure.alert;
-				this.reposition();
-				
+
+                this.reposition();
             };
 			if(this._alert)
 			{

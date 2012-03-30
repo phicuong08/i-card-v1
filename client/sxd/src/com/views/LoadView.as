@@ -13,7 +13,8 @@ package com.views {
                 _view.login.show();
                 _view.hideLoadingText();
             };
-            file.load(((URI.clientUrl + "assets.txt?rnd=") + URI.assetsRnd));
+            //file.load(((URI.clientUrl + "assets.txt?rnd=") + URI.assetsRnd));
+			file.load((URI.clientUrl + "assets.txt") );
         }
         public function close():void{
         }
