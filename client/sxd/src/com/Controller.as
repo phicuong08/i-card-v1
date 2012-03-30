@@ -2,6 +2,7 @@
 package com {
     import com.controllers.*;
 
+	
     public class Controller extends ControllerBase {
 
         public function get sample():SampleController{
