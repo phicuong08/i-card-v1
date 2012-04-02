@@ -27,6 +27,7 @@ package ICard.views {
 			Helper.backtrace("Mod_Player_Base.login, 1");
 //			_data.call(Mod_Player_Base.login, this.loginCallback, [_local1, _local2, _local3, URI.sourceUrl, URI.regdate]);
 //			URI.localConnection(_local1);
+			
 		}
 		private function loginCallback():void{
 			Helper.backtrace("Mod_Player_Base.login, 0");
