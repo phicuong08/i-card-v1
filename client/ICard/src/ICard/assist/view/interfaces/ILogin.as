@@ -4,10 +4,11 @@ package ICard.assist.view.interfaces {
 
     public interface ILogin {
 
-        function get content():Sprite;
-        function set drag(_arg1:IDrag):void;
-        function set onClose(_arg1:Function):void;
-        function clear():void;
+        function get content():MovieClip;
+        function set onLogin(_arg1:Function):void;
+		function set onReg(_arg1:Function):void;
+		function get usrName():String;
+		function get usrPwd():String;
 
     }
 }//package com.assist.view.interfaces 
