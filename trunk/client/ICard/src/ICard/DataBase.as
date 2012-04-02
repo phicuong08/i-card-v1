@@ -49,6 +49,10 @@ package ICard {
         public function get controller():ControllerMgr{
             return (this._ctrl);
         }
+		public function get SFS():SmartFox{
+			return _smartFox;
+		}
+		
         public function init(_arg1:ViewMgr, _arg2:ControllerMgr):void{
             this._view = _arg1;
             this._ctrl = _arg2;
@@ -168,7 +172,7 @@ package ICard {
 				this._onConnect();
 				this._onConnect = null;
 			};
-			this._view.login.show();
+//			this._view.login.show();
 			
 //            var _local2:ByteArray;
 //            if (this._useProxy){
