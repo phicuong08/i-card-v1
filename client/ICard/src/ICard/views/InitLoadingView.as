@@ -24,7 +24,7 @@ package ICard.views {
             this.render();
         }
         public function get logoSuffix():String{
-            var _local1 = "";
+            var _local1:String = "";
             if (((URI.isBaidu) || (URI.isPlatformB))){
                 _local1 = "Baidu";
             } else {

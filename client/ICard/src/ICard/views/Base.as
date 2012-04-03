@@ -93,7 +93,7 @@ package ICard.views {
             var description:String = _arg3;
             var hideLoading:Boolean = _arg4;
             var ignoreCheck:Boolean = _arg5;
-            var callback2 = _arg6;
+            var callback2:Function = _arg6;
             if (this.inStage){
                 if ((callback2 is Function)){
                     callback2();

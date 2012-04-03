@@ -63,7 +63,7 @@ package ICard.assist.view.sound {
             };
             _bgSound = null;
         }
-        public static function playGameSound(_arg1):SoundChannel{
+        public static function playGameSound(_arg1:*):SoundChannel{
             var _local2:Number = (_gameVolume * _mute);
             if (_local2 < 5){
                 return (null);

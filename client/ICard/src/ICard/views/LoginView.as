@@ -8,6 +8,7 @@ package ICard.views {
     import ICard.lang.client.com.views.*;
     import ICard.protocols.*;
     
+	import com.smartfoxserver.v2.core.SFSEvent;
     import flash.events.MouseEvent;
     import flash.net.*;
     public class LoginView extends Base implements IView {
@@ -56,11 +57,28 @@ package ICard.views {
 			var name:String = this._login.usrName;
 			var pwd:String = this._login.usrPwd;
 			Helper.output(name, pwd);
+			_data.SFS_login(name,pwd,this.onLogin,this.onLoginError);
 			Helper.backtrace("Mod_Player_Base.login, 1");
-			_data.call(Mod_Player_Base.login, this.loginCallback, [name, pwd]);
+//			_data.call(Mod_Player_Base.login, this.loginCallback, [name, pwd]);
 //			URI.localConnection(_local1);
 			
 		}
+		
+		private function onLogin(evt:SFSEvent):void
+		{
+			Helper.backtrace("SFS.login, 0");
+			trace("Login successful!");
+			_popup.closeView(this);
+
+		}
+		
+		private function onLoginError(evt:SFSEvent):void
+		{
+			Helper.backtrace("SFS.login, -1");
+			trace("Login failure: " + evt.params.errorMessage);
+		}
+
+		
 		private function loginCallback():void{
 			Helper.backtrace("Mod_Player_Base.login, 0");
 			switch (_ctrl.player.logined){
