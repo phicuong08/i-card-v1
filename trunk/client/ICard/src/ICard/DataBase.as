@@ -78,9 +78,12 @@ package ICard {
         }
         protected function removeNotAllow(_arg1:int, _arg2:int):void{
         }
+		public function callSFS(_arg1:Object, _arg2:Function, _arg3:Array, _arg4:Boolean=true):void{
+			
+		}
         public function call(_arg1:Object, _arg2:Function, _arg3:Array, _arg4:Boolean=true):void{
             if (_connectSucceed == false){
-            //    this._view.tip2.showAlert(DataBaseLang.connected);
+                this._view.tip2.showAlert(DataBaseLang.connected);
                 return;
             };
             var _local5:int = _arg1["module"];
@@ -164,7 +167,7 @@ package ICard {
 //            this._sock.removeEventListener(ProgressEvent.SOCKET_DATA, this.onSocketDataHandler);
 //            this._sock.removeEventListener(Event.CLOSE, this.onCloseHandler);
         }
-        private function onConnectHandler(_arg1:Event):void{
+        private function onConnectHandler(_arg1:SFSEvent):void{
 
 			Helper.backtrace("onConnectHandler");
 			this._connectSucceed = true;
@@ -188,7 +191,7 @@ package ICard {
 //            };
         }
  
-        private function onCloseHandler(_arg1:Event):void{
+        private function onCloseHandler(_arg1:SFSEvent):void{
             Helper.backtrace("onCloseHandler");
             
             this._view.resetHost();
@@ -196,7 +199,7 @@ package ICard {
                 this._onClose();
             };
         }
-        private function onIoErrorHandler(_arg1:IOErrorEvent):void{
+        private function onIoErrorHandler(_arg1:SFSEvent):void{
             if (this._useProxy == false){
                 this.connectProxy();
             } else {
