@@ -79,7 +79,7 @@ package ICard.protocols {
         public static const login:Object = {
             module:0,
             action:0,
-            request:[Utils.StringUtil, Utils.StringUtil, Utils.StringUtil, Utils.StringUtil, Utils.IntUtil],
+            request:[Utils.StringUtil, Utils.StringUtil],
             response:[Utils.ByteUtil, Utils.IntUtil, Utils.ByteUtil, Utils.IntUtil]
         };
         public static const player_first_init:Object = {

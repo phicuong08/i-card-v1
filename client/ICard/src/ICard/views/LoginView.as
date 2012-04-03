@@ -1,31 +1,63 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.views {
     import ICard.*;
-    import ICard.assist.view.interfaces.*;
-    import flash.net.*;
     import ICard.assist.*;
-    import ICard.protocols.*;
     import ICard.assist.server.*;
+    import ICard.assist.view.*;
+    import ICard.assist.view.interfaces.*;
     import ICard.lang.client.com.views.*;
-	import ICard.assist.view.*;
+    import ICard.protocols.*;
+    
+    import flash.events.MouseEvent;
+    import flash.net.*;
     public class LoginView extends Base implements IView {
 
 		private var _first:Boolean;
+		private var _login:ILogin;
 		
 		public function show():void{
+			loadAssets("login", this.loadCallback, "");
+		}
+		
+		private function loadCallback():void
+		{
+			this._login = (_viewMgr.getAssetsObject("login", "login") as ILogin);
+			this._login.onLogin = this.login;
+			this._login.onReg = this.reg;
+			this.render();
+		}
+		private function render():void{
+			if(this._login){
+				_popup.addView(this, this._login.content);
+			}
+//			if (this._achievement == null){
+//				this._achievement = (_viewMgr.getAssetsObject("Achievement", "Achievement") as IAchievement);
+//			};
+//			this.init();
+//			this.getPlayerAchievementListCallBack();
+//			this.showUI();
+//			if ((this._delayGotoAchievementLabel is Function)){
+//				this._delayGotoAchievementLabel();
+//			};
+		}
+		
+		
+		public function showLoading():void{
 			var lr:* = new LoadResponder(this.login, function (_arg1:String, _arg2:int):void{
 				_viewMgr.showViewProcess(_arg1, _arg2);
 			});
 			_viewMgr.loadResources([("InitLoading" + _viewMgr.initLoading.logoSuffix), "Alert"], lr);
 		}
-		private function login():void{
-			_viewMgr.initLoading.show();
-			var _local1:String = ((URI.playerName) || ("test"));
-			var _local2:String = ((URI.hashCode) || ("I love you!"));
-			var _local3:String = ((URI.time) || (Math.floor((new Date().getTime() / 1000)).toString()));
-			Helper.output(_local1, _local2);
+		private function reg(e:MouseEvent):void{
+			
+		}
+		private function login(e:MouseEvent):void{
+		//	_viewMgr.initLoading.show();
+			var name:String = this._login.usrName;
+			var pwd:String = this._login.usrPwd;
+			Helper.output(name, pwd);
 			Helper.backtrace("Mod_Player_Base.login, 1");
-//			_data.call(Mod_Player_Base.login, this.loginCallback, [_local1, _local2, _local3, URI.sourceUrl, URI.regdate]);
+			_data.call(Mod_Player_Base.login, this.loginCallback, [name, pwd]);
 //			URI.localConnection(_local1);
 			
 		}
