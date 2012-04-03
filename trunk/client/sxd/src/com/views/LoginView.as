@@ -20,10 +20,12 @@ package com.views {
             var _local1:String = ((URI.playerName) || ("test"));
             var _local2:String = ((URI.hashCode) || ("I love you!"));
             var _local3:String = ((URI.time) || (Math.floor((new Date().getTime() / 1000)).toString()));
-            Helper.output(_local1, _local2);
-            Helper.backtrace("Mod_Player_Base.login, 1");
-            _data.call(Mod_Player_Base.login, this.loginCallback, [_local1, _local2, _local3, URI.sourceUrl, URI.regdate]);
-            URI.localConnection(_local1);
+//            Helper.output(_local1, _local2);
+//            Helper.backtrace("Mod_Player_Base.login, 1");
+//            _data.call(Mod_Player_Base.login, this.loginCallback, [_local1, _local2, _local3, URI.sourceUrl, URI.regdate]);
+//            URI.localConnection(_local1);
+//			_view.initLoading.loadToolbar();
+
         }
         private function loginCallback():void{
             Helper.backtrace("Mod_Player_Base.login, 0");
