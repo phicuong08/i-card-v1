@@ -44,7 +44,7 @@ package ICard.views {
 		
 		
 		public function showLoading():void{
-			var lr:* = new LoadResponder(this.login, function (_arg1:String, _arg2:int):void{
+			var lr:* = new LoadResponder(this.onInitLoading, function (_arg1:String, _arg2:int):void{
 				_viewMgr.showViewProcess(_arg1, _arg2);
 			});
 			_viewMgr.loadResources([("InitLoading" + _viewMgr.initLoading.logoSuffix), "Alert"], lr);
@@ -63,12 +63,18 @@ package ICard.views {
 //			URI.localConnection(_local1);
 			
 		}
-		
+		private function onInitLoading():void
+		{
+			_popup.closeView(this);
+			_viewMgr.initLoading.show();
+		}
 		private function onLogin(evt:SFSEvent):void
 		{
 			Helper.backtrace("SFS.login, 0");
 			trace("Login successful!");
-			_popup.closeView(this);
+			
+			showLoading();
+			//_popup.closeView(this);
 
 		}
 		
