@@ -1,10 +1,11 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.assist.server {
-    import ICard.haloer.net.*;
-    import adobe.serialization.json.*;
-	import adobe.serialization.json.JSON;
     import ICard.assist.*;
     import ICard.haloer.data.*;
+    import ICard.haloer.net.*;
+    
+    import adobe.serialization.json.*;
+    import adobe.serialization.json.JSON;
 
     public class AchievementType {
 
@@ -13,7 +14,7 @@ package ICard.assist.server {
 
         public static function loadData(_arg1:Function, _arg2:Function=null):void{
             var callback:* = _arg1;
-            var error = _arg2;
+            var error:Function = _arg2;
             if (_achievement){
                 callback();
                 return;

@@ -5,13 +5,12 @@ package ICard {
     import ICard.lang.client.*;
     import ICard.protocols.*;
     
-   
-	import com.smartfoxserver.v2.SmartFox
-	import com.smartfoxserver.v2.core.SFSEvent
-	import com.smartfoxserver.v2.entities.*
-	import com.smartfoxserver.v2.entities.data.*
-	import com.smartfoxserver.v2.requests.*
-		
+    import com.smartfoxserver.v2.SmartFox;
+    import com.smartfoxserver.v2.core.SFSEvent;
+    import com.smartfoxserver.v2.entities.*;
+    import com.smartfoxserver.v2.entities.data.*;
+    import com.smartfoxserver.v2.requests.*;
+    
     import flash.errors.*;
     import flash.events.*;
     import flash.net.*;
@@ -24,10 +23,10 @@ package ICard {
  //       protected var _sock:Socket;
         private var _host:String;
         private var _port:int;
-        private var _useProxy:Boolean = false;
+		protected var _useProxy:Boolean = false;
         protected var _onConnect:Function;
         protected var _onClose:Function;
-        private var _connectSucceed:Boolean = false;
+		protected var _connectSucceed:Boolean = false;
         private var pack_len:int = -1;
         private var buffer:ByteArray;
         private var _event:EventDispatcher;
@@ -64,14 +63,15 @@ package ICard {
             return (createObjectBase(_arg1, _arg2, this._view, this._ctrl, (this as Data)));
         }
         protected function hasNotAllow(_arg1:int, _arg2:int):Boolean{
-            var _local4:Object;
-            var _local3:Number = ((this._notAllowList[Protocol.concat(_arg1, _arg2)]) || (0));
+			return false;
+//            var _local4:Object;
+//            var _local3:Number = ((this._notAllowList[Protocol.concat(_arg1, _arg2)]) || (0));
 //            if ((((_local3 == 0)) || (((new Date().getTime() - _local3) > 900)))){
 //                return (false);
 //            };
-            _local4 = Protocol.lookupProtocol(_arg1, _arg2);
-            Helper.alert((Protocol.getProtocolDescription(_local4["request"]) + " 请求间隔太短。"));
-            return (true);
+//            _local4 = Protocol.lookupProtocol(_arg1, _arg2);
+//            Helper.alert((Protocol.getProtocolDescription(_local4["request"]) + " 请求间隔太短。"));
+//            return (true);
         }
         protected function addNotAllow(_arg1:int, _arg2:int):void{
            // this._notAllowList[Protocol.concat(_arg1, _arg2)] = new Date().getTime();
@@ -113,10 +113,11 @@ package ICard {
             });
         }
         private function netCall(_arg1:uint, _arg2:uint, _arg3:Array, _arg4:Array):void{
-//            var _local5:ByteArray = new ByteArray();
-//            _local5.writeByte(_arg1);
-//            _local5.writeByte(_arg2);
-//            var _local6:ByteArray = Protocol.synthesize(_arg4, _arg3);
+            var _local5:ByteArray = new ByteArray();
+            _local5.writeByte(_arg1);
+            _local5.writeByte(_arg2);
+            var _local6:ByteArray = Protocol.synthesize(_arg4, _arg3);
+			var _tmp:int = 0;
 //            this._sock.writeInt((_local5.length + _local6.length));
 //            this._sock.writeBytes(_local5, 0, _local5.length);
 //            this._sock.writeBytes(_local6, 0, _local6.length);

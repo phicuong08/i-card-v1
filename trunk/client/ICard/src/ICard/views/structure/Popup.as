@@ -452,7 +452,7 @@ package ICard.views.structure {
         private function moveTo(_arg1:IView, _arg2:Sprite, _arg3:Number, _arg4:Number):void{
             var _local5:Number = (_arg3 - _arg2.x);
             var _local6:Number = (_arg4 - _arg2.y);
-            var _local7 = 6;
+            var _local7:Number = 6;
             var _local8:Number = (_local5 / _local7);
             var _local9:Number = (_local6 / _local7);
             this._processList[_arg1] = {

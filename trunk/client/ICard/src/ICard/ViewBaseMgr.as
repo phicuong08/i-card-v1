@@ -1,12 +1,13 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard {
-    import flash.events.*;
-    import flash.display.*;
-    import ICard.views.*;
-    import ICard.haloer.net.*;
-    import ICard.assist.view.*;
     import ICard.assist.*;
+    import ICard.assist.view.*;
     import ICard.haloer.data.*;
+    import ICard.haloer.net.*;
+    import ICard.views.*;
+    
+    import flash.display.*;
+    import flash.events.*;
 
     public class ViewBaseMgr extends SuperMgr {
 
@@ -58,14 +59,14 @@ package ICard {
         protected function resetPosition(_arg1:Event):void{
             var _local2:String;
             for (_local2 in this._positionList) {
-                var _local5 = this._positionList;
+                var _local5:Object = this._positionList;
                 _local5[_local2]();
             };
         }
         public function center(_arg1:String, _arg2:DisplayObject, _arg3:Function=null):void{
             var sign:* = _arg1;
             var d:* = _arg2;
-            var func = _arg3;
+            var func:Function = _arg3;
             if (func == null){
                 func = function ():void{
                     if (d.stage == null){

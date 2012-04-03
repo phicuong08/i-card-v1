@@ -8,7 +8,7 @@ package ICard {
     import flash.events.ErrorEvent;
     import flash.utils.*;
 
-    public class Data extends DataBase implements IData {
+    public class Data extends SFSDataBase implements IData {
 
         private var _callbackList:Object;
         private var _ignoreList:Object;

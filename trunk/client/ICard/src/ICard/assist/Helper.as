@@ -64,7 +64,7 @@ package ICard.assist {
             var _local1:TextFormat = new TextFormat();
             _local1.size = 13;
             _local1.leading = 2;
-            var _local2 = 20;
+            var _local2:int = 20;
             for (_local3 in this._list) {
                 _local4 = new Sprite();
                 _local5 = new BitmapData(100, 25, true, 4284927231);
