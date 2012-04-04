@@ -15,7 +15,7 @@
 			
             addFrameScript(0, this.frame1);
 
-			_Tip.text = "Tryp to loading";
+			_Tip.text = "Try to loading";
 			render("abc",5);
         }
         public function get content():MovieClip{
