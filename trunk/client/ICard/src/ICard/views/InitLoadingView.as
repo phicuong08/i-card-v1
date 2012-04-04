@@ -83,13 +83,17 @@ package ICard.views {
             };
             this.loadToolbar1(callback);
         }
+		
         private function loadToolbar1(_arg1:Function):void{
-            this.loadResources(["Toolbar", "PanelLoading", "DelayMessage", "Map", "Chat", "Templet"], _arg1);
+            this.loadResources(["mainmenu", "roomlist"], _arg1);
         }
+		
         public function get_player_info():void{
-            Helper.backtrace("Mod_Player_Base.get_player_info, 1");
-			_viewMgr.formatServerData();
-            _data.call(Mod_Player_Base.get_player_info, this.getPlayerInfoCallback, []);
+			_popup.closeView(this);
+        	_viewMgr.mainmenu.show();
+//			Helper.backtrace("Mod_Player_Base.get_player_info, 1");
+//			_viewMgr.formatServerData();
+//            _data.call(Mod_Player_Base.get_player_info, this.getPlayerInfoCallback, []);
         }
         private function getPlayerInfoCallback():void{
             Helper.backtrace("Mod_Player_Base.get_player_info, 0");

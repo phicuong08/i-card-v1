@@ -67,6 +67,8 @@ package ICard {
         }
         public function initAddAssets():void{
             addAssets("login", "login.swf");
+			addAssets("mainmenu", "mainmenu.swf");
+			addAssets("roomlist", "roomlist.swf");
 			addAssets("Achievement", "achievement.swf");
             addAssets("AchievementComplete", "achievement_complete.swf");
 			addAssets("Alert", "alert.swf");
@@ -84,6 +86,9 @@ package ICard {
 		}
 		public function get login():LoginView{
 			return ((this.createObject(LoginView) as LoginView));
+		}
+		public function get mainmenu():MainmenuView{
+			return ((this.createObject(MainmenuView) as MainmenuView));
 		}
 		public function get initLoading():InitLoadingView{
 			return ((this.createObject(InitLoadingView) as InitLoadingView));
