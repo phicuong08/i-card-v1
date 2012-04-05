@@ -44,7 +44,7 @@ package ICard.views {
 		
 		
 		public function showLoading():void{
-			var lr:* = new LoadResponder(this.onInitLoading, function (_arg1:String, _arg2:int):void{
+			var lr:* = new LoadResponder(this.onInitLoading_Done, function (_arg1:String, _arg2:int):void{
 				_viewMgr.showViewProcess(_arg1, _arg2);
 			});
 			_viewMgr.loadResources([("InitLoading" + _viewMgr.initLoading.logoSuffix), "Alert"], lr);
@@ -63,11 +63,11 @@ package ICard.views {
 //			URI.localConnection(_local1);
 			
 		}
-		private function onInitLoading():void
+		private function onInitLoading_Done():void
 		{
-			_popup.closeView(this);
 			_viewMgr.initLoading.show();
 			_viewMgr.initLoading.loadToolbar();
+			this.close();
 		}
 		private function onLogin(evt:SFSEvent):void
 		{
@@ -109,6 +109,7 @@ package ICard.views {
 			};
 		}
 		public function close():void{
+				_popup.closeView(this);
 		}
 		public function clear():void{
 		}
