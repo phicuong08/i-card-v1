@@ -87,6 +87,9 @@ package ICard {
 		public function get login():LoginView{
 			return ((this.createObject(LoginView) as LoginView));
 		}
+		public function get roomList():RoomListView{
+			return ((this.createObject(RoomListView) as RoomListView));
+		}
 		public function get mainmenu():MainmenuView{
 			return ((this.createObject(MainmenuView) as MainmenuView));
 		}
