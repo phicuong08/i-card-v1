@@ -44,7 +44,7 @@ package ICard.views {
 		
 		
 		public function showLoading():void{
-			var lr:* = new LoadResponder(this.onInitLoading_Done, function (_arg1:String, _arg2:int):void{
+			var lr:* = new LoadResponder(this.onInitLoadingCallback, function (_arg1:String, _arg2:int):void{
 				_viewMgr.showViewProcess(_arg1, _arg2);
 			});
 			_viewMgr.loadResources([("InitLoading" + _viewMgr.initLoading.logoSuffix), "Alert"], lr);
@@ -63,7 +63,7 @@ package ICard.views {
 //			URI.localConnection(_local1);
 			
 		}
-		private function onInitLoading_Done():void
+		private function onInitLoadingCallback():void
 		{
 			_viewMgr.initLoading.show();
 			_viewMgr.initLoading.loadToolbar();
