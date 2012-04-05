@@ -89,7 +89,7 @@ package ICard.views {
         }
 		
         public function get_player_info():void{
-			_popup.closeView(this);
+					this.close();
         	_viewMgr.mainmenu.show();
 //			Helper.backtrace("Mod_Player_Base.get_player_info, 1");
 //			_viewMgr.formatServerData();
