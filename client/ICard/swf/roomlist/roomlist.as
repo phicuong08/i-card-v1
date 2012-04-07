@@ -7,26 +7,61 @@
 
         public var _fresh_but:SimpleButton;
 		public var _quick_but:SimpleButton;
-     	public var _bar1:roomsel_bar;
-		
+ 
 		
 		
         public function roomlist(){
-			InitCallback(f1,f2);
+			//InitCallback(f1,f2);
+			InitBar(_bar1);
+			InitBar(_bar2);
+			InitBar(_bar3);
+			InitBar(_bar4);
+			InitBar(_bar5);
+			InitBar(_bar6);
+			InitBar(_bar7);
+			
 		}
         public function get content():MovieClip{
             return (this);
         }
-		public function InitCallback(arg1:Function,arg2:Function):void
+		public function InitCallback(arg1:Function,arg2:Function,arg3:Function,arg4:Function):void
 		{
-			_bar1.InitCallback(arg1,arg2,1);
-			_bar2.InitCallback(arg1,arg2,2);
-			_bar3.InitCallback(arg1,arg2,3);
-			_bar4.InitCallback(arg1,arg2,4);
-			_bar5.InitCallback(arg1,arg2,5);
-			_bar6.InitCallback(arg1,arg2,6);
-			_bar7.InitCallback(arg1,arg2,7);
+			InitBarCallback(_bar1,arg1,arg2,1);
+			InitBarCallback(_bar2,arg1,arg2,2);
+			InitBarCallback(_bar3,arg1,arg2,3);
+			InitBarCallback(_bar4,arg1,arg2,4);
+			InitBarCallback(_bar5,arg1,arg2,5);
+			InitBarCallback(_bar6,arg1,arg2,6);
+			InitBarCallback(_bar7,arg1,arg2,7);
+			_fresh_but.addEventListener(MouseEvent.CLICK,arg3);
+			_quick_but.addEventListener(MouseEvent.CLICK,arg4);
+		
 		}
+		private function InitBar(bar:Object):void{
+			bar.stop();
+			var handleMouseOver:* = function(e:MouseEvent):void{
+				bar.gotoAndStop(2);
+			}
+			var handleMouseOut:* = function(e:MouseEvent):void{
+				bar.gotoAndStop(1);
+			}
+			bar.addEventListener(MouseEvent.MOUSE_OVER,handleMouseOver);
+			bar.addEventListener(MouseEvent.MOUSE_OUT,handleMouseOut);
+		}
+		
+		private function InitBarCallback(bar:Object,arg1:Function,arg2:Function,arg3:int):void{
+			var onWatch:* = function(e:MouseEvent):void{
+				arg1(arg3);
+			};
+			var onJoin:* = function(e:MouseEvent):void{
+				arg2(arg3);
+			};
+			bar._watch_but.addEventListener(MouseEvent.MOUSE_UP,onWatch);
+			bar._join_but.addEventListener(MouseEvent.MOUSE_UP,onJoin);
+
+		}
+	
+		
 		
     }
 }//package 
