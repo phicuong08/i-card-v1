@@ -8,13 +8,14 @@ package ICard.views {
     import ICard.lang.client.com.views.*;
     import ICard.protocols.*;
     
-	import com.smartfoxserver.v2.core.SFSEvent;
+    import com.smartfoxserver.v2.core.SFSEvent;
+    
     import flash.events.MouseEvent;
     import flash.net.*;
     public class MainmenuView extends Base implements IView {
 
 		private var _mainmenu:IMainMenu;
-		
+		private var _state:int;
 		public function show():void{
 			loadAssets("mainmenu", this.loadCallback, "");
 		}
@@ -45,6 +46,22 @@ package ICard.views {
 		}
 	
 		private function onExit(e:MouseEvent):void{
+			switch(_state){
+				case 1:   //battle
+					break;
+				case 2:  //train
+					break;
+				case 3:  //VS
+					_viewMgr.roomList.onExitCmd();
+					break;
+				case 4:  //Race
+					break;
+				case 5:
+					break;//Card
+				case 6:  //Shop
+					
+					break;
+			}
 		}
 		private function onSet(e:MouseEvent):void{
 		}
@@ -59,16 +76,23 @@ package ICard.views {
 		private function onGuy(e:MouseEvent):void{
 		}
 		private function onBattle(e:MouseEvent):void{
+			_state = 1;
 		}
 		private function onTrain(e:MouseEvent):void{
+			_state = 2;
 		}
 		private function onVS(e:MouseEvent):void{
+			_state =3;
+			_viewMgr.roomList.show();
 		}
 		private function onRace(e:MouseEvent):void{
+			_state = 4;
 		}
 		private function onCard(e:MouseEvent):void{
+			_state = 5;
 		}
 		private function onShop(e:MouseEvent):void{
+			_state = 6;
 		}
 		
 		public function close():void{
