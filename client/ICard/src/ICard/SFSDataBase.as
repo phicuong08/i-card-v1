@@ -31,5 +31,29 @@ package ICard {
 			if (!SFS.roomManager.containsGroup(GAME_ROOMS_GROUP_NAME))
 				SFS.send(new SubscribeRoomGroupRequest(GAME_ROOMS_GROUP_NAME));
 		}
+
+		public function SFS_joinVSRoom(arg1:int,callback_ok:Function,callback_fail:Function):void
+		{
+			var roomName = "vs_room_" +arg1;
+			var room:Room = SFS.getRoomByName(roomName);
+			if(room ==null)
+			{
+				SFS.addEventListener(SFSEvent.ROOM_ADD, callback_ok);
+				SFS.addEventListener(SFSEvent.ROOM_CREATION_ERROR, callback_fail);
+				
+				var settings:RoomSettings = new RoomSettings("vs room")
+				SFS.send(new CreateRoomRequest(settings));
+			}
+			else
+			{
+				SFS.addEventListener(SFSEvent.ROOM_JOIN, callback_ok);
+				SFS.addEventListener(SFSEvent.ROOM_JOIN_ERROR, callback_fail);
+				// Join a Room called "Lobby"
+				SFS.send(new JoinRoomRequest("vs_room_" + arg1));				
+			}
+
+
+
+		}
     }
 }//package com 
