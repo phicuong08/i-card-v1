@@ -49,15 +49,15 @@ package ICard.views {
 		}
 		private function onJoin(arg1:int):void{
 			
-			_data.SFS_joinVSRoom(arg1,onJoinRoom_OK,onJoinRoom_FAIL):void;
+			_data.SFS_joinVSRoom(arg1,onJoinRoom_OK,onJoinRoom_FAIL);
 			trace("on join=",arg1);
 		}
 		
 		private function onJoinRoom_OK(evt:SFSEvent):void{
-			
+			trace("join room ok");
 		}
 		private function onJoinRoom_FAIL(evt:SFSEvent):void{
-			
+			trace("join room fail");
 		}
 		
 	
