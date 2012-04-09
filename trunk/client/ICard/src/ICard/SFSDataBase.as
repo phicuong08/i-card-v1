@@ -13,7 +13,7 @@ package ICard {
 	import flash.events.*;
     public class SFSDataBase extends DataBase {
 
-		private const GAME_ROOMS_GROUP_NAME:String = "games";
+		private const GAME_ROOMS_GROUP_NAME:String = "battle";
 		
 		public function SFS_login(name:String,pwd:String,callback_ok:Function,callback_fail:Function):void
 		{
@@ -34,14 +34,16 @@ package ICard {
 
 		public function SFS_joinVSRoom(arg1:int,callback_ok:Function,callback_fail:Function):void
 		{
-			var roomName = "vs_room_" +arg1;
+			var roomName:String = "vs_room_" +arg1;
 			var room:Room = SFS.getRoomByName(roomName);
 			if(room ==null)
 			{
 				SFS.addEventListener(SFSEvent.ROOM_ADD, callback_ok);
 				SFS.addEventListener(SFSEvent.ROOM_CREATION_ERROR, callback_fail);
 				
-				var settings:RoomSettings = new RoomSettings("vs room")
+				var settings:RoomSettings = new RoomSettings(roomName);
+				settings.groupId = "vs";
+
 				SFS.send(new CreateRoomRequest(settings));
 			}
 			else
