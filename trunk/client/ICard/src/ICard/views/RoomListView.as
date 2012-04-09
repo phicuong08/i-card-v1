@@ -30,7 +30,7 @@ package ICard.views {
 			
 			this._roomlist = (_viewMgr.getAssetsObject("roomlist", "roomlist") as IRoomList);
 			this._roomlist.InitCallback(onWatch,onJoin,onFresh,onQuick);
-			_data.SFS_subscribeRoomGroup(SubscribeRoomGroup_OK,SubscribeRoomGroup_FAIL);
+			_data.SFS_subscribeVSRoomGroup(SubscribeRoomGroup_OK,SubscribeRoomGroup_FAIL);
 			this.render();
 		}
 		private function render():void{
@@ -48,8 +48,18 @@ package ICard.views {
 			trace("on watch=",arg1);
 		}
 		private function onJoin(arg1:int):void{
+			
+			_data.SFS_createVSRoom(arg1,onCreateRoom_OK,onCreateRoom_FAIL):void;
 			trace("on join=",arg1);
 		}
+				
+		private function onCreateRoom_OK(evt:SFSEvent):void{
+			
+		}
+		private function onCreateRoom_FAIL(evt:SFSEvent):void{
+			
+		}
+		
 		private function onFresh(arg1:int):void{
 			trace("on fresh=",arg1);
 		}

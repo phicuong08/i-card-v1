@@ -24,7 +24,7 @@ package ICard {
 			SFS.send(new LoginRequest(name,pwd));
 
 		}
-		public function SFS_subscribeRoomGroup(callback_ok:Function,callback_fail:Function):void
+		public function SFS_subscribeVSRoomGroup(callback_ok:Function,callback_fail:Function):void
 		{
 			SFS.addEventListener(SFSEvent.ROOM_GROUP_SUBSCRIBE, callback_ok);
 			SFS.addEventListener(SFSEvent.ROOM_GROUP_SUBSCRIBE_ERROR, callback_fail);
