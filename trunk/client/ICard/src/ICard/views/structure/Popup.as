@@ -50,16 +50,15 @@ package ICard.views.structure {
             this._viewMgr.addToFrameProcessList(this.toString(), this.process);
         }
         public function addView(_arg1:IView, _arg2:Sprite):void{
-            if (this.hasViewIncluded(_arg1, this._freeViews)){
-                this.removeFadeOutList(_arg1);
+			this.removeFadeOutList(_arg1);
+			if (this.hasViewIncluded(_arg1, this._freeViews)){
+                
                 this._frees[_arg1] = _arg2;
                 this.addChildWithFade(_arg1, _arg2);
-             
                 return;
             };
             if (this.hasViewIncluded(_arg1, this._superViews)){
                 this.closeAll();
-                this.removeFadeOutList(_arg1);
                 this._supers[_arg1] = _arg2;
                 this.addChildWithFade(_arg1, _arg2);
      
@@ -71,7 +70,6 @@ package ICard.views.structure {
             };
             _local3.push(_arg1);
             this.closeExclude(_local3);
-            this.removeFadeOutList(_arg1);
             this._views[_arg1] = _arg2;
             this.addChildWithFade(_arg1, _arg2);
             this.setfocusView(_arg1);
