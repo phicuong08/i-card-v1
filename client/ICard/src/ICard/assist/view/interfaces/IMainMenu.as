@@ -4,7 +4,7 @@ package ICard.assist.view.interfaces {
 
     public interface IMainMenu {
         function get content():MovieClip;
-		
+		function ShowMainBut(arg1:Boolean):void;
 		function set onExit(_arg1:Function):void;
 		function set onSet(_arg1:Function):void;
 		function set onGold(_arg1:Function):void;
