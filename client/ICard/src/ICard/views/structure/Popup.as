@@ -494,6 +494,18 @@ package ICard.views.structure {
         public function get focusView():IView{
             return (this._focusView);
         }
-
+				public function CloseTop():Boolean{
+						if(_focusView==null)
+						{
+								return false;
+						}
+						else		
+						{
+								closeView(_focusView);
+								if(_focusView)
+										_focusView.show();
+								return true;
+						}
+				}
     }
 }//package com.views.structure 
