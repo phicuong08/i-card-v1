@@ -22,6 +22,15 @@
         public function get content():MovieClip{
             return (this);
         }
+		public function ShowMainBut(arg1:Boolean):void
+		{
+			_battle_but.visible = arg1;
+			_train_but.visible = arg1;
+			_vs_but.visible = arg1;
+			_race_but.visible = arg1;
+			_card_but.visible = arg1;
+			_shop_but.visible = arg1;
+		}
 		public function set onExit(_arg1:Function):void
 		{
 			_exit._exit_but.addEventListener(MouseEvent.CLICK,_arg1);

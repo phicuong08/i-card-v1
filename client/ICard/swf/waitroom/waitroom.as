@@ -6,11 +6,12 @@
     public class waitroom extends MovieClip implements IWaitRoom{
 
        	public var _battle_but:SimpleButton;
-				public var _exit:MovieClip;
+		public var _exit:MovieClip;
 		
         public function waitroom(){
 			InitPanel(true,true);
 			InitPanel(false,false);
+			
 			
 		}
         public function get content():MovieClip{
@@ -50,18 +51,19 @@
 				}
 			}
 		}
-		function set onInvite(_arg1:Function):void{
+		public function set onInvite(_arg1:Function):void{
 				_top_bar._invite_but.addEventListener(MouseEvent.CLICK,_arg1);
-    }
-    function set onBye(_arg1:Function):void{
+    	}
+    	public function set onBye(_arg1:Function):void{
     		_top_bar._bye_but.addEventListener(MouseEvent.CLICK,_arg1);
-    }
-    function set onLock(_arg1:Function):void{
+   		}
+    	public function set onLock(_arg1:Function):void{
     		_top_bar._lock_but.addEventListener(MouseEvent.CLICK,_arg1);
-    }
-  	function set onStart(_arg1:Function):void{
+    	}
+  		public function set onStart(_arg1:Function):void{
   			_panel_up._start_but.addEventListener(MouseEvent.CLICK,_arg1);
   			_panel_down._start_but.addEventListener(MouseEvent.CLICK,_arg1);
-  	}
+  		}
+	
     }
 }//package 
