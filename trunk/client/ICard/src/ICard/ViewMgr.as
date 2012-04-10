@@ -66,16 +66,17 @@ package ICard {
             
         }
         public function initAddAssets():void{
+        		addAssets("waitroom", "waitroom.swf");
             addAssets("login", "login.swf");
-			addAssets("mainmenu", "mainmenu.swf");
-			addAssets("roomlist", "roomlist.swf");
-			addAssets("Achievement", "achievement.swf");
+						addAssets("mainmenu", "mainmenu.swf");
+						addAssets("roomlist", "roomlist.swf");
+						addAssets("Achievement", "achievement.swf");
             addAssets("AchievementComplete", "achievement_complete.swf");
-			addAssets("Alert", "alert.swf");
-			addAssets("Tip2", "addons/tip2.swf");
-			addAssets("InitLoading", "init_loading.swf");
-			addAssets("InitLoadingBaidu", "init_loading_baidu.swf");
-			addAssets("InitLoadingMangguo", "init_loading_mangguo.swf");
+						addAssets("Alert", "alert.swf");
+						addAssets("Tip2", "addons/tip2.swf");
+						addAssets("InitLoading", "init_loading.swf");
+						addAssets("InitLoadingBaidu", "init_loading_baidu.swf");
+						addAssets("InitLoadingMangguo", "init_loading_mangguo.swf");
         }
 		public function get load():LoadView{
 			return ((createObject(LoadView) as LoadView));
