@@ -53,6 +53,7 @@ package ICard.views {
 		}
 		
 		private function onJoinRoom_OK(evt:SFSEvent):void{
+			_viewMgr.waitroom.show();
 			trace("join room ok");
 		}
 		private function onJoinRoom_FAIL(evt:SFSEvent):void{

@@ -42,7 +42,7 @@ package ICard {
 				SFS.addEventListener(SFSEvent.ROOM_CREATION_ERROR, callback_fail);
 				
 				var settings:RoomSettings = new RoomSettings(roomName);
-				settings.groupId = "vs";
+				//settings.groupId = "vs";
 
 				SFS.send(new CreateRoomRequest(settings));
 			}

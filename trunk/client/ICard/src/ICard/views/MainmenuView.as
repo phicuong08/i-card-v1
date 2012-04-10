@@ -46,8 +46,8 @@ package ICard.views {
 	
 		private function onExit(e:MouseEvent):void{
 			
-			_popup.CloseTop();
-	
+			if(_popup.CloseTop()==false)
+				this._mainmenu.ShowMainBut(true);
 		}
 		private function onSet(e:MouseEvent):void{
 		}
@@ -62,18 +62,24 @@ package ICard.views {
 		private function onGuy(e:MouseEvent):void{
 		}
 		private function onBattle(e:MouseEvent):void{
+			this._mainmenu.ShowMainBut(false);
 		}
 		private function onTrain(e:MouseEvent):void{
+			this._mainmenu.ShowMainBut(false);
 
 		}
 		private function onVS(e:MouseEvent):void{
+			this._mainmenu.ShowMainBut(false);
 			_viewMgr.roomList.show();
 		}
 		private function onRace(e:MouseEvent):void{
+			this._mainmenu.ShowMainBut(false);
 		}
 		private function onCard(e:MouseEvent):void{
+			this._mainmenu.ShowMainBut(false);
 		}
 		private function onShop(e:MouseEvent):void{
+			this._mainmenu.ShowMainBut(false);
 		}
 		
 		public function close():void{
