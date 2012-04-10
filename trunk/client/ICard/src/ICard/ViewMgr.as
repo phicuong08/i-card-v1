@@ -93,6 +93,9 @@ package ICard {
 		public function get mainmenu():MainmenuView{
 			return ((this.createObject(MainmenuView) as MainmenuView));
 		}
+		public function get waitroom():WaitRoomView{
+			return ((this.createObject(WaitRoomView) as WaitRoomView));
+		}
 		public function get initLoading():InitLoadingView{
 			return ((this.createObject(InitLoadingView) as InitLoadingView));
 		}
