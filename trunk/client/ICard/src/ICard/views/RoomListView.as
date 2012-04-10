@@ -18,7 +18,6 @@ package ICard.views {
     public class RoomListView extends Base implements IView {
 
 		
-		
 		private var _roomlist:IRoomList;
 		
 		public function show():void{
@@ -72,9 +71,7 @@ package ICard.views {
 		}
 		public function clear():void{
 		}
-		public function onExitCmd():int{
-			return 0;
-		}
+	
 		
 	}
 }//package com.views 
