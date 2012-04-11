@@ -1,13 +1,14 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.assist.view.controls {
-    import flash.events.*;
-    import flash.display.*;
-    import ICard.assist.view.*;
-    import flash.utils.*;
-    import flash.geom.*;
-    import ICard.assist.view.interfaces.*;
-    import flash.text.*;
     import ICard.assist.*;
+    import ICard.assist.view.*;
+    import ICard.assist.view.interfaces.*;
+    
+    import flash.display.*;
+    import flash.events.*;
+    import flash.geom.*;
+    import flash.text.*;
+    import flash.utils.*;
 
     public class Tip extends Sprite implements ITip {
 
@@ -57,7 +58,7 @@ package ICard.assist.view.controls {
         public function get stageOffset():Point{
             return (_offset);
         }
-        public function addTarget(_arg1:DisplayObject, _arg2=null):void{
+        public function addTarget(_arg1:DisplayObject, _arg2:Object=null):void{
             this.clearTarget(_arg1);
             this.addOne(_arg1, _arg2);
             this.addEvent(_arg1);
@@ -72,20 +73,21 @@ package ICard.assist.view.controls {
             };
             this.addEvent(_arg1);
         }
-        public function addFixedTarget(_arg1:DisplayObject, _arg2, _arg3:Point, _arg4:Boolean=true):void{
+	
+        public function addFixedTarget(_arg1:DisplayObject, _arg2:Object, _arg3:Point, _arg4:Boolean=true):void{
             this.clearTarget(_arg1);
             this.addOne(_arg1, _arg2, _arg3, _arg4);
             this.addEvent(_arg1);
         }
-        private function addOne(_arg1:DisplayObject, _arg2, _arg3:Point=null, _arg4:Boolean=true):void{
+        private function addOne(_arg1:DisplayObject, _arg2:*, _arg3:Point=null, _arg4:Boolean=true):void{
             var d:* = null;
             var target:* = _arg1;
             var content:* = _arg2;
-            var pos = _arg3;
+            var pos:Point = _arg3;
             var topBase:Boolean = _arg4;
             if ((content is String)){
                 d = new TextField();
-                var _local6 = (d as TextField);
+                var _local6:TextField = (d as TextField);
                 with (_local6) {
                     selectable = false;
                     autoSize = TextFieldAutoSize.LEFT;
@@ -240,7 +242,7 @@ package ICard.assist.view.controls {
                 visible = _local2.visible;
                 var _local3:int = (_local2) ? (_local2.width + (_contentOffset.x * 2)) : 100;
                 var _local4:int = (_local2) ? (_local2.height + (_contentOffset.y * 2)) : 50;
-                var _local5 = 8;
+                var _local5:int = 8;
                 graphics.lineStyle(1, 0, 0.3);
                 graphics.beginFill(0, 0.75);
                 graphics.drawRoundRect((2 + addonX), (2 + addonY), _local3, _local4, _local5, _local5);
@@ -270,17 +272,17 @@ package ICard.assist.view.controls {
                 };
             };
         }
-        public function clickToOpen(_arg1, _arg2:Event=null):Sprite{
+        public function clickToOpen(_arg1:Object, _arg2:Event=null):Sprite{
             var d:* = null;
             var content:* = _arg1;
-            var e = _arg2;
+            var e:Event = _arg2;
             var container:* = new Sprite();
             this._parent.addChild(container);
             if ((content is DisplayObject)){
                 d = content;
             } else {
                 d = new TextField();
-                var _local4 = (d as TextField);
+                var _local4:TextField = (d as TextField);
                 with (_local4) {
                     selectable = false;
                     autoSize = TextFieldAutoSize.LEFT;
@@ -336,7 +338,7 @@ package ICard.assist.view.controls {
             var _local4:int;
             var _local5:int = (_local2) ? (_local2.width + (this._contentOffset.x * 2)) : 100;
             var _local6:int = (_local2) ? (_local2.height + (this._contentOffset.y * 2)) : 50;
-            var _local7 = 8;
+            var _local7:int = 8;
             _local1.graphics.clear();
             _local1.graphics.lineStyle(1, 0, 0.3);
             _local1.graphics.beginFill(0, 0.75);
@@ -444,8 +446,8 @@ package ICard.assist.view.controls {
         }
         override public function toString():String{
             var _local3:Object;
-            var _local1 = 1;
-            var _local2 = "============\n";
+            var _local1:int = 1;
+            var _local2:String = "============\n";
             for (_local3 in this._targets) {
                 _local2 = (_local2 + ((((((((((("[" + _local1) + "], ") + _local3) + " : \n") + "\tname   : ") + _local3.name) + "\n") + "\tparent : ") + _local3.parent) + "\n") + "\n"));
                 _local1++;

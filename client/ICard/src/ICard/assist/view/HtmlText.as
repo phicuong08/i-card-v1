@@ -50,7 +50,7 @@ package ICard.assist.view {
             if (_arg7){
                 _arg1 = (("<u>" + _arg1) + "</u>");
             };
-            var _local10 = "";
+            var _local10:String = "";
             if (_arg4){
                 _local10 = (_local10 + ((" font=\"" + _arg4) + "\""));
             };

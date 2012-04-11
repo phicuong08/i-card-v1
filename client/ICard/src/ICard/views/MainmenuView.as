@@ -22,13 +22,6 @@ package ICard.views {
 		private function loadCallback():void
 		{
 			this._mainmenu = (_viewMgr.getAssetsObject("mainmenu", "mainmenu") as IMainMenu);
-			this._mainmenu.onExit = this.onExit;
-			this._mainmenu.onSet = this.onSet;
-			this._mainmenu.onGold = this.onGold;
-			this._mainmenu.onFriend = this.onFriend;
-			this._mainmenu.onTask = this.onTask;
-			this._mainmenu.onPack = this.onPack;
-			this._mainmenu.onGuy = this.onGuy;
 			this._mainmenu.onBattle = this.onBattle;
 			this._mainmenu.onTrain = this.onTrain;
 			this._mainmenu.onVS = this.onVS;
