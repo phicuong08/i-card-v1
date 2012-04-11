@@ -1,6 +1,9 @@
 package sfs2x.extensions.games.battlefarm.main;
 
 import java.util.Enumeration;
+import java.util.List;
+
+import com.smartfoxserver.v2.entities.Zone;
 
 import sfs2x.extensions.games.battlefarm.beans.BombBean;
 import sfs2x.extensions.games.battlefarm.beans.GameBean;
@@ -44,6 +47,16 @@ public class GameController extends Thread
 		while (timeEventsRunning)
 		{
 			count++;
+			
+			//ws
+			Zone zone = extension.getParentZone();
+			if( !zone.containsPublicGroup( "battle" ) )
+			{
+			   List<String> pGroupList = zone.getPublicGroups();
+			   pGroupList.add( "battle" );
+			   zone.setPublicGroups( pGroupList );
+			}
+			//ws
 			
 			// Cycle for all the running games
 			for (Enumeration<GameBean> e = extension.getGames().elements(); e.hasMoreElements(); )
