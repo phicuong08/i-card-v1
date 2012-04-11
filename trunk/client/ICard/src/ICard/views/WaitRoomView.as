@@ -12,36 +12,44 @@ package ICard.views {
     
     import flash.events.MouseEvent;
     import flash.net.*;
-	
-	
-	
     public class WaitRoomView extends Base implements IView {
 
-		
 		private var _waitroom:IWaitRoom;
 		
 		public function show():void{
-			loadAssets("roomlist", this.loadCallback, "");
+			loadAssets("waitroom", this.loadCallback, "");
 		}
 		
 		private function loadCallback():void
 		{
-			
 			this._waitroom = (_viewMgr.getAssetsObject("waitroom", "waitroom") as IWaitRoom);
+			this._waitroom.onInvite = this.onInvite;
+			this._waitroom.onBye = this.onBye;
+			this._waitroom.onLock = this.onLock;
+			this._waitroom.onStart = this.onStart;
 			this.render();
 		}
+		
 		private function render():void{
 			if(this._waitroom){
 				_popup.addView(this, this._waitroom.content);
 			}
 		}
 	
+	
+		private function onInvite(e:MouseEvent):void{
+		}
+		private function onBye(e:MouseEvent):void{
+		}
+		private function onLock(e:MouseEvent):void{
+		}
+		private function onStart(e:MouseEvent):void{
+		}
+		
 		public function close():void{
-			_popup.closeView(this);
 		}
 		public function clear():void{
 		}
-	
 		
 	}
 }//package com.views 
