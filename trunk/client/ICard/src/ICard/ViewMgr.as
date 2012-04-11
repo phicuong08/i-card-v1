@@ -169,11 +169,11 @@ package ICard {
         }
         public function get superViews():Array{
             //return ([ActivitiesView, CampWarView, HeroesWarView, ChooseRolesView, FactionWarView, GetPeachView, InCampWarView, LodgeView, MiniFactionWarView, MissionFailedTipsView, MultiWarView, MultiMissionView, PKWarView, PreventIndulgeView, SuperSportView, SuperSportWarView, SportWarView, StrategyWarView, TowerView, WarView, WorldBossWarView, ZodiacView, ZodiacWarView]);
-						return ([MainmenuView]);
+						return ([]);
         }
         public function get coexistViews():Array{
             //return ([[AudienceView, FriendChatView, FriendListView, OtherRoleMsgView, RoleMsgView], [OtherRoleMsgView, RoleMsgView, ImmortalityMsgView], [RoleMsgView, MyFactionView, OtherRoleMsgView], [RoleMsgView, TrainingView, AchievementView], [RoleMsgView, MyFlowerRecordView], [RoleMsgView, ArmsGoldView], [PackView, ArmsGoldView], [RoleMsgView, OtherRoleMsgView, RoleDetailInfoView], [OtherRoleMsgView, PlayerCompareView], [PackView, WarehouseView], [PackView, ShopView], [RoleMsgView, PackView], [RoleMsgView, RefineView], [RoleMsgView, DuJieView], [OtherRoleMsgView, ServerWarRecordView], [FateView, RoleMsgView], [WorldView, TravelEventView], [GameHelperView, RuneView], [GameHelperView, DailyQuestView], [FactionBlessingView, RoleMsgView, OtherRoleMsgView], [FactionWarSignUpView, FactionWarSignUpListView], [FactionWindowView, FactionBossSelectView], [ImmortalityMsgView, InheritView], [GoldOilShopView, ZodiacView]]);
-						return [];
+			return [];
         }
         public function get exclusiveViews():Array{
 //            return ([{
@@ -212,6 +212,9 @@ package ICard {
             //return ([ChatView, ChooseCampView, GameMasterView, MissionPracticeView, PanelLoadingView, RuneView, TakeBibleReadyView, TakeBibleRoadView, TravelEventView, WhatsNewView, TriggerFunctionView, FriendMessageView]);
 			return [];
         }
+		public function get stackViews():Array{
+			return [RoomListView,WaitRoomView];
+		}
         private function initFrameTime():void{
             var ftime:* = NaN;
             var ftime1:* = NaN;
