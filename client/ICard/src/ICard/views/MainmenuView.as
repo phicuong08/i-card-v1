@@ -62,7 +62,7 @@ package ICard.views {
 
 		}
 		private function onVS(e:MouseEvent):void{
-			this._mainmenu.ShowMainBut(false);
+			//this._mainmenu.ShowMainBut(false);
 			_viewMgr.roomList.show();
 		}
 		private function onRace(e:MouseEvent):void{

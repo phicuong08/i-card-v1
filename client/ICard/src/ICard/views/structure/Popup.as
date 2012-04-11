@@ -16,11 +16,14 @@ package ICard.views.structure {
         private var _exclusiveViews:Array;
         private var _inTownViews:Array;
         private var _freeViews:Array;
+		private var _stackViews:Array;
         public var structure:Structure;
         private var _viewMgr:ICard.ViewMgr;
         private var _supers:Dictionary;
+	
         private var _views:Dictionary;
         private var _frees:Dictionary;
+		private var _stacks:Dictionary;
         private var _supersList:Array;
         private var _viewsList:Array;
         private var _timerOut:Timer;
@@ -34,8 +37,9 @@ package ICard.views.structure {
         public function Popup(_arg1:ViewMgr):void{
 			trace("run pop win");
             this._supers = new Dictionary();
-            this._views = new Dictionary();
+	        this._views = new Dictionary();
             this._frees = new Dictionary();
+			this._stacks = new Dictionary();
             this._supersList = [];
             this._viewsList = [];
             this._fadeOutList = new Dictionary();
@@ -47,10 +51,14 @@ package ICard.views.structure {
             this._exclusiveViews = this._viewMgr.exclusiveViews;
   //          this._inTownViews = this._viewMgr.inTownViews;
             this._freeViews = this._viewMgr.freeViews;
+			this._stackViews = this._viewMgr.stackViews;
             this._viewMgr.addToFrameProcessList(this.toString(), this.process);
         }
         public function addView(_arg1:IView, _arg2:Sprite):void{
 			this.removeFadeOutList(_arg1);
+			if (this.hasViewIncluded(_arg1, this._stackViews)){
+				this._stack[_arg1] = _arg2;
+			}
 			if (this.hasViewIncluded(_arg1, this._freeViews)){
                 
                 this._frees[_arg1] = _arg2;
@@ -220,25 +228,22 @@ package ICard.views.structure {
             var _local4:int;
             while (_local4 < _local3) {
                 _local5 = this._coexistViews[_local4];
-                if (this.hasViewIncluded(_arg1, _local5) == false){
-                } else {
+                if (this.hasViewIncluded(_arg1, _local5) == true){
                     _local6 = [];
                     for (_local7 in this._views) {
                         if (this.hasViewIncluded((_local7 as IView), _local5) == true){
                             _local6.push(_local7);
                         };
                     };
-//                    if (_local6.length > 0){
-//                        if ((((_local6.length == 1)) && ((_local6[0] is PanelLoadingView)))){
-//                        } else {
-//                            _local2.push(_local6);
-//                        };
-//                    };
+                    if (_local6.length > 0){
+                        _local2.push(_local6);
+                    };
                 };
                 _local4++;
             };
             return (_local2);
         }
+				
         private function hasViewIncluded(_arg1:IView, _arg2:Array):Boolean{
             var _local3:int = (_arg2) ? _arg2.length : 0;
             var _local4:int;
