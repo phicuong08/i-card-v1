@@ -55,35 +55,37 @@ package ICard.views.structure {
                 
                 this._frees[_arg1] = _arg2;
                 this.addChildWithFade(_arg1, _arg2);
-                return;
-            };
-            if (this.hasViewIncluded(_arg1, this._superViews)){
+ 			}
+			else if (this.hasViewIncluded(_arg1, this._superViews)){
                 this.closeAll();
                 this._supers[_arg1] = _arg2;
                 this.addChildWithFade(_arg1, _arg2);
-     
-                return;
-            };
-            var _local3:Array = this.getCoexistViews(_arg1);
-            if (_local3.length > 0){
-                _local3 = _local3[0];
-            };
-            _local3.push(_arg1);
-            this.closeExclude(_local3);
-            this._views[_arg1] = _arg2;
-            this.addChildWithFade(_arg1, _arg2);
-            this.setfocusView(_arg1);
-            _arg2.mouseChildren = true;
-            _arg2.mouseEnabled = true;
-            if (_arg2.width < Structure.stageWidth){
-                _arg2.x = Math.floor(((Structure.stageWidth - _arg2.width) / 2));
-                _arg2.y = Math.floor(((Structure.stageHeight - _arg2.height) / 2));
-            };
-            if (this._viewsList.indexOf(_arg1) == -1){
-                this._viewsList.push(_arg1);
-            };
-            this.reposition();
-            setTimeout(this.reposition, 10);
+            }
+			else
+			{
+				var _local3:Array = this.getCoexistViews(_arg1);
+				if (_local3.length > 0){
+					_local3 = _local3[0];
+				};
+				_local3.push(_arg1);
+				this.closeExclude(_local3);
+				this._views[_arg1] = _arg2;
+				
+				this.setfocusView(_arg1);
+				_arg2.mouseChildren = true;
+				_arg2.mouseEnabled = true;
+				if (_arg2.width < Structure.stageWidth){
+					_arg2.x = Math.floor(((Structure.stageWidth - _arg2.width) / 2));
+					_arg2.y = Math.floor(((Structure.stageHeight - _arg2.height) / 2));
+				};
+				if (this._viewsList.indexOf(_arg1) == -1){
+					this._viewsList.push(_arg1);
+				};
+				this.reposition();
+				setTimeout(this.reposition, 10);				
+			}
+			this.addChildWithFade(_arg1, _arg2);
+      
         }
         private function addChildWithFade(_arg1:IView, _arg2:Sprite):void{
             var bm:* = null;

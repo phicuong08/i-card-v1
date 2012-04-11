@@ -31,31 +31,31 @@ package ICard {
         private var _info:TextField;
 		
 	
-		private function contextMenuItem(_arg1:String, _arg2:String, _arg3:Boolean=true):ContextMenuItem{
-			var text:* = _arg1;
-			var url:* = _arg2;
-			var enabled:Boolean = _arg3;
-			var item:* = new ContextMenuItem(text);
-			item.enabled = enabled;
-			item.separatorBefore = true;
-			var handler:* = function (_arg1:ContextMenuEvent):void{
-				if (url){
-					navigateToURL(new URLRequest(url));
-				};
-			};
-			item.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, handler);
-			return (item);
-		}
-		
-		private function initContextMenu():void{
-			var _local1:ContextMenu = new ContextMenu();
-			_local1.customItems.push(this.contextMenuItem(ViewLang.WebSite, URI.webSiteUrl));
-			_local1.customItems.push(this.contextMenuItem(ViewLang.BBS, URI.bbsUrl));
-			_local1.customItems.push(this.contextMenuItem(Lang.sprintf(ViewLang.Version, "1.0.1"), "", false));
-			_local1.customItems.push(this.contextMenuItem(ViewLang.Company, "", false));
-			var _local2:Object = stage.getChildAt(0);
-			_local2.contextMenu = _local1;
-		}
+				private function contextMenuItem(_arg1:String, _arg2:String, _arg3:Boolean=true):ContextMenuItem{
+					var text:* = _arg1;
+					var url:* = _arg2;
+					var enabled:Boolean = _arg3;
+					var item:* = new ContextMenuItem(text);
+					item.enabled = enabled;
+					item.separatorBefore = true;
+					var handler:* = function (_arg1:ContextMenuEvent):void{
+						if (url){
+							navigateToURL(new URLRequest(url));
+						};
+					};
+					item.addEventListener(ContextMenuEvent.MENU_ITEM_SELECT, handler);
+					return (item);
+				}
+				
+				private function initContextMenu():void{
+					var _local1:ContextMenu = new ContextMenu();
+					_local1.customItems.push(this.contextMenuItem(ViewLang.WebSite, URI.webSiteUrl));
+					_local1.customItems.push(this.contextMenuItem(ViewLang.BBS, URI.bbsUrl));
+					_local1.customItems.push(this.contextMenuItem(Lang.sprintf(ViewLang.Version, "1.0.1"), "", false));
+					_local1.customItems.push(this.contextMenuItem(ViewLang.Company, "", false));
+					var _local2:Object = stage.getChildAt(0);
+					_local2.contextMenu = _local1;
+				}
 		
         public function ViewMgr(_arg1:Stage){
             this._delayList = {};
@@ -65,62 +65,64 @@ package ICard {
             this.initFrameTime();
             
         }
-        public function initAddAssets():void{
-        				addAssets("waitroom", "waitroom.swf");
-            			addAssets("login", "login.swf");
+		    public function initAddAssets():void{
+						addAssets("waitroom", "waitroom.swf");
+						addAssets("login", "login.swf");
 						addAssets("mainmenu", "mainmenu.swf");
 						addAssets("roomlist", "roomlist.swf");
 						addAssets("Achievement", "achievement.swf");
-            			addAssets("AchievementComplete", "achievement_complete.swf");
+						addAssets("AchievementComplete", "achievement_complete.swf");
 						addAssets("Alert", "alert.swf");
 						addAssets("Tip2", "addons/tip2.swf");
 						addAssets("InitLoading", "init_loading.swf");
 						addAssets("InitLoadingBaidu", "init_loading_baidu.swf");
 						addAssets("InitLoadingMangguo", "init_loading_mangguo.swf");
-        }
-		public function get load():LoadView{
-			return ((createObject(LoadView) as LoadView));
-		}
+		    }
+				public function get load():LoadView{
+					return ((createObject(LoadView) as LoadView));
+				}
+				public function get tip():TipView{
+		    		return ((this.createObject(TipView) as TipView));
+		    }
+				public function get alert():AlertView{
+						return ((this.createObject(AlertView) as AlertView));
+				}
+				public function get login():LoginView{
+						return ((this.createObject(LoginView) as LoginView));
+				}
+				public function get roomList():RoomListView{
+						return ((this.createObject(RoomListView) as RoomListView));
+				}
+				public function get mainmenu():MainmenuView{
+						return ((this.createObject(MainmenuView) as MainmenuView));
+				}
+				public function get waitroom():WaitRoomView{
+						return ((this.createObject(WaitRoomView) as WaitRoomView));
+				}
+				public function get initLoading():InitLoadingView{
+						return ((this.createObject(InitLoadingView) as InitLoadingView));
+				}
+				public function get tip2():Tip2View{
+						return ((this.createObject(Tip2View) as Tip2View));
+				}
 		
-		public function get alert():AlertView{
-			return ((this.createObject(AlertView) as AlertView));
-		}
-		public function get login():LoginView{
-			return ((this.createObject(LoginView) as LoginView));
-		}
-		public function get roomList():RoomListView{
-			return ((this.createObject(RoomListView) as RoomListView));
-		}
-		public function get mainmenu():MainmenuView{
-			return ((this.createObject(MainmenuView) as MainmenuView));
-		}
-		public function get waitroom():WaitRoomView{
-			return ((this.createObject(WaitRoomView) as WaitRoomView));
-		}
-		public function get initLoading():InitLoadingView{
-			return ((this.createObject(InitLoadingView) as InitLoadingView));
-		}
-		public function get tip2():Tip2View{
-			return ((this.createObject(Tip2View) as Tip2View));
-		}
-		
-        public function get achievement():AchievementView{
-            return ((createObject(AchievementView) as AchievementView));
-        }
-        public function get achievementComplete():AchievementCompleteView{
-            return ((createObject(AchievementCompleteView) as AchievementCompleteView));
-        }
-       
-        public function hideLoadingText():void{
-            var _local1:Object = stage.getChildAt(0);
-            _local1.visible = false;
-        }
-        public function formatServerData():void{
-            var _local1:String = "Templet";
-            ServerType.format(getAssetsObj(_local1));
-            removeResource(_local1);
-            //WarData.removeNickNameSuffix = _ctrl.player.removeNickNameSuffix;
-        }
+		    public function get achievement():AchievementView{
+		        return ((createObject(AchievementView) as AchievementView));
+		    }
+		    public function get achievementComplete():AchievementCompleteView{
+		        return ((createObject(AchievementCompleteView) as AchievementCompleteView));
+		    }
+		       
+		    public function hideLoadingText():void{
+		        var _local1:Object = stage.getChildAt(0);
+		        _local1.visible = false;
+		    }
+		    public function formatServerData():void{
+		        var _local1:String = "Templet";
+		        ServerType.format(getAssetsObj(_local1));
+		        removeResource(_local1);
+		        //WarData.removeNickNameSuffix = _ctrl.player.removeNickNameSuffix;
+		    }
         public function afterGetPlayerInfo():void{
             this.initCookie();
             structure.drawMark();
@@ -160,11 +162,11 @@ package ICard {
         }
         public function get superViews():Array{
             //return ([ActivitiesView, CampWarView, HeroesWarView, ChooseRolesView, FactionWarView, GetPeachView, InCampWarView, LodgeView, MiniFactionWarView, MissionFailedTipsView, MultiWarView, MultiMissionView, PKWarView, PreventIndulgeView, SuperSportView, SuperSportWarView, SportWarView, StrategyWarView, TowerView, WarView, WorldBossWarView, ZodiacView, ZodiacWarView]);
-			return ([MainmenuView]);
+						return ([MainmenuView]);
         }
         public function get coexistViews():Array{
             //return ([[AudienceView, FriendChatView, FriendListView, OtherRoleMsgView, RoleMsgView], [OtherRoleMsgView, RoleMsgView, ImmortalityMsgView], [RoleMsgView, MyFactionView, OtherRoleMsgView], [RoleMsgView, TrainingView, AchievementView], [RoleMsgView, MyFlowerRecordView], [RoleMsgView, ArmsGoldView], [PackView, ArmsGoldView], [RoleMsgView, OtherRoleMsgView, RoleDetailInfoView], [OtherRoleMsgView, PlayerCompareView], [PackView, WarehouseView], [PackView, ShopView], [RoleMsgView, PackView], [RoleMsgView, RefineView], [RoleMsgView, DuJieView], [OtherRoleMsgView, ServerWarRecordView], [FateView, RoleMsgView], [WorldView, TravelEventView], [GameHelperView, RuneView], [GameHelperView, DailyQuestView], [FactionBlessingView, RoleMsgView, OtherRoleMsgView], [FactionWarSignUpView, FactionWarSignUpListView], [FactionWindowView, FactionBossSelectView], [ImmortalityMsgView, InheritView], [GoldOilShopView, ZodiacView]]);
-			return [];
+						return [];
         }
         public function get exclusiveViews():Array{
 //            return ([{
@@ -196,7 +198,7 @@ package ICard {
 //                black:[],
 //                white:[]
 //            }]);
-			return [];
+						return [];
         }
    
         public function get freeViews():Array{
