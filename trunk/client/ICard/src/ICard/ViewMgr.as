@@ -66,17 +66,18 @@ package ICard {
             
         }
 		    public function initAddAssets():void{
-						addAssets("waitroom", "waitroom.swf");
-						addAssets("login", "login.swf");
-						addAssets("mainmenu", "mainmenu.swf");
-						addAssets("roomlist", "roomlist.swf");
-						addAssets("Achievement", "achievement.swf");
-						addAssets("AchievementComplete", "achievement_complete.swf");
-						addAssets("Alert", "alert.swf");
-						addAssets("Tip2", "addons/tip2.swf");
-						addAssets("InitLoading", "init_loading.swf");
-						addAssets("InitLoadingBaidu", "init_loading_baidu.swf");
-						addAssets("InitLoadingMangguo", "init_loading_mangguo.swf");
+				addAssets("toolbar", "toolbar.swf");
+				addAssets("waitroom", "waitroom.swf");
+				addAssets("login", "login.swf");
+				addAssets("mainmenu", "mainmenu.swf");
+				addAssets("roomlist", "roomlist.swf");
+				addAssets("Achievement", "achievement.swf");
+				addAssets("AchievementComplete", "achievement_complete.swf");
+				addAssets("Alert", "alert.swf");
+				addAssets("Tip2", "addons/tip2.swf");
+				addAssets("InitLoading", "init_loading.swf");
+				addAssets("InitLoadingBaidu", "init_loading_baidu.swf");
+				addAssets("InitLoadingMangguo", "init_loading_mangguo.swf");
 		    }
 				public function get load():LoadView{
 					return ((createObject(LoadView) as LoadView));
@@ -84,6 +85,12 @@ package ICard {
 				public function get tip():TipView{
 		    		return ((this.createObject(TipView) as TipView));
 		    }
+				public function get toolbar():ToolbarView{
+					return ((createObject(ToolbarView) as ToolbarView));
+				}
+				public function get screen():ScreenView{
+					return ((createObject(ScreenView) as ScreenView));
+				}
 				public function get alert():AlertView{
 						return ((this.createObject(AlertView) as AlertView));
 				}
