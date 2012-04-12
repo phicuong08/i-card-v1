@@ -16,14 +16,14 @@ package ICard.views.structure {
         private var _exclusiveViews:Array;
         private var _inTownViews:Array;
         private var _freeViews:Array;
-		private var _stackViews:Array;
+				private var _stackViews:Array;
         public var structure:Structure;
         private var _viewMgr:ICard.ViewMgr;
         private var _supers:Dictionary;
 	
         private var _views:Dictionary;
         private var _frees:Dictionary;
-		private var _stacks:Dictionary;
+				private var _stacks:Dictionary;
         private var _supersList:Array;
         private var _viewsList:Array;
         private var _timerOut:Timer;
@@ -35,11 +35,11 @@ package ICard.views.structure {
         private var _focusView:IView;
 
         public function Popup(_arg1:ViewMgr):void{
-			trace("run pop win");
+						trace("run pop win");
             this._supers = new Dictionary();
-	        this._views = new Dictionary();
+	        	this._views = new Dictionary();
             this._frees = new Dictionary();
-			this._stacks = new Dictionary();
+						this._stacks = new Dictionary();
             this._supersList = [];
             this._viewsList = [];
             this._fadeOutList = new Dictionary();
@@ -49,52 +49,52 @@ package ICard.views.structure {
             this._superViews = this._viewMgr.superViews;
             this._coexistViews = this._viewMgr.coexistViews;
             this._exclusiveViews = this._viewMgr.exclusiveViews;
-  //          this._inTownViews = this._viewMgr.inTownViews;
+  //        this._inTownViews = this._viewMgr.inTownViews;
             this._freeViews = this._viewMgr.freeViews;
-			this._stackViews = this._viewMgr.stackViews;
+						this._stackViews = this._viewMgr.stackViews;
             this._viewMgr.addToFrameProcessList(this.toString(), this.process);
         }
         public function addView(_arg1:IView, _arg2:Sprite):void{
-			this.removeFadeOutList(_arg1);
-			if (this.hasViewIncluded(_arg1, this._stackViews)){
-				this._stack[_arg1] = _arg2;
-			}
-			if (this.hasViewIncluded(_arg1, this._freeViews)){
+						this.removeFadeOutList(_arg1);
+						if (this.hasViewIncluded(_arg1, this._stackViews)){
+								this._stack[_arg1] = _arg2;
+						}
+						if (this.hasViewIncluded(_arg1, this._freeViews)){
                 
                 this._frees[_arg1] = _arg2;
                 this.addChildWithFade(_arg1, _arg2);
- 			}
-			else if (this.hasViewIncluded(_arg1, this._superViews)){
+ 						}
+						else if (this.hasViewIncluded(_arg1, this._superViews)){
                 this.closeAll();
                 this._supers[_arg1] = _arg2;
                 this.addChildWithFade(_arg1, _arg2);
-            }
-			else
-			{
-				var _local3:Array = this.getCoexistViews(_arg1);
-				if (_local3.length > 0){
-					_local3 = _local3[0];
-				};
-				_local3.push(_arg1);
-				this.closeExclude(_local3);
-				this._views[_arg1] = _arg2;
-				
-				this.setfocusView(_arg1);
-				_arg2.mouseChildren = true;
-				_arg2.mouseEnabled = true;
-				if (_arg2.width < Structure.stageWidth){
-					_arg2.x = Math.floor(((Structure.stageWidth - _arg2.width) / 2));
-					_arg2.y = Math.floor(((Structure.stageHeight - _arg2.height) / 2));
-				};
-				if (this._viewsList.indexOf(_arg1) == -1){
-					this._viewsList.push(_arg1);
-				};
-				this.reposition();
-				setTimeout(this.reposition, 10);				
-			}
-			this.addChildWithFade(_arg1, _arg2);
-      
+			      }
+						else
+						{
+								var _local3:Array = this.getCoexistViews(_arg1);
+								if (_local3.length > 0){
+									_local3 = _local3[0];
+								};
+								_local3.push(_arg1);
+								this.closeExclude(_local3);
+								this._views[_arg1] = _arg2;
+								
+								this.setfocusView(_arg1);
+								_arg2.mouseChildren = true;
+								_arg2.mouseEnabled = true;
+								if (_arg2.width < Structure.stageWidth){
+									_arg2.x = Math.floor(((Structure.stageWidth - _arg2.width) / 2));
+									_arg2.y = Math.floor(((Structure.stageHeight - _arg2.height) / 2));
+								};
+								if (this._viewsList.indexOf(_arg1) == -1){
+									this._viewsList.push(_arg1);
+								};
+								this.reposition();
+								setTimeout(this.reposition, 10);				
+						}
+						this.addChildWithFade(_arg1, _arg2);
         }
+        
         private function addChildWithFade(_arg1:IView, _arg2:Sprite):void{
             var bm:* = null;
             var handle:* = null;
@@ -499,18 +499,20 @@ package ICard.views.structure {
         public function get focusView():IView{
             return (this._focusView);
         }
-		public function CloseTop():Boolean{
-			var ret:Boolean = false;
-			if(_focusView)
-			{
-				closeView(_focusView);
-				if(_focusView)
-				{
-					_focusView.show();
-					ret = true;
-				}
-			}
-			return ret;
+		public function popAndShow():Boolean{
+				var stackSize:int = this._stackViews.length;
+				if(stackSize==0)
+						return false;
+				stackSize = stackSize -1;
+				closeView(_stackViews[stackSize]);
+				_stackViews[stackSize] = null;
+				if(stackSize==0)
+						return false;
+				var topView:IView  = _stackViews[stackSize-1];
+				_stackViews[stackSize-1] = null;
+				topView.show();
+				return true;
 		}
-    }
+		
+	 }
 }//package com.views.structure 
