@@ -213,7 +213,7 @@ package ICard {
 			return [];
         }
 		public function get stackViews():Array{
-			return [RoomListView,WaitRoomView];
+			return [MainmenuView,RoomListView,WaitRoomView];
 		}
         private function initFrameTime():void{
             var ftime:* = NaN;
