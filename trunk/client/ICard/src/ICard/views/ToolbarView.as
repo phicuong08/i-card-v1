@@ -76,7 +76,7 @@ package ICard.views {
 		}
 	
 		private function onExit(e:MouseEvent):void{
-
+				_popup.popAndShow();
 		}
 		private function onSet(e:MouseEvent):void{
 		}
