@@ -5,14 +5,14 @@
 		import flash.events.MouseEvent;
     public class roomlist extends MovieClip implements IRoomList{
         public var _fresh_but:SimpleButton;
-				public var _quick_but:SimpleButton;
+		public var _quick_but:SimpleButton;
 		
         public function roomlist(){
 						//InitCallback(f1,f2);
 						var index:int= 1;
 						while(index <=7)
 						{
-								InitBar(this["_bar" + index] as Object);
+								InitBar(this["_bar" + index++] as Object);
 						}
 //						InitBar(_bar1);
 //						InitBar(_bar2);
@@ -31,7 +31,7 @@
 						var index:int= 1;
 						while(index <=7)
 						{
-								InitBarCallback(this["_bar" + index] as Object,arg1,arg2,1);
+								InitBarCallback(this["_bar" + index] as Object,arg1,arg2,index++);
 						}
 //						InitBarCallback(_bar1,arg1,arg2,1);
 //						InitBarCallback(_bar2,arg1,arg2,2);
@@ -68,7 +68,7 @@
 	
 				public function UpdateRoom(id:int,owner:String,slotInfo:String,
 															joinAble:Boolean,watchAble:Boolean,started:Boolean):void{
-						var bar:Object = this["_bar" + index] as Object;
+						var bar:Object = this["_bar" + id] as Object;
 						bar._watch_but.enabled  = watchAble;
 						bar._join_but.enabled = joinAble;
 				}

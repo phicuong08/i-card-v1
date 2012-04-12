@@ -60,7 +60,12 @@ package ICard.views {
 			trace("join room fail");
 		}
 		
-	
+		private function onNotifyRoom_OK(evt:SFSEvent):void{
+			_viewMgr.waitroom.show();
+			trace("join room ok");
+		}
+		
+		
 		private function onFresh(arg1:int):void{
 			trace("on fresh=",arg1);
 		}
