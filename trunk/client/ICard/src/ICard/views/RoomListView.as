@@ -1,6 +1,7 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.views {
     import ICard.*;
+    import ICard.SFSProtocol;
     import ICard.assist.*;
     import ICard.assist.server.*;
     import ICard.assist.view.*;
@@ -12,7 +13,6 @@ package ICard.views {
     
     import flash.events.MouseEvent;
     import flash.net.*;
-	
 	
 	
     public class RoomListView extends Base implements IView {
@@ -29,7 +29,7 @@ package ICard.views {
 			
 			this._roomlist = (_viewMgr.getAssetsObject("roomlist", "roomlist") as IRoomList);
 			this._roomlist.InitCallback(onWatch,onJoin,onFresh,onQuick);
-			_data.SFS_subscribeVSRoomGroup(SubscribeRoomGroup_OK,SubscribeRoomGroup_FAIL);
+			_data.SFS_subscribeVSRoomGroup(SubscribeRoomGroup_OK,SubscribeRoomGroup_FAIL,onNotifyRoom_OK);
 			this.render();
 		}
 		private function render():void{
@@ -38,7 +38,12 @@ package ICard.views {
 			}
 		}
 		private function SubscribeRoomGroup_OK(evt:SFSEvent):void{
+			
+			var roomArr:Array = SFSProtocol.NewRooms(evt);
 			trace("Group subscribed. The following rooms are now accessible: " + evt.params.newRooms);
+			var len:int  = evt.params.newRooms.length;
+			var id:int = 0;
+		
 		}
 		private function SubscribeRoomGroup_FAIL(evt:SFSEvent):void{
 			trace("Group subscription failed: " + evt.params.errorMessage);
@@ -48,12 +53,17 @@ package ICard.views {
 		}
 		private function onJoin(arg1:int):void{
 			
+			
 			_data.SFS_joinVSRoom(arg1,onJoinRoom_OK,onJoinRoom_FAIL);
 			trace("on join=",arg1);
 		}
 		
 		private function onJoinRoom_OK(evt:SFSEvent):void{
-			_viewMgr.waitroom.show();
+			if(this.inStage ==true)
+			{
+				_viewMgr.waitroom.show();
+			}
+			
 			trace("join room ok");
 		}
 		private function onJoinRoom_FAIL(evt:SFSEvent):void{

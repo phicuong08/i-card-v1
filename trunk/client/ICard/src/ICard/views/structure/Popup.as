@@ -503,7 +503,7 @@ package ICard.views.structure {
 					return false;
 				var topView:IView = _stackView.pop();
 				closeView(topView);
-
+				topView.close();
 				if(this._stackView.length==0)
 					return false;
 				
