@@ -47,6 +47,7 @@ package ICard.views {
 		}
 		
 		public function close():void{
+			_data.SFS_LeaveVSRoom();
 		}
 		public function clear():void{
 		}
