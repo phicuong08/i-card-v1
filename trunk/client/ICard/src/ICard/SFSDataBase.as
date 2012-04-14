@@ -33,7 +33,7 @@ package ICard {
 			SFS.addEventListener(SFSEvent.ROOM_CREATION_ERROR, onRoomAdd_Err);
 			SFS.addEventListener(SFSEvent.ROOM_JOIN_ERROR, onRoomAdd_Err);
 			SFS.addEventListener(SFSEvent.USER_EXIT_ROOM, onUserExitRoom);
-
+			SFS.addEventListener(SFSEvent.USER_COUNT_CHANGE,onUserCountChange);
 			// Login
 			SFS.send(new LoginRequest(name,pwd));
 
@@ -46,7 +46,13 @@ package ICard {
 			if (!SFS.roomManager.containsGroup(GAME_ROOMS_GROUP_NAME))
 				SFS.send(new SubscribeRoomGroupRequest(GAME_ROOMS_GROUP_NAME));
 		}
-		
+		public function SFS_unSubscribeVSRoomGroup(callback_ok:Function,callback_fail:Function):void{
+			SFS.removeEventListener(SFSEvent.ROOM_GROUP_SUBSCRIBE,callback_ok);
+			SFS.removeEventListener(SFSEvent.ROOM_GROUP_SUBSCRIBE_ERROR, callback_fail);
+			_onUpdataVSRoom = null;
+			SFS.send(new UnsubscribeRoomGroupRequest(GAME_ROOMS_GROUP_NAME));
+
+		}
 		
 		public function SFS_joinVSRoom(arg1:int,callback_ok:Function,callback_fail:Function):void
 		{
@@ -81,9 +87,6 @@ package ICard {
 			{
 				SFS.send(new JoinRoomRequest(_joinRoomName));
 			}
-			if(_onUpdataVSRoom!=null){
-				_onUpdataVSRoom(evt);
-			}
 			trace("Room created: " + evt.params.room);
 		}
 		private function onRoomJoin(evt:SFSEvent):void{
@@ -92,13 +95,15 @@ package ICard {
 				_vsRoom = evt.params.room;
 				_onJoinVSRoom_OK = null;
 			}
-			else if(_onUpdataVSRoom!=null)
-			{
-				_onUpdataVSRoom(evt);
-			}
+		
 			trace("Room Join: " + evt.params.room);
 		}
-		
+		private function onUserCountChange(evt:SFSEvent):void{
+			if(_onUpdataVSRoom!=null){
+				_onUpdataVSRoom(evt);
+			}
+			trace("User count change: ");
+		}
 		private function onRoomAdd_Err(evt:SFSEvent):void{
 			trace("Room creation failure: " + evt.params.errorMessage);
 		}

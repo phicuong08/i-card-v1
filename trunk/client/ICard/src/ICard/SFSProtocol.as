@@ -26,7 +26,15 @@ package ICard {
 			}
 			return roomList;
         }
-     
+		public static function AddRooms(evt:SFSEvent):Object{
+			var local4:Object={};
+			var room:SFSRoom = evt.params.room;
+			local4.id = room.id;
+			local4.name = room.name;
+			local4.maxUsers = room.maxUsers;
+			local4.userCount = room.userCount;
+			return local4;
+		}
 
     }
    // var _local1:* = Protocol.init();

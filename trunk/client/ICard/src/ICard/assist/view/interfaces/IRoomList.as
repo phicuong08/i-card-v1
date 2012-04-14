@@ -5,8 +5,11 @@ package ICard.assist.view.interfaces {
     public interface IRoomList {
 
         function get content():MovieClip;
-				function InitCallback(arg1:Function,arg2:Function,arg3:Function,arg4:Function):void;
-				function UpdateRoom(id:int,owner:String,slotInfo:String,
+		function InitCallback(arg1:Function,arg2:Function,arg3:Function,arg4:Function):void;
+		function UpdateRoom(id:int,owner:String,slotInfo:String,
 															joinAble:Boolean,watchAble:Boolean,started:Boolean):void;
+		function UpdateVSRooms(roomArr:Array):void;
+		function AddVSRoom(room:Object):void;
+		function DelVSRoom(id:int):void;
     }
 }//package com.assist.view.interfaces 
