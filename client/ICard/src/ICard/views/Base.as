@@ -7,7 +7,7 @@ package ICard.views {
     import ICard.views.structure.*;
     
     import flash.display.DisplayObject;
-
+	import ICard.SFSMod.Mod_RoomList;
     public class Base extends SuperSubBase {
 
         protected var _instanceName:String;
@@ -68,7 +68,9 @@ package ICard.views {
 			_viewMgr.stage.removeChild(_arg1);
 		}
 		
-		
+		public function get _Mod_RoomList():Mod_RoomList{
+			return (_data._Mod_RoomList as Mod_RoomList);
+		}
         public function destroy():void{
             this._viewMgr.destroyObject(this._instanceName);
         }

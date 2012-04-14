@@ -27,6 +27,7 @@ package ICard.views {
 			this._waitroom.onBye = this.onBye;
 			this._waitroom.onLock = this.onLock;
 			this._waitroom.onStart = this.onStart;
+			_Mod_RoomList.regOnUpdateVSRoom(OnUpdateVSRoom);
 			this.render();
 		}
 		
@@ -36,9 +37,16 @@ package ICard.views {
 			}
 		}
 	
-	
+		private function OnUpdateVSRoom(evt:SFSEvent):void{ //新房间创建
+			if(this.inStage ==true){
+				var room:Object = SFSProtocol.AddRooms(evt);
+				//this._roomlist.AddVSRoom(room);				
+			}
+		}
+		
 		private function onInvite(e:MouseEvent):void{
 		}
+		
 		private function onBye(e:MouseEvent):void{
 		}
 		private function onLock(e:MouseEvent):void{
@@ -47,7 +55,8 @@ package ICard.views {
 		}
 		
 		public function close():void{
-			_data.SFS_LeaveVSRoom();
+			_Mod_RoomList.regOnUpdateVSRoom(null);
+			_Mod_RoomList.leaveVSRoom();
 		}
 		public function clear():void{
 		}
