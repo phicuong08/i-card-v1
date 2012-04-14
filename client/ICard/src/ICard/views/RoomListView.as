@@ -13,7 +13,7 @@ package ICard.views {
     
     import flash.events.MouseEvent;
     import flash.net.*;
-	
+	import flash.utils.*;
 	
     public class RoomListView extends Base implements IView {
 
@@ -40,6 +40,8 @@ package ICard.views {
 		private function SubscribeRoomGroup_OK(evt:SFSEvent):void{
 			
 			var roomArr:Array = SFSProtocol.NewRooms(evt);
+			this._roomlist.UpdateVSRooms(roomArr);
+			
 			trace("Group subscribed. The following rooms are now accessible: " + evt.params.newRooms);
 			var len:int  = evt.params.newRooms.length;
 			var id:int = 0;
@@ -61,6 +63,7 @@ package ICard.views {
 		private function onJoinRoom_OK(evt:SFSEvent):void{
 			if(this.inStage ==true)
 			{
+				_data.SFS_unSubscribeVSRoomGroup(SubscribeRoomGroup_OK,SubscribeRoomGroup_FAIL);
 				_viewMgr.waitroom.show();
 			}
 			
@@ -70,9 +73,12 @@ package ICard.views {
 			trace("join room fail");
 		}
 		
-		private function onNotifyRoom_OK(evt:SFSEvent):void{
-			_viewMgr.waitroom.show();
-			trace("join room ok");
+
+		private function onNotifyRoom_OK(evt:SFSEvent):void{ //新房间创建
+			if(this.inStage ==true){
+				var room:Object = SFSProtocol.AddRooms(evt);
+				this._roomlist.AddVSRoom(room);				
+			}
 		}
 		
 		

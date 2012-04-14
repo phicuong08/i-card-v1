@@ -7,6 +7,7 @@ package ICard.assist.data {
 		function callSFS(_arg1:Object, _arg2:Function, _arg3:Array, _arg4:Boolean=true):void;
 		function SFS_login(name:String,pwd:String,callback_ok:Function,callback_fail:Function):void;
 		function SFS_subscribeVSRoomGroup(callback_ok:Function,callback_fail:Function,onNotify:Function):void;
+		function SFS_unSubscribeVSRoomGroup(callback_ok:Function,callback_fail:Function):void;
 		function SFS_joinVSRoom(arg1:int,callback_ok:Function,callback_fail:Function):void;
 		function SFS_LeaveVSRoom():void;
         function patch(_arg1:Object, _arg2:Function):void;
