@@ -11,6 +11,8 @@ package ICard.views {
     
     import com.smartfoxserver.v2.core.SFSEvent;
     
+	import ICard.SFSMod.Mod_RoomList;
+	
     import flash.events.MouseEvent;
     import flash.net.*;
 	import flash.utils.*;
@@ -29,7 +31,9 @@ package ICard.views {
 			
 			this._roomlist = (_viewMgr.getAssetsObject("roomlist", "roomlist") as IRoomList);
 			this._roomlist.InitCallback(onWatch,onJoin,onFresh,onQuick);
-			_data.SFS_subscribeVSRoomGroup(SubscribeRoomGroup_OK,SubscribeRoomGroup_FAIL,onNotifyRoom_OK);
+			var modRoomList:Mod_RoomList =  (_data._Mod_RoomList as Mod_RoomList);
+			modRoomList.subscribeVSRoomGroup(SubscribeRoomGroup_OK,SubscribeRoomGroup_FAIL);
+			modRoomList.regOnUpdateVSRoom(onNotifyRoom_OK);
 			this.render();
 		}
 		private function render():void{
@@ -55,15 +59,14 @@ package ICard.views {
 		}
 		private function onJoin(arg1:int):void{
 			
-			
-			_data.SFS_joinVSRoom(arg1,onJoinRoom_OK,onJoinRoom_FAIL);
+			_Mod_RoomList.joinVSRoom(arg1,onJoinRoom_OK,onJoinRoom_FAIL);
 			trace("on join=",arg1);
 		}
 		
 		private function onJoinRoom_OK(evt:SFSEvent):void{
 			if(this.inStage ==true)
 			{
-				_data.SFS_unSubscribeVSRoomGroup(SubscribeRoomGroup_OK,SubscribeRoomGroup_FAIL);
+				_Mod_RoomList.unSubscribeVSRoomGroup(SubscribeRoomGroup_OK,SubscribeRoomGroup_FAIL);
 				_viewMgr.waitroom.show();
 			}
 			
