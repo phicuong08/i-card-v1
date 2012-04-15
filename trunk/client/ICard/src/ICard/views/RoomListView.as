@@ -67,7 +67,7 @@ package ICard.views {
 			if(this.inStage ==true)
 			{
 				_Mod_RoomList.unSubscribeVSRoomGroup(SubscribeRoomGroup_OK,SubscribeRoomGroup_FAIL);
-				_viewMgr.waitroom.show();
+				_viewMgr.waitroom.init(evt);
 			}
 			
 			trace("join room ok");

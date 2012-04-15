@@ -25,7 +25,7 @@ package ICard.SFSMod {
 			SFS.addEventListener(SFSEvent.ROOM_CREATION_ERROR, onRoomAdd_Err);
 			SFS.addEventListener(SFSEvent.ROOM_JOIN_ERROR, onRoomAdd_Err);
 			SFS.addEventListener(SFSEvent.USER_EXIT_ROOM, onUserExitRoom);
-			SFS.addEventListener(SFSEvent.USER_COUNT_CHANGE,onUserCountChange);
+			SFS.addEventListener(SFSEvent.USER_ENTER_ROOM,onUserEnterRoom);
 		}
 		public function get SFS():SmartFox{
 			return _smartFox;
@@ -42,15 +42,23 @@ package ICard.SFSMod {
 			trace("Room created: " + evt.params.room);
 		}
 		private function onRoomJoin(evt:SFSEvent):void{
+			if(onVSRoomJoin(evt))
+				return;
+		
+		}
+		private function onVSRoomJoin(evt:SFSEvent):Boolean{
+			if(evt.params.room.groupId !=GAME_ROOMS_GROUP_NAME)
+				return false;
+			
 			if( _onJoinVSRoom_OK!=null && evt.params.room.isJoined){
 				_onJoinVSRoom_OK(evt);
 				_vsRoom = evt.params.room;
 				_onJoinVSRoom_OK = null;
 			}
 			
-			trace("Room Join: " + evt.params.room);
+			return true;
 		}
-		private function onUserCountChange(evt:SFSEvent):void{
+		private function onUserEnterRoom(evt:SFSEvent):void{
 			if(_onUpdataVSRoom!=null){
 				_onUpdataVSRoom(evt);
 			}
@@ -61,10 +69,9 @@ package ICard.SFSMod {
 		}
 		private function onUserExitRoom(evt:SFSEvent):void
 		{
-			var room:Room = evt.params.room;
-			var user:User = evt.params.user;
-			
-			trace("User " + user.name + " just left Room " + room.name);
+			if(_onUpdataVSRoom!=null){
+				_onUpdataVSRoom(evt);
+			}
 		}
 		
 		public function regOnUpdateVSRoom(callback:Function):void
