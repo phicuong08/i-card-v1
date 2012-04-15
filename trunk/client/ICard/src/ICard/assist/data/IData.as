@@ -7,6 +7,7 @@ package ICard.assist.data {
 		function callSFS(_arg1:Object, _arg2:Function, _arg3:Array, _arg4:Boolean=true):void;
 		function SFS_login(name:String,pwd:String,callback_ok:Function,callback_fail:Function):void;
 		function get _Mod_RoomList():Object;
+		function get _Mod_RoomUser():Object;
 		function patch(_arg1:Object, _arg2:Function):void;
         function cancelPatch(_arg1:Object):void;
         function set onClose(_arg1:Function):void;

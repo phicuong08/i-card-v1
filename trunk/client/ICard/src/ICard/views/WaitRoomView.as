@@ -60,6 +60,7 @@ package ICard.views {
 		private function onLock(e:MouseEvent):void{
 		}
 		private function onStart(e:MouseEvent):void{
+			_Mod_RoomUser.GameReady();
 		}
 		
 		public function close():void{
