@@ -35,7 +35,26 @@ package ICard {
 			local4.userCount = room.userCount;
 			return local4;
 		}
-
+		public static function PlayerList(evt:SFSEvent):Array{
+			var playerList:Array = [];
+			var player:Object;
+			for each(player in evt.params.room.playerList){
+				var local2:Object={};
+				local2.bOwner = (player.isItMe)?true:false;
+				local2.bPlayer = player.isPlayer;
+				local2.guyname = player.name;
+				local2.guylev = 1;
+				playerList.push(local2);
+			}
+			return playerList;
+		}
+//		public static function JoinRoom(evt:SFSEvent):Object{
+//			var local4:Object={};
+//			var room:SFSRoom = evt.params.room;
+//			local4.id = room.id;
+//			local4.name = room.name;
+//			return local4;
+//		}
     }
    // var _local1:* = Protocol.init();
     //return (_local1);

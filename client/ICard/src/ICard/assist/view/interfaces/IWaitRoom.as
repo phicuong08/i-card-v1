@@ -3,9 +3,9 @@ package ICard.assist.view.interfaces {
     import flash.display.*;
 
     public interface IWaitRoom {
-        function get content():MovieClip;
-		
-				function set onInvite(_arg1:Function):void;
+        	function get content():MovieClip;
+			function UpdatePlayerList(players:Array):void;
+			function set onInvite(_arg1:Function):void;
 		    
 		    function set onBye(_arg1:Function):void;
 		    
