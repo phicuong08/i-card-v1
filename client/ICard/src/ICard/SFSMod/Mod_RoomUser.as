@@ -5,12 +5,13 @@ package ICard.SFSMod {
 	import com.smartfoxserver.v2.core.SFSEvent;
 	import com.smartfoxserver.v2.entities.*;
 	import com.smartfoxserver.v2.entities.data.*;
-	import com.smartfoxserver.v2.requests.*;
 	import com.smartfoxserver.v2.entities.variables.*;
+	import com.smartfoxserver.v2.requests.*;
 	public class Mod_RoomUser extends Object{
 		
 		public var _smartFox : SmartFox;
-				
+		private const GAME_READY_STR:String = "game_ready";
+		
 		public function Mod_RoomUser(arg1:SmartFox):void{
 			SFS = arg1;	
 			SFS.addEventListener(SFSEvent.USER_VARIABLES_UPDATE, onUserVarsUpdate);
@@ -25,18 +26,22 @@ package ICard.SFSMod {
 		}
 		public function GameReady():void{
 			var userVars:Array = [];
-			userVars.push(new SFSUserVariable("game_ready", 1));
-			SFS.send(new SetUserVariablesRequest(userVars));
+			userVars.push(new SFSUserVariable(GAME_READY_STR, true));
+			SFS.send(new SetUserVariablesRequest(userVars));   //SetRoomVariablesRequest
+
 		}
 		
 		private function onUserVarsUpdate(evt:SFSEvent):void
 		{
+			var user:SFSUser = evt.params.user;
+			
 			var changedVars:Array = evt.params.changedVars as Array;
-			var user:User = evt.params.user as User;
+			var p1:User = evt.params.user as User;
 			
 			// Check if the user changed his x and y user variables
-			if (changedVars.indexOf("x") != -1 || changedVars.indexOf("y") != -1)
+			if (changedVars.indexOf(GAME_READY_STR) != -1 )
 			{
+				var bReady:Boolean = p1.getVariable(GAME_READY_STR).getBoolValue();
 				// Move the user avatar to a new position
 				;
 			}
