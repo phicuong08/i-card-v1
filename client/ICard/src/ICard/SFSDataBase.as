@@ -13,10 +13,11 @@ package ICard {
 	import flash.events.*;
     public class SFSDataBase extends DataBase {
 		private var _mod_roomList:Mod_RoomList;
+		private var _mod_roomUser:Mod_RoomUser;
 	
 		public function SFSDataBase():void{
 			super();
-			_mod_roomList = new Mod_RoomList;
+			_mod_roomList = new Mod_RoomList(SFS);
 			_mod_roomList.Init(SFS);
 		}
 		public function SFS_login(name:String,pwd:String,callback_ok:Function,callback_fail:Function):void

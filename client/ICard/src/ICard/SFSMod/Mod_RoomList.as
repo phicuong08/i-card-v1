@@ -18,15 +18,16 @@ package ICard.SFSMod {
 		
 		private var _vsRoom:Room;
 		
-		public function Init(arg1:SmartFox):void{
+		public function Mod_RoomList(arg1:SmartFox):void{
 			SFS = arg1;
 			SFS.addEventListener(SFSEvent.ROOM_ADD, onRoomAdd);
 			SFS.addEventListener(SFSEvent.ROOM_JOIN, onRoomJoin);
 			SFS.addEventListener(SFSEvent.ROOM_CREATION_ERROR, onRoomAdd_Err);
 			SFS.addEventListener(SFSEvent.ROOM_JOIN_ERROR, onRoomAdd_Err);
 			SFS.addEventListener(SFSEvent.USER_EXIT_ROOM, onUserExitRoom);
-			SFS.addEventListener(SFSEvent.USER_ENTER_ROOM,onUserEnterRoom);
+			SFS.addEventListener(SFSEvent.USER_ENTER_ROOM,onUserEnterRoom);		
 		}
+
 		public function get SFS():SmartFox{
 			return _smartFox;
 		}
