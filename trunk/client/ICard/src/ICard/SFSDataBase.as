@@ -18,7 +18,7 @@ package ICard {
 		public function SFSDataBase():void{
 			super();
 			_mod_roomList = new Mod_RoomList(SFS);
-			_mod_roomList.Init(SFS);
+			_mod_roomUser = new Mod_RoomUser(SFS);
 		}
 		public function SFS_login(name:String,pwd:String,callback_ok:Function,callback_fail:Function):void
 		{
@@ -34,7 +34,9 @@ package ICard {
 		public function get _Mod_RoomList():Object{
 			return _mod_roomList;
 		}
-	
+		public function get _Mod_RoomUser():Object{
+			return _mod_roomUser;
+		}
 	
 	
 
