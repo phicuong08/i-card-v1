@@ -18,12 +18,14 @@
 			_panel_up._start_but.visible = false;
 			_panel_up._guy_text.text = "";
 			_panel_up._lev_text.text = "";
+			_panel_up._bOwner = false;
 			
 			_panel_down._cardgroup.visible = false;
 			_panel_down._ready_mc.visible = false;
 			_panel_down._start_but.visible = false;
 			_panel_down._guy_text.text = "";
 			_panel_down._lev_text.text = "";
+			_panel_down._bOwner = false;
 		}
         public function get content():MovieClip{
             return (this);
@@ -43,22 +45,27 @@
 			}
 			
 		}
+		public function onPlayerReady(val:Object):void{
+			var panel:MovieClip;
+			if(val.bOwner == _panel_up._bOwner)
+			{
+				panel = _panel_up;
+			}
+			else
+			{
+				panel = _panel_down;
+			}
+			panel._ready_mc.visible = true;
+			panel._start_but.visible = false;
+		}
 		private function InitPanel(bUpPanel:Boolean,info:Object):void{
 			var panel:MovieClip = (bUpPanel)? _panel_up:_panel_down;
 			panel._cardgroup.visible = (info.bOwner)?true:false;
 			panel._guy_text.text = info.guyname;
 			panel._lev_text.text = info.guylev;
-			if(info.bReady)
-			{
-				panel._ready_mc.visible = true;
-				panel._start_but.visible = false;
-			}
-			else
-			{
-				panel._ready_mc.visible = false;
-				panel._start_but.visible = (info.bOwner)?true:false;
-			}
-			
+			panel._ready_mc.visible = false;
+			panel._start_but.visible = (info.bOwner)?true:false;
+			panel._bOwner = (info.bOwner);
 		}
 		
 		

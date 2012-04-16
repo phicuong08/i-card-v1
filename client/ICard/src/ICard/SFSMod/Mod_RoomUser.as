@@ -11,7 +11,7 @@ package ICard.SFSMod {
 		
 		public var _smartFox : SmartFox;
 		private const GAME_READY_STR:String = "game_ready";
-		
+		public var _playerReadyCallback:Function;
 		public function Mod_RoomUser(arg1:SmartFox):void{
 			SFS = arg1;	
 			SFS.addEventListener(SFSEvent.USER_VARIABLES_UPDATE, onUserVarsUpdate);
@@ -30,7 +30,9 @@ package ICard.SFSMod {
 			SFS.send(new SetUserVariablesRequest(userVars));   //SetRoomVariablesRequest
 
 		}
-		
+		public function regOnPlayerReady(arg1:Function):void{
+			_playerReadyCallback = arg1;
+		}
 		private function onUserVarsUpdate(evt:SFSEvent):void
 		{
 			var user:SFSUser = evt.params.user;
@@ -39,9 +41,14 @@ package ICard.SFSMod {
 			var p1:User = evt.params.user as User;
 			
 			// Check if the user changed his x and y user variables
-			if (changedVars.indexOf(GAME_READY_STR) != -1 )
+			if (changedVars.indexOf(GAME_READY_STR) != -1 && _playerReadyCallback!=null)
 			{
+				var readyVal:Object={};
 				var bReady:Boolean = p1.getVariable(GAME_READY_STR).getBoolValue();
+				readyVal.bReady = true;
+				readyVal.bOwner = p1.isItMe;
+				readyVal.id = p1.id;
+				_playerReadyCallback(readyVal);
 				// Move the user avatar to a new position
 				;
 			}

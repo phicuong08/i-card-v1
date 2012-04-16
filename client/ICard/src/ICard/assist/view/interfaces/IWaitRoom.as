@@ -5,6 +5,7 @@ package ICard.assist.view.interfaces {
     public interface IWaitRoom {
         	function get content():MovieClip;
 			function UpdatePlayerList(players:Array):void;
+			function onPlayerReady(val:Object):void;
 			function set onInvite(_arg1:Function):void;
 		    
 		    function set onBye(_arg1:Function):void;

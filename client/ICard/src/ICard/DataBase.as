@@ -4,7 +4,6 @@ package ICard {
     import ICard.haloer.utils.*;
     import ICard.lang.client.*;
     import ICard.protocols.*;
-    
     import com.smartfoxserver.v2.SmartFox;
     import com.smartfoxserver.v2.core.SFSEvent;
     import com.smartfoxserver.v2.entities.*;
@@ -40,7 +39,6 @@ package ICard {
             this.buffer = new ByteArray();
             this._event = new EventDispatcher();
 			_smartFox = new SmartFox;
-			
 
             this._eventList = {};
             super();

@@ -74,6 +74,10 @@ package ICard.views {
 		public function get _Mod_RoomUser():Mod_RoomUser{
 			return (_data._Mod_RoomUser as Mod_RoomUser);
 		}
+		public function get _Mod_UserMgr():Mod_UserMgr{
+			return (_data._Mod_UserMgr as Mod_UserMgr);
+		}
+		
         public function destroy():void{
             this._viewMgr.destroyObject(this._instanceName);
         }

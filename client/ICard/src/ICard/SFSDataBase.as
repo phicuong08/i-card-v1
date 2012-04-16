@@ -14,11 +14,13 @@ package ICard {
     public class SFSDataBase extends DataBase {
 		private var _mod_roomList:Mod_RoomList;
 		private var _mod_roomUser:Mod_RoomUser;
+		private var _mod_UserMgr:Mod_UserMgr;
 	
 		public function SFSDataBase():void{
 			super();
 			_mod_roomList = new Mod_RoomList(SFS);
 			_mod_roomUser = new Mod_RoomUser(SFS);
+			_mod_UserMgr = new Mod_UserMgr(SFS);
 		}
 		public function SFS_login(name:String,pwd:String,callback_ok:Function,callback_fail:Function):void
 		{
@@ -37,7 +39,9 @@ package ICard {
 		public function get _Mod_RoomUser():Object{
 			return _mod_roomUser;
 		}
-	
+		public function get _Mod_UserMgr():Object{
+			return _mod_UserMgr;
+		}
 	
 
 		

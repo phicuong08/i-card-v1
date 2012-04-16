@@ -1,14 +1,14 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard {
 	import ICard.haloer.data.oObject;
-	
+	import ICard.SFSFacade.*;
 	import com.smartfoxserver.v2.SmartFox;
 	import com.smartfoxserver.v2.core.SFSEvent;
 	import com.smartfoxserver.v2.entities.*;
 	import com.smartfoxserver.v2.entities.data.*;
+	import com.smartfoxserver.v2.entities.managers.*;
 	import com.smartfoxserver.v2.entities.match.*;
 	import com.smartfoxserver.v2.requests.*;
-	
     public class SFSProtocol {
 
      		
@@ -40,6 +40,7 @@ package ICard {
 			var player:Object;
 			for each(player in evt.params.room.playerList){
 				var local2:Object={};
+				local2.id = player.id;
 				local2.bOwner = (player.isItMe)?true:false;
 				local2.bPlayer = player.isPlayer;
 				local2.guyname = player.name;
@@ -48,6 +49,7 @@ package ICard {
 			}
 			return playerList;
 		}
+		
 //		public static function JoinRoom(evt:SFSEvent):Object{
 //			var local4:Object={};
 //			var room:SFSRoom = evt.params.room;
