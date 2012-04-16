@@ -75,7 +75,14 @@ package ICard.views {
 					break;
 				}
 			}
-			this._waitroom.onPlayerReady(arg);
+			if(allReady==true)
+			{
+				
+			}
+			else
+			{
+				this._waitroom.onPlayerReady(arg);
+			}
 		}
 		public function close():void{
 			_Mod_RoomList.regOnUpdateVSRoom(null);
