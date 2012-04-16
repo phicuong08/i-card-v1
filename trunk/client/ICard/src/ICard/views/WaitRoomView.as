@@ -35,6 +35,7 @@ package ICard.views {
 			this._waitroom.onStart = this.onStart;
 			this._waitroom.UpdatePlayerList(_playerList);
 			_Mod_RoomList.regOnUpdateVSRoom(OnUpdateVSRoom);
+			_Mod_RoomUser.regOnPlayerReady(onPlayerReady);
 			this.render();
 		}
 		
@@ -62,9 +63,23 @@ package ICard.views {
 		private function onStart(e:MouseEvent):void{
 			_Mod_RoomUser.GameReady();
 		}
-		
+		private function onPlayerReady(arg:Object):void{
+			if(_playerList.length<=1)
+				return;
+			var player:Object;
+			var allReady:Boolean = true;
+			for each(player in _playerList){
+				if(_Mod_UserMgr.PlayerReady(player.id)==false)
+				{
+					allReady = false;
+					break;
+				}
+			}
+			this._waitroom.onPlayerReady(arg);
+		}
 		public function close():void{
 			_Mod_RoomList.regOnUpdateVSRoom(null);
+			_Mod_RoomUser.regOnPlayerReady(null);
 			_Mod_RoomList.leaveVSRoom();
 		}
 		public function clear():void{
