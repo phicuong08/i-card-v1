@@ -1,7 +1,7 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard {
 	import ICard.haloer.data.oObject;
-	import ICard.SFSFacade.*;
+
 	import com.smartfoxserver.v2.SmartFox;
 	import com.smartfoxserver.v2.core.SFSEvent;
 	import com.smartfoxserver.v2.entities.*;

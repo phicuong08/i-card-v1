@@ -66,6 +66,7 @@ package ICard {
             
         }
 		    public function initAddAssets():void{
+				addAssets("battlefield","battlefield.swf");
 				addAssets("toolbar", "toolbar.swf");
 				addAssets("waitroom", "waitroom.swf");
 				addAssets("login", "login.swf");
@@ -105,6 +106,9 @@ package ICard {
 				}
 				public function get waitroom():WaitRoomView{
 						return ((this.createObject(WaitRoomView) as WaitRoomView));
+				}
+				public function get battleField():BattleFieldView{
+					return ((this.createObject(BattleFieldView) as BattleFieldView));
 				}
 				public function get initLoading():InitLoadingView{
 						return ((this.createObject(InitLoadingView) as InitLoadingView));
