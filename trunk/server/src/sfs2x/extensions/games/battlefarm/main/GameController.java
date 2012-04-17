@@ -3,6 +3,8 @@ package sfs2x.extensions.games.battlefarm.main;
 import java.util.Enumeration;
 import java.util.List;
 
+import com.icard.cardSpecialSFSClass.CardSFSApi;
+import com.smartfoxserver.v2.SmartFoxServer;
 import com.smartfoxserver.v2.entities.Zone;
 
 import sfs2x.extensions.games.battlefarm.beans.BombBean;
@@ -43,20 +45,29 @@ public class GameController extends Thread
 	public void run()
 	{	
 		int count = 0;
+		CardSFSApi cardSFSApi = new CardSFSApi(SmartFoxServer.getInstance());
+		//ws
+		//ws
+		SmartFoxServer.getInstance().getAPIManager().setSFSApi(cardSFSApi);
+		//ws
+		
 		
 		while (timeEventsRunning)
 		{
 			count++;
 			
 			//ws
+			
+			
 			Zone zone = extension.getParentZone();
+			List<String> groupList = zone.getPublicGroups();
 			if( !zone.containsPublicGroup( "battle" ) )
 			{
 			   List<String> pGroupList = zone.getPublicGroups();
 			   pGroupList.add( "battle" );
 			   zone.setPublicGroups( pGroupList );
 			}
-			//ws
+			
 			
 			// Cycle for all the running games
 			for (Enumeration<GameBean> e = extension.getGames().elements(); e.hasMoreElements(); )
