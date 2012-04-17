@@ -85,7 +85,7 @@ package ICard.views {
         }
 		
         private function loadToolbar1(_arg1:Function):void{
-            this.loadResources(["mainmenu", "toolbar","roomlist","waitroom"], _arg1);
+            this.loadResources(["mainmenu", "toolbar","roomlist","waitroom","battlefield"], _arg1);
         }
 		
         public function get_player_info():void{

@@ -77,12 +77,19 @@ package ICard.views {
 			}
 			if(allReady==true)
 			{
-				
+				startBattle();
 			}
 			else
 			{
 				this._waitroom.onPlayerReady(arg);
 			}
+		}
+		private function startBattle():void{
+			_Mod_RoomList.regOnUpdateVSRoom(null);
+			_Mod_RoomUser.regOnPlayerReady(null);
+			_popup.closeView(this);
+			_viewMgr.battleField.show();
+			
 		}
 		public function close():void{
 			_Mod_RoomList.regOnUpdateVSRoom(null);
