@@ -10,7 +10,6 @@ package ICard.SFSMod {
 	public class Mod_RoomList extends Object{
 		
 		public var _smartFox : SmartFox;
-		private var _joinRoomName:String;
 		private var _onJoinVSRoom_OK:Function;
 		private var _onJoinVSRoom_Fail:Function;
 		private var _onUpdataVSRoom:Function;
@@ -36,10 +35,6 @@ package ICard.SFSMod {
 		}
 		
 		private function onRoomAdd(evt:SFSEvent):void{
-			if(evt.params.room.name == _joinRoomName)
-			{
-				SFS.send(new JoinRoomRequest(_joinRoomName));
-			}
 			trace("Room created: " + evt.params.room);
 		}
 		private function onRoomJoin(evt:SFSEvent):void{
@@ -110,7 +105,6 @@ package ICard.SFSMod {
 				settings.groupId = GAME_ROOMS_GROUP_NAME;
 				settings.maxUsers = 2;
 				settings.isGame = true;
-				_joinRoomName = roomName;
 				SFS.send(new CreateRoomRequest(settings));
 			}
 			else
