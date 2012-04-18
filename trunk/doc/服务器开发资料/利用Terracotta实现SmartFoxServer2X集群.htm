@@ -1,0 +1,528 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<title>利用Terracotta实现SmartFoxServer2X集群 - Liner-J - 博客频道 - CSDN.NET</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="description" content="两个多月没有更新博客了,那是因为刚进入一个新的领域,疯狂地学习并工作。这两个月,对于我来说,是一次新的旅程。从之前的Android开发,一不小心溜入游戏服务器端的开发。现在，终于有了一点闲暇，记录一下这两个月中学到的和领悟到的知识。&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 两个月前,进入一家做互联网3D产品的创业公司,而我负责的,正是服务器端的开发。和传统的3D游戏不同,这里没有复杂的游戏逻辑,只专注于产品需要的功能，">
+<script src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/ga.js" async="" type="text/javascript"></script><script src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/jquery.js" type="text/javascript"></script>
+<script src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/plugins.js" type="text/javascript"></script>
+<script src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/common.js" type="text/javascript"></script>
+<link rel="Stylesheet" type="text/css" href="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/style.css">
+<link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="http://blog.csdn.net/chenjie19891104/rss/list">
+<link rel="shortcut icon" href="http://blog.csdn.net/favicon.ico">
+<link type="text/css" rel="stylesheet" href="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/default.css">
+</head>
+<body>
+<script src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/pub_topnav_2011.js" type="text/javascript"></script><link rel="stylesheet" type="text/css" href="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/navtop_2011.css">
+<div class="nav_top_2011">
+<p><span style="color:red;">您还未登录！</span>|<a href="http://passport.csdn.net/UserLogin.aspx">登录</a>|<a href="http://passport.csdn.net/CSDNUserRegister.aspx">注册</a>|<a href="http://passport.csdn.net/help/faq">帮助</a></p><ul>
+<li><a href="http://www.csdn.net/" target="_blank">CSDN首页</a></li>
+<li><a href="http://news.csdn.net/" target="_blank">资讯</a></li>
+<li><a href="http://bbs.csdn.net/" target="_blank">论坛</a></li>
+<li><a href="http://blog.csdn.net/" target="_blank">博客</a></li>
+<li><a href="http://download.csdn.net/" target="_blank">下载</a></li>
+<li><a href="http://so.csdn.net/" target="_blank">搜索</a></li>
+<li class="more"><h2 id="topnav_btnmore"><a href="javascript:void(0);">更多</a></h2>
+<ul style="display: none;" id="topnav_hidlist">
+<li><a href="http://cto.csdn.net/" target="_blank">CTO俱乐部</a></li>
+<li><a href="http://student.csdn.net/" target="_blank">学生大本营</a></li>
+<li><a href="http://edu.csdn.net/" target="_blank">培训充电</a></li>
+<li><a href="http://mobile.csdn.net/" target="_blank">移动开发</a></li>
+<li><a href="http://sd.csdn.net/" target="_blank">软件研发</a></li>
+<li><a href="http://cloud.csdn.net/" target="_blank">云计算</a></li>
+<li><a href="http://www.programmer.com.cn/" target="_blank">程序员</a></li>
+<li><a href="http://www.iteye.com/" target="_blank">ITeye</a>&lt;&gt;
+</li><li><a href="http://tup.csdn.net/" target="_blank">TUP</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+<div id="container">
+<div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h1>
+                <a href="http://blog.csdn.net/chenjie19891104">Liner-J</a></h1>
+            <h2>你不知道的永远比你知道的要多得多——做人要低调,学会倾听,学会思考,学会反省...还有很多要学会...</h2>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>
+            <!--<li id="btnHome"><a href="/chenjie19891104"><span><img src="http://static.blog.csdn.net/images/ico_home.gif">我的首页</span></a></li>-->
+            <li id="btnContents"><a href="http://blog.csdn.net/chenjie19891104?viewmode=contents"><span><img src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/ico_list.gif">目录视图</span></a></li>
+            <li id="btnView"><a href="http://blog.csdn.net/chenjie19891104?viewmode=list"><span><img src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/ico_summary.gif">摘要视图</span></a></li>
+            <li id="btnRss"><a href="http://blog.csdn.net/chenjie19891104/rss/list"><span><img src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/ico_rss.gif">订阅</span></a></li>
+</ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "chenjie19891104";
+    var blog_address = "http://blog.csdn.net/chenjie19891104";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = $.cookie("UserName");
+</script>
+        
+<div id="body">
+<div id="main">
+<div class="main">
+<div class="notice"> 
+
+<a href="http://blog.csdn.net/blogdevteam/article/details/7468291" target="_blank"><font color="red">4月18日22:00至4月19日2:00网站服务暂停公告</font></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://blog.csdn.net/blogdevteam/article/details/7415936" target="_blank"><font color="red">博客频道4月技术图书有奖试读火爆开启</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://www.mobileasiaexpo.cn/?MAECN=CSDN2" target="_blank"><font color="blue">移动业界领袖会议·上海·6.20</font></a>
+<br>
+
+
+<a href="http://event.blog.csdn.net/TopColumn/awardlist.aspx" target="_blank"><font color="red">CSDN十大风云博客专栏评选结果公布！</font></a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://topic.csdn.net/u/20120416/10/9123faba-8474-4f2a-a0cf-a1b7d0fe5913.html" target="_blank"><font color="red">下载频道分享季1：分享经典，领取积分！</font></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<a href="http://event.blog.csdn.net/BlogSkin/Vote.aspx" target="_blank"><font color="red">CSDN博客皮肤评选活动火爆开启！</font></a>
+</div><script type="text/javascript" src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/ad_002.js"></script>
+
+<div id="article_details" class="details">
+    <div class="article_title">
+    <span class="ico ico_type_Original"></span>
+    <h3>
+        <span class="link_title"><a href="http://blog.csdn.net/chenjie19891104/article/details/7429084">
+        利用Terracotta实现SmartFoxServer2X集群
+        </a></span>
+    </h3>
+</div>
+
+        
+    <div class="article_manage">
+        <span class="link_categories">
+        分类：
+            <a href="http://blog.csdn.net/chenjie19891104/article/category/590977">网络应用开发</a> 
+            <a href="http://blog.csdn.net/chenjie19891104/article/category/744254">java</a> 
+            <a href="http://blog.csdn.net/chenjie19891104/article/category/1087480">技术杂谈</a> 
+        </span>
+    <span class="link_postdate">2012-04-05 17:39</span>
+    <span class="link_view" title="阅读次数">54人阅读</span>
+    <span class="link_comments" title="评论次数"><a href="#comments">评论</a>(0)</span>
+    <span class="link_collect"><a href="javascript:void(0);" onclick="javascript:collectArticle('利用Terracotta实现SmartFoxServer2X集群','7429084');return false;" title="收藏">收藏</a></span>
+    <span class="link_report"><a href="#report" onclick="javascript:report(7429084,2);return false;" title="举报">举报</a></span>
+    
+</div>
+
+    
+<div id="article_content" class="article_content">
+    
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+两个多月没有更新博客了,那是因为刚进入一个新的领域,疯狂地学习并工作。这两个月,对于我来说,是一次新的旅程。从之前的Android开发,一不小心
+溜入游戏服务器端的开发。现在，终于有了一点闲暇，记录一下这两个月中学到的和领悟到的知识。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+两个月前,进入一家做互联网3D产品的创业公司,而我负责的,正是服务器端的开发。和传统的3D游戏不同,这里没有复杂的游戏逻辑,只专注于产品需要的功
+能，客户端中不外乎用户的登陆和聊天等功能。而服务器端主要的任务就是处理用户的登陆登出和各种信息的同步。之前的一个月，学习了
+SmartFoxServer引擎，同时一并学习了下Unity3D引擎(因为客户端使用的是这个,学这个主要是为了可以很好地和客户端配合)。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+一直到几个星期前，当老大说要支持高达200000个用户同时在线的时候，才知道SFS2X试用版最多只可以支持100个用户，几经周折破解了
+SFS2X，消除了这个限制。但是，就算消除了限制，让一台机子同时处理200K个用户同时在线并操作，最后的结果只有一个——它将活活累死！于是，到
+SFS官方论坛和网站上寻求答案，虽然英文马马虎虎，但还可以表情达意，最终得知Terracotta是个好东东。而且官方有一个
+SmartFoxServer1.6和Terracotta集成的文档。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+正当我兴致突起，准备大干一场的时候，无意中被当头一棒——SmartFoxServer2X明确表态，从2X起，SmartFoxServer不再支持
+Terracotta集群。花了好几个昼昼夜夜，在其官方论坛上用那生硬的English发帖询问，结果终于得到证实，2X开始真的不支持或者不再提倡使
+用Terracotta来集群。再次看到1.6的那份官方集群文档的最后一句：<br>
+</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Finally the future releases of 
+SmartFoxServer&nbsp; will move towards a tighter integration with 
+Terracotta,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; to provide even more distributed services out of the box, and further simplify the development</p>
+<p>我不禁哑然！</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 后来，翻阅了大量了官方论坛上的帖子，却又找到官方人员的相关言论说，可以按照1.6思想的来使用Terracotta完成SFS的集群。于是，我决定尝试一把...</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 写好了集群扩展的代码，当想要测试一把的时候，才发现，怎样让Terracotta识别SFS2X呢？也就是怎样将SFS2X作为Terracotta集群的客户端来启动呢？</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 下载了1.6的集群的Demo，看到了它是使用了一个新的bat文件来启动的。看了下这个文件，其中含有Terracotta的启动包，终于明白了，原来如此。于是将其拷贝到</p>
+<p>SFS2X的启动bat文件中，成功实现将SFS2X加入到Terracotta集群中。通过Terracotta Developer Console也可以看到连接上的客户端。</p>
+<p>兴奋之余，将写好的SFS2X集群扩展Demo打了个jar包放到了SFS2X中，又写了个测试的Client，结果一运行，报了一个大大的异常，从异常信息看出，这个和ClassLoader有关。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+之前学习SFS2X的时候，看到过官方介绍过2X中使用了新的ClassLoader机制。核心SFS2X使用SystemClassLoader加载，
+每一个扩展使用一个新的ClassLoader进行加载，这样是为了方便应用扩展的热部署。但是，这个热部署我倒不太愿意用，现在又因为这个鸟东东和
+Terracotta集群有了冲突。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+从Terracotta的官方论坛中又再次得知，加载Terracotta中共享数据的ClassLoader必须命名，Terracotta就是根据
+ClassLoader的名称来完成不同JVM之间相同数据的同步。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这下彻底死了个翘翘，难道注定了无法实现SFS2X和Terracotta的集成吗？心有不甘。。。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 这时，一个强烈的念头涌上心头，SmartFoxServer2X不是用java写的嘛，反编译你的源码，殊死一搏吧。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+这个时候，发现其代码并没有进行加密，心中大喜。反编译后的代码清楚无比，看到了在加载每个扩展的时候，其都定义了一个URLClassLoader来完
+成扩展的加载。那么我现在就需要替换掉这个URLClassLoader，而使用自己的定义的ClassLoader。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 于是引入Terracotta和SmartFoxServer相关的jar包，重新实现了个命了名的ClassLoader，让这个ClassLoader完成扩展的加载。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 打成jar包，替换掉原来的jar包，运行起来，OK！测试通过，集群终于实现。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+实现集群的目的，主要是为了分担负载和容错。那么现在如何实现负载均衡成为一个关键，看了很多关于负载均衡的资料，基本是基于Http请求的负载均衡。但
+是，对于像SmartFoxServer一样的游戏服务器端引擎来说，其使用的往往是Tcp或者Udp协议。而我们知道，Http协议是无状态的，用户的
+每一次请求都可以做到负载均衡。而Tcp或者Udp使用的是长连接的形式，用户一旦和某个物理机器连接了，那么直到他主动退出或者这个物理机器上的
+SmartFoxServer出现故障，否则其在登陆中所发出的每一次请求都是在同一个TCP或者UDP连接中完成的。那么如何实现SFS2X的负载均衡
+呢？</p>
+<p><img src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/1333619236_6967.jpg" alt=""></p>
+<p><br>
+</p>
+<p><br>
+</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 有两个思路：</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+1、客户端维护一个服务器端可用的SFS2X节点的列表，然后每次请求的时候随即获取一个进行连接，如果请求超时或者失败，则再重新选择一个尝试连接。但
+是这个方案不能根据负载状况进行请求。<br>
+</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+2、就是外加一个负载均衡服务器，这个服务器作为一个普通的Web 
+Server。可以使用Tomcat或者Apache等。他主要的功能就是负责维护每个SFS2X节点的负载情况(每个节点上登陆的用户数)和可用的
+SFS2X节点信息。当一个客户端请求登陆SFS2X服务器的时候，其首先发送Http请求到这个WebServer，这个WebServer会查询并返
+回当前所有可用的节点和每个节点对应的负载信息。然后，客户端根据返回的数据，选择一个负载最小的节点进行连接。但是这个方案，这个单点的
+WebServer容易成为整个系统的瓶颈，同时可能成为单点故障。但是这个可以使用传统的负载均衡技术来避免这些问题。</p>
+<p><img src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/1333619264_5892.jpg" alt=""><br>
+</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+第一个基本排除，采用第二个。但是第二个又引发一个问题。就是负载均衡服务器和SFS2X集群如何完成数据的同步。是每个SFS2X节点每隔一定的时间将
+连接到本机的用户数等信息发送到一个存储媒介，这样，负载均衡服务器每次只需要查询这个存储媒介就可以了。但是，这个会成为瓶颈吗？</p>
+<p>I DON'T KNOW,JUST TEST IT!<br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+
+</div>
+<div class="share_buttons" id="sharePanel"><span>分享到：</span> <a name="sina" class="share_sina" title="分享到新浪微博"></a><a name="qq" class="share_qq" title="分享到腾讯微博"></a></div>
+
+<div class="article_next_prev">
+        <li class="prev_article">
+            <span>上一篇：</span><a href="http://blog.csdn.net/chenjie19891104/article/details/7205507">小A的年前面试经历——实录</a></li>
+</div>
+
+
+</div>
+<div id="ad_cen"><iframe src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/ad.htm" style="border-width: 0px; overflow: hidden; width: 1008px; height: 96px;" id="ad_frm_0" frameborder="0" scrolling="no"></iframe></div>
+<script type="text/javascript">
+    new Ad(4, 'ad_cen');
+</script>
+<div id="comment_title" class="panel_head">查看评论<a name="comments"></a></div>
+<div id="comment_list"><br>&nbsp;&nbsp;暂无评论<br><br><div class="clear"></div></div>
+<div id="comment_bar"></div>
+<div id="comment_form"><div class="guest_link">您还没有登录,请<a href="http://passport.csdn.net/account/login?from=http%3A%2F%2Fblog.csdn.net%2Fchenjie19891104%2Farticle%2Fdetails%2F7429084">[登录]</a>或<a href="http://passport.csdn.net/account/register?from=http%3A%2F%2Fblog.csdn.net%2Fchenjie19891104%2Farticle%2Fdetails%2F7429084">[注册]</a></div></div>
+<div class="announce">* 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+<script type="text/javascript">
+    var fileName = '7429084';
+    var commentscount = 0;
+    var islock = false
+</script>
+<script type="text/javascript" src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/comment.js"></script>
+<div id="ad_bot"><iframe src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/ad_002.htm" style="border-width: 0px; overflow: hidden; width: 1008px; height: 170px;" id="ad_frm_1" frameborder="0" scrolling="no"></iframe></div>
+<script type="text/javascript">
+    new Ad(5, 'ad_bot');
+</script>
+<div id="report_dialog"></div>
+
+
+<div class="clear"></div>
+</div>
+</div>
+<div id="side">
+    <div class="side">
+<div id="custom_column_20525522" class="panel">
+    <ul class="panel_head"><span>我的推荐</span></ul>
+    <ul class="panel_body">
+        
+<div style="margin-bottom:20px"><img src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/1334657022_3475.gif" style="padding-top: 10px;" height="23" width="23"><a href="http://weibo.com/whoiscrying" style="margin-bottom: 20px; font-size: 20px;">我的微博</a></div>
+<div style="margin-bottom:7px"><a href="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=200&amp;height=550&amp;fansRow=2&amp;ptype=1&amp;speed=0&amp;skin=1&amp;isTitle=1&amp;noborder=1&amp;isWeibo=1&amp;isFans=1&amp;uid=1837318817&amp;verifier=4794544d&amp;dpc=1">1、我的微博-简略版</a></div>
+<div style="margin-bottom:7px"><a href="http://www.ekarma.cn/" style="margin-bottom: 20px;">2、不错的3D服务提供商</a></div>
+<div style="margin-bottom:7px"><a href="http://dongzhen.karmacity.cn/" style="margin-bottom: 20px;">3、精美的3D店铺</a></div>
+
+    </ul>
+</div><div id="panel_Profile" class="panel">
+    <ul class="panel_head"><span>个人资料</span></ul>
+    <ul class="panel_body profile">
+        <div id="blog_userface">
+            <a href="http://my.csdn.net/chenjie19891104" target="_blank">
+            <img src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/1_chenjie19891104.jpg" title="访问我的空间" style="max-width: 90%;">
+            </a>
+            <br>
+            <span><a href="http://my.csdn.net/chenjie19891104" target="_blank">chenjie19891104</a></span>
+        </div>
+<div class="interact">
+<!--<a href="#" class="attented" title="已关注"></a>-->
+<a href="#" class="attent" id="span_add_follow" title="[加关注]"></a>
+<a href="http://my.csdn.net/my/letter/send/chenjie19891104" class="letter" title="[发私信]"></a>
+</div>
+        <div id="blog_medal">
+        <div id="bms_box"><a href="http://medal.blog.csdn.net/allmedal.aspx" target="_blank"><img src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/holdon_s2.gif" onmouseover="m_over_m(this,0)" onmouseout="m_out_m()" alt=""></a></div></div>
+        <ul id="blog_rank">
+            <li>访问：<span>106058次</span></li>
+            <li>积分：<span>1978分</span></li>
+            <li>排名：<span>第2458名</span></li>
+        </ul>
+        <ul id="blog_statistics">
+            <li>原创：<span>69篇</span></li>
+            <li>转载：<span>22篇</span></li>
+            <li>译文：<span>0篇</span></li>
+            <li>评论：<span>228条</span></li>
+        </ul>
+    </ul>
+</div>
+
+<script type="text/javascript">
+var _blogger='chenjie19891104';
+$(document).ready(function () {
+    $('#span_add_follow').click(function () {
+        var url = "http://my.csdn.net/index.php/follow/do_follow?jsonpcallback=?";
+        $.getJSON(url, { "username": _blogger }, function (data) {
+            if (data.succ == 1) {
+                alert('关注成功！');
+                $('#span_add_follow').attr('class', 'attented').click(function () { return false; });
+            } else {
+                alert(data.msg);
+            }
+        });
+    });
+    if (getUN().toLowerCase() == _blogger.toLowerCase()) {
+        $('.interact').hide();
+    }
+});
+function getUN() {
+    var m = document.cookie.match(new RegExp("(^| )UserName=([^;]*)(;|$)"));
+    if (m) return m[2];
+    else return '';
+}
+</script>
+
+<div class="panel" id="panel_Search">
+    <ul class="panel_head"><span>文章搜索</span></ul>
+    <ul class="panel_body">
+        <form id="frmSearch" action="http://so.csdn.net/search" class="form_search" target="_blank">
+        <span><input id="inputSearch" class="blogsearch" title="请输入关键字" type="text"></span>
+        <input id="btnSubmit" value="搜索" title="search in blog" type="submit">
+        <input name="q" id="inputQ" type="hidden">
+        <input name="t" value="blog" type="hidden">
+        <a id="btnSearchBlog" target="_blank"></a>
+        </form>
+    </ul>
+</div><div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>文章分类</span></ul>
+    <ul class="panel_body">
+        <li>
+        <a href="http://blog.csdn.net/chenjie19891104/article/category/756236">Android 学习笔记</a><span>(44)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/chenjie19891104/article/category/818758">C/C++编程</a><span>(1)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/chenjie19891104/article/category/796560">hibernate 学习总结</a><span>(1)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/chenjie19891104/article/category/744254">java</a><span>(4)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/chenjie19891104/article/category/744773">java 设计模式</a><span>(8)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/chenjie19891104/article/category/817072">流媒体技术</a><span>(4)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/chenjie19891104/article/category/590977">网络应用开发</a><span>(1)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/chenjie19891104/article/category/854155">Oracle</a><span>(3)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/chenjie19891104/article/category/960957">个人随想</a><span>(2)</span>
+        
+        </li>
+        <li>
+        <a href="http://blog.csdn.net/chenjie19891104/article/category/1087480">技术杂谈</a><span>(1)</span>
+        
+        </li>
+    </ul>
+</div><div id="hotarticls" class="panel">
+    <ul class="panel_head"><span>阅读排行</span></ul>
+    <ul class="panel_body">
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6315668" title="Android自定义View之一：初探实例">Android自定义View之一：初探实...</a> (9535)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6338920" title="Android多媒体学习十四：播放网络上的视频">Android多媒体学习十四：播放网络上...</a> (5005)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6320323" title="Android多媒体学习一：Android中Image的简单实例。">Android多媒体学习一：Androi...</a> (4452)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6344250" title="Android打造个性十足的组件技术之复合组件">Android打造个性十足的组件技术之复...</a> (4030)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6440820" title="JNI学习之步步深入二">JNI学习之步步深入二</a> (3980)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6323423" title="Android多媒体学习四：实现图像的编辑和合成">Android多媒体学习四：实现图像的编...</a> (3778)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6333553" title="Android多媒体学习十：利用AudioRecord类实现自己的音频录制程序">Android多媒体学习十：利用Audi...</a> (3733)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6338910" title="Android多媒体学习十三：检索MediaStore中的Video和其对应的缩略图信息">Android多媒体学习十三：检索Med...</a> (3135)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6330383" title="Android多媒体学习五：调用Android自带的播放器播放Audio">Android多媒体学习五：调用Andr...</a> (2785)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6450077" title="JNI学习之步步深入四--皇后的祝福">JNI学习之步步深入四--皇后的祝福</a> (2746)
+        </li>
+    </ul>
+</div>
+<div id="hotarticls" class="panel">
+    <ul class="panel_head"><span>评论排行</span></ul>
+    <ul class="panel_body">
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6336439" title="Android多媒体学习十一：实现仿百度图片查看功能">Android多媒体学习十一：实现仿百度...</a> (22)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6344250" title="Android打造个性十足的组件技术之复合组件">Android打造个性十足的组件技术之复...</a> (17)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6338920" title="Android多媒体学习十四：播放网络上的视频">Android多媒体学习十四：播放网络上...</a> (15)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6320323" title="Android多媒体学习一：Android中Image的简单实例。">Android多媒体学习一：Androi...</a> (13)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6338910" title="Android多媒体学习十三：检索MediaStore中的Video和其对应的缩略图信息">Android多媒体学习十三：检索Med...</a> (12)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6333553" title="Android多媒体学习十：利用AudioRecord类实现自己的音频录制程序">Android多媒体学习十：利用Audi...</a> (12)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/7108948" title="我的2011——毕业之年的总结与彷徨">我的2011——毕业之年的总结与彷徨</a> (11)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6450077" title="JNI学习之步步深入四--皇后的祝福">JNI学习之步步深入四--皇后的祝福</a> (9)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6409290" title="JAVA设计模式之Chain-of-Responsiblility模式">JAVA设计模式之Chain-of-Re...</a> (9)
+        </li>
+        <li>
+            <a href="http://blog.csdn.net/chenjie19891104/article/details/6412471" title="JNI学习之步步深入一">JNI学习之步步深入一</a> (8)
+        </li>
+    </ul>
+</div>
+<div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body">
+    <li>
+    <a href="http://blog.csdn.net/chenjie19891104/article/details/6338920#comments">Android多媒体学习十四：播放网络上的视频</a>
+    <p style="margin:0px;">zxk251846526:
+楼主，求《android网络视频播放器》的源码！！！万分感谢。。。470881220@qq.com
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/chenjie19891104/article/details/7076166#comments">说说Android桌面(Launcher应用)背后的故事(八)——让桌面的精灵穿越起来</a>
+    <p style="margin:0px;">ritterliu:
+@rambo19840696:可以参考下folder中的realTimeReorder()
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/chenjie19891104/article/details/7031713#comments">说说Android桌面(Launcher应用)背后的故事(六)——研究Launcher而实现的附属品(可以拖拽的ListView)</a>
+    <p style="margin:0px;">zhengkuo1025:
+真的是感谢楼主！对自己帮助很大！谢谢了！！！
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/chenjie19891104/article/details/7205507#comments">小A的年前面试经历——实录</a>
+    <p style="margin:0px;">wt0731:
+耐人寻味。机遇真的很重要啊！
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/chenjie19891104/article/details/6336439#comments">Android多媒体学习十一：实现仿百度图片查看功能</a>
+    <p style="margin:0px;">fengdexunmi:
+@chenjie19891104:楼主，你好，在eoe中的多媒体大汇集中也没有GridImageAd...
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/chenjie19891104/article/details/6330383#comments">Android多媒体学习五：调用Android自带的播放器播放Audio</a>
+    <p style="margin:0px;">jiayuan314:
+有完整代码吗 jiayuan314@163.com急用  谢谢
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/chenjie19891104/article/details/7008962#comments">说说Android桌面(Launcher应用)背后的故事(三)——CellLayout的秘密</a>
+    <p style="margin:0px;">hadaki:
+非常感谢楼主的总结，学习了。。
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/chenjie19891104/article/details/6338920#comments">Android多媒体学习十四：播放网络上的视频</a>
+    <p style="margin:0px;">lele870629:
+求网络视频播放器的源码~~~万分感谢~~~
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/chenjie19891104/article/details/6336439#comments">Android多媒体学习十一：实现仿百度图片查看功能</a>
+    <p style="margin:0px;">DendyCC:
+LZ给发一份Dendycc@163.com,谢谢啦！
+    </p>
+    </li>
+    <li>
+    <a href="http://blog.csdn.net/chenjie19891104/article/details/6338202#comments">Android多媒体学习十二：Android中Video的三种播放方式的实现</a>
+    <p style="margin:0px;">aduovip:
+写得不错，项目中正好用到， 十分感谢博主！
+    </p>
+    </li>
+</ul>
+</div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="clear"></div>
+</div>
+<script type="text/javascript" src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/shCore-src.js"></script>
+<script type="text/javascript" src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/ZeroClipboard.js"></script>
+<script type="text/javascript" src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/article_code.js"></script>
+
+<script type="text/javascript" src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/show.js"></script>
+<script type="text/javascript" src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/showblogmedal.js"></script>
+<script type="text/javascript">document.write("<img src=http://counter.csdn.net/pv.aspx?id=24 border=0 width=0 height=0>");</script><img src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/pv.txt" border="0" height="0" width="0">
+<script type="text/javascript" src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/counter.js"></script><script type="text/javascript" charset="UTF-8" src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/msg.js"></script><img src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/visitlog.htm" alt="" border="0" height="1" width="1">
+<script type="text/javascript" src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/publib_footer.js"></script><link rel="stylesheet" type="text/css" href="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/pub_footerstyle.css"><div class="pub_footerall"><dl><dt></dt> <dd><a href="http://www.csdn.net/company/about.html" target="_blank">公司简介</a>|<a href="http://www.csdn.net/company/recruit.html" target="_blank">招贤纳士</a>|<a href="http://www.csdn.net/company/marketing.html" target="_blank">广告服务</a>|<a href="http://www.csdn.net/company/account.html" target="_blank">银行汇款帐号</a>|<a href="http://www.csdn.net/company/contact.html" target="_blank">联系方式</a>|<a href="http://www.csdn.net/company/statement.html" target="_blank">版权声明</a>|<a href="http://www.csdn.net/company/layer.html" target="_blank">法律顾问</a>|<a href="mailto:webmaster@csdn.net">问题报告</a></dd><dd>北京创新乐知信息技术有限公司 版权所有,&nbsp;京&nbsp;ICP&nbsp;证&nbsp;070598&nbsp;号</dd><dd>世纪乐知(北京)网络技术有限公司 提供技术支持</dd><dd>江苏乐知网络技术有限公司 提供商务支持</dd><dd><img src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/pic_email.gif" alt="" title=""> Email:webmaster@csdn.net</dd><dd>Copyright © 1999-2012, CSDN.NET, All Rights Reserved</dd><dd><a href="http://www.hd315.gov.cn/beian/view.asp?bianhao=010202001032100010" target="_blank"><img src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/gongshang_logos.gif" alt="GongshangLogo" title=""></a></dd></dl></div>
+
+
+<script type="text/javascript" src="%E5%88%A9%E7%94%A8Terracotta%E5%AE%9E%E7%8E%B0SmartFoxServer2X%E9%9B%86%E7%BE%A4_files/ad.js"></script>
+
+
+</div>
+
+</body></html>
