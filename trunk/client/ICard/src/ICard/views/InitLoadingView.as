@@ -85,15 +85,16 @@ package ICard.views {
         }
 		
         private function loadToolbar1(_arg1:Function):void{
-            this.loadResources(["mainmenu", "toolbar","roomlist","waitroom","battlefield"], _arg1);
+            this.loadResources(["mainmenu", "toolbar","roomlist","waitroom","battlefield","templet"], _arg1);
         }
 		
         public function get_player_info():void{
 			this.close();
 			_viewMgr.screen.show();
         	_viewMgr.mainmenu.show();
+			_viewMgr.formatServerData();
 //			Helper.backtrace("Mod_Player_Base.get_player_info, 1");
-//			_viewMgr.formatServerData();
+			
 //            _data.call(Mod_Player_Base.get_player_info, this.getPlayerInfoCallback, []);
         }
         private function getPlayerInfoCallback():void{

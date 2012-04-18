@@ -90,12 +90,12 @@ public class GameMapBsn
 						if (line.getName().equalsIgnoreCase("mapline"))
 						{
 							String str = line.getContent();
-							String l = "";
+					//		String l = "";
 							
 							for(int x = 0; x < Constants.MAP_WIDTH; x++)
 							{
 								tempMap[count][x] = str.charAt(x);
-								l+=str.charAt(x);
+					//			l+=str.charAt(x);
 							}
 						}
 

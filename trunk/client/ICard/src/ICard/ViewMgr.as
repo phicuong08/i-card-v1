@@ -66,6 +66,7 @@ package ICard {
             
         }
 		    public function initAddAssets():void{
+				addAssets("templet","templet.swf");
 				addAssets("battlefield","battlefield.swf");
 				addAssets("toolbar", "toolbar.swf");
 				addAssets("waitroom", "waitroom.swf");
@@ -129,7 +130,7 @@ package ICard {
 		        _local1.visible = false;
 		    }
 		    public function formatServerData():void{
-		        var _local1:String = "Templet";
+		        var _local1:String = "templet";
 		        ServerType.format(getAssetsObj(_local1));
 		        removeResource(_local1);
 		        //WarData.removeNickNameSuffix = _ctrl.player.removeNickNameSuffix;
