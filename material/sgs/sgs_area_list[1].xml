@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sgs>
+	<area name="1区五谷丰登(华东电信)" ID="1">
+		<iplist ip="61.152.97.50" url="" port="41000" usercount="0"/>
+		<iplist ip="61.152.97.50" url="" port="41001" usercount="0"/>
+		<iplist ip="61.152.97.51" url="" port="41002" usercount="0"/>
+		<iplist ip="61.152.97.51" url="" port="41003" usercount="0"/>
+		<iplist ip="61.152.97.52" url="" port="41004" usercount="0"/>
+		<iplist ip="61.152.97.52" url="" port="41005" usercount="0"/>
+		<iplist ip="61.152.97.53" url="" port="41006" usercount="0"/>
+		<iplist ip="61.152.97.53" url="" port="41007" usercount="0"/>
+		<iplist ip="61.152.97.54" url="" port="41008" usercount="0"/>
+		<iplist ip="61.152.97.54" url="" port="41009" usercount="0"/>
+	</area>
+	<area name="2区桃园结义(全国网通)" ID="2">
+		<iplist ip="210.51.33.31" url="" port="41000" usercount="0"/>
+		<iplist ip="210.51.33.31" url="" port="41001" usercount="0"/>
+		<iplist ip="210.51.33.27" url="" port="41002" usercount="0"/>
+		<iplist ip="210.51.33.27" url="" port="41003" usercount="0"/>
+		<iplist ip="210.51.33.30" url="" port="41004" usercount="0"/>
+		<iplist ip="210.51.33.30" url="" port="41005" usercount="0"/>
+		<iplist ip="210.51.33.37" url="" port="41006" usercount="0"/>
+		<iplist ip="210.51.33.37" url="" port="41007" usercount="0"/>
+	</area>
+	<area name="3区南蛮入侵(上海电信)" ID="3">
+		<iplist ip="61.152.101.59" url="" port="41000" usercount="0"/>
+		<iplist ip="61.152.101.59" url="" port="41001" usercount="0"/>
+		<iplist ip="61.152.101.65" url="" port="41002" usercount="0"/>
+		<iplist ip="61.152.101.65" url="" port="41003" usercount="0"/>
+		<iplist ip="61.152.101.68" url="" port="41004" usercount="0"/>
+		<iplist ip="61.152.101.68" url="" port="41005" usercount="0"/>
+		<iplist ip="61.152.101.75" url="" port="41006" usercount="0"/>
+		<iplist ip="61.152.101.75" url="" port="41007" usercount="0"/>
+	</area>
+
+	<area name="4区/5区万箭齐发(全国电信)" ID="4">
+		<iplist ip="115.238.116.156" url="" port="41000" usercount="0"/>
+		<iplist ip="115.238.116.156" url="" port="41001" usercount="0"/>
+		<iplist ip="115.238.116.157" url="" port="41002" usercount="0"/>
+		<iplist ip="115.238.116.157" url="" port="41003" usercount="0"/>
+		<iplist ip="115.238.116.158" url="" port="41004" usercount="0"/>
+		<iplist ip="115.238.116.158" url="" port="41005" usercount="0"/>
+		<iplist ip="115.238.116.174" url="" port="41006" usercount="0"/>
+		<iplist ip="115.238.116.174" url="" port="41007" usercount="0"/>
+	</area>
+	<area name="6区顺手牵羊(全国网通)" ID="6">
+		<iplist ip="125.39.178.4" url="" port="41000" usercount="0"/>
+		<iplist ip="125.39.178.4" url="" port="41001" usercount="0"/>
+		<iplist ip="125.39.178.5" url="" port="41002" usercount="0"/>
+		<iplist ip="125.39.178.5" url="" port="41003" usercount="0"/>
+		<iplist ip="125.39.178.43" url="" port="41004" usercount="0"/>
+		<iplist ip="125.39.178.43" url="" port="41005" usercount="0"/>
+		<iplist ip="125.39.178.44" url="" port="41006" usercount="0"/>
+		<iplist ip="125.39.178.44" url="" port="41007" usercount="0"/>
+	</area>
+	<area name="7区/8区借刀杀人(全国双线)" ID="8">
+		<iplist ip="115.236.20.75" url="A8GS1.SANGUOSHA.COM" port="41000" usercount="0"/>
+		<iplist ip="115.236.20.75" url="A8GS1.SANGUOSHA.COM" port="41001" usercount="0"/>
+		<iplist ip="115.236.20.76" url="A8GS2.SANGUOSHA.COM" port="41002" usercount="0"/>
+		<iplist ip="115.236.20.76" url="A8GS2.SANGUOSHA.COM" port="41003" usercount="0"/>
+		<iplist ip="115.236.20.77" url="A8GS3.SANGUOSHA.COM" port="41004" usercount="0"/>
+		<iplist ip="115.236.20.77" url="A8GS3.SANGUOSHA.COM" port="41005" usercount="0"/>
+		<iplist ip="115.236.20.78" url="A8GS4.SANGUOSHA.COM" port="41006" usercount="0"/>
+		<iplist ip="115.236.20.78" url="A8GS4.SANGUOSHA.COM" port="41007" usercount="0"/>
+		<iplist ip="115.236.20.74" url="A8LOGIN.SANGUOSHA.COM" port="41008" usercount="0"/>
+		<iplist ip="115.236.20.74" url="A8LOGIN.SANGUOSHA.COM" port="41009" usercount="0"/>
+	</area>
+</sgs>

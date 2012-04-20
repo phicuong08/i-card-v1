@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SanGuoShaWizard>
+	<RoomInfo Name="欢迎来到新手场！">
+		<Seat Index="0" Name="新手一" />
+		<Seat Index="1" Name="新手二" />
+		<Seat Index="2" Name="新手三" />
+		<Seat Index="3" Name="新手四" />
+		<Seat Index="4" Name="新手五" />
+		<Seat Index="5" Name="新手六" />
+		<Seat Index="6" Name="新手七" />
+		<Seat Index="7" Name="新手八" />
+	</RoomInfo>
+	<Item Timer="100">
+		<Text x="center" y="bottom">
+			<![CDATA[《三国杀onilne》的基本规则及基本牌的使用暂时便告一段落，接下来，让奴家来教您如何使用锦囊吧。]]>
+		</Text>
+	</Item>
+	
+	<Item Timer="9000">
+		<Text x="center" y="bottom">
+			<![CDATA[在《三国杀onilne》中，除了基本牌之外，还有一种代表着谋略意义的手牌——锦囊牌。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[锦囊牌可不像【杀】一样，它没有使用次数的限制，换句话说，只要您想用，就可以用，大胆放心的用吧！]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[锦囊牌分为延时类锦囊与非延时类锦囊，它们的区别在于生效时机不同。这个可能不太好理解，且听奴家慢慢道来。]]>
+		</Text>
+	</Item>
+	<Item Timer="11906">
+	<Arrow Type="Top"/>
+		<Text x="center" y="bottom">
+			<![CDATA[您看，【南蛮入侵】就是一张典型的非延时锦囊，使用后即刻生效。它的作用是让下家开始，依次打出1张【杀】响应，选择不打出【杀】的玩家，将受到1点伤害。]]>
+		</Text>
+			<Text x="center" y="bottom">
+			<![CDATA[我们来试试看吧。先鼠标单击，选中【南蛮入侵】。]]>
+		</Text>
+		<Target Type="Card" ID="72" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="11907">
+	<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[接着点击“确定”，马上我们就可以看到效果了哟。]]>
+		</Text>
+		<Target Type="Button" ID="btnOK" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="18141">
+		<Text x="center" y="bottom">
+			<![CDATA[刘备没有打出【杀】来响应，受到1点伤害。太棒了！]]>
+		</Text>		
+	</Item>
+	<Item Timer="20813">
+		<Text x="center" y="bottom">
+			<![CDATA[赵云也没有打出【杀】来响应，受到1点伤害。真糟糕，打到自己人了。]]>
+		</Text>		
+	</Item>
+	<Item Timer="23282">
+		<Text x="center" y="bottom">
+			<![CDATA[周瑜打出了【杀】来响应，不受伤害。]]>
+		</Text>		
+	</Item>	
+	<Item Timer="36233">
+		<Arrow Type="Top"/>
+		<Text x="center" y="bottom">
+			<![CDATA[【乐不思蜀】是延时类锦囊，使用后不能即刻生效，他的作用是对一个目标使用后，在他下个回合时需要进行判定，若判定牌不为红桃，则该目标遗失出牌阶段。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[我们就拿下家的刘备开刀，让他动不了！先选中【乐不思蜀】。]]>
+		</Text>
+		<Target Type="Card" ID="71" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="36234">
+		<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[再选择刘备作为目标。]]>
+		</Text>
+		<Target Type="Seat" Name="刘备" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>	
+	<Item Timer="36235">
+	<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[点击“确定”，立即使用。]]>
+		</Text>
+		<Target Type="Button" ID="btnOK" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="39953">
+		<Text x="center" y="bottom">
+			<![CDATA[此时，刘备的头像下方出现了“乐”字的标记。【乐不思蜀】将在刘备的回合生效。]]>
+		</Text>
+	</Item>
+	<Item Timer="40219">
+		<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[让我们点击“结束”来看看到底【乐不思蜀】会对刘备产生什么样的影响吧。]]>
+		</Text>
+		<Target Type="Button" ID="btnDiscard" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>	
+	<Item Timer="42141">
+		<Text x="center" y="bottom">
+			<![CDATA[摸牌之前，是判定阶段，非延时锦囊在此时生效。判定，就是从牌堆顶部翻开1张牌，根据它的花色或点数来决定锦囊是否生效。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[判定牌的花色是方块，【乐不思蜀】对刘备生效，刘备将直接进入弃牌阶段。]]>
+		</Text>
+	</Item>	
+	<Item Timer="49782">
+	<Arrow Type="Top"/>
+		<Text x="center" y="bottom">
+			<![CDATA[以上，便是锦囊牌的基本使用方法，每张锦囊的效果都不一样，具体的使用方法及效果请查看详细教学。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[锦囊使用的教学到此为止，下面，请继续“装备使用”教学。]]>
+		</Text>
+		<ContinueButton visible="true" Label="继续" sgs="zhuangbei.sgs" sgsw="zhuangbei.sgsw"/>
+	</Item>
+</SanGuoShaWizard>

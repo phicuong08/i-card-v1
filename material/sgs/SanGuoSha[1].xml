@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<SanGuoSha>
+	<System>
+<!--
+最后更新的时间与版本
+-->
+		<Version>2012-03-16 11:30</Version>
+		<ReleaseVersion>2.12</ReleaseVersion>
+
+<!-- 
+第一阶段加载资源版本号 
+-->
+		<SkinCssVersion>		251 </SkinCssVersion>			<!-- css/skin_css_simplified.swf -->
+		<PreLoadSkinVersion>	262 </PreLoadSkinVersion>		<!-- assets/preload_simplified.swf -->
+		
+		<!-- 配置文件版本号 -->
+		<ConfigVersion>			791	</ConfigVersion>			<!-- config/simplified/simplified.sgsc -->
+
+		<!-- 与客户端共享的公共配置文件版本号 -->
+		<GlobalConfigVersion>	784	</GlobalConfigVersion>		<!-- config/global/simplified.sgsc -->
+		
+<!--
+第二阶段加载资源版本号
+-->
+		<!-- 第二阶段游戏资源版本号 -->
+		<SkinVersion>			215 </SkinVersion>				<!-- assets/skin_simplified.swf -->
+		<SkinShopVersion>		215 </SkinShopVersion>			<!-- assets/skin_shop_simplified.swf -->
+		<SkinReadyVersion>		215 </SkinReadyVersion>			<!-- assets/ready_simplified.swf -->
+		<SkinLobbyVersion>		216 </SkinLobbyVersion>			<!-- assets/lobby_simplified.swf -->
+		<SkinGameVersion>		215 </SkinGameVersion>			<!-- assets/game_simplified.swf -->
+
+		<!-- 卡牌资源版本号 -->
+		<CardVersion>				120	</CardVersion>				<!-- assets/card_simplified.swf -->
+		<CardGeneralNormalVersion>	120	</CardGeneralNormalVersion>	<!-- assets/card_general_normal_simplified -->
+		<CardGeneralFHLVersion>		120	</CardGeneralFHLVersion>	<!-- assets/card_general_fhl_merge_simplified -->
+		<CardGeneralYSVersion>		120	</CardGeneralYSVersion>		<!-- assets/card_general_yp_merge_simplified -->
+
+		<!-- 声音资源版本号 -->
+		<SoundGameVersion>			926	</SoundGameVersion>			<!-- assets/sound_game.swf -->
+		<SoundNormalVersion>		925	</SoundNormalVersion>		<!-- assets/sound_profession_normal.swf -->
+		<SoundFHLVersion>			926	</SoundFHLVersion>			<!-- assets/sound_profession_fhl_merge.swf -->
+		<SoundYSVersion>			926	</SoundYSVersion>			<!-- assets/sound_profession_ys.swf -->
+
+		<!-- 动画资源版本号 -->
+		<AnimationOtherVersion>		930	</AnimationOtherVersion>	<!-- assets/animation_other.swf -->
+		<AnimationGameVersion>		930	</AnimationGameVersion>		<!-- assets/animation_game.swf -->
+		<AnimationSkillVersion>		930	</AnimationSkillVersion>	<!-- assets/animation_skill.swf -->
+		<AnimationEquipVersion>		930	</AnimationEquipVersion>	<!-- assets/animation_equip.swf -->
+		
+<!--
+其它配置信息
+-->		
+		<!-- 是否开启客户端行为分析日志 -->
+		<EnabledBehaviorLog>true</EnabledBehaviorLog>
+
+		<!-- 标记是否是内部测试 -->
+		<IsAlphaVersion>false</IsAlphaVersion>
+		
+		<!-- IsAlphaVersion 为 true 时，是否显示调试工具栏 -->
+		<EnableDebugToolbox>false</EnableDebugToolbox>
+		
+		<!-- 默认的客户端ID -->
+		<ClientType>1000</ClientType>
+		
+		<!-- 策略文件获得端口号 -->
+		<CrossdomainPort>843</CrossdomainPort>
+		
+		<!-- 默认语言 (繁体：traditional 简体：simplified)-->
+		<DefaultLanguage>simplified</DefaultLanguage>
+		
+		<!-- 连接服务器失败时显示的说明（停机维护说明） -->
+		<Maintenance></Maintenance>
+		
+		<!-- 允许多开 -->
+		<EnableMultipleGame>true</EnableMultipleGame>
+
+		<EnabledBottomAD>true</EnabledBottomAD>
+	</System>
+	<ClientLog>
+		<!-- 开启客户端日志 -->
+		<EnabledClientLog>true</EnabledClientLog>
+		
+		<!-- 记录游戏加载时间 -->
+		<FirstLoad>true</FirstLoad>
+		<SecondLoad>true</SecondLoad>
+		<ThirdLoad>true</ThirdLoad>
+		
+		<!-- 记录在模式界面的停留时间 -->
+		<ModeStayTimer>false</ModeStayTimer>
+		
+		<!-- 记录声效的选择 -->
+		<SelectSound>true</SelectSound>
+		
+		<!-- 记录游戏窗口大小的选择 -->
+		<SelectWinType>true</SelectWinType>
+		
+		<!-- 记录每局游戏时间 -->
+		<GameTime>true</GameTime>
+		
+		<!-- 记录游戏类型 -->
+		<GameType>true</GameType>
+		
+		<!-- 记录壁纸的选择 -->
+		<Wallpaper></Wallpaper>
+	</ClientLog>
+	<Source>
+		<!-- Client.xml 文件的所在文件夹，不包括语言文件夹 -->
+		<ClientXMLFolder>config</ClientXMLFolder>
+	</Source>
+</SanGuoSha>
