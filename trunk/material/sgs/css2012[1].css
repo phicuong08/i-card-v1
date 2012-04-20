@@ -1,0 +1,59 @@
+@charset "gb2312";*{margin:0;padding:0}html,body{height:100%}body{color:#666;font-size:12px;font-family:"宋体";background-color:#000}img{border:0}li{list-style:none}a.red:link,a.red:visited,a.red:hover{color:#FF0000}a.linkBold:link,a.linkBold:visited,a.linkBold:hover{font-weight:bold}a:link,a:visited{color:#fcd788;text-decoration:none}a:hover{color:#D89300;text-decoration:underline}a.yellow:link,a.yellow:visited{color:#E8BB07;text-decoration:none}a.yellow:hover{color:#fff;text-decoration:underline}a.white:link,a.white:visited{color:#fff;text-decoration:none}a.white:hover{color:#E8BB07;text-decoration:underline}.wrap{width:1004px;margin:0 auto}.header,.nav,.content,.upBottomBg,.footer{background:url(../images/bannner_nav_bottom.jpg) no-repeat;height:161px;width:100%;overflow:hidden}
+
+.header{height:207px;}
+
+.header h1,.header h1 a{width:990px;height:200px;float:left}	.header h1 a{overflow:hidden;text-indent:-9999px}
+
+.nav{height:24px;background-position:0 -207px}.nav ul,.nav ul li{height:19px;float:left}.nav ul{width:471px;margin-top:3px;margin-left:108px;display:inline}.nav ul li{width:90px;margin-left:4px;display:inline}.nav ul li a{display:block;width:90px;height:19px;overflow:hidden;text-indent:-9999px}.nav ul li a:hover{background:url(../images/aHover.png) no-repeat;margin-left:1px}.content{height:401px;background:url(../images/contentBg.jpg) no-repeat;position:relative;}.content_l{width:300px;margin-left:80px;float:left;display:inline}.flashAd,.newsList{width:100%;height:185px;overflow:hidden;margin-top:23px}	.newsList{margin-top:20px}	.newsList dl,.newsList dl dt,.newsList dl dd{width:100%;float:left}.newsList dl dt{height:17px;*height:15px}.newsList dl dt strong{float:left;margin-left:10px;text-indent:-9999px}.newsList dl dt span{float:right}.newsList dl dt span a{width:30px;height:8px;text-indent:-9999px;display:block;overflow:hidden;margin-right:6px;margin-top:8px}.newsList dl dd{margin-top:7px;*margin-top:10px}.newsList dl dd ul,.newsList dl dd ul li{width:100%;float:left}.newsList dl dd ul li{font:12px/24px "宋体";height:24px}.newsList dl dd ul li span,.newsList dl dd ul li u{width:36px;float:left;text-decoration:none}.newsList dl dd ul li u{text-align:right;color:#aaa}.newsList dl dd ul li span{margin-left:25px;width:236px;white-space:nowrap;word-brak:break-all;overflow:hidden}.content_r{width:510px;float:left;height:366px;float:left;margin-top:16px;margin-left:36px;display:inline;overflow:hidden}.content_r1,.serverStatus,.scrollNews{width:100%;height:45px;float:left}.serverStatus{width:280px}.serverStatus ul li{float:left;margin-right:20px;line-height:30px}.serverStatus ul li em,.serverStatus ul li span{float:left}.serverStatus ul li em{overflow:hidden;margin-top:9px;*margin-top:7px;margin-right:5px}.serverType em{width:9px;height:13px;background:url(../images/serverStatus.jpg) no-repeat;display:block}
+
+.serverType li a:link,.serverType li a:visited{color:#FCD788;text-decoration:none}.serverType li a:hover{color:#ffcc00;text-decoration:underline}
+
+.serverType em.server_g{background-position:0 0}.serverType em.server_b , .latestServerList .CSF em.server_b{background-position:-9px 0}.serverType em.server_m,.latestServerList .CSF em.server_m{background-position:-27px 0}.serverType em.server_f , .latestServerList .CSF em.server_f{background-position:-18px 0}.serverStatus ul li span{color:#BCBCBC}.serverStatus ul li span font{color:#FCD788; font-size:12px}.scrollNews{width:230px;height:22px;overflow:hidden;color:#E8BB07}.scrollNews ul{margin-top:9px;font-family:"宋体"}.scrollNews ul li{width:100%;height:16px;white-space:nowrap;word-break:break-all;overflow:hidden}.upBottomBg{height:27px;background-position:0 -233px}.footer{background:none;height:100px;color:#969696}.footer strong{width:100%;float:left;text-align:center;font:12px/30px "宋体"}.sdoLogo,.webRecord,.sgsLogo{width:200px;float:left;height:152px;text-align:center;margin-top:10px}.sdoLogo{margin-left:50px;display:inline;margin-top:5px;}.sdoLogo img{margin-top:5px}.webRecord{line-height:19px;padding-top:4px}.webRecord{width:500px}/*Login*/.serverLogin{width:400px;height:240px;margin-left:40px;margin-top:30px;display:inline;float:left}.serverLogin ul,.serverLogin ul li{width:100%;float:left}.serverLogin ul li{height:40px;line-height:40px}.serverLogin ul li em,.serverLogin ul li span,.serverLogin ul li u{width:190px;float:left}.serverLogin ul li span{width:90px;text-align:right;color:#E8BB07;margin-right:5px}.serverLogin ul li em input{height:19px;width:188px;border:1px #5A5A5A solid;background:url(../images/inputBg.jpg) repeat-x;margin-top:10px;*margin-top:9px;color:#FFF}.serverLogin ul li u{width:100px;margin-left:10px;text-decoration:none}.btnServerLogin{height:29px;width:100%;float:left;margin-top:15px}.btnServerLogin a{width:82px;height:29px;display:block;background:url(../images/btnLogin.png) no-repeat;overflow:hidden;float:left;margin-right:10px;text-indent:-9999px}.btnServerLogin a.btnUserLogin{margin-left:95px;display:inline}.btnServerLogin a.btnUserLogin:hover{background-position:0 -29px;margin-top:-1px;_margin-top:0px}.btnServerLogin a.btnUserReg{width:101px;background-position:-93px 0}.btnServerLogin a.btnUserReg:hover{background-position:-93px -29px;margin-top:-1px;_margin-top:0px}.loginAgreement{width:100%;height:30px;float:left;margin-top:20px}.loginAgreement em,.loginAgreement span{float:left}.loginAgreement em{width:14px;margin-left:95px;display:inline;margin-top:5px;*margin-top:0px}.loginAgreement span{line-height:22px;margin-left:5px}
+
+/*ServerList*/
+.latestServerList{ height:115px;}
+
+
+
+
+.latestServerList,.latestServerList dl,.latestServerList dl dt,.latestServerList dl dd{width:100%;float:left}
+.latestServerList dl dt{height:27px;background:url(../images/serverListTitle2011.png) no-repeat;overflow:hidden;text-indent:-9999px; margin-bottom:8px;}
+.latestServerList dl dt.TJ{ background-position:0 -27px;}
+
+.latestServerList ul li{width:210px;float:left;background:url(../images/btnServerBg.jpg) no-repeat;height:28px;position:relative;display:inline;margin-top:10px;_margin-top:6px;}
+.latestServerList ul li em,.latestServerList ul li span,.latestServerList ul li u{float:left; margin-top:4px}
+.latestServerList ul li em{margin-left:15px;margin-top:7px;margin-right:5px;display:inline}
+.latestServerList ul li b{font-size:13px;font-weight:400;margin-right:2px;}
+.latestServerList ul li span{width:145px;height:28px;white-space:nowrap;word-break:break-all;overflow:hidden;line-height:20px}
+.latestServerList ul li span a#area1{color:red;text-decoration:none;}
+.latestServerList ul li span a#area1:hover{color:#F90;text-decoration:underline;}
+
+.latestServerList .CSF em{width:9px;height:13px;background:url(../images/serverStatus.jpg) no-repeat;display:block;_margin-left:5px;}
+
+.latestServerList ul li.ico_j u,.latestServerList ul li.ico_n u{width:40px;height:20px;background:url(../images/bm.gif) no-repeat;overflow:hidden;position:absolute; left:160px;}
+.latestServerList ul li.ico_j u{background:url(../images/bh.gif) no-repeat;}
+.allServerList dl dt{background-position:0 -27px;}
+
+
+
+
+.webxz{position:absolute;top:355px; right:97px;}
+
+.webxz a{color:#abe50d;text-decoration:underline; z-index:10;}
+.webxz a:hover{color:#E8BB07;text-decoration:underline;}
+
+
+#serverTab{height:24px;width:100%;background:url(../images/tabLine.png) repeat-x;margin-top:5px;float:left}
+#serverTab li{width:67px;height:24px;float:left;margin-right:2px;text-align:center;line-height:23px}
+#serverTab li a:link,#serverTab li a:visited,#serverTab li a:hover{color:#999999;width:67px;height:24px;display:block;background:url(../images/tabliBg2011.png) no-repeat;text-decoration:none;overflow:hidden}
+#serverTab li a.current:link,#serverTab li a.current:visited,#serverTab li a.current:hover{color:#FFF000;width:67px;height:24px;display:block;line-height:24px;background:url(../images/tabliBg2011.png) 0 -24px no-repeat;text-decoration:none;overflow:hidden}
+.latestServerList ul li span font{color:#FCD788;font-size:12px}/*新增控制服务器列表在一列*/.latestServerList ul{width:43%;float:left;padding-left:26px;}
+#area1 a:link , #area1 a:visited {
+color:red;
+text-decoration:;
+}
+
+#area2 a:link , #area2 a:visited {
+color:red;
+text-decoration:none;
+}

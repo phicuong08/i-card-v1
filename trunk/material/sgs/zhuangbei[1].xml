@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SanGuoShaWizard>
+	<Item Timer="101">
+		<Text x="center" y="bottom">
+			<![CDATA[在《三国杀onilne》中，除了基本牌之外，还有一种代表着武装意义的手牌——装备牌。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[装备牌有四种：武器、防具、防御马、进攻马。每一个位置只允许存在一件装备。]]>
+		</Text>
+	</Item>
+	<Item Timer="9090">
+		<Text x="center" y="bottom">
+		<![CDATA[您所在的位置是2号位，此时，您与1号位主公及3号位刘备的距离为1，您的“杀”只能对距离1以内的目标使用。]]>
+		</Text>
+		<Target Type="Card" ID="71" Event="Click"/>
+		<ShowRole Seat = "2" Role = "1"/>
+		<ShowRole Seat = "2" Role = "3"/>  
+	</Item>
+	<Item Timer="14166">
+		<Text x="center" y="bottom">
+		<![CDATA[八号位与四号位与您的距离则为2，依次类推。最远距离为4。]]>
+		</Text>
+		<Target Type="Card" ID="71" Event="Click"/>
+		<ShowRole Seat = "2" Role = "8"/>
+		<ShowRole Seat = "2" Role = "4"/>  
+	</Item>
+	<Item Timer="14167">
+	<Arrow Type="Top"/>
+		<Text x="center" y="bottom">
+			<![CDATA[装备牌中的武器牌，拥有“攻击范围”的概念，这个数字的意义便是你能“杀”所能够到的距离。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[每把武器都拥有不同的技能，让我们先选中【青龙偃月刀】来试试吧。]]>
+		</Text>
+		<Target Type="Card" ID="96" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="14168">
+		<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[点击“确定”，立即装备【青龙偃月刀】。]]>
+		</Text>
+		<Target Type="Button" ID="btnOK" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="24833">
+		<Arrow Type="Top"/>
+		<Text x="center" y="bottom">
+			<![CDATA[此时，选中【杀】即可清楚的看到您能【杀】到的目标了。]]>	
+		</Text>	
+		<Target Type="Card" ID="8" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="24835">
+		<Arrow Type="Right"/>
+		<Text x="center" y="bottom">
+			<![CDATA[您唯一无法【杀】到的只有距离为4的华佗了，我们还是先将火力集中在主公孙权身上吧。点击孙权作为目标。]]>
+		</Text>	
+		<Target Type="Seat" Name="孙权" Event="Click"/>	
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="24836">
+		<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[点击“确定”使用【杀】。]]>
+		</Text>
+		<Target Type="Button" ID="btnOK" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="37467">
+		<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[孙权使用了【闪】，此时，您的武器【青龙偃月刀】可以发挥作用了，它的作用是，当你的【杀】被【闪】后，可以继续使用【杀】。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[点击“确定”发动武器技能。]]>
+		</Text>
+		<Target Type="Button" ID="btnOK" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>	
+	<Item Timer="37468">
+		<Arrow Type="Top"/>
+		<Text x="center" y="bottom">
+			<![CDATA[继续选中1张【杀】。]]>
+		</Text>
+		<Target Type="Card" ID="9" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="37469">
+		<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[再次点击“确定”使用这张【杀】。]]>
+		</Text>
+		<Target Type="Button" ID="btnOK" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>	
+	<Item Timer="42105">
+		<Text x="center" y="bottom">
+			<![CDATA[孙权没有继续使用【闪】，受到了1点伤害。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[每一把武器都拥有不同的技能，离开教学后，可在帮助及游戏中把鼠标悬停在卡牌上查看对应的武器技能。]]>
+		</Text>
+	</Item>	
+	<Item Timer="46987">
+	<Arrow Type="Top"/>
+		<Text x="center" y="bottom">
+			<![CDATA[不同的防具可以起到不同的防御效果。如【八卦阵】，当您需要出【闪】时，可进行一次判定，若为红色花色，则视为您已打出一张【闪】。]]>
+		</Text>
+		<Text x="160" y="196">
+			<![CDATA[点击选中【八卦阵】]]>
+		</Text>
+		<Target Type="Card" ID="67" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="46988">
+	<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[点击“确定”，将其装备。]]>
+		</Text>
+		<Target Type="Button" ID="btnOK" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="48949">
+	<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[点击“结束”来跳过回合，马上您将看到【八卦阵】的防御效果。]]>
+		</Text>
+		<Target Type="Button" ID="btnDiscard" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="55717">
+	<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[刘备对您使用了一张的【杀】，此时系统提示是否发动【八卦阵】]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[点击“确定”发动【八卦阵】防御效果。]]>
+		</Text>
+		<Target Type="Button" ID="btnOK" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="59690">
+	<Arrow Type="Top"/>
+		<Text x="center" y="bottom">
+			<![CDATA[【八卦阵】判定牌为草花，因此判定失效，假如此时判定牌花色为红，此时您便不需要出闪。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[选中一张【闪】]]>
+		</Text>
+		<Target Type="Card" ID="16" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="59691">
+		<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[点击“确定”打出【闪】]]>
+		</Text>
+		<Target Type="Button" ID="btnOK" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="60000">
+		<Text x="center" y="bottom">
+			<![CDATA[装备的教学到此为止，您学会了吗？]]>
+		</Text>
+		<ExitButton Visible="true"/>
+		<Button Visible="false"/>
+	</Item>
+</SanGuoShaWizard>

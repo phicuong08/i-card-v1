@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<Client>
+	<System>
+		<!-- 是否允许充值 -->
+		<EnabledPay>true</EnabledPay>
+		<!-- 是否允许商城 -->
+		<EnabledMall>true</EnabledMall>
+		<!-- 是否允许新武将展示 -->
+		<EnabledGetNewGeneral>true</EnabledGetNewGeneral>
+		<!-- 是否允许会员卡升级-->
+		<EnabledVipUpdate>false</EnabledVipUpdate>
+		<!-- 是否允许任务 -->
+		<EnabledTask>true</EnabledTask>
+		<!-- 是否允许包裹 -->
+		<EnabledPackage>true</EnabledPackage>
+		<!-- 是否允许赠送 -->
+		<EnabledGive>true</EnabledGive>
+		<!-- 是否验证临时通行证 -->
+		<EnabledPassport>true</EnabledPassport>
+		<!-- 是否打开信息补填 -->
+		<EnabledSupplementInfo>true</EnabledSupplementInfo>
+		<!-- 是否允许收藏 -->
+		<EnabledFavorite>true</EnabledFavorite>
+		<!-- 是否允许返回选区界面 -->
+		<AllowReturnAreaList>true</AllowReturnAreaList>
+		<!-- 是否允许铜钱 -->
+		<EnabledTongQian>true</EnabledTongQian>
+		<!-- 是否允许点券 -->
+		<EnabledDianQuan>true</EnabledDianQuan>
+		<!-- 充值方式：点券充值 Recharge 点券兑换 Exchange -->
+		<PayType>Recharge</PayType>
+		<!-- 获得跨域策略文件的端口 -->
+		<CrossdomainPort>843</CrossdomainPort>
+		<EnterMatchScript></EnterMatchScript>
+		<ExitMatchScript></ExitMatchScript>
+		<!-- 是否在游戏界面显示诏令，州郡令 -->
+		<EnabledZhaoLingInGaming>false</EnabledZhaoLingInGaming>
+		<!-- 是否允许请神阁 -->
+		<EnabledQinShenGe>true</EnabledQinShenGe>
+		<!-- 是否允许聊天 -->
+		<EnabledPlayerSendMsg>true</EnabledPlayerSendMsg>
+		<!--商场一级菜单按钮   武将&1     功能&2       三国秀&4          铜钱&8             抢购&16    淘宝&32   目前情况下台湾版配置为30,其它版本配置为31-->
+		<ShopMenuList>63</ShopMenuList>
+		<!-- 是否允许在商城武将中显示标准武将页签  标准 &1 火包&2 林包&4 一将&8 sp &16    目前情况下台湾版配置为0,其它版本配置为30-->
+		<ShopGeneralLabel>30</ShopGeneralLabel>		
+	</System>
+	<Source>
+		<!-- 版本配置文件 -->
+		<VersionConfigFile><![CDATA[config/global/sgs_verinfo.zip]]></VersionConfigFile>
+		<!-- 大区配置文件 -->
+		<!--<ServerConfigFile><![CDATA[config/global/sgs_area_list.zip]]></ServerConfigFile>-->
+		<ServerConfigFile><![CDATA[gate/sgs_area_list.xml]]></ServerConfigFile>
+		<!-- 屏蔽关键字配置文件 -->
+		<RubbishFilterFile><![CDATA[config/global/rubbishfilter.zip]]></RubbishFilterFile>
+		<!-- 商品Tips文件 -->
+		<GoodsBaseFile><![CDATA[config/global/gs_dbs_fs_goodsbaseinfo.zip]]></GoodsBaseFile>
+		<!-- 商品配置文件 -->
+		<GoodsTipsFile><![CDATA[config/global/client_goods_tips.zip]]></GoodsTipsFile>
+		<!--注册三国秀配置-->
+		<SanGuoShowCreateFile><![CDATA[config/global/clientserverpub.zip]]></SanGuoShowCreateFile>
+		<!-- 礼包配置文件 -->
+		<GiftBaseFile><![CDATA[config/global/dbs_giftbag.zip]]></GiftBaseFile>
+		<!-- 配置文件目录 -->
+		<ConfigFolder><![CDATA[config]]></ConfigFolder>
+		<!-- 广告配置目录 -->
+		<ADFolder><![CDATA[AD]]></ADFolder>
+		<!-- 资源目录 -->
+		<AssetsFolder><![CDATA[assets]]></AssetsFolder>
+		<!-- 声音文件 -->
+		<Sound><![CDATA[assets/Sound.swf]]></Sound>
+		<!-- 动画文件 -->
+		<Animation><![CDATA[assets/Animation.swf]]></Animation>
+		<!-- 背景图片文件 -->
+		<Background><![CDATA[]]></Background>
+		<!-- 新手教程文件 -->
+		<Help><![CDATA[help.swf]]></Help>
+		<!-- 背景音乐目录 -->
+		<BackgroundMusicPath><![CDATA[assets/Sound]]></BackgroundMusicPath>
+		<!-- 游戏桌布 -->
+		<WallpaperFolder><![CDATA[assets/wallpaper]]></WallpaperFolder>
+		<WallpaperCount>8</WallpaperCount>
+		<!--淘宝配置文件-->
+		<TaoBaoConfigURL><![CDATA[http://www.zhuoyou.com/zt/online-mall/index.xml]]></TaoBaoConfigURL>
+	</Source>
+	<URL>
+		<!-- 登录失败，显示提示玩家点确定后 -->
+		<Login><![CDATA[]]></Login>
+		<!-- 登录失败 -->
+		<LoginFailURL><![CDATA[]]></LoginFailURL>
+		<!-- 实名登记 -->
+		<RealnameRegister><![CDATA[http://pwd.sdo.com/ptinfo/PTInfo/FillAdultInfo.aspx]]></RealnameRegister>
+		<!-- 选区界面链接 -->
+		<AreaSelect><![CDATA[]]></AreaSelect>
+		<!-- 多开链接 -->
+		<MultiOpen><![CDATA[]]></MultiOpen>
+		<!-- 首页 -->
+		<HomePage><![CDATA[http://sgs.sdo.com]]></HomePage>
+		<!-- FAQ地址 -->
+		<FaqUrl><![CDATA[http://bbs.sanguosha.com/viewthread.php?tid=132&extra=page%3D1]]></FaqUrl>
+		<!-- 官方论坛地址 -->
+		<Bbs><![CDATA[http://bbs.sanguosha.com/index.php]]></Bbs>
+		<!-- 防沉迷 -->
+		<Obsession><![CDATA[http://sgs.sdo.com]]></Obsession>
+		<!-- 注册地址 -->
+		<Register><![CDATA[http://www.sanguosha.com/newbie.asp]]></Register>
+		<!-- 收藏地址与标题 -->
+		<Favorite Title="三国杀Web版"><![CDATA[http://web.sanguosha.com/2/Play.html]]></Favorite>
+		<!-- 邀请链接 -->
+		<Invite><![CDATA[http://web.sanguosha.com/2/Play.html]]></Invite>
+		<!-- 充值链接 -->
+		<Pay><![CDATA[https://pay.sdo.com/Deposit/HomePage.aspx?sel_game=205]]></Pay>
+		<!-- 忘记密码 -->
+		<GetPassword><![CDATA[http://pwd.sdo.com/PTInfo/SafeCenter/GetPwd/ChgPwdStepInputAcc.aspx?pwdchoose=findpwd]]></GetPassword>
+		<!-- 反馈与建议链接 -->
+		<Feedback>http://www.sanguosha.com/web2/newsDetail2.asp?id=1645</Feedback>
+		<!-- 数字帐号禁用链接 -->
+		<NumberAccountRefuse>http://bbs.sanguosha.com/viewthread.php?tid=76776&extra=page%3D1</NumberAccountRefuse>
+		<!-- 任务窗体下面的广告链接 -->
+		<TaskWindowLink Title="猛击此处得百万铜钱">http://login.sanguosha.com/yireite/task.php?area={areaid}&nickname={nickname}</TaskWindowLink>
+	</URL>
+</Client>

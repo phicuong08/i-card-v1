@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SanGuoShaWizard>
+	<Item Timer="100">
+		<Text x="center" y="bottom">
+			<![CDATA[欢迎来到《三国杀online》！您将要学习的是风靡中国的策略类卡牌游戏的玩法。仅需两分钟，您便可以学会三国杀的基本规则！]]>
+		</Text>
+	</Item>
+	
+	<Item Timer="101">
+		<Text x="center" y="bottom">
+			<![CDATA[奴家小乔，现在将由我来教您进行一局游戏，要认真的学哦！不然奴家会生气的！]]>
+		</Text>
+	</Item>
+	
+	<Item Timer="4046">
+		<Text x="center" y="bottom">
+			<![CDATA[牌局开始时，首先进行的是身份的抽取。要注意哦，身份是直接关系到胜利条件的。]]>
+		</Text>
+		<ShowRole Seat = "1" Role = "1"/>
+		<ShowRole Seat = "2" Role = "4"/>  
+		<ShowRole Seat = "3" Role = "2"/>
+		<ShowRole Seat = "4" Role = "3"/>
+		<ShowRole Seat = "5" Role = "3"/>
+		<ShowRole Seat = "6" Role = "2"/>
+		<ShowRole Seat = "7" Role = "4"/>
+		<ShowRole Seat = "8" Role = "3"/>
+	</Item>
+	<Item Timer="4047">
+		<Text x="center" y="bottom">
+			<![CDATA[本局您抽到的身份是“反贼”，反贼的胜利目标是是杀死<br>“主公”。]]>
+		</Text>
+		<ShowRole Seat = "2" Role = "3"/>
+		<DrawLine Start = "2" End = "1"/>
+	</Item>
+	<Item Timer="4048">
+		<Text x="center" y="bottom">
+			<![CDATA[八人局中，还有两名“忠臣”，忠臣的胜利目标是在主公存活的情况下杀死所有“反贼”和“内奸”。]]>
+		</Text>
+		<ShowRole Seat = "3" Role = "2"/>
+		<ShowRole Seat = "6" Role = "2"/>
+		<DrawLine Start = "3" End = "2"/>
+		<DrawLine Start = "3" End = "4"/>
+		<DrawLine Start = "3" End = "5"/>
+		<DrawLine Start = "3" End = "8"/>
+	</Item>	
+	<Item Timer="4049">
+		<Text x="center" y="bottom">
+			<![CDATA[还有一种特殊的身份“内奸”。内奸的胜利条件非常特殊，他需要消灭掉所有的“忠臣”与“反贼”之后再消灭“主公”。]]>
+		</Text>
+		<ShowRole Seat = "7" Role = "4"/>
+		<DrawLine Start = "7" End = "1"/>
+		<DrawLine Start = "7" End = "2"/>
+		<DrawLine Start = "7" End = "3"/>
+		<DrawLine Start = "7" End = "4"/>
+		<DrawLine Start = "7" End = "5"/>
+		<DrawLine Start = "7" End = "6"/>
+		<DrawLine Start = "7" End = "8"/>
+	</Item>
+	<Item Timer="10215">
+		<Text x="center" y="bottom">
+			<![CDATA[身份抽取完毕后，即选择武将，您选择了甘宁作为自己的武将，每个不同的武将拥有不同的技能和体力。]]>
+		</Text>
+	</Item>	
+	<Item Timer="10216">
+		<Text x="center" y="bottom">
+			<![CDATA[武将选择结束后，系统会分发给每个人4张手牌。其中【杀】、【闪】、【桃】被称为基本牌。]]>
+		</Text>
+	</Item>	
+	<Item Timer="27793">
+		<Text x="center" y="bottom">
+			<![CDATA[发牌完毕后游戏进入主公回合，主公被称为“一号位”；主公下家，您当前位置被称为“二号位”；您的下家就是“三号位”，依次类推到主公上家“八号位”为止。]]>
+		</Text>>
+	</Item>	
+	<Item Timer="34214">
+		<Arrow Type="Top"/>
+		<Text x="center" y="bottom">
+			<![CDATA[主公对您使用了【杀】，这个时候，若不【闪】，便会损失1点体力。]]>
+		</Text>		
+		<Text x="center" y="bottom">
+			<![CDATA[用您的鼠标左键点击，选中一张【闪】。]]>
+		</Text>
+		<Target Type="Card" ID="16" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="34215">
+		<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[然后，点击“确定”，就可以打出【闪】来防御【杀】]]>
+		</Text>		
+		<Target Type="Button" ID="btnOK" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="39012">
+		<Text x="center" y="bottom">
+			<![CDATA[每人每回合只能使用一张【杀】当行动完了之后，点击“结束”按钮，进入弃牌阶段。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[在弃牌阶段，每个人可以保留与当前体力值相等数量的手牌数。孙权当前体力为5，手牌数为5，不需要弃牌。]]>
+		</Text>
+	</Item>
+	<Item Timer="44650">
+	<Arrow Type="Top"/>
+		<Text x="center" y="bottom">
+			<![CDATA[主公行动完后，便轮到了您的回合。摸牌阶段，系统会给您发两张手牌。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[紧接着进入出牌阶段，在这个阶段，您可以使用【杀】来对别人造成伤害。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[还是一样，用您的鼠标左键点击，选中1张【杀】。]]>
+		</Text>
+		<Target Type="Card" ID="8" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>	
+	<Item Timer="44651">
+	<Arrow Type="Right"/>
+		<Text x="center" y="bottom">
+			<![CDATA[对主公使用【杀】可以减少他的体力。点击选择孙权作为【杀】的目标。]]>
+		</Text>
+		<Target Type="Seat" Name="孙权" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	
+	<Item Timer="44652">
+	<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[此时点击“确定”，即可对孙权使用这张【杀】。]]>
+		</Text>
+		<Target Type="Button" ID="btnOK" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	
+	<Item Timer="50041">
+		<Text x="center" y="bottom">
+			<![CDATA[孙权没有出【闪】，因此受到了1点伤害。当一个武将的体力小于等于0时，便会阵亡，加把劲吧！]]>
+		</Text>
+	</Item>	
+	
+	<Item Timer="52949">
+		<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[当您无牌可出，或者不想出牌时，便需要点击“结束”进入弃牌阶段。]]>
+		</Text>
+		<Target Type="Button" ID="btnDiscard" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	
+	<Item Timer="54039">
+		
+		<Text x="center" y="bottom">
+			<![CDATA[奴家之前说过了哟，弃牌阶段需要弃掉大于当前体力值数的手牌，比如当前体力为3，手牌为5，便需要弃掉2张手牌。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[不过您现在的体力有4点，而且手牌数也刚好是4张，因此，不需要弃牌了。]]>
+		</Text>
+	</Item>
+	<Item Timer="59683">
+		<Arrow Type="Left"/>
+		
+		<Text x="center" y="bottom">
+			<![CDATA[刘备的身份是“忠臣”，他的目标是要消灭对主公不利的人，您刚刚【杀】主公，出来混总是要还的。您看，刘备【杀】了您一下。]]>
+		</Text>
+		
+		<Text x="center" y="bottom">
+			<![CDATA[您当前手牌中没有【闪】，因此，只能点击  “取消”并受到伤害。主人您可别死了哟！]]>
+		</Text>
+		
+		<Target Type="Button" ID="btnCancel" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>	
+	<Item Timer="73812">
+		
+		<Text x="center" y="bottom">
+			<![CDATA[赵云的身份跟你一样是“反贼”，你们可是一伙的哟。由于距离的限制无法对主公造成伤害，只能对身为“忠臣”的刘备出【杀】。]]>
+		
+		</Text>	
+	</Item>	
+	<Item Timer="127969">
+		<Arrow Type="Left"/>
+		
+		<Text x="center" y="bottom">
+			<![CDATA[又到了主公孙权的回合，主公再次对你使用了【杀】。没有闪的您只能继续点击“取消”受到伤害了。]]>
+		</Text>
+		
+		<Target Type="Button" ID="btnCancel" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	
+	<Item Timer="148573">
+		<Arrow Type="Top"/>
+		<Text x="center" y="bottom">
+			<![CDATA[您现在已经损失了2点体力，不要慌！我们有【桃】，【桃】的作用是恢复体力。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[先鼠标点击选中1张【桃】]]>
+		</Text>
+		<Target Type="Card" ID="25" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="148574">
+		<Arrow Type="Left"/>
+		<Text x="center" y="bottom">
+			<![CDATA[点击“确定”即可使用这张【桃】来恢复1点体力。]]>
+		</Text>
+		<Target Type="Button" ID="btnOK" Event="Click"/>
+		<Button Visible="false"/>
+	</Item>
+	<Item Timer="149000">
+		<Text x="center" y="bottom">
+			<![CDATA[【桃】不同于【杀】，在出牌阶段没有使用【桃】的次数限制]]>
+		</Text>
+		
+		<Text x="center" y="bottom">
+			<![CDATA[另外，桃还可以在其他玩家濒死的时候救人一命，详情请查看手牌教学中的【桃】教学。]]>
+		</Text>
+		<Text x="center" y="bottom">
+			<![CDATA[接下来，我将教您锦囊的使用方式]]>
+		</Text>
+		<ContinueButton visible="true" Label="继续" sgs="jinnang.sgs" sgsw="jinnang.sgsw"/>
+		</Item>
+</SanGuoShaWizard>
