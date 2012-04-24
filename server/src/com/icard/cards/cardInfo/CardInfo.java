@@ -33,6 +33,20 @@ public final class CardInfo {
 	public int getCountOfThisCard() {
 		return CountOfThisCard;
 	}
+	
+	//增加此种牌的全服务器计数
+	public void AddCountOfThisCard() {
+		synchronized (this){
+			CountOfThisCard++;
+		}
+	}
+	
+	//减少此种牌的全服务器计数
+	public void DecCountOfThisCard() {
+		synchronized (this){
+			CountOfThisCard--;
+		}
+	}
 
 	public String getName() {
 		return Name;
