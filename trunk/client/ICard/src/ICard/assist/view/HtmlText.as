@@ -40,30 +40,31 @@ package ICard.assist.view {
         public static function purple(_arg1:String):String{
             return (format(_arg1, Purple));
         }
-        public static function format(_arg1:String, _arg2:uint=0, _arg3:uint=12, _arg4:String="", _arg5:Boolean=false, _arg6:Boolean=false, _arg7:Boolean=false, _arg8:String=null, _arg9:String=null):String{
-            if (_arg5){
+        public static function format(_arg1:String, colorVal:uint=0, fontsize:uint=12, fontstyle:String="", 
+        								bBlod:Boolean=false, bItalic:Boolean=false, bUnderline:Boolean=false, urlLink:String=null, alignStyle:String=null):String{
+            if (bBlod){
                 _arg1 = (("<b>" + _arg1) + "</b>");
             };
-            if (_arg6){
+            if (bItalic){
                 _arg1 = (("<i>" + _arg1) + "</i>");
             };
-            if (_arg7){
+            if (bUnderline){
                 _arg1 = (("<u>" + _arg1) + "</u>");
             };
             var _local10:String = "";
-            if (_arg4){
-                _local10 = (_local10 + ((" font=\"" + _arg4) + "\""));
+            if (fontstyle){
+                _local10 = (_local10 + ((" font=\"" + fontstyle) + "\""));
             };
-            if (_arg3 > 0){
-                _local10 = (_local10 + ((" size=\"" + _arg3) + "\""));
+            if (fontsize > 0){
+                _local10 = (_local10 + ((" size=\"" + fontsize) + "\""));
             };
-            _local10 = (_local10 + ((" color=\"#" + _arg2.toString(16)) + "\""));
+            _local10 = (_local10 + ((" color=\"#" + colorVal.toString(16)) + "\""));
             _arg1 = (((("<font" + _local10) + ">") + _arg1) + "</font>");
-            if (_arg8){
-                _arg1 = (((("<a href=\"" + _arg8) + "\" target=\"_blank\">") + _arg1) + "</a>");
+            if (urlLink){
+                _arg1 = (((("<a href=\"" + urlLink) + "\" target=\"_blank\">") + _arg1) + "</a>");
             };
-            if (_arg9){
-                _arg1 = (((("<p align=\"" + _arg9) + "\">") + _arg1) + "</p>");
+            if (alignStyle){
+                _arg1 = (((("<p align=\"" + alignStyle) + "\">") + _arg1) + "</p>");
             };
             return (_arg1);
         }
