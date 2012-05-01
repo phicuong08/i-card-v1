@@ -12,22 +12,22 @@ package ICard.assist.view {
         public static const Blue2:uint = 44783;
         public static const Yellow2:uint = 0xFFF200;
         public static const Purple:uint = 0xFF00FF;
-      	public static SKYBLUE:uint = "0x0080FF"		-- 淡蓝，天空蓝--不建议
-				public static PURPLE:uint = "0x7600EC"		-- 紫--不建议
-				public static JACINTH:uint = "0xFFA042"		-- 桔红
-				public static DARKYELLOW:uint = "0xD5D500"	-- 暗黄--不建议
-				public static GREY:uint = "0x999999"		--灰
+      	public static const SKYBLUE:uint = 0x0080FF;		// 淡蓝，天空蓝--不建议
+		public static const PURPLE:uint = 0x7600EC;		    // 紫--不建议
+		public static const JACINTH:uint = 0xFFA042;		// 桔红
+		public static const DARKYELLOW:uint = 0xD5D500;	// 暗黄--不建议
+		public static const GREY:uint = 0x999999;		//灰
 
         //字体大小
-				public static FONTSIZE_1:uint = 24	-- 大号
-				public static FONTSIZE_2:uint = 19	-- 偏大号
-				public static FONTSIZE_3:uint = 15	-- 中号
-				public static FONTSIZE_4:uint = 10	-- 偏小号
-				public static FONTSIZE_5:uint = 7	-- 小号
+		public static const FONTSIZE_1:uint = 24	// 大号
+		public static const FONTSIZE_2:uint = 19	// 偏大号
+		public static const FONTSIZE_3:uint = 15	// 中号
+		public static const FONTSIZE_4:uint = 10	// 偏小号
+		public static const FONTSIZE_5:uint = 7	// 小号
 				
-				--换行
-				private static _newLineSign:String = "<br>";
-			  private static _tabSign:String = "<tab>";
+		//换行
+		private static const _newLineSign:String = "<br>";
+		private static const _tabSign:String = "<tab>";
         public static function yellow(_arg1:String):String{
             return (format(_arg1, Yellow));
         }
@@ -101,19 +101,19 @@ package ICard.assist.view {
         		return "<p>" + arg1 + "</p>";
         }
         //list标签包装
-        public static function ParagraphWraper(arg1:String):String{
-        		return "<li>" + arg1 + "</li>";
-        }
-        //字体标签包装
-				public static function FontWraper(str:String, size:uint, color:uint):String{
-						if (size==0){
-								size = defaultFontSize
-						}
-						if(color==0){
-								color = defaultFontColor
-						}
-	
-						return "<font size='" + size + "' color='" + color.toString(16) + "'>" + str + "</font>"
-				}
+//        public static function ParagraphWraper(arg1:String):String{
+//        		return "<li>" + arg1 + "</li>";
+//        }
+//        //字体标签包装
+//				public static function FontWraper(str:String, size:uint, color:uint):String{
+//						if (size==0){
+//								size = defaultFontSize
+//						}
+//						if(color==0){
+//								color = defaultFontColor
+//						}
+//	
+//						return "<font size='" + size + "' color='" + color.toString(16) + "'>" + str + "</font>"
+//				}
     }
 }//package com.assist.view 

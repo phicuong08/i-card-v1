@@ -1,11 +1,11 @@
 ﻿package {
     import flash.display.*;
 	import flash.utils.*;
-    //import ICard.assist.view.interfaces.*;
+    import ICard.assist.view.interfaces.*;
     import flash.text.*;
 	import flash.display.BitmapData;
 	import flash.events.MouseEvent;
-    public class carddb extends MovieClip{
+    public class carddb extends MovieClip implements ICardDB{
 		public static const _title_x:int = 60;
 		public static const _title_y:int = 20;
 		public static const _cost_x = 15;
@@ -31,7 +31,7 @@
 			//var card1:MovieClip = CreateSkillCard("c_50009");
 			//var card1:MovieClip = CreateEquipCard("c_31007",3,2);
 			//var card1:MovieClip = CreateWeaponCard("c_30007",3,2,1);
-			addChild(card1);
+			//addChild(card1);
 
 		}
 		public function CreateCard(info:Object):MovieClip{
