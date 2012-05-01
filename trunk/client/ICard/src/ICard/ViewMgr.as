@@ -66,6 +66,7 @@ package ICard {
             
         }
 		    public function initAddAssets():void{
+				addAssets("carddb","carddb.swf");
 				addAssets("templet","templet.swf");
 				addAssets("battlefield","battlefield.swf");
 				addAssets("toolbar", "toolbar.swf");

@@ -14,19 +14,24 @@ package ICard.views {
     import flash.net.*;
     public class BattleFieldView extends Base implements IView {
 		private var _battleField:IBattleField;
-	
+		private var _cardDB:ICardDB;
 		public function init(evt:SFSEvent):void
 		{
 			show();
 		}
 		public function show():void{
 			loadAssets("battlefield", this.loadCallback, "");
+			loadAssets("carddb", this.loadCardDBCallback, "");
 		}
 		
 		private function loadCallback():void
 		{
 			this._battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
 			this.render();
+		}
+		private function loadCardDBCallback():void
+		{
+			this._cardDB = (_viewMgr.getAssetsObject("carddb", "carddb") as ICardDB);
 		}
 		
 		private function render():void{
