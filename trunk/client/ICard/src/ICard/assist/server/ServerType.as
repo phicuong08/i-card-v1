@@ -8,7 +8,7 @@ package ICard.assist.server {
         private var _list:Array;
 
         public function ServerType(){
-            this._list = [AchievementType, ActivityType,  ServerType,  TowerType,    0];
+            this._list = [CardType,  ServerType,   0];
             super();
         }
         public static function format(_arg1:File):void{
@@ -27,11 +27,8 @@ package ICard.assist.server {
                     _local6++;
                 };
             };
-                    
-			format(FateType, "FateTypeData", ["Fates", "FateLevel"]);
-			format(TownType, "TownTypeData", ["Towns"]);
-			
-            
+			format(CardType, "CardTypeData", ["HeroCards", "SkillCards","TaskCards","DefCards","WeaponCards","SoldierCards"]);
+
         }
 
     }

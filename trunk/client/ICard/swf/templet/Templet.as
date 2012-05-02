@@ -3,9 +3,6 @@ package {
     import flash.display.*;
 	import ICard.assist.server.source.*;
     public class Templet extends Sprite {
-		var _fateData:FateTypeData;
-		var _townData:TownTypeData;
-		var _soulData:SoulTypeData;
-
+		var _cardData:CardTypeData;
     }
 }//package 
