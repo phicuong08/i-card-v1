@@ -6,8 +6,13 @@ import java.util.List;
 import com.icard.cards.BaseCard;
 
 public abstract class CardPower {
-	protected boolean isEnable = true;//能力是否使能
-
+	protected boolean 	isEnable = true;	//能力是否使能
+	protected BaseCard  fatherBaseCard;		//power的拥有者
+	
+	public CardPower(BaseCard baseCard){
+		fatherBaseCard 	= baseCard;
+		isEnable		= true;
+	}
 	
 	public abstract void OnBoard();		//上场技能	
 	public abstract void OnDisable();	//技能被禁止
