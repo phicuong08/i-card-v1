@@ -1,5 +1,7 @@
 package com.icard.cards.cardPower;
 
+import com.icard.cards.BaseCard;
+
 public class PowerManager {
 	private static PowerManager mInstance =null;
 	private PowerManager(){
@@ -14,7 +16,7 @@ public class PowerManager {
 		}
 		return 	mInstance;
 	}
-	public CardPower GetPower(int Id){
+	public CardPower GetPower(BaseCard baseCard){
 		return null;
 	}
 	
