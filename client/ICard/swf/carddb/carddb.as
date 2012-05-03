@@ -15,8 +15,9 @@
 		public static const _at_x = 18;
 		public static const _at_y = 120;
         public function carddb(){
-			//var cardInfo:Object = new Object;
-			
+			var cardInfo:Object = new Object;
+			cardInfo ={20005,26,5,4};
+			CreateCard(cardInfo);
 			//cardInfo.hp = 26;
 			//cardInfo.id = 40001;
 			//cardInfo.atk =26;
@@ -31,25 +32,25 @@
 			//var card1:MovieClip = CreateSkillCard("c_50009");
 			//var card1:MovieClip = CreateEquipCard("c_31007",3,2);
 			//var card1:MovieClip = CreateWeaponCard("c_30007",3,2,1);
-			//addChild(card1);
+			addChild(card1);
 
 		}
 		public function CreateCard(info:Object):MovieClip{
-			var typeId:int = info.id/1000;
+			var typeId:int = info[0]/1000;
 			var cardMC:MovieClip;
-			var title:String = "c_" + info.id.toString();
+			var title:String = "c_" + info[0].toString();
 			switch(typeId)
 			{
 				case 30:
-					cardMC = CreateWeaponCard(title,info.cost,info.atk,info.turncost);
+					cardMC = CreateWeaponCard(info[0],info.cost,info.atk,info.turncost);
 					break;
 				case 31:
-					cardMC = CreateEquipCard(title,info.cost,info.def);
+					cardMC = CreateEquipCard(info[0],info.cost,info.def);
 					break;
 				case 21:
 				case 22:
 				case 23:
-					cardMC = CreateSoldierCard(title,info.hp,info.cost,info.atk);
+					cardMC = CreateSoldierCard(info[0],info[1],info[2],info[3]);
 					break;
 				case 20:
 					cardMC = CreateHeroCard(title,info.hp);
