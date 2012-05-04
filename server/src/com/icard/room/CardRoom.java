@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.icard.cards.BaseCard;
 
-public class Room {
+public class CardRoom {
 	private int cardIndex =0;
 	private Map<Integer,BaseCard> cardMap = new HashMap<Integer,BaseCard>();
 	public void AddCard(BaseCard card){
