@@ -15,15 +15,9 @@
 		public static const _at_x = 18;
 		public static const _at_y = 120;
         public function carddb(){
-			var cardInfo:Object = new Object;
-			cardInfo ={20005,26,5,4};
-			CreateCard(cardInfo);
-			//cardInfo.hp = 26;
-			//cardInfo.id = 40001;
-			//cardInfo.atk =26;
-			//cardInfo.cost =4;
-			//cardInfo.def =4;
-			//cardInfo.turncost=5;
+			//var cardInfo:Array = [21001,"血爪"           ,"中立",   "DPS",   1,   2,       1,     "不可被指定"];
+			//var card1:MovieClip =CreateCard(cardInfo);
+			
 			
 			//var card1:MovieClip = CreateCard(cardInfo);
 			//var card1:MovieClip = CreateHeroCard("c_20005",26);
@@ -32,31 +26,32 @@
 			//var card1:MovieClip = CreateSkillCard("c_50009");
 			//var card1:MovieClip = CreateEquipCard("c_31007",3,2);
 			//var card1:MovieClip = CreateWeaponCard("c_30007",3,2,1);
-			addChild(card1);
+			//addChild(card1);
 
 		}
-		public function CreateCard(info:Object):MovieClip{
+		
+		public function CreateCard(info:Array):MovieClip{
 			var typeId:int = info[0]/1000;
 			var cardMC:MovieClip;
 			var title:String = "c_" + info[0].toString();
 			switch(typeId)
 			{
 				case 30:
-					cardMC = CreateWeaponCard(info[0],info.cost,info.atk,info.turncost);
+					cardMC = CreateWeaponCard(title,info[4],info[5],info[6]);
 					break;
 				case 31:
-					cardMC = CreateEquipCard(info[0],info.cost,info.def);
+					cardMC = CreateEquipCard(title,info[4],info[5]);
 					break;
 				case 21:
 				case 22:
 				case 23:
-					cardMC = CreateSoldierCard(info[0],info[1],info[2],info[3]);
+					cardMC = CreateSoldierCard(title,info[4],info[5],info[6]);
 					break;
 				case 20:
-					cardMC = CreateHeroCard(title,info.hp);
+					cardMC = CreateHeroCard(title,info[5]);
 					break;
 				case 50:
-					cardMC = CreateSkillCard(title,info.cost);
+					cardMC = CreateSkillCard(title,info[4]);
 					break;
 				case 40:
 					cardMC = CreateTaskCard(title);
@@ -86,7 +81,7 @@
 			return hero;
 			
 		}
-		public function CreateWeaponCard(title:String,cost:int,at:int,turncost:int):MovieClip{
+		public function CreateWeaponCard(title:String,cost:int,turncost:int,at:int):MovieClip{
 			var weapon:MovieClip = new card_weapon;
 			weapon.addChild(CreateTitleMC(title));
 			weapon.addChild(CreateCostMC(cost));
@@ -102,8 +97,7 @@
 			equip.addChild(CreateHpMC(def));
 			return equip;
 		}
-		
-		public function CreateSoldierCard(title:String,hp:int,cost:int,at:int):MovieClip{
+		public function CreateSoldierCard(title:String,cost:int,hp:int,at:int):MovieClip{
 			var soldier:MovieClip = new card_soldier;
 			soldier.addChild(CreateTitleMC(title));
 			soldier.addChild(CreateHpMC(hp));
