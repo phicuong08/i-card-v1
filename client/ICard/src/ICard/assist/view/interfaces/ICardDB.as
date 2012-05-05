@@ -3,6 +3,6 @@ package ICard.assist.view.interfaces {
     import flash.display.*;
 
     public interface ICardDB {
-			function CreateCard(info:Object):MovieClip;
+			function CreateCard(info:Array):MovieClip;
 	}
 }//package com.assist.view.interfaces 

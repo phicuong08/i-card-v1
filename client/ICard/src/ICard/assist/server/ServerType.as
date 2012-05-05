@@ -28,7 +28,7 @@ package ICard.assist.server {
                 };
             };
 			format(CardType, "CardTypeData", ["HeroCards", "SkillCards","TaskCards","DefCards","WeaponCards","SoldierCards"]);
-			var card:Object = CardType.GetCardInfo(20005);
+
         }
 
     }

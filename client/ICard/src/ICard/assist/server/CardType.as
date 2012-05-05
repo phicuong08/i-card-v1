@@ -83,7 +83,7 @@ package ICard.assist.server {
 			_TaskCards = _arg1;
 		}
 		
-		public static function GetCardInfo(id:int):Object{
+		public static function GetCardInfo(id:int):Array{
 			var typeId:int = id/1000;
 			var cardGroup:Object;
 			switch(typeId)
