@@ -41,7 +41,7 @@ package ICard.views {
 		}
 		private function test():void{
 			var card:Array = CardType.GetCardInfo(20001);
-			var c1:MovieClip = _cardDB.CreateCard(card);
+			var c1:MovieClip = _cardDB.CreateCard(1,card);
 			//_battleField.RunTest();
 			
 			_battleField.Add2Slot(BattleFieldType.MyFightSlotId,c1);
