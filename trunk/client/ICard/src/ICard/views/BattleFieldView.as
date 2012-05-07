@@ -40,11 +40,14 @@ package ICard.views {
 			}
 		}
 		private function test():void{
-			var card:Array = CardType.GetCardInfo(20001);
-			var c1:MovieClip = _cardDB.CreateCard(1,card);
+			var card1:Array = CardType.GetCardInfo(20001);
+			var c1:MovieClip = _cardDB.CreateCard(1,card1);
+			var card2:Array = CardType.GetCardInfo(20002);
+			var c2:MovieClip = _cardDB.CreateCard(1,card2);
 			//_battleField.RunTest();
 			
-			_battleField.Add2Slot(BattleFieldType.MyFightSlotId,c1);
+			_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c1);
+			_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c2);
 			
 		}
 		public function close():void{

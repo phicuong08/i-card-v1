@@ -7,11 +7,14 @@
     public class SlotBar extends MovieClip {
 		private var _widthMax:int;
 		private var _cardWidth:int;
+		public var _selCard:MovieClip;
+		public var _slotID:int;
         public function SlotBar():void{
             super();
         }
-		public function Init(x:int,y:int,widthMax:int)
+		public function Init(slotId:int,x:int,y:int,widthMax:int)
 		{
+			_slotID = slotId;
 			_widthMax = widthMax;
 			this.x =x;
 			this.y =y;
@@ -39,10 +42,13 @@
 				UpdatePos();
 			}
 		}
-		
-  		public function AddCard(card:MovieClip):void{
+	
+		public function AddCardBase(card:MovieClip):void{
 			this.addChild(card);
 			UpdatePos();
+		}
+  		public function AddCard(card:MovieClip):void{
+			AddCardBase(card);
 		}
 		public function RemoveAllCard():void{
 			while(this.numChildren)
@@ -59,7 +65,6 @@
 				return;
 
 			var cardWidth:Number = (card0.width*this.numChildren < _widthMax)? card0.width: (_widthMax/this.numChildren);
-			trace("cardWidth=",cardWidth);
 			while(index <this.numChildren)
 			{
 				var card:MovieClip = (getChildAt(index) as MovieClip);

@@ -115,7 +115,7 @@
 		private function CreateTaskCard(title:String):MovieClip{
 			var taskMC:MovieClip = new card_yuan;
 			taskMC.addChild(CreateTitleMC(title));
-			hero.stand ="normal";
+			taskMC.stand ="normal";
 			return taskMC;
 			
 		}
