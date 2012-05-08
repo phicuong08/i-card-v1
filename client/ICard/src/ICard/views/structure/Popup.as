@@ -9,6 +9,7 @@ package ICard.views.structure {
     import flash.display.*;
     import flash.events.*;
     import flash.utils.*;
+	
     dynamic public class Popup extends ICard.views.structure.Base {
 
         private var _superViews:Array;

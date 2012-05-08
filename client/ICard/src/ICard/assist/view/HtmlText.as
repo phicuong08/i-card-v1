@@ -6,8 +6,8 @@ package ICard.assist.view {
         public static const Yellow:uint = 0xFFFF00;
         public static const Red:uint = 0xFF0000;
         public static const White:uint = 0xFFFFFF;
-        public static const Green:uint = 0xFF00;
-        public static const Blue:uint = 0xFF;
+        public static const Green:uint = 0x01FF00;
+        public static const Blue:uint = 0x0101FF;
         public static const Orange:uint = 16225309;
         public static const Blue2:uint = 44783;
         public static const Yellow2:uint = 0xFFF200;
@@ -21,8 +21,8 @@ package ICard.assist.view {
         //字体大小
 		public static const FONTSIZE_1:uint = 24	// 大号
 		public static const FONTSIZE_2:uint = 19	// 偏大号
-		public static const FONTSIZE_3:uint = 15	// 中号
-		public static const FONTSIZE_4:uint = 10	// 偏小号
+		public static const FONTSIZE_3:uint = 16	// 中号
+		public static const FONTSIZE_4:uint = 13	// 偏小号
 		public static const FONTSIZE_5:uint = 7	// 小号
 	
 		//换行
@@ -109,8 +109,8 @@ package ICard.assist.view {
 				fontsize = FONTSIZE_3;
 			if (colorVal==0)
 				colorVal = White;
-			
-			return "<font size='" + fontsize + "' color='" + colorVal + "'>" + arg1 + "</font>"
+			return format(arg1,colorVal,fontsize);
+			//return "<font size='" + fontsize + "' color='" + colorVal + "'>" + arg1 + "</font>"
 		}
 
     }
