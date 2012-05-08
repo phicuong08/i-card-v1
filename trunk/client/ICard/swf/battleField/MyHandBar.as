@@ -11,7 +11,7 @@
         }
 	
 		override public function AddCard(card:MovieClip):void{
-			AddCardBase(card);
+			super.AddCard(card);
 				
 			var handleMouseOverCard:* = function(e:MouseEvent):void{
 				card.y = card.height/2 -4;
