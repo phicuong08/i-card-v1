@@ -9,9 +9,10 @@
 	import flash.events.MouseEvent;
     public class battleField extends MovieClip implements IBattleField{
 		private var _slots:Array;
+		private var _tip:ITip;
         public function battleField(){
 			InitSlot();
-			RunTest();
+			//RunTest();
 			
 			
 		}
@@ -81,6 +82,9 @@
 		}
 		public function SideCard(slotId:int,realID:int):void{
 			_slots[slotId].SideCard(realID);
+		}
+		public function set tip(_arg1:ITip):void{
+		    _tip = _arg1;
 		}
 		public function RunTest():void{
 			var index:int=1;
