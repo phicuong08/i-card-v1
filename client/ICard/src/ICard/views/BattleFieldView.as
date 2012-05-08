@@ -13,6 +13,7 @@ package ICard.views {
     
     import flash.display.MovieClip;
     import flash.events.MouseEvent;
+    import flash.geom.Point;
     import flash.net.*;
 
     public class BattleFieldView extends Base implements IView {
@@ -30,6 +31,8 @@ package ICard.views {
 		private function loadCallback():void
 		{
 			this._battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
+			
+			this._battleField.tip = _viewMgr.tip.iTip;
 			this._cardDB = (_viewMgr.getAssetsObject("carddb", "carddb") as ICardDB);
 			test();
 			this.render();
@@ -51,7 +54,7 @@ package ICard.views {
 			//_battleField.RunTest();
 			
 			
-			_viewMgr.tip.iTip.addTarget(c1,strCardHtml);
+			_viewMgr.tip.iTip.addFixedTarget(c1,strCardHtml,new Point(0,0),true);
 			_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c1);
 			_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c2);
 			

@@ -6,7 +6,7 @@ package com.assist.view {
         public static const Yellow:uint = 0xFFFF00;
         public static const Red:uint = 0xFF0000;
         public static const White:uint = 0xFFFFFF;
-        public static const Green:uint = 0xFF00;
+        public static const Green:uint = 0x01FF00;
         public static const Blue:uint = 0xFF;
         public static const Orange:uint = 16225309;
         public static const Blue2:uint = 44783;
