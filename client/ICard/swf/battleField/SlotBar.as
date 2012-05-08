@@ -42,13 +42,10 @@
 				UpdatePos();
 			}
 		}
-	
-		public function AddCardBase(card:MovieClip):void{
+			
+  	public function AddCard(card:MovieClip):void{
 			this.addChild(card);
 			UpdatePos();
-		}
-  		public function AddCard(card:MovieClip):void{
-			AddCardBase(card);
 		}
 		public function RemoveAllCard():void{
 			while(this.numChildren)
