@@ -4,10 +4,11 @@ package ICard.views {
     import ICard.assist.*;
     import ICard.assist.server.*;
     import ICard.assist.view.*;
+    import ICard.assist.view.controls.BattleFieldType;
     import ICard.assist.view.interfaces.*;
     import ICard.lang.client.com.views.*;
     import ICard.protocols.*;
-	import ICard.assist.view.controls.BattleFieldType;
+    
     import com.smartfoxserver.v2.core.SFSEvent;
     
     import flash.display.MovieClip;
@@ -41,11 +42,16 @@ package ICard.views {
 		}
 		private function test():void{
 			var card1:Array = CardType.GetCardInfo(20001);
+			var card0:Array = CardType.GetCardInfo(20000);
+			
+			var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(card1,card0);
 			var c1:MovieClip = _cardDB.CreateCard(1,card1);
 			var card2:Array = CardType.GetCardInfo(20002);
 			var c2:MovieClip = _cardDB.CreateCard(1,card2);
 			//_battleField.RunTest();
 			
+			
+			_viewMgr.tip.iTip.addTarget(c1,strCardHtml);
 			_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c1);
 			_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c2);
 			
