@@ -24,9 +24,9 @@ package ICard.assist.view {
 		public static const FONTSIZE_3:uint = 15	// 中号
 		public static const FONTSIZE_4:uint = 10	// 偏小号
 		public static const FONTSIZE_5:uint = 7	// 小号
-				
+	
 		//换行
-		private static const _newLineSign:String = "<br>";
+		public static const _newLineSign:String = "<br>";
 		private static const _tabSign:String = "<tab>";
         public static function yellow(_arg1:String):String{
             return (format(_arg1, Yellow));
@@ -101,19 +101,17 @@ package ICard.assist.view {
         		return "<p>" + arg1 + "</p>";
         }
         //list标签包装
-//        public static function ParagraphWraper(arg1:String):String{
-//        		return "<li>" + arg1 + "</li>";
-//        }
-//        //字体标签包装
-//				public static function FontWraper(str:String, size:uint, color:uint):String{
-//						if (size==0){
-//								size = defaultFontSize
-//						}
-//						if(color==0){
-//								color = defaultFontColor
-//						}
-//	
-//						return "<font size='" + size + "' color='" + color.toString(16) + "'>" + str + "</font>"
-//				}
+        public static function ListWraper(arg1:String):String{
+        		return "<li>" + arg1 + "</li>";
+        }
+		public static function FontWraper(arg1:String,fontsize:uint=0,colorVal:uint=0):String{
+			if (fontsize==0)
+				fontsize = FONTSIZE_3;
+			if (colorVal==0)
+				colorVal = White;
+			
+			return "<font size='" + fontsize + "' color='" + colorVal + "'>" + arg1 + "</font>"
+		}
+
     }
 }//package com.assist.view 
