@@ -78,7 +78,7 @@
   <extension>
     <name>battleFarm</name>
     <type>JAVA</type>
-    <file>sfs2x.extensions.games.battlefarm.main.BattleFarmExtension</file>
+    <file>sfs2x.extensions.icard.main.ICardExtension</file>
     <propertiesFile></propertiesFile>
     <reloadMode>AUTO</reloadMode>
   </extension>
