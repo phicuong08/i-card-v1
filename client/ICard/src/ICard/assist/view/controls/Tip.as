@@ -190,8 +190,8 @@ package ICard.assist.view.controls {
             target.addEventListener(MouseEvent.ROLL_OUT, mouseOut, false, 0, true);
         }
         private function removeEvent(_arg1:DisplayObject):void{
-            _arg1.removeEventListener(MouseEvent.MOUSE_OVER, this._targets[_arg1].mouseOver);
-            _arg1.removeEventListener(MouseEvent.MOUSE_OUT, this._targets[_arg1].mouseOut);
+            _arg1.removeEventListener(MouseEvent.ROLL_OVER, this._targets[_arg1].mouseOver);
+            _arg1.removeEventListener(MouseEvent.ROLL_OUT, this._targets[_arg1].mouseOut);
             _arg1.removeEventListener(MouseEvent.MOUSE_MOVE, this._targets[_arg1].mouseMove);
         }
         private function clearTarget(_arg1:DisplayObject):void{
