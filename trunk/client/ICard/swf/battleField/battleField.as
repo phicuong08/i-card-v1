@@ -72,20 +72,29 @@
 		public function SetMyHero(card:MovieClip):void{
 			
 		}
-		public function Add2Slot(slotId:int,card:MovieClip):void{
-			//addChild(card);
-			_slots[slotId].AddCard(card);
+		public function Add2Slot(slotId:int,card:MovieClip,tipInfo:String):void{
+			_slots[slotId].AddCard(card,tipInfo);
 		}
 		public function RemoveCard(slotId:int,realID:int):void{
-			//addChild(card);
 			_slots[slotId].RemoveCard(realID);
 		}
+		
 		public function SideCard(slotId:int,realID:int):void{
 			_slots[slotId].SideCard(realID);
 		}
+		
 		public function set tip(_arg1:ITip):void{
-		    _tip = _arg1;
+		  _tip = _arg1;
+		    
+		  var id:int = BattleFieldType.MyHandSlotId;
+			while(id <= BattleFieldType.YouHeroSlotId)
+			{
+				_slots[id]._tip = _tip;
+				id++;
+			}
+			
 		}
+
 		public function RunTest():void{
 			var index:int=1;
 			var c1:MovieClip;
