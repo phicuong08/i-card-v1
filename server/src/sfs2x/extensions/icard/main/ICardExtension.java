@@ -2,6 +2,7 @@ package sfs2x.extensions.icard.main;
 
 
 
+import com.icard.data.excel.ExcelReader;
 import com.smartfoxserver.v2.core.SFSEventType;
 import com.smartfoxserver.v2.extensions.SFSExtension;
 
@@ -12,6 +13,10 @@ public class ICardExtension extends SFSExtension {
 		trace("**************************************");
 		trace("* Starting ICard extension");
 
+		//ws
+		ExcelReader er =new ExcelReader();
+		er.openFile("aaa");
+		//ws
 		
 		// Event handler: join room
 		addEventHandler(SFSEventType.USER_JOIN_ROOM, UserJoinedEventHandler.class);
