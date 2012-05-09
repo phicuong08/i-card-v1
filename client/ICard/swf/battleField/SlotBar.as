@@ -3,8 +3,10 @@
     import flash.events.*;
     import flash.display.*;
     import flash.text.*;
-
+		import ICard.assist.view.interfaces.*;
+		
     public class SlotBar extends MovieClip {
+    private var _tip:ITip;
 		private var _widthMax:int;
 		private var _cardWidth:int;
 		public var _selCard:MovieClip;
@@ -34,25 +36,43 @@
 			}
 			return ret;
 		}
-		public function RemoveCard(realID:int):void{
+		public function RemoveCard(realID:int):MovieClip{
 			var index:int = FindCardIndex(realID);
 			if(index >=0)
 			{
+				RemoveCardTip(getChildAt(index) as MovieClip);
 				this.removeChildAt(index);
 				UpdatePos();
 			}
+			return delCard;
 		}
 			
-  	public function AddCard(card:MovieClip):void{
+  	public function AddCard(card:MovieClip,tipInfo:String):void{
 			this.addChild(card);
 			UpdatePos();
 		}
 		public function RemoveAllCard():void{
 			while(this.numChildren)
 			{
+				RemoveCardTip(getChildAt(index) as MovieClip);
 				removeChild(this.getChildAt(0));
 			}
 		}
+		public function SetCardTip(card:MovieClip,tipInfo:String):void{
+				if(!_tip || !card)
+					return;
+				var pos:Point = card.localToGlobal(new Point(0,card.height/2));
+				_tip->addFixedTarget(card, tipInfo, pos);
+		}
+		
+		public function RemoveCardTip(card:MovieClip):void{
+			if(_tip && card)
+				_tip->removeTarget(card);
+		}
+		public function set tip(_arg1:ITip):void{
+		  _tip = _arg1;
+		}
+		
 		public function UpdatePos():void{
 			if(this.numChildren<1)
 				return;

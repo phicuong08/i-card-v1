@@ -10,7 +10,7 @@
             super();
         }
 	
-		override public function AddCard(card:MovieClip):void{
+		override public function AddCard(card:MovieClip,tipInfo:String):void{
 			super.AddCard(card);
 				
 			var handleMouseOverCard:* = function(e:MouseEvent):void{
@@ -25,6 +25,7 @@
 			}
 			card.addEventListener(MouseEvent.ROLL_OVER,handleMouseOverCard);
 			card.addEventListener(MouseEvent.ROLL_OUT,handleMouseOutCard);
+			SetCardTip(card,tipInfo);
 		}
 		private function HideCardActionMenu(card:MovieClip):void{
 			_cardMenu.fight_but.removeEventListener(MouseEvent.CLICK,OnCardToEnter);
