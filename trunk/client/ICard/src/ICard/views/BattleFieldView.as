@@ -47,16 +47,24 @@ package ICard.views {
 			var card1:Array = CardType.GetCardInfo(20001);
 			var card0:Array = CardType.GetCardInfo(20000);
 			
-			var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(card1,card0);
-			var c1:MovieClip = _cardDB.CreateCard(1,card1);
-			var card2:Array = CardType.GetCardInfo(20002);
-			var c2:MovieClip = _cardDB.CreateCard(1,card2);
-			//_battleField.RunTest();
-			
-			
-			_viewMgr.tip.iTip.addFixedTarget(c1,strCardHtml,new Point(0,0),true);
-			_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c1);
-			_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c2);
+			var i:int;
+			while(i<7)
+			{
+				var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(card1,card0);
+				var c1:MovieClip = _cardDB.CreateCard(1,card1);
+				var card2:Array = CardType.GetCardInfo(20002);
+				var c2:MovieClip = _cardDB.CreateCard(1,card2);
+				var strCardHtml2:String = cardTipHtml.CreateCardHtmlTip(card2,card0);
+				//_battleField.RunTest();
+				
+				//_viewMgr.tip.iTip.addFixedTarget(c1,strCardHtml,new Point(0,0),true);
+				c1.tipInfo = strCardHtml;
+				c2.tipInfo = strCardHtml2;
+				_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c1);
+				_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c2);
+				i++;
+			}
+		
 			
 		}
 		public function close():void{

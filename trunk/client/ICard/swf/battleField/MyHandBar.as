@@ -10,22 +10,24 @@
             super();
         }
 	
-		override public function AddCard(card:MovieClip,tipInfo:String):void{
+		override public function AddCard(card:MovieClip):void{
 			super.AddCard(card);
 				
 			var handleMouseOverCard:* = function(e:MouseEvent):void{
 				card.y = card.height/2 -4;
 				_selCard = card;
 				ShowCardActionMenu(card);
+				
 			}
 			var handleMouseOutCard:* = function(e:MouseEvent):void{
 				card.y = card.height/2;
 				_selCard = null;
 				HideCardActionMenu(card);
+				RemoveCardTip(card);
 			}
 			card.addEventListener(MouseEvent.ROLL_OVER,handleMouseOverCard);
 			card.addEventListener(MouseEvent.ROLL_OUT,handleMouseOutCard);
-			SetCardTip(card,tipInfo);
+			SetCardTip(card);
 		}
 		private function HideCardActionMenu(card:MovieClip):void{
 			_cardMenu.fight_but.removeEventListener(MouseEvent.CLICK,OnCardToEnter);
