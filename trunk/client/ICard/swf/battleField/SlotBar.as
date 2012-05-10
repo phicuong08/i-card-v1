@@ -10,6 +10,7 @@
 		private var _tip:ITip;
 		private var _widthMax:int;
 		private var _cardWidth:int;
+	
 		public var _selCard:MovieClip;
 		public var _slotID:int;
         public function SlotBar():void{
@@ -62,9 +63,9 @@
 				trace("tip info",card.tipInfo);
 				if(!card || !card.tipInfo)
 					return;	
-				var pos:Point = card.localToGlobal(new Point(0,-card.height/2-95));
-				//if((pos.x +380)>1200)
-				//	pos.x = 1200 -380;
+				var pos:Point = card.localToGlobal(new Point(-100,-card.height/2-40));
+				if((pos.x +380)>1200)
+					pos.x = 1200 -380;
 				
 				
 				_tip.addFixedTarget(card, card.tipInfo, pos);

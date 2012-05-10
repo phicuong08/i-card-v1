@@ -17,7 +17,7 @@
 				card.y = card.height/2 -4;
 				_selCard = card;
 				ShowCardActionMenu(card);
-				
+				SetCardTip(card);
 			}
 			var handleMouseOutCard:* = function(e:MouseEvent):void{
 				card.y = card.height/2;
@@ -27,7 +27,7 @@
 			}
 			card.addEventListener(MouseEvent.ROLL_OVER,handleMouseOverCard);
 			card.addEventListener(MouseEvent.ROLL_OUT,handleMouseOutCard);
-			SetCardTip(card);
+			
 		}
 		private function HideCardActionMenu(card:MovieClip):void{
 			_cardMenu.fight_but.removeEventListener(MouseEvent.CLICK,OnCardToEnter);
@@ -48,10 +48,12 @@
 			card.addChild(_cardMenu);
 		}
 		public function OnCardToEnter(e:MouseEvent):void{
-			trace(_selCard.realID,"To Enter!");
+			battleField._CardToEnterFunc(_selCard.realID);	
+			//trace(_selCard.realID,"To Enter!");
 		}
 		public function OnCardToRes(e:MouseEvent):void{
-			trace(_selCard.realID,"To Res!");
+			battleField._CardToResFunc(_selCard.realID);
+			//trace(_selCard.realID,"To Res!");
 		}
 		public function OnCardToTomb(e:MouseEvent):void{
 			trace(_selCard.realID,"To Tomb!");

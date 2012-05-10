@@ -33,6 +33,8 @@ package ICard.views {
 			this._battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
 			
 			this._battleField.tip = _viewMgr.tip.iTip;
+			this._battleField.onCard2Fight = onCard2Fight;
+			this._battleField.onCard2Res = onCard2Res;
 			this._cardDB = (_viewMgr.getAssetsObject("carddb", "carddb") as ICardDB);
 			test();
 			this.render();
@@ -43,12 +45,20 @@ package ICard.views {
 				_popup.addView(this, this._battleField.content);
 			}
 		}
+		private function onCard2Fight(arg1:int):Boolean{
+			return true;	
+		}
+		private function onCard2Res(arg1:int):Boolean{
+			return true;	
+		}
+		
 		private function test():void{
+
 			var card1:Array = CardType.GetCardInfo(20001);
 			var card0:Array = CardType.GetCardInfo(20000);
 			
 			var i:int;
-			while(i<7)
+			while(i<4)
 			{
 				var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(card1,card0);
 				var c1:MovieClip = _cardDB.CreateCard(1,card1);
