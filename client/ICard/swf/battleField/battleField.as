@@ -10,6 +10,8 @@
     public class battleField extends MovieClip implements IBattleField{
 		private var _slots:Array;
 		private var _tip:ITip;
+		public static var _CardToEnterFunc:Function;
+		public static var _CardToResFunc:Function;
         public function battleField(){
 			InitSlot();
 			//RunTest();
@@ -18,6 +20,7 @@
 		}
 		private function InitSlot():void{
 			_slots  = [];
+			
 			
 			_slots[BattleFieldType.MyHandSlotId] = new MyHandBar;
 			_slots[BattleFieldType.MyHandSlotId].Init(BattleFieldType.MyHandSlotId,2,650,1180);
@@ -81,7 +84,6 @@
 		public function SideCard(slotId:int,realID:int):void{
 			_slots[slotId].SideCard(realID);
 		}
-		
 		public function set tip(_arg1:ITip):void{
 			_tip = _arg1;
 		   
@@ -93,7 +95,12 @@
 			}
 			
 		}
-
+		public function set onCard2Fight(arg1:Function):void{
+			_CardToEnterFunc = arg1;
+		}
+		public function set onCard2Res(arg1:Function):void{
+			_CardToResFunc = arg1;
+		}
 		public function RunTest():void{
 			var index:int=1;
 			var c1:MovieClip;
