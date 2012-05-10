@@ -2,6 +2,9 @@ package sfs2x.extensions.icard.main;
 
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.icard.data.excel.ExcelReader;
 import com.smartfoxserver.v2.core.SFSEventType;
 import com.smartfoxserver.v2.extensions.SFSExtension;
@@ -14,8 +17,8 @@ public class ICardExtension extends SFSExtension {
 		trace("* Starting ICard extension");
 
 		//ws
-		ExcelReader er =new ExcelReader();
-		er.openFile("aaa");
+		HashMap<String,ArrayList<HashMap<String,String>>> data = ExcelReader.loadFile("./card.xls");
+
 		//ws
 		
 		// Event handler: join room
