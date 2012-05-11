@@ -17,6 +17,9 @@ package ICard.datas.card {
 					public var _turn;Boolean;//翻转
 					public var _slot:int;  //卡片所在槽 
 					
+					public function CardData():void{
+							_bufDB = new BufDB;
+					}
 					public function CardData(realID:int,cardID:int,slot:int,hpAdd:int=0,side:Boolean=false,turn:Boolean=false):void{
 							_bufDB = new BufDB;
 							_realID = realID;

@@ -11,8 +11,8 @@ package ICard.datas {
 					public function AddCards(cards:Array):void{
 							for each( var cardInfo:Object in cards) 
 							{
-									var newCard:CardData = new CardData(cardInfo["realID"],cardInfo["cardID"],
-																					cardInf["slot"]);
+									var newCard:CardData = new CardData;
+									newCard.format(cardInfo);
 									AddCard(newCard);
 							}
 					}
