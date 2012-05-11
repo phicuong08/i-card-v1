@@ -5,23 +5,25 @@ package ICard.datas.card {
 			import ICard.haloer.data.*;
 			import ICard.assist.server.CardType;
 			public class CardData {
-					private static const StateNormal:int = 1;
-					private static const StateSide:int = 2;
-					private static const StateTurn:int = 2;
+					public static const StateNormal:int = 0;
+					public static const StateSide:int = 2;
+					public static const StateTurn:int = 2;
 					
 					public var _realID:int; //唯一id
 					public var _cardID:int; //卡片id,
 					public var _bufDB:BufDB;  //挂着的buf
 					public var _hpAdd:int;  //负值为扣血量
-					public var _state:int;  //卡片状态，正常，横置，翻转
+					public var _side:Boolean;//横置
+					public var _turn;Boolean;//翻转
 					public var _slot:int;  //卡片所在槽 
 					
-					public function CardData(realID:int,cardID:int,slot:int,hpAdd:int=0,state:int=StateNormal):void{
+					public function CardData(realID:int,cardID:int,slot:int,hpAdd:int=0,side:Boolean=false,turn:Boolean=false):void{
 							_bufDB = new BufDB;
 							_realID = realID;
 							_cardID = cardID;
 							_hpAdd = hpAdd;
-							_state = state;
+							_side = side;
+							_turn = turn;
 							_slot = slot;
 					}
 					
@@ -30,20 +32,17 @@ package ICard.datas.card {
      					_cardID = arg1["cardID"];
      					_bufDB = arg1["bufDB"];
      					_hpAdd = arg1["hpAdd"];
-     					_state = arg1["state"];
+     					_side = arg1["side"];
+     					_turn = arg1["turn"];
      					_slot = arg1["slot"];
      			}
-     			
+     	
      			public function AddBuf(arg1:Array):void{
      					_bufDB.AddBuf(arg1);
      			}
      			
      			public function DelBuf(realID:int):void{
      					_bufDB.DelBuf(realID);
-     			}
-     			
-     			public function SetState(arg1:int):void{
-     					_state = arg1;
      			}
      			
      			public function AddHP(arg1:int):void{
