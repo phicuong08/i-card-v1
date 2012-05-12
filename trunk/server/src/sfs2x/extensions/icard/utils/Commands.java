@@ -12,11 +12,14 @@ public class Commands {
 	public static final String CMD_S2C_CLIENT_STATE_UPDATE="s2c_client_state_update";
 	//参数1: playerId,参数2: 状态 [ 0--初始状态， 1--就绪]
 	
-	public static final String CMD_S2C_CARD_UPDATE="s2c_s2c_card_update";
+	public static final String CMD_S2C_CARD_UPDATE="s2c_card_update";
 	//参数1. playerId,参数2:牌状态{realID,cardID,slot_id,side_state,turn_state,hp,atk,def]; key-value
 	
+	public static final String CMD_S2C_CARD_FIGHT_RESULT="s2c_card_fight_result";
+	//参数1. playerId,参数2:牌状态{realID,cardID,slot_id,side_state,turn_state,hp,atk,def]; key-value
 	
-	
+	public static final String CMS_S2C_CARD_FIGHT="s2c_card_fight";
+	//参数1:源卡{realID},参数2:目标卡{目标卡数，realID,realID,...};
 	
 	//client commands
 	//
