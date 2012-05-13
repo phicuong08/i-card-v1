@@ -4,6 +4,7 @@
     import flash.display.*;
     import flash.utils.*;
     import ICard.assist.*;
+	import ICard.datas.CardDiffData;
 //	import mx.binding.IBindingClient;
 //	import mx.core.BitmapAsset;
     public class Main extends Sprite {
@@ -29,6 +30,7 @@
             URI.analyze(this);
             Helper.test = false;//Config.EnableProtocolHelper;
             Helper.initStage(stage);
+			CardDiffData.init();
             this._data = new Data();
             this._ctrl = new ControllerMgr();
             this._view = new ViewMgr(stage);
