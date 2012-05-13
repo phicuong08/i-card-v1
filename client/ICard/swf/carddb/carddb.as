@@ -18,28 +18,30 @@
 		public static const _at_y = 120;
         public function carddb(){
 			//var cardInfo:Array = [30001,"上古骨弓"        ,"中立","种族",   3,   2,       2,     "当你使用上古骨弓进行打击时，你的英雄在此次战斗中具有远程攻击（防御者不会对你造成战斗伤害）。"];
-			//var card1:MovieClip =CreateCard(12,cardInfo);
+			
+			//var info:Object={realID:1,cardID:40001,hp:18,cost:3,turncost:1,atk:2,def:0,side:false,turn:false};
+			//var card1:MovieClip =CreateCard(info);
 			//card1.x = card1.width/2;
 			//card1.y = card1.height/2;
 			//SetAtk(card1,87);
-			//addChild(card1);
+			addChild(card1);
 
 		}
-		public function CreateBackCard(realID:int,cardID:int=0,hp:int=0):MovieClip{
-			var typeId:int = cardID/1000;
+		public function CreateBackCard(info:Object):MovieClip{
+			var typeId:int = info["cardID"]/1000;
 			var cardMC:MovieClip;
-			var title:String = "c_" + cardID.toString();
+			var title:String = "c_" + info["cardID"].toString();
 			switch(typeId)
 			{
 				case 20:
-					cardMC = CreateHeroBackCard(title,hp);
+					cardMC = CreateHeroBackCard(title,info);
 					break;
 				default:
 					cardMC = new card_back;
 					cardMC.stand ="back";
 					break;
 			}
-			cardMC.realID = realID;
+			cardMC.realID = info["realID"];
 			return cardMC;
 		}
 		public function SetHp(card:MovieClip,hp:int):Boolean{
@@ -65,7 +67,7 @@
 				if(elem0 && elem0.cardpart=="atk")
 				{
 					card.removeChildAt(index);
-					card.addChild(CreateAtMC(atk));
+					card.addChild(CreateAtkMC(atk));
 					return true;
 				}
 				index++;
@@ -73,40 +75,40 @@
 			return false;
 		}
 		
-		public function CreateCard(realID:int,info:Array):MovieClip{
-			var typeId:int = info[0]/1000;
+		public function CreateCard(info:Object):MovieClip{
+			var typeId:int = info["cardID"]/1000;
 			var cardMC:MovieClip;
-			var title:String = "c_" + info[0].toString();
+			var title:String = "c_" + info["cardID"].toString();
 			switch(typeId)
 			{
 				case 30:
-					cardMC = CreateWeaponCard(title,info[4],info[5],info[6]);
+					cardMC = CreateWeaponCard(title,info);
 					break;
 				case 31:
-					cardMC = CreateEquipCard(title,info[4],info[5]);
+					cardMC = CreateEquipCard(title,info);
 					break;
 				case 21:
 				case 22:
 				case 23:
-					cardMC = CreateSoldierCard(title,info[4],info[5],info[6]);
+					cardMC = CreateSoldierCard(title,info);
 					break;
 				case 20:
-					cardMC = CreateHeroCard(title,info[5]);
+					cardMC = CreateHeroCard(title,info);
 					break;
 				case 50:
-					cardMC = CreateSkillCard(title,info[4]);
+					cardMC = CreateSkillCard(title,info);
 					break;
 				case 40:
 					cardMC = CreateTaskCard(title);
 					break;
 			}
-			cardMC.realID = realID;
+			cardMC.realID = info["realID"];
 			return cardMC;
 		}
-		private function CreateSkillCard(title:String,cost:int):MovieClip{
+		private function CreateSkillCard(title:String,info:Object):MovieClip{
 			var skillMC:MovieClip = new card_skill;
 			skillMC.addChild(CreateTitleMC(title));
-			skillMC.addChild(CreateCostMC(cost));
+			skillMC.addChild(CreateCostMC(info["cost"]));
 			skillMC.stand ="normal";
 			return skillMC;
 			
@@ -120,47 +122,47 @@
 			
 		}
 		
-		private function CreateHeroCard(title:String,hp:int):MovieClip{
+		private function CreateHeroCard(title:String,info:Object):MovieClip{
 			var hero:MovieClip = new card_hero;
 			hero.addChild(CreateTitleMC(title));
-			hero.addChild(CreateHpMC(hp));
+			hero.addChild(CreateHpMC(info["hp"]));
 			hero.stand ="normal";
 			return hero;
 			
 		}
-		private function CreateHeroBackCard(title:String,hp:int):MovieClip{
+		private function CreateHeroBackCard(title:String,info:Object):MovieClip{
 			var hero:MovieClip = new card_back;
 			hero.addChild(CreateTitleMC(title));
-			hero.addChild(CreateHpMC(hp));
+			hero.addChild(CreateHpMC(info["hp"]));
 			hero.stand ="back";
 			return hero;
 			
 		}
 		
-		private function CreateWeaponCard(title:String,cost:int,turncost:int,at:int):MovieClip{
+		private function CreateWeaponCard(title:String,info:Object):MovieClip{
 			var weapon:MovieClip = new card_weapon;
 			weapon.addChild(CreateTitleMC(title));
-			weapon.addChild(CreateCostMC(cost));
-			weapon.addChild(CreateAtMC(at));
-			weapon.addChild(CreateHpMC(turncost));
+			weapon.addChild(CreateCostMC(info["cost"]));
+			weapon.addChild(CreateAtkMC(info["atk"]));
+			weapon.addChild(CreateHpMC(info["turncost"]));
 			weapon.stand ="normal";
 			return weapon;
 		}
 		
-		private function CreateEquipCard(title:String,cost:int,def:int):MovieClip{
+		private function CreateEquipCard(title:String,info:Object):MovieClip{
 			var equip:MovieClip = new card_equip;
 			equip.addChild(CreateTitleMC(title));
-			equip.addChild(CreateCostMC(cost));
-			equip.addChild(CreateHpMC(def));
+			equip.addChild(CreateCostMC(info["cost"]));
+			equip.addChild(CreateHpMC(info["def"]));
 			equip.stand ="normal";
 			return equip;
 		}
-		private function CreateSoldierCard(title:String,cost:int,hp:int,at:int):MovieClip{
+		private function CreateSoldierCard(title:String,info:Object):MovieClip{
 			var soldier:MovieClip = new card_soldier;
 			soldier.addChild(CreateTitleMC(title));
-			soldier.addChild(CreateHpMC(hp));
-			soldier.addChild(CreateCostMC(cost));
-			soldier.addChild(CreateAtMC(at));
+			soldier.addChild(CreateHpMC(info["hp"]));
+			soldier.addChild(CreateCostMC(info["cost"]));
+			soldier.addChild(CreateAtkMC(info["atk"]));
 			soldier.stand ="normal";
 			return soldier;
 		}
@@ -180,7 +182,7 @@
 			costMC.cardpart = "cost";
 			return costMC;
 		}
-		private function CreateAtMC(at:int):MovieClip{
+		private function CreateAtkMC(at:int):MovieClip{
 			var atMC:MovieClip = CreateNum(at);
 			atMC.x = _at_x- atMC.width/2 -_cardWidth/2;
 			atMC.y = _at_y -_cardHeight/2;

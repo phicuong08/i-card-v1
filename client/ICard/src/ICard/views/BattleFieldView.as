@@ -6,7 +6,12 @@ package ICard.views {
     import ICard.assist.view.*;
     import ICard.assist.view.controls.BattleFieldType;
     import ICard.assist.view.interfaces.*;
+    import ICard.datas.BattleGuyData;
+    import ICard.datas.CardDiffData;
+    import ICard.datas.card.CardData;
     import ICard.lang.client.com.views.*;
+    import ICard.logic.*;
+    import ICard.logic.BattleStage;
     import ICard.protocols.*;
     
     import com.smartfoxserver.v2.core.SFSEvent;
@@ -17,12 +22,11 @@ package ICard.views {
     import flash.net.*;
 
     public class BattleFieldView extends Base implements IView {
+		private var _updateTimeCardNotify:String = "timer_card_notify";
 		private var _battleField:IBattleField;
 		private var _cardDB:ICardDB;
-		public function init(evt:SFSEvent):void
-		{
-			show();
-		}
+		private var _battleStage:BattleStage;
+
 		public function show():void{
 			loadAssets("battlefield", this.loadCallback, "");
 				
@@ -30,6 +34,7 @@ package ICard.views {
 		
 		private function loadCallback():void
 		{
+			_battleStage = BattleStage.getInstance();
 			this._battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
 			
 			this._battleField.tip = _viewMgr.tip.iTip;
@@ -37,13 +42,33 @@ package ICard.views {
 			this._battleField.onCard2Res = onCard2Res;
 			this._cardDB = (_viewMgr.getAssetsObject("carddb", "carddb") as ICardDB);
 			test();
+			_viewMgr.addToTimerProcessList(this._updateTimeCardNotify, this.CardNotifyTimer);
 			this.render();
 		}
-		
+		private function CardNotifyTimer():void{
+			var abc:int =0;
+			var cardInfo:Array = CardDiffData.PopCard();
+			if(cardInfo!=null)
+			{
+				if(CardDiffData.IsSlotDiff(cardInfo[0],cardInfo[1]))
+				{
+					
+				}
+				else if(CardDiffData.IsAttrDiff(cardInfo[0],cardInfo[1]))
+				{
+					
+				}
+				else if(CardDiffData.IsSideDiff(cardInfo[0],cardInfo[1]))
+				{
+					
+				}
+			}
+		}
 		private function render():void{
 			if(this._battleField){
 				_popup.addView(this, this._battleField.content);
 			}
+			
 		}
 		private function onCard2Fight(arg1:int):Boolean{
 			return true;	
@@ -53,27 +78,37 @@ package ICard.views {
 		}
 		
 		private function test():void{
-
-			var card1:Array = CardType.GetCardInfo(20001);
-			var card0:Array = CardType.GetCardInfo(20000);
+			_battleStage.InitGuy([{realID:1},{realID:2}]);
 			
-			var i:int;
-			while(i<4)
-			{
-				var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(card1,card0);
-				var c1:MovieClip = _cardDB.CreateCard(1,card1);
-				var card2:Array = CardType.GetCardInfo(20002);
-				var c2:MovieClip = _cardDB.CreateCard(1,card2);
-				var strCardHtml2:String = cardTipHtml.CreateCardHtmlTip(card2,card0);
-				//_battleField.RunTest();
-				
-				//_viewMgr.tip.iTip.addFixedTarget(c1,strCardHtml,new Point(0,0),true);
-				c1.tipInfo = strCardHtml;
-				c2.tipInfo = strCardHtml2;
-				_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c1);
-				_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c2);
-				i++;
-			}
+			var card1:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyHandSlotId};
+			var card2:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyResourceSlotId};
+			_battleStage.UpdateCards(1,[card1]);
+			_battleStage.UpdateCards(1,[card2]);
+			
+			
+			var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(card1["cardID"]);
+			var c1:MovieClip = _cardDB.CreateCard(card1);
+			_battleField.Add2Slot(card1["slot"],c1);
+			
+
+//			
+//			var i:int;
+//			while(i<4)
+//			{
+//				var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(card1,cardTitle);
+//				var c1:MovieClip = _cardDB.CreateCard(1,card1);
+//				var card2:Array = CardType.GetCardInfo(20002);
+//				var c2:MovieClip = _cardDB.CreateCard(1,card2);
+//				var strCardHtml2:String = cardTipHtml.CreateCardHtmlTip(card2,cardTitle);
+//				//_battleField.RunTest();
+//				
+//				//_viewMgr.tip.iTip.addFixedTarget(c1,strCardHtml,new Point(0,0),true);
+//				c1.tipInfo = strCardHtml;
+//				c2.tipInfo = strCardHtml2;
+//				_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c1);
+//				_battleField.Add2Slot(BattleFieldType.MyHandSlotId,c2);
+//				i++;
+//			}
 		
 			
 		}

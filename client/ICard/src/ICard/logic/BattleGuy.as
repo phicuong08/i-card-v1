@@ -1,16 +1,28 @@
 //Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.logic {
-			import ICard.datas.*;
-			
-			public class BattleGuy {
-					private var _data:BattleGuyData;
-					private var _realID:int;
-					public function BattleGuy(arg1:Object):void{
-							_realID = arg1["realID"];
-					}
-					public function get ID():int{
-							return _realID;
-					}
+	import ICard.datas.*;
+	
+	public class BattleGuy {
+		private var _data:BattleGuyData;
+		private var _realID:int;
+
 		
-    }
+		public function BattleGuy(arg1:Object):void{
+			_realID = arg1["realID"];
+			_data = new BattleGuyData;
+		}
+		public function get ID():int{
+			return _realID;
+		}
+		
+		public function ResetCards():void{
+			_data.ResetCards();
+		}
+		public function EmptyCards():void{
+			_data.EmptyCards();
+		}
+		public function UpdateCards(info:Array):void{
+			_data.UpdateCardArray(info);
+		}
+	}
 }//package com.assist.data.mission 
