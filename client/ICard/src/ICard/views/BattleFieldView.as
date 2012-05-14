@@ -50,19 +50,30 @@ package ICard.views {
 			var cardInfo:Array = CardDiffData.PopCard();
 			if(cardInfo!=null)
 			{
-				if(CardDiffData.IsSlotDiff(cardInfo[0],cardInfo[1]))
+				if(CardDiffData.IsSlotDiff(cardInfo[0],cardInfo[1])||
+					 CardDiffData.IsTurnDiff(cardInfo[0],cardInfo[1]))
 				{
-					
+						var newCard:MovieClip = CreateCard(cardInfo[1]);
+						_battleField.Add2Slot(cardInfo[1]["slot"],newCard);
 				}
 				else if(CardDiffData.IsAttrDiff(cardInfo[0],cardInfo[1]))
 				{
-					
+						vard cardMC:MovieClip = _battleField.FindCard(cardInfo[1]);
+						this._cardDB.UpdateAttr(cardMC,cardInfo[1]);
 				}
 				else if(CardDiffData.IsSideDiff(cardInfo[0],cardInfo[1]))
 				{
-					
+						_battleField.SideCard(cardInfo[1]);
 				}
 			}
+		}
+		private function CreateCard(info:Object,bTip:Boolean=true):MovieClip{
+				var cardMC:MovieClip = _cardDB.CreateCard(cardInfo[1]);
+				if(cardMC==null || bTip==false)
+						return cardMC;
+				var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(cardInfo["cardID"]);		
+				cardMC.tipInfo = strCardHtml;
+				return cardMC;
 		}
 		private function render():void{
 			if(this._battleField){
@@ -87,7 +98,7 @@ package ICard.views {
 			
 			
 			var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(card1["cardID"]);
-			var c1:MovieClip = _cardDB.CreateCard(card1);
+			var c1:MovieClip = CreateCard(card1);
 			_battleField.Add2Slot(card1["slot"],c1);
 			
 
