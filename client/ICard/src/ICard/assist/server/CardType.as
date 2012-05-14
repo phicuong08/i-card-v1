@@ -136,6 +136,8 @@ package ICard.assist.server {
 				case 40:
 					cardGroup = _TaskCards;
 					break;
+				default:
+					return null;
 			}
 			return cardGroup[id];
 		}

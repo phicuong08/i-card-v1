@@ -22,7 +22,7 @@ package ICard.views {
     import flash.net.*;
 
     public class BattleFieldView extends Base implements IView {
-		private var _updateTimeCardNotify:String = "timer_card_notify";
+		private var _updateFrameCardNotify:String = "frame_card_notify";
 		private var _battleField:IBattleField;
 		private var _cardDB:ICardDB;
 		private var _battleStage:BattleStage;
@@ -40,38 +40,41 @@ package ICard.views {
 			this._battleField.tip = _viewMgr.tip.iTip;
 			this._battleField.onCard2Fight = onCard2Fight;
 			this._battleField.onCard2Res = onCard2Res;
+			this._battleField.onSideCard = onSideCard;
+			this._battleField.onTurnCard = onTurnCard;
+			
 			this._cardDB = (_viewMgr.getAssetsObject("carddb", "carddb") as ICardDB);
 			test();
-			_viewMgr.addToTimerProcessList(this._updateTimeCardNotify, this.CardNotifyTimer);
+			_viewMgr.addToFrameProcessList(this._updateFrameCardNotify, this.CardNotifyFrame);
+			
 			this.render();
 		}
-		private function CardNotifyTimer():void{
-			var abc:int =0;
+		private function CardNotifyFrame():void{
 			var cardInfo:Array = CardDiffData.PopCard();
 			if(cardInfo!=null)
 			{
-				if(CardDiffData.IsSlotDiff(cardInfo[0],cardInfo[1])||
-					 CardDiffData.IsTurnDiff(cardInfo[0],cardInfo[1]))
+				var cardObj:Object = cardInfo[1].ToObject();
+				 if(CardDiffData.IsAttrDiff(cardInfo[0],cardInfo[1]))
 				{
-						var newCard:MovieClip = CreateCard(cardInfo[1]);
-						_battleField.Add2Slot(cardInfo[1]["slot"],newCard);
-				}
-				else if(CardDiffData.IsAttrDiff(cardInfo[0],cardInfo[1]))
-				{
-						vard cardMC:MovieClip = _battleField.FindCard(cardInfo[1]);
-						this._cardDB.UpdateAttr(cardMC,cardInfo[1]);
+						var cardMC:MovieClip = _battleField.FindCard(cardObj["realID"]);
+						this._cardDB.UpdateAttr(cardMC,cardObj);
 				}
 				else if(CardDiffData.IsSideDiff(cardInfo[0],cardInfo[1]))
 				{
-						_battleField.SideCard(cardInfo[1]);
+						_battleField.SideCard(cardObj);
+				}
+				else
+				{
+					var newCard:MovieClip = CreateCard(cardObj);
+					_battleField.Add2Slot(cardObj["slot"],newCard);
 				}
 			}
 		}
 		private function CreateCard(info:Object,bTip:Boolean=true):MovieClip{
-				var cardMC:MovieClip = _cardDB.CreateCard(cardInfo[1]);
+				var cardMC:MovieClip = _cardDB.CreateCard(info);
 				if(cardMC==null || bTip==false)
 						return cardMC;
-				var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(cardInfo["cardID"]);		
+				var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(info["cardID"]);		
 				cardMC.tipInfo = strCardHtml;
 				return cardMC;
 		}
@@ -81,10 +84,19 @@ package ICard.views {
 			}
 			
 		}
+		private function onTurnCard(arg1:int):Boolean{
+			return true;	
+		}
+		private function onSideCard(arg1:int):Boolean{
+			return true;	
+		}
+		
 		private function onCard2Fight(arg1:int):Boolean{
 			return true;	
 		}
 		private function onCard2Res(arg1:int):Boolean{
+			var card1:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyResourceSlotId};
+			_battleStage.UpdateCards(1,[card1]);
 			return true;	
 		}
 		
@@ -92,14 +104,12 @@ package ICard.views {
 			_battleStage.InitGuy([{realID:1},{realID:2}]);
 			
 			var card1:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyHandSlotId};
-			var card2:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyResourceSlotId};
+			//var card2:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyResourceSlotId};
 			_battleStage.UpdateCards(1,[card1]);
-			_battleStage.UpdateCards(1,[card2]);
+			//_battleStage.UpdateCards(1,[card2]);
 			
-			
-			var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(card1["cardID"]);
-			var c1:MovieClip = CreateCard(card1);
-			_battleField.Add2Slot(card1["slot"],c1);
+//			var c1:MovieClip = CreateCard(card1);
+//			_battleField.Add2Slot(card1["slot"],c1);
 			
 
 //			

@@ -10,6 +10,8 @@
     public class battleField extends MovieClip implements IBattleField{
 		private var _slots:Array;
 		private var _tip:ITip;
+		public static var _TurnCardFunc:Function;
+		public static var _SideCardFunc:Function;
 		public static var _CardToEnterFunc:Function;
 		public static var _CardToResFunc:Function;
         public function battleField(){
@@ -39,7 +41,7 @@
 			_slots[BattleFieldType.MyTombSlotId].Init(BattleFieldType.MyTombSlotId,2,350,1180);
 			
 			_slots[BattleFieldType.MyHeroSlotId] = new HeroBar;
-			_slots[BattleFieldType.MyHeroSlotId].Init(BattleFieldType.MyHeroSlotId,878,500,1180);
+			_slots[BattleFieldType.MyHeroSlotId].Init(BattleFieldType.MyHeroSlotId,880,500,1180);
 			
 			_slots[BattleFieldType.YouHandSlotId] = new SlotBar;
 			_slots[BattleFieldType.YouHandSlotId].Init(BattleFieldType.YouHandSlotId,2,-100,1180);
@@ -102,7 +104,7 @@
 					card = _slots[id].FindCard(realID);
 					if(card)
 					{
-							_slots[slotId].RemoveCard(realID);
+							_slots[id].RemoveCard(realID);
 							break;
 					}
 					id++;
@@ -128,6 +130,12 @@
 				id++;
 			}
 			
+		}
+		public function set onSideCard(arg1:Function):void{
+			_SideCardFunc = arg1;
+		}
+		public function set onTurnCard(arg1:Function):void{
+			_TurnCardFunc = arg1;
 		}
 		public function set onCard2Fight(arg1:Function):void{
 			_CardToEnterFunc = arg1;

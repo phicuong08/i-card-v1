@@ -28,6 +28,10 @@ package ICard.datas.card {
 		public function get Slot():int{
 			return _slot;
 		}
+		public function ToObject():Object{
+			return {"realID":_realID,"cardID":_cardID,
+								"hp":_hp,"atk":_atk,"def":_def,"side":_side,"turn":_turn,"slot":_slot};
+		}
 		public function format(arg1:Object):void{
 			_realID = arg1["realID"];
 			_cardID = arg1["cardID"];

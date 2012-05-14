@@ -50,7 +50,7 @@ package ICard.datas {
 		public static function IsSlotDiff(oldCard:CardData,newCard:CardData):Boolean{
 			if(oldCard==null || newCard==null)
 				return false;
-			return (oldCard.Slot==newCard.Slot);
+			return (oldCard.Slot!=newCard.Slot);
 		}
 		public static function IsAttrDiff(oldCard:CardData,newCard:CardData):Boolean{
 			if(oldCard==null || newCard==null)
@@ -69,7 +69,12 @@ package ICard.datas {
 		public static function IsSideDiff(oldCard:CardData,newCard:CardData):Boolean{
 			if(oldCard==null || newCard==null)
 				return false;
-			return (oldCard.Side==newCard.Side);		
+			return (oldCard.Side!=newCard.Side);		
+		}
+		public static function IsTurnDiff(oldCard:CardData,newCard:CardData):Boolean{
+			if(oldCard==null || newCard==null)
+				return false;
+			return (oldCard.Turn!=newCard.Turn);		
 		}
 	}
 	//var _local1:* = CardDiffData.init();
