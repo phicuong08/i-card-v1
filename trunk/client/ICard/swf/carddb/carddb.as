@@ -44,6 +44,11 @@
 			cardMC.realID = info["realID"];
 			return cardMC;
 		}
+		public function UpdateAttr(card:MovieClip,info:Object):Boolean{
+				if(card==null)
+						return false;
+				return true;
+		}
 		public function SetHp(card:MovieClip,hp:int):Boolean{
 			var index:int = 0;
 			while(index < card.numChildren)

@@ -23,6 +23,21 @@
 			this.x =x;
 			this.y =y;
 		}
+		public function FindCard(realID:int):MovieClip{
+			var ret:int = -1;
+			var index:int = 0;
+			while(index <this.numChildren)
+			{
+				var card:MovieClip = (getChildAt(index) as MovieClip);
+				if(card.realID==realID)
+				{
+					return card;
+				}
+				index++;
+			}
+			return null;
+		}
+		
 		public function FindCardIndex(realID:int):int{
 			var ret:int = -1;
 			var index:int = 0;

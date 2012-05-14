@@ -7,5 +7,6 @@ package ICard.assist.view.interfaces {
 			function CreateBackCard(info:Object):MovieClip;
 			function SetHp(card:MovieClip,hp:int):Boolean;
 			function SetAtk(card:MovieClip,atk:int):Boolean;
+			function UpdateAttr(card:MovieClip,info:Object):Boolean;
 	}
 }//package com.assist.view.interfaces 

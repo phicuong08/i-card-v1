@@ -71,19 +71,53 @@
 	    public function get content():MovieClip{
             return (this);
         }
+    public function FindCard(realID:int):MovieClip{
+    	var id:int = BattleFieldType.MyHandSlotId;
+    	var card:MovieClip;
+			while(id <= BattleFieldType.YouHeroSlotId)
+			{
+				card = _slots[id].FindCard(realID);
+				if(card)
+						return card;
+				id++;
+			}	
+			return null;
+    }    
 		public function SetMyHero(card:MovieClip):void{
 			
 		}
-		public function Add2Slot(slotId:int,card:MovieClip):void{
-			_slots[slotId].AddCard(card);
-		}
-		public function RemoveCard(slotId:int,realID:int):void{
-			_slots[slotId].RemoveCard(realID);
+		
+		public function Add2Slot(slotId:int,cardMC:MovieClip):void{
+			if(cardMC==null)
+					return;
+				RemoveCard(cardMC.realID);
+				_slots[slotId].AddCard(cardMC);
 		}
 		
-		public function SideCard(slotId:int,realID:int):void{
-			_slots[slotId].SideCard(realID);
+		 public function RemoveCard(realID:int):void{
+	    	var id:int = BattleFieldType.MyHandSlotId;
+	    	var card:MovieClip;
+				while(id <= BattleFieldType.YouHeroSlotId)
+				{
+					card = _slots[id].FindCard(realID);
+					if(card)
+					{
+							_slots[slotId].RemoveCard(realID);
+							break;
+					}
+					id++;
+				}	
+    }    
+    
+		public function SideCard(info:Object):void{
+				if(info==null)
+						return;
+				var cardMC = FindCard(info["realID"]);
+				if(cardMC==null)
+						return;
+				var bSide:Boolean = info["side"];
 		}
+		
 		public function set tip(_arg1:ITip):void{
 			_tip = _arg1;
 		   
