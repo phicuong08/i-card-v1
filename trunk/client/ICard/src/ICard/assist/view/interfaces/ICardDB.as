@@ -4,7 +4,6 @@ package ICard.assist.view.interfaces {
 
     public interface ICardDB {
 			function CreateCard(info:Object):MovieClip;
-			function CreateBackCard(info:Object):MovieClip;
 			function SetHp(card:MovieClip,hp:int):Boolean;
 			function SetAtk(card:MovieClip,atk:int):Boolean;
 			function UpdateAttr(card:MovieClip,info:Object):Boolean;

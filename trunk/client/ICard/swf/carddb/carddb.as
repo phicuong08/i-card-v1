@@ -24,31 +24,16 @@
 			//card1.x = card1.width/2;
 			//card1.y = card1.height/2;
 			//SetAtk(card1,87);
-			addChild(card1);
+			//addChild(card1);
 
 		}
-		public function CreateBackCard(info:Object):MovieClip{
-			var typeId:int = info["cardID"]/1000;
-			var cardMC:MovieClip;
-			var title:String = "c_" + info["cardID"].toString();
-			switch(typeId)
-			{
-				case 20:
-					cardMC = CreateHeroBackCard(title,info);
-					break;
-				default:
-					cardMC = new card_back;
-					cardMC.stand ="back";
-					break;
-			}
-			cardMC.realID = info["realID"];
-			return cardMC;
-		}
+
 		public function UpdateAttr(card:MovieClip,info:Object):Boolean{
 				if(card==null)
 						return false;
 				return true;
 		}
+		
 		public function SetHp(card:MovieClip,hp:int):Boolean{
 			var index:int = 0;
 			while(index < card.numChildren)
@@ -86,6 +71,10 @@
 			var title:String = "c_" + info["cardID"].toString();
 			switch(typeId)
 			{
+				case 1:
+					cardMC = new card_back;
+					info["turn"] = true;
+					break;
 				case 30:
 					cardMC = CreateWeaponCard(title,info);
 					break;
@@ -98,7 +87,12 @@
 					cardMC = CreateSoldierCard(title,info);
 					break;
 				case 20:
-					cardMC = CreateHeroCard(title,info);
+					if(info["turn"]==true)
+					{
+						cardMC = CreateHeroBackCard(title,info);
+					}
+					else
+						cardMC = CreateHeroCard(title,info);
 					break;
 				case 50:
 					cardMC = CreateSkillCard(title,info);
@@ -108,13 +102,13 @@
 					break;
 			}
 			cardMC.realID = info["realID"];
+			cardMC.turn = info["turn"];
 			return cardMC;
 		}
 		private function CreateSkillCard(title:String,info:Object):MovieClip{
 			var skillMC:MovieClip = new card_skill;
 			skillMC.addChild(CreateTitleMC(title));
 			skillMC.addChild(CreateCostMC(info["cost"]));
-			skillMC.stand ="normal";
 			return skillMC;
 			
 		}
@@ -122,7 +116,6 @@
 		private function CreateTaskCard(title:String):MovieClip{
 			var taskMC:MovieClip = new card_yuan;
 			taskMC.addChild(CreateTitleMC(title));
-			taskMC.stand ="normal";
 			return taskMC;
 			
 		}
@@ -131,7 +124,6 @@
 			var hero:MovieClip = new card_hero;
 			hero.addChild(CreateTitleMC(title));
 			hero.addChild(CreateHpMC(info["hp"]));
-			hero.stand ="normal";
 			return hero;
 			
 		}
@@ -139,7 +131,6 @@
 			var hero:MovieClip = new card_back;
 			hero.addChild(CreateTitleMC(title));
 			hero.addChild(CreateHpMC(info["hp"]));
-			hero.stand ="back";
 			return hero;
 			
 		}
@@ -150,7 +141,6 @@
 			weapon.addChild(CreateCostMC(info["cost"]));
 			weapon.addChild(CreateAtkMC(info["atk"]));
 			weapon.addChild(CreateHpMC(info["turncost"]));
-			weapon.stand ="normal";
 			return weapon;
 		}
 		
@@ -159,7 +149,6 @@
 			equip.addChild(CreateTitleMC(title));
 			equip.addChild(CreateCostMC(info["cost"]));
 			equip.addChild(CreateHpMC(info["def"]));
-			equip.stand ="normal";
 			return equip;
 		}
 		private function CreateSoldierCard(title:String,info:Object):MovieClip{
@@ -168,7 +157,6 @@
 			soldier.addChild(CreateHpMC(info["hp"]));
 			soldier.addChild(CreateCostMC(info["cost"]));
 			soldier.addChild(CreateAtkMC(info["atk"]));
-			soldier.stand ="normal";
 			return soldier;
 		}
 		

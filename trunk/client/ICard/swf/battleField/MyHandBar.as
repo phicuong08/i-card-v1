@@ -47,6 +47,7 @@
 			_cardMenu.exit_but.addEventListener(MouseEvent.CLICK,OnCardToTomb);
 			card.addChild(_cardMenu);
 		}
+		
 		public function OnCardToEnter(e:MouseEvent):void{
 			battleField._CardToEnterFunc(_selCard.realID);	
 			//trace(_selCard.realID,"To Enter!");
