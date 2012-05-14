@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class CardInfo {
-	private int Id = 0; // 牌的id，与数据库中的ID对应
+	public static final int COLOR_ALL = 0;	//所有种族 
+	public static final int COLOR_DPS = 1;  
+	public static final int COLOR_TANK = 2;
+	public static final int COLOR_HEALER = 3; 
+	public static final int COLOR_OTHER = 4;
+	
+	private int Id = 0; // 牌的id
 	private int CountOfThisCard = 0; // 这种牌的全服务器数量
 
 	private String Name = "";
