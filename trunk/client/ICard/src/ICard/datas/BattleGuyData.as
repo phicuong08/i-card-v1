@@ -72,7 +72,7 @@ package ICard.datas {
 			}
 		}
 		
-		public function ResNum():Boolean{
+		public function ResNum():int{
 			var val:int = 0;
 			for each( var card:CardData in _cardArr)
 			{
@@ -82,6 +82,7 @@ package ICard.datas {
 					val++;
 				}
 			}
+			return val;
 		}
 		
 		public function UseRes(val:int):Boolean{ 
