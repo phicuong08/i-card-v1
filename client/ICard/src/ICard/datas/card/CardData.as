@@ -18,6 +18,7 @@ package ICard.datas.card {
 		public var _side:Boolean;//横置
 		public var _turn:Boolean;//翻转
 		public var _slot:int;  //卡片所在槽 
+		public var _targetArr:Array;
 		
 		public function CardData():void{
 
