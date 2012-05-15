@@ -5,6 +5,13 @@ package sfs2x.extensions.icard.main;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
+import sfs2x.extensions.icard.main.commandHandler.ClientGameStateUpdateHandle;
+import sfs2x.extensions.icard.main.eventHandler.UserDisconnectedEventHandler;
+import sfs2x.extensions.icard.main.eventHandler.UserJoinedEventHandler;
+import sfs2x.extensions.icard.main.eventHandler.UserLeavedEventHandler;
+import sfs2x.extensions.icard.utils.Commands;
+
 import com.icard.data.excel.ExcelReader;
 import com.smartfoxserver.v2.core.SFSEventType;
 import com.smartfoxserver.v2.extensions.SFSExtension;
@@ -16,10 +23,11 @@ public class ICardExtension extends SFSExtension {
 		trace("**************************************");
 		trace("* Starting ICard extension");
 
-		//ws
-		HashMap<String,ArrayList<HashMap<String,String>>> data = ExcelReader.loadFile("./card.xls");
 
-		//ws
+		
+		//命令handler添加
+		//客户端准备
+		addRequestHandler(Commands.CMD_C2S_CLIENT_GAME_STATE_UPDATE,ClientGameStateUpdateHandle.class);
 		
 		// Event handler: join room
 		addEventHandler(SFSEventType.USER_JOIN_ROOM, UserJoinedEventHandler.class);

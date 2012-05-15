@@ -1,4 +1,4 @@
-package sfs2x.extensions.icard.main;
+package sfs2x.extensions.icard.main.eventHandler;
 
 import com.smartfoxserver.v2.core.ISFSEvent;
 import com.smartfoxserver.v2.exceptions.SFSException;

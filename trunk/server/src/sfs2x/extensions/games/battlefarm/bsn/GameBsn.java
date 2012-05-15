@@ -125,7 +125,7 @@ public class GameBsn
 		recipients.add(p1.getSfsUser());
 		recipients.add(p2.getSfsUser());
 
-		extension.send(Commands.XP, resObj, recipients);
+		//extension.send(Commands.XP, resObj, recipients);
 	}
 
 	/** 
@@ -246,7 +246,7 @@ public class GameBsn
 			recipients.add(p1.getSfsUser());
 			recipients.add(p2.getSfsUser());
 
-			extension.send(Commands.OPEN_DOOR, resObj, recipients);
+			//extension.send(Commands.OPEN_DOOR, resObj, recipients);
 
 		}
 		else
@@ -307,7 +307,7 @@ public class GameBsn
 					resObj.putUtfString("_cmd","stop");
 
 					// Send to remaining user
-					extension.send(Commands.CMD_STOP, resObj, remaining.getSfsUser());
+					//extension.send(Commands.CMD_STOP, resObj, remaining.getSfsUser());
 
 				}
 				else
