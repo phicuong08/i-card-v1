@@ -25,6 +25,9 @@ package ICard.datas.card {
 		public function get RealID():int{
 			return _realID;
 		}
+		public function get CardID():int{
+			return _cardID;
+		}
 		public function get Slot():int{
 			return _slot;
 		}
@@ -73,28 +76,35 @@ package ICard.datas.card {
 		public function IsDead():Boolean{
 			return (_hp<=0);
 		}
-		
-		//		public function GetAtk(void):int{
-		//			var baseInfo:Object = CardType.GetCardBattleInfo(_realID);
-		//			if(!baseInfo || !baseInfo["atk"])
-		//				return 0;
-		//			return (baseInfo["atk"] + _bufDB.AtkAdd());
-		//		}
-		//		public function GetDef(void):int{
-		//			var baseInfo:Object = CardType.GetCardBattleInfo(_realID);
-		//			if(!baseInfo || !baseInfo["def"])
-		//				return 0;
-		//			return (baseInfo["def"] + _bufDB.DefAdd());
-		//		}
-		//		public function GetBattleInfo():Object{
-		//			var battleInfo:Object ={};
-		//			var baseInfo:Object = CardType.GetCardBattleInfo(_realID);
-		//			if(!baseInfo)
-		//				retrun null;
-		//			battleInfo["hp"] = baseInfo["hp"]+ _bufDB.HpAdd() + _hpAdd;
-		//			battleInfo["atk"] = baseInfo["atk"]+ _bufDB.AtkAdd();
-		//			battleInfo["def"] = baseInfo["def"]+ _bufDB.DefAdd();
-		//		}
+		public function get Type():int{
+				var ret:int=0;
+				switch(_cardID/1000)
+				{
+				case 30:
+					ret = CardType.WeaponType;
+					break;
+				case 31:
+					ret = CardType.DefType;
+					break;
+				case 21:
+				case 22:
+				case 23:
+					ret = CardType.SoldierType;
+					break;
+				case 20:
+					ret = CardType.HeroType;
+					break;
+				case 50:
+					ret = CardType.SkillType;
+					break;
+				case 40:
+					ret = CardType.TaskType;
+					break;
+			}
+			return ret;
+		}	
+
+	
 		
 		//        public function format(_arg1:Array):void{
 		//            var _local2:Object = {};

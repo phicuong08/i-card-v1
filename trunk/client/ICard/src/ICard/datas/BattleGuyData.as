@@ -31,6 +31,10 @@ package ICard.datas {
 			return true;
 		}
 		
+		public function FindCard(arg1:int):CardData{
+			return _cardArr[arg1];
+		}
+		
 		public function UpdateCard(info:Object):void{
 			var realID:int = info["realID"];
 			var oldCard:CardData;
@@ -59,6 +63,7 @@ package ICard.datas {
 					card._side = false;
 			}
 		}
+		
 		public function ResetRes():void{
 			for each( var card:CardData in _cardArr)
 			{
@@ -66,7 +71,19 @@ package ICard.datas {
 					card._side = false;
 			}
 		}
-
+		
+		public function ResNum():Boolean{
+			var val:int = 0;
+			for each( var card:CardData in _cardArr)
+			{
+				if( card._slot == BattleFieldType.MyResourceSlotId &&
+					card._side ==false)
+				{
+					val++;
+				}
+			}
+		}
+		
 		public function UseRes(val:int):Boolean{ 
 			if(val>ResVal())
 				return false;

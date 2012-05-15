@@ -3,12 +3,33 @@ package ICard.assist.server {
 	
 	public class CardType {
 		
+		public static const HeroType = 0;
+		public static const SoldierType = 1;
+		public static const WeaponType = 2;
+		public static const DefType = 3;
+		public static const SkillType = 4;
+		public static const TaskType = 5;
+		
 		private static var _HeroCards:Object = null;
 		private static var _SoldierCards:Object = null;
 		private static var _WeaponCards:Object = null;
 		private static var _DefCards:Object = null;
 		private static var _SkillCards:Object = null;
 		private static var _TaskCards:Object = null;
+		private static var _UseCard:Object = null;
+		
+		public static function get UseCard():Object{
+			if (_UseCard == null){
+				throw (new Error("还未赋值！"));
+			};
+			return (_UseCard);
+		}
+		public static function set UseCard(_arg1:Object):void{
+			if (_UseCard != null){
+				throw (new Error("非法赋值"));
+			};
+			_UseCard = _arg1;
+		}
 		
 		public static function get HeroCards():Object{
 			if (_HeroCards == null){
@@ -111,6 +132,11 @@ package ICard.assist.server {
 			}
 			return battleInfo;
 		}
+		
+		public static function UseCardInfo(id:int):Array{
+				return _UseCard[id];
+		}
+		
 		public static function GetCardInfo(id:int):Array{
 			var typeId:int = id/1000;
 			var cardGroup:Object;
