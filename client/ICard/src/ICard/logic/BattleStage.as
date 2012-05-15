@@ -2,6 +2,7 @@
 package ICard.logic {
 	import ICard.datas.*;
 	import flash.utils.*;
+	import ICard.datas.card.*;
 	public class BattleStage {
 		private var _guy:Dictionary;
 		private var _myID:int;
@@ -20,7 +21,7 @@ package ICard.logic {
 			for each(var o:Object in guysInfo)
 			{
 				var newGuy:BattleGuy = new BattleGuy(o);
-				if(o["mine"]=true)
+				if(o["mine"]==true)
 						_myID = newGuy.ID;
 				_guy[newGuy.ID] =newGuy;
 			}
@@ -41,12 +42,13 @@ package ICard.logic {
 			var card:CardData = PlayerMe.CardDB.FindCard(realID);
 			if(!card)
 				return false;
-			if(!UseCard.UseAble(card,PlayerMe.CardDB.ResNum())	
+			if(!UseCard.UseAble(card,PlayerMe.CardDB.ResNum()))	
 				return false;
+			return true;
 		
 		}
 		public function Card2Res(realID:int):Boolean{
-		
+			return true;
 		}
 	}
 }//package com.assist.data.mission 

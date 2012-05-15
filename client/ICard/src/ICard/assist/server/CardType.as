@@ -3,12 +3,12 @@ package ICard.assist.server {
 	
 	public class CardType {
 		
-		public static const HeroType = 0;
-		public static const SoldierType = 1;
-		public static const WeaponType = 2;
-		public static const DefType = 3;
-		public static const SkillType = 4;
-		public static const TaskType = 5;
+		public static const HeroType:int = 0;
+		public static const SoldierType:int = 1;
+		public static const WeaponType:int = 2;
+		public static const DefType:int = 3;
+		public static const SkillType:int = 4;
+		public static const TaskType:int = 5;
 		
 		
 		private static var _HeroCards:Object = null;
