@@ -10,6 +10,7 @@ package ICard.assist.server {
 		public static const SkillType = 4;
 		public static const TaskType = 5;
 		
+		
 		private static var _HeroCards:Object = null;
 		private static var _SoldierCards:Object = null;
 		private static var _WeaponCards:Object = null;
