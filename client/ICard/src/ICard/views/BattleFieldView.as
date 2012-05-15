@@ -92,12 +92,11 @@ package ICard.views {
 		}
 		
 		private function onCard2Fight(arg1:int):Boolean{
-			return true;	
+			return _battleStage.Card2Fight(arg1);
 		}
+		
 		private function onCard2Res(arg1:int):Boolean{
-			var card1:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyResourceSlotId};
-			_battleStage.UpdateCards(1,[card1]);
-			return true;	
+			return _battleStage.Card2Res(arg1);
 		}
 		
 		private function test():void{

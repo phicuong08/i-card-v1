@@ -11,6 +11,9 @@ package ICard.logic {
 			_realID = arg1["realID"];
 			_data = new BattleGuyData;
 		}
+		public function get CardDB():BattleGuyData{
+			return _data;
+		}
 		public function get ID():int{
 			return _realID;
 		}
@@ -24,5 +27,6 @@ package ICard.logic {
 		public function UpdateCards(info:Array):void{
 			_data.UpdateCardArray(info);
 		}
+	
 	}
 }//package com.assist.data.mission 
