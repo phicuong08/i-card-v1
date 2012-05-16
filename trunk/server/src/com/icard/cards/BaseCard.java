@@ -12,7 +12,7 @@ public class BaseCard {
 	
 	protected CardInfo cardInfo;	//牌的静态信息引用，多张牌对应一个cardInfo对象。
 	protected CardPower cardPower;	//牌的能力，每张牌对应一个能力对象。
-	protected int IDinRoom;			//服务器内存中的uuid
+	protected int realIdInRoom;		//服务器内存中的uuid
 	protected int Cost = 0; 		// 上场花费（对盟军，技能有效）
 	protected int BaseAttack = 0; 	// 攻击力
 	protected int BaseLife = 0; 	// 生命
@@ -32,13 +32,7 @@ public class BaseCard {
 		cardPower =null;
 	}
 
-	public int getIDinRoom() {
-		return IDinRoom;
-	}
 
-	public void setIDinRoom(int iDinRoom) {
-		IDinRoom = iDinRoom;
-	}
 
 	public int getCost() {
 		return Cost;
@@ -66,6 +60,14 @@ public class BaseCard {
 
 	public ArrayList<PowerElement> getPowerEleList() {
 		return powerEleList;
+	}
+
+	public int getRealIdInRoom() {
+		return realIdInRoom;
+	}
+
+	public void setRealIdInRoom(int realIdInRoom) {
+		this.realIdInRoom = realIdInRoom;
 	}
 
 	public void setPowerEleList(ArrayList<PowerElement> powerEleList) {
