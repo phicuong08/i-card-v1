@@ -13,7 +13,6 @@ public class UserJoinedEventHandler extends BaseServerEventHandler {
 	public void handleServerEvent(ISFSEvent event) throws SFSException {
 		Room room = (Room) event.getParameter(SFSEventParam.ROOM);	
 
-
 			// Get user that joined
 			User user = (User) event.getParameter(SFSEventParam.USER);
 
