@@ -16,15 +16,11 @@ package ICard.logic {
 			};
 			return (_obj);
 		}
-		public function InitGuy(guysInfo:Array):void{
+		public function InitGuy(me:int,you:int):void{
 			_guy = new Dictionary;
-			for each(var o:Object in guysInfo)
-			{
-				var newGuy:BattleGuy = new BattleGuy(o);
-				if(o["mine"]==true)
-						_myID = newGuy.ID;
-				_guy[newGuy.ID] =newGuy;
-			}
+			_myID = me;
+			_guy[me] = new BattleGuy(me);
+			_guy[you] = new BattleGuy(you);
 		}
 		public function get PlayerMe():BattleGuy{
 			return _guy[_myID];

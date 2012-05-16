@@ -7,8 +7,8 @@ package ICard.logic {
 		private var _realID:int;
 
 		
-		public function BattleGuy(arg1:Object):void{
-			_realID = arg1["realID"];
+		public function BattleGuy(arg1:int):void{
+			_realID = arg1;
 			_data = new BattleGuyData;
 		}
 		public function get CardDB():BattleGuyData{
