@@ -40,9 +40,9 @@ package ICard.SFSMod {
 				_battleStage.onUpdateCard(cardInfo);
 			}
 		}
-		//²ÎÊý1(srcID);²ÎÊý2(target):Ä¿±ê¿¨{(realID)...},²ÎÊý3(time):·´Ó¦Ê±¼ä(Ãë),²ÎÊý4(attacker),²ÎÊý5(defender);
+		//ï¿½ï¿½ï¿½ï¿½1(srcID);ï¿½ï¿½ï¿½ï¿½2(target):Ä¿ï¿½ê¿¨{(realID)...},ï¿½ï¿½ï¿½ï¿½3(time):ï¿½ï¿½Ó¦Ê±ï¿½ï¿½(ï¿½ï¿½),ï¿½ï¿½ï¿½ï¿½4(attacker),ï¿½ï¿½ï¿½ï¿½5(defender);
 		public function onCardFight(params:ISFSObject):void{
-			var infoObj:ISFSObject = params.getSFSArray("fight");
+			var infoObj:ISFSObject = params.getSFSObject("fight");
 			var keyArr:Array = infoObj.getKeys();
 			var fightInfo:Object = new Object;
 			for each( var keyVal:String in keyArr)
@@ -54,13 +54,13 @@ package ICard.SFSMod {
 			var targets:Array = [];
 			for (var y:int = 0; y < targetArr.size(); y++)
 			{
-				var desID:int =  targetArr.getSFSObject(y);
+				var desID:int =  targetArr.getInt(y);
 				targets.push_back(desID);
 			}
 			_battleStage.onCardFight(fightInfo,targets);
 		}
 		
-		//²ÎÊý1(srcID):, ²ÎÊý2(target):{ {realID,hpAdd,def,atk,slot,turn,side} ,...}--ÊÜ×÷ÓÃ¿¨½á¹û
+		//ï¿½ï¿½ï¿½ï¿½1(srcID):, ï¿½ï¿½ï¿½ï¿½2(target):{ {realID,hpAdd,def,atk,slot,turn,side} ,...}--ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½
 		public function onCardFightResult(params:ISFSObject):void{
 			var srcID:int = params.getInt("srcID");
 			var targetArr:ISFSArray = params.getSFSArray("target");
@@ -76,7 +76,7 @@ package ICard.SFSMod {
 				}
 				targets.push_back(targetInfo);
 			}
-			
+			_battleStage.onCardFightResult(srcID,targets);
 		}
 		
 		public function QueryStartGame():void{

@@ -35,6 +35,7 @@ package ICard.views {
 		private function loadCallback():void
 		{
 			_battleStage = BattleStage.getInstance();
+			_battlestage.CardFightResultCallback = this.onCardFightResult;
 			this._battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
 			
 			this._battleField.tip = _viewMgr.tip.iTip;
@@ -58,10 +59,10 @@ package ICard.views {
 				{
 						var cardMC:MovieClip = _battleField.FindCard(cardObj["realID"]);
 						this._cardDB.UpdateAttr(cardMC,cardObj);
-				}
-				else if(CardDiffData.IsSideDiff(cardInfo[0],cardInfo[1]))
-				{
-						_battleField.SideCard(cardObj);
+						if(CardDiffData.IsSideDiff(cardInfo[0],cardInfo[1]))
+						{
+								_battleField.SideCard(cardObj);
+						}		
 				}
 				else
 				{
@@ -99,12 +100,15 @@ package ICard.views {
 			return _battleStage.Card2Res(arg1);
 		}
 		
+		public function onCardFightResult(srcID:int,targets:Array):void{
+			_viewMgr.fightMovie.show(srcID,targets);
+		}
 		private function test():void{
-			_battleStage.InitGuy([{realID:1},{realID:2}]);
+			_battleStage.InitGuy(1,2);
 			
-			var card1:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyHandSlotId};
+			var card1:Object={playerID:1,realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyHandSlotId};
 			//var card2:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyResourceSlotId};
-			_battleStage.UpdateCards(1,[card1]);
+			_battleStage.onUpdateCard(card1);
 			//_battleStage.UpdateCards(1,[card2]);
 			
 //			var c1:MovieClip = CreateCard(card1);

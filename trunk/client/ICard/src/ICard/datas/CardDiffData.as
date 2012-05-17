@@ -61,7 +61,7 @@ package ICard.datas {
 				return true;
 			else if(oldCard.Def!=newCard.Def)
 				return true;
-			else if(oldCard.Turn!=newCard.Turn)
+			else if(oldCard.Side!=newCard.Side)
 				return true;
 			return false;
 		}
