@@ -24,8 +24,8 @@ package ICard.logic {
 		public function EmptyCards():void{
 			_data.EmptyCards();
 		}
-		public function UpdateCards(info:Array):void{
-			_data.UpdateCardArray(info);
+		public function UpdateCard(info:Object):void{
+			_data.UpdateCard(info);
 		}
 	
 	}

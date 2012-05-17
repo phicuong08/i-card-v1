@@ -35,22 +35,47 @@ package ICard.SFSMod {
 				var cardInfo:Object = new Object;
 				for each( var keyVal:String in keyArr)
 				{
-					cardInfo[keyVal] = cardObj.getInt("keyVal");
+					cardInfo[keyVal] = cardObj.getInt(keyVal);
 				}
-				
-				
-				var cardData:SFSDataWrapper;
-				cardData.
-				cardObj.getData(
-				cardObj.getInt("hp");
-				cardObj.containsKey(
+				_battleStage.onUpdateCard(cardInfo);
+			}
+		}
+		//参数1(srcID);参数2(target):目标卡{(realID)...},参数3(time):反应时间(秒),参数4(attacker),参数5(defender);
+		public function onCardFight(params:ISFSObject):void{
+			var infoObj:ISFSObject = params.getSFSArray("fight");
+			var keyArr:Array = infoObj.getKeys();
+			var fightInfo:Object = new Object;
+			for each( var keyVal:String in keyArr)
+			{
+					fightInfo[keyVal] = infoObj.getInt(keyVal);
 			}
 				
+			var targetArr:ISFSArray = params.getSFSArray("target");
+			var targets:Array = [];
+			for (var y:int = 0; y < targetArr.size(); y++)
+			{
+				var desID:int =  targetArr.getSFSObject(y);
+				targets.push_back(desID);
+			}
+			_battleStage.onCardFight(fightInfo,targets);
 		}
-		public function onCardFight(params:ISFSObject):void{
-			
-		}
+		
+		//参数1(srcID):, 参数2(target):{ {realID,hpAdd,def,atk,slot,turn,side} ,...}--受作用卡结果
 		public function onCardFightResult(params:ISFSObject):void{
+			var srcID:int = params.getInt("srcID");
+			var targetArr:ISFSArray = params.getSFSArray("target");
+			var targets:Array = [];
+			for (var y:int = 0; y < targetArr.size(); y++)
+			{
+				var targetObj:ISFSObject = targetArr.getSFSObject(y);
+				var keyArr:Array = targetObj.getKeys();
+				var targetInfo:Object = new Object;
+				for each( var keyVal:String in keyArr)
+				{
+					targetInfo[keyVal] = targetObj.getInt(keyVal);
+				}
+				targets.push_back(targetInfo);
+			}
 			
 		}
 		

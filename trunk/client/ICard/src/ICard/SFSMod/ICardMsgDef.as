@@ -30,10 +30,10 @@ package ICard.SFSMod {
 		//{参数1(playerID,realID,cardID,slot,side,turn,hp,atk,def),...}
 		
 		public static var s2c_battle_card_fight:String = "11002";//卡片使用，包括施法与卡片战斗
-		//参数1(srcID);参数2(target):目标卡{(realID,slot)...},参数3(timer):反应时间(秒);
+		//参数1(srcID);参数2(target):目标卡{(realID)...},参数3(time):反应时间(秒),参数4(defender);
 		
 		
 		public static var s2c_battle_card_fight_result:String = "11003"; //战斗表现
-		//参数1(srcID):, 参数2(target):{ {realID,slot} ,...}--受作用卡结果
+		//参数1(srcID):, 参数2(target):{ {realID,hpAdd,def,atk,slot,turn,side} ,...}--受作用卡结果
 	}
 }//package ICard.protocols 

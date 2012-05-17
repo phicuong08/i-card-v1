@@ -6,6 +6,7 @@ package ICard.logic {
 	public class BattleStage {
 		private var _guy:Dictionary;
 		private var _myID:int;
+		private var _fightLink:FightLink;
 		private static var _obj:BattleStage;
 		public function BattleStage():void{
 		}
@@ -21,6 +22,7 @@ package ICard.logic {
 			_myID = me;
 			_guy[me] = new BattleGuy(me);
 			_guy[you] = new BattleGuy(you);
+			_fightLink = new FightLink;
 		}
 		public function get PlayerMe():BattleGuy{
 			return _guy[_myID];
@@ -29,11 +31,24 @@ package ICard.logic {
 			if(_guy[guyId])
 				_guy[guyId].ResetCards();
 		}
-		public function UpdateCards(guyId:int,info:Array):void{
-			if(_guy[guyId])
-				_guy[guyId].UpdateCards(info);
+		public function onUpdateCard(info:Object):void{
+			if(_guy[info["playerID"]])
+				_guy[info["playerID"]].onUpdateCard(info);
+		}
+		public function onCardFight(fightInfo:Object,targets:Array):void{
+			var srdID:int = fightInfo["srcID"];
+			var defender:int = fightInfo["defender"];
+			var timeVal = fightInfo["time"];
+			_fightLink.Add(srdID,targets);
+			if(defender==_myID) //·ÀÓù
+			{
+					
+			}
 		}
 		
+		public function InitDefend(playerID:int,timeVal:int):void{
+		
+		}
 		public function Card2Fight(realID:int):Boolean{
 			var card:CardData = PlayerMe.CardDB.FindCard(realID);
 			if(!card)

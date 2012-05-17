@@ -12,15 +12,7 @@ package ICard.datas {
 			_cardArr = new Dictionary;
 			_cardDiff = new CardDiffData;
 		}
-		
-		
-		public function UpdateCardArray(info:Array):void{
-			for each( var cardInfo:Object in info) 
-			{
-				UpdateCard(cardInfo);
-			}
-		}
-		
+	
 		public function EmptyCards():void{
 			_cardArr = new Dictionary;
 		}
