@@ -1,12 +1,15 @@
 //Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.logic {
 	import ICard.datas.*;
-	import flash.utils.*;
 	import ICard.datas.card.*;
+	
+	import flash.utils.*;
 	public class BattleStage {
 		private var _guy:Dictionary;
 		private var _myID:int;
 		private var _fightLink:FightLink;
+		private var _cardFightResultCallback:Function;
+		
 		private static var _obj:BattleStage;
 		public function BattleStage():void{
 		}
@@ -16,6 +19,9 @@ package ICard.logic {
 				_obj = new (BattleStage)();
 			};
 			return (_obj);
+		}
+		public function set CardFightResultCallback(arg1:Function):void{
+			_cardFightResultCallback = arg1;
 		}
 		public function InitGuy(me:int,you:int):void{
 			_guy = new Dictionary;
@@ -38,17 +44,18 @@ package ICard.logic {
 		public function onCardFight(fightInfo:Object,targets:Array):void{
 			var srdID:int = fightInfo["srcID"];
 			var defender:int = fightInfo["defender"];
-			var timeVal = fightInfo["time"];
+			var timeVal:int = fightInfo["time"];
 			_fightLink.Add(srdID,targets);
-			if(defender==_myID) //·ÀÓù
+			if(defender==_myID) //ï¿½ï¿½ï¿½ï¿½
 			{
 					
 			}
 		}
-		
-		public function InitDefend(playerID:int,timeVal:int):void{
-		
+		public function onCardFightResult(srcID:int,targets:Array):void{
+			if(_cardFightResultCallback!=null)
+				_cardFightResultCallback(srcID,targets);
 		}
+		
 		public function Card2Fight(realID:int):Boolean{
 			var card:CardData = PlayerMe.CardDB.FindCard(realID);
 			if(!card)

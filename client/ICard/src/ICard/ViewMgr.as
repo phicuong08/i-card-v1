@@ -112,6 +112,9 @@ package ICard {
 				public function get battleField():BattleFieldView{
 					return ((this.createObject(BattleFieldView) as BattleFieldView));
 				}
+				public function get fightMovie():FightMovieView{
+					return ((this.createObject(FightMovieView) as FightMovieView));
+				}
 				public function get initLoading():InitLoadingView{
 						return ((this.createObject(InitLoadingView) as InitLoadingView));
 				}
