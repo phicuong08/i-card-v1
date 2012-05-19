@@ -35,7 +35,7 @@ package ICard.views {
 		private function loadCallback():void
 		{
 			_battleStage = BattleStage.getInstance();
-			_battlestage.CardFightResultCallback = this.onCardFightResult;
+			_battleStage.CardFightResultCallback = this.onCardFightResult;
 			this._battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
 			
 			this._battleField.tip = _viewMgr.tip.iTip;
@@ -101,7 +101,7 @@ package ICard.views {
 		}
 		
 		public function onCardFightResult(srcID:int,targets:Array):void{
-			_viewMgr.fightMovie.show(srcID,targets);
+			_viewMgr.fightMovie.InitShow(srcID,targets);
 		}
 		private function test():void{
 			_battleStage.InitGuy(1,2);

@@ -12,9 +12,12 @@ package ICard.views {
 		private var _srcCard:int;
 		private var _targets:Array;
 		
-		public function show(srcID:int,targets:Array):void{
+		public function InitShow(srcID:int,targets:Array):void{
 			_srcCard =srcID;
 			_targets = targets;
+			loadAssets("fightmovie", this.loadCallback, "");
+		}
+		public function show():void{
 			loadAssets("fightmovie", this.loadCallback, "");
 		}
 		
