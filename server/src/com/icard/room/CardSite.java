@@ -21,7 +21,11 @@ public class CardSite {
 	public static final int  YourTombSlotId		= 11;
 	public static final int  YourHeroIdSlotId	= 12;
 	
+	public static final int  USER_READY_STATE_NOT_READY	= 0;
+	public static final int  USER_READY_STATE_READYED	= 1;
+	
 	public int belongUserID = -1; 
+	public int userReadyState =0; //[ 0--³õÊ¼×´Ì¬£¬ 1--¾ÍÐ÷]
 	
 	//Ì×ÅÆ
 	public List<BaseCard> CardBox = new ArrayList<BaseCard>();

@@ -89,6 +89,7 @@ public class CardUser {
 	public void siteUp(){
 		if(site!=null){
 			site.belongUserID=-1;
+			site.userReadyState = CardSite.USER_READY_STATE_NOT_READY;
 			site=null;
 		}
 	}
@@ -98,6 +99,7 @@ public class CardUser {
 			if(site.belongUserID ==-1){
 				this.site = site;
 				this.site.belongUserID =Id;
+				site.userReadyState = CardSite.USER_READY_STATE_NOT_READY;
 				return true;
 			}
 		}
