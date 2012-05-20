@@ -12,13 +12,13 @@ public class BaseCard {
 	
 	protected CardInfo cardInfo;	//牌的静态信息引用，多张牌对应一个cardInfo对象。
 	protected CardPower cardPower;	//牌的能力，每张牌对应一个能力对象。
-	protected int realIdInRoom;		//服务器内存中的uuid
+	protected int realId;			//牌桌上的中的uuid
 	protected int Cost = 0; 		// 上场花费（对盟军，技能有效）
 	protected int BaseAttack = 0; 	// 攻击力
 	protected int BaseLife = 0; 	// 生命
 	protected ArrayList<PowerElement> powerEleList = new ArrayList<PowerElement>();	//卡附着的技能列表
 	
-	BaseCard(CardInfo info){
+	public BaseCard(CardInfo info){
 		
 		this.cardInfo = info;
 		this.cardInfo.AddCountOfThisCard();//增加每种牌的计数
@@ -62,12 +62,12 @@ public class BaseCard {
 		return powerEleList;
 	}
 
-	public int getRealIdInRoom() {
-		return realIdInRoom;
+	public int getRealId() {
+		return realId;
 	}
 
-	public void setRealIdInRoom(int realIdInRoom) {
-		this.realIdInRoom = realIdInRoom;
+	public void setRealId(int realId) {
+		this.realId = realId;
 	}
 
 	public void setPowerEleList(ArrayList<PowerElement> powerEleList) {
