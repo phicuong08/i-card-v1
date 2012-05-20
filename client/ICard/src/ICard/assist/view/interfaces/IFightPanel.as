@@ -4,6 +4,6 @@ package ICard.assist.view.interfaces {
 
     public interface IFightPanel {
 			function get content():MovieClip;
-			function CreateCard(info:Object):MovieClip;
+			
 	}
 }//package com.assist.view.interfaces 
