@@ -4,9 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import sfs2x.extensions.icard.main.ParentExtension;
+import sfs2x.extensions.icard.utils.Commands;
+
 import com.icard.cards.BaseCard;
 import com.icard.user.CardUser;
+import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSArray;
+import com.smartfoxserver.v2.entities.data.SFSObject;
 
 public class CardRoom {
 	private int roomId;
@@ -84,4 +89,17 @@ public class CardRoom {
 		return watchers;
 	}
 	
+	//玩家准备状态改变
+	public void OnUserReadyStateUpdate (int userId, int userState ){
+		for(CardSite site:desktop.getSites()){
+			if(site.belongUserID == userId){
+				site.userReadyState = userState;
+				ISFSObject params = new SFSObject ();
+				params.putInt("playerId", userId);
+				List<User> recipients
+				ParentExtension.getInstance().send(Commands.CMD_S2C_CLIENT_GAME_STATE_UPDATE, params, recipients)
+			}
+		}
+		
+	}
 }

@@ -12,14 +12,13 @@ import com.icard.user.CardUserManager;
 
 public class CardDesktop {
 	
-
-	
 	//房主
 	private CardUser roomOwner = null;	
-	//游戏者
-	private CardUser gamePlayer =null;
+		
+	//游戏中所有的玩家
+	private HashMap <Integer,CardUser> allPlayers = new HashMap <Integer,CardUser>();	
 	
-	//观看者
+	//游戏中所有的观看者
 	private HashMap <Integer,CardUser>	watchers =null;
 	
 	private ArrayList<CardSite> sites =  new ArrayList<CardSite>();
@@ -27,6 +26,7 @@ public class CardDesktop {
 	private java.util.Random Random = new java.util.Random();
 	
 	public CardDesktop(){
+		//现在支持2人玩
 		sites.add(new CardSite());
 		sites.add(new CardSite());
 	}
@@ -34,13 +34,14 @@ public class CardDesktop {
 	//开始游戏
 	public void startGame(CardUser RoomOwner,CardUser Player,HashMap <Integer,CardUser>	watchers){
 		this.roomOwner = RoomOwner;
-		this.gamePlayer = Player;
+		allPlayers.put(RoomOwner.getId(), RoomOwner);
+		allPlayers.put(Player.getId(), Player);
 		this.watchers = watchers;
 		if(RefeshCard()==false){
 			return;
 		}
-		
 	}
+	
 	//洗牌
 	private boolean RefeshCard(){
 		int cardRealIdIndex =0;
@@ -69,5 +70,7 @@ public class CardDesktop {
 	public ArrayList<CardSite> getSites() {
 		return sites;
 	}
+	
+	
 	
 }
