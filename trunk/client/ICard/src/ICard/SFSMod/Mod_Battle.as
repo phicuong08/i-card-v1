@@ -22,23 +22,17 @@ package ICard.SFSMod {
 			var meID:int = params.getInt("me");
 			var youID:int = params.getInt("you");
 			_battleStage.InitGuy(meID,youID);
+			procCardArr(params);
 		}
+		
+
 		public function onBattleStateUpdate(params:ISFSObject):void{
+			var state:int = params.getInt("state");
+			var playerId:int = params.getInt("playerID");
 			
 		}
 		public function onCardUpdate(params:ISFSObject):void{
-			var cardArr:ISFSArray = params.getSFSArray("card");
-			for (var y:int = 0; y < cardArr.size(); y++)
-			{
-				var cardObj:ISFSObject = cardArr.getSFSObject(y);
-				var keyArr:Array = cardObj.getKeys();
-				var cardInfo:Object = new Object;
-				for each( var keyVal:String in keyArr)
-				{
-					cardInfo[keyVal] = cardObj.getInt(keyVal);
-				}
-				_battleStage.onUpdateCard(cardInfo);
-			}
+			procCardArr(params);
 		}
 		//����1(srcID);����2(target):Ŀ�꿨{(realID)...},����3(time):��Ӧʱ��(��),����4(attacker),����5(defender);
 		public function onCardFight(params:ISFSObject):void{
@@ -100,6 +94,19 @@ package ICard.SFSMod {
 			params.putInt("slot", slot);
 			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_update, params) );
 		}		
-
+		private function procCardArr(params:ISFSObject):void{
+			var cardArr:ISFSArray = params.getSFSArray("card");
+			for (var y:int = 0; y < cardArr.size(); y++)
+			{
+				var cardObj:ISFSObject = cardArr.getSFSObject(y);
+				var keyArr:Array = cardObj.getKeys();
+				var cardInfo:Object = new Object;
+				for each( var keyVal:String in keyArr)
+				{
+					cardInfo[keyVal] = cardObj.getInt(keyVal);
+				}
+				_battleStage.onUpdateCard(cardInfo);
+			}
+		}
 	}
 }//package ICard.protocols 

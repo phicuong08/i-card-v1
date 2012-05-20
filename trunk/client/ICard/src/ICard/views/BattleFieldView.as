@@ -83,7 +83,7 @@ package ICard.views {
 			if(this._battleField){
 				_popup.addView(this, this._battleField.content);
 			}
-			
+			_viewMgr.fightMovie.show();
 		}
 		private function onTurnCard(arg1:int):Boolean{
 			return true;	
@@ -104,11 +104,16 @@ package ICard.views {
 			_viewMgr.fightMovie.InitShow(srcID,targets,oldCards,bEnemy);
 		}
 		private function test():void{
-			_battleStage.InitGuy(1,2);
 			
-			var card1:Object={playerID:1,realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyHandSlotId};
+			//_viewMgr.fightMovie.show();
+			//_battleStage.InitGuy(1,2);
+			
+			//var card1:Object={playerID:1,realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyHandSlotId};
+			//_battleStage.onUpdateCard(card1);
+			
+			
 			//var card2:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyResourceSlotId};
-			_battleStage.onUpdateCard(card1);
+			
 			//_battleStage.UpdateCards(1,[card2]);
 			
 //			var c1:MovieClip = CreateCard(card1);

@@ -2,7 +2,7 @@
 package ICard.assist.view.interfaces {
     import flash.display.*;
 
-    public interface IFightPanel {
+    public interface IFightMovie {
 			function get content():MovieClip;
 			
 	}
