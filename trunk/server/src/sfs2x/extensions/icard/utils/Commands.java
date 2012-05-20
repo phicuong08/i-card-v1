@@ -7,13 +7,14 @@ public class Commands {
 	
 	
 	public static final String CMD_S2C_GAME_START 				= "10001";
-	//参数1(me)--我方playerID ;参数2(you):--对方playerID,参数3(cards)--(playerID,realID,cardID,slot,side,turn,hp,atk,def),...}
+	//参数1(me)--我方playerID ;参数2(you):--对方playerID,参数3(card)--(playerID,realID,cardID,slot,side,turn,hp,atk,def),...}
+
 
 	public static final String CMD_S2C_CLIENT_GAME_STATE_UPDATE	="10002";
 	//参数1(playerID) ;参数2(state): 状态 [ 0--初始状态， 1--就绪]
 	
 	public static final String CMD_S2C_CARD_UPDATE				="11001";
-	//{参数1(playerID,realID,cardID,slot,side,turn,hp,atk,def),...}
+	//{参数1(card)--(playerID,realID,cardID,slot,side,turn,hp,atk,def),...}
 	//卡片状态改变
 
 	public static final String CMD_S2C_CARD_FIGHT				="11002";
