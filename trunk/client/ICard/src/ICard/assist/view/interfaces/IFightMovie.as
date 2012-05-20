@@ -5,6 +5,7 @@ package ICard.assist.view.interfaces {
 
     public interface IFightMovie {
       		function get content():MovieClip;
+			function show(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void;
 			//function set onSideCard(_arg1:Function):void;
 	}
 }//package com.assist.view.interfaces 

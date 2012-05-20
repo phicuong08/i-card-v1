@@ -100,8 +100,8 @@ package ICard.views {
 			return _battleStage.Card2Res(arg1);
 		}
 		
-		public function onCardFightResult(srcID:int,targets:Array):void{
-			_viewMgr.fightMovie.InitShow(srcID,targets);
+		public function onCardFightResult(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
+			_viewMgr.fightMovie.InitShow(srcID,targets,oldCards,bEnemy);
 		}
 		private function test():void{
 			_battleStage.InitGuy(1,2);

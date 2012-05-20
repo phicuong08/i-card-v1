@@ -55,7 +55,7 @@ package ICard.SFSMod {
 			for (var y:int = 0; y < targetArr.size(); y++)
 			{
 				var desID:int =  targetArr.getInt(y);
-				targets.push_back(desID);
+				targets.push(desID);
 			}
 			_battleStage.onCardFight(fightInfo,targets);
 		}
@@ -74,7 +74,7 @@ package ICard.SFSMod {
 				{
 					targetInfo[keyVal] = targetObj.getInt(keyVal);
 				}
-				targets.push_back(targetInfo);
+				targets.push(targetInfo);
 			}
 			_battleStage.onCardFightResult(srcID,targets);
 		}

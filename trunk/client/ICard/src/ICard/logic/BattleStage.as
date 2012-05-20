@@ -52,10 +52,22 @@ package ICard.logic {
 			}
 		}
 		public function onCardFightResult(srcID:int,targets:Array):void{
+			var oldCards:Array=[];
+			var srcGuy:BattleGuy;
+			var desGuy:BattleGuy;
+			for each(var card:Object in targets){
+				var cardOld:Object = FindCard(card["realID"]);
+				if(cardOld)
+					oldCards.push(cardOld["card"]);
+				if( card["realID"] == srcID)
+					srcGuy = card["guy"];
+				else
+					desGuy = card["guy"];
+			}
 			if(_cardFightResultCallback!=null)
-				_cardFightResultCallback(srcID,targets);
+				_cardFightResultCallback(srcID,targets,oldCards,(srcGuy!=desGuy));
 		}
-		
+
 		public function Card2Fight(realID:int):Boolean{
 			var card:CardData = PlayerMe.CardDB.FindCard(realID);
 			if(!card)
@@ -67,6 +79,21 @@ package ICard.logic {
 		}
 		public function Card2Res(realID:int):Boolean{
 			return true;
+		}
+		public function FindCard(realID:int):Object{
+			var cardInfo:Object = new Object;
+			for each(var guy:BattleGuy in _guy)
+			{
+				var card:CardData = guy.CardDB.FindCard(realID);
+				if(card)
+				{
+					cardInfo["card"]=card;
+					cardInfo["guy"]=guy;
+					return cardInfo;
+					
+				}
+			}
+			return null;
 		}
 	}
 }//package com.assist.data.mission 
