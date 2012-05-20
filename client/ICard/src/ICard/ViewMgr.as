@@ -66,6 +66,7 @@ package ICard {
             
         }
 		    public function initAddAssets():void{
+				addAssets("fightmovie","fightmovie.swf");
 				addAssets("carddb","carddb.swf");
 				addAssets("templet","templet.swf");
 				addAssets("battlefield","battlefield.swf");
@@ -96,6 +97,9 @@ package ICard {
 				}
 				public function get alert():AlertView{
 						return ((this.createObject(AlertView) as AlertView));
+				}
+				public function get fightmovie():FightMovieView{
+					return ((this.createObject(FightMovieView) as FightMovieView));
 				}
 				public function get login():LoginView{
 						return ((this.createObject(LoginView) as LoginView));
@@ -219,7 +223,7 @@ package ICard {
    
         public function get freeViews():Array{
             //return ([ChatView, ChooseCampView, GameMasterView, MissionPracticeView, PanelLoadingView, RuneView, TakeBibleReadyView, TakeBibleRoadView, TravelEventView, WhatsNewView, TriggerFunctionView, FriendMessageView]);
-			return [];
+			return [FightMovieView];
         }
 		public function get stackViews():Array{
 			return [MainmenuView,RoomListView,WaitRoomView];

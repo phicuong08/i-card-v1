@@ -8,7 +8,7 @@ package ICard.SFSMod {
 		//clinet msg
 		
 		public static var c2s_client_battle_state_update:String ="1";  //玩家状态修改
-		
+		//参数1(state);状态 [ 0--初始状态， 1--就绪]
 		
 		//卡片消息
 		public static var c2s_battle_card_use:String ="1001";       //使用卡片  
@@ -21,13 +21,13 @@ package ICard.SFSMod {
 		//game start 开始游戏，参数1:玩家牌更新信息; 
 		//{player1{card1{realID,cardID},card2,...},player2,...}
 		public static var s2c_client_battle_start:String ="10001";   //开始游戏
-		//参数1(me)--我方playerID ;参数2(you):--对方playerID,
+		//参数1(me)--我方playerID ;参数2(you):--对方playerID,参数3(card)--(playerID,realID,cardID,slot,side,turn,hp,atk,def),...}
 		
 		public static var s2c_client_battle_state_update:String ="10002"; //玩家状态改变
 		//参数1(playerID) ;参数2(state): 状态 [ 0--初始状态， 1--就绪]
 		
 		public static var s2c_battle_card_update:String ="11001"; //卡片状态改变
-		//{参数1(playerID,realID,cardID,slot,side,turn,hp,atk,def),...}
+		//{参数1(card)--(playerID,realID,cardID,slot,side,turn,hp,atk,def),...}
 		
 		public static var s2c_battle_card_fight:String = "11002";//卡片使用，包括施法与卡片战斗
 		//参数1(srcID);参数2(target):目标卡{(realID)...},参数3(time):反应时间(秒),参数4(defender);

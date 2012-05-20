@@ -27,7 +27,7 @@ package ICard.datas {
 			return _cardArr[arg1];
 		}
 		
-		public function UpdateCard(info:Object):void{
+		public function onUpdateCard(info:Object):void{
 			var realID:int = info["realID"];
 			var oldCard:CardData;
 			var newCard:CardData = new CardData;

@@ -26,13 +26,15 @@ package ICard.views {
 		
 		private function loadCallback():void
 		{
+//			_viewMgr.addToPositionList(sign, this.reposition);
 			this._fightmovie = (_viewMgr.getAssetsObject("fightmovie", "fightmovie") as IFightMovie);
-			this._fightmovie.show(_srcCard,_targets,_oldCards,_bEnemy);
+//			this._fightmovie.show(_srcCard,_targets,_oldCards,_bEnemy);
 			this.render();
 		}
 		private function render():void{
 			if(this._fightmovie){
 				_popup.addView(this, this._fightmovie.content);
+				_viewMgr.center(sign, this._fightmovie.content);
 			}
 		}
 	
@@ -41,6 +43,21 @@ package ICard.views {
 		}
 		public function clear():void{
 		}
-		
+		public function reposition(_arg1:Boolean=true):void{
+			var _local2:int;
+			var _local3:int;
+			if (inStage == false){
+				return;
+			};
+			if (true == _arg1){
+				//				_viewMgr.toolbar.reposition();
+			} else {
+				_local2 = Structure.stageWidth;
+				_local3 = Structure.stageHeight;
+//				this._il.content.x = ((_local2 - this._il.content.width) / 2);
+//				this._il.content.y = ((_local3 - this._il.content.height) / 2);
+			};
+			_structure.reposition();
+		}
 	}
 }//package com.views 
