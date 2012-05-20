@@ -5,16 +5,16 @@
 	import flash.display.BitmapData;
 	import flash.events.MouseEvent;
     public class cardFactory extends MovieClip{
-		public static const _cardWidth =120;
-		public static const _cardHeight = 150;
-		public static const _title_x:int = 60;
-		public static const _title_y:int = 20;
-		public static const _cost_x = 15;
-		public static const _cost_y = 6;
-		public static const _hp_x = 100;
-		public static const _hp_y = 120;
-		public static const _at_x = 18;
-		public static const _at_y = 120;
+		public static const _cardWidth =180;
+		public static const _cardHeight = 225;
+		public static const _title_x:int = 90;
+		public static const _title_y:int = 30;
+		public static const _cost_x = 22;
+		public static const _cost_y = 16;
+		public static const _hp_x = 150;
+		public static const _hp_y = 184;
+		public static const _at_x = 28;
+		public static const _at_y = 184;
         public function cardFactory(){
 		}
 
@@ -171,9 +171,7 @@
 			var classTitle:Class = getDefinitionByName(title) as Class;
 			var titlePic:MovieClip = new classTitle;
 			titlePic.x = _title_x +titlePic.width/20 -_cardWidth/2;
-			titlePic.y = -10 -_cardHeight/2;;
-			titlePic.scaleX = .9;
-			titlePic.scaleY = .9;
+			titlePic.y = _title_y -_cardHeight/2;;
 			titlePic.cardpart = "title";
 			return titlePic;
 		}
