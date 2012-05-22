@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import sfs2x.extensions.icard.main.ParentExtension;
+import sfs2x.extensions.icard.utils.Commands;
+
 import com.icard.cards.BaseCard;
 import com.icard.user.CardUser;
 import com.icard.user.CardUserManager;
+import com.smartfoxserver.v2.entities.User;
+import com.smartfoxserver.v2.entities.data.ISFSObject;
+import com.smartfoxserver.v2.entities.data.SFSObject;
 
  
 
@@ -40,6 +46,18 @@ public class CardDesktop {
 		if(RefeshCard()==false){
 			return;
 		}
+		ISFSObject params = new SFSObject ();
+		params.putInt("playerID", userId);
+		params.putInt("state",userState);
+		List<CardUser> cardUser = new ArrayList<CardUser>();
+		cardUser.add(roomOwner);
+		gamePlayer!=null){
+			cardUser.add(gamePlayer);
+		}
+		cardUser.addAll(watchers.values());
+		List<User> recipients = CardUserManager.getInstance().GetSFSUserByCardUser(cardUser);
+		//·¢ËÍ
+		ParentExtension.getInstance().send(Commands.CMD_S2C_CLIENT_GAME_STATE_UPDATE, params, recipients);
 	}
 	
 	//Ï´ÅÆ
