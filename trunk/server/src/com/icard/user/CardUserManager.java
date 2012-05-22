@@ -1,7 +1,13 @@
 package com.icard.user;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import sfs2x.extensions.icard.main.ParentExtension;
+
+import com.smartfoxserver.v2.entities.User;
 
 
 
@@ -38,5 +44,14 @@ public class CardUserManager {
 		}else{
 			return null;
 		}
+	}
+	
+	public List<User> GetSFSUserByCardUser(List<CardUser> cardUser){
+		List<User> ret = new ArrayList<User>();
+		for(CardUser card:cardUser){
+			User user = ParentExtension.getInstance().getParentZone().getUserById(card.getId());
+			ret.add(user);
+		}
+		return ret;
 	}
 }

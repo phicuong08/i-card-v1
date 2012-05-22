@@ -2,6 +2,7 @@ package com.icard.room;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import sfs2x.extensions.icard.main.ParentExtension;
@@ -9,6 +10,8 @@ import sfs2x.extensions.icard.utils.Commands;
 
 import com.icard.cards.BaseCard;
 import com.icard.user.CardUser;
+import com.icard.user.CardUserManager;
+import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSArray;
 import com.smartfoxserver.v2.entities.data.SFSObject;
@@ -95,11 +98,32 @@ public class CardRoom {
 			if(site.belongUserID == userId){
 				site.userReadyState = userState;
 				ISFSObject params = new SFSObject ();
-				params.putInt("playerId", userId);
-				List<User> recipients
-				ParentExtension.getInstance().send(Commands.CMD_S2C_CLIENT_GAME_STATE_UPDATE, params, recipients)
+				params.putInt("playerID", userId);
+				params.putInt("state",userState);
+				List<CardUser> cardUser = new ArrayList<CardUser>();
+				if(roomOwner!=null){
+					cardUser.add(roomOwner);
+				}
+				if(gamePlayer!=null){
+					cardUser.add(gamePlayer);
+				}
+				cardUser.addAll(watchers.values());
+				List<User> recipients = CardUserManager.getInstance().GetSFSUserByCardUser(cardUser);
+				//发送
+				ParentExtension.getInstance().send(Commands.CMD_S2C_CLIENT_GAME_STATE_UPDATE, params, recipients);
+				break;
 			}
 		}
-		
+		//查看是否所有玩家都准备完毕
+		boolean allSiteReady = true;
+		for(CardSite site:desktop.getSites()){
+			if(site.userReadyState == 0){
+				allSiteReady = false;
+			}
+		}
+		if(allSiteReady == true){
+			//开始游戏
+			desktop.startGame(roomOwner, gamePlayer, watchers);
+		}
 	}
 }
