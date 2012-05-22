@@ -5,6 +5,8 @@
 	import ICard.assist.view.interfaces.*;
 	import flash.display.BitmapData;
 	import flash.events.MouseEvent;
+	import flash.events.TimerEvent;
+
     public class fightmovie extends MovieClip implements IFightMovie{
 		
 		private var _timerShowResult:Timer;
@@ -14,13 +16,18 @@
 			var card1:Object= {realID:1,cardID:40001,hp:18,cost:3,turncost:1,atk:2,def:0,side:false,turn:false};
 			var card2:Object={realID:2,cardID:40002,hp:18,cost:3,turncost:1,atk:2,def:0,side:false,turn:false};
 			var card3:Object={realID:3,cardID:30001,hp:18,cost:32,turncost:12,atk:22,def:0,side:false,turn:false};
+			var card4:Object= {realID:1,cardID:40001,hp:16,cost:3,turncost:1,atk:2,def:0,side:false,turn:false};
+			var card5:Object={realID:2,cardID:40002,hp:18,cost:3,turncost:1,atk:4,def:0,side:false,turn:false};
+			var card6:Object={realID:3,cardID:30001,hp:18,cost:32,turncost:12,atk:22,def:1,side:false,turn:false};
+
 			_timerShowResult = new Timer(100, 0);
+			
+			show(1,[card1,card2,card3],[card4,card5,card6],true);
 			_timerShowResult.addEventListener(TimerEvent.TIMER, this.showResult);
-			show(1,[card1,card2,card3],[card1,card2,card3],true);
 		}
 		public function show(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
 			AddObject(CreateFightCard(srcID,oldCards,targets));
-			var fightIcon:MovieClip = cardFactory.CreateIcon(bEnemy);
+			var fightIcon:MovieClip = cardFactory.CreateFightIcon(bEnemy);
 			AddObject(fightIcon);
 			for each(var target:Object in targets)
 			{
@@ -59,8 +66,10 @@
 				return null;
 			var cardMC:MovieClip = cardFactory.CreateCard(oldCard);
 			var resultMC:MovieClip;
+			trace("hp new",newCard["hp"],"hp old",oldCard["hp"]);
 			if( newCard["hp"]!= oldCard["hp"])
 			{
+
 					var hpVal:int = newCard["hp"] - oldCard["hp"];
 					resultMC = (hpVal>0)?cardFactory.CreateGain(Math.abs(hpVal)): cardFactory.CreateDebuf(Math.abs(hpVal));
 					resultMC.x =resultMC.width/2;
@@ -71,7 +80,7 @@
 			{
 					var atkVal:int = newCard["atk"] - oldCard["atk"];
 					resultMC = (atkVal>0)?cardFactory.CreateGain(Math.abs(atkVal)): cardFactory.CreateDebuf(Math.abs(atkVal));
-					resultMC._scale=0.6;
+					//resultMC._scale=0.6;
 					resultMC.x = -cardMC.height/2 + resultMC.width/2;
 					resultMC.y = cardMC.height/2 + resultMC.height/2;
 					cardMC.addChild(resultMC);			
@@ -80,17 +89,18 @@
 			{
 					var defVal:int = newCard["def"] - oldCard["def"];
 					resultMC = (defVal>0)?cardFactory.CreateGain(Math.abs(defVal)): cardFactory.CreateDebuf(Math.abs(defVal));
-					resultMC._scale=0.6;
+					//resultMC._scale=0.6;
 					resultMC.x = -cardMC.height/2 + resultMC.width/2;
 					resultMC.y = cardMC.height/2 + resultMC.height/2;
 					cardMC.addChild(resultMC);			
 			}
+			return cardMC;
 		}
 		public function AddObject(obj:MovieClip):void{
 			if(!obj)
 				return;
 			this.addChild(obj);
-			_showCardArr.push(ob);
+			_showCardArr.push(obj);
 			UpdatePos();
 		}
 		
