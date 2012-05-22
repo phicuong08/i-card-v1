@@ -176,7 +176,7 @@
 			return titlePic;
 		}
 		
-		public static function CreateIcon(bEnemy:Boolean):MovieClip{
+		public static function CreateFightIcon(bEnemy:Boolean):MovieClip{
 			var classVal:Class;
 			if(bEnemy)
 			{
@@ -233,7 +233,7 @@
 			numMC.x = delMC.width;
 			valMC.addChild(numMC);
 			valMC.showVal=1;
-			valMC._alpha =0;
+			valMC.alpha =0;
 			return valMC;
 		}
 		
@@ -245,7 +245,7 @@
 			numMC.x = addMC.width;
 			valMC.addChild(numMC);
 			valMC.showVal=1;
-			valMC._alpha =0;
+			valMC.alpha =0;
 			return valMC;
 		}
 		public static function ResultAlphaInc(cardMC:MovieClip):Boolean{
@@ -253,12 +253,14 @@
 			var doAlpha:Boolean=false;
 			while(index < cardMC.numChildren)
 			{
-				var elem:MovieClip = (card.getChildAt(index) as MovieClip);
-				if(elem["showVal"]==1 && elem._alpha<100)
+				var elem:MovieClip = (cardMC.getChildAt(index) as MovieClip);
+				if(elem && elem["showVal"]==1 && elem.alpha<100)
 				{
 					doAlpha = true;
-					elem._alpha +=10;
+					elem.alpha +=10;
+					trace("here go");
 				}
+				index++;
 			}
 			return doAlpha;
 		}
