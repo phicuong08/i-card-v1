@@ -206,6 +206,84 @@
 			valMC.addChild(lowPic);
 			return valMC;
 		}
-
+		private static function CreateRedNum(val:int):MovieClip{
+			var valMC:MovieClip = new MovieClip;
+			var lowVal:int =val%10;
+			var highVal:int = val/10;
+			var offSet:int = 0;
+			if(highVal>0)
+			{
+				var classVal:Class = getDefinitionByName("num_r_"+highVal) as Class;
+				var highPic:MovieClip = new classVal;
+				valMC.addChild(highPic);
+				offSet = 10;
+			}
+			var classVal2:Class = getDefinitionByName("num_r_"+lowVal) as Class;
+			var lowPic:MovieClip = new classVal2;
+			lowPic.x = offSet;
+			valMC.addChild(lowPic);
+			return valMC;
+		}
+		
+		public static function CreateDebuf(val:int):MovieClip{
+			var valMC:MovieClip = new MovieClip;
+			var delMC:MovieClip = CreateIcon("del_icon");	
+			var numMC:MovieClip = CreateRedNum(val);
+			valMC.addChild(delMC);
+			numMC.x = delMC.width;
+			valMC.addChild(numMC);
+			valMC.showVal=1;
+			valMC._alpha =0;
+			return valMC;
+		}
+		
+		public static function CreateGain(val:int):MovieClip{
+			var valMC:MovieClip = new MovieClip;
+			var addMC:MovieClip = CreateIcon("add_icon");	
+			var numMC:MovieClip = CreateGreenNum(val);
+			valMC.addChild(addMC);
+			numMC.x = addMC.width;
+			valMC.addChild(numMC);
+			valMC.showVal=1;
+			valMC._alpha =0;
+			return valMC;
+		}
+		public static function ResultAlphaInc(cardMC:MovieClip):Boolean{
+			var index:int = 0;
+			var doAlpha:Boolean=false;
+			while(index < cardMC.numChildren)
+			{
+				var elem:MovieClip = (card.getChildAt(index) as MovieClip);
+				if(elem["showVal"]==1 && elem._alpha<100)
+				{
+					doAlpha = true;
+					elem._alpha +=10;
+				}
+			}
+			return doAlpha;
+		}
+		private static function CreateIcon( icon:String):MovieClip{
+				var classVal:Class = getDefinitionByName(icon) as Class;
+				var iconMC:MovieClip = new classVal;
+				return iconMC;
+		}
+		private static function CreateGreenNum(val:int):MovieClip{
+			var valMC:MovieClip = new MovieClip;
+			var lowVal:int =val%10;
+			var highVal:int = val/10;
+			var offSet:int = 0;
+			if(highVal>0)
+			{
+				var classVal:Class = getDefinitionByName("num_g_"+highVal) as Class;
+				var highPic:MovieClip = new classVal;
+				valMC.addChild(highPic);
+				offSet = 10;
+			}
+			var classVal2:Class = getDefinitionByName("num_g_"+lowVal) as Class;
+			var lowPic:MovieClip = new classVal2;
+			lowPic.x = offSet;
+			valMC.addChild(lowPic);
+			return valMC;
+		}
     }
 }//package 
