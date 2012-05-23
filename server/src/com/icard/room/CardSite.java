@@ -51,4 +51,18 @@ public class CardSite {
 		FightSlot.clear();
 		TombSlot.clear();
 	}
+	
+	//ÆðÅÆ
+	public List<BaseCard> pickCard(int cardNumber){
+		List<BaseCard> ret = new ArrayList<BaseCard>();
+		for(int index =0;index<cardNumber;index++){
+			BaseCard card = CardBox.get(index);
+			ret.add(card);
+			HandSlot.put(card.getRealId(), card);
+		}
+		for(int index =0;index<cardNumber;index++){
+			CardBox.remove(index);
+		}
+		return ret;
+	}
 }
