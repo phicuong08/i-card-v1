@@ -146,7 +146,7 @@
 		}
 		
 		private static function CreateHpMC(hp:int):MovieClip{
-			var hpMC:MovieClip = CreateNum(hp);
+			var hpMC:MovieClip = CreateNum("num_",hp);
 			hpMC.x = _hp_x -hpMC.width/2 - _cardWidth/2;
 			hpMC.y = _hp_y - _cardHeight/2;
 			hpMC.cardpart = "hp";
@@ -154,14 +154,14 @@
 		}
 		
 		private static function CreateCostMC(cost:int):MovieClip{
-			var costMC:MovieClip = CreateNum(cost);
+			var costMC:MovieClip = CreateNum("num_",cost);
 			costMC.x = _cost_x -costMC.width/2-_cardWidth/2;
 			costMC.y = _cost_y -_cardHeight/2;
 			costMC.cardpart = "cost";
 			return costMC;
 		}
 		private static function CreateAtkMC(at:int):MovieClip{
-			var atMC:MovieClip = CreateNum(at);
+			var atMC:MovieClip = CreateNum("num_",at);
 			atMC.x = _at_x- atMC.width/2 -_cardWidth/2;
 			atMC.y = _at_y -_cardHeight/2;
 			atMC.cardpart = "atk";
@@ -188,47 +188,22 @@
 			}
 			return new classVal;
 		}
-		private static function CreateNum(val:int):MovieClip{
+			
+		public static function CreateDebuf_Big(val:int):MovieClip{
 			var valMC:MovieClip = new MovieClip;
-			var lowVal:int =val%10;
-			var highVal:int = val/10;
-			var offSet:int = 0;
-			if(highVal>0)
-			{
-				var classVal:Class = getDefinitionByName("num_"+highVal) as Class;
-				var highPic:MovieClip = new classVal;
-				valMC.addChild(highPic);
-				offSet = 10;
-			}
-			var classVal2:Class = getDefinitionByName("num_"+lowVal) as Class;
-			var lowPic:MovieClip = new classVal2;
-			lowPic.x = offSet;
-			valMC.addChild(lowPic);
+			var delMC:MovieClip = CreateIcon("big_sub");	
+			var numMC:MovieClip = CreateNum("big_y_",val);
+			valMC.addChild(delMC);
+			numMC.x = delMC.width;
+			valMC.addChild(numMC);
+			valMC.showVal=1;
+			valMC.alpha =0;
 			return valMC;
 		}
-		private static function CreateRedNum(val:int):MovieClip{
+		public static function CreateDebuf_Mini(val:int):MovieClip{
 			var valMC:MovieClip = new MovieClip;
-			var lowVal:int =val%10;
-			var highVal:int = val/10;
-			var offSet:int = 0;
-			if(highVal>0)
-			{
-				var classVal:Class = getDefinitionByName("num_r_"+highVal) as Class;
-				var highPic:MovieClip = new classVal;
-				valMC.addChild(highPic);
-				offSet = 10;
-			}
-			var classVal2:Class = getDefinitionByName("num_r_"+lowVal) as Class;
-			var lowPic:MovieClip = new classVal2;
-			lowPic.x = offSet;
-			valMC.addChild(lowPic);
-			return valMC;
-		}
-		
-		public static function CreateDebuf(val:int):MovieClip{
-			var valMC:MovieClip = new MovieClip;
-			var delMC:MovieClip = CreateIcon("del_icon");	
-			var numMC:MovieClip = CreateRedNum(val);
+			var delMC:MovieClip = CreateIcon("mini_sub");	
+			var numMC:MovieClip = CreateNum("mini_y_",val);
 			valMC.addChild(delMC);
 			numMC.x = delMC.width;
 			valMC.addChild(numMC);
@@ -237,10 +212,10 @@
 			return valMC;
 		}
 		
-		public static function CreateGain(val:int):MovieClip{
+		public static function CreateGain_Big(val:int):MovieClip{
 			var valMC:MovieClip = new MovieClip;
-			var addMC:MovieClip = CreateIcon("add_icon");	
-			var numMC:MovieClip = CreateGreenNum(val);
+			var addMC:MovieClip = CreateIcon("big_add");	
+			var numMC:MovieClip = CreateNum("big_g_",val);
 			valMC.addChild(addMC);
 			numMC.x = addMC.width;
 			valMC.addChild(numMC);
@@ -248,17 +223,29 @@
 			valMC.alpha =0;
 			return valMC;
 		}
+		public static function CreateGain_Mini(val:int):MovieClip{
+			var valMC:MovieClip = new MovieClip;
+			var addMC:MovieClip = CreateIcon("mini_add");	
+			var numMC:MovieClip = CreateNum("mini_g_",val);
+			valMC.addChild(addMC);
+			numMC.x = addMC.width;
+			valMC.addChild(numMC);
+			valMC.showVal=1;
+			valMC.alpha =0;
+			return valMC;
+		}
+		
 		public static function ResultAlphaInc(cardMC:MovieClip):Boolean{
 			var index:int = 0;
 			var doAlpha:Boolean=false;
 			while(index < cardMC.numChildren)
 			{
 				var elem:MovieClip = (cardMC.getChildAt(index) as MovieClip);
-				if(elem && elem["showVal"]==1 && elem.alpha<100)
+				if(elem && elem["showVal"]==1 && elem.alpha<80)
 				{
 					doAlpha = true;
-					elem.alpha +=10;
-					trace("here go");
+					elem.alpha +=2;
+					trace("here go",elem.alpha);
 				}
 				index++;
 			}
@@ -269,22 +256,23 @@
 				var iconMC:MovieClip = new classVal;
 				return iconMC;
 		}
-		private static function CreateGreenNum(val:int):MovieClip{
+		private static function CreateNum(title:String,val:int):MovieClip{
 			var valMC:MovieClip = new MovieClip;
 			var lowVal:int =val%10;
 			var highVal:int = val/10;
 			var offSet:int = 0;
 			if(highVal>0)
 			{
-				var classVal:Class = getDefinitionByName("num_g_"+highVal) as Class;
+				var classVal:Class = getDefinitionByName(title+highVal) as Class;
 				var highPic:MovieClip = new classVal;
 				valMC.addChild(highPic);
 				offSet = 10;
 			}
-			var classVal2:Class = getDefinitionByName("num_g_"+lowVal) as Class;
+			var classVal2:Class = getDefinitionByName(title+lowVal) as Class;
 			var lowPic:MovieClip = new classVal2;
 			lowPic.x = offSet;
 			valMC.addChild(lowPic);
+			valMC.alpha=60;
 			return valMC;
 		}
     }

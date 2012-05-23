@@ -71,15 +71,16 @@
 			{
 
 					var hpVal:int = newCard["hp"] - oldCard["hp"];
-					resultMC = (hpVal>0)?cardFactory.CreateGain(Math.abs(hpVal)): cardFactory.CreateDebuf(Math.abs(hpVal));
+					resultMC = (hpVal>0)?cardFactory.CreateGain_Big(Math.abs(hpVal)): cardFactory.CreateDebuf_Big(Math.abs(hpVal));
 					//resultMC.x =resultMC.width/2;
 					//resultMC.y =resultMC.height/2;
+					resultMC.y = 20;
 					cardMC.addChild(resultMC);
 			}
 			if( newCard["atk"]!= oldCard["atk"])
 			{
 					var atkVal:int = newCard["atk"] - oldCard["atk"];
-					resultMC = (atkVal>0)?cardFactory.CreateGain(Math.abs(atkVal)): cardFactory.CreateDebuf(Math.abs(atkVal));
+					resultMC = (atkVal>0)?cardFactory.CreateGain_Mini(Math.abs(atkVal)): cardFactory.CreateDebuf_Mini(Math.abs(atkVal));
 					//resultMC._scale=0.6;
 					resultMC.x = -cardMC.width/2 + resultMC.width/2;
 					resultMC.y = cardMC.height/2 - resultMC.height/2;
@@ -88,7 +89,7 @@
 			if( newCard["def"]!= oldCard["def"])
 			{
 					var defVal:int = newCard["def"] - oldCard["def"];
-					resultMC = (defVal>0)?cardFactory.CreateGain(Math.abs(defVal)): cardFactory.CreateDebuf(Math.abs(defVal));
+					resultMC = (defVal>0)?cardFactory.CreateGain_Mini(Math.abs(defVal)): cardFactory.CreateDebuf_Mini(Math.abs(defVal));
 					//resultMC._scale=0.6;
 					resultMC.x = cardMC.width/2 - resultMC.width/2;
 					resultMC.y = cardMC.height/2 - resultMC.height/2;
