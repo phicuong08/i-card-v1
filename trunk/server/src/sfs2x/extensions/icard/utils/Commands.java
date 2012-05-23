@@ -7,7 +7,7 @@ public class Commands {
 	
 	
 	public static final String CMD_S2C_GAME_START 				= "10001";
-	//参数1(me)--我方playerID ;参数2(you):--对方playerID,参数3(card)--(playerID,realID,cardID,slot,side,turn,hp,atk,def),...}
+	//参数1(me)--我方playerID ;参数2(you):--对方playerID,参数3(card)--(playerID,realID,cardID,slot,side,turn,hp,atk,def),...}  side=1,横置， turn=1,翻转
 
 
 	public static final String CMD_S2C_CLIENT_GAME_STATE_UPDATE	="10002";

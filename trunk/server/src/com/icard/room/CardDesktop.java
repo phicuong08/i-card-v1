@@ -12,6 +12,7 @@ import com.icard.user.CardUser;
 import com.icard.user.CardUserManager;
 import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
+import com.smartfoxserver.v2.entities.data.SFSArray;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 
  
@@ -19,13 +20,21 @@ import com.smartfoxserver.v2.entities.data.SFSObject;
 public class CardDesktop {
 	
 	//房主
-	private CardUser roomOwner = null;	
-		
+	private CardUser roomOwner = null;
+	//房主的对手
+	private CardUser player	   = null;
+
+	
 	//游戏中所有的玩家
-	private HashMap <Integer,CardUser> allPlayers = new HashMap <Integer,CardUser>();	
+	private HashMap <Integer,CardUser> allPlayers = new HashMap <Integer,CardUser>();
+	//用于接收send数据用的sfx玩家
+	private List<User> allSFSPlayer = null;
+	private HashMap <Integer,User> allSFSPlayerMap = new HashMap <Integer,User>();
 	
 	//游戏中所有的观看者
 	private HashMap <Integer,CardUser>	watchers =null;
+	//用于接收send数据用的sfx观察者
+	private List<User> allSFSWatchers = null;
 	
 	private ArrayList<CardSite> sites =  new ArrayList<CardSite>();
 		
@@ -40,24 +49,41 @@ public class CardDesktop {
 	//开始游戏
 	public void startGame(CardUser RoomOwner,CardUser Player,HashMap <Integer,CardUser>	watchers){
 		this.roomOwner = RoomOwner;
+		this.player = Player;
 		allPlayers.put(RoomOwner.getId(), RoomOwner);
 		allPlayers.put(Player.getId(), Player);
 		this.watchers = watchers;
 		if(RefeshCard()==false){
 			return;
 		}
-		ISFSObject params = new SFSObject ();
-		params.putInt("playerID", userId);
-		params.putInt("state",userState);
-		List<CardUser> cardUser = new ArrayList<CardUser>();
-		cardUser.add(roomOwner);
-		gamePlayer!=null){
-			cardUser.add(gamePlayer);
+		//设置用于接收send数据用的sfx玩家，sfx观察者
+		allSFSPlayer = CardUserManager.getInstance().GetSFSUserByCardUser(new ArrayList<CardUser>(allPlayers.values()));
+		for(User user:allSFSPlayer){
+			allSFSPlayerMap.put(user.getId(), user);
 		}
-		cardUser.addAll(watchers.values());
-		List<User> recipients = CardUserManager.getInstance().GetSFSUserByCardUser(cardUser);
-		//发送
-		ParentExtension.getInstance().send(Commands.CMD_S2C_CLIENT_GAME_STATE_UPDATE, params, recipients);
+		allSFSWatchers = CardUserManager.getInstance().GetSFSUserByCardUser(new ArrayList<CardUser>(watchers.values()));
+		
+		//发送开始命令给玩家
+		ISFSObject params = new SFSObject ();
+		SFSArray  cards = new SFSArray  ();
+		for(CardSite site :sites){
+			List<BaseCard> pickedCards = site.pickCard(7);
+			for(BaseCard pickedCard :pickedCards){
+				ISFSObject card = new SFSObject ();
+				card.putInt("playerID", site.belongUserID);
+				card.putInt("realID", pickedCard.getRealId());
+				card.putInt("cardID", pickedCard.getCardInfo().getId());
+				cards.addSFSObject(card);
+			}
+		}
+		params.putSFSArray("card", cards);
+		params.putInt("me", roomOwner.getId());
+		params.putInt("you", this.player.getId());
+		ParentExtension.getInstance().send(Commands.CMD_S2C_GAME_START, params, this.allSFSPlayerMap.get(roomOwner.getId()));
+		
+		params.putInt("me", player.getId());
+		params.putInt("you", this.roomOwner.getId());
+		ParentExtension.getInstance().send(Commands.CMD_S2C_GAME_START, params, this.allSFSPlayerMap.get(player.getId()));
 	}
 	
 	//洗牌
