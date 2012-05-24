@@ -6,164 +6,74 @@ package ICard.assist {
 		public var abc:Array;		
 		public static function CreateCardHtmlTip(cardID:int):String{
 			var typeId:int = cardID/1000;
-			
-			var title:Array = CardType.GetCardInfo(typeId*1000);
-			var info:Array = CardType.GetCardInfo(cardID);
-			
-			var result:String="";
-			switch(typeId)
+			var title:Object = CardType.CreateCardInfo(typeId*1000);
+			var info:Object = CardType.CreateCardInfo(cardID);
+			return CardHtmlTip(info,title);
+		}
+		
+		private static function CardHtmlTip(info:Object,title:Object):String{
+			var result:String = CardBaseHtml(info,title);
+			if(info["cost"])
 			{
-				case 20:
-					result= HeroHtmlTip(info,title);
-					break;
-				case 50:
-					result =SkillHtmlTip(info,title);
-					break;
-				case 40:
-					result =TaskHtmlTip(info,title);
-					break;
-				case 31:
-					result =DefHtmlTip(info,title);
-					break;		
-				case 30:
-					result =WeaponHtmlTip(info,title);
-					break;
-				case 21:
-				case 22:
-				case 23:
-					result =SoldierHtmlTip(info,title);
-					break;		
+				result  += CardAtkHtml(info,title);
+				if(info["turncost"])
+					result = result + "   "  + CardTurnCostHtml(info,title);
+				result += HtmlText._newLineSign;
 			}
-			return result;
-		}
-		
-		private static function SoldierHtmlTip(info:Array,title:Array):String{
-			var result:String = CardBaseHtml(info,title);
-			result = result + CardAtkHtml(info,title) + "   " + CardHpHtml(info,title) +HtmlText._newLineSign;
-			result = result + CardDetailHtml(info,title);
-			return result;
-		}
-		
-		private static function WeaponHtmlTip(info:Array,title:Array):String{
-			var result:String = CardBaseHtml(info,title);
-			result = result + CardCostHtml(info,title) + "   " + CardTurnCostHtml(info,title) +HtmlText._newLineSign;
-			result = result + CardAtkHtml(info,title) + HtmlText._newLineSign;
-			result = result + CardDetailHtml(info,title);
-			return result;
-		}
-		
-		private static function DefHtmlTip(info:Array,title:Array):String{
-			var result:String = CardBaseHtml(info,title);
-			result = result + CardCostHtml(info,title) + HtmlText._newLineSign;
-			result = result + CardDefHtml(info,title) + HtmlText._newLineSign;
-			result = result + CardDetailHtml(info,title);
-			return result;
-		}
-		
-		private static function TaskHtmlTip(info:Array,title:Array):String{
-			var result:String = CardBaseHtml(info,title);
-			result = result + CardDetailHtml(info,title);
-			return result;
-		}
-		
-		private static function SkillHtmlTip(info:Array,title:Array):String{
-			var result:String = CardBaseHtml(info,title);
-			result = result + CardCostHtml(info,title) + HtmlText._newLineSign;
-			result = result + CardDetailHtml(info,title);
-			return result;
-		}
-		
-		private static function HeroHtmlTip(info:Array,title:Array):String{
-			var result:String = CardBaseHtml(info,title);
-			result = result + CardCostHtml(info,title) + HtmlText._newLineSign;
-			result = result + CardHpHtml(info,title) + HtmlText._newLineSign;
+			if(info["atk"])
+			{
+				result += CardAtkHtml(info,title);
+				if(info["hp"])
+					result = result + "   "  + CardHpHtml(info,title);
+				result += HtmlText._newLineSign;
+			}
+			else if(info["hp"])
+			{
+				result = result + CardHpHtml(info,title) + HtmlText._newLineSign;
+			}
+			if(info["def"])
+				result = result + CardDefHtml(info,title) + HtmlText._newLineSign;
 			result = result + CardDetailHtml(info,title);
 			return result;
 		}
 		
 		
-		private static function CardAtkHtml(info:Array,title:Array):String{
-			var typeId:int = info[0]/1000;
-			var result:String="";
-			switch(typeId)
-			{
-				case 30:
-				case 21:
-				case 22:
-				case 23:
-					result= HtmlText.FontWraper(title[6],HtmlText.FONTSIZE_3,HtmlText.Green) + HtmlText.FontWraper(info[6],HtmlText.FONTSIZE_3,HtmlText.White);
-					break;
-			}
-			return result;
+		
+		private static function CardAtkHtml(info:Object,title:Object):String{
+			return HtmlText.FontWraper(title["atk"],HtmlText.FONTSIZE_3,HtmlText.Green) + 
+										HtmlText.FontWraper(info["atk"],HtmlText.FONTSIZE_3,HtmlText.White);
 		}
 		
-		private static function CardCostHtml(info:Array,title:Array):String{
-			var typeId:int = info[0]/1000;
-			var result:String="";
-			switch(typeId)
-			{
-				case 20:
-				case 21:
-				case 22:
-				case 23:
-				case 50:
-				case 30:
-				case 31:
-					result= HtmlText.FontWraper(title[4],HtmlText.FONTSIZE_3,HtmlText.Green) + HtmlText.FontWraper(info[4],HtmlText.FONTSIZE_3,HtmlText.White);
-					break;
-			}
-			return result;
+		private static function CardCostHtml(info:Object,title:Object):String{
+			return HtmlText.FontWraper(title["cost"],HtmlText.FONTSIZE_3,HtmlText.Green) + 
+											HtmlText.FontWraper(info["cost"],HtmlText.FONTSIZE_3,HtmlText.White);
 		}
 		
-		private static function CardTurnCostHtml(info:Array,title:Array):String{
-			var typeId:int = info[0]/1000;
-			var result:String="";
-			switch(typeId)
-			{
-				case 30:
-					result= HtmlText.FontWraper(title[5],HtmlText.FONTSIZE_3,HtmlText.Green) + HtmlText.FontWraper(info[5],HtmlText.FONTSIZE_3,HtmlText.White);
-					break;
-			}
-			return result;
+		private static function CardTurnCostHtml(info:Object,title:Object):String{
+			return HtmlText.FontWraper(title["turncost"],HtmlText.FONTSIZE_3,HtmlText.Green) + 
+										HtmlText.FontWraper(info["turncost"],HtmlText.FONTSIZE_3,HtmlText.White);
 		}
 		
-		private static function CardDefHtml(info:Array,title:Array):String{
-			var typeId:int = info[0]/1000;
-			var result:String="";
-			switch(typeId)
-			{
-				case 31:
-					result= HtmlText.FontWraper(title[5],HtmlText.FONTSIZE_3,HtmlText.Green) + HtmlText.FontWraper(info[5],HtmlText.FONTSIZE_3,HtmlText.White);
-					break;
-			}
-			return result;
+		private static function CardDefHtml(info:Object,title:Object):String{
+			return HtmlText.FontWraper(title["def"],HtmlText.FONTSIZE_3,HtmlText.Green) + 
+										HtmlText.FontWraper(info["def"],HtmlText.FONTSIZE_3,HtmlText.White);
 		}
 		
-		private static function CardDetailHtml(info:Array,title:Array):String{
-			var detailPos:int = info.length - 1;
-			return HtmlText.FontWraper(info[detailPos],HtmlText.FONTSIZE_4,HtmlText.White);
+		private static function CardDetailHtml(info:Object,title:Object):String{
+			return HtmlText.FontWraper(info["detail"],HtmlText.FONTSIZE_4,HtmlText.White);
 		}
 		
-		private static function CardHpHtml(info:Array,title:Array):String{
-			var typeId:int = info[0]/1000;
-			var result:String="";
-			switch(typeId)
-			{
-				case 20: //hero
-				case 21: //dps
-				case 22: //
-				case 23: 
-					result = HtmlText.FontWraper(title[5],HtmlText.FONTSIZE_3,HtmlText.Green) + HtmlText.FontWraper(info[5],HtmlText.FONTSIZE_3,HtmlText.White);
-					break;
-			}
-			return result;
+		private static function CardHpHtml(info:Object,title:Object):String{
+			return HtmlText.FontWraper(title["hp"],HtmlText.FONTSIZE_3,HtmlText.Green) + 
+										HtmlText.FontWraper(info["hp"],HtmlText.FONTSIZE_3,HtmlText.White);
 		}
-		private static function CardBaseHtml(info:Array,title:Array):String{
+		
+		private static function CardBaseHtml(info:Object,title:Object):String{
 			var result:String ="";
-			result = HtmlText.FontWraper(title[1],HtmlText.FONTSIZE_2,HtmlText.Yellow) + 
-				HtmlText.FontWraper(info[1],HtmlText.FONTSIZE_2,HtmlText.White) +  HtmlText._newLineSign;
-			result = result + HtmlText.FontWraper(title[2],HtmlText.FONTSIZE_3,HtmlText.Green) + HtmlText.FontWraper(info[2],HtmlText.FONTSIZE_3,HtmlText.White) + "   ";
-			result = result + HtmlText.FontWraper(title[3],HtmlText.FONTSIZE_3,HtmlText.Green) + HtmlText.FontWraper(info[3],HtmlText.FONTSIZE_3,HtmlText.White) + HtmlText._newLineSign;   
+			result = HtmlText.FontWraper(title["title"],HtmlText.FONTSIZE_2,HtmlText.Yellow) + 
+				HtmlText.FontWraper(info["title"],HtmlText.FONTSIZE_2,HtmlText.White) +  HtmlText._newLineSign;
+			result = result + HtmlText.FontWraper(title["camp"],HtmlText.FONTSIZE_3,HtmlText.Green) + HtmlText.FontWraper(info["camp"],HtmlText.FONTSIZE_3,HtmlText.White) + "   ";
+			result = result + HtmlText.FontWraper(title["race"],HtmlText.FONTSIZE_3,HtmlText.Green) + HtmlText.FontWraper(info["race"],HtmlText.FONTSIZE_3,HtmlText.White) + HtmlText._newLineSign;   
 			return result;
 		}
 	}

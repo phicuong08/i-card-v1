@@ -9,6 +9,7 @@ package ICard.assist.data {
 				function get _Mod_RoomList():Object;
 				function get _Mod_RoomUser():Object;
 				function get _Mod_UserMgr():Object;
+				function get _Mod_Battle():Object;
 				function patch(_arg1:Object, _arg2:Function):void;
         function cancelPatch(_arg1:Object):void;
         function set onClose(_arg1:Function):void;

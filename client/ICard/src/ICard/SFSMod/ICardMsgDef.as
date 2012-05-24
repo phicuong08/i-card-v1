@@ -35,5 +35,9 @@ package ICard.SFSMod {
 		
 		public static var s2c_battle_card_fight_result:String = "11003"; //战斗表现
 		//参数1(srcID):, 参数2(target):{ {realID,hpAdd,def,atk,slot,turn,side} ,...}--受作用卡结果,参数3(bEnemy)[0-对已方，1-对敌方]
+		
+		public static var s2c_battle_player_loop:String ="11004";//回合转化
+		//参数1 playerID--出牌玩家ID,参数2-time --单位秒
+		
 	}
 }//package ICard.protocols 

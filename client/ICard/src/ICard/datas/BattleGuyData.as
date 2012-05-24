@@ -43,19 +43,19 @@ package ICard.datas {
 		public function ResetCards():void{
 			for each( var card:CardData in _cardArr)
 			{
-				if( card._slot == BattleFieldType.MyResourceSlotId ||
-					card._slot == BattleFieldType.MyHeroSlotId ||
-					card._slot ==BattleFieldType.YouResourceSlotId||
-					card._slot ==BattleFieldType.YouHeroSlotId)
-					card._side = false;
+				if( card.Slot == BattleFieldType.MyResourceSlotId ||
+					card.Slot == BattleFieldType.MyHeroSlotId ||
+					card.Slot ==BattleFieldType.YouResourceSlotId||
+					card.Slot ==BattleFieldType.YouHeroSlotId)
+					card.Side = 0;
 			}
 		}
 		
 		public function ResetRes():void{
 			for each( var card:CardData in _cardArr)
 			{
-				if( card._slot == BattleFieldType.MyResourceSlotId)
-					card._side = false;
+				if( card.Slot == BattleFieldType.MyResourceSlotId)
+					card.Side = 0;
 			}
 		}
 		
@@ -63,8 +63,8 @@ package ICard.datas {
 			var val:int = 0;
 			for each( var card:CardData in _cardArr)
 			{
-				if( card._slot == BattleFieldType.MyResourceSlotId &&
-					card._side ==false)
+				if( card.Slot == BattleFieldType.MyResourceSlotId &&
+					card.Side ==0)
 				{
 					val++;
 				}
@@ -78,10 +78,10 @@ package ICard.datas {
 			for each( var card:CardData in _cardArr)
 			{
 				
-				if( card._slot == BattleFieldType.MyResourceSlotId &&
-					card._side ==false)
+				if( card.Slot == BattleFieldType.MyResourceSlotId &&
+					card.Side ==0)
 				{
-					card._side = true;
+					card.Side = 1;
 					val++;
 				}
 				if(val==0)
@@ -94,8 +94,8 @@ package ICard.datas {
 			var resVal:int = 0;
 			for each( var card:CardData in _cardArr)
 			{
-				if( card._slot == BattleFieldType.MyResourceSlotId &&
-					card._side ==false)
+				if( card.Slot == BattleFieldType.MyResourceSlotId &&
+					card.Side ==false)
 					resVal++;
 			}
 			return resVal;

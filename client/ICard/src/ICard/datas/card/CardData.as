@@ -71,10 +71,10 @@ package ICard.datas.card {
 		public function set Side(val:int):void{
 			_info["side"] = val;
 		}
-		public function get Turn():Boolean{
+		public function get Turn():int{
 			return _info["turn"];
 		}
-		public function set Turn(val:int):int{
+		public function set Turn(val:int):void{
 			_info["turn"]=val;
 		}
 		
@@ -89,11 +89,11 @@ package ICard.datas.card {
 			Turn = arg1.Turn;
 		}
 		public function IsDead():Boolean{
-			return (_hp<=0);
+			return (HP<=0);
 		}
 		public function get Type():int{
 				var ret:int=0;
-				switch(_cardID/1000)
+				switch(CardID/1000)
 				{
 				case 30:
 					ret = CardType.WeaponType;

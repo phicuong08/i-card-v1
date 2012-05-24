@@ -58,7 +58,7 @@ package ICard.views {
 				{
 						var cardMC:MovieClip = _battleField.FindCard(cardObj["realID"]);
 						this._cardDB.UpdateAttr(cardMC,cardObj);
-						if(CardDiffData.IsSideDiff(cardInfo[0]))
+						if(CardDiffData.IsSideDiff(cardInfo[0],cardInfo[1]))
 						{
 								_battleField.SideCard(cardObj);
 						}		
@@ -96,7 +96,9 @@ package ICard.views {
 		private function AskCard2ResSlot(arg1:int):Boolean{
 			return _battleStage.AskCard2ResSlot(arg1);
 		}
-		
+		private function AskTurnCard(arg1:int):Boolean{
+			return _battleStage.AskTurnCard(arg1);
+		}
 		public function onCardFightResult(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
 			_viewMgr.fightMovie.InitShow(srcID,targets,oldCards,bEnemy);
 		}
