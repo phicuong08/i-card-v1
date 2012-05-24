@@ -2,18 +2,26 @@
 package ICard.logic {
 	import ICard.datas.*;
 	import ICard.datas.card.*;
+	import ICard.assist.data.*;
+	import ICard.SFSMod.*;
 	
 	import flash.utils.*;
+	
 	public class BattleStage {
 		private var _guy:Dictionary;
 		private var _myID:int;
 		private var _fightLink:FightLink;
 		private var _cardFightResultCallback:Function;
+		private var _enable2Res:Boolean;
+		protected var _data:IData;
 		
 		private static var _obj:BattleStage;
 		public function BattleStage():void{
+			_enable2Res = false;
 		}
-		
+		public function settle(arg:Data):void{
+			_data = (arg as IData);
+		}
 		public static function getInstance():BattleStage{
 			if (!_obj){
 				_obj = new (BattleStage)();
@@ -52,7 +60,6 @@ package ICard.logic {
 				fillCard["hp"] = info["hp"];
 			if(info["atk"])	
 				fillCard["atk"] = info["atk"];
-				
 			if(info["def"])	
 				fillCard["def"] = info["def"];
 			if(info["side"])	
@@ -91,16 +98,18 @@ package ICard.logic {
 				_cardFightResultCallback(srcID,targets,oldCards,(srcGuy!=desGuy));
 		}
 
-		public function Card2Fight(realID:int):Boolean{
+		public function AskCard2FightSlot(realID:int):Boolean{
 			var card:CardData = PlayerMe.CardDB.FindCard(realID);
 			if(!card)
 				return false;
 			if(!UseCard.UseAble(card,PlayerMe.CardDB.ResNum()))	
 				return false;
-			return true;
-		
+			return UseCard.Card2FightSlot(card,Mod_Battle);
 		}
-		public function Card2Res(realID:int):Boolean{
+		public function AskCard2ResSlot(realID:int):Boolean{
+			if(!_enable2Res)
+				return false;
+			Mod_Battle.QueryUpdateCard(realID,BattleFieldType.MyResourceSlotId);
 			return true;
 		}
 		
@@ -126,6 +135,10 @@ package ICard.logic {
 				}
 			}
 			return null;
+		}
+		
+		public function get Mod_Battle():Mod_RoomList{
+			return (_data._Mod_Battle as Mod_Battle);
 		}
 	}
 }//package com.assist.data.mission 
