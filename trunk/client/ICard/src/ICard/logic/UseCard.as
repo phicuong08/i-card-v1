@@ -4,7 +4,7 @@ package ICard.logic {
 	import ICard.datas.card.*;
 	import ICard.assist.server.CardType;
 	import ICard.assist.view.controls.BattleFieldType;
-	
+	import ICard.SFSMod.*;
 	public class UseCard {
 		
 		public static function ResEnough(card:CardData,resVal:int):Boolean{
@@ -13,6 +13,27 @@ package ICard.logic {
 				return true;
 			return (resVal >= useInfo[1]);
 		}
+		public static function Card2FightSlot(card:CardData,mod:Mod_Battle):Boolean{
+			var ret:Boolean=false;
+			switch(card.Type)
+			{
+				case CardType.SoldierType:
+				{
+					mod.QueryUpdateCard(card.ID,BattleFieldType.MyFightSlotId);
+					ret = true;
+				}
+					break;
+				case CardType.WeaponType:
+				case CardType.DefType:
+				{
+					mod.QueryUpdateCard(card.ID,BattleFieldType.MyEquipSlotId);
+					ret = true;
+				}
+					break;
+			}
+			return ret;
+		}
+		
 		public static function UseAble(card:CardData,resVal:int):Boolean{
 			if(ResEnough(card,resVal)==false)
 				return false;
