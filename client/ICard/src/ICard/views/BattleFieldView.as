@@ -120,7 +120,7 @@ package ICard.views {
 //			_battleField.Add2Slot(card1["slot"],c1);
 			
 
-//			
+		
 //			var i:int;
 //			while(i<4)
 //			{

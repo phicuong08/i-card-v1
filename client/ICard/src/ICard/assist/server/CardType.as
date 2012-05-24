@@ -104,69 +104,101 @@ package ICard.assist.server {
 			};
 			_TaskCards = _arg1;
 		}
-		public static function GetCardBattleInfo(id:int):Object{
-			var cardInfo:Array = GetCardInfo(id);
-			var battleInfo:Object = {};
-			if(cardInfo==null)
-				return null;
-			var typeId:int = cardInfo[0];
-			battleInfo["id"] = cardInfo[0];
-			battleInfo["cost"] =cardInfo[4];
-			switch(typeId)
-			{
-				case 30:
-					battleInfo["atk"]= cardInfo[6];
-					battleInfo["turncost"]= cardInfo[5];
-					break;
-				case 31:
-					battleInfo["def"] =cardInfo[5];
-					break;
-				case 21:
-				case 22:
-				case 23:
-					battleInfo["atk"]= cardInfo[6];
-					battleInfo["hp"]= cardInfo[5];
-					break;
-				case 20:
-					battleInfo["hp"]= cardInfo[5];
-					break;
-			}
-			return battleInfo;
-		}
-		
+			
 		public static function UseCardInfo(id:int):Array{
 				return _UseCard[id];
 		}
 		
-		public static function GetCardInfo(id:int):Array{
+		private static CreateWeaponCardInfo(id:int):Object{
+			var cardInfo:Array = _WeaponCards[id];
+			if(!cardInfo)
+				return null;
+			var card:Object = new Object;
+			card["cardID"] = cardInfo[0];
+			card["cost"]=cardInfo[4];
+			card["turncost"]=cardInfo[5];
+			card["atk"]=cardInfo[6];
+			return card;
+		}
+		private static CreateDefCardInfo(id:int):Object{
+			var cardInfo:Array = _DefCards[id];
+			if(!cardInfo)
+				return null;
+			var card:Object = new Object;
+			card["cardID"] = cardInfo[0];
+			card["cost"]=cardInfo[4];
+			card["def"]=cardInfo[5];
+			return card;
+		}
+		private static CreateSoldierCardInfo(id:int):Object{
+			var cardInfo:Array = _SoldierCards[id];
+			if(!cardInfo)
+				return null;
+			var card:Object = new Object;
+			card["cardID"] = cardInfo[0];
+			card["cost"]=cardInfo[4];
+			card["hp"]=cardInfo[5];
+			card["atk"]=cardInfo[6];
+			return card;
+		}
+		private static CreateHeroCardInfo(id:int):Object{
+			var cardInfo:Array = _HeroCards[id];
+			if(!cardInfo)
+				return null;
+			var card:Object = new Object;
+			card["cardID"] = cardInfo[0];
+			card["cost"]=cardInfo[4];
+			card["hp"]=cardInfo[5];
+			return card;
+		}
+		private static CreateSkillCardInfo(id:int):Object{
+			var cardInfo:Array = _SkillCards[id];
+			if(!cardInfo)
+				return null;
+			var card:Object = new Object;
+			card["cardID"] = cardInfo[0];
+			card["cost"]=cardInfo[4];
+			return card;
+		}
+		private static CreateTaskCardInfo(id:int):Object{
+			var cardInfo:Array = _TaskCards[id];
+			if(!cardInfo)
+				return null;
+			var card:Object = new Object;
+			card["cardID"] = cardInfo[0];
+			return card;
+		}
+		
+		public static function CreateCardInfo(id:int):Object{
 			var typeId:int = id/1000;
+			var cardInfo:Object;
 			var cardGroup:Object;
 			switch(typeId)
 			{
 				case 30:
-					cardGroup = _WeaponCards;
+					cardInfo = CreateWeaponCardInfo(id);
 					break;
 				case 31:
-					cardGroup = _DefCards;
+					cardInfo = CreateDefCardInfo(id);
 					break;
 				case 21:
 				case 22:
 				case 23:
-					cardGroup = _SoldierCards;
+					cardInfo = CreateSoldierCardInfo(id);
 					break;
 				case 20:
-					cardGroup = _HeroCards;
+					cardInfo = CreateHeroCardInfo(id);
 					break;
 				case 50:
-					cardGroup = _SkillCards;
+					cardInfo = CreateSkillCardInfo(id);
 					break;
 				case 40:
-					cardGroup = _TaskCards;
+					cardInfo = CreateTaskCardInfo(id);
 					break;
 				default:
 					return null;
 			}
-			return cardGroup[id];
+			return cardInfo;
 		}
 		
 	}
