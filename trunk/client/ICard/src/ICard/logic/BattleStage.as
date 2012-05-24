@@ -38,9 +38,32 @@ package ICard.logic {
 				_guy[guyId].ResetCards();
 		}
 		public function onUpdateCard(info:Object):void{
+			var fullCard:Object = FullCardInfo(info);
+			if(fullCard==null)
+				return;
 			if(_guy[info["playerID"]])
-				_guy[info["playerID"]].onUpdateCard(info);
+				_guy[info["playerID"]].onUpdateCard(fullCard);
 		}
+		private function FullCardInfo(info:Object):Object{
+			var fillCard:Object = CardType.CreateCardInfo(info["cardID"]);
+			if(fillCard==null)
+				return null;
+			if(info["hp"])
+				fillCard["hp"] = info["hp"];
+			if(info["atk"])	
+				fillCard["atk"] = info["atk"];
+				
+			if(info["def"])	
+				fillCard["def"] = info["def"];
+			if(info["side"])	
+				fillCard["side"] = info["side"];	
+			if(info["turn"])	
+				fillCard["turn"] = info["turn"];
+			if(info["slot"])	
+				fillCard["slot"] = info["slot"];	
+			return fillCard;
+		}
+			
 		public function onCardFight(fightInfo:Object,targets:Array):void{
 			var srdID:int = fightInfo["srcID"];
 			var defender:int = fightInfo["defender"];

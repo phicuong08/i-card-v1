@@ -9,33 +9,15 @@ package ICard.datas.card {
 		public static const StateSide:int = 2;
 		public static const StateTurn:int = 2;
 		
-		public var _realID:int; //唯一id
-		public var _cardID:int; //卡片id,
-//		public var _bufDB:BufDB;  //挂着的buf
-		public var _hp:int;  //负值为扣血量
-		public var _atk:int;  //
-		public var _def:int;  
-		public var _side:Boolean;//横置
-		public var _turn:Boolean;//翻转
-		public var _slot:int;  //卡片所在槽 
-		public var _targetArr:Array;
-		
-		public function CardData():void{
 
+		public var _targetArr:Array;
+		public var _info:Object;
+		public function CardData(info:Object):void{
+			_info = info;
 		}
-		public function get RealID():int{
-			return _realID;
-		}
-		public function get CardID():int{
-			return _cardID;
-		}
-		public function get Slot():int{
-			return _slot;
-		}
-		public function ToObject():Object{
-			return {"realID":_realID,"cardID":_cardID,
-								"hp":_hp,"atk":_atk,"def":_def,"side":_side,"turn":_turn,"slot":_slot};
-		}
+	
+
+	/*	
 		public function format(arg1:Object):void{
 			_realID = arg1["realID"];
 			_cardID = arg1["cardID"];
@@ -46,33 +28,65 @@ package ICard.datas.card {
 			_turn = arg1["turn"];
 			_slot = arg1["slot"];
 		}
-		public function get HP():int{
-			return _hp;
+	*/	
+		public function set RealID(val:int):void{
+			_info["realID"] = val;
 		}
-		
+		public function get RealID():int{
+			return _info["realID"];
+		}
+		public function get CardID():int{
+			return _info["cardID"];
+		}
+		public function set CardID(val:int):void{
+			_info["cardID"] = val;
+		}
+		public function get Slot():int{
+			return _info["slot"];
+		}
+		public function set Slot(val:int):void{
+			_info["slot"]=val;
+		}
+		public function get HP():int{
+			return _info["hp"];
+		}
+		public function set HP(val:int):void{
+			_info["hp"]=val;
+		}
 		public function get Atk():int{
-			return _atk;
+			return _info["atk"];
+		}
+		public function set Atk(val:int):void{
+			_info["atk"] = val;
 		}
 		public function get Def():int{
-			return _def;
+			return _info["def"];
 		}
-		
-		public function get Side():Boolean{
-			return _side;
+		public function set Def(val:int):void{
+			_info["def"] = val;
+		}
+		public function get Side():int{
+			return _info["side"];
+		}
+		public function set Side(val:int):void{
+			_info["side"] = val;
 		}
 		public function get Turn():Boolean{
-			return _turn;
+			return _info["turn"];
+		}
+		public function set Turn(val:int):int{
+			_info["turn"]=val;
 		}
 		
 		public function Clone(arg1:CardData):void{
-			_realID = arg1._realID;
-			_cardID = arg1._cardID;
-			_hp = arg1._hp;
-			_atk = arg1._atk;
-			_def = arg1._def;
-			_side = arg1._side;
-			_turn = arg1._turn;
-			_slot = arg1._slot;
+			RealID = arg1.RealID;
+			CardID = arg1.CardID;
+			Slot = arg1.Slot;
+			HP = arg1.HP;
+			Atk = arg1.Atk;
+			Def = arg1.Def;
+			Side = arg1.Side;
+			Turn = arg1.Turn;
 		}
 		public function IsDead():Boolean{
 			return (_hp<=0);

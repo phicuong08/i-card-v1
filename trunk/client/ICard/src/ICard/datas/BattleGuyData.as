@@ -30,18 +30,13 @@ package ICard.datas {
 		public function onUpdateCard(info:Object):void{
 			var realID:int = info["realID"];
 			var oldCard:CardData;
-			var newCard:CardData = new CardData;
-			newCard.format(info);
+			var newCard:CardData = new CardData(info);
 			if(_cardArr[realID])
 			{
-				oldCard = new CardData;
+				oldCard = new CardData(new Object);
 				oldCard.Clone(_cardArr[realID]);
 			}
-			else
-			{
-				_cardArr[realID] = new CardData;
-			}
-			_cardArr[realID].format(info);
+			_cardArr[realID] = newCard;
 			CardDiffData.UpdateCard(oldCard,newCard);
 		}
 		
