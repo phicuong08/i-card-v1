@@ -72,7 +72,11 @@ package ICard.SFSMod {
 			}
 			_battleStage.onCardFightResult(srcID,targets);
 		}
-		
+		//
+		public function onCardPlayerLoop(params:ISFSObject):void{
+			var playerID:int = params.getInt("playerID");
+			var secNum:int = params.getInt("time");
+		}
 		public function QueryStartGame():void{
 			var params:ISFSObject = new SFSObject();
 			params.putInt("state", 2);

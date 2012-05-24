@@ -41,7 +41,9 @@ package ICard {
 		{
 			SFS.removeEventListener(SFSEvent.EXTENSION_RESPONSE, onExtensionResponse)
 		}
-		
+		public function get _Mod_Battle():Object{
+			return _mod_Battle;
+		}
 		public function get _Mod_RoomList():Object{
 			return _mod_roomList;
 		}
@@ -61,22 +63,26 @@ package ICard {
 			{
 				case ICardMsgDef.s2c_client_battle_start:
 					_mod_Battle.onBattleStart(params);
-					break
+					break;
 				case ICardMsgDef.s2c_client_battle_state_update:
 					_mod_Battle.onBattleStateUpdate(params);
-					break
+					break;
 				
 				case ICardMsgDef.s2c_battle_card_update:
 					_mod_Battle.onCardUpdate(params)
-					break
+					break;
 				
 				case ICardMsgDef.s2c_battle_card_fight:
 					_mod_Battle.onCardFight(params)
-					break
+					break;
 				
 				case ICardMsgDef.s2c_battle_card_fight_result:
 					_mod_Battle.onCardFightResult(params)
+					break;
+				case ICardMsgDef.s2c_battle_player_loop:
+					_mod_Battle.onCardPlayerLoop(params)
 					break
+			
 			}
 		}
 		

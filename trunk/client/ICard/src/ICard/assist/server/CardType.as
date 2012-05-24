@@ -109,63 +109,87 @@ package ICard.assist.server {
 				return _UseCard[id];
 		}
 		
-		private static CreateWeaponCardInfo(id:int):Object{
+		private static function CreateWeaponCardInfo(id:int):Object{
 			var cardInfo:Array = _WeaponCards[id];
 			if(!cardInfo)
 				return null;
 			var card:Object = new Object;
 			card["cardID"] = cardInfo[0];
+			card["title"] = cardInfo[1];
+			card["camp"] = cardInfo[2];
+			card["race"]= cardInfo[3];
 			card["cost"]=cardInfo[4];
 			card["turncost"]=cardInfo[5];
 			card["atk"]=cardInfo[6];
+			card["detail"]=cardInfo[7];
 			return card;
 		}
-		private static CreateDefCardInfo(id:int):Object{
+		private static function CreateDefCardInfo(id:int):Object{
 			var cardInfo:Array = _DefCards[id];
 			if(!cardInfo)
 				return null;
 			var card:Object = new Object;
 			card["cardID"] = cardInfo[0];
+			card["title"] = cardInfo[1];
+			card["camp"] = cardInfo[2];
+			card["race"]= cardInfo[3];
 			card["cost"]=cardInfo[4];
 			card["def"]=cardInfo[5];
+			card["detail"]=cardInfo[6];
 			return card;
 		}
-		private static CreateSoldierCardInfo(id:int):Object{
+		private static function CreateSoldierCardInfo(id:int):Object{
 			var cardInfo:Array = _SoldierCards[id];
 			if(!cardInfo)
 				return null;
 			var card:Object = new Object;
 			card["cardID"] = cardInfo[0];
+			card["title"] = cardInfo[1];
+			card["camp"] = cardInfo[2];
+			card["race"]= cardInfo[3];
 			card["cost"]=cardInfo[4];
 			card["hp"]=cardInfo[5];
 			card["atk"]=cardInfo[6];
+			card["detail"]=cardInfo[7];
 			return card;
 		}
-		private static CreateHeroCardInfo(id:int):Object{
+		private static function CreateHeroCardInfo(id:int):Object{
 			var cardInfo:Array = _HeroCards[id];
 			if(!cardInfo)
 				return null;
 			var card:Object = new Object;
 			card["cardID"] = cardInfo[0];
+			card["title"] = cardInfo[1];
+			card["camp"] = cardInfo[2];
+			card["race"]= cardInfo[3];
 			card["cost"]=cardInfo[4];
 			card["hp"]=cardInfo[5];
+			card["detail"]=cardInfo[6];
 			return card;
 		}
-		private static CreateSkillCardInfo(id:int):Object{
+		private static function CreateSkillCardInfo(id:int):Object{
 			var cardInfo:Array = _SkillCards[id];
 			if(!cardInfo)
 				return null;
 			var card:Object = new Object;
 			card["cardID"] = cardInfo[0];
+			card["title"] = cardInfo[1];
+			card["camp"] = cardInfo[2];
+			card["race"]= cardInfo[3];
 			card["cost"]=cardInfo[4];
+			card["detail"]=cardInfo[5];
 			return card;
 		}
-		private static CreateTaskCardInfo(id:int):Object{
+		private static function CreateTaskCardInfo(id:int):Object{
 			var cardInfo:Array = _TaskCards[id];
 			if(!cardInfo)
 				return null;
 			var card:Object = new Object;
 			card["cardID"] = cardInfo[0];
+			card["title"] = cardInfo[1];
+			card["camp"] = cardInfo[2];
+			card["race"]= cardInfo[3];
+			card["detail"]=cardInfo[4];
 			return card;
 		}
 		

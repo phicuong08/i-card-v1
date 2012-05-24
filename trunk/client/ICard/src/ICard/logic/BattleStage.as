@@ -1,9 +1,13 @@
 //Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.logic {
+	import ICard.Data;
+	import ICard.SFSMod.*;
+	import ICard.SFSMod.Mod_Battle;
+	import ICard.assist.data.*;
+	import ICard.assist.server.CardType;
 	import ICard.datas.*;
 	import ICard.datas.card.*;
-	import ICard.assist.data.*;
-	import ICard.SFSMod.*;
+	import ICard.assist.view.controls.BattleFieldType;
 	
 	import flash.utils.*;
 	
@@ -104,16 +108,18 @@ package ICard.logic {
 				return false;
 			if(!UseCard.UseAble(card,PlayerMe.CardDB.ResNum()))	
 				return false;
-			return UseCard.Card2FightSlot(card,Mod_Battle);
+			return UseCard.Card2FightSlot(card,_Mod_Battle);
 		}
 		public function AskCard2ResSlot(realID:int):Boolean{
 			if(!_enable2Res)
 				return false;
-			Mod_Battle.QueryUpdateCard(realID,BattleFieldType.MyResourceSlotId);
+			_Mod_Battle.QueryUpdateCard(realID,BattleFieldType.MyResourceSlotId);
 			return true;
 		}
-		
-		public GetUISlot(cardInfo:Object):int{
+		public function AskTurnCard(realID:int):Boolean{
+			return true;
+		}
+		public function GetUISlot(cardInfo:Object):int{
 			var card:CardData = PlayerMe.CardDB.FindCard(cardInfo["realID"]);
 			if(card)
 				return cardInfo["slot"];
@@ -136,9 +142,10 @@ package ICard.logic {
 			}
 			return null;
 		}
-		
-		public function get Mod_Battle():Mod_RoomList{
+		public function get _Mod_Battle():Mod_Battle{
 			return (_data._Mod_Battle as Mod_Battle);
 		}
+		
+
 	}
 }//package com.assist.data.mission 
