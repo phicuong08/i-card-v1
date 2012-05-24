@@ -39,10 +39,9 @@ package ICard.views {
 			this._battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
 			
 			this._battleField.tip = _viewMgr.tip.iTip;
-			this._battleField.onCard2Fight = onCard2Fight;
-			this._battleField.onCard2Res = onCard2Res;
-			this._battleField.onSideCard = onSideCard;
-			this._battleField.onTurnCard = onTurnCard;
+			this._battleField.AskCard2FightSlot = AskCard2FightSlot;
+			this._battleField.AskCard2ResSlot = AskCard2ResSlot;
+			this._battleField.AskTurnCard = AskTurnCard;
 			
 			this._cardDB = (_viewMgr.getAssetsObject("carddb", "carddb") as ICardDB);
 			test();
@@ -54,12 +53,12 @@ package ICard.views {
 			var cardInfo:Array = CardDiffData.PopCard();
 			if(cardInfo!=null)
 			{
-				var cardObj:Object = cardInfo[1].ToObject();
+				var cardObj:Object = cardInfo[1];
 				 if(CardDiffData.IsAttrDiff(cardInfo[0],cardInfo[1]))
 				{
 						var cardMC:MovieClip = _battleField.FindCard(cardObj["realID"]);
 						this._cardDB.UpdateAttr(cardMC,cardObj);
-						if(CardDiffData.IsSideDiff(cardInfo[0],cardInfo[1]))
+						if(CardDiffData.IsSideDiff(cardInfo[0]))
 						{
 								_battleField.SideCard(cardObj);
 						}		
@@ -67,7 +66,7 @@ package ICard.views {
 				else
 				{
 					var newCard:MovieClip = CreateCard(cardObj);
-					_battleField.Add2Slot(cardObj["slot"],newCard);
+					_battleField.Add2Slot(_battleStage.GetUISlot(cardObj),newCard);
 				}
 			}
 		}
@@ -85,19 +84,17 @@ package ICard.views {
 			}
 			_viewMgr.fightMovie.show();
 		}
-		private function onTurnCard(arg1:int):Boolean{
-			return true;	
-		}
-		private function onSideCard(arg1:int):Boolean{
+		private function DoTurnCard(arg1:int):Boolean{
 			return true;	
 		}
 		
-		private function onCard2Fight(arg1:int):Boolean{
-			return _battleStage.Card2Fight(arg1);
+		
+		private function AskCard2FightSlot(arg1:int):Boolean{
+			return _battleStage.AskCard2FightSlot(arg1);
 		}
 		
-		private function onCard2Res(arg1:int):Boolean{
-			return _battleStage.Card2Res(arg1);
+		private function AskCard2ResSlot(arg1:int):Boolean{
+			return _battleStage.AskCard2ResSlot(arg1);
 		}
 		
 		public function onCardFightResult(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{

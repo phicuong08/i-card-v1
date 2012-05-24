@@ -26,8 +26,8 @@ package ICard.logic {
 		public function InitGuy(me:int,you:int):void{
 			_guy = new Dictionary;
 			_myID = me;
-			_guy[me] = new BattleGuy(me);
-			_guy[you] = new BattleGuy(you);
+			_guy[me] = new BattleGuy(me,true);
+			_guy[you] = new BattleGuy(you,false);
 			_fightLink = new FightLink;
 		}
 		public function get PlayerMe():BattleGuy{
@@ -103,6 +103,15 @@ package ICard.logic {
 		public function Card2Res(realID:int):Boolean{
 			return true;
 		}
+		
+		public GetUISlot(cardInfo:Object):int{
+			var card:CardData = PlayerMe.CardDB.FindCard(cardInfo["realID"]);
+			if(card)
+				return cardInfo["slot"];
+			else
+				return cardInfo["slot"] +6;
+		}
+		
 		public function FindCard(realID:int):Object{
 			var cardInfo:Object = new Object;
 			for each(var guy:BattleGuy in _guy)

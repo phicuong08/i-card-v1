@@ -49,12 +49,10 @@
 		}
 		
 		public function OnCardToEnter(e:MouseEvent):void{
-			battleField._CardToEnterFunc(_selCard.realID);	
-			//trace(_selCard.realID,"To Enter!");
+			battleField._AskCardToEnterFunc(_selCard.realID);	
 		}
 		public function OnCardToRes(e:MouseEvent):void{
-			battleField._CardToResFunc(_selCard.realID);
-			//trace(_selCard.realID,"To Res!");
+			battleField._AskCardToResFunc(_selCard.realID);
 		}
 		public function OnCardToTomb(e:MouseEvent):void{
 			trace(_selCard.realID,"To Tomb!");
