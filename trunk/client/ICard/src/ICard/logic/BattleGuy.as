@@ -5,11 +5,12 @@ package ICard.logic {
 	public class BattleGuy {
 		private var _data:BattleGuyData;
 		private var _realID:int;
-
+		private var _IsMe:Boolean;
 		
-		public function BattleGuy(arg1:int):void{
+		public function BattleGuy(arg1:int,meFlag:Boolean):void{
 			_realID = arg1;
 			_data = new BattleGuyData;
+			_IsMe = meFlag;
 		}
 		public function get CardDB():BattleGuyData{
 			return _data;

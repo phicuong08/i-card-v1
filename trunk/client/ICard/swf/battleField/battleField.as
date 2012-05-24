@@ -10,10 +10,9 @@
     public class battleField extends MovieClip implements IBattleField{
 		private var _slots:Array;
 		private var _tip:ITip;
-		public static var _TurnCardFunc:Function;
-		public static var _SideCardFunc:Function;
-		public static var _CardToEnterFunc:Function;
-		public static var _CardToResFunc:Function;
+		public static var _AskTurnCardFunc:Function;
+		public static var _AskCardToEnterFunc:Function;
+		public static var _AskCardToResFunc:Function;
         public function battleField(){
 			InitSlot();
 			//RunTest();
@@ -131,17 +130,15 @@
 			}
 			
 		}
-		public function set onSideCard(arg1:Function):void{
-			_SideCardFunc = arg1;
+
+		public function set AskTurnCard(arg1:Function):void{
+			_AskTurnCardFunc = arg1;
 		}
-		public function set onTurnCard(arg1:Function):void{
-			_TurnCardFunc = arg1;
+		public function set AskCard2FightSlot(arg1:Function):void{
+			_AskCardToEnterFunc = arg1;
 		}
-		public function set onCard2Fight(arg1:Function):void{
-			_CardToEnterFunc = arg1;
-		}
-		public function set onCard2Res(arg1:Function):void{
-			_CardToResFunc = arg1;
+		public function set AskCard2ResSlot(arg1:Function):void{
+			_AskCardToResFunc = arg1;
 		}
 		public function RunTest():void{
 			var index:int=1;
