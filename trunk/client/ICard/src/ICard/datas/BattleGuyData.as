@@ -44,10 +44,14 @@ package ICard.datas {
 			for each( var card:CardData in _cardArr)
 			{
 				if( card.Slot == BattleFieldType.MyResourceSlotId ||
-					card.Slot == BattleFieldType.MyHeroSlotId ||
-					card.Slot ==BattleFieldType.YouResourceSlotId||
-					card.Slot ==BattleFieldType.YouHeroSlotId)
+					card.Slot == BattleFieldType.MySoldierSlotId ||
+					card.Slot == BattleFieldType.MyEquipSlotId )
+				{
+					var oldCard:CardData = new CardData(new Object);
+					oldCard.Clone(card);
 					card.Side = 0;
+					CardDiffData.UpdateCard(oldCard,card);
+				}
 			}
 		}
 		

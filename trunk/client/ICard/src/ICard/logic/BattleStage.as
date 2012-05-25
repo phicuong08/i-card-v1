@@ -16,12 +16,15 @@ package ICard.logic {
 		private var _myID:int;
 		private var _fightLink:FightLink;
 		private var _cardFightResultCallback:Function;
+		private var _playerLoopFreshCallback:Function;
 		private var _enable2Res:Boolean;
 		protected var _data:IData;
 		
 		private static var _obj:BattleStage;
 		public function BattleStage():void{
 			_enable2Res = false;
+			_cardFightResultCallback = new Function;
+			_playerLoopFreshCallback = new Function;
 		}
 		public function settle(arg:Data):void{
 			_data = (arg as IData);
@@ -34,6 +37,9 @@ package ICard.logic {
 		}
 		public function set CardFightResultCallback(arg1:Function):void{
 			_cardFightResultCallback = arg1;
+		}
+		public function set PlayerLoopFreshCallback(arg1:Function):void{
+			_playerLoopFreshCallback = arg1;
 		}
 		public function InitGuy(me:int,you:int):void{
 			_guy = new Dictionary;
@@ -141,6 +147,10 @@ package ICard.logic {
 				}
 			}
 			return null;
+		}
+		public functionPlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
+			ResetCards(playerID);
+			_playerLoopFreshCallback(playerID==_myID,secNum);			
 		}
 		public function get _Mod_Battle():Mod_Battle{
 			return (_data._Mod_Battle as Mod_Battle);

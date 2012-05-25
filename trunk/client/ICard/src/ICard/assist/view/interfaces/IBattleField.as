@@ -14,6 +14,7 @@ package ICard.assist.view.interfaces {
 			function Add2Slot(slotId:int,card:MovieClip):void;
 			function RemoveCard(realID:int):void;
 			function SideCard(info:Object):void; //横置,重置
+			function LoopFresh(myLoop:Boolean,secNum:int):void;
 			function RunTest():void;
 	}
 }//package com.assist.view.interfaces 
