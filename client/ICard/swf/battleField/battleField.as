@@ -109,14 +109,16 @@
 					id++;
 				}	
     }    
+    public function LoopFresh(myLoop:Boolean,secNum:int):void{
     
+    }
 		public function SideCard(info:Object):void{
 				if(info==null)
 						return;
 				var cardMC = FindCard(info["realID"]);
 				if(cardMC==null)
 						return;
-				var bSide:Boolean = info["side"];
+				battleAssis.SideCard(info["side"]==1,cardMC);
 		}
 		
 		public function set tip(_arg1:ITip):void{

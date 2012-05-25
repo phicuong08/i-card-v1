@@ -24,6 +24,7 @@ package ICard.datas {
 			_cardOld = new Dictionary;
 			_cardNew = new Dictionary;
 		}
+		
 			
 		
 		public static function UpdateCard(oldCard:CardData,newCard:CardData):void{

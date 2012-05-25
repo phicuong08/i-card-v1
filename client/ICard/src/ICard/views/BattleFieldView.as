@@ -36,12 +36,13 @@ package ICard.views {
 		{
 			_battleStage = BattleStage.getInstance();
 			_battleStage.CardFightResultCallback = this.onCardFightResult;
-			this._battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
+			_battleStage.PlayerLoopFreshCallback = this.onPlayerLoopFresh;
 			
-			this._battleField.tip = _viewMgr.tip.iTip;
-			this._battleField.AskCard2FightSlot = AskCard2FightSlot;
-			this._battleField.AskCard2ResSlot = AskCard2ResSlot;
-			this._battleField.AskTurnCard = AskTurnCard;
+			_battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
+			_battleField.tip = _viewMgr.tip.iTip;
+			_battleField.AskCard2FightSlot = AskCard2FightSlot;
+			_battleField.AskCard2ResSlot = AskCard2ResSlot;
+			_battleField.AskTurnCard = AskTurnCard;
 			
 			this._cardDB = (_viewMgr.getAssetsObject("carddb", "carddb") as ICardDB);
 			test();
@@ -98,6 +99,9 @@ package ICard.views {
 		}
 		private function AskTurnCard(arg1:int):Boolean{
 			return _battleStage.AskTurnCard(arg1);
+		}
+		public functiononPlayerLoopFresh(myLoop:Boolean,secNum:int):void{
+			_battleField.LoopFresh(myLoop,secNum);
 		}
 		public function onCardFightResult(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
 			_viewMgr.fightMovie.InitShow(srcID,targets,oldCards,bEnemy);
