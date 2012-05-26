@@ -54,20 +54,20 @@ package ICard.views {
 			var cardInfo:Array = CardDiffData.PopCard();
 			if(cardInfo!=null)
 			{
-				var cardObj:Object = cardInfo[1];
+				var cardObj:CardData = (cardInfo[1] as CardData);
 				 if(CardDiffData.IsAttrDiff(cardInfo[0],cardInfo[1]))
 				{
-						var cardMC:MovieClip = _battleField.FindCard(cardObj["realID"]);
-						this._cardDB.UpdateAttr(cardMC,cardObj);
+						var cardMC:MovieClip = _battleField.FindCard(cardObj.RealID);
+						this._cardDB.UpdateAttr(cardMC,cardObj.Info);
 						if(CardDiffData.IsSideDiff(cardInfo[0],cardInfo[1]))
 						{
-								_battleField.SideCard(cardObj);
+								_battleField.SideCard(cardObj.Info);
 						}		
 				}
 				else
 				{
-					var newCard:MovieClip = CreateCard(cardObj);
-					_battleField.Add2Slot(_battleStage.GetUISlot(cardObj),newCard);
+					var newCard:MovieClip = CreateCard(cardObj.Info);
+					_battleField.Add2Slot(_battleStage.GetUISlot(cardObj.Info),newCard);
 				}
 			}
 		}
@@ -83,7 +83,7 @@ package ICard.views {
 			if(this._battleField){
 				_popup.addView(this, this._battleField.content);
 			}
-			_viewMgr.fightMovie.show();
+			//_viewMgr.fightMovie.show();
 		}
 		private function DoTurnCard(arg1:int):Boolean{
 			return true;	
@@ -100,7 +100,7 @@ package ICard.views {
 		private function AskTurnCard(arg1:int):Boolean{
 			return _battleStage.AskTurnCard(arg1);
 		}
-		public functiononPlayerLoopFresh(myLoop:Boolean,secNum:int):void{
+		public function onPlayerLoopFresh(myLoop:Boolean,secNum:int):void{
 			_battleField.LoopFresh(myLoop,secNum);
 		}
 		public function onCardFightResult(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
@@ -108,11 +108,15 @@ package ICard.views {
 		}
 		private function test():void{
 			
+			_battleStage.InitGuy(1,2);
+			
 			//_viewMgr.fightMovie.show();
 			//_battleStage.InitGuy(1,2);
 			
-			//var card1:Object={playerID:1,realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyHandSlotId};
-			//_battleStage.onUpdateCard(card1);
+			var card1:Object={playerID:1,realID:1,cardID:20001,slot:BattleFieldType.MyHeroSlotId};
+			var card2:Object={playerID:1,realID:2,cardID:30001,slot:BattleFieldType.MyHandSlotId};
+			_battleStage.onUpdateCard(card1);
+			_battleStage.onUpdateCard(card2);
 			
 			
 			//var card2:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyResourceSlotId};

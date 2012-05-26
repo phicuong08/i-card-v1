@@ -6,11 +6,9 @@ package ICard.datas {
 	import flash.utils.*;
 	public class BattleGuyData {
 		private var _cardArr:Dictionary;	
-		private var _cardDiff:CardDiffData;
 		
 		public function BattleGuyData():void{
 			_cardArr = new Dictionary;
-			_cardDiff = new CardDiffData;
 		}
 	
 		public function EmptyCards():void{
@@ -28,29 +26,31 @@ package ICard.datas {
 		}
 		
 		public function onUpdateCard(info:Object):void{
-			var realID:int = info["realID"];
-			var oldCard:CardData;
 			var newCard:CardData = new CardData(info);
-			if(_cardArr[realID])
+			var oldCard:CardData = FindCard(info["realID"]);
+			if(oldCard)
 			{
-				oldCard = new CardData(new Object);
-				oldCard.Clone(_cardArr[realID]);
+				oldCard = newCard;
 			}
-			_cardArr[realID] = newCard;
-			CardDiffData.UpdateCard(oldCard,newCard);
+			else
+			{
+				_cardArr[newCard.RealID]=newCard;
+			}
+			CardDiffData.UpdateCard(newCard);
+			
 		}
 		
 		public function ResetCards():void{
 			for each( var card:CardData in _cardArr)
 			{
 				if( card.Slot == BattleFieldType.MyResourceSlotId ||
-					card.Slot == BattleFieldType.MySoldierSlotId ||
+					card.Slot == BattleFieldType.MyFightSlotId ||
 					card.Slot == BattleFieldType.MyEquipSlotId )
 				{
 					var oldCard:CardData = new CardData(new Object);
 					oldCard.Clone(card);
 					card.Side = 0;
-					CardDiffData.UpdateCard(oldCard,card);
+					CardDiffData.UpdateCard(card);
 				}
 			}
 		}

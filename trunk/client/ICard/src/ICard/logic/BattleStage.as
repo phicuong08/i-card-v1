@@ -66,6 +66,7 @@ package ICard.logic {
 			var fillCard:Object = CardType.CreateCardInfo(info["cardID"]);
 			if(fillCard==null)
 				return null;
+			fillCard["realID"]= info["realID"];
 			if(info["hp"])
 				fillCard["hp"] = info["hp"];
 			if(info["atk"])	
@@ -148,7 +149,7 @@ package ICard.logic {
 			}
 			return null;
 		}
-		public functionPlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
+		public function PlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
 			ResetCards(playerID);
 			_playerLoopFreshCallback(playerID==_myID,secNum);			
 		}

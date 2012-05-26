@@ -5,47 +5,44 @@ package ICard.datas {
 	
 	import flash.utils.*;
 	public class CardDiffData {
-		private static var _cardOld:Dictionary;
-		private static var _cardNew:Dictionary;
+		private static var _cardDifArr:Array;
 
 		
 		public static function init():void{
-			if(_cardOld==null)
+			if(_cardDifArr==null)
 			{
-				_cardOld = new Dictionary
-			}
-			if(_cardNew==null)
-			{
-				_cardNew = new Dictionary
+				_cardDifArr = new Array
 			}
 			
 		}
 		public static function Empty():void{
-			_cardOld = new Dictionary;
-			_cardNew = new Dictionary;
+			_cardDifArr = new Array;
 		}
 		
 			
 		
-		public static function UpdateCard(oldCard:CardData,newCard:CardData):void{
-			
-			if(oldCard)
-				_cardOld[oldCard.RealID] = oldCard;
-			if(newCard)
-				_cardNew[newCard.RealID] = newCard;
-		}
-		public static function PopCard():Array{
-			
-			var cardInfo:Array;
-			for each( var card:CardData in _cardNew)
+		public static function UpdateCard(newCard:CardData):void{
+			for each(var cardArr:Array in _cardDifArr)
 			{
-				cardInfo = new Array;
-				cardInfo[0] = _cardOld[card.RealID];
-				cardInfo[1] = card;
-				delete _cardOld[card.RealID];
-				delete _cardNew[card.RealID];
+				var card:CardData = cardArr[0] as CardData;
+				if(card.RealID ==newCard.RealID) //exist old card 
+				{
+					cardArr[0] = cardArr[1];
+					cardArr[1] = newCard;
+					return;
+				}
 			}
-			return cardInfo;
+			var oldCard:CardData = new CardData(new Object);
+			oldCard.Clone(newCard);
+			
+			var diff:Array = new Array;
+			diff[0] = oldCard;
+			diff[1] = newCard;
+			_cardDifArr.push(diff);
+		}
+		
+		public static function PopCard():Array{
+			return _cardDifArr.pop();
 		}
 
 		public static function IsSlotDiff(oldCard:CardData,newCard:CardData):Boolean{
