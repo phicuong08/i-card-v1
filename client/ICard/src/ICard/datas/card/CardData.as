@@ -29,6 +29,9 @@ package ICard.datas.card {
 			_slot = arg1["slot"];
 		}
 	*/	
+		public function get Info():Object{
+			return _info;
+		}
 		public function set RealID(val:int):void{
 			_info["realID"] = val;
 		}

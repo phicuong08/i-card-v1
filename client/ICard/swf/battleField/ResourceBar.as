@@ -61,7 +61,7 @@
 			card.addChild(_use_but);
 		}
 		public function OnCardUse(e:MouseEvent):void{
-			battleField._TurnCardFunc(_selCard.realID);	
+			battleField._AskCardToEnterFunc(_selCard.realID);	
 		}
     }
 }//package 
