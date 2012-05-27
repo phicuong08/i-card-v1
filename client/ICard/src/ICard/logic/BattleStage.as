@@ -5,9 +5,9 @@ package ICard.logic {
 	import ICard.SFSMod.Mod_Battle;
 	import ICard.assist.data.*;
 	import ICard.assist.server.CardType;
+	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.datas.*;
 	import ICard.datas.card.*;
-	import ICard.assist.view.controls.BattleFieldType;
 	
 	import flash.utils.*;
 	
@@ -19,7 +19,7 @@ package ICard.logic {
 		private var _playerLoopFreshCallback:Function;
 		private var _enable2Res:Boolean;
 		protected var _data:IData;
-		
+		private var _IsTurn:Boolean; //操作回合
 		private static var _obj:BattleStage;
 		public function BattleStage():void{
 			_enable2Res = false;
@@ -120,6 +120,7 @@ package ICard.logic {
 		public function AskCard2ResSlot(realID:int):Boolean{
 			if(!_enable2Res)
 				return false;
+			_enable2Res = false;
 			_Mod_Battle.QueryUpdateCard(realID,BattleFieldType.MyResourceSlotId);
 			return true;
 		}
@@ -149,14 +150,30 @@ package ICard.logic {
 			}
 			return null;
 		}
+		private function onMyLoop():void{
+			_enable2Res = true;
+		}
 		public function PlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
 			ResetCards(playerID);
-			_playerLoopFreshCallback(playerID==_myID,secNum);			
+			_playerLoopFreshCallback(playerID==_myID,secNum);	
+			_IsTurn = (playerID==_myID)?true:false;
 		}
 		public function get _Mod_Battle():Mod_Battle{
 			return (_data._Mod_Battle as Mod_Battle);
 		}
-		
+		public function CardMenuFlag(realID:int):Array{
+			var cardInfo:Object =  FindCard(realID);
+			if(!cardInfo || cardInfo["guy"]!=_myID ||(_IsTurn==false))
+				return null;
+			var flagArr:Array = new Array;
+			flagArr[0] = UseCard.Is2ResAble(cardInfo["card"]);                             //资源
+			flagArr[1] = UseCard.Is2EnterAble(cardInfo["card"],PlayerMe.CardDB.ResNum());  //进场
+			flagArr[2] = UseCard.Is2FightAble(cardInfo["card"],PlayerMe.CardDB.ResNum());  //战斗  
+			flagArr[3] = UseCard.IsTaskAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //任务
+			flagArr[4] = UseCard.IsSkillAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //施法
+			flagArr[5] = UseCard.IsTurnAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //施法
+			return flagArr;
+		}
 
 	}
 }//package com.assist.data.mission 

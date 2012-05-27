@@ -64,17 +64,35 @@
 			}
 			return false;
 		}
-		
-		public function CreateCard(info:Object):MovieClip{
+		private function CreateBackCard(info:Object):MovieClip{
+			if(!info.hasOwnProperty("turn") ||info["turn"]==0)
+				return null;
 			var typeId:int = info["cardID"]/1000;
 			var cardMC:MovieClip;
 			var title:String = "c_" + info["cardID"].toString();
 			switch(typeId)
 			{
-				case 1:
-					cardMC = new card_back;
-					info["turn"] = true;
+				case 20:
+					cardMC = CreateHeroBackCard(title,info);
 					break;
+				default:
+					cardMC = new card_back;
+					break;
+			}
+			cardMC.realID = info["realID"];
+			cardMC.turn = 1;
+			return cardMC;
+		}
+		public function CreateCard(info:Object):MovieClip{
+			var typeId:int = info["cardID"]/1000;
+			trace("card turn",info["turn"]);
+			var cardMC:MovieClip = CreateBackCard(info);
+			if(cardMC)
+				return cardMC;
+				
+			var title:String = "c_" + info["cardID"].toString();
+			switch(typeId)
+			{
 				case 30:
 					cardMC = CreateWeaponCard(title,info);
 					break;
@@ -87,12 +105,7 @@
 					cardMC = CreateSoldierCard(title,info);
 					break;
 				case 20:
-					if(info["turn"]==true)
-					{
-						cardMC = CreateHeroBackCard(title,info);
-					}
-					else
-						cardMC = CreateHeroCard(title,info);
+					cardMC = CreateHeroCard(title,info);
 					break;
 				case 50:
 					cardMC = CreateSkillCard(title,info);
@@ -102,7 +115,8 @@
 					break;
 			}
 			cardMC.realID = info["realID"];
-			cardMC.turn = info["turn"];
+			cardMC.turn = 0;
+			
 			return cardMC;
 		}
 		private function CreateSkillCard(title:String,info:Object):MovieClip{
