@@ -36,9 +36,14 @@ package ICard.logic {
 		public static function Is2ResAble(card:CardData):Boolean{
 			return (card.Slot == BattleFieldType.MyHandSlotId);
 		}
-		public static function IsTurnAble(card:CardData):Boolean{
+		public static function IsTurnAble(card:CardData,resVal:int):Boolean{
+			if(card.Slot != BattleFieldType.MyHeroSlotId)
+				return false;
+			if( card.Turn==0)
+				return false;
+			return ResEnough(card,resVal);
 		}
-		}
+		
 		public static function IsSkillAble(card:CardData,resVal:int):Boolean{
 			if(card.Slot != BattleFieldType.MyHandSlotId)
 				return false;
