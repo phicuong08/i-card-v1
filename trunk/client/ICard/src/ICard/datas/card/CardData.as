@@ -44,6 +44,9 @@ package ICard.datas.card {
 		public function set CardID(val:int):void{
 			_info["cardID"] = val;
 		}
+		public function get Cost():int{
+			return _info["cost"];
+		}
 		public function get Slot():int{
 			return _info["slot"];
 		}

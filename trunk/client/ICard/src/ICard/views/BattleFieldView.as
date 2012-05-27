@@ -115,8 +115,10 @@ package ICard.views {
 			
 			var card1:Object={playerID:1,realID:1,cardID:20001,slot:BattleFieldType.MyHeroSlotId};
 			var card2:Object={playerID:1,realID:2,cardID:30001,slot:BattleFieldType.MyHandSlotId};
+			var card3:Object={playerID:1,realID:2,cardID:30001,slot:BattleFieldType.MyFightSlotId};
 			_battleStage.onUpdateCard(card1);
 			_battleStage.onUpdateCard(card2);
+			_battleStage.onUpdateCard(card3);
 			
 			
 			//var card2:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyResourceSlotId};

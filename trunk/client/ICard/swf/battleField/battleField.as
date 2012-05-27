@@ -145,13 +145,13 @@
 		public function RunTest():void{
 			var index:int=1;
 			var c1:MovieClip;
-			while(index <8)
+			while(index <2)
 			{
 				c1 = new c_20005;
 				c1.stand ="normal";
 				c1.realID = index;
 				c1.tipInfo = "abc";
-				Add2Slot(BattleFieldType.MyHandSlotId,c1);
+				Add2Slot(BattleFieldType.MyHeroSlotId,c1);
 				index++;
 			}
 	//		RemoveCard(BattleFieldType.YouResourceSlotId,3);

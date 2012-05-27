@@ -189,7 +189,8 @@ package ICard.assist.server {
 			card["title"] = cardInfo[1];
 			card["camp"] = cardInfo[2];
 			card["race"]= cardInfo[3];
-			card["detail"]=cardInfo[4];
+			card["cost"]=cardInfo[4];
+			card["detail"]=cardInfo[5];
 			return card;
 		}
 		

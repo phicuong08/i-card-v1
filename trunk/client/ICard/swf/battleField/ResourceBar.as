@@ -11,12 +11,15 @@
         }
 	
  		override public function AddCard(card:MovieClip):void{
-			
-			if(card.turn==true && this.numChildren>0)
+			trace("turn",card.turn);
+			if(card.turn==true)
 			{
-				var elem0:MovieClip = (this.getChildAt(0) as MovieClip);
-				if(elem0.turn==true)  //只会加一个背面的
-					return;
+				if( this.numChildren>0)
+				{
+					var elem0:MovieClip = (this.getChildAt(0) as MovieClip);
+					if(elem0 && elem0.turn==true)  //只会加一个背面的
+						return;
+				}
 				this.addChildAt(card,0);
 				UpdatePos();
 			}
@@ -46,7 +49,7 @@
 		}
 		
 		private function HideCardUseMenu(card:MovieClip):void{
-			_use_but.removeEventListener(MouseEvent.CLICK,OnCardUse);
+			_use_but.removeEventListener(MouseEvent.CLICK,CardTurn);
 			card.removeChild(_use_but);
 			_use_but = null;
 		}
@@ -57,11 +60,11 @@
 			_use_but = new card_use_but;
 			_use_but.x = 0;
 			_use_but.y = 0;
-			_use_but.addEventListener(MouseEvent.CLICK,OnCardUse);
+			_use_but.addEventListener(MouseEvent.CLICK,CardTurn);
 			card.addChild(_use_but);
 		}
-		public function OnCardUse(e:MouseEvent):void{
-			battleField._AskCardToEnterFunc(_selCard.realID);	
+		public function CardTurn(e:MouseEvent):void{
+			battleField._AskTurnCardFunc(_selCard.realID);	
 		}
     }
 }//package 
