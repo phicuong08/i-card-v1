@@ -5,9 +5,11 @@
     import flash.text.*;
 	import flash.geom.*;
 	import ICard.assist.view.interfaces.*;
+	import ICard.assist.data.IBattleStage;
 		
     public class SlotBar extends MovieClip {
 		private var _tip:ITip;
+		public var _battleStage:IBattleStage;
 		private var _widthMax:int;
 		private var _cardWidth:int;
 	
@@ -92,6 +94,9 @@
 		}
 		public function set tip(_arg1:ITip):void{
 		  _tip = _arg1;
+		}
+		public function set BattleStage(_arg1:IBattleStage):void{
+		  _battleStage = _arg1;
 		}
 		
 		public function UpdatePos():void{

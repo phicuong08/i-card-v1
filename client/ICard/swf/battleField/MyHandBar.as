@@ -37,6 +37,7 @@
 			_cardMenu = null;
 		}
 		private function ShowCardActionMenu(card:MovieClip):void{
+			_battleStage.CardMenuFlag(card.realID);
 			if(_cardMenu)
 				return;
 			_cardMenu = new card_menu;
@@ -49,10 +50,10 @@
 		}
 		
 		public function OnCardToEnter(e:MouseEvent):void{
-			battleField._AskCardToEnterFunc(_selCard.realID);	
+			_battleStage.AskCard2FightSlot(_selCard.realID);	
 		}
 		public function OnCardToRes(e:MouseEvent):void{
-			battleField._AskCardToResFunc(_selCard.realID);
+			_battleStage.AskCard2ResSlot(_selCard.realID);
 		}
 		public function OnCardToTomb(e:MouseEvent):void{
 			trace(_selCard.realID,"To Tomb!");

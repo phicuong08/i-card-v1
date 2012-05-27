@@ -40,9 +40,7 @@ package ICard.views {
 			
 			_battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
 			_battleField.tip = _viewMgr.tip.iTip;
-			_battleField.AskCard2FightSlot = AskCard2FightSlot;
-			_battleField.AskCard2ResSlot = AskCard2ResSlot;
-			_battleField.AskTurnCard = AskTurnCard;
+			_battleField.BattleStage = _battleStage;
 			
 			this._cardDB = (_viewMgr.getAssetsObject("carddb", "carddb") as ICardDB);
 			test();
@@ -89,17 +87,6 @@ package ICard.views {
 			return true;	
 		}
 		
-		
-		private function AskCard2FightSlot(arg1:int):Boolean{
-			return _battleStage.AskCard2FightSlot(arg1);
-		}
-		
-		private function AskCard2ResSlot(arg1:int):Boolean{
-			return _battleStage.AskCard2ResSlot(arg1);
-		}
-		private function AskTurnCard(arg1:int):Boolean{
-			return _battleStage.AskTurnCard(arg1);
-		}
 		public function onPlayerLoopFresh(myLoop:Boolean,secNum:int):void{
 			_battleField.LoopFresh(myLoop,secNum);
 		}
@@ -113,12 +100,13 @@ package ICard.views {
 			//_viewMgr.fightMovie.show();
 			//_battleStage.InitGuy(1,2);
 			
+			_battleStage.PlayerLoopFresh(1,30);
 			var card1:Object={playerID:1,realID:1,cardID:20001,slot:BattleFieldType.MyHeroSlotId};
 			var card2:Object={playerID:1,realID:2,cardID:30001,slot:BattleFieldType.MyHandSlotId};
-			var card3:Object={playerID:1,realID:2,cardID:30001,slot:BattleFieldType.MyFightSlotId};
+			//var card3:Object={playerID:1,realID:2,cardID:30001,slot:BattleFieldType.MyFightSlotId};
 			_battleStage.onUpdateCard(card1);
 			_battleStage.onUpdateCard(card2);
-			_battleStage.onUpdateCard(card3);
+			//_battleStage.onUpdateCard(card3);
 			
 			
 			//var card2:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyResourceSlotId};

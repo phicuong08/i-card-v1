@@ -4,15 +4,14 @@
 	import HeroBar;
 	import flash.utils.Dictionary;
     import ICard.assist.view.interfaces.*;
+	import ICard.assist.data.IBattleStage;
 	import ICard.assist.view.controls.BattleFieldType;
     import flash.text.*;
 	import flash.events.MouseEvent;
     public class battleField extends MovieClip implements IBattleField{
 		private var _slots:Array;
 		private var _tip:ITip;
-		public static var _AskTurnCardFunc:Function;
-		public static var _AskCardToEnterFunc:Function;
-		public static var _AskCardToResFunc:Function;
+		private var _battleStage:IBattleStage;
         public function battleField(){
 			InitSlot();
 			//RunTest();
@@ -120,7 +119,15 @@
 						return;
 				battleAssis.SideCard(info["side"]==1,cardMC);
 		}
-		
+		public function set BattleStage(arg1:IBattleStage):void{
+			_battleStage = arg1;
+			var id:int = BattleFieldType.MyHandSlotId;
+			while(id <= BattleFieldType.YouHeroSlotId)
+			{
+				_slots[id].BattleStage = _battleStage;
+				id++;
+			}
+		}
 		public function set tip(_arg1:ITip):void{
 			_tip = _arg1;
 		   
@@ -133,15 +140,7 @@
 			
 		}
 
-		public function set AskTurnCard(arg1:Function):void{
-			_AskTurnCardFunc = arg1;
-		}
-		public function set AskCard2FightSlot(arg1:Function):void{
-			_AskCardToEnterFunc = arg1;
-		}
-		public function set AskCard2ResSlot(arg1:Function):void{
-			_AskCardToResFunc = arg1;
-		}
+		
 		public function RunTest():void{
 			var index:int=1;
 			var c1:MovieClip;

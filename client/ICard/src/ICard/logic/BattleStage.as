@@ -4,6 +4,7 @@ package ICard.logic {
 	import ICard.SFSMod.*;
 	import ICard.SFSMod.Mod_Battle;
 	import ICard.assist.data.*;
+
 	import ICard.assist.server.CardType;
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.datas.*;
@@ -11,7 +12,7 @@ package ICard.logic {
 	
 	import flash.utils.*;
 	
-	public class BattleStage {
+	public class BattleStage implements IBattleStage{
 		private var _guy:Dictionary;
 		private var _myID:int;
 		private var _fightLink:FightLink;
@@ -143,7 +144,7 @@ package ICard.logic {
 				if(card)
 				{
 					cardInfo["card"]=card;
-					cardInfo["guy"]=guy;
+					cardInfo["guy"]=guy.ID;
 					return cardInfo;
 					
 				}
@@ -161,17 +162,17 @@ package ICard.logic {
 		public function get _Mod_Battle():Mod_Battle{
 			return (_data._Mod_Battle as Mod_Battle);
 		}
-		public function CardMenuFlag(realID:int):Array{
+		public function CardMenuFlag(realID:int):Object{
 			var cardInfo:Object =  FindCard(realID);
 			if(!cardInfo || cardInfo["guy"]!=_myID ||(_IsTurn==false))
 				return null;
-			var flagArr:Array = new Array;
-			flagArr[0] = UseCard.Is2ResAble(cardInfo["card"]);                             //资源
-			flagArr[1] = UseCard.Is2EnterAble(cardInfo["card"],PlayerMe.CardDB.ResNum());  //进场
-			flagArr[2] = UseCard.Is2FightAble(cardInfo["card"],PlayerMe.CardDB.ResNum());  //战斗  
-			flagArr[3] = UseCard.IsTaskAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //任务
-			flagArr[4] = UseCard.IsSkillAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //施法
-			flagArr[5] = UseCard.IsTurnAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //施法
+			var flagArr:Object = new Object;
+			flagArr["res"] = UseCard.Is2ResAble(cardInfo["card"]);                             //资源
+			flagArr["enter"] = UseCard.Is2EnterAble(cardInfo["card"],PlayerMe.CardDB.ResNum());  //进场
+			flagArr["fight"] = UseCard.Is2FightAble(cardInfo["card"],PlayerMe.CardDB.ResNum());  //战斗  
+			flagArr["task"] = UseCard.IsTaskAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //任务
+			flagArr["skill"] = UseCard.IsSkillAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //施法
+			flagArr["turn"] = UseCard.IsTurnAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //翻转
 			return flagArr;
 		}
 
