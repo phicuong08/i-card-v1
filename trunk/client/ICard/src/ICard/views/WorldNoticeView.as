@@ -25,8 +25,8 @@ package ICard.views {
             if (true == _arg1){
                 _viewMgr.toolbar.reposition();
             } else {
-                if (((!((this._worldNotice == null))) && (this._view.stage.contains(this._worldNotice.content)))){
-                    this._worldNotice.content.x = Math.max(290, (Math.floor(((this._view.stage.stageWidth - 420) / 2)) - Structure.stageClip.x));
+                if (((!((this._worldNotice == null))) && (this._viewMgr.stage.contains(this._worldNotice.content)))){
+                    this._worldNotice.content.x = Math.max(290, (Math.floor(((this._viewMgr.stage.stageWidth - 420) / 2)) - Structure.stageClip.x));
                     this._worldNotice.content.y = (150 + Structure.stageOffset.y);
                 };
             };
