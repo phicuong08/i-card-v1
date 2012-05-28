@@ -171,7 +171,7 @@ package ICard.logic {
 			flagArr["enter"] = UseCard.Is2EnterAble(cardInfo["card"],PlayerMe.CardDB.ResNum());  //进场
 			flagArr["fight"] = UseCard.Is2FightAble(cardInfo["card"],PlayerMe.CardDB.ResNum());  //战斗  
 			flagArr["task"] = UseCard.IsTaskAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //任务
-			flagArr["skill"] = UseCard.IsSkillAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //施法
+			flagArr["cast"] = UseCard.IsCastAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //施法
 			flagArr["turn"] = UseCard.IsTurnAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //翻转
 			return flagArr;
 		}

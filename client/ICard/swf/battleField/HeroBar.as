@@ -11,8 +11,7 @@
 	
  		override public function AddCard(card:MovieClip):void{
 			RemoveAllCard();
-			this.addChild(card);
-			UpdatePos();
+			super.AddCard(card);
 		}
 	
     }
