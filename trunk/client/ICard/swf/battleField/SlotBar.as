@@ -12,7 +12,7 @@
 		public var _battleStage:IBattleStage;
 		private var _widthMax:int;
 		private var _cardWidth:int;
-	
+		private var _cardMenu:MovieClip;
 		public var _selCard:MovieClip;
 		public var _slotID:int;
         public function SlotBar():void{
@@ -68,6 +68,24 @@
 		public function AddCard(card:MovieClip):void{
 			this.addChild(card);
 			UpdatePos();
+			
+			var handleMouseOverCard:* = function(e:MouseEvent):void{
+				
+				_selCard = card;
+				ShowCardActionMenu(card);
+				if(_cardMenu.numChildren>0)
+					card.y = card.height/2 -4;
+				SetCardTip(card);
+			}
+			var handleMouseOutCard:* = function(e:MouseEvent):void{
+				card.y = card.height/2;
+				_selCard = null;
+				HideCardActionMenu(card);
+				RemoveCardTip(card);
+			}
+			card.addEventListener(MouseEvent.ROLL_OVER,handleMouseOverCard);
+			card.addEventListener(MouseEvent.ROLL_OUT,handleMouseOutCard);
+			
 		}
 		public function RemoveAllCard():void{
 			while(this.numChildren)
@@ -99,6 +117,70 @@
 		  _battleStage = _arg1;
 		}
 		
+		private function HideCardActionMenu(card:MovieClip):void{
+			if(!_cardMenu)
+				return;
+			card.removeChild(_cardMenu);
+			while(_cardMenu.numChildren)
+			{
+				var obj:SimpleButton = _cardMenu.getChildAt(0) as SimpleButton;
+				obj.removeEventListener(MouseEvent.CLICK,obj["func"]);
+				_cardMenu.removeChild(obj);
+			}
+			_cardMenu = null;
+		}
+		
+		
+		
+		public function ShowCardActionMenu(card:MovieClip):void{
+			HideCardActionMenu(card);
+			var flagObj:Object = _battleStage.CardMenuFlag(card.realID);
+			if(!flagObj)
+				return;
+			_cardMenu = new MovieClip;	
+			if(	flagObj["enter"]==true)
+				AddMenuBut(card_enter_but,OnCardToEnter);
+			if(flagObj["cast"]==true)
+				AddMenuBut(card_cast_but,OnCardToCast);
+			if(flagObj["res"]==true)
+				AddMenuBut(card_res_but,OnCardToRes);
+			if(flagObj["task"]==true)
+				AddMenuBut(card_cast_but,OnCardToTask);
+			if(flagObj["fight"]==true)
+				AddMenuBut(card_fight_but,OnCardToFight);
+			if(flagObj["turn"]==true)
+				AddMenuBut(card_cast_but,OnCardToTurn);
+			_cardMenu.x = -_cardMenu.width/2 +5;
+			_cardMenu.y = -28;
+			card.addChild(_cardMenu);
+		}
+		
+		private function AddMenuBut( classType:Class,func:Function):void{
+			var addBut:SimpleButton = new classType;
+			addBut["func"] = func;
+			addBut.addEventListener(MouseEvent.CLICK,func);
+			addBut.x = _cardMenu.width + 10;
+			_cardMenu.addChild(addBut);
+		}
+		
+		public function OnCardToEnter(e:MouseEvent):void{
+			_battleStage.AskCard2FightSlot(_selCard.realID);	
+		}
+		public function OnCardToRes(e:MouseEvent):void{
+			_battleStage.AskCard2ResSlot(_selCard.realID);
+		}
+		public function OnCardToCast(e:MouseEvent):void{
+			trace(_selCard.realID,"To cast!");
+		}
+		public function OnCardToTask(e:MouseEvent):void{
+			trace(_selCard.realID,"To task!");
+		}
+		public function OnCardToFight(e:MouseEvent):void{
+			trace(_selCard.realID,"To fight!");
+		}
+		public function OnCardToTurn(e:MouseEvent):void{
+			trace(_selCard.realID,"To turn!");
+		}
 		public function UpdatePos():void{
 			if(this.numChildren<1)
 				return;

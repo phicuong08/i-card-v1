@@ -44,7 +44,7 @@ package ICard.logic {
 			return ResEnough(card,resVal);
 		}
 		
-		public static function IsSkillAble(card:CardData,resVal:int):Boolean{
+		public static function IsCastAble(card:CardData,resVal:int):Boolean{
 			if(card.Slot != BattleFieldType.MyHandSlotId)
 				return false;
 			if(card.Type != CardType.SkillType)

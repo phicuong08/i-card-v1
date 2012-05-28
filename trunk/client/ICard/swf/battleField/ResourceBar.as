@@ -5,8 +5,8 @@
     import flash.text.*;
 
     public class ResourceBar extends SlotBar {
-		private var _use_but:SimpleButton;
-        public function ResourceBar():void{
+
+	public function ResourceBar():void{
             super();
         }
 	
@@ -25,46 +25,9 @@
 			}
 			else
 			{
-				AddNewTaskCard(card);
+				super.AddCard(card);
 			}
 		}
 		
-		private function AddNewTaskCard(card:MovieClip):void{
-			super.AddCard(card);
-			
-			var handleMouseOverCard:* = function(e:MouseEvent):void{
-				card.y = card.height/2 -4;
-				_selCard = card;
-				ShowCardUseMenu(card);
-				SetCardTip(card);
-			}
-			var handleMouseOutCard:* = function(e:MouseEvent):void{
-				card.y = card.height/2;
-				_selCard = null;
-				HideCardUseMenu(card);
-				RemoveCardTip(card);
-			}
-			card.addEventListener(MouseEvent.ROLL_OVER,handleMouseOverCard);
-			card.addEventListener(MouseEvent.ROLL_OUT,handleMouseOutCard);
-		}
-		
-		private function HideCardUseMenu(card:MovieClip):void{
-			_use_but.removeEventListener(MouseEvent.CLICK,CardTurn);
-			card.removeChild(_use_but);
-			_use_but = null;
-		}
-		
-		private function ShowCardUseMenu(card:MovieClip):void{
-			if(_use_but)
-				return;
-			_use_but = new card_use_but;
-			_use_but.x = 0;
-			_use_but.y = 0;
-			_use_but.addEventListener(MouseEvent.CLICK,CardTurn);
-			card.addChild(_use_but);
-		}
-		public function CardTurn(e:MouseEvent):void{
-			_battleStage.AskTurnCard(_selCard.realID);	
-		}
-    }
+	}
 }//package 

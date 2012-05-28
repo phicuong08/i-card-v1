@@ -15,7 +15,7 @@ package ICard.assist {
 			var result:String = CardBaseHtml(info,title);
 			if(info["cost"])
 			{
-				result  += CardAtkHtml(info,title);
+				result  += CardCostHtml(info,title);
 				if(info["turncost"])
 					result = result + "   "  + CardTurnCostHtml(info,title);
 				result += HtmlText._newLineSign;
