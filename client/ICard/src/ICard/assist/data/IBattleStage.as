@@ -3,6 +3,7 @@ package ICard.assist.data{
     import flash.display.*;
 
     public interface IBattleStage {
+    function CardInfo(realID:int):Object;
 		function CardMenuFlag(realID:int):Object;
 		function AskCard2FightSlot(realID:int):Boolean;
 		function AskCard2ResSlot(realID:int):Boolean;

@@ -112,12 +112,14 @@
     
     }
 		public function SideCard(info:Object):void{
-				if(info==null)
-						return;
-				var cardMC = FindCard(info["realID"]);
-				if(cardMC==null)
-						return;
-				battleAssis.SideCard(info["side"]==1,cardMC);
+		
+			var id:int = BattleFieldType.MyHandSlotId;
+			while(id <= BattleFieldType.YouHeroSlotId)
+			{
+				if(_slots[id].SideCard(info))
+					return;
+				id++;
+			}	
 		}
 		public function set BattleStage(arg1:IBattleStage):void{
 			_battleStage = arg1;
@@ -153,7 +155,7 @@
 				Add2Slot(BattleFieldType.MyHeroSlotId,c1);
 				index++;
 			}
-	//		RemoveCard(BattleFieldType.YouResourceSlotId,3);
+	//	RemoveCard(BattleFieldType.YouResourceSlotId,3);
 			
 			
 			index = 1;

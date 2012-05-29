@@ -130,6 +130,13 @@
 			_cardMenu = null;
 		}
 		
+		public function SideCard(info:Object):Boolean{
+				var cardMC = FindCard(info["realID"]);
+				if(cardMC==null)
+						return false;
+				battleAssis.SideCard(info["side"]==1,cardMC);
+				return true;
+		}
 		
 		
 		public function ShowCardActionMenu(card:MovieClip):void{

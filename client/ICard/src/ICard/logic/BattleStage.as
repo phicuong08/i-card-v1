@@ -175,6 +175,14 @@ package ICard.logic {
 			flagArr["turn"] = UseCard.IsTurnAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //翻转
 			return flagArr;
 		}
-
+		public function CardInfo(realID:int):Object{
+			var cardObj:Object = FindCard(realID);
+			if(!cardObj)
+				return null;
+			var	card:CardData = cardObj["card"] as CardData;
+			if(!card)
+				return null;
+			return card.Info;
+		}
 	}
 }//package com.assist.data.mission 
