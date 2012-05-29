@@ -22,7 +22,7 @@
 			_slots  = [];
 			
 			
-			_slots[BattleFieldType.MyHandSlotId] = new MyHandBar;
+			_slots[BattleFieldType.MyHandSlotId] = new SlotBar;
 			_slots[BattleFieldType.MyHandSlotId].Init(BattleFieldType.MyHandSlotId,2,650,1180);
 			
 			
