@@ -29,8 +29,8 @@
 			_slots[BattleFieldType.MyResourceSlotId] = new ResourceBar;
 			_slots[BattleFieldType.MyResourceSlotId].Init(BattleFieldType.MyResourceSlotId,2,500,826);
 			
-			_slots[BattleFieldType.MyEquipSlotId] = new SlotBar;
-			_slots[BattleFieldType.MyEquipSlotId].Init(BattleFieldType.MyEquipSlotId,2,500,856);
+			_slots[BattleFieldType.MyEquipSlotId] = new EquipBar;
+			_slots[BattleFieldType.MyEquipSlotId].Init(BattleFieldType.MyEquipSlotId,1198,535,1300);
 			
 			_slots[BattleFieldType.MyFightSlotId] = new SlotBar;
 			_slots[BattleFieldType.MyFightSlotId].Init(BattleFieldType.MyFightSlotId,2,350,1180);
@@ -47,7 +47,7 @@
 			_slots[BattleFieldType.YouResourceSlotId] = new ResourceBar;
 			_slots[BattleFieldType.YouResourceSlotId].Init(BattleFieldType.YouResourceSlotId,2,50,826);
 			
-			_slots[BattleFieldType.YouEquipSlotId] = new SlotBar;
+			_slots[BattleFieldType.YouEquipSlotId] = new EquipBar;
 			_slots[BattleFieldType.YouEquipSlotId].Init(BattleFieldType.YouEquipSlotId,2,500,856);
 			
 			_slots[BattleFieldType.YouFightSlotId] = new SlotBar;

@@ -56,7 +56,8 @@ package ICard.views {
 				 if(CardDiffData.IsAttrDiff(cardInfo[0],cardInfo[1]))
 				{
 						var cardMC:MovieClip = _battleField.FindCard(cardObj.RealID);
-						this._cardDB.UpdateAttr(cardMC,cardObj.Info);
+						if(cardMC)
+							this._cardDB.UpdateAttr(cardMC,cardObj.Info);
 						if(CardDiffData.IsSideDiff(cardInfo[0],cardInfo[1]))
 						{
 								_battleField.SideCard(cardObj.Info);
@@ -102,11 +103,12 @@ package ICard.views {
 			
 			_battleStage.PlayerLoopFresh(1,30);
 			var card1:Object={playerID:1,realID:1,cardID:20001,slot:BattleFieldType.MyHeroSlotId};
-			var card2:Object={playerID:1,realID:2,cardID:30001,slot:BattleFieldType.MyHandSlotId};
-			//var card3:Object={playerID:1,realID:2,cardID:30001,slot:BattleFieldType.MyFightSlotId};
-			_battleStage.onUpdateCard(card1);
-			_battleStage.onUpdateCard(card2);
-			//_battleStage.onUpdateCard(card3);
+			var card2:Object={playerID:1,realID:2,cardID:31001,slot:BattleFieldType.MyHandSlotId};
+			var card3:Object={playerID:1,realID:2,cardID:31001,side:1,slot:BattleFieldType.MyEquipSlotId};
+		//	_battleStage.onUpdateCard(card1);
+		//	_battleStage.onUpdateCard(card2);
+			
+			_battleStage.onUpdateCard(card3);
 			
 			
 			//var card2:Object={realID:1,cardID:20001,hp:22,atk:0,def:0,side:false,turn:false,slot:BattleFieldType.MyResourceSlotId};

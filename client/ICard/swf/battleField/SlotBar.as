@@ -31,6 +31,7 @@
 			while(index <this.numChildren)
 			{
 				var card:MovieClip = (getChildAt(index) as MovieClip);
+
 				if(card.realID==realID)
 				{
 					return card;
@@ -74,11 +75,11 @@
 				_selCard = card;
 				ShowCardActionMenu(card);
 				if(_cardMenu.numChildren>0)
-					card.y = card.height/2 -4;
+					card.y = card.baseY -4;
 				SetCardTip(card);
 			}
 			var handleMouseOutCard:* = function(e:MouseEvent):void{
-				card.y = card.height/2;
+				card.y = card.baseY;
 				_selCard = null;
 				HideCardActionMenu(card);
 				RemoveCardTip(card);
@@ -202,6 +203,7 @@
 				var card:MovieClip = (getChildAt(index) as MovieClip);
 				card.x = card.width/2 +cardWidth*index;
 				card.y = card.height/2;
+				card.baseY = card.y;
 				index++;
 			}
 		}
