@@ -1,6 +1,5 @@
 package sfs2x.extensions.icard.beans;
 
-import com.smartfoxserver.v2.entities.User;
 
 /**
  * PlayerBean: class describing a player in a match
@@ -8,24 +7,10 @@ import com.smartfoxserver.v2.entities.User;
  * @author Ing. Ignazio Locatelli
  * @version 1.0
  */
-public class CardSiteBean
+public class AICardSiteBean extends CardSiteBean
 {	
-	/** User id */
-	private int _playerID = 0;
-	private ConcurrentHashMap<Integer, CardBean> _cardMap =new ConcurrentHashMap<Integer, CardBean>();
-	
-
-	public CardSiteBean(int player) {
-		_playerID = player;
+	public AICardSiteBean(int player) {
+		super(player);
 	}
-
-	public int getPlayerID() {
-		return _playerID;
-	}
-	public void AddCard(CardBean card){
-		_cardMap.put(card.getRealID(), cardInfo);
-	}
-	
-
 	
 }

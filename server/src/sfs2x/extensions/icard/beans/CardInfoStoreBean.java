@@ -1,4 +1,4 @@
-package com.icard.cards.cardInfo;
+package sfs2x.extensions.icard.beans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,14 +11,14 @@ public class CardInfoStoreBean {
 	
 	private static int MIN_CARD_ID	=2000;	//最小的卡片id
 	
-	private static CardInfoManager mInstance =null;
+	private static CardInfoStoreBean mInstance =null;
 	private HashMap<Integer, CardInfoBean> _cardInfoMap =new HashMap<Integer, CardInfoBean>();
-	private CardInfoManager(){
+	private CardInfoStoreBean(){
 	}
 	
-	public static CardInfoManager GetInstance(){
+	public static CardInfoStoreBean GetInstance(){
 		if(mInstance ==null){
-			mInstance = new CardInfoManager();
+			mInstance = new CardInfoStoreBean();
 			mInstance.init();
 		}
 		return mInstance;
@@ -41,7 +41,7 @@ public class CardInfoStoreBean {
 				int BaseUseCost = Integer.parseInt(rowData.get("使用费用"));// 最初始的使用一次花费（对武器有效）
 				if(Id>=MIN_CARD_ID){
 					CardInfoBean cardInfo = new CardInfoBean(Id,  BaseCost,   BaseAttack,
-							  						BaseHp,  BaseDefence,BaseUseOnceCost);
+							  						BaseHp,  BaseDefence,BaseUseCost);
 					_cardInfoMap.put(Id, cardInfo);
 				}
 			}

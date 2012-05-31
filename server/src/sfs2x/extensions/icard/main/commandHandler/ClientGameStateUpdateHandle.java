@@ -14,7 +14,7 @@ public class ClientGameStateUpdateHandle extends BaseClientRequestHandler {
 	public void handleClientRequest(User paramUser, ISFSObject paramISFSObject) {
 		CardUser cardUser = CardUserManager.getInstance().GetUser(paramUser.getId());
 		
-		SFSExtension this.getParentExtension()
+		//SFSExtension this.getParentExtension()
 
 	}
 

@@ -4,6 +4,8 @@ package sfs2x.extensions.icard.main;
 
 
 
+import java.util.List;
+
 import sfs2x.extensions.icard.main.commandHandler.ClientGameStateUpdateHandle;
 import sfs2x.extensions.icard.main.eventHandler.RoomCreatedEventHandler;
 import sfs2x.extensions.icard.main.eventHandler.RoomRemovedEventHandler;
@@ -15,6 +17,7 @@ import sfs2x.extensions.icard.utils.Commands;
 
 
 import com.smartfoxserver.v2.core.SFSEventType;
+import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.extensions.SFSExtension;
 
 public class ICardExtension extends SFSExtension {
@@ -58,5 +61,8 @@ public class ICardExtension extends SFSExtension {
 		trace("* BattleFarm initialization completed");
 		trace("**************************************");
 	}
-
+	public void startGame(List<User> players)
+	{
+		
+	}
 }
