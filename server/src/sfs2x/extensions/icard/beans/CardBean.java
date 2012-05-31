@@ -1,4 +1,4 @@
-package sfs2x.extensions.games.battlefarm.beans;
+package sfs2x.extensions.icard.beans;
 
 /**
  * BombBean: object describing a bomb on the game map
@@ -6,92 +6,57 @@ package sfs2x.extensions.games.battlefarm.beans;
  * @author Ing. Ignazio Locatelli
  * @version 1.0
  */
-public class BombBean
+public class CardBean
 {
-	/** Bomb id */
-	private int id;
-
-	/** X position */
-	private int px = 0;
-
-	/** Y position */
-	private int py;
-
-	/** Set time bomb */
-	private long boomTime;
-
-	/** Active flag */
-	private boolean active;
-
-	/** User id of the bomb owner */
-	private int idOwner = 0;
-
-	/**
-	 * Constructor
-	 * 
-	 * @param id        The bomb id
-	 * @param px        The x position of the bomb
-	 * @param py        The y position of the bomb
-	 * @param boomTime  The time at which the bomb will explode
-	 * @param idOwner   SFS id of the owner of the bomb
-	 */
-	public BombBean(int id, int px, int py, long boomTime, int idOwner)
+	private int _realID;
+	private int _cardID;
+	private int _addHp;
+	private int _addAtk;
+	private int _addDef;
+	
+	private CardInfoBean _info;
+	
+	public CardBean(int realID, int cardID)
 	{
-		this.active = false;
-		this.id = id;
-		this.px = px;
-		this.py = py;
-		this.boomTime = boomTime;
-		this.idOwner = idOwner;
+		_realID = realID;
+		_cardID = cardID;
+		_info = CardInfoStoreBean.GetInstance().getCardInfo(cardID);
 	}
 	
 	/* GETTERS & SETTERS */
 
-	public int getId() {
-		return id;
+	public int getRealID() {
+		return _realID;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setRealID(int id) {
+		_realID = id;
+	}
+	public int getCost(){ //费用
+		return _info.getBaseCost();
+	}
+	public int getUseCost(){ //使用（武器，法术）,横置(盟军)费用
+		return _info.getBaseUseCost();
+	}
+	public int getDef(){ //防御力
+		return _info.getBaseDefence();
+	}
+	public int getAtk(){ //攻击力
+		return _info.getBaseAttack();
+	}
+	public int getHp(){  //血量
+		return _addHp + _info.getBaseHp();
+	}
+	public void AddHp(int val){
+		_addHp += val;
+		if(_addHp > (getMaxHp() - _info.getBaseHp()))
+			_addHp = getMaxHp() - _info.getBaseHp();
+	}
+	public bool getIsDead(){ 
+		return (_addHp + _info.getBaseHp())<=0;
+	}
+	public int getMaxHp(){ //血上限
+		return _info.getBaseHp();
 	}
 
-	public int getPx() {
-		return px;
-	}
-
-	public void setPx(int px) {
-		this.px = px;
-	}
-
-	public int getPy() {
-		return py;
-	}
-
-	public void setPy(int py) {
-		this.py = py;
-	}
-
-	public long getBoomTime() {
-		return boomTime;
-	}
-
-	public void setBoomTime(long boomTime) {
-		this.boomTime = boomTime;
-	}
-
-	public boolean isActive() {
-		return active;
-	}
-
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-
-	public int getIdOwner() {
-		return idOwner;
-	}
-
-	public void setIdOwner(int idOwner) {
-		this.idOwner = idOwner;
-	}
 }

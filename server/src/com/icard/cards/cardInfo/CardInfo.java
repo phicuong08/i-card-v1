@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class CardInfo {
-	public static final int COLOR_ALL = 0;	//所有种族 
-	public static final int COLOR_DPS = 1;  
-	public static final int COLOR_TANK = 2;
-	public static final int COLOR_HEALER = 3; 
-	public static final int COLOR_OTHER = 4;
+	public static final int RACE_ALL = 0;	//所有种族 
+	public static final int RACE_DPS = 1;  
+	public static final int RACE_TANK = 2;
+	public static final int RACE_HEALER = 3; 
+	public static final int RACE_OTHER = 4;
 	
-	public static final String color_all_str 	= "all";	//所有种族 
-	public static final String color_dps_str 	= "dps";
-	public static final String color_tank_str 	= "tank";
-	public static final String color_healer_str= "healer";
-	public static final String color_other_str = "other";
+	public static final String race_all_str 	= "all";	//所有种族 
+	public static final String race_dps_str 	= "dps";
+	public static final String race_tank_str 	= "tank";
+	public static final String race_healer_str= "healer";
+	public static final String race_other_str = "other";
 	
 	private int Id = 0; // 牌的id
 	private boolean IsHero	= false; //是否英雄
@@ -46,20 +46,20 @@ public final class CardInfo {
 
 	public static int getColorInt(String Color){
 		int ret =-1;
-		if(Color.endsWith(color_all_str)){
-			ret = COLOR_ALL;
+		if(Color.endsWith(race_all_str)){
+			ret = RACE_ALL;
 		}
-		if(Color.endsWith(color_dps_str )){
-			ret = COLOR_DPS ;
+		if(Color.endsWith(race_dps_str )){
+			ret = RACE_DPS ;
 		}
-		if(Color.endsWith(color_tank_str )){
-			ret = COLOR_TANK ;
+		if(Color.endsWith(race_tank_str )){
+			ret = RACE_TANK ;
 		}
-		if(Color.endsWith(color_healer_str)){
-			ret = COLOR_HEALER ;
+		if(Color.endsWith(race_healer_str)){
+			ret = RACE_HEALER ;
 		}
-		if(Color.endsWith(color_other_str )){
-			ret = COLOR_OTHER  ;
+		if(Color.endsWith(race_other_str )){
+			ret = RACE_OTHER  ;
 		}
 		return ret;
 	}

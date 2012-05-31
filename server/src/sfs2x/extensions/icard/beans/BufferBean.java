@@ -1,4 +1,4 @@
-package sfs2x.extensions.games.battlefarm.beans;
+package sfs2x.extensions.icard.beans;
 
 import sfs2x.extensions.games.battlefarm.utils.Constants;
 
