@@ -8,6 +8,8 @@ package sfs2x.extensions.games.battlefarm.utils;
  */
 public class Constants
 {	
+	public final static int DEFAULT_WAIT_OP_DURATION = 30;
+
 	/** Default game duration */
 	public final static int DEFAULT_GAME_DURATION = 60;
 

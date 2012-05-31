@@ -36,7 +36,7 @@ public class CardGameBean
 
 	/** Game started flag */
 	private boolean started = false;
-
+	private BattleStateBean _StateBean;
 	/**
 	 * Constructor
 	 * 
@@ -49,7 +49,7 @@ public class CardGameBean
 
 		// Initialize internal data structure
 		_sites = new ConcurrentHashMap<Integer,CardSiteBean>();
-		
+		_battleStateBean = new BattleStateBean;
 		// Reset game to its initial status
 		reset(); 
 	}
@@ -75,7 +75,9 @@ public class CardGameBean
 	public long getGameStartTime() {
 		return gameStartTime;
 	}
-
+	public BattleStateBean getStateBean(){
+		return _StateBean;
+	}
 	public void setGameStartTime(long gameStartTime) {
 		this.gameStartTime = gameStartTime;
 	}
