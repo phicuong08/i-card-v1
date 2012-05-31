@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Timer;
 import java.util.concurrent.ConcurrentHashMap;
 
-import sfs2x.extensions.games.battlefarm.main.BattleFarmExtension;
-import sfs2x.extensions.games.battlefarm.utils.Constants;
-import sfs2x.extensions.games.battlefarm.utils.SyncGameStart;
+import sfs2x.extensions.icard.main.ICardExtension;
+import sfs2x.extensions.icard.utils.Constants;
+import sfs2x.extensions.icard.utils.SyncGameStart;
 
 import com.smartfoxserver.v2.entities.User;
 
@@ -49,7 +49,7 @@ public class CardGameBean
 
 		// Initialize internal data structure
 		_sites = new ConcurrentHashMap<Integer,CardSiteBean>();
-		_battleStateBean = new BattleStateBean;
+		_StateBean = new BattleStateBean();
 		// Reset game to its initial status
 		reset(); 
 	}
@@ -64,7 +64,7 @@ public class CardGameBean
 		this._id = id;
 	}
 
-	public ConcurrentHashMap<Integer, PlayerBean> getSites() {
+	public ConcurrentHashMap<Integer, CardSiteBean> getSites() {
 		return _sites;
 	}
 
@@ -112,7 +112,7 @@ public class CardGameBean
 	/** 
 	 * Start a new game 
 	 */
-	public void startGame(List<User> recipients, BattleFarmExtension ext)
+	public void startGame(List<User> recipients, ICardExtension ext)
 	{
 		gameStartTime = System.currentTimeMillis() + 3500;
 		started = true;

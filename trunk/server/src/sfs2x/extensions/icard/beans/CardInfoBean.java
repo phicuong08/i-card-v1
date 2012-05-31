@@ -1,4 +1,4 @@
-package com.icard.cards.cardInfo;
+package sfs2x.extensions.icard.beans;
 
 import java.util.ArrayList;
 import java.util.List;

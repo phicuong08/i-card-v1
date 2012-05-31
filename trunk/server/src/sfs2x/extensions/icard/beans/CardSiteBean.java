@@ -1,5 +1,7 @@
 package sfs2x.extensions.icard.beans;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 import com.smartfoxserver.v2.entities.User;
 
 /**
@@ -23,7 +25,7 @@ public class CardSiteBean
 		return _playerID;
 	}
 	public void AddCard(CardBean card){
-		_cardMap.put(card.getRealID(), cardInfo);
+		_cardMap.put(card.getRealID(), card);
 	}
 	
 

@@ -52,7 +52,7 @@ public class CardBean
 		if(_addHp > (getMaxHp() - _info.getBaseHp()))
 			_addHp = getMaxHp() - _info.getBaseHp();
 	}
-	public bool getIsDead(){ 
+	public Boolean getIsDead(){ 
 		return (_addHp + _info.getBaseHp())<=0;
 	}
 	public int getMaxHp(){ //я╙иооч

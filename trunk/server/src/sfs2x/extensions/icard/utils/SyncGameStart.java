@@ -1,8 +1,8 @@
-package sfs2x.extensions.games.battlefarm.utils;
+package sfs2x.extensions.icard.utils;
 
 import java.util.*;
 
-import sfs2x.extensions.games.battlefarm.main.BattleFarmExtension;
+import sfs2x.extensions.icard.main.ICardExtension;
 
 import com.smartfoxserver.v2.entities.User;
 
@@ -18,10 +18,10 @@ public class SyncGameStart extends TimerTask
 	private List<User> players = null;
 
 	/** Reference to handler managing communication with Players */
-	private BattleFarmExtension ext = null;
+	private ICardExtension ext = null;
 
 	/** Creates a new instance of SyncGameStart */
-	public SyncGameStart(BattleFarmExtension ext, List<User> players)
+	public SyncGameStart(ICardExtension ext, List<User> players)
 	{
 		this.ext = ext;
 		this.players = players;
