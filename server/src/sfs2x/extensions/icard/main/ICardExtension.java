@@ -6,6 +6,7 @@ package sfs2x.extensions.icard.main;
 
 import java.util.List;
 
+import sfs2x.extensions.icard.beans.CardInfoStoreBean;
 import sfs2x.extensions.icard.main.commandHandler.ClientGameStateUpdateHandle;
 import sfs2x.extensions.icard.main.eventHandler.RoomCreatedEventHandler;
 import sfs2x.extensions.icard.main.eventHandler.RoomRemovedEventHandler;
@@ -26,7 +27,7 @@ public class ICardExtension extends SFSExtension {
 	public void init() {
 		trace("**************************************");
 		trace("* Starting ICard extension");
-
+		CardInfoStoreBean.GetInstance();
 		ParentExtension.setInstance(this);
 	
 

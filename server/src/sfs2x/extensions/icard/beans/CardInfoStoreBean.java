@@ -7,8 +7,7 @@ import java.util.List;
 import com.icard.data.excel.ExcelReader;
 
 public class CardInfoStoreBean {
-	private final static String CARD_FILE_PATH ="./card.xls";
-	
+	private final static String CARD_FILE_PATH ="extensions/ICard/card.xls";
 	private static int MIN_CARD_ID	=2000;	//最小的卡片id
 	
 	private static CardInfoStoreBean mInstance =null;
@@ -33,7 +32,7 @@ public class CardInfoStoreBean {
 			ArrayList<HashMap<String,String>> sheetData = excelCardData.get(sheetName);
 			for(HashMap<String,String> rowData :sheetData){
 				int Id = Integer.parseInt(rowData.get("编号")); // 牌的id
-			
+			/*
 				int BaseCost = Integer.parseInt(rowData.get("费用")); // 最初始的上场花费（对盟军，技能有效）
 				int BaseAttack = Integer.parseInt(rowData.get("攻击")); // 最初始的攻击力
 				int BaseHp = Integer.parseInt(rowData.get("生命")); // 最初始的生命
@@ -44,6 +43,7 @@ public class CardInfoStoreBean {
 							  						BaseHp,  BaseDefence,BaseUseCost);
 					_cardInfoMap.put(Id, cardInfo);
 				}
+			*/	
 			}
 			
 		}
