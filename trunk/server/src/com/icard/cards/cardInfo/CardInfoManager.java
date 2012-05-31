@@ -22,10 +22,10 @@ public class CardInfoManager {
 	private static CardInfoManager mInstance =null;
 	private HashMap<Integer, CardInfo> cardInfoMap =new HashMap<Integer, CardInfo>();
 	private CardInfoManager(){
-		excel_sheet_fighters.add(CardInfo.color_dps_str);
-		excel_sheet_fighters.add(CardInfo.color_tank_str);
-		excel_sheet_fighters.add(CardInfo.color_healer_str);
-		excel_sheet_fighters.add(CardInfo.color_other_str);
+		excel_sheet_fighters.add(CardInfo.race_dps_str);
+		excel_sheet_fighters.add(CardInfo.race_tank_str);
+		excel_sheet_fighters.add(CardInfo.race_healer_str);
+		excel_sheet_fighters.add(CardInfo.race_other_str);
 		
 		excel_sheet_weapons.add("ÎäÆ÷");
 		excel_sheet_defines.add("·À¾ß");
