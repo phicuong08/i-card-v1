@@ -1,6 +1,6 @@
 package sfs2x.extensions.icard.beans;
 
-import com.smartfoxserver.v2.entities.User;
+
 import java.util.*;
 import sfs2x.extensions.icard.utils.Constants;
 
