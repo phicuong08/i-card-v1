@@ -23,7 +23,7 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
  * @author Ing. Ignazio Locatelli
  * @version 1.0
  */
-public class GameBsn
+public class BattleBsn
 {	
 	// Store directions factors to move left,right,up,down
 	private final static Object[] dirs = { new int[]{-1, 0}, new int[]{1, 0}, new int[]{0, -1}, new int[]{0, 1} };

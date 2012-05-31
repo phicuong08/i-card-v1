@@ -1,6 +1,8 @@
 package sfs2x.extensions.icard.beans;
 
 import com.smartfoxserver.v2.entities.User;
+import java.util.Stack;
+
 
 /**
  * PlayerBean: class describing a player in a match
@@ -13,6 +15,7 @@ public class BattleStateBean
 	public static final int NONE_STATE= 0;
 	public static final int WAIT_OP = 1;
 	public static final int CHAIN_WAIT_OP = 2;
+	private Stack _battleChain;
 	/** User id */
 	private int _waitPlayerID = 0;  //等待操作的玩家
 	
@@ -21,6 +24,7 @@ public class BattleStateBean
 
 	public BattleStateBean() {
 		_state = NONE_STATE;
+		
 	}
 	
 	public int getState(){
@@ -39,8 +43,11 @@ public class BattleStateBean
 	}
 	public void InitChainWaitOp(int playerID)
 		_waitPlayerID = playerID;
+		_battleChain = new Stack();
 		_state = CHAIN_WAIT_OP;
 		_waitDuration = Constants.BATTLE_WAIT_OP_DURATION;
 	}
-	
+	public void setChainCard(int realID){
+		_battleChain.push(realID);
+	}
 }
