@@ -15,30 +15,14 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
  * @author Ing. Ignazio Locatelli
  * @version 1.0
  */
-public class BattleBsn
+public class GameBsn
 {	
-	// Store directions factors to move left,right,up,down
-	private final static Object[] dirs = { new int[]{-1, 0}, new int[]{1, 0}, new int[]{0, -1}, new int[]{0, 1} };
-
-	/**
-	 * Bomb explosion management
-	 * Collisions are checked by verifying if one of the players is in the same line (horiz / vert) with the bomb
-	 * If so, a call to the checkCollision is sent in order to check if the bomb explosion can reach the player
-	 * 
-	 * @param gameBean	The Game object 
-	 * @param bombBean 	The Bomb object describing the bomb that is exploding
-	 * @param extension 	Reference to the main extension 
-	 */
 
 	
 
-	/**
-	 * Take a random place in the available tiles array and put an item in it
-	 * 
-	 * @param  gameBean 	The Game object 
-	 * @return mt 			The generated tile
-	 */
-	/*
+	
+
+
 	private static MapTileBean regenItem(GameBean gameBean)
 	{
 		Random rnd = new Random();
@@ -70,5 +54,7 @@ public class BattleBsn
 		gameBean = null;
 	}
 	*/
-	public static void 
+	public static CardGameBean CreateGame(){
+		return GameLobbyBean.GetInstance().getNewCardGame();
+	}
 }

@@ -5,7 +5,7 @@ public class Commands {
 							//server commands
 							//
 	
-	
+	public static final String CMD_S2C_ERROR              =  "9002";
 	public static final String CMD_S2C_GAME_START 				= "10001";
 	//参数1(me)--我方playerID ;参数2(you):--对方playerID,参数3(card)--(playerID,realID,cardID,slot,side,turn,hp,atk,def),...}  side=1,横置， turn=1,翻转
 
@@ -33,7 +33,7 @@ public class Commands {
 							//
 							//client commands
 							//
-	public static final String CMD_C2S_CLIENT_GAME_STATE_UPDATE = "1";
+	public static final String CMD_C2S_CLIENT_BATTLE_STATE_UPDATE = "1";
 	//玩家状态修改   参数1: 状态[ 0--初始状态， 1--就绪]
 	
 	public static final String CMD_C2S_CARD_USE					="1001"; //使用卡片 
