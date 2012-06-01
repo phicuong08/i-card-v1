@@ -33,8 +33,9 @@ public class ICardExtension extends SFSExtension {
 
 		//命令handler添加
 		//客户端准备
-		addRequestHandler(Commands.CMD_C2S_CLIENT_GAME_STATE_UPDATE,ClientGameStateUpdateHandle.class);
-		
+		addRequestHandler(Commands.CMD_C2S_CLIENT_BATTLE_STATE_UPDATE,ClientBattleStateUpdateHandle.class);
+		addRequestHandler(Commands.CMD_C2S_CARD_USE,ClientUseCardHandle.class);
+		addRequestHandler(Commands.CMD_C2S_CARD_UPDATE,ClientUpdateCardHandle.class);
 		
 		//事件handle添加
 		// Event handler: join room
