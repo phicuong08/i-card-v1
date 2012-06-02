@@ -32,18 +32,18 @@ public class CardInfoStoreBean {
 			ArrayList<HashMap<String,String>> sheetData = excelCardData.get(sheetName);
 			for(HashMap<String,String> rowData :sheetData){
 				int Id = Integer.parseInt(rowData.get("编号")); // 牌的id
-			/*
-				int BaseCost = Integer.parseInt(rowData.get("费用")); // 最初始的上场花费（对盟军，技能有效）
-				int BaseAttack = Integer.parseInt(rowData.get("攻击")); // 最初始的攻击力
-				int BaseHp = Integer.parseInt(rowData.get("生命")); // 最初始的生命
-				int BaseDefence = Integer.parseInt(rowData.get("防御"));//最初的防御
-				int BaseUseCost = Integer.parseInt(rowData.get("使用费用"));// 最初始的使用一次花费（对武器有效）
+			
+				int BaseCost = (rowData.get("费用")==null||rowData.get("费用").isEmpty())?0:Integer.parseInt(rowData.get("费用")); // 最初始的上场花费（对盟军，技能有效）
+				int BaseAttack = (rowData.get("攻击")==null||rowData.get("攻击").isEmpty())?0:Integer.parseInt(rowData.get("攻击")); // 最初始的攻击力
+				int BaseHp = (rowData.get("生命")==null||rowData.get("生命").isEmpty())?0:Integer.parseInt(rowData.get("生命")); // 最初始的生命
+				int BaseDefence = (rowData.get("防御")==null||rowData.get("防御").isEmpty())?0:Integer.parseInt(rowData.get("防御"));//最初的防御
+				int BaseUseCost = (rowData.get("使用费用")==null||rowData.get("使用费用").isEmpty())?0:Integer.parseInt(rowData.get("使用费用"));// 最初始的使用一次花费（对武器有效）
 				if(Id>=MIN_CARD_ID){
 					CardInfoBean cardInfo = new CardInfoBean(Id,  BaseCost,   BaseAttack,
 							  						BaseHp,  BaseDefence,BaseUseCost);
 					_cardInfoMap.put(Id, cardInfo);
 				}
-			*/	
+
 			}
 			
 		}

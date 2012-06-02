@@ -9,5 +9,4 @@ package sfs2x.extensions.icard.utils;
 public class Constants
 {	
 	public final static int BATTLE_WAIT_OP_DURATION = 30;
-	public final static int BATTLE_WAIT_OP_DURATION = 1;
 }
