@@ -16,6 +16,7 @@ package ICard.SFSMod {
 		private var _battleStage:BattleStage;
 		public function Mod_Battle(arg1:SmartFox):void{
 			_smartFox = arg1;	
+			_battleStage = BattleStage.getInstance();
 		}
 	
 		public function onBattleStart(params:ISFSObject):void{
@@ -101,6 +102,8 @@ package ICard.SFSMod {
 		}		
 		private function procCardArr(params:ISFSObject):void{
 			var cardArr:ISFSArray = params.getSFSArray("card");
+			if(cardArr==null)
+				return;
 			for (var y:int = 0; y < cardArr.size(); y++)
 			{
 				var cardObj:ISFSObject = cardArr.getSFSObject(y);
