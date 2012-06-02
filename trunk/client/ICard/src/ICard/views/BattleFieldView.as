@@ -29,7 +29,7 @@ package ICard.views {
 
 		public function show():void{
 			loadAssets("battlefield", this.loadCallback, "");
-				
+			QueryNewGame();	
 		}
 		
 		private function loadCallback():void
@@ -139,6 +139,9 @@ package ICard.views {
 //			}
 		
 			
+		}
+		private function QueryNewGame():void{
+			_data._Mod_Battle.QueryStartGame();
 		}
 		public function close():void{
 
