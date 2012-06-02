@@ -70,5 +70,5 @@ public class BattleBsn
 		gameBean = null;
 	}
 	*/
-	public static void 
+
 }

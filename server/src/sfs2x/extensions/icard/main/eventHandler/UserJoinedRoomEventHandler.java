@@ -15,6 +15,7 @@ public class UserJoinedRoomEventHandler extends BaseServerEventHandler {
 
 	@Override
 	public void handleServerEvent(ISFSEvent event) throws SFSException {
+		/*
 		Room room = (Room) event.getParameter(SFSEventParam.ROOM);	
 
 		// Get user that joined
@@ -25,6 +26,7 @@ public class UserJoinedRoomEventHandler extends BaseServerEventHandler {
 		CardUser cardUser = CardUserManager.getInstance().GetUser(user.getId());
 		CardRoom cardRoom = CardRoomManager.getInstance().GetRoom(room.getId());
 		cardRoom.OnPlayerJoinRoom(cardUser);
+		*/
 	}
 
 }

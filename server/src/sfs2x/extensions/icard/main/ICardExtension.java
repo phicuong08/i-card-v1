@@ -7,13 +7,9 @@ package sfs2x.extensions.icard.main;
 import java.util.List;
 
 import sfs2x.extensions.icard.beans.CardInfoStoreBean;
-import sfs2x.extensions.icard.main.commandHandler.ClientGameStateUpdateHandle;
-import sfs2x.extensions.icard.main.eventHandler.RoomCreatedEventHandler;
-import sfs2x.extensions.icard.main.eventHandler.RoomRemovedEventHandler;
-import sfs2x.extensions.icard.main.eventHandler.UserDisconnectedEventHandler;
-import sfs2x.extensions.icard.main.eventHandler.UserJoinedRoomEventHandler;
-import sfs2x.extensions.icard.main.eventHandler.UserJoinedZoneEventHandler;
-import sfs2x.extensions.icard.main.eventHandler.UserLeavedRoomEventHandler;
+import sfs2x.extensions.icard.main.commandHandler.*;
+import sfs2x.extensions.icard.main.eventHandler.*;
+
 import sfs2x.extensions.icard.utils.Commands;
 
 
@@ -60,7 +56,7 @@ public class ICardExtension extends SFSExtension {
 		addEventHandler(SFSEventType.ROOM_REMOVED, RoomRemovedEventHandler.class);
 
 
-		trace("* BattleFarm initialization completed");
+		trace("* ICard initialization completed");
 		trace("**************************************");
 	}
 	public void startGame(List<User> players)

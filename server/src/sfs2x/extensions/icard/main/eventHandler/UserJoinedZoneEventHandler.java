@@ -12,10 +12,10 @@ public class UserJoinedZoneEventHandler extends BaseServerEventHandler {
 
 	@Override
 	public void handleServerEvent(ISFSEvent paramISFSEvent) throws SFSException {
-		User user = (User) paramISFSEvent.getParameter(SFSEventParam.USER);
-		trace("icard: user  join ZONE',user name =" + user.getName() + "' - user id: " + user.getId());
-		CardUser cardUser = new CardUser(user.getId());
-		CardUserManager.getInstance().AddUser(cardUser);
+//		User user = (User) paramISFSEvent.getParameter(SFSEventParam.USER);
+//		trace("icard: user  join ZONE',user name =" + user.getName() + "' - user id: " + user.getId());
+//		CardUser cardUser = new CardUser(user.getId());
+//		CardUserManager.getInstance().AddUser(cardUser);
 		
 	}
 

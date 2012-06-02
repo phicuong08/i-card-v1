@@ -8,7 +8,7 @@ import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 import com.smartfoxserver.v2.extensions.SFSExtension;
-
+import sfs2x.extensions.icard.beans.*;
 /**
  * GameBsn: class containing utility business classes for game processing
  * 
@@ -23,15 +23,7 @@ public class GameBsn
 	
 
 
-	private static MapTileBean regenItem(GameBean gameBean)
-	{
-		Random rnd = new Random();
-		int i = rnd.nextInt(gameBean.getEmptyTiles().size());
-		MapTileBean mt = (MapTileBean) gameBean.getEmptyTiles().remove(i);
-		gameBean.getGameMap()[mt.getPy()][mt.getPx()] = gameBean.getBaseGameMapBean().getCollectibles().charAt(0); // Here we use the first available collectible item; on the client-side a random item will be displayed (among those available)
-		return mt;
-	}
-	*/
+	
 
 	/**
 	 *  Quit a running game (one of the player exits or disconnects)
@@ -54,7 +46,14 @@ public class GameBsn
 		gameBean = null;
 	}
 	*/
+	public static CardGameBean CreateVSAIGame(){
+		return GameLobbyBean.GetInstance().getNewVSAIGame();
+	}
 	public static CardGameBean CreateGame(){
 		return GameLobbyBean.GetInstance().getNewCardGame();
+	}
+	public static Boolean initVsAI(CardGameBean game,int playerID){
+
+		return true;
 	}
 }

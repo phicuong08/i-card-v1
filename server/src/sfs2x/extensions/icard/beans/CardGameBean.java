@@ -71,7 +71,10 @@ public class CardGameBean
 	public void setPlayers(ConcurrentHashMap<Integer, CardSiteBean> sites) {
 		_sites = sites;
 	}
-
+	public void AddPlayer(int playerID){
+		CardSiteBean site = new CardSiteBean(playerID);
+		_sites.put(site.getPlayerID(),site);
+	}
 	public long getGameStartTime() {
 		return gameStartTime;
 	}
