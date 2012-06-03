@@ -26,6 +26,8 @@ package ICard.datas {
 		}
 		
 		public function onUpdateCard(info:Object):void{
+//			if(info["slot"]!=BattleFieldType.YouHandSlotId)
+//				return;
 			var newCard:CardData = new CardData(info);
 			var oldCard:CardData = FindCard(info["realID"]);
 			if(oldCard)

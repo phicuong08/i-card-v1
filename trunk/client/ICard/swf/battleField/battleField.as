@@ -57,7 +57,7 @@
 			_slots[BattleFieldType.YouTombSlotId].Init(BattleFieldType.YouTombSlotId,2,350,1180);
 			
 			_slots[BattleFieldType.YouHeroSlotId] = new HeroBar;
-			_slots[BattleFieldType.YouHeroSlotId].Init(BattleFieldType.YouHeroSlotId,2,350,1180);
+			_slots[BattleFieldType.YouHeroSlotId].Init(BattleFieldType.YouHeroSlotId,880,50,1180);
 		
 			var id:int = BattleFieldType.MyHandSlotId;
 			while(id <= BattleFieldType.YouHeroSlotId)

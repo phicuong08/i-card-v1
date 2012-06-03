@@ -167,6 +167,11 @@ package ICard.assist.server {
 			card["detail"]=cardInfo[6];
 			return card;
 		}
+		private static function CreateUnKnowCardInfo(id:int):Object{
+			var card:Object = new Object;
+			card["cardID"] = id;
+			return card;
+		}
 		private static function CreateSkillCardInfo(id:int):Object{
 			var cardInfo:Array = _SkillCards[id];
 			if(!cardInfo)
@@ -200,6 +205,9 @@ package ICard.assist.server {
 			var cardGroup:Object;
 			switch(typeId)
 			{
+				case 0:
+					cardInfo = CreateUnKnowCardInfo(id);
+					break;
 				case 30:
 					cardInfo = CreateWeaponCardInfo(id);
 					break;

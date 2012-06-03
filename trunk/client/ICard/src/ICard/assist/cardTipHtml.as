@@ -12,6 +12,8 @@ package ICard.assist {
 		}
 		
 		private static function CardHtmlTip(info:Object,title:Object):String{
+			if(!title["title"])
+				return null;
 			var result:String = CardBaseHtml(info,title);
 			if(info["cost"])
 			{

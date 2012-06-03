@@ -43,7 +43,6 @@ package ICard.views {
 			_battleField.BattleStage = _battleStage;
 			
 			this._cardDB = (_viewMgr.getAssetsObject("carddb", "carddb") as ICardDB);
-			test();
 			_viewMgr.addToFrameProcessList(this._updateFrameCardNotify, this.CardNotifyFrame);
 			
 			this.render();
