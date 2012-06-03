@@ -23,7 +23,7 @@ public class CardGameBean
 {
 	/** Game id, corresponding to room id */
 	private int _id = 0;
-
+	private int _inc_card_realID=1;
 
 	/** Players */
 	private ConcurrentHashMap<Integer,CardSiteBean> _sites = null;
@@ -63,7 +63,17 @@ public class CardGameBean
 	public void setId(int id) {
 		this._id = id;
 	}
-
+	public Boolean AddCard(int playerID,int cardID,int slotID){
+		CardSiteBean site = _sites.get(playerID);
+		if(site==null)
+			return false;
+		site.AddCard(new CardBean(getGenCardRealID(),cardID,slotID));
+		return true;
+	}
+	private int getGenCardRealID(){
+		int realID= _inc_card_realID++;
+		return realID;
+	}
 	public ConcurrentHashMap<Integer, CardSiteBean> getSites() {
 		return _sites;
 	}
