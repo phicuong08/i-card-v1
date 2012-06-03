@@ -65,7 +65,8 @@
 			return false;
 		}
 		private function CreateBackCard(info:Object):MovieClip{
-			if(!info.hasOwnProperty("turn") ||info["turn"]==0)
+			if((!info.hasOwnProperty("turn") ||info["turn"]==0)&&
+			  info["cardID"]!=1)
 				return null;
 			var typeId:int = info["cardID"]/1000;
 			var cardMC:MovieClip;

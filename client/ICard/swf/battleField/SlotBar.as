@@ -74,7 +74,7 @@
 				
 				_selCard = card;
 				ShowCardActionMenu(card);
-				if(_cardMenu.numChildren>0)
+				if(_cardMenu && _cardMenu.numChildren>0)
 					card.y = card.baseY -4;
 				SetCardTip(card);
 			}
@@ -96,10 +96,11 @@
 			}
 		}
 		public function SetCardTip(card:MovieClip):void{
-				trace("tip info",card.tipInfo);
+				
 				if(!card || !card.tipInfo)
 					return;	
-				var pos:Point = card.localToGlobal(new Point(-100,-card.height/2-40));
+				trace("tip info",card.tipInfo);	
+				var pos:Point = (_slotID<=6)?card.localToGlobal(new Point(-100,-card.height/2-40)):card.localToGlobal(new Point(-100,card.height+8));
 				if((pos.x +380)>1200)
 					pos.x = 1200 -380;
 				
