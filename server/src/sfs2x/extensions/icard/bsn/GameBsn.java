@@ -1,14 +1,20 @@
 package sfs2x.extensions.icard.bsn;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Vector;
+
 import java.util.Random;
 
+import com.icard.cards.BaseCard;
 import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 import com.smartfoxserver.v2.extensions.SFSExtension;
 import sfs2x.extensions.icard.beans.*;
+import sfs2x.extensions.icard.utils.*;
 /**
  * GameBsn: class containing utility business classes for game processing
  * 
@@ -18,9 +24,19 @@ import sfs2x.extensions.icard.beans.*;
 public class GameBsn
 {	
 
-	
-
-	
+	//private Vector<Integer>  _cardStore ={1,2,3};
+	static private int _cardStore[]={50001,50005,50008,
+									 40001,40002,40003,40004,40005,40006,40007,40009,40010,
+									 31001,31004,31005,
+									 30001,30003,30004,
+									 21001,21002,21003,21004,21005,
+									 21001,21002,21003,21004,21005,
+									 22001,22002,22003,22004,22005,
+									 22001,22002,22003,22004,22005,
+									 23001,23002,23003,23004,23005,
+									 23001,23002,23003,23004,23005,
+									 };
+	static private java.util.Random _Random = new java.util.Random();
 
 
 	
@@ -52,6 +68,45 @@ public class GameBsn
 	public static CardGameBean CreateGame(){
 		return GameLobbyBean.GetInstance().getNewCardGame();
 	}
+	public static void GenCardSource(CardGameBean gameBean,int playerID)
+	{
+		CardSiteBean site = gameBean.getSites().get(playerID);
+		if(site==null)
+			return;
+		List<Integer> Cards = new ArrayList<Integer>();
+		for(int i=0;i<_cardStore.length;i++)
+		{
+			Cards.add(_cardStore[i]);
+		}
+		List<Integer> washCards = WashCard(Cards);
+		site.setCardSource(washCards);
+	}
+	public static void InitCardSite(CardGameBean gameBean,int playerID){
+		GenCardSource(gameBean,playerID);
+		CardSiteBean site = gameBean.getSites().get(playerID);
+		if(site==null)
+			return;
+		site.setEmptyCardMap();
+		gameBean.AddCard(playerID, 20001, Constants.HERO_SLOT_ID);
+		for(int i=0;i<Constants.DEFAULT_HAND_CARD_NUM;i++)
+		{
+			Integer cardID = site.getCatchCard();
+			gameBean.AddCard(playerID, cardID, Constants.HAND_SLOT_ID);
+		}
+	}
+	
+	public static List<Integer> WashCard(List<Integer> oldCards){
+		List<Integer> newCards = new ArrayList<Integer>();
+		
+		while(oldCards.size()>0){
+			int count = oldCards.size();
+			int randomIndex = _Random.nextInt(count);
+			newCards.add(oldCards.get(randomIndex));
+			oldCards.remove(randomIndex);
+		}
+		return newCards;
+	}
+	
 	public static Boolean initVsAI(CardGameBean game,int playerID){
 
 		return true;

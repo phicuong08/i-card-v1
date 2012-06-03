@@ -5,8 +5,10 @@ import com.icard.user.CardUserManager;
 import com.smartfoxserver.v2.core.SFSEventParam;
 import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.User;
+import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSObject;
+import com.smartfoxserver.v2.entities.data.SFSArray;
 
 import sfs2x.extensions.icard.bsn.*;
 import sfs2x.extensions.icard.beans.*;
@@ -33,6 +35,18 @@ public class ClientBattleStateUpdateHandle extends ICardClientRequestHandler {
 			ISFSObject params = new SFSObject();
 			params.putInt("me", playerID);
 			params.putInt("you", ai.intValue());
+			
+			GameBsn.InitCardSite(newGame, playerID);
+			GameBsn.InitCardSite(newGame, ai.intValue());
+			
+			ISFSArray sfsa = new SFSArray();
+			
+			//public void FillCardInfoArr(ISFSArray cardInfoArr,CardSiteBean siteBean)
+			for (CardSiteBean site : newGame.getSites().values())
+			{
+				FillCardInfoArr(sfsa,site,playerID);
+			}
+			params.putSFSArray("card", sfsa);
 			send(Commands.CMD_S2C_GAME_START, params, sender);
 			
 		}
