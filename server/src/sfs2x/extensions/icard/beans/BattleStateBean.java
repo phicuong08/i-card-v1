@@ -56,7 +56,5 @@ public class BattleStateBean
 		_battleChain.addElement(realID);
 	}
 	
-	public void gameTick(ICardExtension ext){
-		
-	}
+
 }
