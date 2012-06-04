@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.concurrent.ConcurrentHashMap;
 
+import sfs2x.extensions.icard.bsn.BattleBsn;
 import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.Constants;
 import sfs2x.extensions.icard.utils.SyncGameStart;
@@ -37,6 +38,7 @@ public class CardGameBean
 	/** Game started flag */
 	private boolean started = false;
 	private BattleStateBean _StateBean;
+	private int _OpPlayerID =0; // currently do operate player id;
 	/**
 	 * Constructor
 	 * 
@@ -63,6 +65,12 @@ public class CardGameBean
 	public void setId(int id) {
 		this._id = id;
 	}
+	public void setOpPlayer(int id){
+		_OpPlayerID = id;
+	}
+	public int getOpPlayer(){
+		return _OpPlayerID;
+	}
 	public Boolean AddCard(int playerID,int cardID,int slotID){
 		CardSiteBean site = _sites.get(playerID);
 		if(site==null)
@@ -81,8 +89,8 @@ public class CardGameBean
 	public void setPlayers(ConcurrentHashMap<Integer, CardSiteBean> sites) {
 		_sites = sites;
 	}
-	public void AddPlayer(int playerID){
-		CardSiteBean site = new CardSiteBean(playerID);
+	public void AddPlayer(int playerID,User sfsUser){
+		CardSiteBean site = new CardSiteBean(playerID,sfsUser);
 		_sites.put(site.getPlayerID(),site);
 	}
 	public long getGameStartTime() {
@@ -98,7 +106,7 @@ public class CardGameBean
 	public boolean isStarted() {
 		return started;
 	}
-
+	
 	public void setStarted(boolean started) {
 		this.started = started;
 	}
@@ -134,5 +142,7 @@ public class CardGameBean
 		timer = new Timer();
 		timer.schedule(new SyncGameStart(ext, recipients), 3000);
 	}
-
+	public void gameTick(ICardExtension ext){
+		BattleBsn.RunBattleStateBean(this,ext);
+	}
 }

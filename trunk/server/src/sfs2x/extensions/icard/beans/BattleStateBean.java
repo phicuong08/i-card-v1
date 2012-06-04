@@ -13,9 +13,10 @@ import sfs2x.extensions.icard.utils.Constants;
  */
 public class BattleStateBean
 {	
-	public static final int NONE_STATE= 0;
-	public static final int WAIT_OP = 1;
-	public static final int CHAIN_WAIT_OP = 2;
+	public static final int ST_NONE_STATE= 0;
+	public static final int ST_INIT=1;
+	public static final int ST_WAIT_OP = 2;
+	public static final int ST_CHAIN_WAIT_OP = 3;
 	private Vector<Integer>  _battleChain;
 	/** User id */
 	private int _waitPlayerID = 0;  //等待操作的玩家
@@ -24,9 +25,11 @@ public class BattleStateBean
 	private int _waitDuration = 60;
 
 	public BattleStateBean() {
-		_state = NONE_STATE;
+		_state =ST_NONE_STATE;
 	}
-	
+	public void setState(int val){
+		_state = val;
+	}
 	public int getState(){
 		return _state;
 	}
@@ -38,13 +41,13 @@ public class BattleStateBean
 	}
 	public void InitWaitOp(int playerID){
 		_waitPlayerID = playerID;
-		_state = WAIT_OP;
+		_state = ST_WAIT_OP;
 		_waitDuration = Constants.BATTLE_WAIT_OP_DURATION;
 	}
 	public void InitChainWaitOp(int playerID){
 		_waitPlayerID = playerID;
 		_battleChain = new Vector<Integer>();
-		_state = CHAIN_WAIT_OP;
+		_state = ST_CHAIN_WAIT_OP;
 		_waitDuration = Constants.BATTLE_WAIT_OP_DURATION;
 	}
 	public void setChainCard(int realID){

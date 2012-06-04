@@ -1,7 +1,15 @@
 package sfs2x.extensions.icard.bsn;
 
+import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.Random;
+
+import sfs2x.extensions.icard.beans.BattleStateBean;
+import sfs2x.extensions.icard.beans.CardGameBean;
+import sfs2x.extensions.icard.beans.CardSiteBean;
+import sfs2x.extensions.icard.main.ICardExtension;
+import sfs2x.extensions.icard.utils.Commands;
+import sfs2x.extensions.icard.utils.Constants;
 
 import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.User;
@@ -18,57 +26,39 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
 public class BattleBsn
 {	
 	// Store directions factors to move left,right,up,down
-	private final static Object[] dirs = { new int[]{-1, 0}, new int[]{1, 0}, new int[]{0, -1}, new int[]{0, 1} };
-
-	/**
-	 * Bomb explosion management
-	 * Collisions are checked by verifying if one of the players is in the same line (horiz / vert) with the bomb
-	 * If so, a call to the checkCollision is sent in order to check if the bomb explosion can reach the player
-	 * 
-	 * @param gameBean	The Game object 
-	 * @param bombBean 	The Bomb object describing the bomb that is exploding
-	 * @param extension 	Reference to the main extension 
-	 */
-
 	
+	static private java.util.Random _Random = new java.util.Random();
 
-	/**
-	 * Take a random place in the available tiles array and put an item in it
-	 * 
-	 * @param  gameBean 	The Game object 
-	 * @return mt 			The generated tile
-	 */
-	/*
-	private static MapTileBean regenItem(GameBean gameBean)
-	{
-		Random rnd = new Random();
-		int i = rnd.nextInt(gameBean.getEmptyTiles().size());
-		MapTileBean mt = (MapTileBean) gameBean.getEmptyTiles().remove(i);
-		gameBean.getGameMap()[mt.getPy()][mt.getPx()] = gameBean.getBaseGameMapBean().getCollectibles().charAt(0); // Here we use the first available collectible item; on the client-side a random item will be displayed (among those available)
-		return mt;
+
+	private static void procStateInit(CardGameBean game,ICardExtension ext){
+
+		int count = game.getSites().size();
+		int randomIndex = _Random.nextInt(count);
+		int index = 0;
+		int rndPlayer = 0;
+		for (Enumeration<CardSiteBean> e = game.getSites().elements(); e.hasMoreElements();){
+			CardSiteBean site = (CardSiteBean) e.nextElement();
+			rndPlayer = site.getPlayerID();
+			if(index == randomIndex)
+				break;
+			index++;
+		}
+		game.setOpPlayer(rndPlayer);
+		game.getStateBean().setState(BattleStateBean.ST_WAIT_OP);
+		ISFSObject params = new SFSObject();
+		params.putInt("playerID", rndPlayer);
+		params.putInt("time", Constants.BATTLE_LOOP_TIME);
+		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
 	}
-	*/
-
-	/**
-	 *  Quit a running game (one of the player exits or disconnects)
-	 *  
-	 * @param gameBean		Game Object describing the game from which the user has exited
-	 * @param extension		Reference to the main Battlefarm extension
-	 */
-	/*
-	public static void quitGame(GameBean gameBean, BattleFarmExtension extension)
-	{
-		// Remove game from gameList
-		extension.getGames().remove(gameBean);
-
-		// Destroy game objects
-		gameBean.setPlayers(null);
-		gameBean.setBaseGameMapBean(null);
-
-		extension.trace("Battlefarm: game " + gameBean.getId() + " destroyed");
-
-		gameBean = null;
+	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext){
+		switch(game.getStateBean().getState()){
+		case BattleStateBean.ST_INIT:
+			procStateInit(game,ext);
+			break;
+		case BattleStateBean.ST_WAIT_OP:
+			break;
+		case BattleStateBean.ST_CHAIN_WAIT_OP:
+			break;
+		}
 	}
-	*/
-
 }

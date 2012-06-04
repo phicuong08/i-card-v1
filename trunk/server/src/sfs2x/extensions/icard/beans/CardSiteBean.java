@@ -19,12 +19,15 @@ public class CardSiteBean
 	private int _playerID = 0;
 	private CardBean _hero;
 	private ConcurrentHashMap<Integer, CardBean> _cardMap =new ConcurrentHashMap<Integer, CardBean>();
-	private List<Integer> _cardSource ;
-
-	public CardSiteBean(int player) {
+	private List<Integer> _drawCardSrc ;
+	private User _sfsUser=null;
+	public CardSiteBean(int player,User sfsUser) {
 		_playerID = player;
+		_sfsUser = sfsUser;
 	}
-
+	public User getSfsUser() {
+		return _sfsUser;
+	}
 	public int getPlayerID() {
 		return _playerID;
 	}
@@ -32,7 +35,7 @@ public class CardSiteBean
 		_cardMap.put(card.getRealID(), card);
 	}
 	public void setCardSource(List<Integer> cards){
-		_cardSource = cards;
+		_drawCardSrc = cards;
 	}
 	public void setEmptyCardMap(){
 		_cardMap = new ConcurrentHashMap<Integer, CardBean>();
@@ -40,13 +43,13 @@ public class CardSiteBean
 	public ConcurrentHashMap<Integer, CardBean> getCardMap(){
 		return _cardMap;
 	}
-	public List<Integer> getCardSource(){
-		return _cardSource;
+	public List<Integer> getDrawCardSrc(){
+		return _drawCardSrc;
 	}
-	public Integer getCatchCard(){
-		if(_cardSource.isEmpty())
+	public Integer getDrawCard(){
+		if(_drawCardSrc.isEmpty())
 			return 0;
-		return _cardSource.remove(0);
+		return _drawCardSrc.remove(0);
 	}
 	
 }

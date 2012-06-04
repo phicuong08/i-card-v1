@@ -81,6 +81,15 @@ public class GameBsn
 		List<Integer> washCards = WashCard(Cards);
 		site.setCardSource(washCards);
 	}
+	
+	public static void StartGame(CardGameBean newGame){
+		for (CardSiteBean site : newGame.getSites().values())
+		{
+			InitCardSite(newGame, site.getPlayerID());
+		}
+		newGame.setStarted(true);
+		newGame.getStateBean().setState(BattleStateBean.ST_INIT);
+	}
 	public static void InitCardSite(CardGameBean gameBean,int playerID){
 		GenCardSource(gameBean,playerID);
 		CardSiteBean site = gameBean.getSites().get(playerID);
@@ -90,7 +99,7 @@ public class GameBsn
 		gameBean.AddCard(playerID, 20001, Constants.HERO_SLOT_ID);
 		for(int i=0;i<Constants.DEFAULT_HAND_CARD_NUM;i++)
 		{
-			Integer cardID = site.getCatchCard();
+			Integer cardID = site.getDrawCard();
 			gameBean.AddCard(playerID, cardID, Constants.HAND_SLOT_ID);
 		}
 	}
