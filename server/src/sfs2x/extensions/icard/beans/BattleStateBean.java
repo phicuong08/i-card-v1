@@ -2,6 +2,8 @@ package sfs2x.extensions.icard.beans;
 
 
 import java.util.*;
+
+import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.Constants;
 
 
@@ -52,5 +54,9 @@ public class BattleStateBean
 	}
 	public void setChainCard(int realID){
 		_battleChain.addElement(realID);
+	}
+	
+	public void gameTick(ICardExtension ext){
+		
 	}
 }
