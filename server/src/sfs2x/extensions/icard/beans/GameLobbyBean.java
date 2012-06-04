@@ -30,7 +30,7 @@ public class GameLobbyBean
 	}
 	public CardGameBean getNewVSAIGame(){
 		CardGameBean gameBean = getNewCardGame();
-		gameBean.AddPlayer(generateAIID());
+		gameBean.AddPlayer(generateAIID(),null);
 		return gameBean;
 	}
 	

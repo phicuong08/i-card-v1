@@ -10,7 +10,7 @@ package sfs2x.extensions.icard.beans;
 public class AICardSiteBean extends CardSiteBean
 {	
 	public AICardSiteBean(int player) {
-		super(player);
+		super(player,null);
 	}
 	
 }

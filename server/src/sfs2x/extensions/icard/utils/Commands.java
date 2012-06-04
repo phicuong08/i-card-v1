@@ -24,7 +24,7 @@ public class Commands {
 	public static final String CMD_S2C_CARD_FIGHT_RESULT		="11003";
 	//参数1(srcID):, 参数2(target):{ {realID,hpAdd,def,atk,slot,turn,side} ,...}--受作用卡结果,参数3(bEnemy)[0-对已方，1-对敌方]
 	//战斗表现
-	
+	public static final String CMD_S2C_BATTLE_PLAYER_LOOP       ="11004";//回合转化
 	
 	
 

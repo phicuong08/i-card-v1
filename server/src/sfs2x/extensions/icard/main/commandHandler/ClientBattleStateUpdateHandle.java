@@ -31,17 +31,14 @@ public class ClientBattleStateUpdateHandle extends ICardClientRequestHandler {
 				ai = site.getPlayerID();
 				break;
 			}
-			newGame.AddPlayer(playerID);	
+			newGame.AddPlayer(playerID,sender);
+			GameBsn.StartGame(newGame);
+			
 			ISFSObject params = new SFSObject();
 			params.putInt("me", playerID);
 			params.putInt("you", ai.intValue());
 			
-			GameBsn.InitCardSite(newGame, playerID);
-			GameBsn.InitCardSite(newGame, ai.intValue());
-			
 			ISFSArray sfsa = new SFSArray();
-			
-			//public void FillCardInfoArr(ISFSArray cardInfoArr,CardSiteBean siteBean)
 			for (CardSiteBean site : newGame.getSites().values())
 			{
 				FillCardInfoArr(sfsa,site,playerID);
