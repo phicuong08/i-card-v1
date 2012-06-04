@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import sfs2x.extensions.icard.main.ICardExtension;
+
 import com.icard.cards.BaseCard;
 import com.smartfoxserver.v2.entities.User;
 
@@ -51,5 +53,7 @@ public class CardSiteBean
 			return 0;
 		return _drawCardSrc.remove(0);
 	}
-	
+	public void gameTick(CardGameBean game,ICardExtension ext){
+		
+	}
 }

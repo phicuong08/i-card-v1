@@ -23,41 +23,25 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
  * @author Ing. Ignazio Locatelli
  * @version 1.0
  */
-public class BattleBsn
+public class BattleAIBsn
 {	
 	// Store directions factors to move left,right,up,down
 	
 	static private java.util.Random _Random = new java.util.Random();
 
 
-	private static void procStateInit(CardGameBean game,ICardExtension ext){
-		int count = game.getSites().size();
-		int randomIndex = _Random.nextInt(count);
-		int index = 0;
-		int rndPlayer = 0;
-		for (Enumeration<CardSiteBean> e = game.getSites().elements(); e.hasMoreElements();){
-			CardSiteBean site = (CardSiteBean) e.nextElement();
-			rndPlayer = site.getPlayerID();
-			if(index == randomIndex)
-				break;
-			index++;
-		}
-		game.setOpPlayer(rndPlayer);
-		game.getStateBean().setState(BattleStateBean.ST_WAIT_OP);
-		ISFSObject params = new SFSObject();
-		params.putInt("playerID", rndPlayer);
-		params.putInt("time", Constants.BATTLE_LOOP_TIME);
-		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
-	}
-	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext){
+	public static void RunBattleAI(CardGameBean game,CardSiteBean site,ICardExtension ext){
+		if(game.getOpPlayer()!= site.getPlayerID())
+			return;
 		switch(game.getStateBean().getState()){
-		case BattleStateBean.ST_INIT:
-			procStateInit(game,ext);
-			break;
 		case BattleStateBean.ST_WAIT_OP:
+			procWaitOp(game,site,ext);
 			break;
 		case BattleStateBean.ST_CHAIN_WAIT_OP:
 			break;
 		}
+	}
+	private static void procWaitOp(CardGameBean game,CardSiteBean site,ICardExtension ext){
+		
 	}
 }

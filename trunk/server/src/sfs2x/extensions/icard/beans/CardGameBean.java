@@ -144,5 +144,10 @@ public class CardGameBean
 	}
 	public void gameTick(ICardExtension ext){
 		BattleBsn.RunBattleStateBean(this,ext);
+		for (Enumeration<CardSiteBean> e = _sites.elements(); e.hasMoreElements();)
+		{
+			CardSiteBean site = (CardSiteBean) e.nextElement();
+			site.gameTick(this,ext);
+		}
 	}
 }
