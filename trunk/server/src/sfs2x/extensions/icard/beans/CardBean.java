@@ -10,6 +10,12 @@ import sfs2x.extensions.icard.utils.Constants;
  */
 public class CardBean
 {
+	public final static int HAND_SLOT_ID = 1;
+	public final static int RES_SLOT_ID = 2;
+	public final static int EQUIP_SLOT_ID = 3;
+	public final static int FIGHT_SLOT_ID = 4;
+	public final static int TOMB_SLOT_ID = 5;
+	public final static int HERO_SLOT_ID = 6;
 	private int _realID;
 	private int _cardID;
 	private int _slotID;
@@ -35,8 +41,8 @@ public class CardBean
 	}
 	public int getClientCardID(Boolean bOwner){
 		if(bOwner==false){
-			if(_slotID==Constants.HAND_SLOT_ID || 
-			  (_slotID==Constants.RES_SLOT_ID && _turn==1))
+			if(_slotID==CardBean.HAND_SLOT_ID || 
+			  (_slotID==CardBean.RES_SLOT_ID && _turn==1))
 				return 1;			
 		}
 		return _cardID;

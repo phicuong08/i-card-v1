@@ -3,6 +3,7 @@ package sfs2x.extensions.icard.bsn;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
@@ -16,7 +17,7 @@ import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 import com.smartfoxserver.v2.extensions.SFSExtension;
-
+import sfs2x.extensions.icard.beans.*;
 /**
  * GameBsn: class containing utility business classes for game processing
  * 
@@ -57,11 +58,14 @@ public class BattleBsn
 			break;
 		case BattleStateBean.ST_CHAIN_WAIT_OP:
 			break;
+		case BattleStateBean.ST_WAIT_GOD:
+			game.RunGodLogic(ext);
+			break;
 		}
 	}
-	public static Vector<CardBean> PickSlotCard{CardSiteBean site,int slotID){
+	public static Vector<CardBean> PickSlotCard(CardSiteBean site,int slotID){
 		Vector<CardBean> pickVect =new Vector<CardBean>();
-		for (Enumeration<CardBean> e = _sites.getCardMap().elements(); e.hasMoreElements();)
+		for (Enumeration<CardBean> e = site.getCardMap().elements(); e.hasMoreElements();)
 		{
 				CardBean card = (CardBean) e.nextElement();
 				if(card.getSlotID() == slotID)

@@ -1,5 +1,7 @@
 package sfs2x.extensions.icard.beans;
 
+import java.util.Vector;
+
 import sfs2x.extensions.icard.utils.Constants;
 
 
@@ -11,12 +13,15 @@ import sfs2x.extensions.icard.utils.Constants;
  */
 public class CardActionStoreBean
 {
-	private private Vector<CardActionBean> _actionVect;
+	private Vector<CardActionBean> _actionVect;
 	public CardActionStoreBean()
 	{
 		_actionVect = new Vector<CardActionBean>();
 	}
-	public AddAction(CardActionBean action){
+	public void AddAction(CardActionBean action){
 		_actionVect.add(action);
+	}
+	public Vector<CardActionBean> getActionVect(){
+		return _actionVect;
 	}
 }

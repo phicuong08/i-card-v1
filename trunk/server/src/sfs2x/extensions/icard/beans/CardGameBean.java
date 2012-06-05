@@ -7,6 +7,7 @@ import java.util.Timer;
 import java.util.concurrent.ConcurrentHashMap;
 
 import sfs2x.extensions.icard.bsn.BattleBsn;
+import sfs2x.extensions.icard.bsn.CardActionBsn;
 import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.Constants;
 import sfs2x.extensions.icard.utils.SyncGameStart;
@@ -68,11 +69,11 @@ public class CardGameBean
 		this._id = id;
 	}
 	public void setFreshLoop(int playerID){
-			setOpPlayer(rndPlayer);
-			_StateBean.setState(BattleStateBean.ST_WAIT_OP);
-			CardSiteBean site = _sites.get(playerID);
-			if(site)
-				site.setFreshLoop();
+		setOpPlayer(playerID);
+		_StateBean.setState(BattleStateBean.ST_WAIT_OP);
+		CardSiteBean site = _sites.get(playerID);
+		if (site != null)
+			site.setFreshLoop();
 	}
 	public void setOpPlayer(int id){
 		_OpPlayerID = id;
@@ -105,6 +106,10 @@ public class CardGameBean
 		CardSiteBean site = new CardSiteBean(playerID,sfsUser);
 		_sites.put(site.getPlayerID(),site);
 	}
+	public void AddAIPlayer(int playerID,User sfsUser){
+		CardSiteBean site = new AICardSiteBean(playerID);
+		_sites.put(site.getPlayerID(),site);
+	}
 	public long getGameStartTime() {
 		return gameStartTime;
 	}
@@ -122,10 +127,7 @@ public class CardGameBean
 	public void setStarted(boolean started) {
 		this.started = started;
 	}
-	public void WaitForGod(){
-		_StateBean.setState(BattleStateBean.ST_WAIT_GOD);
-	}
-	
+
 	/* PUBLIC METHODS */
 
 	/**
@@ -143,7 +145,10 @@ public class CardGameBean
 			//player.setScore(0);
 		}
 	}
-
+	public void RunGodLogic(ICardExtension ext){
+		CardActionBsn.procCardActionStore(this,_actionStoreBean,ext);
+		_StateBean.LeaveGodState();
+	}
 	/** 
 	 * Start a new game 
 	 */
