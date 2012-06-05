@@ -87,6 +87,9 @@ public class CardGameBean
 		site.AddCard(new CardBean(getGenCardRealID(),cardID,slotID));
 		return true;
 	}
+	public CardActionStoreBean getActionStore(){
+		return _actionStoreBean;
+	}
 	private int getGenCardRealID(){
 		int realID= _inc_card_realID++;
 		return realID;
@@ -119,7 +122,9 @@ public class CardGameBean
 	public void setStarted(boolean started) {
 		this.started = started;
 	}
-
+	public void WaitForGod(){
+		_StateBean.setState(BattleStateBean.ST_WAIT_GOD);
+	}
 	
 	/* PUBLIC METHODS */
 

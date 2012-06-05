@@ -21,10 +21,12 @@ public class CardActionBean
 	
 	private int _type;
 	private int _src;
+	private int _playerID;
 	private Vector<Integer> _des;
-	public CardActionBean(int src,int type,Vector<Integer> des)
+	public CardActionBean(int src,int playerID,int type,Vector<Integer> des)
 	{
 		_src = src;
+		_playerID = playerID;
 		_type = type;
 		_des = des;
 	}

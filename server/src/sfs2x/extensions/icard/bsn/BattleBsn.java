@@ -59,7 +59,7 @@ public class BattleBsn
 			break;
 		}
 	}
-	public static Vector<CardBean> PickSlotCard(){CardSiteBean site,int slotID){
+	public static Vector<CardBean> PickSlotCard{CardSiteBean site,int slotID){
 		Vector<CardBean> pickVect =new Vector<CardBean>();
 		for (Enumeration<CardBean> e = _sites.getCardMap().elements(); e.hasMoreElements();)
 		{

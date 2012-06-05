@@ -40,7 +40,6 @@ public class BattleAIBsn
 		case BattleStateBean.ST_CHAIN_WAIT_OP:
 			break;
 		}
-		game.WaitForGod();
 	}
 	private static void procWaitOp(CardGameBean game,CardSiteBean site,ICardExtension ext){
 		if(AddCard2ResSlot(game,site))
