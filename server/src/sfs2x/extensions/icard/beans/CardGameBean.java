@@ -38,6 +38,7 @@ public class CardGameBean
 	/** Game started flag */
 	private boolean started = false;
 	private BattleStateBean _StateBean;
+	private CardActionStoreBean _actionStoreBean;
 	private int _OpPlayerID =0; // currently do operate player id;
 	/**
 	 * Constructor
@@ -52,6 +53,7 @@ public class CardGameBean
 		// Initialize internal data structure
 		_sites = new ConcurrentHashMap<Integer,CardSiteBean>();
 		_StateBean = new BattleStateBean();
+		_actionStoreBean = new CardActionStoreBean();
 		// Reset game to its initial status
 		reset(); 
 	}
@@ -64,6 +66,13 @@ public class CardGameBean
 
 	public void setId(int id) {
 		this._id = id;
+	}
+	public void setFreshLoop(int playerID){
+			setOpPlayer(rndPlayer);
+			_StateBean.setState(BattleStateBean.ST_WAIT_OP);
+			CardSiteBean site = _sites.get(playerID);
+			if(site)
+				site.setFreshLoop();
 	}
 	public void setOpPlayer(int id){
 		_OpPlayerID = id;

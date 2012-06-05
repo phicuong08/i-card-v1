@@ -42,6 +42,19 @@ public class BattleAIBsn
 		}
 	}
 	private static void procWaitOp(CardGameBean game,CardSiteBean site,ICardExtension ext){
+		if(AddCard2ResSlot(game,site))
+			return;
 		
+	}
+	private static Boolean AddCard2ResSlot(CardGameBean game,CardSiteBean site){
+		if(site.getAddResAble()==false)
+			return false;
+		Vector<CardBean> cardVect = BattleBsn.PickSlotCard{site,Constants.HAND_SLOT_ID);
+		if(cardVect.size()==0)
+			return false;
+		CardBean card = (card)cardVect.firstElement();
+		CardActionBean action = new CardActionBean(card.getRealID(),CardActionBean.DO_CARD_2_RES);
+		game.getActionStore().AddAction(action);
+		return true;
 	}
 }
