@@ -26,7 +26,7 @@ public class BattleStateBean
 	
 	private int _state;	
 	private int _waitDuration = 60;
-
+	private int _backupState;
 	public BattleStateBean() {
 		_state =ST_NONE_STATE;
 	}
@@ -41,6 +41,13 @@ public class BattleStateBean
 	}
 	public Boolean getIsWaitTimeOut(){
 		return _waitDuration <= 0;
+	}
+	public void Jump2GodState(){
+		_backupState = _state;
+		setState(ST_WAIT_GOD);
+	}
+	public void LeaveGodState(){
+		setState(_backupState);
 	}
 	public void InitWaitOp(int playerID){
 		_waitPlayerID = playerID;

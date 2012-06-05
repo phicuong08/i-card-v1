@@ -96,11 +96,11 @@ public class GameBsn
 		if(site==null)
 			return;
 		site.setEmptyCardMap();
-		gameBean.AddCard(playerID, 20001, Constants.HERO_SLOT_ID);
+		gameBean.AddCard(playerID, 20001, CardBean.HERO_SLOT_ID);
 		for(int i=0;i<Constants.DEFAULT_HAND_CARD_NUM;i++)
 		{
 			Integer cardID = site.getDrawCard();
-			gameBean.AddCard(playerID, cardID, Constants.HAND_SLOT_ID);
+			gameBean.AddCard(playerID, cardID, CardBean.HAND_SLOT_ID);
 		}
 	}
 	

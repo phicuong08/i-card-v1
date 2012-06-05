@@ -3,8 +3,12 @@ package sfs2x.extensions.icard.bsn;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.BattleStateBean;
+import sfs2x.extensions.icard.beans.CardActionBean;
+import sfs2x.extensions.icard.beans.CardActionStoreBean;
+import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardSiteBean;
 import sfs2x.extensions.icard.main.ICardExtension;
@@ -13,7 +17,9 @@ import sfs2x.extensions.icard.utils.Constants;
 
 import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.User;
+import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
+import com.smartfoxserver.v2.entities.data.SFSArray;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 import com.smartfoxserver.v2.extensions.SFSExtension;
 
@@ -23,38 +29,49 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
  * @author Ing. Ignazio Locatelli
  * @version 1.0
  */
-public class BattleAIBsn
+public class CardActionBsn
 {	
-	// Store directions factors to move left,right,up,down
-	
-	static private java.util.Random _Random = new java.util.Random();
-
-
-	public static void RunBattleAI(CardGameBean game,CardSiteBean site,ICardExtension ext){
-		if(game.getOpPlayer()!= site.getPlayerID())
-			return;
-		switch(game.getStateBean().getState()){
-		case BattleStateBean.ST_WAIT_OP:
-			procWaitOp(game,site,ext);
-			break;
-		case BattleStateBean.ST_CHAIN_WAIT_OP:
-			break;
+	public static void procCardActionStore(CardGameBean game, CardActionStoreBean actionStore,ICardExtension ext){
+		for (Enumeration<CardActionBean> e = actionStore.getActionVect().elements(); e.hasMoreElements();){
+			CardActionBean action = (CardActionBean)e.nextElement();
+			procCardAction(game,action,ext);
 		}
 	}
-	private static void procWaitOp(CardGameBean game,CardSiteBean site,ICardExtension ext){
-		if(AddCard2ResSlot(game,site))
-			return;
-		
+	public static void procCardAction(CardGameBean game, CardActionBean action,ICardExtension ext){
+		switch(action.getType()){
+		case CardActionBean.DO_CARD_2_ATK:
+			break;
+		case CardActionBean.DO_CARD_2_DEF:
+			break;
+		case CardActionBean.DO_CARD_2_EQUIPSLOT:
+			break;
+		case CardActionBean.DO_CARD_2_FIGHTSLOT:
+			break;
+		case CardActionBean.DO_CARD_2_RES:
+			procCard2Res(game,action,ext);
+			break;
+		case CardActionBean.DO_CARD_2_TURN:
+			break;	
+		case CardActionBean.DO_CARD_2_USE:
+			break;		
+		}
 	}
-	private static Boolean AddCard2ResSlot(CardGameBean game,CardSiteBean site){
-		if(site.getAddResAble()==false)
-			return false;
-		Vector<CardBean> cardVect = BattleBsn.PickSlotCard{site,Constants.HAND_SLOT_ID);
-		if(cardVect.size()==0)
-			return false;
-		CardBean card = (card)cardVect.firstElement();
-		CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_RES);
-		game.getActionStore().AddAction(action);
-		return true;
+	private static void procCard2Res(CardGameBean game, CardActionBean action,ICardExtension ext){
+		CardSiteBean site = game.getSites().get(action.getPlayerID());
+		if(site==null)
+			return;
+		CardBean card = site.getCardMap().get(action.getSrc());
+		if(card==null)
+			return;
+		card.setSlotID(CardBean.RES_SLOT_ID);
+		card.setSide(0);
+		
+		ISFSObject params = new SFSObject();
+		ISFSArray sfsa = new SFSArray();
+		ISFSObject cardInfo = SFSObjectBsn.genCardSlotInfo(card,action.getPlayerID());
+		if(cardInfo!=null)
+			sfsa.addSFSObject(cardInfo);
+		params.putSFSArray("card", sfsa);
+		ext.SendGameCommand(Commands.CMD_S2C_CARD_UPDATE,params,game);
 	}
 }

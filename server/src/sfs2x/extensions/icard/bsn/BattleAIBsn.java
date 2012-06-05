@@ -3,8 +3,11 @@ package sfs2x.extensions.icard.bsn;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.BattleStateBean;
+import sfs2x.extensions.icard.beans.CardActionBean;
+import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardSiteBean;
 import sfs2x.extensions.icard.main.ICardExtension;
@@ -40,7 +43,7 @@ public class BattleAIBsn
 		case BattleStateBean.ST_CHAIN_WAIT_OP:
 			break;
 		}
-		game.WaitForGod();
+		game.getStateBean().Jump2GodState();
 	}
 	private static void procWaitOp(CardGameBean game,CardSiteBean site,ICardExtension ext){
 		if(AddCard2ResSlot(game,site))
@@ -50,11 +53,11 @@ public class BattleAIBsn
 	private static Boolean AddCard2ResSlot(CardGameBean game,CardSiteBean site){
 		if(site.getAddResAble()==false)
 			return false;
-		Vector<CardBean> cardVect = BattleBsn.PickSlotCard{site,Constants.HAND_SLOT_ID);
+		Vector<CardBean> cardVect = BattleBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID);
 		if(cardVect.size()==0)
 			return false;
-		CardBean card = (card)cardVect.firstElement();
-		CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_RES);
+		CardBean card = (CardBean)cardVect.firstElement();
+		CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_RES,null);
 		game.getActionStore().AddAction(action);
 		return true;
 	}
