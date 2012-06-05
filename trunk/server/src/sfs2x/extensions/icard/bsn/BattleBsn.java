@@ -42,8 +42,7 @@ public class BattleBsn
 				break;
 			index++;
 		}
-		game.setOpPlayer(rndPlayer);
-		game.getStateBean().setState(BattleStateBean.ST_WAIT_OP);
+		game.setFreshLoop(rndPlayer);
 		ISFSObject params = new SFSObject();
 		params.putInt("playerID", rndPlayer);
 		params.putInt("time", Constants.BATTLE_LOOP_TIME);
@@ -59,5 +58,15 @@ public class BattleBsn
 		case BattleStateBean.ST_CHAIN_WAIT_OP:
 			break;
 		}
+	}
+	public static Vector<CardBean> PickSlotCard(){CardSiteBean site,int slotID){
+		Vector<CardBean> pickVect =new Vector<CardBean>();
+		for (Enumeration<CardBean> e = _sites.getCardMap().elements(); e.hasMoreElements();)
+		{
+				CardBean card = (CardBean) e.nextElement();
+				if(card.getSlotID() == slotID)
+					pickVect.add(card);
+		}
+		return pickVect;
 	}
 }

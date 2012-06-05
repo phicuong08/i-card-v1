@@ -23,6 +23,7 @@ public class CardSiteBean
 	private ConcurrentHashMap<Integer, CardBean> _cardMap =new ConcurrentHashMap<Integer, CardBean>();
 	private List<Integer> _drawCardSrc ;
 	private User _sfsUser=null;
+	private Boolean _addResAble = false;
 	public CardSiteBean(int player,User sfsUser) {
 		_playerID = player;
 		_sfsUser = sfsUser;
@@ -32,6 +33,12 @@ public class CardSiteBean
 	}
 	public int getPlayerID() {
 		return _playerID;
+	}
+	public void setFreshLoop(){
+		_addResAble = true;
+	}
+	public Boolean getAddResAble(){
+		return _addResAble;
 	}
 	public void AddCard(CardBean card){
 		_cardMap.put(card.getRealID(), card);
