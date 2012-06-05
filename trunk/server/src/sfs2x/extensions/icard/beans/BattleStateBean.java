@@ -19,6 +19,7 @@ public class BattleStateBean
 	public static final int ST_INIT=1;
 	public static final int ST_WAIT_OP = 2;
 	public static final int ST_CHAIN_WAIT_OP = 3;
+	public static final int ST_WAIT_GOD = 4;
 	private Vector<Integer>  _battleChain;
 	/** User id */
 	private int _waitPlayerID = 0;  //等待操作的玩家
