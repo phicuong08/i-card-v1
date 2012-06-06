@@ -102,4 +102,13 @@ public class ICardExtension extends SFSExtension {
 				send(command, params, site.getSfsUser());
 		}
 	}
+	public void SendGameCardUpdate(CardGameBean game){
+		if(GameBsn.ExistDirtyCard(game)==false)
+			return;
+		
+		ISFSObject params = new SFSObject();
+		ISFSArray sfsa = SFSObjectBsn.genDirtyGameArr(game);
+		params.putSFSArray("card", sfsa);
+		SendGameCommand(Commands.CMD_S2C_CARD_UPDATE,params,game);
+	}
 }

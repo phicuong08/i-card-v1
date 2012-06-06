@@ -16,6 +16,15 @@ public class CardBean
 	public final static int FIGHT_SLOT_ID = 4;
 	public final static int TOMB_SLOT_ID = 5;
 	public final static int HERO_SLOT_ID = 6;
+	
+	public final static int SLOT_DIRTY_BIT = 0;
+	public final static int HP_DIRTY_BIT = 1;
+	public final static int TURN_DIRTY_BIT = 2;
+	public final static int ATK_DIRTY_BIT = 3;
+	public final static int DEF_DIRTY_BIT = 4;
+	public final static int COST_DIRTY_BIT = 5;
+	public final static int SIDE_DIRTY_BIT = 6;
+	
 	private int _realID;
 	private int _cardID;
 	private int _slotID;
@@ -24,7 +33,7 @@ public class CardBean
 	private int _addHp;
 	private int _addAtk;
 	private int _addDef;
-	
+	private int _diryFlag=0;
 	private CardInfoBean _info;
 	
 	public CardBean(int realID, int cardID,int slotID)
@@ -63,6 +72,7 @@ public class CardBean
 	}
 	public void setSlotID(int id){
 		_slotID = id;
+		setDirtyFlagBit(SLOT_DIRTY_BIT);
 	}
 	public int getTurn() {
 		return _turn;
@@ -70,6 +80,7 @@ public class CardBean
 
 	public void setTurn(int val) {
 		_turn = val;
+		setDirtyFlagBit(TURN_DIRTY_BIT);
 	}
 	public int getSide() {
 		return _side;
@@ -77,12 +88,13 @@ public class CardBean
 
 	public void setSide(int val) {
 		_side = val;
+		setDirtyFlagBit(SIDE_DIRTY_BIT);
 	}
 	
 	public int getCost(){ //费用
 		return _info.getBaseCost();
 	}
-	public int getUseCost(){ //使用（武器，法术）,横置(盟军)费用
+	public int getUseCost(){ //使用（武器，法术）,横置(盟军)费用,英雄翻转
 		return _info.getBaseUseCost();
 	}
 	public int getDef(){ //防御力
@@ -94,19 +106,11 @@ public class CardBean
 	public int getHp(){  //血量
 		return _addHp + _info.getBaseHp();
 	}
-	public Boolean getDefDirty(){
-		return (getDef()!=_info.getBaseDefence());
-	}
-	public Boolean getHpDirty(){
-		return (getHp()!=_info.getBaseHp());
-	}
-	public Boolean getAtkDirty(){
-		return (getAtk()!=_info.getBaseAttack());
-	}
 	public void AddHp(int val){
 		_addHp += val;
 		if(_addHp > (getMaxHp() - _info.getBaseHp()))
 			_addHp = getMaxHp() - _info.getBaseHp();
+		setDirtyFlagBit(HP_DIRTY_BIT);	
 	}
 	public Boolean getIsDead(){ 
 		return (_addHp + _info.getBaseHp())<=0;
@@ -114,5 +118,20 @@ public class CardBean
 	public int getMaxHp(){ //血上限
 		return _info.getBaseHp();
 	}
+	public void setDirtyFlagBit(int bitPos){
+		_diryFlag |= 1<< bitPos;
+	}
+	public int getDirtyFlag(){
+		return _dirtyFlag;
+	}
+	public void setDirtyFlag(int val){
+		_dirtyFlag = val;
+	}
+	public Boolean getDirtyFlagBit(int bitPos){
+		int val = _dirtyFlag & (1<<bitPos);
+		return (val>0);
+	}
 
+	
+	
 }
