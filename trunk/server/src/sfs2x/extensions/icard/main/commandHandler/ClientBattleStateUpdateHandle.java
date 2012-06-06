@@ -38,11 +38,7 @@ public class ClientBattleStateUpdateHandle extends ICardClientRequestHandler {
 			params.putInt("me", playerID);
 			params.putInt("you", ai.intValue());
 			
-			ISFSArray sfsa = new SFSArray();
-			for (CardSiteBean site : newGame.getSites().values())
-			{
-				FillCardInfoArr(sfsa,site,playerID);
-			}
+			ISFSArray sfsa = SFSObjectBsn.genDirtyGameArr(newGame);
 			params.putSFSArray("card", sfsa);
 			send(Commands.CMD_S2C_GAME_START, params, sender);
 			

@@ -26,12 +26,39 @@ import sfs2x.extensions.icard.beans.*;
  */
 public class SFSObjectBsn
 {	
-	public static ISFSObject genCardSlotInfo(CardBean card,int player){
+	public static ISFSObject genCardDirtyInfo(CardBean card,int player){
+		if(card.getDirtyFlag()==0)
+			return null;
 		ISFSObject cardInfo = new SFSObject();
 		cardInfo.putInt("realID", card.getRealID());
-		cardInfo.putInt("slot", card.getSlotID());
-		cardInfo.putInt("side", card.getSide());
+		if(card.getDirtyFlagBit(CardBean.SLOT_DIRTY_BIT))
+			cardInfo.putInt("slot", card.getSlotID());
+		if(card.getDirtyFlagBit(CardBean.SIDE_DIRTY_BIT))	
+			cardInfo.putInt("side", card.getSide());
+		if(card.getDirtyFlagBit(CardBean.TURN_DIRTY_BIT))	
+			cardInfo.putInt("turn", card.getTurn());	
+		if(card.getDirtyFlagBit(CardBean.HP_DIRTY_BIT))	
+			cardInfo.putInt("hp", card.getHp());	
 		cardInfo.putInt("playerID", player);
 		return cardInfo;
 	}
+	
+	public static void fillDirtyCardInfo(ISFSArray sfsa, CardSiteBean site,int player){
+		for (Enumeration<CardBean> e = site.getCardMap().elements(); e.hasMoreElements();){
+			CardBean card = (CardBean) e.nextElement();
+			ISFSObject cardInfo = genCardDirtyInfo(card,player);
+			if(cardInfo)
+				sfsa.addSFSObject(cardInfo);
+			card.setDirtyFlag(0);	
+		}
+	}
+	public static ISFSArray genDirtyGameArr(CardGameBean game){
+			ISFSArray sfsa = new SFSArray();
+			for (CardSiteBean site : game.getSites().values())
+			{
+				fillDirtyCardInfo(sfsa,site,playerID);
+			}
+			return sfsa;
+	}
+
 }

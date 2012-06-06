@@ -147,6 +147,7 @@ public class CardGameBean
 	}
 	public void RunGodLogic(ICardExtension ext){
 		CardActionBsn.procCardActionStore(this,_actionStoreBean,ext);
+		ext.SendGameCardUpdate(this);
 		_StateBean.LeaveGodState();
 	}
 	/** 

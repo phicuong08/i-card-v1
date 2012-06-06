@@ -117,7 +117,17 @@ public class GameBsn
 	}
 	
 	public static Boolean initVsAI(CardGameBean game,int playerID){
-
 		return true;
+	}
+	public static Boolean ExistDirtyCard(CardGameBean game){
+		for (CardSiteBean site : game.getSites().values())
+		{
+			for (Enumeration<CardBean> e = site.getCardMap().elements(); e.hasMoreElements();){
+				CardBean card = (CardBean) e.nextElement();
+				if(card.getDirtyFlag()>0)
+					return true;
+			}
+		}
+		return false;
 	}
 }

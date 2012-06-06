@@ -38,40 +38,53 @@ public class CardActionBsn
 		}
 	}
 	public static void procCardAction(CardGameBean game, CardActionBean action,ICardExtension ext){
-		switch(action.getType()){
-		case CardActionBean.DO_CARD_2_ATK:
-			break;
-		case CardActionBean.DO_CARD_2_DEF:
-			break;
-		case CardActionBean.DO_CARD_2_EQUIPSLOT:
-			break;
-		case CardActionBean.DO_CARD_2_FIGHTSLOT:
-			break;
-		case CardActionBean.DO_CARD_2_RES:
-			procCard2Res(game,action,ext);
-			break;
-		case CardActionBean.DO_CARD_2_TURN:
-			break;	
-		case CardActionBean.DO_CARD_2_USE:
-			break;		
-		}
-	}
-	private static void procCard2Res(CardGameBean game, CardActionBean action,ICardExtension ext){
 		CardSiteBean site = game.getSites().get(action.getPlayerID());
 		if(site==null)
 			return;
 		CardBean card = site.getCardMap().get(action.getSrc());
 		if(card==null)
 			return;
+		switch(action.getType()){
+		case CardActionBean.DO_CARD_2_ATK:
+			break;
+		case CardActionBean.DO_CARD_2_DEF:
+			break;
+		case CardActionBean.DO_CARD_2_EQUIPSLOT:
+			procCard2EquipSlot(site,card);
+			break;
+		case CardActionBean.DO_CARD_2_FIGHTSLOT:
+			procCard2FightSlot(site,card);
+			break;
+		case CardActionBean.DO_CARD_2_RES:
+			procCard2Res(card);
+			break;
+		case CardActionBean.DO_CARD_2_TURN:
+			procCard2Turn(site,card);
+			break;	
+		case CardActionBean.DO_CARD_2_USE:
+			break;		
+		}
+	}
+	private static void procCard2Turn(CardSiteBean site,CardBean card){
+		if(CardSiteBsn.getResNum(site)< card.getUseCost())
+			return;
+		CardSiteBsn.useRes(site,card.getCost());
+		card.setTurn(1);
+	}
+	private static void procCard2FightSlot(CardSiteBean site,CardBean card){
+		if(CardSiteBsn.getResNum(site)< card.getCost())
+			return;
+		CardSiteBsn.useRes(site,card.getCost());
+		card.setSlotID(CardBean.FIGHT_SLOT_ID);	
+	}
+	private static void procCard2EquipSlot(CardSiteBean site,CardBean card){
+		if(CardSiteBsn.getResNum(site)< card.getCost())
+			return;
+		CardSiteBsn.useRes(site,card.getCost());
+		card.setSlotID(CardBean.EQUIP_SLOT_ID);	
+	}
+	private static void procCard2Res(CardBean card){
 		card.setSlotID(CardBean.RES_SLOT_ID);
 		card.setSide(0);
-		
-		ISFSObject params = new SFSObject();
-		ISFSArray sfsa = new SFSArray();
-		ISFSObject cardInfo = SFSObjectBsn.genCardSlotInfo(card,action.getPlayerID());
-		if(cardInfo!=null)
-			sfsa.addSFSObject(cardInfo);
-		params.putSFSArray("card", sfsa);
-		ext.SendGameCommand(Commands.CMD_S2C_CARD_UPDATE,params,game);
 	}
 }
