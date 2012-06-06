@@ -136,12 +136,9 @@ public class CardGameBean
 	public void reset()
 	{
 		started = false;
-		// Set map to initial state (given by xml map)
-			
-		// Reset player score
-		for (Enumeration<CardSiteBean> e = _sites.elements(); e.hasMoreElements();)
+
+		for (CardSiteBean site : _sites..values())
 		{
-			CardSiteBean site = (CardSiteBean) e.nextElement();
 			//player.setScore(0);
 		}
 	}
@@ -164,9 +161,8 @@ public class CardGameBean
 	}
 	public void gameTick(ICardExtension ext){
 		BattleBsn.RunBattleStateBean(this,ext);
-		for (Enumeration<CardSiteBean> e = _sites.elements(); e.hasMoreElements();)
+		for (CardSiteBean site : _sites.values())
 		{
-			CardSiteBean site = (CardSiteBean) e.nextElement();
 			site.gameTick(this,ext);
 		}
 	}

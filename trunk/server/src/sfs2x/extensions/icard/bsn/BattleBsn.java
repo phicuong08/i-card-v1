@@ -36,8 +36,7 @@ public class BattleBsn
 		int randomIndex = _Random.nextInt(count);
 		int index = 0;
 		int rndPlayer = 0;
-		for (Enumeration<CardSiteBean> e = game.getSites().elements(); e.hasMoreElements();){
-			CardSiteBean site = (CardSiteBean) e.nextElement();
+		for (CardSiteBean site : game.getSites().values()){
 			rndPlayer = site.getPlayerID();
 			if(index == randomIndex)
 				break;
@@ -65,9 +64,8 @@ public class BattleBsn
 	}
 	public static Vector<CardBean> PickSlotCard(CardSiteBean site,int slotID){
 		Vector<CardBean> pickVect =new Vector<CardBean>();
-		for (Enumeration<CardBean> e = site.getCardMap().elements(); e.hasMoreElements();)
+		for (CardBean card : site.getCardMap().values())
 		{
-				CardBean card = (CardBean) e.nextElement();
 				if(card.getSlotID() == slotID)
 					pickVect.add(card);
 		}
