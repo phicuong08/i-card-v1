@@ -35,6 +35,7 @@ package ICard.views {
 		private function loadCallback():void
 		{
 			_battleStage = BattleStage.getInstance();
+			_battleStage.settle(_data);
 			_battleStage.CardFightResultCallback = this.onCardFightResult;
 			_battleStage.PlayerLoopFreshCallback = this.onPlayerLoopFresh;
 			
@@ -70,6 +71,9 @@ package ICard.views {
 			}
 		}
 		private function CreateCard(info:Object,bTip:Boolean=true):MovieClip{
+				trace("create card",info["cardID"]);
+				if(info["cardID"]==0)
+					return null;
 				var cardMC:MovieClip = _cardDB.CreateCard(info);
 				if(cardMC==null || bTip==false)
 						return cardMC;
@@ -95,7 +99,7 @@ package ICard.views {
 		}
 		private function test():void{
 			
-			_battleStage.InitGuy(1,2);
+			_battleStage.InitGuy(1,2,0);
 			
 			//_viewMgr.fightMovie.show();
 			//_battleStage.InitGuy(1,2);

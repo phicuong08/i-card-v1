@@ -86,7 +86,6 @@
 		}
 		public function CreateCard(info:Object):MovieClip{
 			var typeId:int = info["cardID"]/1000;
-			trace("card turn",info["turn"]);
 			var cardMC:MovieClip = CreateBackCard(info);
 			if(cardMC)
 				return cardMC;
