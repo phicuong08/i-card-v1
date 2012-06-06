@@ -33,8 +33,7 @@ public class CardSiteBsn
 {	
 	public static void getResNum(CardSiteBean site){
 		int num=0;
-		for (Enumeration<CardSiteBean> e = site.getCardMap().elements(); e.hasMoreElements();){
-			CardBean card = (CardBean) e.nextElement();
+		for (CardBean card : site.getCardMap().values()){
 			if(card.getSlotID==RES_SLOT_ID && card.getSide()==0)
 				num++;
 		}
@@ -42,9 +41,7 @@ public class CardSiteBsn
 	}
 	public static void useRes(CardSiteBean site,int resNum){
 		int remain=resNum;
-		
-		for (Enumeration<CardBean> e = site.getCardMap().elements(); e.hasMoreElements();){
-			CardBean card = (CardBean) e.nextElement();
+		for (CardBean card : site.getCardMap().values()){
 			if(card.getSlotID==RES_SLOT_ID && card.getSide()==0)
 			{
 				card.setSide(1);

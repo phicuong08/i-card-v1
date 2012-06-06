@@ -32,6 +32,8 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
 public class CardActionBsn
 {	
 	public static void procCardActionStore(CardGameBean game, CardActionStoreBean actionStore,ICardExtension ext){
+	
+
 		for (Enumeration<CardActionBean> e = actionStore.getActionVect().elements(); e.hasMoreElements();){
 			CardActionBean action = (CardActionBean)e.nextElement();
 			procCardAction(game,action,ext);
