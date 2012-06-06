@@ -24,6 +24,7 @@ public class CardBean
 	public final static int DEF_DIRTY_BIT = 4;
 	public final static int COST_DIRTY_BIT = 5;
 	public final static int SIDE_DIRTY_BIT = 6;
+	public final static int CARDID_DIRTY_BIT = 7;
 	
 	private int _realID;
 	private int _cardID;
@@ -31,9 +32,7 @@ public class CardBean
 	private int _turn;
 	private int _side;
 	private int _addHp;
-	private int _addAtk;
-	private int _addDef;
-	private int _diryFlag=0;
+	private int _dirtyFlag=0;
 	private CardInfoBean _info;
 	
 	public CardBean(int realID, int cardID,int slotID)
@@ -41,6 +40,8 @@ public class CardBean
 		_realID = realID;
 		_cardID = cardID;
 		_slotID = slotID;
+		setDirtyFlagBit(SLOT_DIRTY_BIT);
+		setDirtyFlagBit(CARDID_DIRTY_BIT);
 		_info = CardInfoStoreBean.GetInstance().getCardInfo(cardID);
 	}
 	
@@ -119,7 +120,7 @@ public class CardBean
 		return _info.getBaseHp();
 	}
 	public void setDirtyFlagBit(int bitPos){
-		_diryFlag |= 1<< bitPos;
+		_dirtyFlag |= 1<< bitPos;
 	}
 	public int getDirtyFlag(){
 		return _dirtyFlag;

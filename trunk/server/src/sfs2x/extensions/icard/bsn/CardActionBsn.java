@@ -31,6 +31,7 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
  */
 public class CardActionBsn
 {	
+	
 	public static void procCardActionStore(CardGameBean game, CardActionStoreBean actionStore,ICardExtension ext){
 	
 

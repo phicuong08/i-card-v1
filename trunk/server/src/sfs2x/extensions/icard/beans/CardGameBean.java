@@ -137,7 +137,7 @@ public class CardGameBean
 	{
 		started = false;
 
-		for (CardSiteBean site : _sites..values())
+		for (CardSiteBean site : _sites.values())
 		{
 			//player.setScore(0);
 		}

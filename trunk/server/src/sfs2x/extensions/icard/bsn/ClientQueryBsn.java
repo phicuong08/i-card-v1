@@ -14,6 +14,7 @@ import sfs2x.extensions.icard.beans.CardSiteBean;
 import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.Commands;
 import sfs2x.extensions.icard.utils.Constants;
+import sfs2x.extensions.icard.utils.ErrorDef;
 
 import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.User;
@@ -31,15 +32,16 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
  */
 public class ClientQueryBsn
 {	
-	public static void getResNum(CardSiteBean site){
+	public static int getResNum(CardSiteBean site){
 		int num=0;
 		for (CardBean card : site.getCardMap().values()){
-			if(card.getSlotID==RES_SLOT_ID && card.getSide()==0)
+			if(card.getSlotID()==CardBean.RES_SLOT_ID && card.getSide()==0)
 				num++;
 		}
 		return num;
 	}
-	public static void updateCardSlot(CardGameBean game,int playerID int realID, int slot){
+	
+	public static void updateCardSlot(CardGameBean game,int playerID, int realID, int slot){
 		if(game.getOpPlayer()!= playerID)
 		{
 			ErrorDef._CurErr = ErrorDef.ERR_PLAYER_MATCH;

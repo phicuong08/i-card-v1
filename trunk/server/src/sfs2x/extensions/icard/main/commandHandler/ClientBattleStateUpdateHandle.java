@@ -32,17 +32,17 @@ public class ClientBattleStateUpdateHandle extends ICardClientRequestHandler {
 				break;
 			}
 			newGame.AddPlayer(playerID,sender);
-			GameBsn.StartGame(newGame);
+			GameBsn.InitGameCard(newGame);
 			
 			ISFSObject params = new SFSObject();
 			params.putInt("me", playerID);
 			params.putInt("you", ai.intValue());
 			params.putInt("game",newGame.getId());
 			
-			ISFSArray sfsa = SFSObjectBsn.genDirtyGameArr(newGame);
+			ISFSArray sfsa = SFSObjectBsn.genDirtyGameArr(newGame,playerID);
 			params.putSFSArray("card", sfsa);
 			send(Commands.CMD_S2C_GAME_START, params, sender);
-			
+			GameBsn.StartGame(newGame);
 		}
 		else
 		{

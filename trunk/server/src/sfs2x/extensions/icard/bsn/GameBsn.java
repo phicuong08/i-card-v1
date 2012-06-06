@@ -82,14 +82,17 @@ public class GameBsn
 		site.setCardSource(washCards);
 	}
 	
-	public static void StartGame(CardGameBean newGame){
+	public static void InitGameCard(CardGameBean newGame){
 		for (CardSiteBean site : newGame.getSites().values())
 		{
 			InitCardSite(newGame, site.getPlayerID());
 		}
+	}
+	public static void StartGame(CardGameBean newGame){
 		newGame.setStarted(true);
 		newGame.getStateBean().setState(BattleStateBean.ST_INIT);
 	}
+	
 	public static void InitCardSite(CardGameBean gameBean,int playerID){
 		GenCardSource(gameBean,playerID);
 		CardSiteBean site = gameBean.getSites().get(playerID);
@@ -100,6 +103,10 @@ public class GameBsn
 		for(int i=0;i<Constants.DEFAULT_HAND_CARD_NUM;i++)
 		{
 			Integer cardID = site.getDrawCard();
+			if(cardID.intValue()==0)
+			{
+				break;
+			}
 			gameBean.AddCard(playerID, cardID, CardBean.HAND_SLOT_ID);
 		}
 	}
@@ -122,8 +129,8 @@ public class GameBsn
 	public static Boolean ExistDirtyCard(CardGameBean game){
 		for (CardSiteBean site : game.getSites().values())
 		{
-			for (Enumeration<CardBean> e = site.getCardMap().elements(); e.hasMoreElements();){
-				CardBean card = (CardBean) e.nextElement();
+			for(CardBean card:site.getCardMap().values())
+			{
 				if(card.getDirtyFlag()>0)
 					return true;
 			}

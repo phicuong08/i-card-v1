@@ -26,36 +26,4 @@ public class ICardClientRequestHandler extends BaseClientRequestHandler {
 			errObj.putUtfString("note",msg);
 			send(Commands.CMD_S2C_ERROR, errObj, sender);
 	}
-	
-	public void FillCardInfoArr(ISFSArray cardInfoArr,CardSiteBean siteBean,int sendId){
-		ConcurrentHashMap<Integer, CardBean> cardMap = siteBean.getCardMap();
-		if(cardMap==null)
-			return;
-
-		 for (Iterator<CardBean> iter = cardMap.values().iterator(); iter.hasNext(); )
-		{
-			 CardBean card = (CardBean)iter.next();
-			 ISFSObject cardInfoObj = GenCardInfoObj(card,siteBean.getPlayerID(),sendId);
-			 if(cardInfoObj!=null)
-				 cardInfoArr.addSFSObject(cardInfoObj);
-		}
-	}
-	public  ISFSObject GenCardInfoObj(CardBean card,int playerID,int sendId)
-	{
-		ISFSObject cardInfo = new SFSObject();
-		cardInfo.putInt("realID", card.getRealID());
-		cardInfo.putInt("cardID", card.getClientCardID(playerID==sendId));
-		cardInfo.putInt("slot", card.getSlotID());
-		cardInfo.putInt("side", card.getSide());
-		cardInfo.putInt("turn", card.getTurn());
-		cardInfo.putInt("playerID", playerID);
-		if(card.getHpDirty()==true)
-			cardInfo.putInt("hp", card.getHp());
-		if(card.getAtkDirty()==true)
-			cardInfo.putInt("atk", card.getAtk());
-		if(card.getDefDirty()==true)
-			cardInfo.putInt("def", card.getDef());
-		return cardInfo;
-	}
-
 }
