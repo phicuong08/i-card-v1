@@ -13,9 +13,17 @@ public class ClientUpdateCardHandle extends BaseClientRequestHandler {
 	@Override
 	public void handleClientRequest(User paramUser, ISFSObject paramISFSObject) {
 		CardUser cardUser = CardUserManager.getInstance().GetUser(paramUser.getId());
+		ErrorDef.Empty();
+		int realID = paramISFSObject.getInt("realID");
+		int slot = paramISFSObject.getInt("slot");
+		int gameId = paramISFSObject.getInt("game");
 		
-		//SFSExtension this.getParentExtension()
-
+		CardGameBean game = GameLobbyBean.GetInstance().getGameMap.get(gameId);
+		if(game==null)
+			return;
+		ClientQueryBsn.updateCardSlot(game,paramUser.getId(),realID,slot);
+		
+		SendOnErr(paramUser);
 	}
 
 }

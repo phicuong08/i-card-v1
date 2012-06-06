@@ -17,6 +17,10 @@ public class ICardClientRequestHandler extends BaseClientRequestHandler {
 	
 	}
 	
+	public void SendOnErr(User sender){
+		if(ErrorDef.IsEmpty()==false)
+			SendErrorMsg(sender,ErrorDef._CurErr);	
+	}
 	public void SendErrorMsg(User sender,String msg){
 			ISFSObject errObj = new SFSObject();;
 			errObj.putUtfString("note",msg);
