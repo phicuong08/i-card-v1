@@ -22,7 +22,8 @@ package ICard.SFSMod {
 		public function onBattleStart(params:ISFSObject):void{
 			var meID:int = params.getInt("me");
 			var youID:int = params.getInt("you");
-			_battleStage.InitGuy(meID,youID);
+			var gameID:int = params.getInt("game");
+			_battleStage.InitGuy(meID,youID,gameID);
 			procCardArr(params);
 		}
 		
@@ -88,6 +89,7 @@ package ICard.SFSMod {
 		public function QueryUseCard(realID:int,targets:Array):void{
 			var params:ISFSObject = new SFSObject();
 			params.putInt("srcID", realID);
+			params.putInt("game",_battleStage.GameID);
 			if(targets.length >0)
 			{
 				params.putIntArray("target",targets);
@@ -98,6 +100,7 @@ package ICard.SFSMod {
 			var params:ISFSObject = new SFSObject();
 			params.putInt("realID", realID);
 			params.putInt("slot", slot);
+			params.putInt("game",_battleStage.GameID);
 			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_update, params) );
 		}		
 		private function procCardArr(params:ISFSObject):void{

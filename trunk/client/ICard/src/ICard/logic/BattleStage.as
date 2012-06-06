@@ -4,7 +4,6 @@ package ICard.logic {
 	import ICard.SFSMod.*;
 	import ICard.SFSMod.Mod_Battle;
 	import ICard.assist.data.*;
-
 	import ICard.assist.server.CardType;
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.datas.*;
@@ -14,6 +13,7 @@ package ICard.logic {
 	
 	public class BattleStage implements IBattleStage{
 		private var _guy:Dictionary;
+		private var _gameID:int;
 		private var _myID:int;
 		private var _fightLink:FightLink;
 		private var _cardFightResultCallback:Function;
@@ -27,7 +27,7 @@ package ICard.logic {
 			_cardFightResultCallback = new Function;
 			_playerLoopFreshCallback = new Function;
 		}
-		public function settle(arg:Data):void{
+		public function settle(arg:IData):void{
 			_data = (arg as IData);
 		}
 		public static function getInstance():BattleStage{
@@ -42,12 +42,16 @@ package ICard.logic {
 		public function set PlayerLoopFreshCallback(arg1:Function):void{
 			_playerLoopFreshCallback = arg1;
 		}
-		public function InitGuy(me:int,you:int):void{
+		public function InitGuy(me:int,you:int,gameID:int):void{
 			_guy = new Dictionary;
 			_myID = me;
+			_gameID = gameID;
 			_guy[me] = new BattleGuy(me,true);
 			_guy[you] = new BattleGuy(you,false);
 			_fightLink = new FightLink;
+		}
+		public function get GameID():int{
+			return _gameID;
 		}
 		public function get PlayerMe():BattleGuy{
 			return _guy[_myID];
@@ -151,13 +155,13 @@ package ICard.logic {
 			}
 			return null;
 		}
-		private function onMyLoop():void{
-			_enable2Res = true;
-		}
+
 		public function PlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
 			ResetCards(playerID);
 			_playerLoopFreshCallback(playerID==_myID,secNum);	
 			_IsTurn = (playerID==_myID)?true:false;
+			if(_IsTurn)
+				_enable2Res = true;
 		}
 		public function get _Mod_Battle():Mod_Battle{
 			return (_data._Mod_Battle as Mod_Battle);
