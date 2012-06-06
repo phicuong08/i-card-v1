@@ -10,10 +10,10 @@ public class ErrorDef
 {	
 	public final static String ERR_PLAYER_MATCH = "player is not match!";
 	public static String _CurErr="";
-	public void Empty(){
+	public static void Empty(){
 		_CurErr="";
 	}
-	public Boolean IsEmpty(){
+	public static Boolean IsEmpty(){
 		return _CurErr.length()==0;
 	}
 }

@@ -31,10 +31,10 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
  */
 public class CardSiteBsn
 {	
-	public static void getResNum(CardSiteBean site){
+	public static int getResNum(CardSiteBean site){
 		int num=0;
 		for (CardBean card : site.getCardMap().values()){
-			if(card.getSlotID==RES_SLOT_ID && card.getSide()==0)
+			if(card.getSlotID()==CardBean.RES_SLOT_ID && card.getSide()==0)
 				num++;
 		}
 		return num;
@@ -42,7 +42,7 @@ public class CardSiteBsn
 	public static void useRes(CardSiteBean site,int resNum){
 		int remain=resNum;
 		for (CardBean card : site.getCardMap().values()){
-			if(card.getSlotID==RES_SLOT_ID && card.getSide()==0)
+			if(card.getSlotID()==CardBean.RES_SLOT_ID && card.getSide()==0)
 			{
 				card.setSide(1);
 				remain--;

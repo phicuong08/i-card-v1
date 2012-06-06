@@ -12,6 +12,8 @@ import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardInfoStoreBean;
 import sfs2x.extensions.icard.beans.CardSiteBean;
 import sfs2x.extensions.icard.beans.GameLobbyBean;
+import sfs2x.extensions.icard.bsn.GameBsn;
+import sfs2x.extensions.icard.bsn.SFSObjectBsn;
 import sfs2x.extensions.icard.main.commandHandler.*;
 import sfs2x.extensions.icard.main.eventHandler.*;
 
@@ -20,7 +22,9 @@ import sfs2x.extensions.icard.utils.Commands;
 
 import com.smartfoxserver.v2.core.SFSEventType;
 import com.smartfoxserver.v2.entities.User;
+import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
+import com.smartfoxserver.v2.entities.data.SFSObject;
 import com.smartfoxserver.v2.extensions.SFSExtension;
 
 public class ICardExtension extends SFSExtension {
@@ -105,10 +109,14 @@ public class ICardExtension extends SFSExtension {
 	public void SendGameCardUpdate(CardGameBean game){
 		if(GameBsn.ExistDirtyCard(game)==false)
 			return;
-		
-		ISFSObject params = new SFSObject();
-		ISFSArray sfsa = SFSObjectBsn.genDirtyGameArr(game);
-		params.putSFSArray("card", sfsa);
-		SendGameCommand(Commands.CMD_S2C_CARD_UPDATE,params,game);
+		for(CardSiteBean site :game.getSites().values())
+		{
+			if(site.getSfsUser()==null)
+				continue;
+			ISFSObject params = new SFSObject();
+			ISFSArray sfsa = SFSObjectBsn.genDirtyGameArr(game,site.getPlayerID());
+			params.putSFSArray("card", sfsa);
+			send(Commands.CMD_S2C_CARD_UPDATE, params, site.getSfsUser());
+		}
 	}
 }
