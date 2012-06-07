@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Random;
 import java.util.Vector;
 
+import sfs2x.extensions.icard.beans.AICardSiteBean;
 import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardBean;
@@ -33,9 +34,14 @@ public class BattleAIBsn
 	static private java.util.Random _Random = new java.util.Random();
 
 
-	public static void RunBattleAI(CardGameBean game,CardSiteBean site,ICardExtension ext){
+	public static void RunBattleAI(CardGameBean game,AICardSiteBean site,ICardExtension ext){
 		if(game.getOpPlayer()!= site.getPlayerID())
 			return;
+		if(site.getThinkNeed()>0){
+			site.decThinkNeed();
+			return;
+		}
+		site.setThinkNeed();
 		switch(game.getStateBean().getState()){
 		case BattleStateBean.ST_WAIT_OP:
 			procWaitOp(game,site,ext);
@@ -43,6 +49,7 @@ public class BattleAIBsn
 		case BattleStateBean.ST_CHAIN_WAIT_OP:
 			break;
 		}
+		
 		//game.getStateBean().Jump2GodState();
 	}
 	private static void procWaitOp(CardGameBean game,CardSiteBean site,ICardExtension ext){

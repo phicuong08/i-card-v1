@@ -7,7 +7,7 @@ import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.CardActionBean;
-import sfs2x.extensions.icard.beans.CardActionStoreBean;
+
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardSiteBean;
@@ -32,14 +32,6 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
 public class CardActionBsn
 {	
 	
-	public static void procCardActionStore(CardGameBean game, CardActionStoreBean actionStore,ICardExtension ext){
-	
-
-		for (Enumeration<CardActionBean> e = actionStore.getActionVect().elements(); e.hasMoreElements();){
-			CardActionBean action = (CardActionBean)e.nextElement();
-			procCardAction(game,action,ext);
-		}
-	}
 	public static void procCardAction(CardGameBean game, CardActionBean action,ICardExtension ext){
 		CardSiteBean site = game.getSites().get(action.getPlayerID());
 		if(site==null)
