@@ -33,8 +33,7 @@ public class SFSObjectBsn
 			return null;
 		ISFSObject cardInfo = new SFSObject();
 		cardInfo.putInt("realID", card.getRealID());
-		if(card.getDirtyFlagBit(CardBean.CARDID_DIRTY_BIT))
-			cardInfo.putInt("cardID", card.getClientCardID(player==receiver));
+		cardInfo.putInt("cardID", card.getClientCardID(player==receiver));
 		if(card.getDirtyFlagBit(CardBean.SLOT_DIRTY_BIT))
 			cardInfo.putInt("slot", card.getSlotID());
 		if(card.getDirtyFlagBit(CardBean.SIDE_DIRTY_BIT))	

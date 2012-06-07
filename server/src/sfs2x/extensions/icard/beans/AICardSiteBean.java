@@ -18,15 +18,23 @@ public class AICardSiteBean extends CardSiteBean
 		super(player,null);
 		setThinkNeed();
 	}
-	
+	public void setThinkNeed(){
+		_thinkNeed = THINK_TIME;
+	}
+	public int getThinkNeed(){
+		return _thinkNeed;
+	}
+	public void decThinkNeed(){
+		_thinkNeed--;
+	}
 	@Override
 	public void gameTick(CardGameBean game,ICardExtension ext){
-		if(thinkNeed>0){
-			thinkNeed--;
+		if(_thinkNeed>0){
+			_thinkNeed--;
 		}
 		else{
 			BattleAIBsn.RunBattleAI(game, this, ext);
-			thinkNeed = THINK_TIME;
+			_thinkNeed = THINK_TIME;
 		}
 	}
 }

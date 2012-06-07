@@ -54,7 +54,6 @@ public class CardGameBean
 		// Initialize internal data structure
 		_sites = new ConcurrentHashMap<Integer,CardSiteBean>();
 		_StateBean = new BattleStateBean();
-		_actionStoreBean = new CardActionStoreBean();
 		// Reset game to its initial status
 		reset(); 
 	}
@@ -89,9 +88,12 @@ public class CardGameBean
 		return true;
 	}
 	public void setCurAction(CardActionBean action){
-		_curAction = action;
+		synchronized(this)
+		{
+			_curAction = action;
+		}
 	}
-	public CardActionStoreBean getCurAction(){
+	public CardActionBean getCurAction(){
 		return _curAction;
 	}
 	private int getGenCardRealID(){
@@ -139,15 +141,17 @@ public class CardGameBean
 	public void reset()
 	{
 		started = false;
-
-		for (CardSiteBean site : _sites.values())
-		{
-			//player.setScore(0);
-		}
 	}
 	public void RunGodLogic(ICardExtension ext){
-		CardActionBsn.procCardActionStore(this,_actionStoreBean,ext);
+		CardActionBean action;
+		synchronized(this)
+		{
+			action = _curAction;
+			_curAction = null;
+		}
+		CardActionBsn.procCardAction(this,action,ext);
 		ext.SendGameCardUpdate(this);
+		
 		_StateBean.LeaveGodState();
 	}
 	/** 

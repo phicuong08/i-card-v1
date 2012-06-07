@@ -9,6 +9,7 @@ package sfs2x.extensions.icard.utils;
 public class ErrorDef 
 {	
 	public final static String ERR_PLAYER_MATCH = "player is not match!";
+	public final static String ERR_NOT_PLAYER_OP = "player can't do op!";
 	public static String _CurErr="";
 	public static void Empty(){
 		_CurErr="";

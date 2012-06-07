@@ -7,7 +7,6 @@ import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.CardActionBean;
-import sfs2x.extensions.icard.beans.CardActionStoreBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardSiteBean;
