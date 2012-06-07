@@ -11,17 +11,20 @@ import sfs2x.extensions.icard.utils.Constants;
  * @author Ing. Ignazio Locatelli
  * @version 1.0
  */
-public class CardActionStoreBean
+public class CardActionChainBean
 {
 	private Vector<CardActionBean> _actionVect;
-	public CardActionStoreBean()
+	public CardActionChainBean()
 	{
+		Empty();
+	}
+	public void Empty(){
 		_actionVect = new Vector<CardActionBean>();
 	}
-	public void AddAction(CardActionBean action){
+	public void PushAction(CardActionBean action){
 		_actionVect.add(action);
 	}
-	public Vector<CardActionBean> getActionVect(){
+	public Vector<CardActionBean> getActionChain(){
 		return _actionVect;
 	}
 }

@@ -65,8 +65,14 @@ public class CardActionBsn
 			procCard2Turn(site,card);
 			break;	
 		case CardActionBean.DO_CARD_2_USE:
+			procCard2Use(site,card);
 			break;		
 		}
+	}
+	private static void procCard2Use(CardSiteBean site,CardBean card){
+		if(CardSiteBsn.getResNum(site)< card.getUseCost())
+			return;
+			
 	}
 	private static void procCard2Turn(CardSiteBean site,CardBean card){
 		if(CardSiteBsn.getResNum(site)< card.getUseCost())

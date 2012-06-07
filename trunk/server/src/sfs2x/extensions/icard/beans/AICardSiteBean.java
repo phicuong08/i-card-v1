@@ -11,13 +11,22 @@ import sfs2x.extensions.icard.main.ICardExtension;
  * @version 1.0
  */
 public class AICardSiteBean extends CardSiteBean
-{	
+{
+	public final static  int	THINK_TIME = 20;
+	private int _thinkNeed;
 	public AICardSiteBean(int player) {
 		super(player,null);
+		setThinkNeed();
 	}
 	
 	@Override
 	public void gameTick(CardGameBean game,ICardExtension ext){
-		BattleAIBsn.RunBattleAI(game, this, ext);
+		if(thinkNeed>0){
+			thinkNeed--;
+		}
+		else{
+			BattleAIBsn.RunBattleAI(game, this, ext);
+			thinkNeed = THINK_TIME;
+		}
 	}
 }
