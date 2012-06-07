@@ -39,7 +39,7 @@ public class CardGameBean
 	/** Game started flag */
 	private boolean started = false;
 	private BattleStateBean _StateBean;
-	private CardActionStoreBean _actionStoreBean;
+	private CardActionBean _curAction;
 	private int _OpPlayerID =0; // currently do operate player id;
 	/**
 	 * Constructor
@@ -88,8 +88,11 @@ public class CardGameBean
 		site.AddCard(new CardBean(getGenCardRealID(),cardID,slotID));
 		return true;
 	}
-	public CardActionStoreBean getActionStore(){
-		return _actionStoreBean;
+	public void setCurAction(CardActionBean action){
+		_curAction = action;
+	}
+	public CardActionStoreBean getCurAction(){
+		return _curAction;
 	}
 	private int getGenCardRealID(){
 		int realID= _inc_card_realID++;

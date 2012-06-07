@@ -43,7 +43,7 @@ public class BattleAIBsn
 		case BattleStateBean.ST_CHAIN_WAIT_OP:
 			break;
 		}
-		game.getStateBean().Jump2GodState();
+		//game.getStateBean().Jump2GodState();
 	}
 	private static void procWaitOp(CardGameBean game,CardSiteBean site,ICardExtension ext){
 		if(AddCard2ResSlot(game,site))
@@ -58,7 +58,7 @@ public class BattleAIBsn
 			return false;
 		CardBean card = (CardBean)cardVect.firstElement();
 		CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_RES,null);
-		game.getActionStore().AddAction(action);
+		game.setCurAction(action);
 		return true;
 	}
 }

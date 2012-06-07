@@ -54,6 +54,7 @@ public class BattleBsn
 			procStateInit(game,ext);
 			break;
 		case BattleStateBean.ST_WAIT_OP:
+			procWaitOP(game,ext);
 			break;
 		case BattleStateBean.ST_CHAIN_WAIT_OP:
 			break;
@@ -61,6 +62,17 @@ public class BattleBsn
 			game.RunGodLogic(ext);
 			break;
 		}
+	}
+	public static void procWaitOP(CardGameBean game,ICardExtension ext){
+		//超时处理 TBD
+		CardActionBean curAction = game.getCurAction();
+		if(curAction==null)
+			return;
+			
+		//检测是否操作方	
+		if(game.getOpPlayer()!=curAction.getPlayerID())
+			return;
+		game.getStateBean().Jump2GodState();
 	}
 	public static Vector<CardBean> PickSlotCard(CardSiteBean site,int slotID){
 		Vector<CardBean> pickVect =new Vector<CardBean>();
