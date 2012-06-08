@@ -57,14 +57,15 @@ public class CardActionBsn
 			procCard2Turn(site,card);
 			break;	
 		case CardActionBean.DO_CARD_2_USE:
-			procCard2Use(site,card);
+			procCard2Use(game,site,card,action);
 			break;		
 		}
 	}
-	private static void procCard2Use(CardSiteBean site,CardBean card){
+	private static void procCard2Use(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
 		if(CardSiteBsn.getResNum(site)< card.getUseCost())
 			return;
-			
+		CardSiteBsn.useRes(site,card.getCost());
+		game.getBattleChain().PushAction(action);	
 	}
 	private static void procCard2Turn(CardSiteBean site,CardBean card){
 		if(CardSiteBsn.getResNum(site)< card.getUseCost())

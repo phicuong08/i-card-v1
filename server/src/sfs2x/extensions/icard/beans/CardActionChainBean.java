@@ -14,6 +14,7 @@ import sfs2x.extensions.icard.utils.Constants;
 public class CardActionChainBean
 {
 	private Vector<CardActionBean> _actionVect;
+	private CardActionBean _chainTop;
 	public CardActionChainBean()
 	{
 		Empty();
@@ -23,6 +24,12 @@ public class CardActionChainBean
 	}
 	public void PushAction(CardActionBean action){
 		_actionVect.add(action);
+		_chainTop = action;
+	}
+	public CardActionBean pickChainTop(){
+		CardActionBean ret = _chainTop;
+		_chainTop = null;
+		return ret;
 	}
 	public Vector<CardActionBean> getActionChain(){
 		return _actionVect;
