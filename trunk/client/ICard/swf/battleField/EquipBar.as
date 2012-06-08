@@ -6,7 +6,7 @@
 
     public class EquipBar extends SlotBar {
 
-	public function EquipBar():void{
+		public function EquipBar():void{
             super();
         }
 		

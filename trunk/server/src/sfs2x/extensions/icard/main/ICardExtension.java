@@ -119,4 +119,10 @@ public class ICardExtension extends SFSExtension {
 			send(Commands.CMD_S2C_CARD_UPDATE, params, site.getSfsUser());
 		}
 	}
+	public void SendBattleChainTop(CardGameBean game){
+		CardActionBean action = game.getBattleChain().pickChainTop();
+		if(action==null)
+			return;
+		
+	}
 }

@@ -39,6 +39,7 @@ public class CardGameBean
 	/** Game started flag */
 	private boolean started = false;
 	private BattleStateBean _StateBean;
+	private CardActionChainBean _battleChain;
 	private CardActionBean _curAction;
 	private int _OpPlayerID =0; // currently do operate player id;
 	/**
@@ -79,6 +80,9 @@ public class CardGameBean
 	}
 	public int getOpPlayer(){
 		return _OpPlayerID;
+	}
+	public CardActionChainBean getBattleChain(){
+		return _battleChain;
 	}
 	public Boolean AddCard(int playerID,int cardID,int slotID){
 		CardSiteBean site = _sites.get(playerID);
