@@ -17,6 +17,7 @@ public class ClientUpdateCardHandle extends ICardClientRequestHandler {
 
 	@Override
 	public void handleClientRequest(User paramUser, ISFSObject paramISFSObject) {
+		trace("start handle Client Request");
 		ErrorDef.Empty();
 		int realID = paramISFSObject.getInt("realID");
 		int slot = paramISFSObject.getInt("slot");

@@ -22,6 +22,9 @@ public class CardActionChainBean
 	public void Empty(){
 		_actionVect = new Vector<CardActionBean>();
 	}
+	public Boolean IsEmpty(){
+		return _actionVect.size()==0;
+	}
 	public void PushAction(CardActionBean action){
 		_actionVect.add(action);
 		_chainTop = action;

@@ -37,6 +37,9 @@ public class CardSiteBean
 	public void setFreshLoop(){
 		_addResAble = true;
 	}
+	public void setAddResAble(Boolean flag){
+		_addResAble = flag;
+	}
 	public Boolean getAddResAble(){
 		return _addResAble;
 	}

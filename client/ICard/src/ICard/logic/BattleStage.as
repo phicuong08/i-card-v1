@@ -66,6 +66,9 @@ package ICard.logic {
 				return;
 			if(_guy[info["playerID"]])
 				_guy[info["playerID"]].onUpdateCard(fullCard);
+			if(info["slot"] && info["slot"]==BattleFieldType.MyResourceSlotId)
+				_enable2Res = false;
+				
 		}
 		private function FullCardInfo(info:Object):Object{
 			var fillCard:Object = CardType.CreateCardInfo(info["cardID"]);
@@ -89,7 +92,7 @@ package ICard.logic {
 			
 		public function onCardFight(fightInfo:Object,targets:Array):void{
 			var srdID:int = fightInfo["srcID"];
-			var defender:int = fightInfo["defender"];
+			var defender:int = fightInfo["player"];
 			var timeVal:int = fightInfo["time"];
 			_fightLink.Add(srdID,targets);
 			if(defender==_myID) //����
@@ -171,7 +174,7 @@ package ICard.logic {
 			if(!cardInfo || cardInfo["guy"]!=_myID ||(_IsTurn==false))
 				return null;
 			var flagArr:Object = new Object;
-			flagArr["res"] = UseCard.Is2ResAble(cardInfo["card"]);                             //资源
+			flagArr["res"] = (_enable2Res)?UseCard.Is2ResAble(cardInfo["card"]):false;                             //资源
 			flagArr["enter"] = UseCard.Is2EnterAble(cardInfo["card"],PlayerMe.CardDB.ResNum());  //进场
 			flagArr["fight"] = UseCard.Is2FightAble(cardInfo["card"],PlayerMe.CardDB.ResNum());  //战斗  
 			flagArr["task"] = UseCard.IsTaskAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //任务

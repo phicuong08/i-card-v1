@@ -40,14 +40,13 @@ public class GameController extends Thread
 	{	
 		int count = 0;
 		
-		_lastTickTime = System.nanoTime();
+		_lastTickTime = System.currentTimeMillis();
 		while (timeEventsRunning)
 		{
 			count++;
-			long curNano =  System.nanoTime();
-			long elapsed = curNano - _lastTickTime;
-			_lastTickTime = curNano;
-
+			long curMillis =  System.currentTimeMillis();
+			long elapsed = curMillis - _lastTickTime;
+			_lastTickTime = curMillis;
 			// Cycle for all the running games
 			for (Enumeration<CardGameBean> e = _extension.getGames().elements(); e.hasMoreElements(); )
 			{	

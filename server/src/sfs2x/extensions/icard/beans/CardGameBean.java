@@ -55,6 +55,7 @@ public class CardGameBean
 		// Initialize internal data structure
 		_sites = new ConcurrentHashMap<Integer,CardSiteBean>();
 		_StateBean = new BattleStateBean();
+		_battleChain = new CardActionChainBean();
 		// Reset game to its initial status
 		reset(); 
 	}
