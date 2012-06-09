@@ -22,7 +22,7 @@ public class BattleStateBean
 	public static final int ST_WAIT_GOD = 4;
 	private Vector<Integer>  _battleChain;
 	/** User id */
-	private int _waitPlayerID = 0;  //等待操作的玩家
+	private int _opPlayerID = 0;  //等待操作的玩家
 	
 	private int _state;	
 	private int _waitDuration = 60;
@@ -36,8 +36,8 @@ public class BattleStateBean
 	public int getState(){
 		return _state;
 	}
-	public int getWaitPlayer() {
-		return _waitPlayerID;
+	public int getOpPlayer() {
+		return _opPlayerID;
 	}
 	public Boolean getIsWaitTimeOut(){
 		return _waitDuration <= 0;
@@ -50,15 +50,13 @@ public class BattleStateBean
 		setState(_backupState);
 	}
 	public void InitWaitOp(int playerID){
-		_waitPlayerID = playerID;
+		_opPlayerID = playerID;
 		_state = ST_WAIT_OP;
-		_waitDuration = Constants.BATTLE_WAIT_OP_DURATION;
+		_waitDuration = Constants.BATTLE_LOOP_TIME;
 	}
-	public void InitChainWaitOp(int playerID){
-		_waitPlayerID = playerID;
-		_battleChain = new Vector<Integer>();
-		_state = ST_CHAIN_WAIT_OP;
-		_waitDuration = Constants.BATTLE_WAIT_OP_DURATION;
+	public Boolean DecDuration(int val){
+		_waitDuration -= val;
+		return (_waitDuration>0);
 	}
 	public void setChainCard(int realID){
 		_battleChain.addElement(realID);

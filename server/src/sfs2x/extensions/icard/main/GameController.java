@@ -22,7 +22,7 @@ public class GameController extends Thread
 	
 	/** Debug flag */
 	private boolean debug = false;
-	
+	private long _lastTickTime;
 	/**
 	 * Constructor
 	 * 
@@ -40,10 +40,14 @@ public class GameController extends Thread
 	{	
 		int count = 0;
 		
+		_lastTickTime = System.nanoTime();
 		while (timeEventsRunning)
 		{
 			count++;
-			
+			long curNano =  System.nanoTime();
+			long elapsed = curNano - _lastTickTime;
+			_lastTickTime = curNano;
+
 			// Cycle for all the running games
 			for (Enumeration<CardGameBean> e = _extension.getGames().elements(); e.hasMoreElements(); )
 			{	
@@ -52,7 +56,7 @@ public class GameController extends Thread
 				// Process the game only if it has been started
 				if (currGameBean.isStarted())
 				{	
-					currGameBean.gameTick(_extension);
+					currGameBean.gameTick(_extension,(int) elapsed);
 					//if ( debug && (count%100) == 0) extension.trace("analyze match: " + currGameBean.getId());
 
 /*					

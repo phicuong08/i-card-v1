@@ -60,7 +60,7 @@ public class BattleAIBsn
 	private static Boolean AddCard2ResSlot(CardGameBean game,CardSiteBean site){
 		if(site.getAddResAble()==false)
 			return false;
-		Vector<CardBean> cardVect = BattleBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID);
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID);
 		if(cardVect.size()==0)
 			return false;
 		CardBean card = (CardBean)cardVect.firstElement();
