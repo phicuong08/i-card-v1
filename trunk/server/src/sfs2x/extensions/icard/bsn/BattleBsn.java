@@ -43,28 +43,30 @@ public class BattleBsn
 			index++;
 		}
 		game.setFreshLoop(rndPlayer);
-		ISFSObject params = new SFSObject();
-		params.putInt("playerID", rndPlayer);
-		params.putInt("time", Constants.BATTLE_LOOP_TIME);
+		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(rndPlayer, Constants.BATTLE_LOOP_TIME);
 		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
 	}
-	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext){
+	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext,int elasped){
 		switch(game.getStateBean().getState()){
 		case BattleStateBean.ST_INIT:
 			procStateInit(game,ext);
 			break;
 		case BattleStateBean.ST_WAIT_OP:
-			procWaitOP(game,ext);
-			break;
-		case BattleStateBean.ST_CHAIN_WAIT_OP:
+			procWaitOP(game,ext,elasped);
 			break;
 		case BattleStateBean.ST_WAIT_GOD:
 			game.RunGodLogic(ext);
 			break;
 		}
 	}
-	public static void procWaitOP(CardGameBean game,ICardExtension ext){
+	public static void procWaitOP(CardGameBean game,ICardExtension ext,int elasped){
 		//≥¨ ±¥¶¿Ì TBD
+		if(game.getStateBean().DecDuration(elasped)){
+			SwitchOpPlayer(game);
+			ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getOpPlayer(), Constants.BATTLE_LOOP_TIME);
+			ext.SendGameCommand(Commands.CMD_S2C_PRI_PLAYER_LOOP, params,game);
+			return;
+		}
 		CardActionBean curAction = game.getCurAction();
 		if(curAction==null)
 			return;
@@ -74,13 +76,15 @@ public class BattleBsn
 			return;
 		game.getStateBean().Jump2GodState();
 	}
-	public static Vector<CardBean> PickSlotCard(CardSiteBean site,int slotID){
-		Vector<CardBean> pickVect =new Vector<CardBean>();
-		for (CardBean card : site.getCardMap().values())
-		{
-				if(card.getSlotID() == slotID)
-					pickVect.add(card);
+
+	public static void SwitchOpPlayer(CardGameBean game)
+	{
+		int op = game.getOpPlayer();
+		for (CardSiteBean site : game.getSites().values()){
+			if(site.getPlayerID() != op)
+				op =site.getPlayerID();
 		}
-		return pickVect;
+		game.getStateBean().InitWaitOp(op);
 	}
+
 }

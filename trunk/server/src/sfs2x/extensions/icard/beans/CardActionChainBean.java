@@ -31,6 +31,9 @@ public class CardActionChainBean
 		_chainTop = null;
 		return ret;
 	}
+	public Boolean ExistChainTop(){
+		return (_chainTop!=null);
+	}
 	public Vector<CardActionBean> getActionChain(){
 		return _actionVect;
 	}

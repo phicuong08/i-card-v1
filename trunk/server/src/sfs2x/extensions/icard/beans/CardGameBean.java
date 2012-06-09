@@ -41,7 +41,7 @@ public class CardGameBean
 	private BattleStateBean _StateBean;
 	private CardActionChainBean _battleChain;
 	private CardActionBean _curAction;
-	private int _OpPlayerID =0; // currently do operate player id;
+	private int _loopPlayer;
 	/**
 	 * Constructor
 	 * 
@@ -69,17 +69,16 @@ public class CardGameBean
 		this._id = id;
 	}
 	public void setFreshLoop(int playerID){
-		setOpPlayer(playerID);
+		_loopPlayer = playerID;
+		_StateBean.InitWaitOp(playerID);
 		_StateBean.setState(BattleStateBean.ST_WAIT_OP);
 		CardSiteBean site = _sites.get(playerID);
 		if (site != null)
 			site.setFreshLoop();
 	}
-	public void setOpPlayer(int id){
-		_OpPlayerID = id;
-	}
+
 	public int getOpPlayer(){
-		return _OpPlayerID;
+		return _StateBean.getOpPlayer();
 	}
 	public CardActionChainBean getBattleChain(){
 		return _battleChain;
@@ -155,8 +154,14 @@ public class CardGameBean
 		}
 		CardActionBsn.procCardAction(this,action,ext);
 		ext.SendGameCardUpdate(this);
+		if(_battleChain.ExistChainTop()){
+			ext.SendBattleChainTop(this);
+		}
+		else
+		{
+			_StateBean.LeaveGodState();
+		}
 		
-		_StateBean.LeaveGodState();
 	}
 	/** 
 	 * Start a new game 
@@ -165,13 +170,12 @@ public class CardGameBean
 	{
 		gameStartTime = System.currentTimeMillis() + 3500;
 		started = true;
-
 		// Wait a number of seconds and then notify clients that the game starts!
 		timer = new Timer();
 		timer.schedule(new SyncGameStart(ext, recipients), 3000);
 	}
-	public void gameTick(ICardExtension ext){
-		BattleBsn.RunBattleStateBean(this,ext);
+	public void gameTick(ICardExtension ext,int elapsed){
+		BattleBsn.RunBattleStateBean(this,ext,elapsed);
 		for (CardSiteBean site : _sites.values())
 		{
 			site.gameTick(this,ext);

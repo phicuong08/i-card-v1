@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.BattleStateBean;
+import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardSiteBean;
 import sfs2x.extensions.icard.main.ICardExtension;
@@ -63,5 +64,24 @@ public class SFSObjectBsn
 			}
 			return sfsa;
 	}
-
+	public static ISFSObject genPlayerLoopInfo(int player,int time){
+		ISFSObject params = new SFSObject();
+		params.putInt("playerID", player);
+		params.putInt("time", time);
+		return params;
+	}
+	public static ISFSObject genBattleChainTopInfo(CardGameBean game){
+		ISFSObject params = new SFSObject();
+		
+		CardActionBean action = game.getBattleChain().pickChainTop();
+		ISFSObject fightInfo = new SFSObject();
+		fightInfo.putInt("player", action.getPlayerID());
+		fightInfo.putInt("srcID",action.getSrc());
+		fightInfo.putInt("type", action.getType());
+		fightInfo.putInt("time", Constants.BATTLE_LOOP_TIME);
+		params.putSFSObject("fight", fightInfo);
+		params.putIntArray("target", action.getDes());
+		return params;
+		
+	}
 }

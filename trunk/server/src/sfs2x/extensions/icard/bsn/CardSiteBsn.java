@@ -51,5 +51,13 @@ public class CardSiteBsn
 		}
 
 	}
-	
+	public static Vector<CardBean> PickSlotCard(CardSiteBean site,int slotID){
+		Vector<CardBean> pickVect =new Vector<CardBean>();
+		for (CardBean card : site.getCardMap().values())
+		{
+				if(card.getSlotID() == slotID)
+					pickVect.add(card);
+		}
+		return pickVect;
+	}
 }

@@ -8,6 +8,7 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardInfoStoreBean;
 import sfs2x.extensions.icard.beans.CardSiteBean;
@@ -123,6 +124,7 @@ public class ICardExtension extends SFSExtension {
 		CardActionBean action = game.getBattleChain().pickChainTop();
 		if(action==null)
 			return;
-		
+		ISFSObject params = SFSObjectBsn.genBattleChainTopInfo(game);
+		SendGameCommand(Commands.CMD_S2C_CARD_FIGHT,params,game);
 	}
 }
