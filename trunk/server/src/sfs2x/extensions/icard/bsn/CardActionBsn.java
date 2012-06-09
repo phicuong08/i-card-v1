@@ -33,6 +33,8 @@ public class CardActionBsn
 {	
 	
 	public static void procCardAction(CardGameBean game, CardActionBean action,ICardExtension ext){
+		if(action==null)
+			return;
 		CardSiteBean site = game.getSites().get(action.getPlayerID());
 		if(site==null)
 			return;
@@ -51,7 +53,7 @@ public class CardActionBsn
 			procCard2FightSlot(site,card);
 			break;
 		case CardActionBean.DO_CARD_2_RES:
-			procCard2Res(card);
+			procCard2Res(site,card);
 			break;
 		case CardActionBean.DO_CARD_2_TURN:
 			procCard2Turn(site,card);
@@ -85,7 +87,10 @@ public class CardActionBsn
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setSlotID(CardBean.EQUIP_SLOT_ID);	
 	}
-	private static void procCard2Res(CardBean card){
+	private static void procCard2Res(CardSiteBean site,CardBean card){
+		site.setAddResAble(false);
+		if(card.getCardType() !=CardBean.TASK)
+			card.setCardID(Constants.BACK_CARD_ID);
 		card.setSlotID(CardBean.RES_SLOT_ID);
 		card.setSide(0);
 	}

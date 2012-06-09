@@ -103,10 +103,6 @@ public class GameBsn
 		for(int i=0;i<Constants.DEFAULT_HAND_CARD_NUM;i++)
 		{
 			Integer cardID = site.getDrawCard();
-			if(cardID.intValue()==0)
-			{
-				break;
-			}
 			gameBean.AddCard(playerID, cardID, CardBean.HAND_SLOT_ID);
 		}
 	}

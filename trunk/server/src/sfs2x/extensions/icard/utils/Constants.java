@@ -10,7 +10,7 @@ public class Constants
 {	
 	
 	public final static int DEFAULT_HAND_CARD_NUM = 7;   //起始手牌数
-
+	public final static int BACK_CARD_ID = 1;
 	
 	public static final int SLEEP_TIME = 100;
 	public static final int BATTLE_LOOP_TIME = 30*1000;        //每轮玩家操作时间(秒)

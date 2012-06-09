@@ -98,9 +98,10 @@ public class ICardExtension extends SFSExtension {
 		removeRequestHandler(Commands.CMD_C2S_CARD_USE);
 		removeRequestHandler(Commands.CMD_C2S_CARD_UPDATE);
 
-		trace("BattleFarm extension destroyed");
+		trace("ICard extension destroyed");
 	}
 	public void SendGameCommand(String command,ISFSObject params,CardGameBean game){
+		trace("send game command",command);
 		for (Enumeration<CardSiteBean> e = game.getSites().elements(); e.hasMoreElements();){
 			CardSiteBean site = (CardSiteBean) e.nextElement();
 			if(site.getSfsUser()!=null)
