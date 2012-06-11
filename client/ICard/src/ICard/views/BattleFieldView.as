@@ -92,6 +92,8 @@ package ICard.views {
 		}
 		
 		public function onPlayerLoopFresh(myLoop:Boolean,secNum:int):void{
+			var iconName:String=(myLoop)?"I_turn":"u_turn";
+			_viewMgr.worldNotice.showMessage("",0.8,iconName);
 			_battleField.LoopFresh(myLoop,secNum);
 		}
 		public function onCardFightResult(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{

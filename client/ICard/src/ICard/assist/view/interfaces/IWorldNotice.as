@@ -6,7 +6,7 @@ package ICard.assist.view.interfaces {
 
         function get content():MovieClip;
         function set onClose(_arg1:Function):void;
-        function show(_arg1:String, _arg2:int):void;
+        function show(_arg1:String, _arg2:int,_arg3:String):void;
 
     }
 }//package com.assist.view.interfaces 
