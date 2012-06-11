@@ -43,16 +43,28 @@ public class BattleBsn
 			index++;
 		}
 		game.setFreshLoop(rndPlayer);
-		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(rndPlayer, Constants.BATTLE_LOOP_TIME);
-		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
+//		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(rndPlayer, Constants.BATTLE_LOOP_TIME);
+//		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
 	}
-	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext,int elasped){
+	public static void procLoopInterval(CardGameBean game,ICardExtension ext,int elapsed){
+		if(game.getStateBean().DecLoopInterval(elapsed)==false){
+			game.getStateBean().setState(BattleStateBean.ST_WAIT_OP);
+			
+			ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getStateBean().getOpPlayer(),
+								Constants.BATTLE_LOOP_TIME);
+			ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
+		}
+	}
+	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext,int elapsed){
 		switch(game.getStateBean().getState()){
 		case BattleStateBean.ST_INIT:
 			procStateInit(game,ext);
 			break;
+		case BattleStateBean.ST_LOOP_INTERVAL:
+			procLoopInterval(game,ext,elapsed);
+			break;
 		case BattleStateBean.ST_WAIT_OP:
-			procWaitOP(game,ext,elasped);
+			procWaitOP(game,ext,elapsed);
 			break;
 		case BattleStateBean.ST_WAIT_GOD:
 			game.RunGodLogic(ext);
@@ -65,8 +77,8 @@ public class BattleBsn
 		SwitchOpPlayer(game);
 		if(game.getBattleChain().IsEmpty()){
 			game.setFreshLoop(game.getOpPlayer());
-			ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getOpPlayer(), Constants.BATTLE_LOOP_TIME);
-			ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
+//			ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getOpPlayer(), Constants.BATTLE_LOOP_TIME);
+//			ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
 		}
 		else{
 			

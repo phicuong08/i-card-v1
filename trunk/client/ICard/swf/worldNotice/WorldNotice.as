@@ -23,7 +23,7 @@
             this._aryMessage = [];
             this._onClose = new Function();
             super();
-            this._Notice.alpha = 0;
+            this._Notice.alpha = 0.0;
             this._NoticeText.alpha = 0;
             this.mouseChildren = false;
             this.mouseEnabled = false;
@@ -31,10 +31,20 @@
         public function get content():MovieClip{
             return (this);
         }
-        public function show(_arg1:String, _arg2:int):void{
+        public function show(_arg1:String, _arg2:int,_arg3:String):void{
+			if(_Notice.numChildren>1)
+			{
+				_Notice.removeChildAt(1);
+			}
             if (_arg2 > 9){
                 _arg2 = 9;
             };
+			if(_arg3.length>0)
+			{
+				var classIcon:Class = getDefinitionByName(_arg3) as Class;
+				var IconMC:MovieClip = new classIcon;
+				_Notice.addChildAt(IconMC,1);
+			}
             var _local3:Number = (_arg2 * 10);
             _local3 = ((Math.PI / 180) * _local3);
             _local3 = (0.12 - (Math.sin(_local3) / 10));

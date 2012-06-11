@@ -72,7 +72,7 @@ public class CardGameBean
 	public void setFreshLoop(int playerID){
 		_loopPlayer = playerID;
 		_StateBean.InitWaitOp(playerID);
-		_StateBean.setState(BattleStateBean.ST_WAIT_OP);
+//		_StateBean.setState(BattleStateBean.ST_WAIT_OP);
 		CardSiteBean site = _sites.get(playerID);
 		if (site != null)
 			site.setFreshLoop();

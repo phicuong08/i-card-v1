@@ -66,6 +66,7 @@ package ICard {
             
         }
 		    public function initAddAssets():void{
+				addAssets("WorldNotice","WorldNotice.swf");
 				addAssets("fightmovie","fightmovie.swf");
 				addAssets("carddb","carddb.swf");
 				addAssets("templet","templet.swf");
@@ -112,6 +113,9 @@ package ICard {
 				}
 				public function get waitroom():WaitRoomView{
 						return ((this.createObject(WaitRoomView) as WaitRoomView));
+				}
+				public function get worldNotice():WorldNoticeView{
+					return ((this.createObject(WorldNoticeView) as WorldNoticeView));
 				}
 				public function get battleField():BattleFieldView{
 					return ((this.createObject(BattleFieldView) as BattleFieldView));
