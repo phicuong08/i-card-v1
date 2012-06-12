@@ -47,7 +47,7 @@ public class BattleBsn
 	
 	public static void procLoopInterval(CardGameBean game,ICardExtension ext,int elapsed){
 		if(game.getStateBean().DecLoopInterval(elapsed)==false){
-			game.getStateBean().setState(BattleStateBean.ST_WAIT_OP);
+			game.getStateBean().setState(BattleStateBean.ST_WAIT_LOOP_OP);
 			
 			ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getStateBean().getOpPlayer(),
 								Constants.BATTLE_LOOP_TIME);
@@ -78,27 +78,29 @@ public class BattleBsn
 		}
 	}
 
-	public static Boolean procLoopEnd(CardGameBean game,ICardExtension ext){//
+	public static void procLoopEnd(CardGameBean game,ICardExtension ext){//
 		int nextOp = getOtherPlayer(game,game.getOpPlayer());
 		game.setFreshLoop(nextOp);
 		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getOpPlayer(), Constants.BATTLE_LOOP_TIME);
 		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
 	}
 	
-	public static Boolean procWaitChainOP(CardGameBean game,ICardExtension ext){
-		if(game.getStateBean().DecDuration(elasped)==false){ //³¬Ê±
+	public static Boolean procWaitChainOP(CardGameBean game,ICardExtension ext,int elapsed){
+		if(game.getStateBean().DecDuration(elapsed)==false){ //³¬Ê±
 			game.getStateBean().Jump2GodState();
 		}
 		CardActionBean curAction = game.pickCurAction();
 		if(curAction==null)
-			return;
+			return false;
 		if(game.getOpPlayer()!=curAction.getPlayerID())
-			return;
+			return false;
 		game.getBattleChain().PushAction(curAction);		
 		int nextOp = getOtherPlayer(game,game.getOpPlayer());
 		game.getStateBean().InitWaitOp(nextOp);
 		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getOpPlayer(), Constants.BATTLE_LOOP_TIME);
-	  ext.SendGameCommand(Commands.CMD_S2C_PRI_PLAYER_LOOP, params,game);
+		SFSObjectBsn.fillBattleActionInfo(params,game,curAction);
+		ext.SendGameCommand(Commands.CMD_S2C_PRI_PLAYER_LOOP, params,game);
+		return true;
 	}
 	
 	public static void procWaitLoopOP(CardGameBean game,ICardExtension ext,int elasped){

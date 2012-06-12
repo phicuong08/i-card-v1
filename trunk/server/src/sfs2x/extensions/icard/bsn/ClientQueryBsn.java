@@ -45,7 +45,7 @@ public class ClientQueryBsn
 			ErrorDef._CurErr = ErrorDef.ERR_PLAYER_MATCH;
 			return;
 		}
-		if(game.getStateBean().getState()!= BattleStateBean.ST_WAIT_OP){
+		if(game.getStateBean().getState()!= BattleStateBean.ST_WAIT_LOOP_OP){
 			ErrorDef._CurErr = ErrorDef.ERR_NOT_PLAYER_OP;
 			return;
 		}
