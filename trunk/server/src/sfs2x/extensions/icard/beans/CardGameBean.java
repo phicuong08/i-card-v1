@@ -72,7 +72,7 @@ public class CardGameBean
 	public void setFreshLoop(int playerID){
 		_loopPlayer = playerID;
 		_StateBean.InitWaitOp(playerID);
-//		_StateBean.setState(BattleStateBean.ST_WAIT_OP);
+		_StateBean.setState(BattleStateBean.ST_LOOP_INTERVAL);
 		CardSiteBean site = _sites.get(playerID);
 		if (site != null)
 			site.setFreshLoop();
@@ -146,13 +146,17 @@ public class CardGameBean
 	{
 		started = false;
 	}
-	public void RunGodLogic(ICardExtension ext){
+	public CardActionBean pickCurAction(){
 		CardActionBean action;
 		synchronized(this)
 		{
 			action = _curAction;
 			_curAction = null;
 		}
+		return action;
+	}
+	public void RunGodLogic(ICardExtension ext){
+		CardActionBean action = pickCurAction();
 		CardActionBsn.procCardAction(this,action,ext);
 		ext.SendGameCardUpdate(this);
 		if(_battleChain.ExistChainTop()){
