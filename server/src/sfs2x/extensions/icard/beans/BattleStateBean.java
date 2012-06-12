@@ -16,7 +16,7 @@ import sfs2x.extensions.icard.utils.Constants;
 public class BattleStateBean
 {	
 	public static final int ST_NONE_STATE= 0;
-	public static final int ST_INIT=1;
+	public static final int ST_INIT_BATTLE=1;
 	public static final int ST_WAIT_LOOP_OP = 2;
 	public static final int ST_WAIT_CHAIN_OP = 3;
 	public static final int ST_WAIT_GOD = 4;

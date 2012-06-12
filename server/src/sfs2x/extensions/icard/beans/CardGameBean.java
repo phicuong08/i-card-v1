@@ -91,11 +91,14 @@ public class CardGameBean
 		site.AddCard(new CardBean(getGenCardRealID(),cardID,slotID));
 		return true;
 	}
-	public void setCurAction(CardActionBean action){
+	public Boolean setCurAction(CardActionBean action){
+		if(action.getPlayerID()!=getOpPlayer())
+			return false;
 		synchronized(this)
 		{
 			_curAction = action;
 		}
+		return true;
 	}
 	public CardActionBean getCurAction(){
 		return _curAction;
