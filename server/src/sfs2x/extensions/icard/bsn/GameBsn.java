@@ -90,7 +90,7 @@ public class GameBsn
 	}
 	public static void StartGame(CardGameBean newGame){
 		newGame.setStarted(true);
-		newGame.getStateBean().setState(BattleStateBean.ST_INIT);
+		newGame.getStateBean().setState(BattleStateBean.ST_INIT_BATTLE);
 	}
 	
 	public static void InitCardSite(CardGameBean gameBean,int playerID){

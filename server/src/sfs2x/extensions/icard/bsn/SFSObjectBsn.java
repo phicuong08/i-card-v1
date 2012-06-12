@@ -70,10 +70,7 @@ public class SFSObjectBsn
 		params.putInt("time", time);
 		return params;
 	}
-	public static ISFSObject genBattleChainTopInfo(CardGameBean game){
-		ISFSObject params = new SFSObject();
-		
-		CardActionBean action = game.getBattleChain().pickChainTop();
+	public static void fillBattleActionInfo(ISFSObject params,CardGameBean game,CardActionBean action){
 		ISFSObject fightInfo = new SFSObject();
 		fightInfo.putInt("player", action.getPlayerID());
 		fightInfo.putInt("srcID",action.getSrc());
@@ -81,7 +78,6 @@ public class SFSObjectBsn
 		fightInfo.putInt("time", Constants.BATTLE_LOOP_TIME);
 		params.putSFSObject("fight", fightInfo);
 		params.putIntArray("target", action.getDes());
-		return params;
-		
+	
 	}
 }

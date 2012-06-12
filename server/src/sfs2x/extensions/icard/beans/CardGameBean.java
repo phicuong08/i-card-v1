@@ -163,7 +163,7 @@ public class CardGameBean
 		CardActionBsn.procCardAction(this,action,ext);
 		ext.SendGameCardUpdate(this);
 		if(_battleChain.ExistChainTop()){
-			ext.SendBattleChainTop(this);
+			//ext.SendBattleChainTop(this);
 		}
 		else
 		{
