@@ -17,10 +17,13 @@ public class BattleStateBean
 {	
 	public static final int ST_NONE_STATE= 0;
 	public static final int ST_INIT=1;
-	public static final int ST_WAIT_OP = 2;
-	public static final int ST_CHAIN_WAIT_OP = 3;
+	public static final int ST_WAIT_LOOP_OP = 2;
+	public static final int ST_WAIT_CHAIN_OP = 3;
 	public static final int ST_WAIT_GOD = 4;
-	public static final int ST_LOOP_INTERVAL=5;
+	public static final int ST_LOOP_END = 5;
+	public static final int ST_LOOP_INTERVAL=6;
+	
+	
 	private Vector<Integer>  _battleChain;
 	/** User id */
 	private int _opPlayerID = 0;  //等待操作的玩家
@@ -54,7 +57,7 @@ public class BattleStateBean
 	public void InitWaitOp(int playerID){
 		_opPlayerID = playerID;
 		_loopInterval = 3*1000;
-		_state = ST_LOOP_INTERVAL;
+		//_state = ST_LOOP_INTERVAL;
 		_waitDuration = Constants.BATTLE_LOOP_TIME;
 	}
 	public Boolean DecLoopInterval(int val){
