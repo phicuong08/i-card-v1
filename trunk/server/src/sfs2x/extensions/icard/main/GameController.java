@@ -76,6 +76,9 @@ public class GameController extends Thread
 					}
 */					
 				}
+				else if(currGameBean.getNeedClose()==true){
+					_extension.getGames().remove(currGameBean.getId());
+				}
 			}
 			
 			// Sleep a bit

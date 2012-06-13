@@ -37,7 +37,8 @@ public class CardGameBean
 	private Timer timer = null;
 
 	/** Game started flag */
-	private boolean started = false;
+	private boolean _started = false;
+	private boolean _needClose=false;
 	private BattleStateBean _StateBean;
 	private CardActionChainBean _battleChain;
 	private CardActionBean _curAction;
@@ -61,7 +62,13 @@ public class CardGameBean
 	}
 	
 	/* GETTERS & SETTERS */
-
+	public void setNeedClose(){
+		_needClose = true;
+		_started =false;
+	}
+	public boolean getNeedClose(){
+		return _needClose;
+	}
 	public int getId() {
 		return _id;
 	}
@@ -133,11 +140,11 @@ public class CardGameBean
 	}
 
 	public boolean isStarted() {
-		return started;
+		return _started;
 	}
 	
 	public void setStarted(boolean started) {
-		this.started = started;
+		this._started = started;
 	}
 
 	/* PUBLIC METHODS */
@@ -147,7 +154,7 @@ public class CardGameBean
 	 */
 	public void reset()
 	{
-		started = false;
+		_started = false;
 	}
 	public CardActionBean pickCurAction(){
 		CardActionBean action;
@@ -177,7 +184,7 @@ public class CardGameBean
 	public void startGame(List<User> recipients, ICardExtension ext)
 	{
 		gameStartTime = System.currentTimeMillis() + 3500;
-		started = true;
+		_started = true;
 		// Wait a number of seconds and then notify clients that the game starts!
 		timer = new Timer();
 		timer.schedule(new SyncGameStart(ext, recipients), 3000);
