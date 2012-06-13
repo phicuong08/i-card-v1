@@ -43,6 +43,9 @@ public class Commands {
 	public static final String CMD_C2S_CARD_UPDATE				="1002"; //请求改变卡状态,上牌
 	//参数1(realID):int;参数2(slot):int, 
 	
+	public static final String CMD_C2S_END_OP				="1003"; //请求结束操作
+	//参数1(gameID):int;
+	
 
 	
 

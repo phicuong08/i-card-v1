@@ -133,4 +133,9 @@ public class GameBsn
 		}
 		return false;
 	}
+	public static void ClientEndOp(CardGameBean game,int playerID){
+		if(game.getStateBean().IsWaitPlayerOp(playerID)==false)
+			return;
+		game.getStateBean().setState(BattleStateBean.ST_WAIT_GOD);	
+	}
 }
