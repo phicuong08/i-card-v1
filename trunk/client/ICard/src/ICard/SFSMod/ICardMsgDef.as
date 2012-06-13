@@ -16,6 +16,9 @@ package ICard.SFSMod {
 		public static var c2s_battle_card_update:String="1002";     //请求改变卡状态
 		//参数1(realID):int;参数2(slot):int, 
 	
+		public static var c2s_end_op:String	="1003"; //请求结束操作
+		//参数1(gameID):int;
+	
 		//server msg
 		
 		//game start 开始游戏，参数1:玩家牌更新信息; 
