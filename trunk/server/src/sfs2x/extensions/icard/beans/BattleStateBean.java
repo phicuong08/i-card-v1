@@ -71,6 +71,10 @@ public class BattleStateBean
 	public void setChainCard(int realID){
 		_battleChain.addElement(realID);
 	}
-	
+	public Boolean IsWaitPlayerOp(int playerID){
+		if(_opPlayerID!=playerID)
+			return false;
+		return (_state==ST_WAIT_LOOP_OP || _state==ST_WAIT_CHAIN_OP);
+	}
 
 }

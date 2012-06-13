@@ -45,9 +45,11 @@ public class ICardExtension extends SFSExtension {
 
 		//命令handler添加
 		//客户端准备
+		
 		addRequestHandler(Commands.CMD_C2S_CLIENT_BATTLE_STATE_UPDATE,ClientBattleStateUpdateHandle.class);
 		addRequestHandler(Commands.CMD_C2S_CARD_USE,ClientUseCardHandle.class);
 		addRequestHandler(Commands.CMD_C2S_CARD_UPDATE,ClientUpdateCardHandle.class);
+		addRequestHandler(Commands.CMD_C2S_END_OP,ClientEndOpHandle.class);
 		
 		//事件handle添加
 		// Event handler: join room
@@ -97,6 +99,7 @@ public class ICardExtension extends SFSExtension {
 		removeRequestHandler(Commands.CMD_C2S_CLIENT_BATTLE_STATE_UPDATE);
 		removeRequestHandler(Commands.CMD_C2S_CARD_USE);
 		removeRequestHandler(Commands.CMD_C2S_CARD_UPDATE);
+		removeRequestHandler(Commands.CMD_C2S_END_OP);
 
 		trace("ICard extension destroyed");
 	}
@@ -121,11 +124,4 @@ public class ICardExtension extends SFSExtension {
 			send(Commands.CMD_S2C_CARD_UPDATE, params, site.getSfsUser());
 		}
 	}
-//	public void SendBattleChainTop(CardGameBean game){
-//		CardActionBean action = game.getBattleChain().pickChainTop();
-//		if(action==null)
-//			return;
-//		ISFSObject params = SFSObjectBsn.genBattleChainTopInfo(game);
-//		SendGameCommand(Commands.CMD_S2C_CARD_FIGHT,params,game);
-//	}
 }
