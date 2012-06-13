@@ -103,6 +103,7 @@ package ICard.SFSMod {
 			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_update, params) );
 		}
 		public function QueryEndOp():void{
+			var params:ISFSObject = new SFSObject();
 			params.putInt("game",_battleStage.GameID);
 			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_end_op, params) );
 		}

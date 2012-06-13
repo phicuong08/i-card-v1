@@ -62,6 +62,14 @@ public class GameBsn
 		gameBean = null;
 	}
 	*/
+	public static void RemovePlayer(int gameID,int playerID){
+		CardGameBean game = GameLobbyBean.GetInstance().getGameMap().get(gameID);
+		if(game==null)
+			return;
+		if(game.getSites().get(playerID)==null)
+			return;
+		game.setNeedClose();
+	}
 	public static CardGameBean CreateVSAIGame(){
 		return GameLobbyBean.GetInstance().getNewVSAIGame();
 	}
