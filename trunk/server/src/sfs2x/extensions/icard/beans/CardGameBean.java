@@ -134,6 +134,14 @@ public class CardGameBean
 	public long getGameStartTime() {
 		return gameStartTime;
 	}
+	public int getCardOwner(int realID){
+		for(CardSiteBean site:_sites){
+			CardBean card = site.getCardMap().get(realID);
+			if(card!=null)
+				return site.getPlayerID();
+		}
+		return 0;
+	}
 	public BattleStateBean getStateBean(){
 		return _StateBean;
 	}

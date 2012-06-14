@@ -91,7 +91,10 @@ public class BattleBsn
 	}
 	
 	public static void procBattleChain(CardGameBean game,ICardExtension ext){
-	
+		CardActionChainBean actionChain = game.getBattleChain();
+		if(actionChain.getActionChain().size()==0)
+			return;
+		
 	}
 	public static void procLoopEnd(CardGameBean game,ICardExtension ext){//
 		int nextOp = getOtherPlayer(game,game.getOpPlayer());
@@ -100,23 +103,26 @@ public class BattleBsn
 //		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
 	}
 	
-	public static Boolean procWaitChainOP(CardGameBean game,ICardExtension ext,int elapsed){
+	public static void procWaitChainOP(CardGameBean game,ICardExtension ext,int elapsed){
 		if(game.getStateBean().DecDuration(elapsed)==false){ //超时
 			game.getStateBean().Jump2GodState();
 		}
 		CardActionBean curAction = game.pickCurAction();
 		if(curAction==null)
-			return false;
+			return;
 		if(game.getOpPlayer()!=curAction.getPlayerID())
-			return false;
+			return;
+		if(CardActionBsn.Action2ChainAble(game,curAction)==false)
+			return;
 		game.getBattleChain().PushAction(curAction);		
 		int nextOp = getOtherPlayer(game,game.getOpPlayer());
 		game.getStateBean().InitWaitOp(nextOp);
 		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getOpPlayer(), Constants.BATTLE_LOOP_TIME);
 		SFSObjectBsn.fillBattleActionInfo(params,game,curAction);
 		ext.SendGameCommand(Commands.CMD_S2C_PRI_PLAYER_LOOP, params,game);
-		return true;
+		return;
 	}
+	
 	
 	public static void procWaitLoopOP(CardGameBean game,ICardExtension ext,int elasped){
 		//超时处理 TBD
@@ -132,6 +138,7 @@ public class BattleBsn
 		if(game.getOpPlayer()!=curAction.getPlayerID())
 			return;
 		if(needActiveBattleChain(curAction)){
+			game.getBattleChain().Empty();
 			game.getStateBean().setState(BattleStateBean.ST_WAIT_CHAIN_OP);
 		}
 		else{
@@ -139,8 +146,14 @@ public class BattleBsn
 		}
 		
 	}
-	public static boolean needActiveBattleChain(CardActionBean curAction){
-		return true;
+	public static boolean needActiveBattleChain(CardGameBean game,CardActionBean curAction){
+		if(	curAction.getDes().size()==0)
+			return false;
+		for(Integer realID:curAction.getDes()){
+			if(game.getCardOwner(realID)!=game.getOpPlayer())
+				return true;
+		}
+		return false;
 	}
 	public static int  getOtherPlayer(CardGameBean game,int meID)
 	{

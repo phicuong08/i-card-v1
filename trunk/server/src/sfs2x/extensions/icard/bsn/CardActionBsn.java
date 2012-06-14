@@ -32,6 +32,35 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
 public class CardActionBsn
 {	
 	
+	public static Boolean Action2ChainAble(CardGameBean game,CardActionBean action){
+		
+	}
+	private static int getChainActionCost(CardActionChainBean chainBean,int playerID){
+		
+	}
+	private static int getActionCost(CardActionBean action){
+		switch(action.getType()){
+		case CardActionBean.DO_CARD_2_ATK:
+			break;
+		case CardActionBean.DO_CARD_2_DEF:
+			break;
+		case CardActionBean.DO_CARD_2_EQUIPSLOT:
+			procCard2EquipSlot(site,card);
+			break;
+		case CardActionBean.DO_CARD_2_FIGHTSLOT:
+			procCard2FightSlot(site,card);
+			break;
+		case CardActionBean.DO_CARD_2_RES:
+			procCard2Res(site,card);
+			break;
+		case CardActionBean.DO_CARD_2_TURN:
+			procCard2Turn(site,card);
+			break;	
+		case CardActionBean.DO_CARD_2_USE:
+			procCard2Use(game,site,card,action);
+			break;		
+		}
+	}
 	public static void procCardAction(CardGameBean game, CardActionBean action,ICardExtension ext){
 		if(action==null)
 			return;
