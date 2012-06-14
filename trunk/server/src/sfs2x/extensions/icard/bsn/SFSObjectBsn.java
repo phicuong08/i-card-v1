@@ -80,9 +80,9 @@ public class SFSObjectBsn
 		params.putIntArray("target", action.getDes());
 	
 	}
-	public void genBattleLoopResetInfo(CardGameBean game){
+	public static ISFSObject genBattleLoopResetInfo(CardGameBean game){
 		ISFSObject params = new SFSObject();
-		params.putInt("playerID", player.getOpPlayer());
+		params.putInt("playerID", game.getOpPlayer());
 		params.putInt("time", Constants.BATTLE_LOOP_TIME);
 		return params;
 	}
