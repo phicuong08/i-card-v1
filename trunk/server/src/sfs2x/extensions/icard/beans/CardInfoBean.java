@@ -87,5 +87,5 @@ public final class CardInfoBean {
 					break;
 			}
 			return ret;
-		}	
+		}
 }

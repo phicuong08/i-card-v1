@@ -38,29 +38,28 @@ public class CardActionBsn
 	private static int getChainActionCost(CardActionChainBean chainBean,int playerID){
 		
 	}
+	
 	private static int getActionCost(CardActionBean action){
+		CardInfoBean cardInfo = CardInfoStoreBean.GetInstance().getCardInfo(action.getSrc());
+		if(cardInfo==null)
+			return 911; //¼«´óÖµ
+		int cost = 0;
 		switch(action.getType()){
 		case CardActionBean.DO_CARD_2_ATK:
-			break;
-		case CardActionBean.DO_CARD_2_DEF:
+			cost = getAtkCost(cardInfo);
 			break;
 		case CardActionBean.DO_CARD_2_EQUIPSLOT:
-			procCard2EquipSlot(site,card);
-			break;
 		case CardActionBean.DO_CARD_2_FIGHTSLOT:
-			procCard2FightSlot(site,card);
-			break;
-		case CardActionBean.DO_CARD_2_RES:
-			procCard2Res(site,card);
+			cost = cardInfo.getBaseCost();			
 			break;
 		case CardActionBean.DO_CARD_2_TURN:
-			procCard2Turn(site,card);
-			break;	
 		case CardActionBean.DO_CARD_2_USE:
-			procCard2Use(game,site,card,action);
-			break;		
+			cost = getUseCost(cardInfo);
+			break;	
 		}
+		return cost;
 	}
+	
 	public static void procCardAction(CardGameBean game, CardActionBean action,ICardExtension ext){
 		if(action==null)
 			return;
@@ -123,4 +122,23 @@ public class CardActionBsn
 		card.setSlotID(CardBean.RES_SLOT_ID);
 		card.setSide(0);
 	}
+	private static int getUseCost(CardInfoBean card){
+		CardUseBean useBean= CardUseStoreBean.GetInstance().getCardUse(card.getCardID())
+		if(useBean!=null){
+			return useBean.getCost();
+		}
+		else{
+			return card.getBaseCost();
+		}
+	}
+	private static int getAtkCost(CardInfoBean card){
+		int cost =0;
+		switch(card.getType()){
+			case CardInfoBean.WEAPON:
+				cost = card.getBaseUseCost();
+				break;
+				
+		}
+		return cost;
+	}	
 }
