@@ -42,6 +42,6 @@ package ICard.SFSMod {
 		public static var s2c_battle_player_loop:String ="11004";//回合转化
 		//参数1 playerID--出牌玩家ID,参数2-time --单位秒
 		public static var  s2c_pri_player_loop:String       ="11005";
-		
+		public static var  s2c_battle_reset_player_loop:String ="11006";
 	}
 }//package ICard.protocols 

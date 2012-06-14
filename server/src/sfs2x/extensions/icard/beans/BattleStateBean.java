@@ -54,6 +54,11 @@ public class BattleStateBean
 	public void LeaveGodState(){
 		setState(_backupState);
 	}
+	public void resetWaitLoopOp(int playerID){
+		_opPlayerID = playerID;
+		_waitDuration = Constants.BATTLE_LOOP_TIME;
+		_state =  ST_WAIT_LOOP_OP;
+	}
 	public void InitWaitOp(int playerID){
 		_opPlayerID = playerID;
 		_loopInterval = 3*1000;

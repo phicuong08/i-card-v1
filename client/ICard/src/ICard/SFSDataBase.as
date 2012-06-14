@@ -67,15 +67,12 @@ package ICard {
 				case ICardMsgDef.s2c_client_battle_state_update:
 					_mod_Battle.onBattleStateUpdate(params);
 					break;
-				
 				case ICardMsgDef.s2c_battle_card_update:
 					_mod_Battle.onCardUpdate(params);
 					break;
-				
 				case ICardMsgDef.s2c_battle_card_fight:
 					_mod_Battle.onCardFight(params);
 					break;
-				
 				case ICardMsgDef.s2c_battle_card_fight_result:
 					_mod_Battle.onCardFightResult(params);
 					break;
@@ -85,7 +82,9 @@ package ICard {
 				case ICardMsgDef.s2c_pri_player_loop:
 					_mod_Battle.onPriPlayerLoop(params);
 					break;
-			
+				case ICardMsgDef.s2c_battle_reset_player_loop;
+					_mod_Battle.onResetPlayerLoop(params);
+					break;
 			}
 		}
 		

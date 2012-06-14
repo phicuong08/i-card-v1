@@ -84,7 +84,9 @@ public class CardGameBean
 		if (site != null)
 			site.setFreshLoop();
 	}
-
+	public int getLoopPlayer(){
+		return _loopPlayer;
+	}
 	public int getOpPlayer(){
 		return _StateBean.getOpPlayer();
 	}
@@ -164,19 +166,6 @@ public class CardGameBean
 			_curAction = null;
 		}
 		return action;
-	}
-	public void RunGodLogic(ICardExtension ext){
-		CardActionBean action = pickCurAction();
-		CardActionBsn.procCardAction(this,action,ext);
-		ext.SendGameCardUpdate(this);
-		if(_battleChain.ExistChainTop()){
-			//ext.SendBattleChainTop(this);
-		}
-		else
-		{
-			_StateBean.LeaveGodState();
-		}
-		
 	}
 	/** 
 	 * Start a new game 

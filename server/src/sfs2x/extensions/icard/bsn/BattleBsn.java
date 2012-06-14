@@ -73,11 +73,26 @@ public class BattleBsn
 			procLoopEnd(game,ext);
 			break;
 		case BattleStateBean.ST_WAIT_GOD:
-			game.RunGodLogic(ext);
+			procGodLogic(game,ext);
 			break;
 		}
 	}
-
+	public static void procGodLogic(CardGameBean game,ICardExtension ext){
+		CardActionBean action = game.pickCurAction();
+		if(action!=null){
+			CardActionBsn.procCardAction(this,action,ext);
+			ext.SendGameCardUpdate(this);
+		}
+		procBattleChain(game,ext);
+		
+		game.getStateBean().resetWaitLoopOp(game.getLoopPlayer());
+		ISFSObject params =SFSObjectBsn.genBattleLoopResetInfo(game);
+		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_LOOP_RESET, params,game);
+	}
+	
+	public static void procBattleChain(CardGameBean game,ICardExtension ext){
+	
+	}
 	public static void procLoopEnd(CardGameBean game,ICardExtension ext){//
 		int nextOp = getOtherPlayer(game,game.getOpPlayer());
 		game.setFreshLoop(nextOp);
@@ -116,9 +131,17 @@ public class BattleBsn
 		//¼ì²âÊÇ·ñ²Ù×÷·½	
 		if(game.getOpPlayer()!=curAction.getPlayerID())
 			return;
-		game.getStateBean().Jump2GodState();
+		if(needActiveBattleChain(curAction)){
+			game.getStateBean().setState(BattleStateBean.ST_WAIT_CHAIN_OP);
+		}
+		else{
+			game.getStateBean().Jump2GodState();
+		}
+		
 	}
-
+	public static boolean needActiveBattleChain(CardActionBean curAction){
+		return true;
+	}
 	public static int  getOtherPlayer(CardGameBean game,int meID)
 	{
 		for (CardSiteBean site : game.getSites().values()){
