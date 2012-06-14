@@ -80,13 +80,13 @@ public class BattleBsn
 	public static void procGodLogic(CardGameBean game,ICardExtension ext){
 		CardActionBean action = game.pickCurAction();
 		if(action!=null){
-			CardActionBsn.procCardAction(this,action,ext);
-			ext.SendGameCardUpdate(this);
+			CardActionBsn.procCardAction(game,action,ext);
+			ext.SendGameCardUpdate(game);
 		}
 		procBattleChain(game,ext);
 		
 		game.getStateBean().resetWaitLoopOp(game.getLoopPlayer());
-		ISFSObject params =SFSObjectBsn.genBattleLoopResetInfo(game);
+		ISFSObject params = SFSObjectBsn.genBattleLoopResetInfo(game);
 		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_LOOP_RESET, params,game);
 	}
 	
@@ -137,8 +137,8 @@ public class BattleBsn
 		//¼ì²âÊÇ·ñ²Ù×÷·½	
 		if(game.getOpPlayer()!=curAction.getPlayerID())
 			return;
-		if(needActiveBattleChain(curAction)){
-			game.getBattleChain().Empty();
+		if(needActiveBattleChain(game,curAction)){
+			game.EmptyBattleChain();
 			game.getStateBean().setState(BattleStateBean.ST_WAIT_CHAIN_OP);
 		}
 		else{

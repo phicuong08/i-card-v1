@@ -23,6 +23,7 @@ public class CardSiteBean
 	private ConcurrentHashMap<Integer, CardBean> _cardMap =new ConcurrentHashMap<Integer, CardBean>();
 	private List<Integer> _drawCardSrc ;
 	private User _sfsUser=null;
+	private int _chainCost=0;
 	private Boolean _addResAble = false;
 	public CardSiteBean(int player,User sfsUser) {
 		_playerID = player;
@@ -33,6 +34,15 @@ public class CardSiteBean
 	}
 	public int getPlayerID() {
 		return _playerID;
+	}
+	public int getChainCost(){
+		return _chainCost;
+	}
+	public void addChainCost(int val){
+		_chainCost += val;
+	}
+	public void clearChainCost(){
+		_chainCost = 0 ;
 	}
 	public void setFreshLoop(){
 		_addResAble = true;
@@ -54,6 +64,16 @@ public class CardSiteBean
 	}
 	public ConcurrentHashMap<Integer, CardBean> getCardMap(){
 		return _cardMap;
+	}
+	public int getRemainRes(){
+		int ret = 0;
+		for(CardBean card:_cardMap.values()){
+			if(card.getSlotID()==CardBean.RES_SLOT_ID &&
+				card.getSide()==0)
+				ret++;
+		}
+		ret -= _chainCost;
+		return ret;
 	}
 	public List<Integer> getDrawCardSrc(){
 		return _drawCardSrc;

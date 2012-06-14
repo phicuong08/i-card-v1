@@ -8,9 +8,14 @@ import java.util.Vector;
 import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.CardActionBean;
 
+import sfs2x.extensions.icard.beans.CardActionChainBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
+import sfs2x.extensions.icard.beans.CardInfoBean;
+import sfs2x.extensions.icard.beans.CardInfoStoreBean;
 import sfs2x.extensions.icard.beans.CardSiteBean;
+import sfs2x.extensions.icard.beans.CardUseBean;
+import sfs2x.extensions.icard.beans.CardUseStoreBean;
 import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.Commands;
 import sfs2x.extensions.icard.utils.Constants;
@@ -33,10 +38,15 @@ public class CardActionBsn
 {	
 	
 	public static Boolean Action2ChainAble(CardGameBean game,CardActionBean action){
+		int cost = getActionCost(action);
+		CardSiteBean site = game.getSites().get(action.getPlayerID());
+		if(site==null)
+			return false;
+		if(site.getRemainRes()<cost)
+			return false;
 		
-	}
-	private static int getChainActionCost(CardActionChainBean chainBean,int playerID){
-		
+		site.addChainCost(cost);
+		return true;
 	}
 	
 	private static int getActionCost(CardActionBean action){
@@ -123,7 +133,7 @@ public class CardActionBsn
 		card.setSide(0);
 	}
 	private static int getUseCost(CardInfoBean card){
-		CardUseBean useBean= CardUseStoreBean.GetInstance().getCardUse(card.getCardID())
+		CardUseBean useBean= CardUseStoreBean.GetInstance().getCardUse(card.getCardID());
 		if(useBean!=null){
 			return useBean.getCost();
 		}

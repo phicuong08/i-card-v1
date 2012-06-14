@@ -33,16 +33,16 @@ public class CardUseStoreBean {
 			for(HashMap<String,String> rowData :sheetData){
 				int Id = Integer.parseInt(rowData.get("ID")); // ÅÆµÄid
 			
-				int Cost = (rowData.get("cost")==null||rowData.get("cost").isEmpty())?0:Integer.parseInt(rowData.get("cost")); // 
+				int cost = (rowData.get("cost")==null||rowData.get("cost").isEmpty())?0:Integer.parseInt(rowData.get("cost")); // 
 				int targetNum = (rowData.get("targetNum")==null||rowData.get("targetNum").isEmpty())?0:Integer.parseInt(rowData.get("targetNum")); 
 				int myHero = (rowData.get("myHero")==null||rowData.get("myHero").isEmpty())?0:Integer.parseInt(rowData.get("myHero")); // 
 				int mySoldier = (rowData.get("mySoldier")==null||rowData.get("mySoldier").isEmpty())?0:Integer.parseInt(rowData.get("mySoldier"));//
 				int yourHero = (rowData.get("yourHero")==null||rowData.get("yourHero").isEmpty())?0:Integer.parseInt(rowData.get("yourHero")); // 
 				int yourSoldier = (rowData.get("yourSoldier")==null||rowData.get("yourSoldier").isEmpty())?0:Integer.parseInt(rowData.get("yourSoldier"));//
 
-				CardUseBean cardUse = new CardUseBean(Id,  targetNum, myHero,mySoldier,
+				CardUseBean cardUse = new CardUseBean(Id,  cost,targetNum, myHero,mySoldier,
 							  						yourHero, yourSoldier);
-					_useInfoMap.put(Id, cardInfo);
+					_useInfoMap.put(Id, cardUse);
 			}
 			
 		}

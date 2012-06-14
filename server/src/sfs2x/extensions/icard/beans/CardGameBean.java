@@ -93,6 +93,12 @@ public class CardGameBean
 	public CardActionChainBean getBattleChain(){
 		return _battleChain;
 	}
+	public void EmptyBattleChain(){
+		_battleChain.Empty();
+		for(CardSiteBean site:_sites.values()){
+			site.clearChainCost();
+		}
+	}
 	public Boolean AddCard(int playerID,int cardID,int slotID){
 		CardSiteBean site = _sites.get(playerID);
 		if(site==null)
@@ -135,7 +141,7 @@ public class CardGameBean
 		return gameStartTime;
 	}
 	public int getCardOwner(int realID){
-		for(CardSiteBean site:_sites){
+		for(CardSiteBean site:_sites.values()){
 			CardBean card = site.getCardMap().get(realID);
 			if(card!=null)
 				return site.getPlayerID();
