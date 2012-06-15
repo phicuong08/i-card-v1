@@ -58,21 +58,27 @@ public class CardActionBsn
 		if(chain.size()!=0){
 			if(action.getDes().size()!=1)
 				return false;
+			for(CardActionBean a1 :chain.values()){ //卡片在链上
+				if(a1.getSrc()==action.getSrc())
+					return false;
+			}
+			
 			int targetID= action.getDes().get(0);
-			if(findTargetFromChain(chain,targetID)==false) //目标是否在链上
-				return false;
-			if(findTargetFromChain(chain,action.getSrc())==true)	//源已经在链上，不可用
+			CardActionBean topAction = chain.getChainTop();
+			if(findActionTarget(topAction,targetID)==false)
 				return false;
 		}
 		
 		site.addChainCost(cost);
 		return true;
 	}
-	public static Boolean findTargetFromChain(CardActionChainBean chain,int targetID){
-		for(CardActionBean action :chain.values()){
-			if(action.getSrc()==targetID)
+	private static boolean findActionTarget(CardActionBean desCard,int targetID){
+		if(desCard.getSrc()==targetID)
+			return;
+		for(Integer id :desCard.getDes().values()){
+			if( id == targetID)
 				return true;
-		}
+		}	
 		return false;
 	}
 	private static int getActionCost(CardActionBean action){
