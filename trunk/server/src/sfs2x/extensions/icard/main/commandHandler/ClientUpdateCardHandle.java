@@ -26,6 +26,8 @@ public class ClientUpdateCardHandle extends ICardClientRequestHandler {
 		CardGameBean game = GameLobbyBean.GetInstance().getGameMap().get(gameId);
 		if(game==null)
 			return;
+		if(game.getCardOwner(realID)!= paramUser.getId())
+			return;
 		ClientQueryBsn.updateCardSlot(game,paramUser.getId(),realID,slot);
 		SendOnErr(paramUser);
 	}

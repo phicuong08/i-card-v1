@@ -27,6 +27,9 @@ public class ClientUseCardHandle extends BaseClientRequestHandler {
 				return;
 			if(game.getOpPlayer()!=paramUser.getId())
 				return;
+			if(game.getCardOwner(srcID)!= paramUser.getId())
+				return;
+				
 			Vector<Integer> des = new Vector<Integer>();
 			Collection<Integer> targetCol = paramISFSObject.getIntArray("target"); 
 			for(Integer targetID:targetCol){
