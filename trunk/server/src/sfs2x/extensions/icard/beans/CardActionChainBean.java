@@ -18,6 +18,11 @@ public class CardActionChainBean
 	{
 		Empty();
 	}
+	public CardActionBean getChainTop(){
+		if(_actionVect.size()==0)
+			return null;
+		return (CardActionBean)_actionVect.lastElement();
+	}
 	public void Empty(){
 		_actionVect = new Vector<CardActionBean>();
 	}
