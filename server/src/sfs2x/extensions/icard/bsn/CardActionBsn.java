@@ -37,6 +37,16 @@ import com.smartfoxserver.v2.extensions.SFSExtension;
 public class CardActionBsn
 {	
 	
+	public static void procAction(CardGameBean game,CardActionBean action){
+		switch(action.getType()){
+			case CardActionBean.DO_CARD_2_ATK:
+				break;
+			case CardActionBean.DO_CARD_2_DEF:
+				break;
+			case CardActionBean.DO_CARD_2_USE:	
+				break;
+		}
+	}
 	public static Boolean Action2ChainAble(CardGameBean game,CardActionBean action){
 		int cost = getActionCost(action);
 		CardSiteBean site = game.getSites().get(action.getPlayerID());
@@ -44,11 +54,27 @@ public class CardActionBsn
 			return false;
 		if(site.getRemainRes()<cost)
 			return false;
+		CardActionChainBean chain = game.getBattleChain();
+		if(chain.size()!=0){
+			if(action.getDes().size()!=1)
+				return false;
+			int targetID= action.getDes().get(0);
+			if(findTargetFromChain(chain,targetID)==false) //目标是否在链上
+				return false;
+			if(findTargetFromChain(chain,action.getSrc())==true)	//源已经在链上，不可用
+				return false;
+		}
 		
 		site.addChainCost(cost);
 		return true;
 	}
-	
+	public static Boolean findTargetFromChain(CardActionChainBean chain,int targetID){
+		for(CardActionBean action :chain.values()){
+			if(action.getSrc()==targetID)
+				return true;
+		}
+		return false;
+	}
 	private static int getActionCost(CardActionBean action){
 		CardInfoBean cardInfo = CardInfoStoreBean.GetInstance().getCardInfo(action.getSrc());
 		if(cardInfo==null)

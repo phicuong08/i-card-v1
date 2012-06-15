@@ -91,10 +91,14 @@ public class BattleBsn
 	}
 	
 	public static void procBattleChain(CardGameBean game,ICardExtension ext){
-		CardActionChainBean actionChain = game.getBattleChain();
-		if(actionChain.getActionChain().size()==0)
+		Vector<CardActionBean> chain = game.getBattleChain().getActionChain();
+
+		if(chain.size()==0)
 			return;
-		
+		for(int i= chain.size()-1;i>=0;i--){
+			CardActionBean action = chain.get(i);
+			CardActionBsn.procAction(game,action);
+		}
 	}
 	public static void procLoopEnd(CardGameBean game,ICardExtension ext){//
 		int nextOp = getOtherPlayer(game,game.getOpPlayer());
