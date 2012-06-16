@@ -95,6 +95,9 @@ public class CardBean
 		}
 		return retType;
 	}
+	public CardInfoBean getInfo(){
+		return _info;
+	}
 	public int getRealID() {
 		return _realID;
 	}
