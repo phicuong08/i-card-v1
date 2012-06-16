@@ -54,34 +54,46 @@ public class CardActionBsn
 			return false;
 		if(site.getRemainRes()<cost)
 			return false;
-		CardActionChainBean chain = game.getBattleChain();
+		Vector<CardActionBean> chain = game.getBattleChain().getActionChain();
 		if(chain.size()!=0){
 			if(action.getDes().size()!=1)
 				return false;
-			for(CardActionBean a1 :chain.values()){ //卡片在链上
-				if(a1.getSrc()==action.getSrc())
-					return false;
-			}
-			
+			if(cardAlreadyInChain(chain,action.getSrc()))
+				return false;
 			int targetID= action.getDes().get(0);
-			CardActionBean topAction = chain.getChainTop();
+			CardActionBean topAction = chain.lastElement();
 			if(findActionTarget(topAction,targetID)==false)
 				return false;
+			CardInfoBean cardInfo = game.getCardInfo(action.getSrc());
+			if(action.getType()!=CardActionBean.DO_CARD_2_TURN &&  //仅法术卡和英雄翻转才可进战斗链
+			    action.getType()!=CardActionBean.DO_CARD_2_USE)
+				return false;
+			if(cardInfo.getType()!= CardInfoBean.HERO &&
+			   cardInfo.getType()!=CardInfoBean.SKILL &&
+			   cardInfo.getType()!=CardInfoBean.SOLDIER)
+				return false;
 		}
-		
-		site.addChainCost(cost);
 		return true;
+	}
+	private static boolean cardAlreadyInChain(Vector<CardActionBean> chain,int srcID){
+		for(int i=0;i<chain.size();i++){
+			CardActionBean a1 = (CardActionBean)chain.get(i);
+			if(a1.getSrc()==srcID)
+				return true;
+		}
+		return false;
 	}
 	private static boolean findActionTarget(CardActionBean desCard,int targetID){
 		if(desCard.getSrc()==targetID)
-			return;
-		for(Integer id :desCard.getDes().values()){
-			if( id == targetID)
+			return true;
+		Vector<Integer> desVect = desCard.getDes();
+		for(int i=0;i<desVect.size();i++){
+			if(desVect.get(i)==targetID)
 				return true;
-		}	
+		}
 		return false;
 	}
-	private static int getActionCost(CardActionBean action){
+	public static int getActionCost(CardActionBean action){
 		CardInfoBean cardInfo = CardInfoStoreBean.GetInstance().getCardInfo(action.getSrc());
 		if(cardInfo==null)
 			return 911; //极大值

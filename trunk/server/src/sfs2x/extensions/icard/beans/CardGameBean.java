@@ -148,6 +148,14 @@ public class CardGameBean
 		}
 		return 0;
 	}
+	public CardInfoBean getCardInfo(int realID){
+		for(CardSiteBean site:_sites.values()){
+			CardBean card = site.getCardMap().get(realID);
+			if(card!=null)
+				return card.getInfo();
+		}
+		return null;
+	}
 	public BattleStateBean getStateBean(){
 		return _StateBean;
 	}
@@ -162,7 +170,6 @@ public class CardGameBean
 	public void setStarted(boolean started) {
 		this._started = started;
 	}
-
 	/* PUBLIC METHODS */
 
 	/**
