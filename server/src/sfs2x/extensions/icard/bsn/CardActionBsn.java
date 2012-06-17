@@ -127,6 +127,7 @@ public class CardActionBsn
 		case CardActionBean.DO_CARD_2_ATK:
 			break;
 		case CardActionBean.DO_CARD_2_DEF:
+			procCard2Def(game,site,card,action);
 			break;
 		case CardActionBean.DO_CARD_2_EQUIPSLOT:
 			procCard2EquipSlot(site,card);
@@ -145,11 +146,50 @@ public class CardActionBsn
 			break;		
 		}
 	}
+	public static boolean IsFriendAction(CardGameBean game,CardActionBean action){
+		if(action.getDes().size()==0)
+			return true;
+		int desID = action.getDes().get(0);
+		return (game.getCardOwner(desID) == action.getPlayerID());
+		
+	}
+	private static void procCard2Def(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
+
+		CardUseBean useInfo = CardUseStoreBean.GetInstance().getCardUse(card.getCardID());
+		if(useInfo==null)
+			return;
+		int inc =0;
+		for(Integer realID:action.getDes()){
+			if(inc >= useInfo.getTargetNum())
+				break;
+			CardInfoBean cardInfo = game.getCardInfo(realID);
+			if(IsMatchUse(game,action,cardInfo,useInfo)==false)
+				continue;
+			
+			inc++;
+		}
+	}
+	
+	public static boolean IsMatchUse(CardGameBean game,CardActionBean action,
+										CardInfoBean cardInfo,CardUseBean useInfo){
+		boolean IsFriend = IsFriendAction(game,action);
+		boolean IsMatch = false;
+		switch(cardInfo.getType()){
+		case CardInfoBean.HERO:
+			IsMatch = (IsFriend==true)? useInfo.getMyHero()>0:useInfo.getYourHero()>0 ;
+			break;
+		case CardInfoBean.SOLDIER:
+			IsMatch = (IsFriend==true)? useInfo.getMySoldier()>0:useInfo.getYourSoldier()>0 ;
+			break;	
+		}
+		return IsMatch;
+	}
+	
 	private static void procCard2Use(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
 		if(CardSiteBsn.getResNum(site)< card.getUseCost())
 			return;
 		CardSiteBsn.useRes(site,card.getCost());
-		game.getBattleChain().PushAction(action);	
+	//	game.getBattleChain().PushAction(action);	
 	}
 	private static void procCard2Turn(CardSiteBean site,CardBean card){
 		if(CardSiteBsn.getResNum(site)< card.getUseCost())
