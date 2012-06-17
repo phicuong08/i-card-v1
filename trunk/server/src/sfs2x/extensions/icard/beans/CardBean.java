@@ -42,7 +42,7 @@ public class CardBean
 	private int _addHp;
 	private int _dirtyFlag=0;
 	private CardInfoBean _info;
-	
+	private BufferStoreBean _bufStore;
 	public CardBean(int realID, int cardID,int slotID)
 	{
 		_realID = realID;
@@ -51,9 +51,12 @@ public class CardBean
 		setDirtyFlagBit(SLOT_DIRTY_BIT);
 		setDirtyFlagBit(CARDID_DIRTY_BIT);
 		_info = CardInfoStoreBean.GetInstance().getCardInfo(cardID);
+		_bufStore = new BufferStoreBean();
 	}
-	
 	/* GETTERS & SETTERS */
+	public BufferStoreBean getBufStore(){
+		return _bufStore;
+	}
 	public int getCardID() {
 		return _cardID;
 	}

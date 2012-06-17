@@ -25,6 +25,7 @@ public class CardSiteBean
 	private User _sfsUser=null;
 	private int _chainCost=0;
 	private Boolean _addResAble = false;
+
 	public CardSiteBean(int player,User sfsUser) {
 		_playerID = player;
 		_sfsUser = sfsUser;
@@ -82,6 +83,12 @@ public class CardSiteBean
 		if(_drawCardSrc.isEmpty())
 			return 0;
 		return _drawCardSrc.remove(0);
+	}
+	public CardInfoBean getInfo(int id){
+		CardBean card = _cardMap.get(id);
+		if(card==null)
+			return null;
+		return card.getInfo();
 	}
 	public void gameTick(CardGameBean game,ICardExtension ext){
 		
