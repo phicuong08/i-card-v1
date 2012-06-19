@@ -32,7 +32,7 @@ public class BufferBsn
 	public static void AddBuf(CardGameBean game,int desID,int type,int src,int val,int loopNum){
 		CardBean card = game.getCard(desID);
 		if(card==null)
-			return false;
+			return;
 		card.getBufStore().AddBuf(type,src,val,loopNum);
 	}
 }

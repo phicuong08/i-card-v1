@@ -3,6 +3,7 @@ package sfs2x.extensions.icard.beans;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 
 import com.icard.data.excel.ExcelReader;
 
@@ -34,7 +35,7 @@ public class CardAbilityStoreBean {
 				int Id = Integer.parseInt(rowData.get("ID")); // ÅÆµÄid
 				String whenInfo = (rowData.get("WHEN")==null||rowData.get("WHEN").isEmpty())?"":rowData.get("WHEN"); // 
 				String whatInfo = (rowData.get("WHAT")==null||rowData.get("WHAT").isEmpty())?"":rowData.get("WHAT"); //
-				int val = (rowData.get("VAL")==null||rowData.get("VAL").isEmpty())?"":rowData.get("VAL"); //
+				int val = (rowData.get("VAL")==null||rowData.get("VAL").isEmpty())?0 :Integer.parseInt(rowData.get("VAL")); //
 				String op = (rowData.get("OP")==null||rowData.get("OP").isEmpty())?"":rowData.get("OP");//
 				AddAbilityInfo(Id,whenInfo,whatInfo,val,op);
 			}
@@ -50,13 +51,13 @@ public class CardAbilityStoreBean {
 				break;
 			vec.add(ability);
 			pos++;	
-		}
+		}while(true);
 		return vec;
 	}
 	private void AddAbilityInfo(int id,String whenInfo,String whatInfo,int val,String op){
-		CardAbilityBean ability = new CardAbilityBean(Id,  ParseWhenInfo(whenInfo),ParseWhatInfo(whatInfo),
+		CardAbilityBean ability = new CardAbilityBean(id,  ParseWhenInfo(whenInfo),ParseWhatInfo(whatInfo),
 						  						val,  ParseOpInfo(op));
-		_abilityInfoMap.put(Id, ability);
+		_abilityInfoMap.put(id, ability);
 	}
 	private int ParseOpInfo(String op){
 		if(op=="OP_OR")

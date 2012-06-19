@@ -10,14 +10,6 @@ import sfs2x.extensions.icard.utils.Constants;
  */
 public class CardBean
 {
-	public final static int HERO = 0;
-	public final static int SOLDIER = 1;
-	public final static int WEAPON = 2;
-	public final static int DEF = 3;
-	public final static int SKILL = 4;
-	public final static int TASK = 5;
-	
-	
 	public final static int HAND_SLOT_ID = 1;
 	public final static int RES_SLOT_ID = 2;
 	public final static int EQUIP_SLOT_ID = 3;
@@ -71,32 +63,9 @@ public class CardBean
 		_cardID = id;
 	}
 	public int getCardType(){
-		int typeId = _cardID/1000;
-		int retType = 0;
-		switch(typeId)
-		{
-			case 30:
-				retType = WEAPON;
-				break;
-			case 31:
-				retType = DEF;
-				break;
-			case 21:
-			case 22:
-			case 23:
-				retType = SOLDIER;
-				break;
-			case 20:
-				retType = HERO;
-				break;
-			case 50:
-				retType = SKILL;
-				break;
-			case 40:
-				retType = TASK;
-				break;
-		}
-		return retType;
+		if(_info!=null)
+			return _info.getType();
+		return 0;
 	}
 	public CardInfoBean getInfo(){
 		return _info;
