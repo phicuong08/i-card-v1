@@ -120,14 +120,18 @@ public class CardActionBsn
 		CardSiteBean site = game.getSites().get(action.getPlayerID());
 		if(site==null)
 			return;
-		CardBean card = site.getCardMap().get(action.getSrc());
+		CardBean card = game.getCard(action.getSrc());
 		if(card==null)
 			return;
 		switch(action.getType()){
 		case CardActionBean.DO_CARD_2_ATK:
+			procCard2Atk(game,card,action);
 			break;
-		case CardActionBean.DO_CARD_2_DEF:
-			procCard2Def(game,site,card,action);
+		case CardActionBean.DO_EQUIP_2_USE:
+			procEquip2Use(game,card,action);
+			break;	
+		case CardActionBean.DO_WEAPON_2_USE:
+			procWeapon2Use(game,card,action);
 			break;
 		case CardActionBean.DO_CARD_2_EQUIPSLOT:
 			procCard2EquipSlot(site,card);
@@ -141,6 +145,9 @@ public class CardActionBsn
 		case CardActionBean.DO_CARD_2_TURN:
 			procCard2Turn(site,card);
 			break;	
+		case CardActionBean.DO_CARD_2_GUIDE:
+			procCard2Guide(site,card);
+			break;	
 		case CardActionBean.DO_CARD_2_USE:
 			procCard2Use(game,site,card,action);
 			break;		
@@ -153,28 +160,40 @@ public class CardActionBsn
 		return (game.getCardOwner(desID) == action.getPlayerID());
 		
 	}
-	private static void procCard2Def(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
-
-		CardUseBean useInfo = CardUseStoreBean.GetInstance().getCardUse(card.getCardID());
-		if(useInfo==null)
-			return;
-		int inc =0;
-		for(Integer realID:action.getDes()){
-			if(inc >= useInfo.getTargetNum())
-				break;
-			CardInfoBean cardInfo = game.getCardInfo(realID);
-			if(IsMatchUse(game,action,cardInfo,useInfo)==false)
-				continue;
-			
-			inc++;
-		}
+	private static boolean procCard2Atk(CardGameBean game,CardBean card,CardActionBean action){
+		
+		return true;
+	}
+	private static boolean procWeapon2Use(CardGameBean game,CardBean card,CardActionBean action){
+		CardInfoBean cardInfo = card.getInfo();
+		if(IsMatchUse(game,action,card)==false)
+			return false;
+		int desID = action.getDes().get(0);	
+		return true;
+	}
+	private static boolean procEquip2Use(CardGameBean game,CardBean card,CardActionBean action){
+		CardInfoBean cardInfo = card.getInfo();
+		if(IsMatchUse(game,action,card)==false)
+			return false;
+		int desID = action.getDes().get(0);
+		BufferBsn.AddBuf(game,desID,BufferBean.TYPE_DEF_ADD,card.getRealID(),card.getDef(),1);
+		return true;
 	}
 	
 	public static boolean IsMatchUse(CardGameBean game,CardActionBean action,
-										CardInfoBean cardInfo,CardUseBean useInfo){
+										CardBean card){
+		if(card.getSide()>0)
+			return false;								
+		CardUseBean useInfo = CardUseStoreBean.GetInstance().getCardUse(card.getCardID());
+		if(useInfo==null)
+			return false;
+		if(action.getDes().size()==0)
+			return false;
+		if(action.getDes().size()> useInfo.getTargetNum())
+			return false;
 		boolean IsFriend = IsFriendAction(game,action);
 		boolean IsMatch = false;
-		switch(cardInfo.getType()){
+		switch(card.getType()){
 		case CardInfoBean.HERO:
 			IsMatch = (IsFriend==true)? useInfo.getMyHero()>0:useInfo.getYourHero()>0 ;
 			break;

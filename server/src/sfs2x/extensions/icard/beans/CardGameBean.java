@@ -148,6 +148,14 @@ public class CardGameBean
 		}
 		return 0;
 	}
+	public CardBean getCard(int realID){
+		for(CardSiteBean site:_sites.values()){
+			CardBean card = site.getCardMap().get(realID);
+			if(card!=null)
+				return card;
+		}
+		return null;	
+	}
 	public CardInfoBean getCardInfo(int realID){
 		for(CardSiteBean site:_sites.values()){
 			CardBean card = site.getCardMap().get(realID);
