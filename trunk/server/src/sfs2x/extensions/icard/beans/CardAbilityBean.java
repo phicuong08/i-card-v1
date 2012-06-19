@@ -40,6 +40,7 @@ public class CardAbilityBean
 	public static final int BUF_SHIELD                 =10; //吸收伤害
 	public static final int BUF_UNABLE                 =11; //无法执行
 	public static final int BUF_COST_ADD               =12; //费用增加
+	public static final int BUF_DEF_ADD                =13; //
 	
 	public static final int DO_NULL           =100;  //
 	public static final int DO_KILL_SKILL     =101;  //消灭技能

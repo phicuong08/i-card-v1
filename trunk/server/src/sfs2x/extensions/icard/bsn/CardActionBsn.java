@@ -8,6 +8,7 @@ import java.util.Vector;
 import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.CardActionBean;
 
+import sfs2x.extensions.icard.beans.CardAbilityBean;
 import sfs2x.extensions.icard.beans.CardActionChainBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
@@ -146,7 +147,7 @@ public class CardActionBsn
 			procCard2Turn(site,card);
 			break;	
 		case CardActionBean.DO_CARD_2_GUIDE:
-			procCard2Guide(site,card);
+			//procCard2Guide(site,card);
 			break;	
 		case CardActionBean.DO_CARD_2_USE:
 			procCard2Use(game,site,card,action);
@@ -176,7 +177,7 @@ public class CardActionBsn
 		if(IsMatchUse(game,action,card)==false)
 			return false;
 		int desID = action.getDes().get(0);
-		BufferBsn.AddBuf(game,desID,BufferBean.TYPE_DEF_ADD,card.getRealID(),card.getDef(),1);
+		BufferBsn.AddBuf(game,desID,CardAbilityBean.BUF_DEF_ADD,card.getRealID(),card.getDef(),1);
 		return true;
 	}
 	
@@ -193,7 +194,7 @@ public class CardActionBsn
 			return false;
 		boolean IsFriend = IsFriendAction(game,action);
 		boolean IsMatch = false;
-		switch(card.getType()){
+		switch(card.getCardType()){
 		case CardInfoBean.HERO:
 			IsMatch = (IsFriend==true)? useInfo.getMyHero()>0:useInfo.getYourHero()>0 ;
 			break;
@@ -230,7 +231,7 @@ public class CardActionBsn
 	}
 	private static void procCard2Res(CardSiteBean site,CardBean card){
 		site.setAddResAble(false);
-		if(card.getCardType() !=CardBean.TASK)
+		if(card.getCardType() !=CardInfoBean.TASK)
 			card.setCardID(Constants.BACK_CARD_ID);
 		card.setSlotID(CardBean.RES_SLOT_ID);
 		card.setSide(0);
