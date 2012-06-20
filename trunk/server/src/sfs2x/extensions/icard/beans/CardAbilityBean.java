@@ -35,12 +35,16 @@ public class CardAbilityBean
 	public static final int BUF_DEF_UNABLE             =5;  //无法防御
 	public static final int BUF_DIST_WEAPON_ATK_ADD    =6;  //远程武器攻击力增加
 	public static final int BUF_GUIDE                  =7;  //护卫能力
-	public static final int BUF_HIDDEN                 =8;  //潜行
+	public static final int BUF_HIDDEN                 =8;  //隐遁
 	public static final int BUF_POINT_UNABLE           =9;  //不可指定
 	public static final int BUF_SHIELD                 =10; //吸收伤害
 	public static final int BUF_UNABLE                 =11; //无法执行
 	public static final int BUF_COST_ADD               =12; //费用增加
 	public static final int BUF_DEF_ADD                =13; //
+	public static final int BUF_SIDE                   =14; //
+	public static final int BUF_HEAL                   =15; //
+	public static final int BUF_CURE                   =16; //受到攻击时伤害增加
+	public static final int BUF_LATENT                 =17; //潜行
 	
 	public static final int DO_NULL           =100;  //
 	public static final int DO_KILL_SKILL     =101;  //消灭技能
@@ -53,7 +57,9 @@ public class CardAbilityBean
 	public static final int DO_DROP_RES       =108;  //弃资源
 	public static final int DO_DROP_HAND_CARD =109;  //弃手牌
 	public static final int DO_HEAL           =110;  //治疗
-	
+	public static final int DO_DAMAGE         =111;  //治疗
+	public static final int DO_ATK_SIDE_ADD   =112;  //攻击横置时加伤害
+
 	public static final int OP_OR             =1;
 	public static final int OP_AND            =2;
 	

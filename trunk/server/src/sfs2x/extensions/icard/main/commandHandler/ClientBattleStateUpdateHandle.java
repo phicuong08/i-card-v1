@@ -23,6 +23,7 @@ public class ClientBattleStateUpdateHandle extends ICardClientRequestHandler {
 		//SFSExtension this.getParentExtension()
 		CardGameBean newGame = GameBsn.CreateVSAIGame();
 		
+		CardAbilityStoreBean.GetInstance();
 		if(newGame!=null)
 		{
 			Integer ai=0;
