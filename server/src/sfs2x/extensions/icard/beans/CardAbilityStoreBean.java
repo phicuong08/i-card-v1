@@ -91,6 +91,14 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.BUF_UNABLE;
 		else if(whatInfo=="BUF_COST_ADD")
 			return CardAbilityBean.BUF_COST_ADD;	
+		else if(whatInfo=="BUF_SIDE")
+			return CardAbilityBean.BUF_SIDE;
+		else if(whatInfo=="BUF_HEAL")
+			return CardAbilityBean.BUF_HEAL;
+		else if(whatInfo=="BUF_CURE")
+			return CardAbilityBean.BUF_CURE;		
+		else if(whatInfo=="BUF_LATENT")
+			return CardAbilityBean.BUF_LATENT;		
 		else if(whatInfo=="DO_KILL_SKILL")
 			return CardAbilityBean.DO_KILL_SKILL;
 		else if(whatInfo=="DO_DEAD")
@@ -110,7 +118,11 @@ public class CardAbilityStoreBean {
 		else if(whatInfo=="DO_DROP_HAND_CARD")
 			return CardAbilityBean.DO_DROP_HAND_CARD;	
 		else if(whatInfo=="DO_HEAL")
-			return CardAbilityBean.DO_HEAL;											
+			return CardAbilityBean.DO_HEAL;	
+		else if(whatInfo=="DO_DAMAGE")
+			return CardAbilityBean.DO_DAMAGE;
+		else if(whatInfo=="DO_ATK_SIDE_ADD")
+			return CardAbilityBean.DO_ATK_SIDE_ADD;	
 		return CardAbilityBean.DO_NULL;	 	
 	}
 	private int ParseWhenInfo(String whenInfo){
