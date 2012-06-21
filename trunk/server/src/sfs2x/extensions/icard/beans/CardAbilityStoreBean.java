@@ -98,7 +98,13 @@ public class CardAbilityStoreBean {
 		else if(whatInfo=="BUF_CURE")
 			return CardAbilityBean.BUF_CURE;		
 		else if(whatInfo=="BUF_LATENT")
-			return CardAbilityBean.BUF_LATENT;		
+			return CardAbilityBean.BUF_LATENT;
+		else if(whatInfo=="BUF_ATK_WITH_EQUIP")
+			return CardAbilityBean.BUF_ATK_WITH_EQUIP;	
+		else if(whatInfo=="BUF_HP_WITH_EQUIP")
+			return CardAbilityBean.BUF_HP_WITH_EQUIP;		
+		else if(whatInfo=="BUF_STRIKE_DAMAGE_ADD")
+			return CardAbilityBean.BUF_STRIKE_DAMAGE_ADD;										
 		else if(whatInfo=="DO_KILL_SKILL")
 			return CardAbilityBean.DO_KILL_SKILL;
 		else if(whatInfo=="DO_DEAD")
