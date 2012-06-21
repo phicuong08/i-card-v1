@@ -16,7 +16,6 @@ public class CardAbilityBean
 
 
 
-WHEN_SACRIFICE
 
 	public static final int WHEN_NULL=0;
 	public static final int WHEN_USE =1; //横置,使用 
@@ -27,11 +26,10 @@ WHEN_SACRIFICE
 	public static final int WHEN_ENTER =7; //进场
 	public static final int WHEN_DEAD =8; //牌被消灭时
 	public static final int WHEN_DEF_DEAD =9; //牌防御被消灭时
-	public static final int WHEN_USE=10;//使用武器
 	public static final int WHEN_USE_SKILL =11; //使用技能
 	public static final int WHEN_SACRIFICE=12;      //牺牲时	
 	public static final int WHEN_MY_LOOP_BEGIN=13;
-  public static final int WHEN_MY_LOOP_END=14;
+	public static final int WHEN_MY_LOOP_END=14;
 	
 	public static final int BUF_ATK_DIST          =1;   //远程
 	public static final int BUF_ATK_WITH_EQUIP    =2;   //每装备则攻击增加
@@ -49,7 +47,9 @@ WHEN_SACRIFICE
 	public static final int BUF_STRIKE_COST_ADD   =14;  //武器打击费用增加
 	public static final int BUF_STRIKE_DAMAGE_ADD =15;  //武器打击伤害增加
 	public static final int BUF_POINT_UNABLE      =16;  //不可指定
-
+	public static final int BUF_DEF_ADD           =17;   //
+	public static final int BUF_DEF_UNABLE        =18;  //无法防御
+	
 	public static final int WHICH_NULL                 =0;  
 	public static final int WHICH_MY                   =1;  //我方
 	public static final int WHICH_MYHERO               =2;  //我方英雄
@@ -82,20 +82,30 @@ WHEN_SACRIFICE
 	public static final int OP_OR             =1;
 	public static final int OP_AND            =2;
 	
+	public static final int LOOP_ONE          =1;
+	public static final int LOOP_ALL          =2;
+	public static final int LOOP_MY           =3;
+	
 	private int _id;
 	private int _when;
 	private int _which;
 	private int _type;
 	private int _val;
 	private int _op;
-	
-	public CardAbilityBean(int id,int when,int which,int type,int val,int op){
+	private int _cost;
+	private int _loopType;
+	private int _targetNum;
+
+	public CardAbilityBean(int id,int when,int which,int type,int val,int op,int cost,int loopType,int tarNum){
 		_id = id;
 		_when = when;
-		_which; = which;
+		_which = which;
 		_type = type;
 		_val = val;
 		_op = op;
+		_cost = cost;
+		_loopType = loopType;
+		_targetNum=tarNum;
 	}
 	public int getID(){
 		return _id;
@@ -112,4 +122,17 @@ WHEN_SACRIFICE
 	public int getOP(){
 		return _op;
 	}
+	public int getCost(){
+		return _cost;
+	}
+	public int getLoopType(){
+		return _loopType;
+	}
+	public int getTargetNum(){
+		return _targetNum;
+	}
+	public int getWhich(){
+		return _which;
+	}
 }
+
