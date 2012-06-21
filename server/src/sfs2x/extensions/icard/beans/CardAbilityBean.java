@@ -27,6 +27,7 @@ public class CardAbilityBean
 	public static final int WHEN_USE_WEAPON=13;//使用武器
 	public static final int WHEN_RESET=14;     //重置时
 	public static final int WHEN_SIDE=15;      //横置时
+	public static final int WHEN_SACRIFICE=16;      //牺牲时
 	
 	public static final int BUF_ATK_UNABLE             =1;  //无法攻击
 	public static final int BUF_ATK_ADD                =2;  //攻击力增加
@@ -45,13 +46,16 @@ public class CardAbilityBean
 	public static final int BUF_HEAL                   =15; //
 	public static final int BUF_CURE                   =16; //受到攻击时伤害增加
 	public static final int BUF_LATENT                 =17; //潜行
+	public static final int BUF_ATK_WITH_EQUIP         =18; //每装备则攻击增加
+	public static final int BUF_HP_WITH_EQUIP          =19; //每装备则生命增加
+	public static final int BUF_STRIKE_COST_ADD        =20; //武器打击费用增加
+	public static final int BUF_STRIKE_DAMAGE_ADD      =21; //武器打击伤害增加
 	
 	public static final int DO_NULL           =100;  //
 	public static final int DO_KILL_SKILL     =101;  //消灭技能
 	public static final int DO_DEAD           =102;  //消灭牌
 	public static final int DO_KILL_WEAPON    =103;  //消灭武器
-	public static final int DO_RESET_HERO     =104;  //重置英雄
-	public static final int DO_RESET_WEAPON   =105;  //重置武器
+	public static final int DO_RESET     =104;       //重置
 	public static final int DO_DRAW_CARD      =106;  //抓牌
 	public static final int DO_BREAK_SKILL    =107;  //打断技能
 	public static final int DO_DROP_RES       =108;  //弃资源
@@ -59,7 +63,9 @@ public class CardAbilityBean
 	public static final int DO_HEAL           =110;  //治疗
 	public static final int DO_DAMAGE         =111;  //治疗
 	public static final int DO_ATK_SIDE_ADD   =112;  //攻击横置时加伤害
-
+	public static final int DO_KILL_COST_DOWN =113;  //消灭费用少于
+	public static final int DO_KILL_COST_UP   =114;  //消灭费用大于
+	
 	public static final int OP_OR             =1;
 	public static final int OP_AND            =2;
 	
