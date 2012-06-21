@@ -54,9 +54,9 @@ public class CardAbilityStoreBean {
 		}while(true);
 		return vec;
 	}
-	private void AddAbilityInfo(int id,String whenInfo,String whatInfo,int val,String op){
-		CardAbilityBean ability = new CardAbilityBean(id,  ParseWhenInfo(whenInfo),ParseWhatInfo(whatInfo),
-						  						val,  ParseOpInfo(op));
+	private void AddAbilityInfo(int id,String whenInfo,String whichInfo,String whatInfo,int val,String op){
+		CardAbilityBean ability = new CardAbilityBean(id,  ParseWhenInfo(whenInfo),ParseWhichInfo(whichInfo),
+																									ParseWhatInfo(whatInfo),val,ParseOpInfo(op));
 		_abilityInfoMap.put(id, ability);
 	}
 	private int ParseOpInfo(String op){
@@ -65,6 +65,33 @@ public class CardAbilityStoreBean {
 		else if(op=="OP_AND")
 			return CardAbilityBean.OP_AND;
 		return 	CardAbilityBean.OP_OR;
+	}
+	private int ParseWhichInfo(String which){
+		if(which=="WHICH_MY")
+			return CardAbilityBean.WHICH_MY;
+		else if(which=="WHICH_MYHERO")
+			return CardAbilityBean.WHICH_MYHERO;
+		else if(which=="WHICH_MYSOLDIER")
+			return CardAbilityBean.WHICH_MYSOLDIER;
+		else if(which=="WHICH_MYWEAPON")
+			return CardAbilityBean.WHICH_MYWEAPON;
+		else if(which=="WHICH_YOUR")
+			return CardAbilityBean.WHICH_YOUR;
+		else if(which=="WHICH_YOURHERO")
+			return CardAbilityBean.WHICH_YOURHERO;
+		else if(which=="WHICH_YOURSOLDIER")
+			return CardAbilityBean.WHICH_YOURSOLDIER;
+		else if(which=="WHICH_YOURWEAPON")
+			return CardAbilityBean.WHICH_YOURWEAPON;
+		else if(which=="WHICH_SKILL")
+			return CardAbilityBean.WHICH_SKILL;
+		else if(which=="WHICH_DES")
+			return CardAbilityBean.WHICH_DES;
+		else if(which=="WHICH_SRC")
+			return CardAbilityBean.WHICH_SRC;
+		else if(which=="WHICH_I")
+			return CardAbilityBean.WHICH_I;
+		return 	CardAbilityBean.WHICH_NULL;
 	}
 	private int ParseWhatInfo(String whatInfo){
 		if(whatInfo=="BUF_ATK_UNABLE")
@@ -104,31 +131,33 @@ public class CardAbilityStoreBean {
 		else if(whatInfo=="BUF_HP_WITH_EQUIP")
 			return CardAbilityBean.BUF_HP_WITH_EQUIP;		
 		else if(whatInfo=="BUF_STRIKE_DAMAGE_ADD")
-			return CardAbilityBean.BUF_STRIKE_DAMAGE_ADD;										
-		else if(whatInfo=="DO_KILL_SKILL")
-			return CardAbilityBean.DO_KILL_SKILL;
-		else if(whatInfo=="DO_DEAD")
-			return CardAbilityBean.DO_DEAD;
-		else if(whatInfo=="DO_KILL_WEAPON")
-			return CardAbilityBean.DO_KILL_WEAPON;
-		else if(whatInfo=="DO_RESET_HERO")
-			return CardAbilityBean.DO_RESET_HERO;
-		else if(whatInfo=="DO_RESET_WEAPON")
-			return CardAbilityBean.DO_RESET_WEAPON;
-		else if(whatInfo=="DO_DRAW_CARD")
-			return CardAbilityBean.DO_DRAW_CARD;		
+			return CardAbilityBean.BUF_STRIKE_DAMAGE_ADD;	
+			
+												
+		else if(whatInfo=="DO_ATK_SIDE_ADD")
+			return CardAbilityBean.DO_ATK_SIDE_ADD;
 		else if(whatInfo=="DO_BREAK_SKILL")
-			return CardAbilityBean.DO_BREAK_SKILL;		
-		else if(whatInfo=="DO_DROP_RES")
-			return CardAbilityBean.DO_DROP_RES;		
+			return CardAbilityBean.DO_BREAK_SKILL;
 		else if(whatInfo=="DO_DROP_HAND_CARD")
-			return CardAbilityBean.DO_DROP_HAND_CARD;	
-		else if(whatInfo=="DO_HEAL")
-			return CardAbilityBean.DO_HEAL;	
+			return CardAbilityBean.DO_DROP_HAND_CARD;
+		else if(whatInfo=="DO_DROP_RES")
+			return CardAbilityBean.DO_DROP_RES;
 		else if(whatInfo=="DO_DAMAGE")
 			return CardAbilityBean.DO_DAMAGE;
-		else if(whatInfo=="DO_ATK_SIDE_ADD")
-			return CardAbilityBean.DO_ATK_SIDE_ADD;	
+		else if(whatInfo=="DO_DEAD")
+			return CardAbilityBean.DO_DEAD;		
+		else if(whatInfo=="DO_HEAL")
+			return CardAbilityBean.DO_HEAL;		
+		else if(whatInfo=="DO_KILL")
+			return CardAbilityBean.DO_KILL;		
+		else if(whatInfo=="DO_KILL_COST_UP")
+			return CardAbilityBean.DO_KILL_COST_UP;	
+		else if(whatInfo=="DO_KILL_COST_DOWN")
+			return CardAbilityBean.DO_KILL_COST_DOWN;	
+		else if(whatInfo=="DO_RESET")
+			return CardAbilityBean.DO_RESET;
+		else if(whatInfo=="DO_SIDE")
+			return CardAbilityBean.DO_SIDE;	
 		return CardAbilityBean.DO_NULL;	 	
 	}
 	private int ParseWhenInfo(String whenInfo){
@@ -136,32 +165,28 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.WHEN_USE;
 		else if(whenInfo=="WHEN_ALL")
 			return CardAbilityBean.WHEN_ALL;
-		else if(whenInfo=="WHEN_ENTER")
-			return CardAbilityBean.WHEN_ENTER;
 		else if(whenInfo=="WHEN_ATK")
 			return CardAbilityBean.WHEN_ATK;
-		else if(whenInfo=="WHEN_ATK_SIDE")
-			return CardAbilityBean.WHEN_ATK_SIDE;
-		else if(whenInfo=="WHEN_ATK_HERO_DAMAGE")
-			return CardAbilityBean.WHEN_ATK_HERO_DAMAGE;
+		else if(whenInfo=="WHEN_ATKED")
+			return CardAbilityBean.WHEN_ATKED;
 		else if(whenInfo=="WHEN_ATK_DAMAGE")
 			return CardAbilityBean.WHEN_ATK_DAMAGE;
-		else if(whenInfo=="WHEN_MY_LOOP_BEGIN")
-			return CardAbilityBean.WHEN_MY_LOOP_BEGIN;
-		else if(whenInfo=="WHEN_USE_SKILL")
-			return CardAbilityBean.WHEN_USE_SKILL;
+		else if(whenInfo=="WHEN_ENTER")
+			return CardAbilityBean.WHEN_ENTER;
 		else if(whenInfo=="WHEN_DEAD")
 			return CardAbilityBean.WHEN_DEAD;
 		else if(whenInfo=="WHEN_DEF_DEAD")
 			return CardAbilityBean.WHEN_DEF_DEAD;
-		else if(whenInfo=="WHEN_ATKED")
-			return CardAbilityBean.WHEN_ATKED;
-		else if(whenInfo=="WHEN_USE_WEAPON")
-			return CardAbilityBean.WHEN_USE_WEAPON;
-		else if(whenInfo=="WHEN_RESET")
-			return CardAbilityBean.WHEN_RESET;
-		else if(whenInfo=="WHEN_SIDE")
-			return CardAbilityBean.WHEN_SIDE;
+		else if(whenInfo=="WHEN_USE")
+			return CardAbilityBean.WHEN_USE;
+		else if(whenInfo=="WHEN_USE_SKILL")
+			return CardAbilityBean.WHEN_USE_SKILL;
+		else if(whenInfo=="WHEN_SACRIFICE")
+			return CardAbilityBean.WHEN_SACRIFICE;
+		else if(whenInfo=="WHEN_MY_LOOP_BEGIN")
+			return CardAbilityBean.WHEN_MY_LOOP_BEGIN;
+		else if(whenInfo=="WHEN_MY_LOOP_END")
+			return CardAbilityBean.WHEN_MY_LOOP_END;
 		return CardAbilityBean.WHEN_NULL;											
 	}
 }
