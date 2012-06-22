@@ -6,8 +6,6 @@ import java.util.List;
 
 import sfs2x.extensions.icard.main.ParentExtension;
 import sfs2x.extensions.icard.utils.Commands;
-
-import com.icard.cards.BaseCard;
 import com.icard.user.CardUser;
 import com.icard.user.CardUserManager;
 import com.smartfoxserver.v2.entities.User;
@@ -67,48 +65,28 @@ public class CardDesktop {
 		ISFSObject params = new SFSObject ();
 		SFSArray  cards = new SFSArray  ();
 		for(CardSite site :sites){
-			List<BaseCard> pickedCards = site.pickCard(7);
-			for(BaseCard pickedCard :pickedCards){
-				ISFSObject card = new SFSObject ();
-				card.putInt("playerID", site.belongUserID);
-				card.putInt("realID", pickedCard.getRealId());
-				card.putInt("cardID", pickedCard.getCardInfo().getId());
-				cards.addSFSObject(card);
-			}
+//			List<BaseCard> pickedCards = site.pickCard(7);
+//			for(BaseCard pickedCard :pickedCards){
+//				ISFSObject card = new SFSObject ();
+//				card.putInt("playerID", site.belongUserID);
+//				card.putInt("realID", pickedCard.getRealId());
+//				card.putInt("cardID", pickedCard.getCardInfo().getId());
+//				cards.addSFSObject(card);
+//			}
 		}
-		params.putSFSArray("card", cards);
-		params.putInt("me", roomOwner.getId());
-		params.putInt("you", this.player.getId());
-		ParentExtension.getInstance().send(Commands.CMD_S2C_GAME_START, params, this.allSFSPlayerMap.get(roomOwner.getId()));
-		
-		params.putInt("me", player.getId());
-		params.putInt("you", this.roomOwner.getId());
-		ParentExtension.getInstance().send(Commands.CMD_S2C_GAME_START, params, this.allSFSPlayerMap.get(player.getId()));
+//		params.putSFSArray("card", cards);
+//		params.putInt("me", roomOwner.getId());
+//		params.putInt("you", this.player.getId());
+//		ParentExtension.getInstance().send(Commands.CMD_S2C_GAME_START, params, this.allSFSPlayerMap.get(roomOwner.getId()));
+//		
+//		params.putInt("me", player.getId());
+//		params.putInt("you", this.roomOwner.getId());
+//		ParentExtension.getInstance().send(Commands.CMD_S2C_GAME_START, params, this.allSFSPlayerMap.get(player.getId()));
 	}
 	
 	//Ï´ÅÆ
 	private boolean RefeshCard(){
-		int cardRealIdIndex =0;
-		for(CardSite site:sites){
-			CardUser user = CardUserManager.getInstance().GetUser(site.belongUserID);
-			if(user ==null){
-				return false;
-			}
-			site.clear();
-			site.Hero = user.getHero();
-			site.Hero.setRealId(cardRealIdIndex);
-			cardRealIdIndex++;
-			List<BaseCard> cards = user.getSelectCards();
-			while(cards.size()>0){
-				int count = cards.size();
-				int randomIndex = Random.nextInt(count);
-				BaseCard card = cards.get(randomIndex);
-				card.setRealId(cardRealIdIndex);
-				site.CardBox.add(card);
-				cards.remove(randomIndex);
-				cardRealIdIndex++;
-			}
-		}
+	
 		return true;
 	}
 	public ArrayList<CardSite> getSites() {
