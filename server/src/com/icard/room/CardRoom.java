@@ -8,7 +8,6 @@ import java.util.Map;
 import sfs2x.extensions.icard.main.ParentExtension;
 import sfs2x.extensions.icard.utils.Commands;
 
-import com.icard.cards.BaseCard;
 import com.icard.user.CardUser;
 import com.icard.user.CardUserManager;
 import com.smartfoxserver.v2.entities.User;

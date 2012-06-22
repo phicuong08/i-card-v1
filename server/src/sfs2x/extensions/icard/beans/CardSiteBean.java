@@ -6,7 +6,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import sfs2x.extensions.icard.main.ICardExtension;
 
-import com.icard.cards.BaseCard;
 import com.smartfoxserver.v2.entities.User;
 
 /**

@@ -7,7 +7,6 @@ import java.util.Vector;
 
 import java.util.Random;
 
-import com.icard.cards.BaseCard;
 import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
