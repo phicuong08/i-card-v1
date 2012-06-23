@@ -32,13 +32,15 @@ public class ICardExtension extends SFSExtension {
 
 	/** Game controller */
 	private GameController _gameController = null;
+	private static ICardExtension _this = null;
 	@Override
+
 	public void init() {
 		trace("**************************************");
 		trace("* Starting ICard extension");
 		CardInfoStoreBean.GetInstance();
 		ParentExtension.setInstance(this);
-		
+		_this = this;
 		// Initialize game controller
 		_gameController = new GameController(this);
 		_gameController.start();
@@ -76,6 +78,9 @@ public class ICardExtension extends SFSExtension {
 
 		trace("* ICard initialization completed");
 		trace("**************************************");
+	}
+	public static ICardExtension getExt(){
+		return _this;
 	}
 	public void startGame(List<User> players)
 	{

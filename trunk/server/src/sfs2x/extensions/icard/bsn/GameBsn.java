@@ -13,6 +13,7 @@ import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 import com.smartfoxserver.v2.extensions.SFSExtension;
 import sfs2x.extensions.icard.beans.*;
+import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.*;
 /**
  * GameBsn: class containing utility business classes for game processing
@@ -144,5 +145,6 @@ public class GameBsn
 		if(game.getStateBean().IsWaitPlayerOp(playerID)==false)
 			return;
 		game.getStateBean().setState(BattleStateBean.ST_WAIT_GOD);	
+		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_END_OP_OK, null, game);
 	}
 }

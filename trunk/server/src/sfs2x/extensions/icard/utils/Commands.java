@@ -27,6 +27,7 @@ public class Commands {
 	public static final String CMD_S2C_BATTLE_PLAYER_LOOP       ="11004";//回合转化
 	public static final String CMD_S2C_PRI_PLAYER_LOOP       ="11005";//优先权转化
 	public static final String CMD_S2C_BATTLE_LOOP_RESET       ="11006";//回合重置
+	public static final String CMD_S2C_END_OP_OK               ="11007";//回合结束完成
 	
 	
 

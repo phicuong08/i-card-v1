@@ -83,7 +83,28 @@ package ICard.datas.card {
 		public function set Turn(val:int):void{
 			_info["turn"]=val;
 		}
-		
+		public function Update(info:Object):void{
+			if(info["cardID"])
+				_info["cardID"] = info["cardID"];
+			
+			if(info["side"])
+				_info["side"] = info["side"];
+			
+			if(info["turn"])
+				_info["turn"] = info["turn"];
+			
+			if(info["slot"])
+				_info["slot"] = info["slot"];
+			
+			if(info["hp"])
+				_info["hp"] = info["hp"];
+			
+			if(info["atk"])
+				_info["atk"] = info["atk"];
+			
+			if(info["def"])
+				_info["def"] = info["def"];
+		}
 		public function Clone(arg1:CardData):void{
 			RealID = arg1.RealID;
 			CardID = arg1.CardID;
