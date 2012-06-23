@@ -32,7 +32,7 @@ package ICard.datas {
 			var oldCard:CardData = FindCard(info["realID"]);
 			if(oldCard)
 			{
-				oldCard = newCard;
+				oldCard.Update(info);
 			}
 			else
 			{
@@ -69,8 +69,10 @@ package ICard.datas {
 			var val:int = 0;
 			for each( var card:CardData in _cardArr)
 			{
-				if( card.Slot == BattleFieldType.MyResourceSlotId &&
-					card.Side ==0)
+				if(card.Side!=0)
+					continue;
+				if( card.Slot == BattleFieldType.MyResourceSlotId ||
+					card.Slot == BattleFieldType.YouResourceSlotId)
 				{
 					val++;
 				}

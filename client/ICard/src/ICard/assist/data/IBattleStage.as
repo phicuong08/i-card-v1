@@ -8,5 +8,7 @@ package ICard.assist.data{
 		function AskCard2FightSlot(realID:int):Boolean;
 		function AskCard2ResSlot(realID:int):Boolean;
 		function AskTurnCard(realID:int):Boolean;
+		function GetResNum(me:Boolean):int;
+		function QueryEndOp():void;
     }
 }//package com.assist.view.interfaces 

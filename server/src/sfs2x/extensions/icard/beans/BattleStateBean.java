@@ -19,10 +19,11 @@ public class BattleStateBean
 	public static final int ST_INIT_BATTLE=1;
 	public static final int ST_WAIT_LOOP_OP = 2;
 	public static final int ST_WAIT_CHAIN_OP = 3;
-	public static final int ST_SELECT_CHAIN_RESP = 4;
-	public static final int ST_WAIT_GOD = 5;
-	public static final int ST_LOOP_END = 6;
-	public static final int ST_LOOP_INTERVAL=7;
+	public static final int ST_WAIT_CHAIN_TIMEOUT = 4;
+	public static final int ST_SELECT_CHAIN_RESP = 5;
+	public static final int ST_WAIT_GOD = 6;
+	public static final int ST_LOOP_END = 7;
+	public static final int ST_LOOP_INTERVAL=8;
 	
 	
 	private Vector<Integer>  _battleChain;
@@ -31,8 +32,8 @@ public class BattleStateBean
 	
 	private int _state;	
 	private int _waitDuration = 60;
-	private int _backupState;
 	private int _loopInterval;
+	private int _waitChainPass;
 	public BattleStateBean() {
 		_state =ST_NONE_STATE;
 	}
@@ -49,11 +50,16 @@ public class BattleStateBean
 		return _waitDuration <= 0;
 	}
 	public void Jump2GodState(){
-		_backupState = _state;
 		setState(ST_WAIT_GOD);
 	}
-	public void LeaveGodState(){
-		setState(_backupState);
+	public int getWaitChainPass(){
+		return _waitChainPass;
+	}
+	public void addWaitChainPass(){
+		_waitChainPass++;
+	}
+	public void clearWaitChainPass(){
+		_waitChainPass = 0;
 	}
 	public void resetWaitLoopOp(int playerID){
 		_opPlayerID = playerID;

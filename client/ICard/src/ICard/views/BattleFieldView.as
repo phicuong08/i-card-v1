@@ -38,7 +38,7 @@ package ICard.views {
 			_battleStage.settle(_data);
 			_battleStage.CardFightResultCallback = this.onCardFightResult;
 			_battleStage.PlayerLoopFreshCallback = this.onPlayerLoopFresh;
-			
+			_battleStage.EndOpOkCallback = this.onEndOpOk;
 			_battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
 			_battleField.tip = _viewMgr.tip.iTip;
 			_battleField.BattleStage = _battleStage;
@@ -94,10 +94,13 @@ package ICard.views {
 		public function onPlayerLoopFresh(myLoop:Boolean,secNum:int):void{
 			var iconName:String=(myLoop)?"I_turn":"u_turn";
 			_viewMgr.worldNotice.showMessage("",0.8,iconName);
-			_battleField.LoopFresh(myLoop,secNum);
+			_battleField.LoopFresh(myLoop,secNum/1000);
 		}
 		public function onCardFightResult(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
 			_viewMgr.fightMovie.InitShow(srcID,targets,oldCards,bEnemy);
+		}
+		public function onEndOpOk():void{
+			_battleField.onEndOpOk();
 		}
 		private function test():void{
 			

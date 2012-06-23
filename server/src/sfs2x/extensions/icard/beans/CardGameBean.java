@@ -43,6 +43,7 @@ public class CardGameBean
 	private CardActionChainBean _battleChain;
 	private CardActionBean _curAction;
 	private int _loopPlayer;
+	private int _curLoop;
 	/**
 	 * Constructor
 	 * 
@@ -186,6 +187,13 @@ public class CardGameBean
 	public void reset()
 	{
 		_started = false;
+		_curLoop = 0;
+	}
+	public int getCurLoop(){
+		return _curLoop;
+	}
+	public void incLoop(){
+		_curLoop++;
 	}
 	public CardActionBean pickCurAction(){
 		CardActionBean action;

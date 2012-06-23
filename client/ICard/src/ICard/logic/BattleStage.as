@@ -18,6 +18,7 @@ package ICard.logic {
 		private var _fightLink:FightLink;
 		private var _cardFightResultCallback:Function;
 		private var _playerLoopFreshCallback:Function;
+		private var _endOpOkCallback:Function;
 		private var _enable2Res:Boolean;
 		protected var _data:IData;
 		private var _IsTurn:Boolean; //操作回合
@@ -26,6 +27,7 @@ package ICard.logic {
 			_enable2Res = false;
 			_cardFightResultCallback = new Function;
 			_playerLoopFreshCallback = new Function;
+			_endOpOkCallback = new Function;
 		}
 		public function settle(arg:IData):void{
 			_data = (arg as IData);
@@ -35,6 +37,9 @@ package ICard.logic {
 				_obj = new (BattleStage)();
 			};
 			return (_obj);
+		}
+		public function set EndOpOkCallback(arg1:Function):void{
+			_endOpOkCallback = arg1;
 		}
 		public function set CardFightResultCallback(arg1:Function):void{
 			_cardFightResultCallback = arg1;
@@ -158,7 +163,10 @@ package ICard.logic {
 			}
 			return null;
 		}
-
+		public function onEndOpOK():void{
+			_IsTurn = false;
+			_endOpOkCallback();
+		}
 		public function PlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
 			ResetCards(playerID);
 			_playerLoopFreshCallback(playerID==_myID,secNum);	
@@ -190,6 +198,22 @@ package ICard.logic {
 			if(!card)
 				return null;
 			return card.Info;
+		}
+		public function GetResNum(me:Boolean):int{
+			if(!PlayerMe)
+				return 0;
+			if(me)
+				return PlayerMe.CardDB.ResNum();
+			else{
+				for each(var guy:BattleGuy in _guy){
+					if(guy.ID!=_myID)
+						return guy.CardDB.ResNum();
+				}
+			}
+			return 0;
+		}
+		public function QueryEndOp():void{
+			_Mod_Battle.QueryEndOp();
 		}
 	}
 }//package com.assist.data.mission 

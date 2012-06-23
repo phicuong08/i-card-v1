@@ -8,15 +8,33 @@
 	import ICard.assist.view.controls.BattleFieldType;
     import flash.text.*;
 	import flash.events.MouseEvent;
+	import flash.events.TimerEvent;
+	import flash.utils.Timer;
+
+
     public class battleField extends MovieClip implements IBattleField{
 		private var _slots:Array;
 		private var _tip:ITip;
 		private var _battleStage:IBattleStage;
+		private var _myResNumMC:ResNumMC;
+		private var _yourResNumMC:ResNumMC;
+
+		private var _timerMC:TimerMC;
+
+		//private var _timer_but2:MovieClip;
         public function battleField(){
 			InitSlot();
 			//RunTest();
-			
-			
+			_timerMC = new TimerMC(_timer_but);
+
+			_myResNumMC = new ResNumMC;
+			_yourResNumMC = new ResNumMC;
+			_myResNumMC.x = 60-_myResNumMC.width/2;
+			_myResNumMC.y = 575;
+			_yourResNumMC.x = 60 -_yourResNumMC.width/2;
+			_yourResNumMC.y = 130;
+			this.addChild(_myResNumMC);
+			this.addChild(_yourResNumMC);
 		}
 		private function InitSlot():void{
 			_slots  = [];
@@ -71,6 +89,14 @@
 	    public function get content():MovieClip{
             return (this);
         }
+		private function freshResNum():void{
+			
+			var myRes:int = _battleStage.GetResNum(true);
+			trace("fresh res my:",myRes);
+			_myResNumMC.setVal(myRes);
+			var yourRes:int  = _battleStage.GetResNum(false);
+			_yourResNumMC.setVal(yourRes);
+		}
     public function FindCard(realID:int):MovieClip{
     	var id:int = BattleFieldType.MyHandSlotId;
     	var card:MovieClip;
@@ -89,9 +115,10 @@
 		
 		public function Add2Slot(slotId:int,cardMC:MovieClip):void{
 			if(cardMC==null)
-					return;
-				RemoveCard(cardMC.realID);
-				_slots[slotId].AddCard(cardMC);
+				return;
+			RemoveCard(cardMC.realID);
+			_slots[slotId].AddCard(cardMC);
+			freshResNum();
 		}
 		
 		 public function RemoveCard(realID:int):void{
@@ -109,8 +136,8 @@
 				}	
     }    
     public function LoopFresh(myLoop:Boolean,secNum:int):void{
-    
-    }
+		_timerMC.InitTimeMC(secNum);
+	}
 		public function SideCard(info:Object):void{
 		
 			var id:int = BattleFieldType.MyHandSlotId;
@@ -120,9 +147,11 @@
 					return;
 				id++;
 			}	
+			freshResNum();
 		}
 		public function set BattleStage(arg1:IBattleStage):void{
 			_battleStage = arg1;
+			_timerMC.Init(_battleStage);
 			var id:int = BattleFieldType.MyHandSlotId;
 			while(id <= BattleFieldType.YouHeroSlotId)
 			{
@@ -139,10 +168,13 @@
 				_slots[id].tip = _tip;
 				id++;
 			}
-			
+		}
+		
+		public function onEndOpOk():void{
+			_timerMC.onEndOpOk();
 		}
 
-		
+
 		public function RunTest():void{
 			var index:int=1;
 			var c1:MovieClip;
@@ -181,5 +213,7 @@
 			//_slots[BattleFieldType.MyFightSlotId].PrintChild();
 			
 		}
+		
+		
     }
 }//package 
