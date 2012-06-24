@@ -59,11 +59,14 @@ package ICard.logic {
 			return ResEnough(card,resVal);
 		}
 		public static function Is2FightAble(card:CardData,resVal:int):Boolean{
-			if(card.Slot != BattleFieldType.MyEquipSlotId ||
+			if(card.Side==true)
+				return false;
+			if(card.Slot != BattleFieldType.MyEquipSlotId &&
 				card.Slot != BattleFieldType.MyFightSlotId)
 				return false;
-			if(card.Side==false)
-				return false;
+			if(card.Type == CardType.DefType ||
+				card.Type == CardType.SoldierType)
+				return true;
 			return UseAble(card,resVal);
 		}
 		public static function Is2EnterAble(card:CardData,resVal:int):Boolean{
