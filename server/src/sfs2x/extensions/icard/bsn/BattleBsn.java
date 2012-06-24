@@ -57,7 +57,6 @@ public class BattleBsn
 			ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getStateBean().getOpPlayer(),
 								Constants.BATTLE_LOOP_TIME);
 			ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
-			
 		}
 	}
 	public static void drawCard(CardGameBean game,ICardExtension ext,int playerID,int num){
@@ -150,6 +149,7 @@ public class BattleBsn
 	public static void procLoopEnd(CardGameBean game,ICardExtension ext){//
 		int nextOp = getOtherPlayer(game,game.getLoopPlayer());
 		game.setFreshLoop(nextOp);
+//		ext.SendGameCardUpdate(game);
 	}
 	
 	public static void procWaitChainTimeOut(CardGameBean game,ICardExtension ext){

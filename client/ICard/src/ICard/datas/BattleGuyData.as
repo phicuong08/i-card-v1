@@ -28,6 +28,11 @@ package ICard.datas {
 		public function onUpdateCard(info:Object):void{
 //			if(info["slot"]!=BattleFieldType.YouHandSlotId)
 //				return;
+			
+			if(info.hasOwnProperty("side") && info["side"]==0)
+			{
+				var kk:int=0;
+			}
 			var newCard:CardData = new CardData(info);
 			var oldCard:CardData = FindCard(info["realID"]);
 			if(oldCard)
@@ -42,21 +47,7 @@ package ICard.datas {
 			
 		}
 		
-		public function ResetCards():void{
-			for each( var card:CardData in _cardArr)
-			{
-				if( card.Slot == BattleFieldType.MyResourceSlotId ||
-					card.Slot == BattleFieldType.MyFightSlotId ||
-					card.Slot == BattleFieldType.MyEquipSlotId )
-				{
-					var oldCard:CardData = new CardData(new Object);
-					oldCard.Clone(card);
-					card.Side = 0;
-					CardDiffData.UpdateCard(card);
-				}
-			}
-		}
-		
+	
 		public function ResetRes():void{
 			for each( var card:CardData in _cardArr)
 			{

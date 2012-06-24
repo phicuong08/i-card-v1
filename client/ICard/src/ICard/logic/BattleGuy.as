@@ -19,9 +19,6 @@ package ICard.logic {
 			return _realID;
 		}
 		
-		public function ResetCards():void{
-			_data.ResetCards();
-		}
 		public function EmptyCards():void{
 			_data.EmptyCards();
 		}
