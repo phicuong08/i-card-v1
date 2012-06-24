@@ -9,8 +9,10 @@ package ICard.logic {
 		
 		public static function ResEnough(card:CardData,resVal:int):Boolean{
 			var useInfo:Array = CardType.UseCardInfo(card.CardID);
-			if(useInfo==false)
-				return true;
+			if(useInfo==null)
+			{
+				return (card.Cost<=resVal);
+			}
 			return (resVal >= useInfo[1]);
 		}
 		public static function Card2FightSlot(card:CardData,mod:Mod_Battle):Boolean{
@@ -66,6 +68,11 @@ package ICard.logic {
 		}
 		public static function Is2EnterAble(card:CardData,resVal:int):Boolean{
 			if(card.Slot != BattleFieldType.MyHandSlotId)
+				return false;
+			var cardType:int =card.Type;
+			if(cardType != CardType.DefType &&
+				cardType != CardType.WeaponType &&
+				cardType != CardType.SoldierType)
 				return false;
 			return (card.Cost<=resVal);
 		}

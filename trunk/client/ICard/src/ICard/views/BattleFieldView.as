@@ -66,7 +66,9 @@ package ICard.views {
 				else
 				{
 					var newCard:MovieClip = CreateCard(cardObj.Info);
-					_battleField.Add2Slot(_battleStage.GetUISlot(cardObj.Info),newCard);
+					var slotId:int = _battleStage.GetUISlot(cardObj.Info);
+					trace("slot id=",slotId);
+					_battleField.Add2Slot(slotId,newCard);
 				}
 			}
 		}
@@ -79,6 +81,11 @@ package ICard.views {
 						return cardMC;
 				var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(info["cardID"]);		
 				cardMC.tipInfo = strCardHtml;
+				if(info["side"]==1)
+				{
+			//		cardMC.scaleX = 0.5;
+					cardMC.rotation = 90;
+				}
 				return cardMC;
 		}
 		private function render():void{

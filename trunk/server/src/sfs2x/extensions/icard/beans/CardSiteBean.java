@@ -46,6 +46,10 @@ public class CardSiteBean
 	}
 	public void setFreshLoop(){
 		_addResAble = true;
+		for(CardBean card:_cardMap.values()){
+			if(card.getSlotID()==CardBean.RES_SLOT_ID)
+				card.setSide(0);
+		}
 	}
 	public void setAddResAble(Boolean flag){
 		_addResAble = flag;

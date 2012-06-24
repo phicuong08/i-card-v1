@@ -38,7 +38,14 @@ public class SFSObjectBsn
 		if(card.getDirtyFlagBit(CardBean.SLOT_DIRTY_BIT))
 			cardInfo.putInt("slot", card.getSlotID());
 		if(card.getDirtyFlagBit(CardBean.SIDE_DIRTY_BIT))	
+		{
 			cardInfo.putInt("side", card.getSide());
+			if(card.getSlotID()== CardBean.RES_SLOT_ID)
+			{
+				int kk;
+				kk=0;
+			}
+		}
 		if(card.getDirtyFlagBit(CardBean.TURN_DIRTY_BIT))	
 			cardInfo.putInt("turn", card.getTurn());	
 		if(card.getDirtyFlagBit(CardBean.HP_DIRTY_BIT))	

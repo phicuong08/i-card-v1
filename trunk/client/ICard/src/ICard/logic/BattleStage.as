@@ -61,10 +61,7 @@ package ICard.logic {
 		public function get PlayerMe():BattleGuy{
 			return _guy[_myID];
 		}
-		public function ResetCards(guyId:int):void{
-			if(_guy[guyId])
-				_guy[guyId].ResetCards();
-		}
+
 		public function onUpdateCard(info:Object):void{
 			var fullCard:Object = FullCardInfo(info);
 			if(fullCard==null)
@@ -75,23 +72,25 @@ package ICard.logic {
 				_enable2Res = false;
 				
 		}
+		private function CopyCardData(fillCard:Object,realID:int):void{
+			var cardObj:Object = FindCard(realID);
+			if(cardObj==null)
+				return;
+			var card:CardData = cardObj["card"] as CardData;
+			if(card==null)
+				return;
+			fillCard["cardID"] = card.CardID;
+			fillCard["hp"] = card.HP;
+			fillCard["atk"] = card.Atk;
+			fillCard["def"] = card.Def;
+			fillCard["side"] = card.Side;
+			fillCard["turn"] = card.Turn;
+			fillCard["slot"] = card.Slot;
+		}
 		private function FullCardInfo(info:Object):Object{
 			var fillCard:Object = CardType.CreateCardInfo(info["cardID"]);
-			if(fillCard==null)
-				return null;
-			fillCard["realID"]= info["realID"];
-			if(info["hp"])
-				fillCard["hp"] = info["hp"];
-			if(info["atk"])	
-				fillCard["atk"] = info["atk"];
-			if(info["def"])	
-				fillCard["def"] = info["def"];
-			if(info["side"])	
-				fillCard["side"] = info["side"];	
-			if(info["turn"])	
-				fillCard["turn"] = info["turn"];
-			if(info["slot"])	
-				fillCard["slot"] = info["slot"];	
+			CopyCardData(fillCard,info["realID"]);
+			CardData.copyObject(fillCard,info);
 			return fillCard;
 		}
 			
@@ -126,8 +125,8 @@ package ICard.logic {
 			var card:CardData = PlayerMe.CardDB.FindCard(realID);
 			if(!card)
 				return false;
-			if(!UseCard.UseAble(card,PlayerMe.CardDB.ResNum()))	
-				return false;
+//			if(!UseCard.UseAble(card,PlayerMe.CardDB.ResNum()))	
+//				return false;
 			return UseCard.Card2FightSlot(card,_Mod_Battle);
 		}
 		public function AskCard2ResSlot(realID:int):Boolean{
@@ -168,7 +167,6 @@ package ICard.logic {
 			_endOpOkCallback();
 		}
 		public function PlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
-			ResetCards(playerID);
 			_playerLoopFreshCallback(playerID==_myID,secNum);	
 			_IsTurn = (playerID==_myID)?true:false;
 			if(_IsTurn)

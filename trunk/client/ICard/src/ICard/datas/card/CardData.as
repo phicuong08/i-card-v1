@@ -29,6 +29,25 @@ package ICard.datas.card {
 			_slot = arg1["slot"];
 		}
 	*/	
+		public static function copyObject(obj1:Object,obj2:Object):void{
+			if(obj2==null)
+				return;
+			obj1["realID"]= obj2["realID"];
+			if(obj2.hasOwnProperty("cardID"))
+				obj1["cardID"] = obj2["cardID"];
+			if(obj2.hasOwnProperty("hp"))
+				obj1["hp"] = obj2["hp"];
+			if(obj2.hasOwnProperty("atk"))
+				obj1["atk"] = obj2["atk"];
+			if(obj2.hasOwnProperty("def"))	
+				obj1["def"] = obj2["def"];
+			if(obj2.hasOwnProperty("side"))	
+				obj1["side"] = obj2["side"];	
+			if(obj2.hasOwnProperty("turn"))
+				obj1["turn"] = obj2["turn"];
+			if(obj2.hasOwnProperty("slot"))	
+				obj1["slot"] = obj2["slot"];
+		}
 		public function get Info():Object{
 			return _info;
 		}
@@ -84,25 +103,25 @@ package ICard.datas.card {
 			_info["turn"]=val;
 		}
 		public function Update(info:Object):void{
-			if(info["cardID"])
+			if(info.hasOwnProperty("cardID"))
 				_info["cardID"] = info["cardID"];
 			
-			if(info["side"])
+			if(info.hasOwnProperty("side"))
 				_info["side"] = info["side"];
 			
-			if(info["turn"])
+			if(info.hasOwnProperty("turn"))
 				_info["turn"] = info["turn"];
 			
-			if(info["slot"])
+			if(info.hasOwnProperty("slot"))
 				_info["slot"] = info["slot"];
 			
-			if(info["hp"])
+			if(info.hasOwnProperty("hp"))
 				_info["hp"] = info["hp"];
 			
-			if(info["atk"])
+			if(info.hasOwnProperty("atk"))
 				_info["atk"] = info["atk"];
 			
-			if(info["def"])
+			if(info.hasOwnProperty("def"))
 				_info["def"] = info["def"];
 		}
 		public function Clone(arg1:CardData):void{
@@ -120,7 +139,8 @@ package ICard.datas.card {
 		}
 		public function get Type():int{
 				var ret:int=0;
-				switch(CardID/1000)
+				var typeId:int = CardID/1000;
+				switch(typeId)
 				{
 				case 30:
 					ret = CardType.WeaponType;
