@@ -20,13 +20,13 @@
 		private var _yourResNumMC:ResNumMC;
 
 		private var _timerMC:TimerMC;
-
+		private var _targetCtl:TargetIndicator;
 		//private var _timer_but2:MovieClip;
         public function battleField(){
 			InitSlot();
 			//RunTest();
 			_timerMC = new TimerMC(_timer_but);
-
+			_targetCtl = new TargetIndicator(this);
 			_myResNumMC = new ResNumMC;
 			_yourResNumMC = new ResNumMC;
 			_myResNumMC.x = 60-_myResNumMC.width/2;
