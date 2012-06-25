@@ -21,19 +21,33 @@
 		    	n++;
 		    }
 	    }
+	    public function get Size():int{
+	    	return _freeIndex;
+	    }
+	    public function IsTarget(realID:int):Boolean{
+	    	 var n:int = 0;
+		    while(n<_freeIndex){
+		    	var tt:MovieClip = _indicatorArr[n];
+		    	if(tt.realID == realID)
+		    		return true;
+		    	n++;
+		    }
+		    return false;
+	    }
 	    public function AddIndicator(card:MovieClip):void{
 	    	if(_freeIndex>=_maxTargetNum)
 	    		return;
 	    	var indicator:MovieClip = _indicatorArr[_freeIndex];
-	    	indicator.x = card.x;
-	    	indicator.y = card.y;
-	    	_parent.addChild(indicator);
+			indicator.realID = card.realID;
+			card.addChild(indicator);
 	    	_freeIndex++;
 	    }
 			public function Empty():void{
 				var n:int = 0;
 				while(n<_freeIndex){
-					_parent.removeChild(_indicatorArr[n]);
+					var indicator:MovieClip = _indicatorArr[n] as MovieClip;
+					indicator.parent.removeChild(indicator);
+					n++;
 				}
 				_freeIndex = 0;
 			}

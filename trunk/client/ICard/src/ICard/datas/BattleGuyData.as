@@ -70,6 +70,17 @@ package ICard.datas {
 			}
 			return val;
 		}
+		public function getFightTarget():Array{
+			var targetArr:Array = [];
+			for each( var card:CardData in _cardArr)
+			{
+				if(card.Slot != BattleFieldType.MyFightSlotId &&
+					card.Slot != BattleFieldType.MyHeroSlotId)
+					continue;
+				targetArr.push(card.RealID);
+			}
+			return targetArr;
+		}
 		
 		public function UseRes(val:int):Boolean{ 
 			if(val>ResVal())

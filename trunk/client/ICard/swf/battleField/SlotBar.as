@@ -14,6 +14,7 @@
 		private var _cardWidth:int;
 		private var _cardMenu:MovieClip;
 		public var _selCard:MovieClip;
+		private var _battleField:battleField;
 		public var _slotID:int;
         public function SlotBar():void{
             super();
@@ -84,9 +85,13 @@
 				HideCardActionMenu(card);
 				RemoveCardTip(card);
 			}
+			var handleMouseClickCard:* = function(e:MouseEvent):void{
+				_battleField.onClickCard(card.realID);
+			}
+			
 			card.addEventListener(MouseEvent.ROLL_OVER,handleMouseOverCard);
 			card.addEventListener(MouseEvent.ROLL_OUT,handleMouseOutCard);
-			
+			card.addEventListener(MouseEvent.CLICK,handleMouseClickCard);
 		}
 		public function RemoveAllCard():void{
 			while(this.numChildren)
@@ -118,7 +123,9 @@
 		public function set BattleStage(_arg1:IBattleStage):void{
 		  _battleStage = _arg1;
 		}
-		
+		public function set BattleField(arg1:battleField):void{
+			_battleField = arg1;
+		}
 		private function HideCardActionMenu(card:MovieClip):void{
 			if(!_cardMenu)
 				return;
@@ -185,7 +192,9 @@
 			trace(_selCard.realID,"To task!");
 		}
 		public function OnCardToFight(e:MouseEvent):void{
-			trace(_selCard.realID,"To fight!");
+			_battleStage.InitialFight(_selCard.realID);
+			_battleField.onInitalFight(_selCard.realID);
+			//trace(_selCard.realID,"To fight!");
 		}
 		public function OnCardToTurn(e:MouseEvent):void{
 			trace(_selCard.realID,"To turn!");
