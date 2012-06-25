@@ -134,9 +134,27 @@
 					}
 					id++;
 				}	
-    }    
+    }   
+	public function onClickCard(realID:int):void{
+		if(_targetCtl.IsTarget(realID)==false)
+			return;
+		_targetCtl.Empty();
+		_battleStage.AddFightTarget(realID);
+	}
+	public function onInitalFight(realID:int):void{
+		var targetArr:Array = _battleStage.FightTarget;
+		if(targetArr==null)
+			return;
+		_targetCtl.Empty();
+		for each(var target:int in targetArr){
+			var card:MovieClip = FindCard(target);
+			_targetCtl.AddIndicator(card);
+		}
+	}
+	
     public function LoopFresh(myLoop:Boolean,secNum:int):void{
 		_timerMC.InitTimeMC(secNum);
+		_targetCtl.Empty();
 	}
 		public function SideCard(info:Object):void{
 		
@@ -156,6 +174,7 @@
 			while(id <= BattleFieldType.YouHeroSlotId)
 			{
 				_slots[id].BattleStage = _battleStage;
+				_slots[id].BattleField = this;
 				id++;
 			}
 		}
@@ -172,6 +191,7 @@
 		
 		public function onEndOpOk():void{
 			_timerMC.onEndOpOk();
+			_targetCtl.Empty();
 		}
 
 

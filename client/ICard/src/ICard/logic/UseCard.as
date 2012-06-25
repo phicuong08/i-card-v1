@@ -5,6 +5,9 @@ package ICard.logic {
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.datas.*;
 	import ICard.datas.card.*;
+	
+	import flash.utils.Dictionary;
+
 	public class UseCard {
 		
 		public static function ResEnough(card:CardData,resVal:int):Boolean{
@@ -79,9 +82,12 @@ package ICard.logic {
 				return false;
 			return (card.Cost<=resVal);
 		}
+		
 		public static function UseAble(card:CardData,resVal:int):Boolean{
 			if(ResEnough(card,resVal)==false)
+			{
 				return false;
+			}
 			switch(card.Type)
 			{
 				case CardType.HeroType:

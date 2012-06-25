@@ -22,6 +22,8 @@ package ICard.logic {
 		private var _enable2Res:Boolean;
 		protected var _data:IData;
 		private var _IsTurn:Boolean; //操作回合
+		private var _fightSrc:int;
+		private var _fightDes:Array;
 		private static var _obj:BattleStage;
 		public function BattleStage():void{
 			_enable2Res = false;
@@ -61,7 +63,20 @@ package ICard.logic {
 		public function get PlayerMe():BattleGuy{
 			return _guy[_myID];
 		}
-
+		public function get Enemy():BattleGuy{
+			for each(var guy:BattleGuy in _guy){
+				if(guy.ID != _myID){
+					return guy;
+				}
+			}
+			return null;
+		}
+		public function get FightTarget():Array{
+			var guy:BattleGuy  = Enemy;
+			if(guy==null)
+				return null;
+			return guy.CardDB.getFightTarget();
+		}
 		public function onUpdateCard(info:Object):void{
 			var fullCard:Object = FullCardInfo(info);
 			if(fullCard==null)
@@ -75,7 +90,9 @@ package ICard.logic {
 		private function CopyCardData(fillCard:Object,realID:int):void{
 			var cardObj:Object = FindCard(realID);
 			if(cardObj==null)
+			{
 				return;
+			}
 			var card:CardData = cardObj["card"] as CardData;
 			if(card==null)
 				return;
@@ -129,6 +146,7 @@ package ICard.logic {
 //				return false;
 			return UseCard.Card2FightSlot(card,_Mod_Battle);
 		}
+		
 		public function AskCard2ResSlot(realID:int):Boolean{
 			if(!_enable2Res)
 				return false;
@@ -212,6 +230,13 @@ package ICard.logic {
 		}
 		public function QueryEndOp():void{
 			_Mod_Battle.QueryEndOp();
+		}
+		public function InitialFight(realID:int):void{
+			_fightSrc = realID;
+			_fightDes = [];
+		}
+		public function AddFightTarget(realID:int):void{
+			_fightDes.push(realID);
 		}
 	}
 }//package com.assist.data.mission 
