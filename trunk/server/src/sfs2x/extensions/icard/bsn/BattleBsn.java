@@ -98,8 +98,8 @@ public class BattleBsn
 		}
 	}
 	public static void doNextChainOp(int playerID,CardActionBean lastAction,CardGameBean game,ICardExtension ext){
-		game.getStateBean().InitWaitOp(playerID);
-		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getOpPlayer(), Constants.BATTLE_LOOP_TIME);
+		game.getStateBean().InitWaitOp(playerID,Constants.BATTLE_CHAIN_OP_TIME);
+		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getOpPlayer(), Constants.BATTLE_CHAIN_OP_TIME);
 		if(lastAction!=null)
 			SFSObjectBsn.fillBattleActionInfo(params,game,lastAction);
 		ext.SendGameCommand(Commands.CMD_S2C_PRI_PLAYER_LOOP, params,game);
@@ -108,7 +108,10 @@ public class BattleBsn
 	public static void procSelectChainResp(CardGameBean game,ICardExtension ext){
 		CardActionBean topAction = game.getBattleChain().getChainTop();
 		if(topAction==null)
+		{
 			game.getStateBean().setState(BattleStateBean.ST_WAIT_GOD);
+			return;
+		}
 		int nextOp = topAction.getPlayerID();//getOtherPlayer(game,topAction.getPlayerID());
 		doNextChainOp(nextOp,topAction,game,ext);
 	}
@@ -183,7 +186,7 @@ public class BattleBsn
 		CardSiteBean site = game.getSites().get(action.getPlayerID());
 		if(site==null)
 			return;
-		site.addChainCost(CardActionBsn.getActionCost(action));
+		site.addChainCost(CardActionBsn.getActionCost(game,action));
 	}
 	
 	public static void procWaitLoopOP(CardGameBean game,ICardExtension ext,int elasped){

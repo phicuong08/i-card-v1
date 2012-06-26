@@ -62,7 +62,7 @@ package ICard.logic {
 			return ResEnough(card,resVal);
 		}
 		public static function Is2FightAble(card:CardData,resVal:int):Boolean{
-			if(card.Side==true)
+			if(card.Side!=0)
 				return false;
 			if(card.Slot != BattleFieldType.MyEquipSlotId &&
 				card.Slot != BattleFieldType.MyFightSlotId)

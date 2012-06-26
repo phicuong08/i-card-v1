@@ -49,7 +49,7 @@ public class CardActionBsn
 		}
 	}
 	public static Boolean Action2ChainAble(CardGameBean game,CardActionBean action){
-		int cost = getActionCost(action);
+		int cost = getActionCost(game,action);
 		CardSiteBean site = game.getSites().get(action.getPlayerID());
 		if(site==null)
 			return false;
@@ -94,27 +94,26 @@ public class CardActionBsn
 		}
 		return false;
 	}
-	public static int getActionCost(CardActionBean action){
-		CardInfoBean cardInfo = CardInfoStoreBean.GetInstance().getCardInfo(action.getSrc());
-		if(cardInfo==null)
-			return 911; //¼«´óÖµ
+	public static int getActionCost(CardGameBean game,CardActionBean action){
+		CardBean card = game.getCard(action.getSrc());
+		if(card==null)
+			return 911;
 		int cost = 0;
 		switch(action.getType()){
 		case CardActionBean.DO_CARD_2_ATK:
-			cost = getAtkCost(cardInfo);
+			cost = getAtkCost(card.getCardID());
 			break;
 		case CardActionBean.DO_CARD_2_EQUIPSLOT:
 		case CardActionBean.DO_CARD_2_FIGHTSLOT:
-			cost = cardInfo.getBaseCost();			
+			cost = card.getCost();			
 			break;
 		case CardActionBean.DO_CARD_2_TURN:
 		case CardActionBean.DO_CARD_2_USE:
-			cost = getUseCost(cardInfo);
+			cost = getUseCost(card.getCardID());
 			break;	
 		}
 		return cost;
 	}
-	
 	public static void procCardAction(CardGameBean game, CardActionBean action,ICardExtension ext){
 		if(action==null)
 			return;
@@ -222,12 +221,14 @@ public class CardActionBsn
 			return;
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setSlotID(CardBean.FIGHT_SLOT_ID);	
+		card.setSide(3);
 	}
 	private static void procCard2EquipSlot(CardSiteBean site,CardBean card){
 		if(CardSiteBsn.getResNum(site)< card.getCost())
 			return;
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setSlotID(CardBean.EQUIP_SLOT_ID);	
+		card.setSide(3);
 	}
 	private static void procCard2Res(CardSiteBean site,CardBean card){
 		site.setAddResAble(false);
@@ -236,17 +237,21 @@ public class CardActionBsn
 		card.setSlotID(CardBean.RES_SLOT_ID);
 		card.setSide(0);
 	}
-	private static int getUseCost(CardInfoBean card){
-		CardUseBean useBean= CardUseStoreBean.GetInstance().getCardUse(card.getCardID());
+	private static int getUseCost(int cardID){
+		CardUseBean useBean= CardUseStoreBean.GetInstance().getCardUse(cardID);
 		if(useBean!=null){
 			return useBean.getCost();
 		}
 		else{
-			return card.getBaseCost();
+			return 911;
 		}
 	}
-	private static int getAtkCost(CardInfoBean card){
+	private static int getAtkCost(int cardID){
 		int cost =0;
+		CardInfoBean card = CardInfoStoreBean.GetInstance().getCardInfo(cardID);
+		if(card==null)
+			return 0;
+	//	CardInfoBean cardInfo = CardInfoStoreBean.GetInstance().getCardInfo(cardID);
 		switch(card.getType()){
 			case CardInfoBean.WEAPON:
 				cost = card.getBaseUseCost();

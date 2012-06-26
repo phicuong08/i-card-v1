@@ -85,7 +85,7 @@ package ICard.logic {
 				_guy[info["playerID"]].onUpdateCard(fullCard);
 			if(info["slot"] && info["slot"]==BattleFieldType.MyResourceSlotId)
 				_enable2Res = false;
-				
+
 		}
 		private function CopyCardData(fillCard:Object,realID:int):void{
 			var cardObj:Object = FindCard(realID);
@@ -229,6 +229,8 @@ package ICard.logic {
 			return 0;
 		}
 		public function QueryEndOp():void{
+			if(DoQueryFight()==true)
+				return;
 			_Mod_Battle.QueryEndOp();
 		}
 		public function InitialFight(realID:int):void{
@@ -237,6 +239,13 @@ package ICard.logic {
 		}
 		public function AddFightTarget(realID:int):void{
 			_fightDes.push(realID);
+		}
+		public function DoQueryFight():Boolean{
+			if(_fightDes==null || _fightDes.length==0){
+				return false;
+			}
+			_Mod_Battle.QueryCardAtk(_fightSrc,_fightDes);
+			return true;
 		}
 	}
 }//package com.assist.data.mission 

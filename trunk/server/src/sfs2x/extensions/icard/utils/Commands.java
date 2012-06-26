@@ -48,6 +48,8 @@ public class Commands {
 	public static final String CMD_C2S_END_OP				="1003"; //请求结束操作
 	//参数1(gameID):int;
 	
+	public static final String CMD_C2S_CARD_ATK 			="1004"; //盟军卡片攻击 
+	//参数1(srcID):int;参数2(target):{realID,...};
 
 	
 

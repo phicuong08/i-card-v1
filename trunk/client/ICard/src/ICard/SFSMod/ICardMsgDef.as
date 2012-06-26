@@ -18,7 +18,10 @@ package ICard.SFSMod {
 	
 		public static var c2s_end_op:String	="1003"; //请求结束操作
 		//参数1(gameID):int;
-	
+		
+		public static var c2s_battle_card_atk:String ="1004";       //卡片atk  
+		//参数1(srcID):int;参数2(target):{realID,...};
+		
 		//server msg
 		
 		//game start 开始游戏，参数1:玩家牌更新信息; 

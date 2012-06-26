@@ -89,6 +89,9 @@ package ICard.SFSMod {
 		public function onPriPlayerLoop(params:ISFSObject):void{
 			var playerID:int = params.getInt("playerID");
 			var secNum:int = params.getInt("time");
+			var fighter:ISFSObject = params.getSFSObject("fight");
+			var targetArr:Array = params.getIntArray("target");
+			var kk:int =0;
 			//_battleStage.PlayerLoopFresh(playerID,secNum);
 		}
 		public function onEndOpOK(params:ISFSObject):void{
@@ -108,7 +111,17 @@ package ICard.SFSMod {
 			{
 				params.putIntArray("target",targets);
 			}
-			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_update, params) );
+			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_use, params) );
+		}
+		public function QueryCardAtk(realID:int,targets:Array):void{
+			var params:ISFSObject = new SFSObject();
+			params.putInt("srcID", realID);
+			params.putInt("game",_battleStage.GameID);
+			if(targets.length >0)
+			{
+				params.putIntArray("target",targets);
+			}
+			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_atk, params) );
 		}
 		public function QueryEndOp():void{
 			var params:ISFSObject = new SFSObject();
@@ -121,7 +134,7 @@ package ICard.SFSMod {
 			params.putInt("slot", slot);
 			params.putInt("game",_battleStage.GameID);
 			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_update, params) );
-		}		
+		}	
 		private function procCardArr(params:ISFSObject):void{
 			var cardArr:ISFSArray = params.getSFSArray("card");
 			if(cardArr==null)
