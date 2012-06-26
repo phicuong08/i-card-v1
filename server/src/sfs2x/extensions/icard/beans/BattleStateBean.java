@@ -66,11 +66,11 @@ public class BattleStateBean
 		_waitDuration = Constants.BATTLE_LOOP_TIME;
 		_state =  ST_WAIT_LOOP_OP;
 	}
-	public void InitWaitOp(int playerID){
+	public void InitWaitOp(int playerID,int during){
 		_opPlayerID = playerID;
 		_loopInterval = 3*1000;
 		//_state = ST_LOOP_INTERVAL;
-		_waitDuration = Constants.BATTLE_LOOP_TIME;
+		_waitDuration = during;
 	}
 	public Boolean DecLoopInterval(int val){
 		_loopInterval -= val;

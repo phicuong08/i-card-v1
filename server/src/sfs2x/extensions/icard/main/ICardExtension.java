@@ -52,6 +52,7 @@ public class ICardExtension extends SFSExtension {
 		addRequestHandler(Commands.CMD_C2S_CARD_USE,ClientUseCardHandle.class);
 		addRequestHandler(Commands.CMD_C2S_CARD_UPDATE,ClientUpdateCardHandle.class);
 		addRequestHandler(Commands.CMD_C2S_END_OP,ClientEndOpHandle.class);
+		addRequestHandler(Commands.CMD_C2S_CARD_ATK,ClientCardAttackHandle.class);
 		
 		//ÊÂ¼þhandleÌí¼Ó
 		// Event handler: join room

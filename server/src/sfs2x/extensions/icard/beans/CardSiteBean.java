@@ -47,7 +47,8 @@ public class CardSiteBean
 	public void setFreshLoop(){
 		_addResAble = true;
 		for(CardBean card:_cardMap.values()){
-			if(card.getSlotID()==CardBean.RES_SLOT_ID)
+			if(card.getSlotID()!=CardBean.HAND_SLOT_ID &&
+			   card.getSlotID()!=CardBean.TOMB_SLOT_ID)
 				card.setSide(0);
 		}
 	}

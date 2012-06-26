@@ -14,4 +14,5 @@ public class Constants
 	
 	public static final int SLEEP_TIME = 100;
 	public static final int BATTLE_LOOP_TIME = 30*1000;        //每轮玩家操作时间(秒)
+	public static final int BATTLE_CHAIN_OP_TIME = 33*1000;        //每轮玩家操作时间(秒)
 }

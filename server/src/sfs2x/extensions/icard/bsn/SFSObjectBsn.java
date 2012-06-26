@@ -1,5 +1,7 @@
 package sfs2x.extensions.icard.bsn;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.Random;
@@ -82,9 +84,12 @@ public class SFSObjectBsn
 		fightInfo.putInt("player", action.getPlayerID());
 		fightInfo.putInt("srcID",action.getSrc());
 		fightInfo.putInt("type", action.getType());
-		fightInfo.putInt("time", Constants.BATTLE_LOOP_TIME);
 		params.putSFSObject("fight", fightInfo);
-		params.putIntArray("target", action.getDes());
+		Collection<Integer> desArr = new ArrayList<Integer>(); ;
+		for(int i=0;i<action.getDes().size();i++){
+			desArr.add(action.getDes().elementAt(i));
+		}
+		params.putIntArray("target", desArr);
 	
 	}
 	public static ISFSObject genBattleLoopResetInfo(CardGameBean game){
