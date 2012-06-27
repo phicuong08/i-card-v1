@@ -7,6 +7,6 @@ package ICard.assist.view.interfaces {
       function get content():MovieClip;
 			function show(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void;
 			function set onClose(_arg1:Function):void;
-			function initFade(a1:float,a2:float,secNum:int):void;
+			function initFade(a1:Number,a2:Number,secNum:int):void;
 	  }
 }//package com.assist.view.interfaces 

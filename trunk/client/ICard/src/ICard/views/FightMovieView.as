@@ -13,10 +13,10 @@ package ICard.views {
 		private var _targets:Array;
 		private var _oldCards:Array;
 		private var _bEnemy:Boolean;
-		private var _alpha1:float;
-		private var _alpha2:float;
-		private var _secNum:float;
-		public function InitFade(a1:float,a2:float,secNum:int):void{
+		private var _alpha1:Number;
+		private var _alpha2:Number;
+		private var _secNum:int;
+		public function InitFade(a1:Number,a2:Number,secNum:int):void{
 			_alpha1 = a1;
 			_alpha2 = a2;
 			_secNum = secNum;
@@ -41,10 +41,12 @@ package ICard.views {
 		private function render():void{
 			if(this._fightmovie){
 				_fightmovie.onClose = this.close;
-				_popup.addView(this, this._fightmovie.content);
-				_viewMgr.center(sign, this._fightmovie.content);
+				//_popup.addView(this, this._fightmovie.content);
+				_viewMgr.stage.addChild(this._fightmovie.content);
+				//_viewMgr.center(sign, this._fightmovie.content);
 				_fightmovie.show(_srcCard,_targets,_oldCards,_bEnemy);
 				_fightmovie.initFade(_alpha1,_alpha2,_secNum);
+				reposition();
 			}
 		}
 	
@@ -56,17 +58,10 @@ package ICard.views {
 		public function reposition(_arg1:Boolean=true):void{
 			var _local2:int;
 			var _local3:int;
-			if (inStage == false){
-				return;
-			};
-			if (true == _arg1){
-				//				_viewMgr.toolbar.reposition();
-			} else {
-				_local2 = Structure.stageWidth;
-				_local3 = Structure.stageHeight;
-//				this._il.content.x = ((_local2 - this._il.content.width) / 2);
-//				this._il.content.y = ((_local3 - this._il.content.height) / 2);
-			};
+			_local2 = Structure.stageWidth;
+			_local3 = Structure.stageHeight;
+			this._fightmovie.content.x = 300;// ((_local2 - this._fightmovie.content.width) / 2);
+			this._fightmovie.content.y = 300;//((_local3 - this._fightmovie.content.height) / 2);
 			_structure.reposition();
 		}
 	}

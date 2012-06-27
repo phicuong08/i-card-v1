@@ -12,27 +12,27 @@
 		private var _timerShowResult:Timer;
 		private var _onClose:Function;
 		private var _showCardArr:Array;
-		private var _alphaInterval:float;
-		private var _curAlphaVal:float;
-		private var _alpha1:float;
-		private var _alpha2:float;
+		private var _alphaInterval:Number;
+		private var _curAlphaVal:Number;
+		private var _alpha1:Number;
+		private var _alpha2:Number;
     public function fightmovie(){
     	_showCardArr = new Array;
     	this._onClose = new Function();
-			var card1:Object= {realID:1,cardID:40001,hp:18,cost:3,turncost:1,atk:2,def:0,side:false,turn:false};
-			var card2:Object={realID:2,cardID:40002,hp:18,cost:3,turncost:1,atk:2,def:0,side:false,turn:false};
-			var card3:Object={realID:3,cardID:30001,hp:18,cost:32,turncost:12,atk:22,def:0,side:false,turn:false};
-			var card4:Object= {realID:1,cardID:40001,hp:16,cost:3,turncost:1,atk:2,def:0,side:false,turn:false};
-			var card5:Object={realID:2,cardID:40002,hp:18,cost:3,turncost:1,atk:4,def:0,side:false,turn:false};
-			var card6:Object={realID:3,cardID:30001,hp:18,cost:32,turncost:12,atk:22,def:1,side:false,turn:false};
+			//var card1:Object= {realID:1,cardID:40001,hp:18,cost:3,turncost:1,atk:2,def:0,side:false,turn:false};
+//			var card2:Object={realID:2,cardID:40002,hp:18,cost:3,turncost:1,atk:2,def:0,side:false,turn:false};
+//			var card3:Object={realID:3,cardID:30001,hp:18,cost:32,turncost:12,atk:22,def:0,side:false,turn:false};
+//			var card4:Object= {realID:1,cardID:40001,hp:16,cost:3,turncost:1,atk:2,def:0,side:false,turn:false};
+//			var card5:Object={realID:2,cardID:40002,hp:18,cost:3,turncost:1,atk:4,def:0,side:false,turn:false};
+//			var card6:Object={realID:3,cardID:30001,hp:18,cost:32,turncost:12,atk:22,def:1,side:false,turn:false};
 
 			_timerShowResult = new Timer(_timerInterval, 0);
 			
 			//show(1,[card1,card2,card3],[card4,card5,card6],true);
 			_timerShowResult.addEventListener(TimerEvent.TIMER, this.showResult);
 		}
-		public function initFade(a1:float,a2:float,secNum:int):void{
-		  _alphaInterval = (a2-a1)/(float)(secNum*1000/_timerInterval);
+		public function initFade(a1:Number,a2:Number,secNum:int):void{
+		  _alphaInterval = (a2-a1)/(Number)(secNum*1000/_timerInterval);
 			this._timerShowResult.start();
 			_curAlphaVal = a1;	
 		}
@@ -56,11 +56,10 @@
 				{
 					cardFactory.ResultAlphaInc(obj,_curAlphaVal);
 				}
-				var bCompleted:Boolean
 				if(_alphaInterval>0)
-				 	bCompleted = (_curAlphaVal >= _alpha2)? ture:false;
+				 	bCompleted = (_curAlphaVal >= _alpha2)? true:false;
 				if(_alphaInterval<0)
-					bCompleted = (_curAlphaVal <= _alpha2)? ture:false;
+					bCompleted = (_curAlphaVal <= _alpha2)? true:false;
 					
 				if(bCompleted)
 				{
@@ -84,7 +83,7 @@
 			return null;
 		}
 		
-		privat function InitMCFade(mc:MovieClip,val:flaot):void{
+		private function InitMCFade(mc:MovieClip,val:Number):void{
 			mc.alpha =val;
 			mc.fadeVal = 1;
 		}
