@@ -83,6 +83,33 @@ package ICard.logic {
 			return (card.Cost<=resVal);
 		}
 		
+		public static function CopyCardData(fillCard:Object,cardObj:Object):void{
+			if(cardObj==null)
+			{
+				return;
+			}
+			var card:CardData = cardObj["card"] as CardData;
+			if(card==null)
+				return;
+			fillCard["cardID"] = card.CardID;
+			fillCard["hp"] = card.HP;
+			fillCard["atk"] = card.Atk;
+			fillCard["def"] = card.Def;
+			fillCard["side"] = card.Side;
+			fillCard["turn"] = card.Turn;
+			fillCard["slot"] = card.Slot;
+		}
+		
+		public static function genMenuFlag(cardInfo:Object,enable2Res:Boolean,resNum:int):Object{
+			var flagArr:Object = new Object;
+			flagArr["res"] = (enable2Res)?Is2ResAble(cardInfo["card"]):false;                             //资源
+			flagArr["enter"] = Is2EnterAble(cardInfo["card"],resNum);  //进场
+			flagArr["fight"] = Is2FightAble(cardInfo["card"],resNum);  //战斗  
+			flagArr["task"] = IsTaskAble(cardInfo["card"],resNum); //任务
+			flagArr["cast"] = IsCastAble(cardInfo["card"],resNum); //施法
+			flagArr["turn"] = IsTurnAble(cardInfo["card"],resNum); //翻转
+			return flagArr;
+		}
 		public static function UseAble(card:CardData,resVal:int):Boolean{
 			if(ResEnough(card,resVal)==false)
 			{
