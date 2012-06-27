@@ -197,7 +197,6 @@
 			numMC.x = delMC.width;
 			valMC.addChild(numMC);
 			valMC.showVal=1;
-			valMC.alpha =0;
 			return valMC;
 		}
 		public static function CreateDebuf_Mini(val:int):MovieClip{
@@ -208,7 +207,6 @@
 			numMC.x = delMC.width;
 			valMC.addChild(numMC);
 			valMC.showVal=1;
-			valMC.alpha =0;
 			return valMC;
 		}
 		
@@ -220,7 +218,6 @@
 			numMC.x = addMC.width;
 			valMC.addChild(numMC);
 			valMC.showVal=1;
-			valMC.alpha =0;
 			return valMC;
 		}
 		public static function CreateGain_Mini(val:int):MovieClip{
@@ -231,25 +228,20 @@
 			numMC.x = addMC.width;
 			valMC.addChild(numMC);
 			valMC.showVal=1;
-			valMC.alpha =0;
 			return valMC;
 		}
 		
-		public static function ResultAlphaInc(cardMC:MovieClip):Boolean{
+		public static function ResultAlphaInc(cardMC:MovieClip,alphaVal:float):Boolean{
 			var index:int = 0;
-			var doAlpha:Boolean=false;
 			while(index < cardMC.numChildren)
 			{
 				var elem:MovieClip = (cardMC.getChildAt(index) as MovieClip);
-				if(elem && elem["showVal"]==1 && elem.alpha<80)
+				if(elem && elem["fadeVal"]==1)
 				{
-					doAlpha = true;
-					elem.alpha +=2;
-					trace("here go",elem.alpha);
+					elem.alpha = alphaVal;
 				}
 				index++;
 			}
-			return doAlpha;
 		}
 		private static function CreateIcon( icon:String):MovieClip{
 				var classVal:Class = getDefinitionByName(icon) as Class;

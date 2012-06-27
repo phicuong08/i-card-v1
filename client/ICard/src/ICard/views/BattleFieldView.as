@@ -39,6 +39,7 @@ package ICard.views {
 			_battleStage.CardFightResultCallback = this.onCardFightResult;
 			_battleStage.PlayerLoopFreshCallback = this.onPlayerLoopFresh;
 			_battleStage.EndOpOkCallback = this.onEndOpOk;
+			_battleStage.PreShowActionCallback = this.onPreShowAction;
 			_battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
 			_battleField.tip = _viewMgr.tip.iTip;
 			_battleField.BattleStage = _battleStage;
@@ -102,6 +103,9 @@ package ICard.views {
 			var iconName:String=(myLoop)?"I_turn":"u_turn";
 			_viewMgr.worldNotice.showMessage("",0.8,iconName);
 			_battleField.LoopFresh(myLoop,secNum/1000);
+		}
+		public function onPreShowAction(srcID:int,targetArr:Array,bEnemy:Boolean):void{
+			_viewMgr.fightmovie.InitShow(srcID,targetArr,targetArr,bEnemy);
 		}
 		public function onCardFightResult(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
 			_viewMgr.fightMovie.InitShow(srcID,targets,oldCards,bEnemy);

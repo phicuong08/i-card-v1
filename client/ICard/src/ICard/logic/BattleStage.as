@@ -19,6 +19,7 @@ package ICard.logic {
 		private var _cardFightResultCallback:Function;
 		private var _playerLoopFreshCallback:Function;
 		private var _endOpOkCallback:Function;
+		private var _preShowAction:Function;
 		private var _enable2Res:Boolean;
 		protected var _data:IData;
 		private var _IsTurn:Boolean; //操作回合
@@ -42,6 +43,10 @@ package ICard.logic {
 		}
 		public function set EndOpOkCallback(arg1:Function):void{
 			_endOpOkCallback = arg1;
+		}
+		
+		public function set PreShowActionCallback(arg1:Function):void{
+			_preShowAction = arg1;
 		}
 		public function set CardFightResultCallback(arg1:Function):void{
 			_cardFightResultCallback = arg1;
@@ -164,7 +169,17 @@ package ICard.logic {
 			else
 				return cardInfo["slot"] +6;
 		}
-		
+		public function FindCardOwner(realID:int):int{
+			for each(var guy:BattleGuy in _guy)
+			{
+				var card:CardData = guy.CardDB.FindCard(realID);
+				if(card)
+				{
+					return guy.ID;
+				}
+			}
+			return 0;
+		}
 		public function FindCard(realID:int):Object{
 			var cardInfo:Object = new Object;
 			for each(var guy:BattleGuy in _guy)
@@ -247,5 +262,25 @@ package ICard.logic {
 			_Mod_Battle.QueryCardAtk(_fightSrc,_fightDes);
 			return true;
 		}
+		public function PriPlayerLoop(playerID:int,secNum:int):void{
+			_endOpOkCallback();
+		}		
+		public function PreShowAction(srcID:int,actionType:int,targetArr:Array):void{
+			var cardArr:Array = [];
+			var srcCard:Object = new Object;
+			var srcOwner:int = FindCardOwner(srcID);
+			var targetOwner:int = 0;
+			CopyCardData(srcCard,srcID);
+			cardArr.push(srcCard);
+			for each(var targetId:int in targetArr){
+				var cardObj:Object = new Object;
+				CopyCardData(cardObj,targetId);
+				cardArr.push(cardObj);
+				if(targetOwner==0)
+					targetOwner = FindCardOwner(targetId);
+			}
+			_preShowAction(srcID,cardArr, (srcOwner!=targetOwner));
+		}
+		
 	}
 }//package com.assist.data.mission 
