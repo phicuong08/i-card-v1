@@ -89,10 +89,19 @@ package ICard.SFSMod {
 		public function onPriPlayerLoop(params:ISFSObject):void{
 			var playerID:int = params.getInt("playerID");
 			var secNum:int = params.getInt("time");
-			var fighter:ISFSObject = params.getSFSObject("fight");
-			var targetArr:Array = params.getIntArray("target");
-			var kk:int =0;
+			onProcActionInfo(params);
+			_battleStage.PriPlayerLoop(playerID,secNum);
 			//_battleStage.PlayerLoopFresh(playerID,secNum);
+		}
+		private function onProcActionInfo(params:ISFSObject):void{
+			var fighterObj:ISFSObject = params.getSFSObject("fight");
+			if(fighter==null)
+				return;
+				
+			var srcID:int = fighterObj.getInt("srcID");
+			var actionType:int = fighterObj.getInt("type");
+			var targetArr:Array = params.getIntArray("target");
+			_battleStage.PreShowAction(srcID,actionType,targetArr);			
 		}
 		public function onEndOpOK(params:ISFSObject):void{
 			_battleStage.onEndOpOK();

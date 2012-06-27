@@ -13,6 +13,14 @@ package ICard.views {
 		private var _targets:Array;
 		private var _oldCards:Array;
 		private var _bEnemy:Boolean;
+		private var _alpha1:float;
+		private var _alpha2:float;
+		private var _secNum:float;
+		public function InitShow(a1:float,a2:float,secNum:int):void{
+			_alpha1 = a1;
+			_alpha2 = a2;
+			_secNum = secNum;
+		}
 		public function InitShow(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
 			_srcCard =srcID;
 			_targets = targets;
@@ -26,15 +34,17 @@ package ICard.views {
 		
 		private function loadCallback():void
 		{
-//			_viewMgr.addToPositionList(sign, this.reposition);
-			this._fightmovie = (_viewMgr.getAssetsObject("fightmovie", "fightmovie") as IFightMovie);
-//			this._fightmovie.show(_srcCard,_targets,_oldCards,_bEnemy);
+			_fightmovie = (_viewMgr.getAssetsObject("fightmovie", "fightmovie") as IFightMovie);
+			
 			this.render();
 		}
 		private function render():void{
 			if(this._fightmovie){
+				_fightmovie.onClose = this.close;
 				_popup.addView(this, this._fightmovie.content);
 				_viewMgr.center(sign, this._fightmovie.content);
+				_fightmovie.show(_srcCard,_targets,_oldCards,_bEnemy);
+				_fightmovie.initFade(_alpha1,_alpha2,_secNum);
 			}
 		}
 	
