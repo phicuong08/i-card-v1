@@ -26,7 +26,8 @@ package ICard.views {
 		private var _battleField:IBattleField;
 		private var _cardDB:ICardDB;
 		private var _battleStage:BattleStage;
-
+		private static var _Inst:BattleFieldView;
+		
 		public function show():void{
 			loadAssets("battlefield", this.loadCallback, "");
 			QueryNewGame();	
@@ -99,12 +100,16 @@ package ICard.views {
 			return true;	
 		}
 		
+		public function onPriPlayerFresh(myLoop:Boolean,secNum:int):void{
+		
+		}
 		public function onPlayerLoopFresh(myLoop:Boolean,secNum:int):void{
 			var iconName:String=(myLoop)?"I_turn":"u_turn";
 			_viewMgr.worldNotice.showMessage("",0.8,iconName);
 			_battleField.LoopFresh(myLoop,secNum/1000);
 		}
 		public function onPreShowAction(srcID:int,targetArr:Array,bEnemy:Boolean):void{
+			_viewMgr.fightmovie.InitFade(1,1.1,3);
 			_viewMgr.fightmovie.InitShow(srcID,targetArr,targetArr,bEnemy);
 		}
 		public function onCardFightResult(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{

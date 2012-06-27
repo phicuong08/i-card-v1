@@ -32,15 +32,18 @@ package ICard.logic {
 			_playerLoopFreshCallback = new Function;
 			_endOpOkCallback = new Function;
 		}
-		public function settle(arg:IData):void{
+		
+		public function settle(arg1:IData):void{
 			_data = (arg as IData);
 		}
+		
 		public static function getInstance():BattleStage{
 			if (!_obj){
 				_obj = new (BattleStage)();
 			};
 			return (_obj);
 		}
+		
 		public function set EndOpOkCallback(arg1:Function):void{
 			_endOpOkCallback = arg1;
 		}
@@ -48,12 +51,15 @@ package ICard.logic {
 		public function set PreShowActionCallback(arg1:Function):void{
 			_preShowAction = arg1;
 		}
+		
 		public function set CardFightResultCallback(arg1:Function):void{
 			_cardFightResultCallback = arg1;
 		}
+		
 		public function set PlayerLoopFreshCallback(arg1:Function):void{
 			_playerLoopFreshCallback = arg1;
 		}
+		
 		public function InitGuy(me:int,you:int,gameID:int):void{
 			_guy = new Dictionary;
 			_myID = me;
@@ -92,23 +98,12 @@ package ICard.logic {
 				_enable2Res = false;
 
 		}
+		
 		private function CopyCardData(fillCard:Object,realID:int):void{
 			var cardObj:Object = FindCard(realID);
-			if(cardObj==null)
-			{
-				return;
-			}
-			var card:CardData = cardObj["card"] as CardData;
-			if(card==null)
-				return;
-			fillCard["cardID"] = card.CardID;
-			fillCard["hp"] = card.HP;
-			fillCard["atk"] = card.Atk;
-			fillCard["def"] = card.Def;
-			fillCard["side"] = card.Side;
-			fillCard["turn"] = card.Turn;
-			fillCard["slot"] = card.Slot;
+			UseCard.CopyCardData(fillCard,cardObj);
 		}
+		
 		private function FullCardInfo(info:Object):Object{
 			var fillCard:Object = CardType.CreateCardInfo(info["cardID"]);
 			CopyCardData(fillCard,info["realID"]);
@@ -126,6 +121,7 @@ package ICard.logic {
 					
 			}
 		}
+		
 		public function onCardFightResult(srcID:int,targets:Array):void{
 			var oldCards:Array=[];
 			var srcGuy:BattleGuy;
@@ -147,8 +143,6 @@ package ICard.logic {
 			var card:CardData = PlayerMe.CardDB.FindCard(realID);
 			if(!card)
 				return false;
-//			if(!UseCard.UseAble(card,PlayerMe.CardDB.ResNum()))	
-//				return false;
 			return UseCard.Card2FightSlot(card,_Mod_Battle);
 		}
 		
@@ -212,14 +206,7 @@ package ICard.logic {
 			var cardInfo:Object =  FindCard(realID);
 			if(!cardInfo || cardInfo["guy"]!=_myID ||(_IsTurn==false))
 				return null;
-			var flagArr:Object = new Object;
-			flagArr["res"] = (_enable2Res)?UseCard.Is2ResAble(cardInfo["card"]):false;                             //资源
-			flagArr["enter"] = UseCard.Is2EnterAble(cardInfo["card"],PlayerMe.CardDB.ResNum());  //进场
-			flagArr["fight"] = UseCard.Is2FightAble(cardInfo["card"],PlayerMe.CardDB.ResNum());  //战斗  
-			flagArr["task"] = UseCard.IsTaskAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //任务
-			flagArr["cast"] = UseCard.IsCastAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //施法
-			flagArr["turn"] = UseCard.IsTurnAble(cardInfo["card"],PlayerMe.CardDB.ResNum()); //翻转
-			return flagArr;
+			return UseCard.genMenuFlag(cardInfo,_enable2Res,PlayerMe.CardDB.ResNum());
 		}
 		public function CardInfo(realID:int):Object{
 			var cardObj:Object = FindCard(realID);
@@ -262,9 +249,11 @@ package ICard.logic {
 			_Mod_Battle.QueryCardAtk(_fightSrc,_fightDes);
 			return true;
 		}
+		
 		public function PriPlayerLoop(playerID:int,secNum:int):void{
 			_endOpOkCallback();
-		}		
+		}
+				
 		public function PreShowAction(srcID:int,actionType:int,targetArr:Array):void{
 			var cardArr:Array = [];
 			var srcCard:Object = new Object;

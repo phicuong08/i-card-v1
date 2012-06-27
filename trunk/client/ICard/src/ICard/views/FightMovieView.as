@@ -16,7 +16,7 @@ package ICard.views {
 		private var _alpha1:float;
 		private var _alpha2:float;
 		private var _secNum:float;
-		public function InitShow(a1:float,a2:float,secNum:int):void{
+		public function InitFade(a1:float,a2:float,secNum:int):void{
 			_alpha1 = a1;
 			_alpha2 = a2;
 			_secNum = secNum;

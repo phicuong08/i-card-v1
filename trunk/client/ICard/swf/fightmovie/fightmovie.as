@@ -28,7 +28,7 @@
 
 			_timerShowResult = new Timer(_timerInterval, 0);
 			
-			show(1,[card1,card2,card3],[card4,card5,card6],true);
+			//show(1,[card1,card2,card3],[card4,card5,card6],true);
 			_timerShowResult.addEventListener(TimerEvent.TIMER, this.showResult);
 		}
 		public function initFade(a1:float,a2:float,secNum:int):void{
