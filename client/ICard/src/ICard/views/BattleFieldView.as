@@ -36,11 +36,10 @@ package ICard.views {
 		private function loadCallback():void
 		{
 			_battleStage = BattleStage.getInstance();
-			_battleStage.settle(_data);
+			_battleStage.settle(_data,this);
 			_battleStage.CardFightResultCallback = this.onCardFightResult;
 			_battleStage.PlayerLoopFreshCallback = this.onPlayerLoopFresh;
 			_battleStage.EndOpOkCallback = this.onEndOpOk;
-			_battleStage.PreShowActionCallback = this.onPreShowAction;
 			_battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
 			_battleField.tip = _viewMgr.tip.iTip;
 			_battleField.BattleStage = _battleStage;

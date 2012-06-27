@@ -95,7 +95,7 @@ package ICard.SFSMod {
 		}
 		private function onProcPreActionInfo(params:ISFSObject):void{
 			var fighterObj:ISFSObject = params.getSFSObject("fight");
-			if(fighter==null)
+			if(fighterObj==null)
 				return;
 				
 			var srcID:int = fighterObj.getInt("srcID");

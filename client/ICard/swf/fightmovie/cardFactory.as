@@ -231,7 +231,7 @@
 			return valMC;
 		}
 		
-		public static function ResultAlphaInc(cardMC:MovieClip,alphaVal:float):Boolean{
+		public static function ResultAlphaInc(cardMC:MovieClip,alphaVal:Number):void{
 			var index:int = 0;
 			while(index < cardMC.numChildren)
 			{

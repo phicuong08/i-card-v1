@@ -8,6 +8,7 @@ package ICard.logic {
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.datas.*;
 	import ICard.datas.card.*;
+	import ICard.views.BattleFieldView;
 	
 	import flash.utils.*;
 	
@@ -19,13 +20,13 @@ package ICard.logic {
 		private var _cardFightResultCallback:Function;
 		private var _playerLoopFreshCallback:Function;
 		private var _endOpOkCallback:Function;
-		private var _preShowAction:Function;
 		private var _enable2Res:Boolean;
 		protected var _data:IData;
 		private var _IsTurn:Boolean; //操作回合
 		private var _fightSrc:int;
 		private var _fightDes:Array;
 		private static var _obj:BattleStage;
+		private static var _battleField:BattleFieldView;
 		public function BattleStage():void{
 			_enable2Res = false;
 			_cardFightResultCallback = new Function;
@@ -33,8 +34,9 @@ package ICard.logic {
 			_endOpOkCallback = new Function;
 		}
 		
-		public function settle(arg1:IData):void{
-			_data = (arg as IData);
+		public function settle(arg1:IData,arg2:BattleFieldView):void{
+			_data = (arg1 as IData);
+			_battleField = arg2;
 		}
 		
 		public static function getInstance():BattleStage{
@@ -48,9 +50,6 @@ package ICard.logic {
 			_endOpOkCallback = arg1;
 		}
 		
-		public function set PreShowActionCallback(arg1:Function):void{
-			_preShowAction = arg1;
-		}
 		
 		public function set CardFightResultCallback(arg1:Function):void{
 			_cardFightResultCallback = arg1;
@@ -268,7 +267,7 @@ package ICard.logic {
 				if(targetOwner==0)
 					targetOwner = FindCardOwner(targetId);
 			}
-			_preShowAction(srcID,cardArr, (srcOwner!=targetOwner));
+			_battleField.onPreShowAction(srcID,cardArr, (srcOwner!=targetOwner));
 		}
 		
 	}

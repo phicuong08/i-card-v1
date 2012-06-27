@@ -91,6 +91,7 @@ package ICard.logic {
 			var card:CardData = cardObj["card"] as CardData;
 			if(card==null)
 				return;
+			fillCard["realID"] = card.RealID;
 			fillCard["cardID"] = card.CardID;
 			fillCard["hp"] = card.HP;
 			fillCard["atk"] = card.Atk;
@@ -102,12 +103,12 @@ package ICard.logic {
 		
 		public static function genMenuFlag(cardInfo:Object,enable2Res:Boolean,resNum:int):Object{
 			var flagArr:Object = new Object;
-			flagArr["res"] = (enable2Res)?Is2ResAble(cardInfo["card"]):false;                             //×ÊÔ´
-			flagArr["enter"] = Is2EnterAble(cardInfo["card"],resNum);  //½ø³¡
-			flagArr["fight"] = Is2FightAble(cardInfo["card"],resNum);  //Õ½¶·  
-			flagArr["task"] = IsTaskAble(cardInfo["card"],resNum); //ÈÎÎñ
-			flagArr["cast"] = IsCastAble(cardInfo["card"],resNum); //Ê©·¨
-			flagArr["turn"] = IsTurnAble(cardInfo["card"],resNum); //·­×ª
+			flagArr["res"] = (enable2Res)?Is2ResAble(cardInfo["card"]):false;                             //ï¿½ï¿½Ô´
+			flagArr["enter"] = Is2EnterAble(cardInfo["card"],resNum);  //ï¿½ï¿½
+			flagArr["fight"] = Is2FightAble(cardInfo["card"],resNum);  //Õ½ï¿½ï¿½  
+			flagArr["task"] = IsTaskAble(cardInfo["card"],resNum); //ï¿½ï¿½ï¿½ï¿½
+			flagArr["cast"] = IsCastAble(cardInfo["card"],resNum); //Ê©ï¿½ï¿½
+			flagArr["turn"] = IsTurnAble(cardInfo["card"],resNum); //ï¿½ï¿½×ª
 			return flagArr;
 		}
 		public static function UseAble(card:CardData,resVal:int):Boolean{
