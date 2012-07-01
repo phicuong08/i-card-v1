@@ -62,6 +62,7 @@ package ICard.views {
 //			this.functionBar();
 //			this.keepAlive();
 //			this.friend();
+			
 			_viewMgr.addToPositionList(sign, this.reposition);
 			//_view.whatsNew.show();
 //			this.load_effect_circle();
@@ -108,13 +109,12 @@ package ICard.views {
 		
 		public function reposition():void{
 			if (this.inStage == true){
-				this._toolbar.reposition(Structure.minStageWidth, Structure.minStageHeight, Structure.maxStageWidth, Structure.maxStageHeight, Structure.stageClip);
+			//	_viewMgr.center(sign, this._toolbar.content);
+				//this._toolbar.reposition(Structure.minStageWidth, Structure.minStageHeight, Structure.maxStageWidth, Structure.maxStageHeight, Structure.stageClip);
 			};
 			Tip.offset = Structure.stageOffset;
 			_structure.reposition();
 			_viewMgr.reposition();
-//			_view.achievementComplete.reposition(false);
-//			_view.activities.reposition(false);
 		
 		}
 		

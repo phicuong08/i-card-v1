@@ -11,8 +11,8 @@ package ICard.views {
 
         public static const minStageWidth:int = 1000;
         public static const minStageHeight:int = 600;
-        public static const maxStageWidth:int = 1250;
-        public static const maxStageHeight:int = 650;
+        public static const maxStageWidth:int = 1650;
+        public static const maxStageHeight:int = 850;
 
         private static var _instance:Structure;
 

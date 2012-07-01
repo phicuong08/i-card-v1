@@ -9,6 +9,8 @@
 
     public class fightmovie extends MovieClip implements IFightMovie{
 		private var _timerInterval:int = 100;
+		private var _xOff:int = 650;
+		private var _yOff:int = 162;
 		private var _timerShowResult:Timer;
 		private var _onClose:Function;
 		private var _showCardArr:Array;
@@ -34,6 +36,8 @@
 		public function initFade(a1:Number,a2:Number,secNum:int):void{
 		  _alphaInterval = (a2-a1)/(Number)(secNum*1000/_timerInterval);
 			this._timerShowResult.start();
+			_alpha1 = a1;
+			_alpha2 = a2;
 			_curAlphaVal = a1;	
 		}
 		public function show(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
@@ -47,7 +51,7 @@
 					AddObject(CreateFightCard(target["realID"],oldCards,targets));
 				}
 			}
-		}
+}
 		
 		private function showResult(_arg1:TimerEvent):void{ //牌上的战斗结果渐变显示
 				var bCompleted:Boolean = true;
@@ -63,6 +67,7 @@
 					
 				if(bCompleted)
 				{
+					trace("fight movie ok!");
 					this._timerShowResult.stop();
 					this._onClose();
 				}
@@ -136,6 +141,8 @@
 		public function AddObject(obj:MovieClip):void{
 			if(!obj)
 				return;
+			obj.y = _yOff;//-obj.height/2;
+			trace("obj.y,stage.height,obj.height =",obj.y,stage.height,obj.height);
 			this.addChild(obj);
 			_showCardArr.push(obj);
 			UpdatePos();
@@ -145,9 +152,9 @@
 			var totalWidth:Number = 0;
 			for each(var obj:MovieClip in _showCardArr)
 			{
-				obj.x = obj.width/2 + totalWidth;
+				obj.x = obj.width/2 + totalWidth + _xOff;
 				totalWidth = totalWidth + obj.width + 10;
-				obj.y = 0;
+				
 			}
 		}
 		
