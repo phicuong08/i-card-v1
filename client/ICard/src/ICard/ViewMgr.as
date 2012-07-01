@@ -149,7 +149,7 @@ package ICard {
 		    }
         public function afterGetPlayerInfo():void{
             this.initCookie();
-            structure.drawMark();
+            //structure.drawMark();
 //            this.panelLoading.show();
 //            this.screen.show();
 //            _data.call(Mod_Player_Base.server_time, this.serverTimeCallBack, []);

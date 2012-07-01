@@ -41,17 +41,20 @@ package ICard.views {
 		private function render():void{
 			if(this._fightmovie){
 				_fightmovie.onClose = this.close;
-				//_popup.addView(this, this._fightmovie.content);
+				
+				
+				
 				_viewMgr.stage.addChild(this._fightmovie.content);
-				//_viewMgr.center(sign, this._fightmovie.content);
+				_viewMgr.center(sign, this._fightmovie.content);
 				_fightmovie.show(_srcCard,_targets,_oldCards,_bEnemy);
 				_fightmovie.initFade(_alpha1,_alpha2,_secNum);
-				reposition();
+				//reposition();
 			}
 		}
 	
 		public function close():void{
-				_popup.closeView(this);
+				//_popup.closeView(this);
+				_viewMgr.stage.removeChild(this._fightmovie.content);
 		}
 		public function clear():void{
 		}
@@ -60,8 +63,8 @@ package ICard.views {
 			var _local3:int;
 			_local2 = Structure.stageWidth;
 			_local3 = Structure.stageHeight;
-			this._fightmovie.content.x = 300;// ((_local2 - this._fightmovie.content.width) / 2);
-			this._fightmovie.content.y = 300;//((_local3 - this._fightmovie.content.height) / 2);
+			this._fightmovie.content.x = ((_local2 - this._fightmovie.content.width) / 2);
+			this._fightmovie.content.y = ((_local3 - this._fightmovie.content.height) / 2);
 			_structure.reposition();
 		}
 	}

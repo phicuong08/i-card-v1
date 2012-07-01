@@ -15,10 +15,20 @@ package ICard.views {
             this.render();
         }
         private function render():void{
-            _viewMgr.structure.content.addChild(this._screen);
-            _viewMgr.toolbar.init();
-            this._screen.addChild(_viewMgr.toolbar.content);
            
+            _viewMgr.toolbar.init();
+//            this._screen.addChild(_viewMgr.toolbar.content);
+//			_screen.x = (Structure.stageWidth - _screen.width)/2;
+//			_screen.y = (Structure.stageHeight -_screen.height)/2;
+//			_viewMgr.structure.content.addChild(this._screen);
+			
+			
+			_viewMgr.toolbar.content.x = (Structure.stageWidth - _viewMgr.toolbar.content.width)/2;
+			_viewMgr.toolbar.content.y = (Structure.stageHeight - _viewMgr.toolbar.content.height)*0.5;
+			
+			_viewMgr.structure.content.addChild(_viewMgr.toolbar.content);
+			//_viewMgr.stage.addChild(_viewMgr.toolbar.content);
+			
             //_viewMgr.setting.loadInitSound();
             // _view.activities.show();
         }

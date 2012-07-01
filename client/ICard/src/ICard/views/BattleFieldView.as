@@ -108,7 +108,7 @@ package ICard.views {
 			_battleField.LoopFresh(myLoop,secNum/1000);
 		}
 		public function onPreShowAction(srcID:int,targetArr:Array,bEnemy:Boolean):void{
-			_viewMgr.fightmovie.InitFade(1,1.1,3);
+			_viewMgr.fightmovie.InitFade(1,1.1,4);
 			_viewMgr.fightmovie.InitShow(srcID,targetArr,targetArr,bEnemy);
 		}
 		public function onCardFightResult(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{

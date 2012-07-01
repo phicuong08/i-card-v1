@@ -28,8 +28,14 @@ package ICard.views {
 			this.render();
 		}
 		private function render():void{
+			//_viewMgr.structure.drawMark();
+			
 			if(this._login){
-				_popup.addView(this, this._login.content);
+				this._login.content.x = (Structure.stageWidth - _login.content.width)/2;
+				this._login.content.y = (Structure.stageHeight - _login.content.height)*0.4;
+				
+				_viewMgr.stage.addChild(this._login.content);
+				//_popup.addView(this, this._login.content);
 			}
 //			if (this._achievement == null){
 //				this._achievement = (_viewMgr.getAssetsObject("Achievement", "Achievement") as IAchievement);
@@ -109,7 +115,8 @@ package ICard.views {
 			};
 		}
 		public function close():void{
-				_popup.closeView(this);
+			_viewMgr.stage.removeChild(this._login.content);
+				
 		}
 		public function clear():void{
 		}
