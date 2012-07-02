@@ -19,7 +19,7 @@ public class BattleStateBean
 	public static final int ST_INIT_BATTLE=1;
 	public static final int ST_WAIT_LOOP_OP = 2;
 	public static final int ST_WAIT_CHAIN_OP = 3;
-	public static final int ST_WAIT_CHAIN_TIMEOUT = 4;
+	public static final int ST_WAIT_CHAIN_OVER = 4;
 	public static final int ST_SELECT_CHAIN_RESP = 5;
 	public static final int ST_WAIT_GOD = 6;
 	public static final int ST_LOOP_END = 7;
