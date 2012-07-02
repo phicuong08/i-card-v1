@@ -17,9 +17,6 @@ package ICard.logic {
 		private var _gameID:int;
 		private var _myID:int;
 		private var _fightLink:FightLink;
-		private var _cardFightResultCallback:Function;
-		private var _playerLoopFreshCallback:Function;
-		private var _endOpOkCallback:Function;
 		private var _enable2Res:Boolean;
 		protected var _data:IData;
 		private var _IsTurn:Boolean; //操作回合
@@ -29,9 +26,6 @@ package ICard.logic {
 		private static var _battleField:BattleFieldView;
 		public function BattleStage():void{
 			_enable2Res = false;
-			_cardFightResultCallback = new Function;
-			_playerLoopFreshCallback = new Function;
-			_endOpOkCallback = new Function;
 		}
 		
 		public function settle(arg1:IData,arg2:BattleFieldView):void{
@@ -46,18 +40,6 @@ package ICard.logic {
 			return (_obj);
 		}
 		
-		public function set EndOpOkCallback(arg1:Function):void{
-			_endOpOkCallback = arg1;
-		}
-		
-		
-		public function set CardFightResultCallback(arg1:Function):void{
-			_cardFightResultCallback = arg1;
-		}
-		
-		public function set PlayerLoopFreshCallback(arg1:Function):void{
-			_playerLoopFreshCallback = arg1;
-		}
 		
 		public function InitGuy(me:int,you:int,gameID:int):void{
 			_guy = new Dictionary;
@@ -134,8 +116,7 @@ package ICard.logic {
 				else
 					desGuy = card["guy"];
 			}
-			if(_cardFightResultCallback!=null)
-				_cardFightResultCallback(srcID,targets,oldCards,(srcGuy!=desGuy));
+			_battleField.onCardFightResult(srcID,targets,oldCards,(srcGuy!=desGuy));
 		}
 
 		public function AskCard2FightSlot(realID:int):Boolean{
@@ -190,10 +171,10 @@ package ICard.logic {
 		}
 		public function onEndOpOK():void{
 			_IsTurn = false;
-			_endOpOkCallback();
+			_battleField.onEndOpOk();
 		}
 		public function PlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
-			_playerLoopFreshCallback(playerID==_myID,secNum);	
+			_battleField.onPlayerLoopFresh(playerID==_myID,secNum);	
 			_IsTurn = (playerID==_myID)?true:false;
 			if(_IsTurn)
 				_enable2Res = true;
@@ -250,7 +231,10 @@ package ICard.logic {
 		}
 		
 		public function PriPlayerLoop(playerID:int,secNum:int):void{
-			_endOpOkCallback();
+			_battleField.onEndOpOk();
+			
+			_IsTurn = (playerID==_myID)?true:false;
+			_battleField.onPriPlayerLoop(_IsTurn,secNum);
 		}
 				
 		public function PreShowAction(srcID:int,actionType:int,targetArr:Array):void{

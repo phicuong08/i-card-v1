@@ -3,7 +3,6 @@ package sfs2x.extensions.icard.main;
 import java.util.Enumeration;
 
 import sfs2x.extensions.icard.beans.*;
-import sfs2x.extensions.icard.bsn.GameBsn;
 import sfs2x.extensions.icard.utils.Constants;
 
 /**

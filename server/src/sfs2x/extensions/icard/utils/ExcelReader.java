@@ -1,19 +1,12 @@
 package sfs2x.extensions.icard.utils;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import jxl.Cell;
-import jxl.CellType;
-import jxl.DateCell;
-import jxl.LabelCell;
-import jxl.NumberCell;
 import jxl.Sheet;
-import jxl.read.biff.BiffException;
 import jxl.read.biff.WorkbookParser;
 
 public class ExcelReader {

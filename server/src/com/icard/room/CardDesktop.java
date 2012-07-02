@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import sfs2x.extensions.icard.main.ParentExtension;
-import sfs2x.extensions.icard.utils.Commands;
 import com.icard.user.CardUser;
 import com.icard.user.CardUserManager;
 import com.smartfoxserver.v2.entities.User;

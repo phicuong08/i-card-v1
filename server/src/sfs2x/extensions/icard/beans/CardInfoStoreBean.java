@@ -2,7 +2,6 @@ package sfs2x.extensions.icard.beans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import com.icard.data.excel.ExcelReader;
 

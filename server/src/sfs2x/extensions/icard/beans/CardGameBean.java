@@ -1,13 +1,10 @@
 package sfs2x.extensions.icard.beans;
 
-import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
 import java.util.Timer;
 import java.util.concurrent.ConcurrentHashMap;
 
 import sfs2x.extensions.icard.bsn.BattleBsn;
-import sfs2x.extensions.icard.bsn.CardActionBsn;
 import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.Constants;
 import sfs2x.extensions.icard.utils.SyncGameStart;

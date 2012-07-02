@@ -5,13 +5,9 @@ import sfs2x.extensions.icard.beans.GameLobbyBean;
 import sfs2x.extensions.icard.bsn.ClientQueryBsn;
 import sfs2x.extensions.icard.utils.ErrorDef;
 
-import com.icard.user.CardUser;
-import com.icard.user.CardUserManager;
-import com.smartfoxserver.v2.core.SFSEventParam;
-import com.smartfoxserver.v2.entities.Room;
+
 import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
-import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 
 public class ClientUpdateCardHandle extends ICardClientRequestHandler {
 

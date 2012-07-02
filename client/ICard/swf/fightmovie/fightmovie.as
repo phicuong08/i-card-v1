@@ -43,6 +43,7 @@
 		}
 		public function show(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
 		  _infoMC = new MovieClip;
+		  this.addChild(_infoMC);
 			AddObject(CreateFightCard(srcID,oldCards,targets));
 			var fightIcon:MovieClip = cardFactory.CreateFightIcon(bEnemy);
 			AddObject(fightIcon);
@@ -155,7 +156,7 @@
 			var totalWidth:Number = 0;
 			for each(var obj:MovieClip in _showCardArr)
 			{
-			  obj.x = obj.width/2 + totalWidth;
+			    obj.x = obj.width/2 + totalWidth;
 				totalWidth = totalWidth + obj.width + 10;
 			}
 			_infoMC.x = (_maskMC.width - _infoMC.width)/2;

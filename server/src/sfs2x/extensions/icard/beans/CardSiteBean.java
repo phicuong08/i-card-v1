@@ -1,6 +1,5 @@
 package sfs2x.extensions.icard.beans;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
