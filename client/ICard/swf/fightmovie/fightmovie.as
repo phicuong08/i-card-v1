@@ -18,6 +18,7 @@
 		private var _curAlphaVal:Number;
 		private var _alpha1:Number;
 		private var _alpha2:Number;
+		private var _infoMC:MovieClip;
     public function fightmovie(){
     	_showCardArr = new Array;
     	this._onClose = new Function();
@@ -41,6 +42,7 @@
 			_curAlphaVal = a1;	
 		}
 		public function show(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
+		  _infoMC = new MovieClip;
 			AddObject(CreateFightCard(srcID,oldCards,targets));
 			var fightIcon:MovieClip = cardFactory.CreateFightIcon(bEnemy);
 			AddObject(fightIcon);
@@ -51,7 +53,8 @@
 					AddObject(CreateFightCard(target["realID"],oldCards,targets));
 				}
 			}
-}
+			UpdatePos();
+		}
 		
 		private function showResult(_arg1:TimerEvent):void{ //牌上的战斗结果渐变显示
 				var bCompleted:Boolean = true;
@@ -143,19 +146,19 @@
 				return;
 			obj.y = _yOff;//-obj.height/2;
 			trace("obj.y,stage.height,obj.height =",obj.y,stage.height,obj.height);
-			this.addChild(obj);
 			_showCardArr.push(obj);
-			UpdatePos();
+			_infoMC.addChild(obj);
+			
 		}
 		
 		private function UpdatePos():void{
 			var totalWidth:Number = 0;
 			for each(var obj:MovieClip in _showCardArr)
 			{
-				obj.x = obj.width/2 + totalWidth + _xOff;
+			  obj.x = obj.width/2 + totalWidth;
 				totalWidth = totalWidth + obj.width + 10;
-				
 			}
+			_infoMC.x = (_maskMC.width - _infoMC.width)/2;
 		}
 		
 		public function set onClose(_arg1:Function):void{
