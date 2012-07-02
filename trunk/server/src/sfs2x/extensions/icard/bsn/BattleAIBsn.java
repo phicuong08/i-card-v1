@@ -1,8 +1,5 @@
 package sfs2x.extensions.icard.bsn;
 
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Random;
 import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.AICardSiteBean;
@@ -12,14 +9,8 @@ import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardSiteBean;
 import sfs2x.extensions.icard.main.ICardExtension;
-import sfs2x.extensions.icard.utils.Commands;
-import sfs2x.extensions.icard.utils.Constants;
 
-import com.smartfoxserver.v2.entities.Room;
-import com.smartfoxserver.v2.entities.User;
-import com.smartfoxserver.v2.entities.data.ISFSObject;
-import com.smartfoxserver.v2.entities.data.SFSObject;
-import com.smartfoxserver.v2.extensions.SFSExtension;
+
 
 /**
  * GameBsn: class containing utility business classes for game processing
@@ -31,9 +22,6 @@ public class BattleAIBsn
 {	
 	// Store directions factors to move left,right,up,down
 	
-	static private java.util.Random _Random = new java.util.Random();
-
-
 	public static void RunBattleAI(CardGameBean game,AICardSiteBean site,ICardExtension ext){
 		if(game.getOpPlayer()!= site.getPlayerID())
 			return;

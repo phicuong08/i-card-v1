@@ -2,13 +2,12 @@ package sfs2x.extensions.icard.beans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 
 import com.icard.data.excel.ExcelReader;
 
 public class CardUseStoreBean {
 	private final static String CARD_FILE_PATH ="extensions/ICard/useCard.xls";
-	private static int MIN_CARD_ID	=2000;	//×îÐ¡µÄ¿¨Æ¬id
 	
 	private static CardUseStoreBean mInstance =null;
 	private HashMap<Integer, CardUseBean> _useInfoMap =new HashMap<Integer, CardUseBean>();

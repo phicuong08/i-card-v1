@@ -1,17 +1,12 @@
 package sfs2x.extensions.icard.bsn;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
 
-import java.util.Random;
 
-import com.smartfoxserver.v2.entities.Room;
-import com.smartfoxserver.v2.entities.User;
-import com.smartfoxserver.v2.entities.data.ISFSObject;
-import com.smartfoxserver.v2.entities.data.SFSObject;
-import com.smartfoxserver.v2.extensions.SFSExtension;
+
+
+
 import sfs2x.extensions.icard.beans.*;
 import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.*;
@@ -38,10 +33,10 @@ public class GameBsn
 									 21001,21001,21001,21001,21001,
 									 };
 	*/								 
-	static private int _cardStore[]={50001,50005,50008,
-									 40001,40002,40003,40004,40005,40006,40007,40009,40010,
-									 31001,31004,31005,
-									 30001,30003,30004,
+	static private int _cardStore[]={21001,50005,21001,
+									21001,40002,21001,40004,21001,40006,21001,40009,40010,
+									 31001,31004,21001,
+									 30001,21001,30004,
 									 21001,21002,21003,21004,21005,
 									 21001,21002,21003,21004,21005,
 									 22001,22002,22003,22004,22005,

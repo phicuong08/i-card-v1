@@ -1,8 +1,5 @@
 package sfs2x.extensions.icard.bsn;
 
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Random;
 import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.BattleStateBean;
@@ -13,12 +10,7 @@ import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.Commands;
 import sfs2x.extensions.icard.utils.Constants;
 
-import com.smartfoxserver.v2.entities.Room;
-import com.smartfoxserver.v2.entities.User;
-import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
-import com.smartfoxserver.v2.entities.data.SFSObject;
-import com.smartfoxserver.v2.extensions.SFSExtension;
 import sfs2x.extensions.icard.beans.*;
 /**
  * GameBsn: class containing utility business classes for game processing
@@ -31,7 +23,7 @@ public class BattleBsn
 	// Store directions factors to move left,right,up,down
 	
 	static private java.util.Random _Random = new java.util.Random();
-
+	static private int _lastState =0;
 
 	private static void procInitBattle(CardGameBean game,ICardExtension ext){
 		int count = game.getSites().size();
@@ -69,33 +61,55 @@ public class BattleBsn
 		}
 		ext.SendGameCardUpdate(game);
 	}
+	public static boolean IsStateChange(int curState){
+		if(_lastState==curState)
+			return false;
+		_lastState=curState;
+		return true;
+	}
 	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext,int elapsed){
 		switch(game.getStateBean().getState()){
 		case BattleStateBean.ST_INIT_BATTLE:
 			procInitBattle(game,ext);
+			if(IsStateChange(game.getStateBean().getState()))
+				ext.trace("STATE== BattleStateBean.ST_INIT_BATTLE");
 			break;
 		case BattleStateBean.ST_LOOP_INTERVAL:
 			procLoopInterval(game,ext,elapsed);
+			if(IsStateChange(game.getStateBean().getState()))
+				ext.trace("STATE== BattleStateBean.ST_LOOP_INTERVAL");
 			break;
 		case BattleStateBean.ST_WAIT_LOOP_OP:
 			procWaitLoopOP(game,ext,elapsed);
+			if(IsStateChange(game.getStateBean().getState()))
+				ext.trace("STATE== BattleStateBean.ST_WAIT_LOOP_OP");
 			break;
 		case BattleStateBean.ST_WAIT_CHAIN_OP:
 			procWaitChainOP(game,ext,elapsed);
+			if(IsStateChange(game.getStateBean().getState()))
+				ext.trace("STATE== BattleStateBean.ST_WAIT_CHAIN_OP");
 			break;
 		case BattleStateBean.ST_WAIT_CHAIN_OVER:
 			procWaitChainOver(game,ext);
+			if(IsStateChange(game.getStateBean().getState()))
+				ext.trace("STATE== BattleStateBean.ST_WAIT_CHAIN_OVER");
 			break;
 		case BattleStateBean.ST_LOOP_END:
 			procLoopEnd(game,ext);
+			if(IsStateChange(game.getStateBean().getState()))
+				ext.trace("STATE== BattleStateBean.ST_LOOP_END");
 			break;
 		case BattleStateBean.ST_WAIT_GOD:
 			procGodLogic(game,ext);
+			if(IsStateChange(game.getStateBean().getState()))
+				ext.trace("STATE== BattleStateBean.ST_WAIT_GOD");
 			break;
 		}
 	}
-	public static void doInitWaitChainOp(int playerID,CardGameBean game,ICardExtension ext,CardActionBean action){
-		game.getStateBean().clearWaitChainPass();
+	public static void doInitWaitChainOp(int playerID,CardGameBean game,ICardExtension ext,
+										CardActionBean action,boolean clearPass){
+		if(clearPass==true)
+			game.getStateBean().clearWaitChainPass();
 		game.getStateBean().InitWaitOp(playerID,Constants.BATTLE_CHAIN_OP_TIME);
 		if(action!=null)
 		{
@@ -139,7 +153,7 @@ public class BattleBsn
 		if(chain.size()>0){
 			CardActionBean topAction = game.getBattleChain().getChainTop();
 			int nextOp = topAction.getPlayerID();//getOtherPlayer(game,topAction.getPlayerID());
-			doInitWaitChainOp(nextOp,game,ext,null);
+			doInitWaitChainOp(nextOp,game,ext,null,true);
 		}
 		else{
 			procLoopReset(game,ext);
@@ -160,7 +174,7 @@ public class BattleBsn
 		}
 		else{
 			int nextOp = getOtherPlayer(game,game.getOpPlayer());
-			doInitWaitChainOp(nextOp,game,ext,null);
+			doInitWaitChainOp(nextOp,game,ext,null,false);
 		}
 	}
 	
@@ -175,7 +189,7 @@ public class BattleBsn
 			return;
 		if(CardActionBsn.Action2ChainAble(game,curAction)==false)
 			return;
-		doInitWaitChainOp(game.getOpPlayer(),game,ext,curAction);
+		doInitWaitChainOp(game.getOpPlayer(),game,ext,curAction,true);
 		return;
 	}
 	
@@ -204,7 +218,7 @@ public class BattleBsn
 				CardActionBean pickAction = game.pickCurAction();
 				game.EmptyBattleChain();
 				game.getBattleChain().PushAction(pickAction);
-				doInitWaitChainOp(game.getOpPlayer(),game,ext,pickAction);
+				doInitWaitChainOp(game.getOpPlayer(),game,ext,pickAction,true);
 			}
 		}
 		else{

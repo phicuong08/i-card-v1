@@ -1,8 +1,5 @@
 package sfs2x.extensions.icard.beans;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public final class CardInfoBean {
 
 	public static final int HERO = 0;

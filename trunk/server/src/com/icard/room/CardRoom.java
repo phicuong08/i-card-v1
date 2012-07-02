@@ -3,7 +3,7 @@ package com.icard.room;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 import sfs2x.extensions.icard.main.ParentExtension;
 import sfs2x.extensions.icard.utils.Commands;
@@ -12,7 +12,6 @@ import com.icard.user.CardUser;
 import com.icard.user.CardUserManager;
 import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
-import com.smartfoxserver.v2.entities.data.SFSArray;
 import com.smartfoxserver.v2.entities.data.SFSObject;
 
 public class CardRoom {

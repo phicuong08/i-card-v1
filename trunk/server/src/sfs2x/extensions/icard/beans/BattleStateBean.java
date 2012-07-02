@@ -3,7 +3,6 @@ package sfs2x.extensions.icard.beans;
 
 import java.util.*;
 
-import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.Constants;
 
 
@@ -20,7 +19,6 @@ public class BattleStateBean
 	public static final int ST_WAIT_LOOP_OP = 2;
 	public static final int ST_WAIT_CHAIN_OP = 3;
 	public static final int ST_WAIT_CHAIN_OVER = 4;
-	public static final int ST_SELECT_CHAIN_RESP = 5;
 	public static final int ST_WAIT_GOD = 6;
 	public static final int ST_LOOP_END = 7;
 	public static final int ST_LOOP_INTERVAL=8;

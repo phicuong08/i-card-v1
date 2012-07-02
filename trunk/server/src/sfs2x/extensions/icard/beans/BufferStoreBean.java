@@ -2,9 +2,6 @@ package sfs2x.extensions.icard.beans;
 
 import java.util.HashMap;
 
-import sfs2x.extensions.icard.utils.Constants;
-
-
 /**
  * GameMapBean: class describing a map associated to a game match
  * 

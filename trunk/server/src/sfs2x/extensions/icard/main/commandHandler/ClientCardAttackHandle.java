@@ -7,10 +7,6 @@ import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.GameLobbyBean;
 
-import com.icard.user.CardUser;
-import com.icard.user.CardUserManager;
-import com.smartfoxserver.v2.core.SFSEventParam;
-import com.smartfoxserver.v2.entities.Room;
 import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
