@@ -75,7 +75,7 @@ public class BattleStateBean
 		return (_loopInterval>0);
 	}
 	public Boolean DecDuration(int val){
-		_waitDuration -= val;
+		_waitDuration =_waitDuration - val;
 		return (_waitDuration>0);
 	}
 	public void setChainCard(int realID){

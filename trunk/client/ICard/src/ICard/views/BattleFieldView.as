@@ -20,7 +20,8 @@ package ICard.views {
     import flash.events.MouseEvent;
     import flash.geom.Point;
     import flash.net.*;
-
+	import flash.events.*;
+	import flash.utils.*;
     public class BattleFieldView extends Base implements IView {
 		private var _updateFrameCardNotify:String = "frame_card_notify";
 		private var _battleField:IBattleField;
@@ -105,7 +106,7 @@ package ICard.views {
 			_battleField.LoopFresh(myLoop,secNum/1000);
 		}
 		public function onPreShowAction(srcID:int,targetArr:Array,bEnemy:Boolean):void{
-			_viewMgr.fightmovie.InitFade(1,1.1,4);
+			_viewMgr.fightmovie.InitFade(1,1.1,2.8);
 			_viewMgr.fightmovie.InitShow(srcID,targetArr,targetArr,bEnemy);
 		}
 		public function onCardFightResult(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
@@ -117,15 +118,16 @@ package ICard.views {
 		public function onPriPlayerLoop(IsTurn:Boolean,secNum:int):void{
 			if(_priLoopTimer!=null)
 				_priLoopTimer.stop();
+			
 			var showPriLoop:* = function(evt:TimerEvent):void{
-				var iconName:String=(myLoop)?"I_rsp":"U_rsp";
-				_viewMgr.worldNotice.showMessage("",0.8,iconName);
+				var iconName:String=(IsTurn)?"I_rsp":"U_rsp";
+				_viewMgr.worldNotice.showMessage("",0.6,iconName);
 				_battleField.PriFresh(IsTurn,30);
 				_priLoopTimer.removeEventListener(TimerEvent.TIMER, showPriLoop);
 				_priLoopTimer.stop();
 			}
 			
-			int delayInterval = secNum - 30*1000;
+			var delayInterval:int = secNum - 30*1000;
 			_priLoopTimer =  new Timer(delayInterval,1);
 			_priLoopTimer.addEventListener(TimerEvent.TIMER, showPriLoop);
 			_priLoopTimer.start();

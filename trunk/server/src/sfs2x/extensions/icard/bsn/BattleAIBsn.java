@@ -44,7 +44,7 @@ public class BattleAIBsn
 		if(AddCard2ResSlot(game,site))
 			return;
 		else
-			GameBsn.ClientEndOp(game,site.getPlayerID());
+			BattleBsn.ClientEndOp(game,site.getPlayerID());
 	}
 	private static Boolean AddCard2ResSlot(CardGameBean game,CardSiteBean site){
 		if(site.getAddResAble()==false)
