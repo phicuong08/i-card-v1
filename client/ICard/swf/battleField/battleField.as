@@ -151,11 +151,15 @@
 			_targetCtl.AddIndicator(card);
 		}
 	}
-	
+		
+		public function PriFresh(myLoop:Boolean,secNum:int):void{
+		_timerMC.InitTimeMC(secNum);
+		}
+		
     public function LoopFresh(myLoop:Boolean,secNum:int):void{
 		_timerMC.InitTimeMC(secNum);
 		_targetCtl.Empty();
-	}
+		}
 		public function SideCard(info:Object):void{
 		
 			var id:int = BattleFieldType.MyHandSlotId;
