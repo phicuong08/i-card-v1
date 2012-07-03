@@ -16,7 +16,7 @@ public class ClientEndOpHandle extends ICardClientRequestHandler {
 		CardGameBean game = GameLobbyBean.GetInstance().getGameMap().get(gameId);
 		if(game!=null)
 		{
-			GameBsn.ClientEndOp(game,playerID);
+			BattleBsn.ClientEndOp(game,playerID);
 		}
 	}
 

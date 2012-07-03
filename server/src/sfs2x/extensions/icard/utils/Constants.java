@@ -16,4 +16,5 @@ public class Constants
 	public static final int BATTLE_LOOP_TIME = 30*1000;        //每轮玩家操作时间(秒)
 	public static final int BATTLE_CHAIN_OP_TIME = 30*1000;        //每轮玩家操作时间(秒)
 	public static final int SHOW_ACTION_TIME = 3*1000;        //显示操作时间(秒)
+	public static final int MAX_ACTION_TIME = 1000*1000;
 }

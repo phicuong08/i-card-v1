@@ -67,6 +67,18 @@ public class BattleBsn
 		_lastState=curState;
 		return true;
 	}
+	public static void ClientEndOp(CardGameBean game,int playerID){
+		if(game.getStateBean().IsWaitPlayerOp(playerID)==false)
+			return;
+		switch(game.getStateBean().getState()){
+		case BattleStateBean.ST_WAIT_LOOP_OP:
+			game.getStateBean().setState(BattleStateBean.ST_LOOP_END);
+			break;
+		case BattleStateBean.ST_WAIT_CHAIN_OP:
+			game.getStateBean().setState(BattleStateBean.ST_WAIT_CHAIN_OVER);
+			break;
+		}
+	}
 	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext,int elapsed){
 		switch(game.getStateBean().getState()){
 		case BattleStateBean.ST_INIT_BATTLE:
@@ -108,7 +120,7 @@ public class BattleBsn
 	}
 	public static void doInitWaitChainOp(int playerID,CardGameBean game,ICardExtension ext,
 										CardActionBean action,boolean clearPass){
-		int needInterval = (action==null)? Constants.BATTLE_CHAIN_OP_TIME: Constants.BATTLE_CHAIN_OP_TIME+SHOW_ACTION_TIME;
+		int needInterval = (action==null)? Constants.BATTLE_CHAIN_OP_TIME: Constants.BATTLE_CHAIN_OP_TIME+Constants.SHOW_ACTION_TIME;
 		if(clearPass==true)
 			game.getStateBean().clearWaitChainPass();
 		game.getStateBean().InitWaitOp(playerID,needInterval);
