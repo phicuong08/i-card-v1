@@ -27,7 +27,7 @@ package ICard.views {
 		private var _cardDB:ICardDB;
 		private var _battleStage:BattleStage;
 		private static var _Inst:BattleFieldView;
-		
+		private var _priLoopTimer:Timer;
 		public function show():void{
 			loadAssets("battlefield", this.loadCallback, "");
 			QueryNewGame();	
@@ -115,7 +115,20 @@ package ICard.views {
 			_battleField.onEndOpOk();
 		}
 		public function onPriPlayerLoop(IsTurn:Boolean,secNum:int):void{
+			if(_priLoopTimer!=null)
+				_priLoopTimer.stop();
+			var showPriLoop:* = function(evt:TimerEvent):void{
+				var iconName:String=(myLoop)?"I_rsp":"U_rsp";
+				_viewMgr.worldNotice.showMessage("",0.8,iconName);
+				_battleField.PriFresh(IsTurn,30);
+				_priLoopTimer.removeEventListener(TimerEvent.TIMER, showPriLoop);
+				_priLoopTimer.stop();
+			}
 			
+			int delayInterval = secNum - 30*1000;
+			_priLoopTimer =  new Timer(delayInterval,1);
+			_priLoopTimer.addEventListener(TimerEvent.TIMER, showPriLoop);
+			_priLoopTimer.start();
 		}
 		private function test():void{
 			

@@ -108,15 +108,16 @@ public class BattleBsn
 	}
 	public static void doInitWaitChainOp(int playerID,CardGameBean game,ICardExtension ext,
 										CardActionBean action,boolean clearPass){
+		int needInterval = (action==null)? Constants.BATTLE_CHAIN_OP_TIME: Constants.BATTLE_CHAIN_OP_TIME+SHOW_ACTION_TIME;
 		if(clearPass==true)
 			game.getStateBean().clearWaitChainPass();
-		game.getStateBean().InitWaitOp(playerID,Constants.BATTLE_CHAIN_OP_TIME);
+		game.getStateBean().InitWaitOp(playerID,needInterval);
 		if(action!=null)
 		{
 			game.getBattleChain().PushAction(action);
 			addChainActionCost(game,action);
 		}
-		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(playerID, Constants.BATTLE_CHAIN_OP_TIME);
+		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(playerID,needInterval);
 		if(action!=null)
 			SFSObjectBsn.fillBattleActionInfo(params,game,action);
 		ext.SendGameCommand(Commands.CMD_S2C_PRI_PLAYER_LOOP, params,game);

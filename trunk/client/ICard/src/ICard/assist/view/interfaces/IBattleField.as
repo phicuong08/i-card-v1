@@ -16,5 +16,6 @@ package ICard.assist.view.interfaces {
 			function LoopFresh(myLoop:Boolean,secNum:int):void;
 			function onEndOpOk():void;
 			function RunTest():void;
+			function PriFresh(myLoop:Boolean,secNum:int):void;
 	}
 }//package com.assist.view.interfaces 
