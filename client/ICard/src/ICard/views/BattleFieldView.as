@@ -41,12 +41,13 @@ package ICard.views {
 			_battleField = (_viewMgr.getAssetsObject("battlefield", "battleField") as IBattleField);
 			_battleField.tip = _viewMgr.tip.iTip;
 			_battleField.BattleStage = _battleStage;
-			
+			_battleField.onFight = _battleStage.DoQueryFight;
 			this._cardDB = (_viewMgr.getAssetsObject("carddb", "carddb") as ICardDB);
 			_viewMgr.addToFrameProcessList(this._updateFrameCardNotify, this.CardNotifyFrame);
 			
 			this.render();
 		}
+		
 		private function CardNotifyFrame():void{
 			var cardInfo:Array = CardDiffData.PopCard();
 			if(cardInfo!=null)
@@ -115,13 +116,14 @@ package ICard.views {
 		public function onEndOpOk():void{
 			_battleField.onEndOpOk();
 		}
-		public function onPriPlayerLoop(IsTurn:Boolean,secNum:int):void{
+		public function onPriPlayerLoop(IsTurn:Boolean,secNum:int,showRpsInfo:Boolean):void{
 			if(_priLoopTimer!=null)
 				_priLoopTimer.stop();
 			
 			var showPriLoop:* = function(evt:TimerEvent):void{
 				var iconName:String=(IsTurn)?"I_rsp":"U_rsp";
-				_viewMgr.worldNotice.showMessage("",0.6,iconName);
+				if(showRpsInfo==true)
+					_viewMgr.worldNotice.showMessage("",0.6,iconName);
 				_battleField.PriFresh(IsTurn,30);
 				_priLoopTimer.removeEventListener(TimerEvent.TIMER, showPriLoop);
 				_priLoopTimer.stop();

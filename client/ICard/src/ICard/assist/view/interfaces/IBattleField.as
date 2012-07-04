@@ -17,5 +17,6 @@ package ICard.assist.view.interfaces {
 			function onEndOpOk():void;
 			function RunTest():void;
 			function PriFresh(myLoop:Boolean,secNum:int):void;
+			function set onFight(_arg1:Function):void;
 	}
 }//package com.assist.view.interfaces 
