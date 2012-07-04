@@ -36,6 +36,7 @@
 			_yourResNumMC.y = 130;
 			this.addChild(_myResNumMC);
 			this.addChild(_yourResNumMC);
+			_fight_but.visible=false;
 		}
 		private function InitSlot():void{
 			_slots  = [];
@@ -145,6 +146,7 @@
 			return;
 		_targetCtl.Empty();
 		_battleStage.AddFightTarget(realID);
+		_fight_but.visible=true;
 	}
 	public function onInitalFight(realID:int):void{
 		var targetArr:Array = _battleStage.FightTarget;
@@ -201,6 +203,7 @@
 		public function onEndOpOk():void{
 			_timerMC.onEndOpOk();
 			_targetCtl.Empty();
+			_fight_but.visible=false;
 		}
 
 
