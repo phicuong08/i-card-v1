@@ -10,6 +10,7 @@ package ICard.assist.data{
 		function AskTurnCard(realID:int):Boolean;
 		function GetResNum(me:Boolean):int;
 		function QueryEndOp():void;
+		function DoQueryFight():void;
 		function get FightTarget():Array;
 		function InitialFight(realID:int):void;
 		function AddFightTarget(realID:int):void;

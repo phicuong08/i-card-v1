@@ -24,6 +24,8 @@ package ICard.logic {
 		private var _fightDes:Array;
 		private static var _obj:BattleStage;
 		private static var _battleField:BattleFieldView;
+
+		
 		public function BattleStage():void{
 			_enable2Res = false;
 		}
@@ -39,6 +41,7 @@ package ICard.logic {
 			};
 			return (_obj);
 		}
+		
 		
 		
 		public function InitGuy(me:int,you:int,gameID:int):void{
@@ -211,8 +214,6 @@ package ICard.logic {
 			return 0;
 		}
 		public function QueryEndOp():void{
-			if(DoQueryFight()==true)
-				return;
 			_Mod_Battle.QueryEndOp();
 		}
 		public function InitialFight(realID:int):void{
@@ -229,14 +230,12 @@ package ICard.logic {
 			_Mod_Battle.QueryCardAtk(_fightSrc,_fightDes);
 			return true;
 		}
-		
 		public function PriPlayerLoop(playerID:int,secNum:int):void{
 			_battleField.onEndOpOk();
-			
-			_IsTurn = (playerID==_myID)?true:false;
-			_battleField.onPriPlayerLoop(_IsTurn,secNum);
+			var newTurn:Boolean = (playerID==_myID)?true:false;
+			_battleField.onPriPlayerLoop(newTurn,secNum,(newTurn!=_IsTurn));
+			_IsTurn = newTurn;
 		}
-				
 		public function PreShowAction(srcID:int,actionType:int,targetArr:Array):void{
 			var cardArr:Array = [];
 			var srcCard:Object = new Object;

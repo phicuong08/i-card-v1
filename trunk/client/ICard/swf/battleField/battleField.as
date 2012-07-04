@@ -18,11 +18,12 @@
 		private var _battleStage:IBattleStage;
 		private var _myResNumMC:ResNumMC;
 		private var _yourResNumMC:ResNumMC;
-
+		public var _fight_but:SimpleButton;
 		private var _timerMC:TimerMC;
 		private var _targetCtl:TargetIndicator;
 		//private var _timer_but2:MovieClip;
-        public function battleField(){
+		
+    public function battleField(){
 			InitSlot();
 			//RunTest();
 			_timerMC = new TimerMC(_timer_but);
@@ -96,6 +97,10 @@
 			_myResNumMC.setVal(myRes);
 			var yourRes:int  = _battleStage.GetResNum(false);
 			_yourResNumMC.setVal(yourRes);
+		}
+		public function set onFight(_arg1:Function):void
+		{
+			_fight_but.addEventListener(MouseEvent.CLICK,_arg1);
 		}
     public function FindCard(realID:int):MovieClip{
     	var id:int = BattleFieldType.MyHandSlotId;
