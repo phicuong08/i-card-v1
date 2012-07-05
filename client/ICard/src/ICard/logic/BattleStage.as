@@ -11,6 +11,7 @@ package ICard.logic {
 	import ICard.views.BattleFieldView;
 	
 	import flash.utils.*;
+	import flash.events.*;
 	
 	public class BattleStage implements IBattleStage{
 		private var _guy:Dictionary;
@@ -223,7 +224,7 @@ package ICard.logic {
 		public function AddFightTarget(realID:int):void{
 			_fightDes.push(realID);
 		}
-		public function DoQueryFight():Boolean{
+		public function DoQueryFight(e:MouseEvent):Boolean{
 			if(_fightDes==null || _fightDes.length==0){
 				return false;
 			}
