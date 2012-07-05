@@ -21,13 +21,15 @@
 		public var _fight_but:SimpleButton;
 		private var _timerMC:TimerMC;
 		private var _targetCtl:TargetIndicator;
+		private var _activeCtl:ActiveIndicator;
 		//private var _timer_but2:MovieClip;
 		
     public function battleField(){
 			InitSlot();
 			//RunTest();
 			_timerMC = new TimerMC(_timer_but);
-			_targetCtl = new TargetIndicator(this);
+			_targetCtl = new TargetIndicator;
+			_activeCtl = new ActiveIndicator;
 			_myResNumMC = new ResNumMC;
 			_yourResNumMC = new ResNumMC;
 			_myResNumMC.x = 60-_myResNumMC.width/2;
@@ -146,13 +148,20 @@
 			return;
 		_targetCtl.Empty();
 		_battleStage.AddFightTarget(realID);
+		var card:MovieClip = FindCard(realID);
+		_activeCtl.AddIndicator(card);
 		_fight_but.visible=true;
 	}
 	public function onInitalFight(realID:int):void{
+		_targetCtl.Empty();
+		_activeCtl.Empty();
+		var srcCard:MovieClip = FindCard(realID);
+		_activeCtl.AddIndicator(srcCard);
+		
 		var targetArr:Array = _battleStage.FightTarget;
 		if(targetArr==null)
 			return;
-		_targetCtl.Empty();
+		
 		for each(var target:int in targetArr){
 			var card:MovieClip = FindCard(target);
 			_targetCtl.AddIndicator(card);
