@@ -170,6 +170,7 @@
 		
 		public function PriFresh(myLoop:Boolean,secNum:int):void{
 		_timerMC.InitTimeMC(secNum);
+		_activeCtl.Empty();
 		}
 		
     public function LoopFresh(myLoop:Boolean,secNum:int):void{
