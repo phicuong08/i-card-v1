@@ -78,6 +78,7 @@ public class BattleBsn
 			game.getStateBean().setState(BattleStateBean.ST_WAIT_CHAIN_OVER);
 			break;
 		}
+		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_END_OP_OK, null, game);
 	}
 	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext,int elapsed){
 		switch(game.getStateBean().getState()){
