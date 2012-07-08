@@ -3,6 +3,7 @@ package sfs2x.extensions.icard.bsn;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
+import java.util.Vector;
 
 
 
@@ -47,6 +48,25 @@ public class SFSObjectBsn
 		return cardInfo;
 	}
 	
+	public static ISFSObject genCardFightResultInfo(CardBean card){
+		if(card.getDirtyFlag()==0)
+			return null;
+		ISFSObject cardInfo = new SFSObject();
+		cardInfo.putInt("realID", card.getRealID());
+		cardInfo.putInt("cardID", card.getCardID());
+		if(card.getDirtyFlagBit(CardBean.SLOT_DIRTY_BIT))
+			cardInfo.putInt("slot", card.getSlotID());
+		if(card.getDirtyFlagBit(CardBean.SIDE_DIRTY_BIT))	
+		{
+			cardInfo.putInt("side", card.getSide());
+		}
+		if(card.getDirtyFlagBit(CardBean.TURN_DIRTY_BIT))	
+			cardInfo.putInt("turn", card.getTurn());	
+		if(card.getDirtyFlagBit(CardBean.HP_DIRTY_BIT))	
+			cardInfo.putInt("hp", card.getHp());	
+		return cardInfo;
+	}
+	
 	public static void fillDirtyCardInfo(ISFSArray sfsa, CardSiteBean site,int player,int receiver){
 		for (Enumeration<CardBean> e = site.getCardMap().elements(); e.hasMoreElements();){
 			CardBean card = (CardBean) e.nextElement();
@@ -69,6 +89,28 @@ public class SFSObjectBsn
 		params.putInt("playerID", player);
 		params.putInt("time", time);
 		return params;
+	}
+	public static ISFSObject genBattleResult(CardGameBean game,CardActionBean action){
+		ISFSObject fightInfo = new SFSObject();
+		fightInfo.putInt("srcID",action.getSrc());
+		ISFSArray sfsa = new SFSArray();
+		ISFSObject cardInfo;
+		CardBean card;
+		Vector<Integer> desVect = action.getDes();
+		for(int i=0;i<desVect.size();i++){
+			card = game.getCard(desVect.get(i));
+			if(card==null)
+				continue;
+			cardInfo = genCardFightResultInfo(card);
+			if(cardInfo!=null)
+				sfsa.addSFSObject(cardInfo);
+		}
+		card = game.getCard(action.getSrc());
+		cardInfo = genCardDirtyInfo(card,0,0);
+		if(cardInfo!=null)
+			sfsa.addSFSObject(cardInfo);
+		fightInfo.putSFSArray("target", sfsa);
+		return fightInfo;
 	}
 	public static void fillBattleActionInfo(ISFSObject params,CardGameBean game,CardActionBean action){
 		ISFSObject fightInfo = new SFSObject();

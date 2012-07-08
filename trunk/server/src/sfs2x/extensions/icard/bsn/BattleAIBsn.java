@@ -35,11 +35,16 @@ public class BattleAIBsn
 			procWaitOp(game,site,ext);
 			break;
 		case BattleStateBean.ST_WAIT_CHAIN_OP:
+			procWaitChainOp(game,site,ext);
 			break;
 		}
 		
 		//game.getStateBean().Jump2GodState();
 	}
+	private static void procWaitChainOp(CardGameBean game,CardSiteBean site,ICardExtension ext){
+		BattleBsn.ClientEndOp(game,site.getPlayerID());
+	}
+	
 	private static void procWaitOp(CardGameBean game,CardSiteBean site,ICardExtension ext){
 		if(AddCard2ResSlot(game,site))
 			return;

@@ -148,7 +148,9 @@ public class CardActionBsn
 		
 	}
 	private static boolean procCard2Atk(CardGameBean game,CardBean card,CardActionBean action){
-		
+		int desID = action.getDes().get(0);
+		CardBean card2 = game.getCard(desID);
+		CardUseBsn.Atk(card, card2);
 		return true;
 	}
 	private static boolean procWeapon2Use(CardGameBean game,CardBean card,CardActionBean action){

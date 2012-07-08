@@ -23,7 +23,6 @@ public class BattleBsn
 	// Store directions factors to move left,right,up,down
 	
 	static private java.util.Random _Random = new java.util.Random();
-	static private int _lastState =0;
 
 	private static void procInitBattle(CardGameBean game,ICardExtension ext){
 		int count = game.getSites().size();
@@ -61,12 +60,7 @@ public class BattleBsn
 		}
 		ext.SendGameCardUpdate(game);
 	}
-	public static boolean IsStateChange(int curState){
-		if(_lastState==curState)
-			return false;
-		_lastState=curState;
-		return true;
-	}
+
 	public static void ClientEndOp(CardGameBean game,int playerID){
 		if(game.getStateBean().IsWaitPlayerOp(playerID)==false)
 			return;
@@ -84,38 +78,24 @@ public class BattleBsn
 		switch(game.getStateBean().getState()){
 		case BattleStateBean.ST_INIT_BATTLE:
 			procInitBattle(game,ext);
-			if(IsStateChange(game.getStateBean().getState()))
-				ext.trace("STATE== BattleStateBean.ST_INIT_BATTLE");
 			break;
 		case BattleStateBean.ST_LOOP_INTERVAL:
 			procLoopInterval(game,ext,elapsed);
-			if(IsStateChange(game.getStateBean().getState()))
-				ext.trace("STATE== BattleStateBean.ST_LOOP_INTERVAL");
 			break;
 		case BattleStateBean.ST_WAIT_LOOP_OP:
 			procWaitLoopOP(game,ext,elapsed);
-			if(IsStateChange(game.getStateBean().getState()))
-				ext.trace("STATE== BattleStateBean.ST_WAIT_LOOP_OP");
 			break;
 		case BattleStateBean.ST_WAIT_CHAIN_OP:
 			procWaitChainOP(game,ext,elapsed);
-			if(IsStateChange(game.getStateBean().getState()))
-				ext.trace("STATE== BattleStateBean.ST_WAIT_CHAIN_OP");
 			break;
 		case BattleStateBean.ST_WAIT_CHAIN_OVER:
 			procWaitChainOver(game,ext);
-			if(IsStateChange(game.getStateBean().getState()))
-				ext.trace("STATE== BattleStateBean.ST_WAIT_CHAIN_OVER");
 			break;
 		case BattleStateBean.ST_LOOP_END:
 			procLoopEnd(game,ext);
-			if(IsStateChange(game.getStateBean().getState()))
-				ext.trace("STATE== BattleStateBean.ST_LOOP_END");
 			break;
 		case BattleStateBean.ST_WAIT_GOD:
 			procGodLogic(game,ext);
-			if(IsStateChange(game.getStateBean().getState()))
-				ext.trace("STATE== BattleStateBean.ST_WAIT_GOD");
 			break;
 		}
 	}
@@ -134,7 +114,8 @@ public class BattleBsn
 		if(action!=null)
 			SFSObjectBsn.fillBattleActionInfo(params,game,action);
 		ext.SendGameCommand(Commands.CMD_S2C_PRI_PLAYER_LOOP, params,game);
-
+		
+		ext.trace("doInitWaitChainOp");
 		game.getStateBean().setState(BattleStateBean.ST_WAIT_CHAIN_OP);
 	}
 	
@@ -163,7 +144,10 @@ public class BattleBsn
 		CardActionBean action = chain.lastElement();
 		chain.removeElement(action);
 		CardActionBsn.procCardAction(game,action,ext);
-		ext.SendGameCardUpdate(game);
+		
+		ISFSObject params = SFSObjectBsn.genBattleResult(game,action);
+		ext.SendGameCommand(Commands.CMD_S2C_CARD_FIGHT_RESULT, params, game);
+
 		if(chain.size()>0){
 			CardActionBean topAction = game.getBattleChain().getChainTop();
 			int nextOp = topAction.getPlayerID();//getOtherPlayer(game,topAction.getPlayerID());
