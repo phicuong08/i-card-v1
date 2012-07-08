@@ -10,13 +10,14 @@ package ICard.logic {
 	import ICard.datas.card.*;
 	import ICard.views.BattleFieldView;
 	
-	import flash.utils.*;
 	import flash.events.*;
+	import flash.utils.*;
 	
 	public class BattleStage implements IBattleStage{
 		private var _guy:Dictionary;
 		private var _gameID:int;
 		private var _myID:int;
+		private var _lastPlayer:int;
 		private var _fightLink:FightLink;
 		private var _enable2Res:Boolean;
 		protected var _data:IData;
@@ -109,16 +110,16 @@ package ICard.logic {
 		
 		public function onCardFightResult(srcID:int,targets:Array):void{
 			var oldCards:Array=[];
-			var srcGuy:BattleGuy;
-			var desGuy:BattleGuy;
+			var srcGuy:int = FindCardOwner(srcID);
+			var desGuy:int;
 			for each(var card:Object in targets){
-				var cardOld:Object = FindCard(card["realID"]);
-				if(cardOld)
-					oldCards.push(cardOld["card"]);
-				if( card["realID"] == srcID)
-					srcGuy = card["guy"];
-				else
-					desGuy = card["guy"];
+				var cardOld:Object = new Object;
+				
+				CopyCardData(cardOld,card["realID"]);
+				oldCards.push(cardOld);
+				
+				if(card["realID"] != srcID)
+					desGuy= FindCardOwner(card["realID"]);
 			}
 			_battleField.onCardFightResult(srcID,targets,oldCards,(srcGuy!=desGuy));
 		}
@@ -178,6 +179,7 @@ package ICard.logic {
 			_battleField.onEndOpOk();
 		}
 		public function PlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
+			_lastPlayer = playerID;
 			_battleField.onPlayerLoopFresh(playerID==_myID,secNum);	
 			_IsTurn = (playerID==_myID)?true:false;
 			if(_IsTurn)
@@ -233,9 +235,11 @@ package ICard.logic {
 		}
 		public function PriPlayerLoop(playerID:int,secNum:int):void{
 			_battleField.onEndOpOk();
+			
 			var newTurn:Boolean = (playerID==_myID)?true:false;
-			_battleField.onPriPlayerLoop(newTurn,secNum,(newTurn!=_IsTurn));
+			_battleField.onPriPlayerLoop(newTurn,secNum,(_lastPlayer!=playerID));
 			_IsTurn = newTurn;
+			_lastPlayer = playerID;
 		}
 		public function PreShowAction(srcID:int,actionType:int,targetArr:Array):void{
 			var cardArr:Array = [];

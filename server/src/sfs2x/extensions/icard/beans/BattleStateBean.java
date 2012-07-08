@@ -3,6 +3,7 @@ package sfs2x.extensions.icard.beans;
 
 import java.util.*;
 
+import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.Constants;
 
 
@@ -36,7 +37,35 @@ public class BattleStateBean
 		_state =ST_NONE_STATE;
 	}
 	public void setState(int val){
-		_state = val;
+		synchronized(this)
+		{
+			_state = val;		
+		}
+		
+		ICardExtension ext = ICardExtension.getExt();
+		switch(_state){
+		case ST_INIT_BATTLE:
+			ext.trace("STATE== BattleStateBean.ST_INIT_BATTLE");
+			break;
+		case ST_LOOP_INTERVAL:
+			ext.trace("STATE== BattleStateBean.ST_LOOP_INTERVAL");
+			break;
+		case ST_WAIT_LOOP_OP:
+			ext.trace("STATE== BattleStateBean.ST_WAIT_LOOP_OP");
+			break;
+		case ST_WAIT_CHAIN_OP:
+			ext.trace("STATE== BattleStateBean.ST_WAIT_CHAIN_OP");
+			break;
+		case ST_WAIT_CHAIN_OVER:
+			ext.trace("STATE== BattleStateBean.ST_WAIT_CHAIN_OVER");
+			break;
+		case ST_LOOP_END:
+			ext.trace("STATE== BattleStateBean.ST_LOOP_END");
+			break;
+		case ST_WAIT_GOD:
+			ext.trace("STATE== BattleStateBean.ST_WAIT_GOD");
+			break;
+		}
 	}
 	public int getState(){
 		return _state;
