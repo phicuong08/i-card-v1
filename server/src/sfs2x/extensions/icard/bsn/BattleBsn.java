@@ -215,7 +215,6 @@ public class BattleBsn
 			if(CardActionBsn.Action2ChainAble(game,curAction)){
 				CardActionBean pickAction = game.pickCurAction();
 				game.EmptyBattleChain();
-				game.getBattleChain().PushAction(pickAction);
 				doInitWaitChainOp(game.getOpPlayer(),game,ext,pickAction,true);
 			}
 		}
