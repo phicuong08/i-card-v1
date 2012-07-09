@@ -27,12 +27,6 @@ package ICard.SFSMod {
 			procCardArr(params);
 		}
 		
-
-		public function onBattleStateUpdate(params:ISFSObject):void{
-			var state:int = params.getInt("state");
-			var playerId:int = params.getInt("playerID");
-			
-		}
 		public function onCardUpdate(params:ISFSObject):void{
 			procCardArr(params);
 		}

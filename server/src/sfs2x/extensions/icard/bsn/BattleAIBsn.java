@@ -7,6 +7,7 @@ import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
+import sfs2x.extensions.icard.beans.CardInfoBean;
 import sfs2x.extensions.icard.beans.CardSiteBean;
 import sfs2x.extensions.icard.main.ICardExtension;
 
@@ -50,6 +51,8 @@ public class BattleAIBsn
 			return;
 		else if(AddCard2FightSlot(game,site))
 			return;
+		else if(AddCard2EquipSlot(game,site))
+			return;
 		else
 			BattleBsn.ClientEndOp(game,site.getPlayerID());
 	}
@@ -60,7 +63,8 @@ public class BattleAIBsn
 		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID,CardInfoBean.SOLDIER);
 		if(cardVect.size()==0)
 			return false;
-		for (CardBean card : site.getCardMap().values()){
+		for(int i=0;i<cardVect.size();i++){
+			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)
 			{
 				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_FIGHTSLOT,null);
@@ -86,7 +90,8 @@ public class BattleAIBsn
 		if(remainRes<=0)
 			return false;
 		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID,CardInfoBean.WEAPON);
-		for (CardBean card : site.getCardMap().values()){
+		for(int i=0;i<cardVect.size();i++){
+			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)
 			{
 				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_EQUIPSLOT,null);
@@ -95,7 +100,8 @@ public class BattleAIBsn
 			}
 		}
 		cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID,CardInfoBean.ARMOR);
-		for (CardBean card : site.getCardMap().values()){
+		for(int i=0;i<cardVect.size();i++){
+			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)
 			{
 				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_EQUIPSLOT,null);

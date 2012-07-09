@@ -11,6 +11,8 @@ import sfs2x.extensions.icard.utils.Commands;
 import sfs2x.extensions.icard.utils.Constants;
 
 import com.smartfoxserver.v2.entities.data.ISFSObject;
+import com.smartfoxserver.v2.entities.data.SFSObject;
+
 import sfs2x.extensions.icard.beans.*;
 /**
  * GameBsn: class containing utility business classes for game processing
@@ -38,18 +40,6 @@ public class BattleBsn
 		game.setFreshLoop(rndPlayer);
 	}
 	
-	public static void procLoopInterval(CardGameBean game,ICardExtension ext,int elapsed){
-		if(game.getStateBean().DecLoopInterval(elapsed)==false){
-			if(game.getCurLoop()!=0) //先手不抓牌
-				drawCard(game,ext,game.getStateBean().getOpPlayer(),1);
-			
-			game.getStateBean().setState(BattleStateBean.ST_WAIT_LOOP_OP);
-			game.incLoop();
-			ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getStateBean().getOpPlayer(),
-								Constants.BATTLE_LOOP_TIME);
-			ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
-		}
-	}
 	public static void drawCard(CardGameBean game,ICardExtension ext,int playerID,int num){
 		CardSiteBean site = game.getSites().get(playerID);
 		if(site==null)
@@ -74,13 +64,11 @@ public class BattleBsn
 		}
 		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_END_OP_OK, null, game);
 	}
+	
 	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext,int elapsed){
 		switch(game.getStateBean().getState()){
 		case BattleStateBean.ST_INIT_BATTLE:
 			procInitBattle(game,ext);
-			break;
-		case BattleStateBean.ST_LOOP_INTERVAL:
-			procLoopInterval(game,ext,elapsed);
 			break;
 		case BattleStateBean.ST_WAIT_LOOP_OP:
 			procWaitLoopOP(game,ext,elapsed);
@@ -98,7 +86,7 @@ public class BattleBsn
 			procGodLogic(game,ext);
 			break;
 		case BattleStateBean.ST_DELAY_JUMP:
-			game.getStateBean().DecDelayDuration(elasped)
+			game.getStateBean().DecDelayDuration(elapsed);
 			break;	
 		case BattleStateBean.ST_INIT_WAIT_LOOP_OP:
 			InitWaitLoopOp(game,ext);
@@ -118,10 +106,13 @@ public class BattleBsn
 	}
 	
 	public static void InitWaitLoopOp(CardGameBean game,ICardExtension ext){
+		if(game.getCurLoop()!=0) //先手不抓牌
+			drawCard(game,ext,game.getStateBean().getOpPlayer(),1);
 		game.getStateBean().resetWaitLoopOp(game.getLoopPlayer());
-		game.getStateBean().setState(BattleStateBean.ST_WAIT_LOOP_OP);
-		ISFSObject params = SFSObjectBsn.genBattleLoopResetInfo(game);
-		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_LOOP_RESET, params,game);
+		game.incLoop();
+		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getStateBean().getOpPlayer(),
+							Constants.BATTLE_LOOP_TIME);
+		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
 	}
 	
 	public static void procGodLogic(CardGameBean game,ICardExtension ext){
@@ -200,12 +191,12 @@ public class BattleBsn
 		
 		game.getStateBean().clearWaitChainPass();
 		//game.getStateBean().setOp(curAction.getPlayerID());
-		game.getBattleChain().PushAction(action);
-		addChainActionCost(game,action);
+		game.getBattleChain().PushAction(curAction);
+		addChainActionCost(game,curAction);
 		game.getStateBean().setDelayJump(BattleStateBean.ST_INIT_WAIT_LOOP_OP,Constants.SHOW_ACTION_TIME);
 		
 		ISFSObject params = new SFSObject();
-		SFSObjectBsn.fillBattleActionInfo(params,game,action);
+		SFSObjectBsn.fillBattleActionInfo(params,game,curAction);
 		ext.SendGameCommand(Commands.CMD_S2C_CARD_FIGHT, params,game);
 	}
 	
@@ -231,8 +222,8 @@ public class BattleBsn
 			return;
 		if(needActiveBattleChain(game,curAction)){
 			if(CardActionBsn.Action2ChainAble(game,curAction)){
-					game.EmptyBattleChain();
-					procWaitChainOP(game,ext,0){
+				game.EmptyBattleChain();
+				procWaitChainOP(game,ext,0);
 			}
 		}
 		else{

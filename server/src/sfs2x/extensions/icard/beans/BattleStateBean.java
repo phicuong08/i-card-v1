@@ -24,7 +24,6 @@ public class BattleStateBean
 	public static final int ST_WAIT_CHAIN_OVER = 6;
 	public static final int ST_WAIT_GOD = 7;
 	public static final int ST_LOOP_END = 8;
-	public static final int ST_LOOP_INTERVAL=9;
 	public static final int ST_DELAY_JUMP=10;
 	
 	
@@ -34,7 +33,6 @@ public class BattleStateBean
 	
 	private int _state;	
 	private int _waitDuration = 60;
-	private int _loopInterval;
 	private int _waitChainPass;
 	private int _delayState;
 	private int _delayDuration;
@@ -64,9 +62,6 @@ public class BattleStateBean
 		switch(_state){
 		case ST_INIT_BATTLE:
 			ext.trace("STATE== BattleStateBean.ST_INIT_BATTLE");
-			break;
-		case ST_LOOP_INTERVAL:
-			ext.trace("STATE== BattleStateBean.ST_LOOP_INTERVAL");
 			break;
 		case ST_WAIT_LOOP_OP:
 			ext.trace("STATE== BattleStateBean.ST_WAIT_LOOP_OP");
@@ -122,13 +117,7 @@ public class BattleStateBean
 	}
 	public void InitWaitOp(int playerID,int during){
 		_opPlayerID = playerID;
-		_loopInterval = 3*1000;
-		//_state = ST_LOOP_INTERVAL;
 		_waitDuration = during;
-	}
-	public Boolean DecLoopInterval(int val){
-		_loopInterval -= val;
-		return (_loopInterval>0);
 	}
 	public Boolean DecDuration(int val){
 		_waitDuration =_waitDuration - val;
