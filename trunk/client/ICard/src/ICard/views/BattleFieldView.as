@@ -111,6 +111,7 @@ package ICard.views {
 			_viewMgr.fightmovie.InitShow(srcID,targetArr,targetArr,bEnemy);
 		}
 		public function onCardFightResult(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
+			_viewMgr.fightmovie.InitFade(0,1,2.8);
 			_viewMgr.fightMovie.InitShow(srcID,targets,oldCards,bEnemy);
 		}
 		public function onEndOpOk():void{
