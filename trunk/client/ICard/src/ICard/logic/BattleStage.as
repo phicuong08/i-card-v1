@@ -75,6 +75,8 @@ package ICard.logic {
 			return guy.CardDB.getFightTarget();
 		}
 		public function onUpdateCard(info:Object):void{
+			if(info["slot"]==4)
+				_enable2Res =false;
 			var fullCard:Object = FullCardInfo(info);
 			if(fullCard==null)
 				return;
