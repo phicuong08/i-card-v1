@@ -21,8 +21,8 @@ public class ClientUseCardHandle extends BaseClientRequestHandler {
 			CardGameBean game = GameLobbyBean.GetInstance().getGameMap().get(gameID);
 			if(game==null)
 				return;
-			if(game.getOpPlayer()!=paramUser.getId())
-				return;
+			if(game.getStateBean().IsWaitPlayerOp(paramUser.getId())==false)
+				return;	
 			if(game.getCardOwner(srcID)!= paramUser.getId())
 				return;
 				
