@@ -93,6 +93,7 @@ public class CardGameBean
 	}
 	public void EmptyBattleChain(){
 		_battleChain.Empty();
+		_StateBean.clearWaitChainPass();
 		for(CardSiteBean site:_sites.values()){
 			site.clearChainCost();
 		}

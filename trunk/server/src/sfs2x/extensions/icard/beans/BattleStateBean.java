@@ -17,12 +17,15 @@ public class BattleStateBean
 {	
 	public static final int ST_NONE_STATE= 0;
 	public static final int ST_INIT_BATTLE=1;
-	public static final int ST_WAIT_LOOP_OP = 2;
-	public static final int ST_WAIT_CHAIN_OP = 3;
-	public static final int ST_WAIT_CHAIN_OVER = 4;
-	public static final int ST_WAIT_GOD = 6;
-	public static final int ST_LOOP_END = 7;
-	public static final int ST_LOOP_INTERVAL=8;
+	public static final int ST_INIT_WAIT_LOOP_OP = 2;
+	public static final int ST_WAIT_LOOP_OP = 3;
+	public static final int ST_INIT_WAIT_CHAIN_OP = 4;
+	public static final int ST_WAIT_CHAIN_OP = 5;
+	public static final int ST_WAIT_CHAIN_OVER = 6;
+	public static final int ST_WAIT_GOD = 7;
+	public static final int ST_LOOP_END = 8;
+	public static final int ST_LOOP_INTERVAL=9;
+	public static final int ST_DELAY_JUMP=10;
 	
 	
 	private Vector<Integer>  _battleChain;
@@ -33,9 +36,24 @@ public class BattleStateBean
 	private int _waitDuration = 60;
 	private int _loopInterval;
 	private int _waitChainPass;
+	private int _delayState;
+	private int _delayDuration;
 	public BattleStateBean() {
 		_state =ST_NONE_STATE;
 	}
+	public void setDelayJump(int state,int duration){
+		_state = ST_DELAY_JUMP;
+		_delayState = state;
+		_delayDuration = duration;
+	}
+	public void DecDelayDuration(int val){
+		_delayDuration =_delayDuration - val;
+		if( _delayDuration<=0)
+		{
+			_state = _delayState;
+		}
+	}
+	
 	public void setState(int val){
 		synchronized(this)
 		{
@@ -67,11 +85,17 @@ public class BattleStateBean
 			break;
 		}
 	}
+	public void setOp(int playerID){
+		_opPlayerID = playerID;
+	}
 	public int getState(){
 		return _state;
 	}
 	public int getOpPlayer() {
 		return _opPlayerID;
+	}
+	public int getWaitDuration(){
+		return _waitDuration;
 	}
 	public Boolean getIsWaitTimeOut(){
 		return _waitDuration <= 0;
@@ -92,6 +116,9 @@ public class BattleStateBean
 		_opPlayerID = playerID;
 		_waitDuration = Constants.BATTLE_LOOP_TIME;
 		_state =  ST_WAIT_LOOP_OP;
+	}
+	public void InitWaitDuration(int during){
+		_waitDuration = during;
 	}
 	public void InitWaitOp(int playerID,int during){
 		_opPlayerID = playerID;
