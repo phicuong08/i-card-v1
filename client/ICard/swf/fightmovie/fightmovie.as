@@ -108,7 +108,7 @@
 				
 			var resultMC:MovieClip;
 			trace("hp new",newCard["hp"],"hp old",oldCard["hp"]);
-			if( newCard["hp"]!= oldCard["hp"])
+			if( newCard.hasOwnProperty("hp") && newCard["hp"]!= oldCard["hp"])
 			{
 
 					var hpVal:int = newCard["hp"] - oldCard["hp"];
@@ -119,7 +119,7 @@
 					InitMCFade(resultMC,_alpha1);
 					cardMC.addChild(resultMC);
 			}
-			if( newCard["atk"]!= oldCard["atk"])
+			if( newCard.hasOwnProperty("atk") && newCard["atk"]!= oldCard["atk"])
 			{
 					var atkVal:int = newCard["atk"] - oldCard["atk"];
 					resultMC = (atkVal>0)?cardFactory.CreateGain_Mini(Math.abs(atkVal)): cardFactory.CreateDebuf_Mini(Math.abs(atkVal));
@@ -129,7 +129,7 @@
 					InitMCFade(resultMC,_alpha1);
 					cardMC.addChild(resultMC);			
 			}
-			if( newCard["def"]!= oldCard["def"])
+			if( newCard.hasOwnProperty("def") && newCard["def"]!= oldCard["def"])
 			{
 					var defVal:int = newCard["def"] - oldCard["def"];
 					resultMC = (defVal>0)?cardFactory.CreateGain_Mini(Math.abs(defVal)): cardFactory.CreateDebuf_Mini(Math.abs(defVal));
