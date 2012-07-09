@@ -40,11 +40,12 @@ public class CardSiteBsn
 		}
 
 	}
-	public static Vector<CardBean> PickSlotCard(CardSiteBean site,int slotID){
+	public static Vector<CardBean> PickSlotCard(CardSiteBean site,int slotID,int cardType){
 		Vector<CardBean> pickVect =new Vector<CardBean>();
 		for (CardBean card : site.getCardMap().values())
 		{
-				if(card.getSlotID() == slotID)
+				if(card.getSlotID() == slotID &&
+				   (cardType==-1 || card.getCardType()==cardType))
 					pickVect.add(card);
 		}
 		return pickVect;

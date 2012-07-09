@@ -48,18 +48,61 @@ public class BattleAIBsn
 	private static void procWaitOp(CardGameBean game,CardSiteBean site,ICardExtension ext){
 		if(AddCard2ResSlot(game,site))
 			return;
+		else if(AddCard2FightSlot(game,site))
+			return;
 		else
 			BattleBsn.ClientEndOp(game,site.getPlayerID());
+	}
+	private static Boolean AddCard2FightSlot(CardGameBean game,CardSiteBean site){
+		int remainRes = site.getRemainRes();
+		if(remainRes<=0)
+			return false;
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID,CardInfoBean.SOLDIER);
+		if(cardVect.size()==0)
+			return false;
+		for (CardBean card : site.getCardMap().values()){
+			if(card.getCost()<=remainRes)
+			{
+				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_FIGHTSLOT,null);
+				game.setCurAction(action);
+				return true;
+			}
+		}
+		return false;	
 	}
 	private static Boolean AddCard2ResSlot(CardGameBean game,CardSiteBean site){
 		if(site.getAddResAble()==false)
 			return false;
-		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID);
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID,-1);
 		if(cardVect.size()==0)
 			return false;
 		CardBean card = (CardBean)cardVect.firstElement();
 		CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_RES,null);
 		game.setCurAction(action);
 		return true;
+	}
+	private static Boolean AddCard2EquipSlot(CardGameBean game,CardSiteBean site){
+		int remainRes = site.getRemainRes();
+		if(remainRes<=0)
+			return false;
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID,CardInfoBean.WEAPON);
+		for (CardBean card : site.getCardMap().values()){
+			if(card.getCost()<=remainRes)
+			{
+				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_EQUIPSLOT,null);
+				game.setCurAction(action);
+				return true;
+			}
+		}
+		cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID,CardInfoBean.ARMOR);
+		for (CardBean card : site.getCardMap().values()){
+			if(card.getCost()<=remainRes)
+			{
+				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_EQUIPSLOT,null);
+				game.setCurAction(action);
+				return true;
+			}
+		}
+		return false;	
 	}
 }
