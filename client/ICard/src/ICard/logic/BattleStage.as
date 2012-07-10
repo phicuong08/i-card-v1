@@ -89,7 +89,7 @@ package ICard.logic {
 		
 		private function CopyCardData(fillCard:Object,realID:int):void{
 			var cardObj:Object = FindCard(realID);
-			UseCard.CopyCardData(fillCard,cardObj);
+			UseCard.CopyData(fillCard,cardObj);
 		}
 		
 		private function FullCardInfo(info:Object):Object{
@@ -144,6 +144,8 @@ package ICard.logic {
 			return true;
 		}
 		public function GetUISlot(cardInfo:Object):int{
+			if(cardInfo["slot"]==4)
+				var abc:int=0;
 			var card:CardData = PlayerMe.CardDB.FindCard(cardInfo["realID"]);
 			if(card)
 				return cardInfo["slot"];

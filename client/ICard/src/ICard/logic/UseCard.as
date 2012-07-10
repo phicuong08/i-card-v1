@@ -83,7 +83,7 @@ package ICard.logic {
 			return (card.Cost<=resVal);
 		}
 		
-		public static function CopyCardData(fillCard:Object,cardObj:Object):void{
+		public static function CopyData(fillCard:Object,cardObj:Object):void{
 			if(cardObj==null)
 			{
 				return;
@@ -93,9 +93,12 @@ package ICard.logic {
 				return;
 			fillCard["realID"] = card.RealID;
 			fillCard["cardID"] = card.CardID;
-			fillCard["hp"] = card.HP;
-			fillCard["atk"] = card.Atk;
-			fillCard["def"] = card.Def;
+			if(card.CardID>10000){
+				fillCard["hp"] = card.HP;
+				fillCard["atk"] = card.Atk;
+				fillCard["def"] = card.Def;				
+			}
+
 			fillCard["side"] = card.Side;
 			fillCard["turn"] = card.Turn;
 			fillCard["slot"] = card.Slot;

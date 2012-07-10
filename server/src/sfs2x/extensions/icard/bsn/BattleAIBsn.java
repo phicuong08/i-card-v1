@@ -51,8 +51,8 @@ public class BattleAIBsn
 			return;
 		else if(AddCard2FightSlot(game,site))
 			return;
-		else if(AddCard2EquipSlot(game,site))
-			return;
+//		else if(AddCard2EquipSlot(game,site))
+//			return;
 		else
 			BattleBsn.ClientEndOp(game,site.getPlayerID());
 	}

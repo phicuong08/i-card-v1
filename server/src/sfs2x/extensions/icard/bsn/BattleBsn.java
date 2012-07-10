@@ -172,7 +172,7 @@ public class BattleBsn
 		else{
 			int nextOp = getOtherPlayer(game,game.getOpPlayer());
 			game.getStateBean().setOp(nextOp);
-			game.getStateBean().setState(BattleStateBean.ST_INIT_WAIT_LOOP_OP);
+			game.getStateBean().setState(BattleStateBean.ST_INIT_WAIT_CHAIN_OP);
 		}
 	}
 	
@@ -193,7 +193,7 @@ public class BattleBsn
 		//game.getStateBean().setOp(curAction.getPlayerID());
 		game.getBattleChain().PushAction(curAction);
 		addChainActionCost(game,curAction);
-		game.getStateBean().setDelayJump(BattleStateBean.ST_INIT_WAIT_LOOP_OP,Constants.SHOW_ACTION_TIME);
+		game.getStateBean().setDelayJump(BattleStateBean.ST_INIT_WAIT_CHAIN_OP,Constants.SHOW_ACTION_TIME);
 		
 		ISFSObject params = new SFSObject();
 		SFSObjectBsn.fillBattleActionInfo(params,game,curAction);
