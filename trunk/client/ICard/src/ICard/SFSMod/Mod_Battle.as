@@ -32,22 +32,7 @@ package ICard.SFSMod {
 		}
 		//����1(srcID);����2(target):Ŀ�꿨{(realID)...},����3(time):��Ӧʱ��(��),����4(attacker),����5(defender);
 		public function onCardFight(params:ISFSObject):void{
-			var infoObj:ISFSObject = params.getSFSObject("fight");
-			var keyArr:Array = infoObj.getKeys();
-			var fightInfo:Object = new Object;
-			for each( var keyVal:String in keyArr)
-			{
-					fightInfo[keyVal] = infoObj.getInt(keyVal);
-			}
-				
-			var targetArr:ISFSArray = params.getSFSArray("target");
-			var targets:Array = [];
-			for (var y:int = 0; y < targetArr.size(); y++)
-			{
-				var desID:int =  targetArr.getInt(y);
-				targets.push(desID);
-			}
-			_battleStage.onCardFight(fightInfo,targets);
+			onProcPreActionInfo(params);
 		}
 		
 		//����1(srcID):, ����2(target):{ {realID,hpAdd,def,atk,slot,turn,side} ,...}--�����ÿ����

@@ -73,7 +73,7 @@
 			_slots[BattleFieldType.YouEquipSlotId].Init(BattleFieldType.YouEquipSlotId,2,500,856);
 			
 			_slots[BattleFieldType.YouFightSlotId] = new SlotBar;
-			_slots[BattleFieldType.YouFightSlotId].Init(BattleFieldType.YouFightSlotId,2,350,1180);
+			_slots[BattleFieldType.YouFightSlotId].Init(BattleFieldType.YouFightSlotId,2,200,1180);
 			
 			_slots[BattleFieldType.YouTombSlotId] = new SlotBar;
 			_slots[BattleFieldType.YouTombSlotId].Init(BattleFieldType.YouTombSlotId,2,350,1180);

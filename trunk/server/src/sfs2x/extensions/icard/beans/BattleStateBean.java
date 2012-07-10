@@ -40,7 +40,7 @@ public class BattleStateBean
 		_state =ST_NONE_STATE;
 	}
 	public void setDelayJump(int state,int duration){
-		_state = ST_DELAY_JUMP;
+		setState(ST_DELAY_JUMP);
 		_delayState = state;
 		_delayDuration = duration;
 	}
@@ -48,7 +48,7 @@ public class BattleStateBean
 		_delayDuration =_delayDuration - val;
 		if( _delayDuration<=0)
 		{
-			_state = _delayState;
+			setState(_delayState);
 		}
 	}
 	
