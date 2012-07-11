@@ -76,7 +76,7 @@ public class CardGameBean
 	}
 	public void setFreshLoop(int playerID){
 		_loopPlayer = playerID;
-		_StateBean.setDelayJump(BattleStateBean.ST_INIT_WAIT_LOOP_OP, Constants.SHOW_ACTION_TIME);
+		_StateBean.setDelayJump(BattleStateBean.ST_INIT_WAIT_LOOP_OP,Constants.SHOW_ACTION_TIME);
 		CardSiteBean site = _sites.get(playerID);
 		if (site != null)
 			site.setFreshLoop();
