@@ -108,36 +108,42 @@
 				
 			var resultMC:MovieClip;
 			trace("hp new",newCard["hp"],"hp old",oldCard["hp"]);
-			if( newCard.hasOwnProperty("hp") && newCard["hp"]!= oldCard["hp"])
+			//if( newCard.hasOwnProperty("hp") && oldCard.hasOwnProperty["hp"])
 			{
-
 					var hpVal:int = newCard["hp"] - oldCard["hp"];
-					resultMC = (hpVal>0)?cardFactory.CreateGain_Big(Math.abs(hpVal)): cardFactory.CreateDebuf_Big(Math.abs(hpVal));
-					//resultMC.x =resultMC.width/2;
-					//resultMC.y =resultMC.height/2;
-					resultMC.y = 20;
-					InitMCFade(resultMC,_alpha1);
-					cardMC.addChild(resultMC);
+					if(hpVal!=0){
+						resultMC = (hpVal>0)?cardFactory.CreateGain_Big(Math.abs(hpVal)): cardFactory.CreateDebuf_Big(Math.abs(hpVal));
+						resultMC.y = 20;
+						InitMCFade(resultMC,_alpha1);
+						cardMC.addChild(resultMC);
+					}
+					
 			}
-			if( newCard.hasOwnProperty("atk") && newCard["atk"]!= oldCard["atk"])
+			//if( newCard.hasOwnProperty("atk") && oldCard.hasOwnProperty["atk"])
 			{
 					var atkVal:int = newCard["atk"] - oldCard["atk"];
-					resultMC = (atkVal>0)?cardFactory.CreateGain_Mini(Math.abs(atkVal)): cardFactory.CreateDebuf_Mini(Math.abs(atkVal));
-					//resultMC._scale=0.6;
-					resultMC.x = -cardMC.width/2 + resultMC.width/2;
-					resultMC.y = cardMC.height/2 - resultMC.height/2;
-					InitMCFade(resultMC,_alpha1);
-					cardMC.addChild(resultMC);			
+					if(atkVal!=0){
+						resultMC = (atkVal>0)?cardFactory.CreateGain_Mini(Math.abs(atkVal)): cardFactory.CreateDebuf_Mini(Math.abs(atkVal));
+						//resultMC._scale=0.6;
+						resultMC.x = -cardMC.width/2 + resultMC.width/2;
+						resultMC.y = cardMC.height/2 - resultMC.height/2;
+						InitMCFade(resultMC,_alpha1);
+						cardMC.addChild(resultMC);			
+					}
+
 			}
-			if( newCard.hasOwnProperty("def") && newCard["def"]!= oldCard["def"])
+			//if( newCard.hasOwnProperty("def") &&  oldCard.hasOwnProperty["def"])
 			{
 					var defVal:int = newCard["def"] - oldCard["def"];
-					resultMC = (defVal>0)?cardFactory.CreateGain_Mini(Math.abs(defVal)): cardFactory.CreateDebuf_Mini(Math.abs(defVal));
-					//resultMC._scale=0.6;
-					resultMC.x = cardMC.width/2 - resultMC.width/2;
-					resultMC.y = cardMC.height/2 - resultMC.height/2;
-					InitMCFade(resultMC,_alpha1);
-					cardMC.addChild(resultMC);			
+					if(defVal!=0){
+						resultMC = (defVal>0)?cardFactory.CreateGain_Mini(Math.abs(defVal)): cardFactory.CreateDebuf_Mini(Math.abs(defVal));
+						//resultMC._scale=0.6;
+						resultMC.x = cardMC.width/2 - resultMC.width/2;
+						resultMC.y = cardMC.height/2 - resultMC.height/2;
+						InitMCFade(resultMC,_alpha1);
+						cardMC.addChild(resultMC);			
+					}
+
 			}
 			return cardMC;
 		}

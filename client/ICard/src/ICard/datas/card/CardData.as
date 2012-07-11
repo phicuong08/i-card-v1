@@ -39,6 +39,8 @@ package ICard.datas.card {
 				obj1["hp"] = obj2["hp"];
 			if(obj2.hasOwnProperty("atk"))
 				obj1["atk"] = obj2["atk"];
+			if(obj2.hasOwnProperty("cost"))
+				obj1["cost"] = obj2["cost"];
 			if(obj2.hasOwnProperty("def"))	
 				obj1["def"] = obj2["def"];
 			if(obj2.hasOwnProperty("side"))	
@@ -65,6 +67,9 @@ package ICard.datas.card {
 		}
 		public function get Cost():int{
 			return _info["cost"];
+		}
+		public function set Cost(val:int):void{
+			_info["cost"] = val;
 		}
 		public function get Slot():int{
 			return _info["slot"];
@@ -133,6 +138,7 @@ package ICard.datas.card {
 			Def = arg1.Def;
 			Side = arg1.Side;
 			Turn = arg1.Turn;
+			Cost = arg1.Cost;
 		}
 		public function IsDead():Boolean{
 			return (HP<=0);

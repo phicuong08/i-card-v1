@@ -96,7 +96,8 @@ package ICard.logic {
 			if(card.CardID>10000){
 				fillCard["hp"] = card.HP;
 				fillCard["atk"] = card.Atk;
-				fillCard["def"] = card.Def;				
+				fillCard["def"] = card.Def;		
+				fillCard["cost"] = card.Cost;
 			}
 
 			fillCard["side"] = card.Side;
