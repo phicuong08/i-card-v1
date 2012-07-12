@@ -83,14 +83,11 @@ package ICard.logic {
 			return (card.Cost<=resVal);
 		}
 		
-		public static function CopyData(fillCard:Object,cardObj:Object):void{
-			if(cardObj==null)
+		public static function CopyData(fillCard:Object,card:CardData):void{
+			if(card==null)
 			{
 				return;
 			}
-			var card:CardData = cardObj["card"] as CardData;
-			if(card==null)
-				return;
 			fillCard["realID"] = card.RealID;
 			fillCard["cardID"] = card.CardID;
 			if(card.CardID>10000){
@@ -105,14 +102,14 @@ package ICard.logic {
 			fillCard["slot"] = card.Slot;
 		}
 		
-		public static function genMenuFlag(cardInfo:Object,enable2Res:Boolean,resNum:int):Object{
+		public static function genMenuFlag(card:CardData,enable2Res:Boolean,resNum:int):Object{
 			var flagArr:Object = new Object;
-			flagArr["res"] = (enable2Res)?Is2ResAble(cardInfo["card"]):false;                             //��Դ
-			flagArr["enter"] = Is2EnterAble(cardInfo["card"],resNum);  //��
-			flagArr["fight"] = Is2FightAble(cardInfo["card"],resNum);  //ս��  
-			flagArr["task"] = IsTaskAble(cardInfo["card"],resNum); //����
-			flagArr["cast"] = IsCastAble(cardInfo["card"],resNum); //ʩ��
-			flagArr["turn"] = IsTurnAble(cardInfo["card"],resNum); //��ת
+			flagArr["res"] = (enable2Res)?Is2ResAble(card):false;                             //��Դ
+			flagArr["enter"] = Is2EnterAble(card,resNum);  //��
+			flagArr["fight"] = Is2FightAble(card,resNum);  //ս��  
+			flagArr["task"] = IsTaskAble(card,resNum); //����
+			flagArr["cast"] = IsCastAble(card,resNum); //ʩ��
+			flagArr["turn"] = IsTurnAble(card,resNum); //��ת
 			return flagArr;
 		}
 		

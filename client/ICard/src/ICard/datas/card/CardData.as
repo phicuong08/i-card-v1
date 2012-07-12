@@ -4,6 +4,9 @@ package ICard.datas.card {
 	import ICard.assist.server.CardType;
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.haloer.data.*;
+	
+	import flash.utils.ByteArray;
+
 	public class CardData {
 		public static const StateNormal:int = 0;
 		public static const StateSide:int = 2;
@@ -39,6 +42,13 @@ package ICard.datas.card {
 			if(obj2.hasOwnProperty("slot"))	
 				obj1["slot"] = obj2["slot"];
 		}
+		public function CloneInfo():Object{
+			var ba:ByteArray = new ByteArray();
+			ba.writeObject( _info );
+			ba.position = 0;
+			return (ba.readObject() as Object);
+		}
+		
 		public function get Info():Object{
 			return _info;
 		}
@@ -103,31 +113,42 @@ package ICard.datas.card {
 		public function set Turn(val:int):void{
 			_info["turn"]=val;
 		}
-		public function Update(info:Object):void{
+		
+		public function Update2(info:Object):void{
+			if(info.hasOwnProperty("cardID")&& 
+				CardID != info["cardID"])
+			{
+				var baseInfo:Object = CardType.CreateCardInfo(info["cardID"]);
+				if(baseInfo)
+				{
+					_info = baseInfo;
+				}
+			}
+			else{
+				if(info.hasOwnProperty("hp"))
+					_info["hp"] = info["hp"];
+				if(info.hasOwnProperty("atk"))
+					_info["atk"] = info["atk"];
+				if(info.hasOwnProperty("def"))
+					_info["def"] = info["def"];
+				if(info.hasOwnProperty("cost"))
+					_info["cost"] = info["cost"];
+			}
+			if(info.hasOwnProperty("realID"))
+				_info["realID"] = info["realID"];
 			if(info.hasOwnProperty("cardID"))
 				_info["cardID"] = info["cardID"];
-			
 			if(info.hasOwnProperty("guy"))
 				_info["guy"] = info["guy"];
-				
 			if(info.hasOwnProperty("side"))
 				_info["side"] = info["side"];
-			
 			if(info.hasOwnProperty("turn"))
 				_info["turn"] = info["turn"];
-			
 			if(info.hasOwnProperty("slot"))
 				_info["slot"] = info["slot"];
-			
-			if(info.hasOwnProperty("hp"))
-				_info["hp"] = info["hp"];
-			
-			if(info.hasOwnProperty("atk"))
-				_info["atk"] = info["atk"];
-			
-			if(info.hasOwnProperty("def"))
-				_info["def"] = info["def"];
 		}
+		
+
 		public function Clone(arg1:CardData):void{
 		  GuyID = arg1.GuyID;
 			RealID = arg1.RealID;

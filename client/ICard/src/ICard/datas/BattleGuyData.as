@@ -1,5 +1,6 @@
 //Created by Action Script Viewer - http://www.buraks.com/asv
 package ICard.datas {
+	import ICard.assist.server.CardType;
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.datas.card.*;
 	
@@ -26,23 +27,14 @@ package ICard.datas {
 		}
 		
 		public function onUpdateCard(info:Object):void{
-//			if(info["slot"]!=BattleFieldType.YouHandSlotId)
-//				return;
-			
-			if(info.hasOwnProperty("side") && info["side"]==0)
+			var newCard:CardData = FindCard(info["realID"]);
+			if(newCard==null)
 			{
-				var kk:int=0;
+				var cardInfo:Object =CardType.CreateCardInfo(info["cardID"]);
+				newCard = new CardData(cardInfo);
+				_cardArr[info["realID"]]=newCard;
 			}
-			var newCard:CardData = new CardData(info);
-			var oldCard:CardData = FindCard(info["realID"]);
-			if(oldCard)
-			{
-				oldCard.Update(info);
-			}
-			else
-			{
-				_cardArr[newCard.RealID]=newCard;
-			}
+			newCard.Update2(info);
 			CardDiffData.UpdateCard(newCard);
 			
 		}
