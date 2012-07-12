@@ -115,6 +115,37 @@ package ICard.logic {
 			flagArr["turn"] = IsTurnAble(cardInfo["card"],resNum); //��ת
 			return flagArr;
 		}
+		
+		public static function IsCast2MyHero(cardID:int):Boolean{
+			var info:Object = CardType.UseCardInfo(cardID);
+			if(info==null)
+				return false;
+			return (info[2]>0);
+		}
+		public static function IsCast2MySoldier(cardID:int):Boolean{
+			var info:Object = CardType.UseCardInfo(cardID);
+			if(info==null)
+				return false;
+			return (info[3]>0);
+		}
+		public static function IsCast2YourHero(cardID:int):Boolean{
+			var info:Object = CardType.UseCardInfo(cardID);
+			if(info==null)
+				return false;
+			return (info[4]>0);
+		}
+		public static function IsCast2YourSoldier(cardID:int):Boolean{
+			var info:Object = CardType.UseCardInfo(cardID);
+			if(info==null)
+				return false;
+			return (info[5]>0);
+		}
+		public static function getCastTargetNum(cardID:int):int{
+			var info:Object = CardType.UseCardInfo(cardID);
+			if(info==null)
+				return 0;
+			return info[1];
+		}
 		public static function UseAble(card:CardData,resVal:int):Boolean{
 			if(ResEnough(card,resVal)==false)
 			{

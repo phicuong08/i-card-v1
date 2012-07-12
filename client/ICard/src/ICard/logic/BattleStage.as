@@ -68,20 +68,19 @@ package ICard.logic {
 			}
 			return null;
 		}
+				
 		public function get FightTarget():Array{
-			var guy:BattleGuy  = Enemy;
-			if(guy==null)
-				return null;
-			return guy.CardDB.getFightTarget();
+			return BattleHelper.getFightTarget(_guy,_fightSrc,PlayerMe,Enemy);
 		}
+		
 		public function onUpdateCard(info:Object):void{
 			if(info["slot"]==4)
 				_enable2Res =false;
 			var fullCard:Object = FullCardInfo(info);
 			if(fullCard==null)
 				return;
-			if(_guy[info["playerID"]])
-				_guy[info["playerID"]].onUpdateCard(fullCard);
+			if(_guy[info["guy"]])
+				_guy[info["guy"]].onUpdateCard(fullCard);
 			if(info["slot"] && info["slot"]==BattleFieldType.MyResourceSlotId)
 				_enable2Res = false;
 
@@ -152,32 +151,25 @@ package ICard.logic {
 			else
 				return cardInfo["slot"] +6;
 		}
+		
 		public function FindCardOwner(realID:int):int{
-			for each(var guy:BattleGuy in _guy)
-			{
-				var card:CardData = guy.CardDB.FindCard(realID);
-				if(card)
-				{
-					return guy.ID;
-				}
-			}
-			return 0;
+			return BattleHelper.getCardOwner(_guy,realID);
 		}
+		
 		public function FindCard(realID:int):Object{
 			var cardInfo:Object = new Object;
-			for each(var guy:BattleGuy in _guy)
+			var card:CardData = BattleHelper.getCardData(_guy,realID);
+			if(card)
 			{
-				var card:CardData = guy.CardDB.FindCard(realID);
-				if(card)
-				{
-					cardInfo["card"]=card;
-					cardInfo["guy"]=guy.ID;
-					return cardInfo;
-					
-				}
+				cardInfo["card"]=card;
+				cardInfo["guy"]=guy.ID;
+				return cardInfo;
 			}
-			return null;
+			else{
+				return null;
+			}
 		}
+		
 		public function onEndOpOK():void{
 			_IsTurn = false;
 			_battleField.onEndOpOk();
@@ -199,10 +191,7 @@ package ICard.logic {
 			return UseCard.genMenuFlag(cardInfo,_enable2Res,PlayerMe.CardDB.ResNum());
 		}
 		public function CardInfo(realID:int):Object{
-			var cardObj:Object = FindCard(realID);
-			if(!cardObj)
-				return null;
-			var	card:CardData = cardObj["card"] as CardData;
+			var	card:CardData = BattleHelper.getCardData(_guy,realID);
 			if(!card)
 				return null;
 			return card.Info;
