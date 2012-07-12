@@ -18,7 +18,6 @@ package ICard.logic {
 		private var _gameID:int;
 		private var _myID:int;
 		private var _lastPlayer:int;
-		private var _fightLink:FightLink;
 		private var _enable2Res:Boolean;
 		protected var _data:IData;
 		private var _IsTurn:Boolean; //操作回合
@@ -52,7 +51,6 @@ package ICard.logic {
 			_gameID = gameID;
 			_guy[me] = new BattleGuy(me,true);
 			_guy[you] = new BattleGuy(you,false);
-			_fightLink = new FightLink;
 		}
 		public function get GameID():int{
 			return _gameID;
@@ -74,49 +72,38 @@ package ICard.logic {
 		}
 		
 		public function onUpdateCard(info:Object):void{
-			if(info["slot"]==4)
-				_enable2Res =false;
-			var fullCard:Object = FullCardInfo(info);
-			if(fullCard==null)
-				return;
 			if(_guy[info["guy"]])
-				_guy[info["guy"]].onUpdateCard(fullCard);
+				_guy[info["guy"]].onUpdateCard(info);
 			if(info["slot"] && info["slot"]==BattleFieldType.MyResourceSlotId)
 				_enable2Res = false;
 
 		}
 		
-		private function CopyCardData(fillCard:Object,realID:int):void{
-			var cardObj:Object = FindCard(realID);
-			UseCard.CopyData(fillCard,cardObj);
-		}
-		
-		private function FullCardInfo(info:Object):Object{
-			var fillCard:Object = CardType.CreateCardInfo(info["cardID"]);
-			CopyCardData(fillCard,info["realID"]);
-			CardData.copyObject(fillCard,info);
-			return fillCard;
-		}
-			
-		public function onCardFight(fightInfo:Object,targets:Array):void{
-			var srdID:int = fightInfo["srcID"];
-			var defender:int = fightInfo["player"];
-			var timeVal:int = fightInfo["time"];
-			_fightLink.Add(srdID,targets);
-			if(defender==_myID) //����
-			{
-					
+		public function CreateCardInfo(cardID:int,realID:int):Object{
+			var card:CardData = FindCard(realID);
+			if(card!=null){
+				return card.CloneInfo();
+			}
+			else{
+				return CardType.CreateCardInfo(cardID);
 			}
 		}
+		
+		private function CloneCardInfo(realID:int):Object{
+			var card:CardData = FindCard(realID);
+			if(card)
+				return card.CloneInfo();
+			else
+				return null;
+		}
+		
 		
 		public function onCardFightResult(srcID:int,targets:Array):void{
 			var oldCards:Array=[];
 			var srcGuy:int = FindCardOwner(srcID);
 			var desGuy:int;
 			for each(var card:Object in targets){
-				var cardOld:Object = new Object;
-				
-				CopyCardData(cardOld,card["realID"]);
+				var cardOld:Object = CloneCardInfo(card["realID"]);
 				oldCards.push(cardOld);
 				
 				if(card["realID"] != srcID)
@@ -156,18 +143,8 @@ package ICard.logic {
 			return BattleHelper.getCardOwner(_guy,realID);
 		}
 		
-		public function FindCard(realID:int):Object{
-			var cardInfo:Object = new Object;
-			var card:CardData = BattleHelper.getCardData(_guy,realID);
-			if(card)
-			{
-				cardInfo["card"]=card;
-				cardInfo["guy"]=guy.ID;
-				return cardInfo;
-			}
-			else{
-				return null;
-			}
+		public function FindCard(realID:int):CardData{
+			return  BattleHelper.getCardData(_guy,realID);
 		}
 		
 		public function onEndOpOK():void{
@@ -185,10 +162,10 @@ package ICard.logic {
 			return (_data._Mod_Battle as Mod_Battle);
 		}
 		public function CardMenuFlag(realID:int):Object{
-			var cardInfo:Object =  FindCard(realID);
-			if(!cardInfo || cardInfo["guy"]!=_myID ||(_IsTurn==false))
+			var card:CardData =  FindCard(realID);
+			if(!card || card.GuyID!=_myID ||(_IsTurn==false))
 				return null;
-			return UseCard.genMenuFlag(cardInfo,_enable2Res,PlayerMe.CardDB.ResNum());
+			return UseCard.genMenuFlag(card,_enable2Res,PlayerMe.CardDB.ResNum());
 		}
 		public function CardInfo(realID:int):Object{
 			var	card:CardData = BattleHelper.getCardData(_guy,realID);
@@ -236,14 +213,12 @@ package ICard.logic {
 		}
 		public function PreShowAction(srcID:int,actionType:int,targetArr:Array):void{
 			var cardArr:Array = [];
-			var srcCard:Object = new Object;
 			var srcOwner:int = FindCardOwner(srcID);
 			var targetOwner:int = 0;
-			CopyCardData(srcCard,srcID);
+			var srcCard:Object = CloneCardInfo(srcID);
 			cardArr.push(srcCard);
 			for each(var targetId:int in targetArr){
-				var cardObj:Object = new Object;
-				CopyCardData(cardObj,targetId);
+				var cardObj:Object = CloneCardInfo(targetId);
 				cardArr.push(cardObj);
 				if(targetOwner==0)
 					targetOwner = FindCardOwner(targetId);
