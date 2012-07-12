@@ -70,16 +70,18 @@ package ICard.datas {
 			}
 			return val;
 		}
-		public function getFightTarget():Array{
-			var targetArr:Array = [];
+		public function getCardOnSlot(slotArr:Array,fillArr:Array):void{
 			for each( var card:CardData in _cardArr)
 			{
-				if(card.Slot != BattleFieldType.MyFightSlotId &&
-					card.Slot != BattleFieldType.MyHeroSlotId)
-					continue;
-				targetArr.push(card.RealID);
+				for each( var slot:int in slotArr)
+				{
+					if(card.Slot == slot)
+					{
+						fillArr.push(card.RealID);
+						break;
+					}
+				}
 			}
-			return targetArr;
 		}
 		
 		public function UseRes(val:int):Boolean{ 

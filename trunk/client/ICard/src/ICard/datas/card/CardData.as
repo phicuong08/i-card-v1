@@ -15,24 +15,13 @@ package ICard.datas.card {
 		public function CardData(info:Object):void{
 			_info = info;
 		}
-	
 
-	/*	
-		public function format(arg1:Object):void{
-			_realID = arg1["realID"];
-			_cardID = arg1["cardID"];
-			_hp = arg1["hp"];
-			_atk = arg1["atk"];
-			_def = arg1["def"];
-			_side = arg1["side"];
-			_turn = arg1["turn"];
-			_slot = arg1["slot"];
-		}
-	*/	
 		public static function copyObject(obj1:Object,obj2:Object):void{
 			if(obj2==null)
 				return;
 			obj1["realID"]= obj2["realID"];
+			if(obj2.hasOwnProperty("guy"))
+				obj1["guy"] = obj2["guy"];
 			if(obj2.hasOwnProperty("cardID"))
 				obj1["cardID"] = obj2["cardID"];
 			if(obj2.hasOwnProperty("hp"))
@@ -53,11 +42,18 @@ package ICard.datas.card {
 		public function get Info():Object{
 			return _info;
 		}
+		
 		public function set RealID(val:int):void{
 			_info["realID"] = val;
 		}
 		public function get RealID():int{
 			return _info["realID"];
+		}
+		public function set GuyID(val:int):void{
+			_info["guy"] = val;
+		}
+		public function get GuyID():int{
+			return _info["guy"];
 		}
 		public function get CardID():int{
 			return _info["cardID"];
@@ -111,6 +107,9 @@ package ICard.datas.card {
 			if(info.hasOwnProperty("cardID"))
 				_info["cardID"] = info["cardID"];
 			
+			if(info.hasOwnProperty("guy"))
+				_info["guy"] = info["guy"];
+				
 			if(info.hasOwnProperty("side"))
 				_info["side"] = info["side"];
 			
@@ -130,6 +129,7 @@ package ICard.datas.card {
 				_info["def"] = info["def"];
 		}
 		public function Clone(arg1:CardData):void{
+		  GuyID = arg1.GuyID;
 			RealID = arg1.RealID;
 			CardID = arg1.CardID;
 			Slot = arg1.Slot;

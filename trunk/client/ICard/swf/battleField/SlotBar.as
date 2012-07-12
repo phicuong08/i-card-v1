@@ -186,7 +186,8 @@
 			_battleStage.AskCard2ResSlot(_selCard.realID);
 		}
 		public function OnCardToCast(e:MouseEvent):void{
-			trace(_selCard.realID,"To cast!");
+			_battleStage.InitialFight(_selCard.realID);
+			//_battleField.onInitalFight(_selCard.realID);
 		}
 		public function OnCardToTask(e:MouseEvent):void{
 			trace(_selCard.realID,"To task!");
