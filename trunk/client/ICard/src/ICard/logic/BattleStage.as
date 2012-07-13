@@ -42,9 +42,7 @@ package ICard.logic {
 			};
 			return (_obj);
 		}
-		
-		
-		
+			
 		public function InitGuy(me:int,you:int,gameID:int):void{
 			_guy = new Dictionary;
 			_myID = me;
@@ -80,30 +78,15 @@ package ICard.logic {
 		}
 		
 		public function CreateCardInfo(cardID:int,realID:int):Object{
-			var card:CardData = FindCard(realID);
-			if(card!=null){
-				return card.CloneInfo();
-			}
-			else{
-				return CardType.CreateCardInfo(cardID);
-			}
+			return BattleHelper.CreateCardInfo(_guy,cardID,realID);
 		}
-		
-		private function CloneCardInfo(realID:int):Object{
-			var card:CardData = FindCard(realID);
-			if(card)
-				return card.CloneInfo();
-			else
-				return null;
-		}
-		
 		
 		public function onCardFightResult(srcID:int,targets:Array):void{
 			var oldCards:Array=[];
 			var srcGuy:int = FindCardOwner(srcID);
 			var desGuy:int;
 			for each(var card:Object in targets){
-				var cardOld:Object = CloneCardInfo(card["realID"]);
+				var cardOld:Object = BattleHelper.CloneCardInfo(_guy,card["realID"]); 
 				oldCards.push(cardOld);
 				
 				if(card["realID"] != srcID)
@@ -167,12 +150,11 @@ package ICard.logic {
 				return null;
 			return UseCard.genMenuFlag(card,_enable2Res,PlayerMe.CardDB.ResNum());
 		}
+		
 		public function CardInfo(realID:int):Object{
-			var	card:CardData = BattleHelper.getCardData(_guy,realID);
-			if(!card)
-				return null;
-			return card.Info;
+			return BattleHelper.CloneCardInfo(_guy,realID);
 		}
+		
 		public function GetResNum(me:Boolean):int{
 			if(!PlayerMe)
 				return 0;
@@ -215,10 +197,10 @@ package ICard.logic {
 			var cardArr:Array = [];
 			var srcOwner:int = FindCardOwner(srcID);
 			var targetOwner:int = 0;
-			var srcCard:Object = CloneCardInfo(srcID);
+			var srcCard:Object = BattleHelper.CloneCardInfo(_guy,srcID); 
 			cardArr.push(srcCard);
 			for each(var targetId:int in targetArr){
-				var cardObj:Object = CloneCardInfo(targetId);
+				var cardObj:Object = BattleHelper.CloneCardInfo(_guy,targetId); 
 				cardArr.push(cardObj);
 				if(targetOwner==0)
 					targetOwner = FindCardOwner(targetId);

@@ -21,6 +21,23 @@ package ICard.logic {
 			}
 			return 0;
 		}
+		public function CreateCardInfo(guyDict:Dictionary,cardID:int,realID:int):Object{
+			var card:CardData = getCardData(guyDict,realID);
+			if(card!=null){
+				return card.CloneInfo();
+			}
+			else{
+				return CardType.CreateCardInfo(cardID);
+			}
+		}
+		
+		private function CloneCardInfo(guyDict:Dictionary,realID:int):Object{
+			var card:CardData = getCardData(guyDict,realID);
+			if(card)
+				return card.CloneInfo();
+			else
+				return null;
+		}
 		
 		public static function getCardData(guyDict:Dictionary,realID:int):CardData{
 			var cardInfo:Object = new Object;
