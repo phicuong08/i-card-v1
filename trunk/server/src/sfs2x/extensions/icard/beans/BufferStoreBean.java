@@ -11,16 +11,12 @@ import java.util.HashMap;
 public class BufferStoreBean
 {
 	private HashMap<Integer, BufferBean> _bufferMap =new HashMap<Integer, BufferBean>();
-	private int _idInc = 0;
 	public BufferStoreBean(){
 	}
-	public void AddBuf(int type,int src,int val,int loopNum){
-		int curID=0;
-		synchronized (this){
-			curID = _idInc++;
-		}
-		BufferBean newBuf = new BufferBean(curID,type,src,val,loopNum);
-		_bufferMap.put(curID,newBuf);
+
+	public void AddBuf(CardAbilityBean ability,int realID){
+		BufferBean newBuf = new BufferBean(ability,realID);
+		_bufferMap.put(realID,newBuf);
 	}
 
 }

@@ -11,7 +11,7 @@ import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
 import com.smartfoxserver.v2.extensions.BaseClientRequestHandler;
 
-public class ClientUseCardHandle extends BaseClientRequestHandler {
+public class ClientCardFightHandle extends BaseClientRequestHandler {
 
 	@Override
 	public void handleClientRequest(User paramUser, ISFSObject paramISFSObject) {
@@ -21,8 +21,8 @@ public class ClientUseCardHandle extends BaseClientRequestHandler {
 			CardGameBean game = GameLobbyBean.GetInstance().getGameMap().get(gameID);
 			if(game==null)
 				return;
-			if(game.getStateBean().IsWaitPlayerOp(paramUser.getId())==false)
-				return;	
+			if(game.getOpPlayer()!=paramUser.getId())
+				return;
 			if(game.getCardOwner(srcID)!= paramUser.getId())
 				return;
 				
@@ -31,7 +31,7 @@ public class ClientUseCardHandle extends BaseClientRequestHandler {
 			for(Integer targetID:targetCol){
 				des.add(targetID);
 			}
-			CardActionBean action = new CardActionBean(srcID,paramUser.getId(),CardActionBean.DO_CARD_2_USE,des);
+			CardActionBean action = new CardActionBean(srcID,paramUser.getId(),CardActionBean.DO_CARD_2_FIGHT,des);
 			game.setCurAction(action);
 	}
 

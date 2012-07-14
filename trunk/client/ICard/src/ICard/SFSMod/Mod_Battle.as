@@ -86,7 +86,7 @@ package ICard.SFSMod {
 			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_client_battle_state_update, params) );
 		}
 		
-		public function QueryUseCard(realID:int,targets:Array):void{
+		public function QueryTaskUse(realID:int,targets:Array):void{
 			var params:ISFSObject = new SFSObject();
 			params.putInt("srcID", realID);
 			params.putInt("game",_battleStage.GameID);
@@ -94,9 +94,9 @@ package ICard.SFSMod {
 			{
 				params.putIntArray("target",targets);
 			}
-			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_use, params) );
+			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_taskuse, params) );
 		}
-		public function QueryCardAtk(realID:int,targets:Array):void{
+		public function QueryCardFight(realID:int,targets:Array):void{
 			var params:ISFSObject = new SFSObject();
 			params.putInt("srcID", realID);
 			params.putInt("game",_battleStage.GameID);
@@ -104,7 +104,7 @@ package ICard.SFSMod {
 			{
 				params.putIntArray("target",targets);
 			}
-			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_atk, params) );
+			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_fight, params) );
 		}
 		public function QueryEndOp():void{
 			var params:ISFSObject = new SFSObject();
