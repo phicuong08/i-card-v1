@@ -77,10 +77,7 @@ package ICard.logic {
 
 		}
 		
-		public function CreateCardInfo(cardID:int,realID:int):Object{
-			return BattleHelper.CreateCardInfo(_guy,cardID,realID);
-		}
-		
+			
 		public function onCardFightResult(srcID:int,targets:Array):void{
 			var oldCards:Array=[];
 			var srcGuy:int = FindCardOwner(srcID);

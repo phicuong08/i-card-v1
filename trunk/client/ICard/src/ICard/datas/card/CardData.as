@@ -19,29 +19,7 @@ package ICard.datas.card {
 			_info = info;
 		}
 
-		public static function copyObject(obj1:Object,obj2:Object):void{
-			if(obj2==null)
-				return;
-			obj1["realID"]= obj2["realID"];
-			if(obj2.hasOwnProperty("guy"))
-				obj1["guy"] = obj2["guy"];
-			if(obj2.hasOwnProperty("cardID"))
-				obj1["cardID"] = obj2["cardID"];
-			if(obj2.hasOwnProperty("hp"))
-				obj1["hp"] = obj2["hp"];
-			if(obj2.hasOwnProperty("atk"))
-				obj1["atk"] = obj2["atk"];
-			if(obj2.hasOwnProperty("cost"))
-				obj1["cost"] = obj2["cost"];
-			if(obj2.hasOwnProperty("def"))	
-				obj1["def"] = obj2["def"];
-			if(obj2.hasOwnProperty("side"))	
-				obj1["side"] = obj2["side"];	
-			if(obj2.hasOwnProperty("turn"))
-				obj1["turn"] = obj2["turn"];
-			if(obj2.hasOwnProperty("slot"))	
-				obj1["slot"] = obj2["slot"];
-		}
+
 		public function CloneInfo():Object{
 			var ba:ByteArray = new ByteArray();
 			ba.writeObject( _info );
@@ -114,7 +92,7 @@ package ICard.datas.card {
 			_info["turn"]=val;
 		}
 		
-		public function Update2(info:Object):void{
+		public function Update(info:Object):void{
 			if(info.hasOwnProperty("cardID")&& 
 				CardID != info["cardID"])
 			{
@@ -150,16 +128,7 @@ package ICard.datas.card {
 		
 
 		public function Clone(arg1:CardData):void{
-		  GuyID = arg1.GuyID;
-			RealID = arg1.RealID;
-			CardID = arg1.CardID;
-			Slot = arg1.Slot;
-			HP = arg1.HP;
-			Atk = arg1.Atk;
-			Def = arg1.Def;
-			Side = arg1.Side;
-			Turn = arg1.Turn;
-			Cost = arg1.Cost;
+			_info = arg1.CloneInfo();
 		}
 		public function IsDead():Boolean{
 			return (HP<=0);
