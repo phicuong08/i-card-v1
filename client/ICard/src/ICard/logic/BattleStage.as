@@ -179,7 +179,7 @@ package ICard.logic {
 			if(_fightDes==null || _fightDes.length==0){
 				return false;
 			}
-			_Mod_Battle.QueryCardAtk(_fightSrc,_fightDes);
+			_Mod_Battle.QueryCardFight(_fightSrc,_fightDes);
 			return true;
 		}
 		public function PriPlayerLoop(playerID:int,secNum:int):void{

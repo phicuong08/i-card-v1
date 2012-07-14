@@ -14,12 +14,12 @@ public class CardActionBean
 	public static final int DO_CARD_2_RES=1;        //卡到资源
 	public static final int DO_CARD_2_FIGHTSLOT=2;  //卡到战斗区
 	public static final int DO_CARD_2_EQUIPSLOT=3;  //卡到装备
-	public static final int DO_CARD_2_ATK=4;        //卡进攻 
+	public static final int DO_CARD_2_FIGHT=4;      //卡战斗(有目标),人物攻击,使用装备,使用法术 
 	public static final int DO_CARD_2_GUIDE=5;      //卡护卫
-	public static final int DO_CARD_2_USE=6;        //任务，技能卡使用
+	public static final int DO_CARD_2_TASK=6;        //任务使用
 	public static final int DO_CARD_2_TURN=7;       //英雄卡翻转
-	public static final int DO_WEAPON_2_USE=8;        //武器使用
-	public static final int DO_EQUIP_2_USE=9;        //装备使用
+//	public static final int DO_WEAPON_2_USE=8;        //武器使用
+//	public static final int DO_EQUIP_2_USE=9;        //装备使用
 	public static final int DO_CARD_2_DEF=10;
 	
 	private int _type;

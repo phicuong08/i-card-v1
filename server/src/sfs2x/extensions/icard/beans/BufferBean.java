@@ -16,30 +16,22 @@ public class BufferBean
 	public static final int WORK_MYLOOP=2;   //我方回合激活
 	
 	private int _id;
-	private int _loopNum=1;  //持续时间
-	private int _workType;   
-	private int _srcID;
-	private int _val;
-	public BufferBean(int id,int type,int src,int val,int loopNum){
-		_id = id;
-		_workType = type;
-		_srcID = src;
-		_val = val;
-		_loopNum = loopNum;
+	private CardAbilityBean _ability;
+	public BufferBean(CardAbilityBean ability,int realID){
+		_ability = ability;
+		_id = realID;
 	}
+
 	public int getID(){
 		return _id;
 	}
 	public int getVal(){
-		return _val;
+		return _ability.getVal();
 	}
 	public int getSrc(){
-		return _srcID;
+		return _id;
 	}
 	public int getType(){
-		return _workType;
-	}
-	public int getLoopNum(){
-		return _loopNum;
+		return _ability.getType();
 	}
 }

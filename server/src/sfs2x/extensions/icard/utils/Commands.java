@@ -39,7 +39,7 @@ public class Commands {
 	public static final String CMD_C2S_CLIENT_BATTLE_STATE_UPDATE = "1";
 	//玩家状态修改   参数1: 状态[ 0--初始状态， 1--就绪]
 	
-	public static final String CMD_C2S_CARD_USE					="1001"; //使用卡片 
+	public static final String CMD_C2S_CARD_TASKUSE					="1001"; //使用任务卡片 
 	//参数1(srcID):int;参数2(target):{realID,...};
 	
 	public static final String CMD_C2S_CARD_UPDATE				="1002"; //请求改变卡状态,上牌
@@ -48,7 +48,7 @@ public class Commands {
 	public static final String CMD_C2S_END_OP				="1003"; //请求结束操作
 	//参数1(gameID):int;
 	
-	public static final String CMD_C2S_CARD_ATK 			="1004"; //盟军卡片攻击 
+	public static final String CMD_C2S_CARD_FIGHT 			="1004"; //盟军卡片攻击 
 	//参数1(srcID):int;参数2(target):{realID,...};
 
 	

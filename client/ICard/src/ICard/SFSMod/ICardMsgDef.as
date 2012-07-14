@@ -11,7 +11,7 @@ package ICard.SFSMod {
 		//参数1(state);状态 [ 0--初始状态， 1--就绪]
 		
 		//卡片消息
-		public static var c2s_battle_card_use:String ="1001";       //使用卡片  
+		public static var c2s_battle_card_taskuse:String ="1001";       //使用卡片  
 		//参数1(srcID):int;参数2(target):{realID,...};
 		public static var c2s_battle_card_update:String="1002";     //请求改变卡状态
 		//参数1(realID):int;参数2(slot):int, 
@@ -19,7 +19,7 @@ package ICard.SFSMod {
 		public static var c2s_end_op:String	="1003"; //请求结束操作
 		//参数1(gameID):int;
 		
-		public static var c2s_battle_card_atk:String ="1004";       //卡片atk  
+		public static var c2s_battle_card_fight:String ="1004";       //卡片atk  
 		//参数1(srcID):int;参数2(target):{realID,...};
 		
 		//server msg

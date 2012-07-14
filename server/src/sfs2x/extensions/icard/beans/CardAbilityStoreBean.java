@@ -44,7 +44,12 @@ public class CardAbilityStoreBean {
 			}
 		}
 	}
-
+	public CardAbilityBean getAbilityBean(int cardID){
+		Vector<CardAbilityBean> vec = getCardAbility(cardID);
+		if(vec.size()==0)
+			return null;
+		return vec.get(0);
+	}
 	public Vector<CardAbilityBean> getCardAbility(int cardID){
 		Vector<CardAbilityBean> vec = new Vector<CardAbilityBean>();
 		int pos=0;
@@ -52,6 +57,7 @@ public class CardAbilityStoreBean {
 			CardAbilityBean ability = _abilityInfoMap.get(cardID*10+pos);
 			if(ability==null)
 				break;
+
 			vec.add(ability);
 			pos++;	
 		}while(true);

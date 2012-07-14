@@ -3,6 +3,7 @@ package sfs2x.extensions.icard.bsn;
 
 
 
+import sfs2x.extensions.icard.beans.CardAbilityBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 
@@ -20,5 +21,9 @@ public class BufferBsn
 		if(card==null)
 			return;
 		card.getBufStore().AddBuf(type,src,val,loopNum);
+	}
+	public static void AddBuf(CardBean cardSrc,CardBean cardDes,CardAbilityBean ability){
+		cardDes.getBufStore().AddBuf(ability, cardSrc.getRealID());
+		
 	}
 }

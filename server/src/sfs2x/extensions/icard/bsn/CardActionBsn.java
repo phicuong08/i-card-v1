@@ -27,11 +27,11 @@ public class CardActionBsn
 	
 	public static void procAction(CardGameBean game,CardActionBean action){
 		switch(action.getType()){
-			case CardActionBean.DO_CARD_2_ATK:
+			case CardActionBean.DO_CARD_2_FIGHT:
 				break;
 			case CardActionBean.DO_CARD_2_DEF:
 				break;
-			case CardActionBean.DO_CARD_2_USE:	
+			case CardActionBean.DO_CARD_2_TASK:	
 				break;
 		}
 	}
@@ -54,7 +54,7 @@ public class CardActionBsn
 				return false;
 			CardInfoBean cardInfo = game.getCardInfo(action.getSrc());
 			if(action.getType()!=CardActionBean.DO_CARD_2_TURN &&  //仅法术卡和英雄翻转才可进战斗链
-			    action.getType()!=CardActionBean.DO_CARD_2_USE)
+			    action.getType()!=CardActionBean.DO_CARD_2_FIGHT)
 				return false;
 			if(cardInfo.getType()!= CardInfoBean.HERO &&
 			   cardInfo.getType()!=CardInfoBean.SKILL &&
@@ -87,7 +87,7 @@ public class CardActionBsn
 			return 911;
 		int cost = 0;
 		switch(action.getType()){
-		case CardActionBean.DO_CARD_2_ATK:
+		case CardActionBean.DO_CARD_2_FIGHT:
 			cost = getAtkCost(card.getCardID());
 			break;
 		case CardActionBean.DO_CARD_2_EQUIPSLOT:
@@ -95,7 +95,7 @@ public class CardActionBsn
 			cost = card.getCost();			
 			break;
 		case CardActionBean.DO_CARD_2_TURN:
-		case CardActionBean.DO_CARD_2_USE:
+		case CardActionBean.DO_CARD_2_TASK:
 			cost = getUseCost(card.getCardID());
 			break;	
 		}
@@ -111,14 +111,8 @@ public class CardActionBsn
 		if(card==null)
 			return;
 		switch(action.getType()){
-		case CardActionBean.DO_CARD_2_ATK:
-			procCard2Atk(game,card,action);
-			break;
-		case CardActionBean.DO_EQUIP_2_USE:
-			procEquip2Use(game,card,action);
-			break;	
-		case CardActionBean.DO_WEAPON_2_USE:
-			procWeapon2Use(game,card,action);
+		case CardActionBean.DO_CARD_2_FIGHT:
+			procCard2Fight(game,site,card,action);
 			break;
 		case CardActionBean.DO_CARD_2_EQUIPSLOT:
 			procCard2EquipSlot(site,card);
@@ -135,8 +129,8 @@ public class CardActionBsn
 		case CardActionBean.DO_CARD_2_GUIDE:
 			//procCard2Guide(site,card);
 			break;	
-		case CardActionBean.DO_CARD_2_USE:
-			procCard2Use(game,site,card,action);
+		case CardActionBean.DO_CARD_2_TASK:
+			procCard2Task(game,site,card,action);
 			break;		
 		}
 	}
@@ -147,10 +141,32 @@ public class CardActionBsn
 		return (game.getCardOwner(desID) == action.getPlayerID());
 		
 	}
-	private static boolean procCard2Atk(CardGameBean game,CardBean card,CardActionBean action){
+	private static void procCard2Atk(CardGameBean game,CardBean card,CardActionBean action){
 		int desID = action.getDes().get(0);
 		CardBean card2 = game.getCard(desID);
-		CardUseBsn.Atk(card, card2);
+		CardUseBsn.Atk(card, card2);	
+	}
+	private static boolean procSkill2Cast(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
+		return CardUseBsn.SkillCast(game,site,card,action);
+	}
+	
+	private static boolean procCard2Fight(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
+		switch(card.getCardType()){
+		case CardInfoBean.HERO:
+		case CardInfoBean.SOLDIER:
+			procCard2Atk(game,card,action);
+			break;
+		case CardInfoBean.SKILL:
+			procSkill2Cast(game,site,card,action);
+			break;
+		case CardInfoBean.ARMOR:
+			procEquip2Use(game,card,action);
+			break;
+		case CardInfoBean.WEAPON:
+			procWeapon2Use(game,card,action);
+			break;
+		}
+
 		return true;
 	}
 	private static boolean procWeapon2Use(CardGameBean game,CardBean card,CardActionBean action){
@@ -193,7 +209,7 @@ public class CardActionBsn
 		return IsMatch;
 	}
 	
-	private static void procCard2Use(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
+	private static void procCard2Task(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
 		if(CardSiteBsn.getResNum(site)< card.getUseCost())
 			return;
 		CardSiteBsn.useRes(site,card.getCost());
