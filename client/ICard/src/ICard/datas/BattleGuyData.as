@@ -34,7 +34,7 @@ package ICard.datas {
 				newCard = new CardData(cardInfo);
 				_cardArr[info["realID"]]=newCard;
 			}
-			newCard.Update2(info);
+			newCard.Update(info);
 			CardDiffData.UpdateCard(newCard);
 			
 		}

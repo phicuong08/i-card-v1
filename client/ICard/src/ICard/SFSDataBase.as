@@ -82,9 +82,6 @@ package ICard {
 				case ICardMsgDef.s2c_end_op_ok:
 					_mod_Battle.onEndOpOK(params);
 					break;
-//				case ICardMsgDef.s2c_battle_reset_player_loop;
-//					_mod_Battle.onResetPlayerLoop(params);
-//					break;
 			}
 		}
 		
