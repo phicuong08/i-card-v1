@@ -1,7 +1,9 @@
 package sfs2x.extensions.icard.bsn;
 
+import java.util.HashMap;
 import java.util.Vector;
 
+import sfs2x.extensions.icard.beans.BufferBean;
 import sfs2x.extensions.icard.beans.CardAbilityBean;
 import sfs2x.extensions.icard.beans.CardAbilityStoreBean;
 import sfs2x.extensions.icard.beans.CardActionBean;
@@ -66,7 +68,20 @@ public class CardUseBsn
 		}
 		return bMatch;
 	}
-
+	public static void DoKillCostDown(CardBean cardSrc,CardBean cardDes,
+										CardAbilityBean ability)
+	{
+		if(cardDes.getCost() <= ability.getVal()){
+			cardDes.setDead();
+		}
+	}
+	public static void DoKillCostUp(CardBean cardSrc,CardBean cardDes,
+			CardAbilityBean ability)
+	{
+		if(cardDes.getCost() >= ability.getVal()){
+			cardDes.setDead();
+		}
+	}
 	public static void DoWhatAbility(CardGameBean game,CardBean cardSrc,CardBean cardDes,
 										CardAbilityBean ability)
 	{
@@ -76,20 +91,23 @@ public class CardUseBsn
 		case CardAbilityBean.DO_BREAK_SKILL:
 			break;
 		case CardAbilityBean.DO_DAMAGE:
-			break;
-		case CardAbilityBean.DO_DEAD:
+			cardDes.AddHp(-ability.getVal());
 			break;
 		case CardAbilityBean.DO_DROP_HAND_CARD:
 			break;
 		case CardAbilityBean.DO_DROP_RES:
 			break;
 		case CardAbilityBean.DO_HEAL:
+			cardDes.AddHp(ability.getVal());
 			break;
 		case CardAbilityBean.DO_KILL:
+			cardDes.setDead();
 			break;
 		case CardAbilityBean.DO_KILL_COST_DOWN:
+			DoKillCostDown(cardSrc,cardDes,ability);
 			break;
 		case CardAbilityBean.DO_KILL_COST_UP:
+			DoKillCostUp(cardSrc,cardDes,ability);
 			break;
 		case CardAbilityBean.DO_RESET:
 			cardDes.setSide(0);
@@ -104,11 +122,29 @@ public class CardUseBsn
 	public static void DoCardAbility(CardGameBean game,CardBean cardSrc,CardBean cardDes){
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(cardSrc.getCardID());
 		
+		boolean bHaveBuf = false;
 		for(int i=0;i<vec.size();i++){
 			CardAbilityBean ability = vec.get(i);
 			if(IsWhichMatch(game,cardSrc,cardDes,ability)==false)
 				continue;
 			DoWhatAbility(game,cardSrc,cardDes,ability);
+			if(ability.IsBuf())
+				bHaveBuf = true;
+		}
+		if(bHaveBuf)
+			cardSrc.setSlotID(CardBean.BUF_SLOT_ID);
+		else
+			onCardDead(game,cardSrc);
+		if(cardDes.getIsDead())
+			onCardDead(game,cardDes);
+	}
+	public static void onCardDead(CardGameBean game,CardBean card){
+		card.setSlotID(CardBean.TOMB_SLOT_ID);
+		HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
+		for(BufferBean buf:bufMap.values()){
+			CardBean cardBuf = game.getCard(buf.getID());
+			if(cardBuf!=null)
+				onCardDead(game,cardBuf);
 		}
 	}
 	
@@ -128,5 +164,10 @@ public class CardUseBsn
 			DoCardAbility(game,card,targetCard);
 		}
 		return true;
+	}
+	public static boolean IsSideEnable(CardBean card,int val){
+		if(val!=0)
+			return true;
+		return (BufferBsn.IsExistBuf(card, CardAbilityBean.BUF_SIDE)==false);
 	}
 }

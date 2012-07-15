@@ -1,5 +1,6 @@
 package sfs2x.extensions.icard.beans;
 
+import sfs2x.extensions.icard.bsn.CardUseBsn;
 import sfs2x.extensions.icard.utils.Constants;
 
 /**
@@ -16,6 +17,7 @@ public class CardBean
 	public final static int FIGHT_SLOT_ID = 4;
 	public final static int TOMB_SLOT_ID = 5;
 	public final static int HERO_SLOT_ID = 6;
+	public final static int BUF_SLOT_ID = 7;
 	
 	public final static int SLOT_DIRTY_BIT = 0;
 	public final static int HP_DIRTY_BIT = 1;
@@ -97,6 +99,8 @@ public class CardBean
 	}
 
 	public void setSide(int val) {
+		if(CardUseBsn.IsSideEnable(this,val)==false)
+			return;
 		_side = val;
 		setDirtyFlagBit(SIDE_DIRTY_BIT);
 	}
@@ -112,6 +116,9 @@ public class CardBean
 	}
 	public int getAtk(){ //¹¥»÷Á¦
 		return _info.getBaseAttack();
+	}
+	public void setDead(){
+		AddHp(-10000);
 	}
 	public int getHp(){  //ÑªÁ¿
 		return _addHp + _info.getBaseHp();
