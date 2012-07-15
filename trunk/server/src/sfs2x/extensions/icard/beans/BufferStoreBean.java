@@ -18,5 +18,7 @@ public class BufferStoreBean
 		BufferBean newBuf = new BufferBean(ability,realID);
 		_bufferMap.put(realID,newBuf);
 	}
-
+	public HashMap<Integer, BufferBean> getBufMap(){
+		return _bufferMap;
+	}
 }

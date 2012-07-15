@@ -180,8 +180,8 @@ public class CardActionBsn
 		CardInfoBean cardInfo = card.getInfo();
 		if(IsMatchUse(game,action,card)==false)
 			return false;
-		int desID = action.getDes().get(0);
-		BufferBsn.AddBuf(game,desID,CardAbilityBean.BUF_DEF_ADD,card.getRealID(),card.getDef(),1);
+//		int desID = action.getDes().get(0);
+//		BufferBsn.AddBuf(game,desID,CardAbilityBean.BUF_DEF_ADD,card.getRealID(),card.getDef(),1);
 		return true;
 	}
 	

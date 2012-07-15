@@ -46,6 +46,7 @@ public class CardAbilityBean
 	public static final int BUF_POINT_UNABLE      =16;  //不可指定
 	public static final int BUF_DEF_ADD           =17;   //
 	public static final int BUF_DEF_UNABLE        =18;  //无法防御
+	public static final int BUF_MAX               =99;  //
 	
 	public static final int WHICH_NULL                 =0;  
 	public static final int WHICH_MY                   =1;  //我方
@@ -68,7 +69,6 @@ public class CardAbilityBean
 	public static final int DO_DROP_HAND_CARD       =103;  //弃手牌
 	public static final int DO_DROP_RES             =104;  //弃资源
 	public static final int DO_DAMAGE               =105;  //伤害
-	public static final int DO_DEAD                 =106;  //消灭牌
 	public static final int DO_HEAL                 =107;  //治疗
 	public static final int DO_KILL                 =108;  //消灭
 	public static final int DO_KILL_COST_UP         =109;  //消灭费用大于
@@ -130,6 +130,9 @@ public class CardAbilityBean
 	}
 	public int getWhich(){
 		return _which;
+	}
+	public boolean IsBuf(){
+		return (_type <= BUF_MAX);
 	}
 }
 

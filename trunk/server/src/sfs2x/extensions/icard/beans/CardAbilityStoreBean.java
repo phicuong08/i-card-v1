@@ -159,8 +159,6 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.DO_DROP_RES;
 		else if(whatInfo.equals("DO_DAMAGE"))
 			return CardAbilityBean.DO_DAMAGE;
-		else if(whatInfo.equals("DO_DEAD"))
-			return CardAbilityBean.DO_DEAD;		
 		else if(whatInfo.equals("DO_HEAL"))
 			return CardAbilityBean.DO_HEAL;		
 		else if(whatInfo.equals("DO_KILL"))

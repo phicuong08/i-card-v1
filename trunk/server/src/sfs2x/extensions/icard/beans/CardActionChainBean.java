@@ -28,11 +28,6 @@ public class CardActionChainBean
 		return _actionVect.size()==0;
 	}
 	public void PushAction(CardActionBean action){
-		if(_actionVect.size()>0)
-		{
-			int kk=0;
-			kk++;
-		}
 		_actionVect.add(action);
 	}
 	

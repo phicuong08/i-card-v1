@@ -33,9 +33,20 @@ public class GameBsn
 									 21001,21001,21001,21001,21001,
 									 };
 	*/								 
-	static private int _cardStore[]={21001,50005,21001,
-									21001,40002,21001,21001,21001,40006,21001,21001,40010,
-									21001,31004,21001,
+//	static private int _cardStore[]={21001,50005,21001,
+//									21001,40002,21001,21001,21001,40006,21001,21001,40010,
+//									21001,31004,21001,
+//									 30001,21001,21001,
+//									 21001,21002,21003,21004,21005,
+//									 21001,21002,21003,21001,21001,
+//									 22001,22002,22003,22004,22005,
+//									 22001,22002,22003,21001,22005,
+//									 23001,23002,23003,23004,21001,
+//									 23001,23002,23003,21001,23005,
+//									 };
+	static private int _cardStore[]={21001,50003,21001,
+									 21001,40002,21001,21001,21001,40006,21001,21001,40010,
+									 21001,31004,21001,
 									 30001,21001,21001,
 									 21001,21002,21003,21004,21005,
 									 21001,21002,21003,21001,21001,
@@ -43,8 +54,7 @@ public class GameBsn
 									 22001,22002,22003,21001,22005,
 									 23001,23002,23003,23004,21001,
 									 23001,23002,23003,21001,23005,
-									 };
-									 								 
+									 };								 								 
 	static private java.util.Random _Random = new java.util.Random();
 
 
@@ -95,8 +105,9 @@ public class GameBsn
 		{
 			Cards.add(_cardStore[i]);
 		}
-		List<Integer> washCards = WashCard(Cards);
-		site.setCardSource(washCards);
+//		List<Integer> washCards = WashCard(Cards);
+//		site.setCardSource(washCards);
+		site.setCardSource(Cards);
 	}
 	
 	public static void InitGameCard(CardGameBean newGame){
