@@ -227,6 +227,8 @@ public class CardActionBsn
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setSlotID(CardBean.FIGHT_SLOT_ID);	
 		card.setSide(3);
+		if(BufferBsn.IsExistAbility(card,CardAbilityBean.WHEN_ENTER)==true)
+			BattleBsn.InitAbilityOp(game,card,CardAbilityBean.WHEN_ENTER);
 	}
 	private static void procCard2EquipSlot(CardSiteBean site,CardBean card){
 		if(CardSiteBsn.getResNum(site)< card.getCost())
