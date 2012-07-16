@@ -24,6 +24,7 @@ public class BattleStateBean
 	public static final int ST_WAIT_CHAIN_OVER = 6;
 	public static final int ST_WAIT_GOD = 7;
 	public static final int ST_LOOP_END = 8;
+	public static final int ST_WAIT_ENTERCARD_OP=9;//牌进场时操作
 	public static final int ST_DELAY_JUMP=10;
 	
 	

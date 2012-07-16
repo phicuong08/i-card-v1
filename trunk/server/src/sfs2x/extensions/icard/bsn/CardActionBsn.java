@@ -118,7 +118,7 @@ public class CardActionBsn
 			procCard2EquipSlot(site,card);
 			break;
 		case CardActionBean.DO_CARD_2_FIGHTSLOT:
-			procCard2FightSlot(site,card);
+			procCard2FightSlot(game,site,card);
 			break;
 		case CardActionBean.DO_CARD_2_RES:
 			procCard2Res(site,card);
@@ -221,7 +221,7 @@ public class CardActionBsn
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setTurn(1);
 	}
-	private static void procCard2FightSlot(CardSiteBean site,CardBean card){
+	private static void procCard2FightSlot(CardGameBean game,CardSiteBean site,CardBean card){
 		if(CardSiteBsn.getResNum(site)< card.getCost())
 			return;
 		CardSiteBsn.useRes(site,card.getCost());

@@ -65,10 +65,30 @@ public class BattleBsn
 		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_END_OP_OK, null, game);
 	}
 	
+	public static void procWaitEnterCardOp(CardGameBean game,ICardExtension ext,int elasped){
+		//超时处理 TBD
+		if(game.getStateBean().DecDuration(elasped)==false){
+			procLoopReset(game,ext);
+			return;
+		}
+		CardActionBean curAction = game.getCurAction();
+		if(curAction==null)
+			return;
+			
+		//检测是否操作方	
+		if(game.getOpPlayer()!=curAction.getPlayerID())
+			return;
+		game.getStateBean().Jump2GodState();
+
+	}
+	
 	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext,int elapsed){
 		switch(game.getStateBean().getState()){
 		case BattleStateBean.ST_INIT_BATTLE:
 			procInitBattle(game,ext);
+			break;
+		case BattleStateBean.ST_WAIT_ENTERCARD_OP:
+			procWaitEnterCardOp(game,ext,elapsed);
 			break;
 		case BattleStateBean.ST_WAIT_LOOP_OP:
 			procWaitLoopOP(game,ext,elapsed);
