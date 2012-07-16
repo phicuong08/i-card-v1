@@ -31,12 +31,57 @@ public class BufferBsn
 		cardDes.getBufStore().AddBuf(ability, cardSrc.getRealID());
 		
 	}
-	public static boolean IsExistBuf(CardBean card,int type){
+	public static boolean IsExistBuf(CardBean card,int type,int when){
 		HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
 		for(BufferBean buf:bufMap.values()){
-			if(buf.getType()==type)
+			if(buf.getType()==type && (buf.getWhen()== CardAbilityBean.WHEN_ALL|| buf.getWhen()==when)
 				return true;
 		}
 		return false;
 	}
+	public static void callCardAbility(CardBean card,CardAbilityBean ability){
+		switch(ability.getType()){
+		case CardAbilityBean.BUF_CURE:
+			card.AddHp(-ability.getVal());
+			break;
+		case CardAbilityBean.BUF_HEAL:
+			card.AddHp(ability.getVal());
+			break;	
+		}
+	}
+	public static boolean IsExistAbility(CardBean card,int when){
+		HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
+		for(BufferBean buf:bufMap.values()){
+			if( buf.getWhen()==when)
+				return true;
+		}
+		return false;
+	}
+	public static boolean IsCardAbility(CardBean card,int when,int type){
+		return (getCardAbility(card,when,CardAbilityBean.WHICH_I,type)!=null);
+	}
+	public static CardAbilityBean getCardAbility(CardBean card,int when,int which,int type){
+		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
+		for(int i=0;i<vec.size();i++){
+			CardAbilityBean ability = vec.get(i);
+			if(ability.getWhich()!=which)
+				continue;
+			if(ability.getType()==type && (buf.getWhen()== CardAbilityBean.WHEN_ALL|| buf.getWhen()==when)){
+				return ability;
+			}
+		}
+		return null;
+	}
+	public static int getAbilityVal(CardBean card,int when,int type){
+		int val = 0;
+		HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
+		for(BufferBean buf:bufMap.values()){
+			if(buf.getType()==type && (buf.getWhen()== CardAbilityBean.WHEN_ALL|| buf.getWhen()==when)
+			{
+				val += buf.getVal();
+			}
+		}
+		return val;
+	}
+	
 }

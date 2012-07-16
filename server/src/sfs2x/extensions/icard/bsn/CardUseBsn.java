@@ -27,10 +27,21 @@ public class CardUseBsn
 		card1.AddHp(-card2.getAtk());
 		card2.AddHp(-card1.getAtk());
 		card1.setSide(1);
+		if(BufferBsn.IsCardAbility(card2,CardAbilityBean.WHEN_ATKED,CardAbilityBean.DO_KILL)==true)
+			card1.setDead();
 		if(card1.getHp()<=0)
+		{
 			card1.setSlotID(CardBean.TOMB_SLOT_ID);
+			if(BufferBsn.IsCardAbility(card1,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true)
+				card2.setDead();
+		}
 		if(card2.getHp()<=0)
+		{
 			card2.setSlotID(CardBean.TOMB_SLOT_ID);
+			if(BufferBsn.IsCardAbility(card2,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true ||
+			   BufferBsn.IsCardAbility(card2,CardAbilityBean.WHEN_DEF_DEAD,CardAbilityBean.DO_KILL)==true)
+			   card1.setDead();
+		}
 	}
 	public static boolean IsWhichMatch(CardGameBean game,CardBean cardSrc,CardBean cardDes,
 										CardAbilityBean ability){

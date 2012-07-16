@@ -105,6 +105,19 @@ public class CardBean
 		setDirtyFlagBit(SIDE_DIRTY_BIT);
 	}
 	
+	public boolean IsDistAtk(int when){
+		if(BufferBsn.IsCardAbility(this,when,CardAbilityBean.BUF_ATK_DIST))
+			return true;
+		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_ATK_DIST,when);
+	}
+	public boolean IsAtkUnable(int when){
+		return BufferBsn.IsExistBuf(this,BUF_ATK_UNABLE,when);
+	}
+	public boolean IsGuidable(int when){
+		if(BufferBsn.getCardAbility(this,when,CardAbilityBean.BUF_GUIDE))
+			return true;
+		return BufferBsn.IsExistBuf(this,BUF_GUIDE,when);
+	}
 	public int getCost(){ //费用
 		return _info.getBaseCost();
 	}
@@ -112,16 +125,17 @@ public class CardBean
 		return _info.getBaseUseCost();
 	}
 	public int getDef(){ //防御力
-		return _info.getBaseDefence();
+		return _info.getBaseDefence() + BufferBsn.getAbilityVal(this,when,BUF_DEF_ADD);
 	}
-	public int getAtk(){ //攻击力
-		return _info.getBaseAttack();
+	public int getAtk(int when){ //攻击力
+		return _info.getBaseAttack() + BufferBsn.getAbilityVal(this,when,BUF_ATK_ADD);
 	}
 	public void setDead(){
 		AddHp(-10000);
+		setSlotID(TOMB_SLOT_ID);
 	}
 	public int getHp(){  //血量
-		return _addHp + _info.getBaseHp();
+		return _addHp + _info.getBaseHp() ;
 	}
 	public void AddHp(int val){
 		_addHp += val;
