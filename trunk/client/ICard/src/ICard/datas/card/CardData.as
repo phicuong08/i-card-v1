@@ -12,8 +12,6 @@ package ICard.datas.card {
 		public static const StateSide:int = 2;
 		public static const StateTurn:int = 2;
 		
-
-		public var _targetArr:Array;
 		public var _info:Object;
 		public function CardData(info:Object):void{
 			_info = info;
@@ -130,52 +128,14 @@ package ICard.datas.card {
 		public function Clone(arg1:CardData):void{
 			_info = arg1.CloneInfo();
 		}
+		
 		public function IsDead():Boolean{
 			return (HP<=0);
 		}
-		public function get Type():int{
-				var ret:int=0;
-				var typeId:int = CardID/1000;
-				switch(typeId)
-				{
-				case 30:
-					ret = CardType.WeaponType;
-					break;
-				case 31:
-					ret = CardType.DefType;
-					break;
-				case 21:
-				case 22:
-				case 23:
-					ret = CardType.SoldierType;
-					break;
-				case 20:
-					ret = CardType.HeroType;
-					break;
-				case 50:
-					ret = CardType.SkillType;
-					break;
-				case 40:
-					ret = CardType.TaskType;
-					break;
-			}
-			return ret;
-		}	
 
-	
-		
-		//        public function format(_arg1:Array):void{
-		//            var _local2:Object = {};
-		//            oObject.list(_arg1, _local2, ["offX", "offY", "challenged", "warResult", "awardExp", "awardItems", "failureAwardItem", "debugInfo", "reportId"]);
-		//            this.offset = [_local2["offX"], _local2["offY"]];
-		//            this.challenged = _local2["challenged"];
-		//            this.formatWarResult(_local2["warResult"][0]);
-		//            this.awardExperiences = this.formatAwardExperiences(((_local2["awardExp"]) || ([])));
-		//            this.awardItems = this.formatAwardItems(((_local2["awardItems"]) || ([])));
-		//            this.failureAwardItem = this.formatAwardItems(((_local2["failureAwardItem"]) || ([])));
-		//            this.debugInfo = ((_local2["debugInfo"]) || ([]));
-		//            this.reportId = ((_local2["reportId"]) || (0));
-		//        }
+		public function get Type():int{
+			return UseCard.getType(CardID);
+		}	
 		
 	}
 }//package com.assist.data.mission 
