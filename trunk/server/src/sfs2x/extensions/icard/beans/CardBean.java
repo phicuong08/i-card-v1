@@ -1,5 +1,6 @@
 package sfs2x.extensions.icard.beans;
 
+import sfs2x.extensions.icard.bsn.BufferBsn;
 import sfs2x.extensions.icard.bsn.CardUseBsn;
 import sfs2x.extensions.icard.utils.Constants;
 
@@ -111,12 +112,12 @@ public class CardBean
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_ATK_DIST,when);
 	}
 	public boolean IsAtkUnable(int when){
-		return BufferBsn.IsExistBuf(this,BUF_ATK_UNABLE,when);
+		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_ATK_UNABLE,when);
 	}
 	public boolean IsGuidable(int when){
-		if(BufferBsn.getCardAbility(this,when,CardAbilityBean.BUF_GUIDE))
+		if(BufferBsn.getCardAbility(this,when,CardAbilityBean.WHICH_I,CardAbilityBean.BUF_GUIDE)!=null)
 			return true;
-		return BufferBsn.IsExistBuf(this,BUF_GUIDE,when);
+		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_GUIDE,when);
 	}
 	public int getCost(){ //费用
 		return _info.getBaseCost();
@@ -124,11 +125,11 @@ public class CardBean
 	public int getUseCost(){ //使用（武器，法术）,横置(盟军)费用,英雄翻转
 		return _info.getBaseUseCost();
 	}
-	public int getDef(){ //防御力
-		return _info.getBaseDefence() + BufferBsn.getAbilityVal(this,when,BUF_DEF_ADD);
+	public int getDef(int when){ //防御力
+		return _info.getBaseDefence() + BufferBsn.getAbilityVal(this,when,CardAbilityBean.BUF_DEF_ADD);
 	}
 	public int getAtk(int when){ //攻击力
-		return _info.getBaseAttack() + BufferBsn.getAbilityVal(this,when,BUF_ATK_ADD);
+		return _info.getBaseAttack() + BufferBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
 	}
 	public void setDead(){
 		AddHp(-10000);
