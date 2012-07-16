@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.CardActionBean;
 
+import sfs2x.extensions.icard.beans.BufferBean;
 import sfs2x.extensions.icard.beans.CardAbilityBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
@@ -227,8 +228,9 @@ public class CardActionBsn
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setSlotID(CardBean.FIGHT_SLOT_ID);	
 		card.setSide(3);
-		if(BufferBsn.IsExistAbility(card,CardAbilityBean.WHEN_ENTER)==true)
-			BattleBsn.InitAbilityOp(game,card,CardAbilityBean.WHEN_ENTER);
+		CardAbilityBean ability = BufferBsn.getCardAbility(card,CardAbilityBean.WHEN_ENTER);
+		if(ability!=null)
+			BattleBsn.InitAbilityOp(game,card,ability);
 	}
 	private static void procCard2EquipSlot(CardSiteBean site,CardBean card){
 		if(CardSiteBsn.getResNum(site)< card.getCost())

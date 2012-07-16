@@ -115,7 +115,7 @@ public class CardBean
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_ATK_UNABLE,when);
 	}
 	public boolean IsGuidable(int when){
-		if(BufferBsn.getCardAbility(this,when,CardAbilityBean.WHICH_I,CardAbilityBean.BUF_GUIDE)!=null)
+		if(BufferBsn.IsCardAbility(this,when,CardAbilityBean.BUF_GUIDE))
 			return true;
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_GUIDE,when);
 	}
