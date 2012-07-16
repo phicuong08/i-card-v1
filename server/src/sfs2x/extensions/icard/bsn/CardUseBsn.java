@@ -36,7 +36,7 @@ public class CardUseBsn
 										CardAbilityBean ability){
 		int srcOwner = game.getCardOwner(cardSrc.getRealID());
 		int desOwner = game.getCardOwner(cardDes.getRealID()); 
-		boolean bMatch = false;
+		boolean bMatch = true;
 		switch(ability.getWhich()){
 		case CardAbilityBean.WHICH_MY:
 			bMatch = (srcOwner==desOwner)&& ((cardDes.getCardType()==CardInfoBean.HERO)||(cardDes.getCardType()==CardInfoBean.SOLDIER));
@@ -82,6 +82,14 @@ public class CardUseBsn
 			cardDes.setDead();
 		}
 	}
+	
+	public static void DoDrawHandCard(CardGameBean game,CardBean cardSrc,CardBean cardDes,
+																	CardAbilityBean ability)
+	{
+		int owner = game.getCardOwner(cardSrc);
+		BattleBsn.drawCard(game,ICardExtension.getExt(),owner,ability.getVal());
+	}
+	
 	public static void DoWhatAbility(CardGameBean game,CardBean cardSrc,CardBean cardDes,
 										CardAbilityBean ability)
 	{
@@ -114,6 +122,9 @@ public class CardUseBsn
 			break;
 		case CardAbilityBean.DO_SIDE:
 			cardDes.setSide(1);
+			break;
+		case CardAbilityBean.DO_DRAW_HAND_CARD:
+			DoDrawHandCard(game,cardSrc,cardDes,ability);
 			break;
 		default:
 			BufferBsn.AddBuf(cardSrc, cardDes, ability);

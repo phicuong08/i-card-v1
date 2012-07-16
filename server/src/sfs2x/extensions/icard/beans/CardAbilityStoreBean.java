@@ -171,6 +171,8 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.DO_RESET;
 		else if(whatInfo.equals("DO_SIDE"))
 			return CardAbilityBean.DO_SIDE;	
+		else if(whatInfo.equals("DO_DRAW_HAND_CARD"))
+			return CardAbilityBean.DO_DRAW_HAND_CARD;		
 		return CardAbilityBean.DO_NULL;	 	
 	}
 	private int ParseWhenInfo(String whenInfo){

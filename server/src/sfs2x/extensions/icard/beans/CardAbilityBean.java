@@ -67,8 +67,9 @@ public class CardAbilityBean
 	public static final int DO_ATK_SIDE_ADD         =101;  //攻击横置时加伤害
 	public static final int DO_BREAK_SKILL          =102;  //打断技能
 	public static final int DO_DROP_HAND_CARD       =103;  //弃手牌
-	public static final int DO_DROP_RES             =104;  //弃资源
-	public static final int DO_DAMAGE               =105;  //伤害
+	public static final int DO_DRAW_HAND_CARD       =104;  //抓牌
+	public static final int DO_DROP_RES             =105;  //弃资源
+	public static final int DO_DAMAGE               =106;  //伤害
 	public static final int DO_HEAL                 =107;  //治疗
 	public static final int DO_KILL                 =108;  //消灭
 	public static final int DO_KILL_COST_UP         =109;  //消灭费用大于

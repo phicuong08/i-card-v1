@@ -143,6 +143,35 @@ package ICard.logic {
 				return 0;
 			return info[1];
 		}
+		public static function  getType(cardID:int):int{
+				var ret:int=0;
+				var typeId:int = cardID/1000;
+				switch(typeId)
+				{
+				case 30:
+					ret = CardType.WeaponType;
+					break;
+				case 31:
+					ret = CardType.DefType;
+					break;
+				case 21:
+				case 22:
+				case 23:
+					ret = CardType.SoldierType;
+					break;
+				case 20:
+					ret = CardType.HeroType;
+					break;
+				case 50:
+					ret = CardType.SkillType;
+					break;
+				case 40:
+					ret = CardType.TaskType;
+					break;
+			}
+			return ret;
+		}	
+		
 		public static function UseAble(card:CardData,resVal:int):Boolean{
 			if(ResEnough(card,resVal)==false)
 			{

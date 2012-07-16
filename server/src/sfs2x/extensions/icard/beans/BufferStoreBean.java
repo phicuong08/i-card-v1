@@ -21,4 +21,13 @@ public class BufferStoreBean
 	public HashMap<Integer, BufferBean> getBufMap(){
 		return _bufferMap;
 	}
+	public Vector<CardAbilityBean> getAbilityOnWhen(int when){
+		if(_bufferMap.size()==0)
+			return null;
+		Vector<CardAbilityBean> vec = new Vector<CardAbilityBean>;
+		for(BufferBean buf:_bufferMap.values()){
+			if(buf.getWhen()==when)
+				vec.add(buf.getAbility());
+		}
+	}
 }

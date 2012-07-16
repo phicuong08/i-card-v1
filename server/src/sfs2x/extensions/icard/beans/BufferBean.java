@@ -21,7 +21,12 @@ public class BufferBean
 		_ability = ability;
 		_id = realID;
 	}
-
+	public CardAbilityBean getAbility(){
+		return _ability;
+	}
+	public int getWhen(){
+		return _ability.getWhen();
+	}
 	public int getID(){
 		return _id;
 	}
