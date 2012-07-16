@@ -142,13 +142,16 @@ public class BattleBsn
 		if(action!=null){
 			CardActionBsn.procCardAction(game,action,ext);
 			ext.SendGameCardUpdate(game);
-			procLoopReset(game,ext);
+			if(game.getStateBean().getState()==BattleStateBean.ST_WAIT_GOD) //״̬δ��ת
+				procLoopReset(game,ext);
 		}
 		else{
 			game.getStateBean().setState(BattleStateBean.ST_LOOP_END);
 		}
 	}
-	
+	public static void InitAbilityOp(CardGameBean game,CardBean card,int when){
+		
+	}
 	public static void procLoopReset(CardGameBean game,ICardExtension ext){
 		game.getStateBean().resetWaitLoopOp(game.getLoopPlayer());
 		ISFSObject params = SFSObjectBsn.genBattleLoopResetInfo(game);
