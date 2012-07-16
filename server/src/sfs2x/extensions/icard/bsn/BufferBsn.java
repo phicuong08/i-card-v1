@@ -51,13 +51,14 @@ public class BufferBsn
 			break;	
 		}
 	}
-	public static boolean IsExistAbility(CardBean card,int when){
-		HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
-		for(BufferBean buf:bufMap.values()){
-			if( buf.getWhen()==when)
-				return true;
+	public static CardAbilityBean getCardAbility(CardBean card,int when){
+		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
+		for(int i=0;i<vec.size();i++){
+			CardAbilityBean ability = vec.get(i);
+			if(ability.getWhen()!=when)
+				return ability;
 		}
-		return false;
+		return null;
 	}
 	public static boolean IsCardAbility(CardBean card,int when,int type){
 		return (getCardAbility(card,when,CardAbilityBean.WHICH_I,type)!=null);

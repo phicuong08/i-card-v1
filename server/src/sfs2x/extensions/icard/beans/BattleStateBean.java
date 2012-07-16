@@ -3,6 +3,9 @@ package sfs2x.extensions.icard.beans;
 
 import java.util.*;
 
+import com.smartfoxserver.v2.entities.data.ISFSObject;
+
+import sfs2x.extensions.icard.bsn.SFSObjectBsn;
 import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.Constants;
 
@@ -24,7 +27,7 @@ public class BattleStateBean
 	public static final int ST_WAIT_CHAIN_OVER = 6;
 	public static final int ST_WAIT_GOD = 7;
 	public static final int ST_LOOP_END = 8;
-	public static final int ST_WAIT_ENTERCARD_OP=9;//牌进场时操作
+	public static final int ST_WAIT_EX_OP=9;//牌进场时操作
 	public static final int ST_DELAY_JUMP=10;
 	
 	
@@ -37,6 +40,7 @@ public class BattleStateBean
 	private int _waitChainPass;
 	private int _delayState;
 	private int _delayDuration;
+	private int _ability;
 	public BattleStateBean() {
 		_state =ST_NONE_STATE;
 	}
@@ -115,6 +119,11 @@ public class BattleStateBean
 	}
 	public void InitWaitDuration(int during){
 		_waitDuration = during;
+	}
+	public void InitExOp(int ability){
+		_waitDuration = Constants.BATTLE_LOOP_TIME;
+		_state = BattleStateBean.ST_WAIT_EX_OP;
+		_ability = ability;
 	}
 	public void InitWaitOp(int playerID,int during){
 		_opPlayerID = playerID;

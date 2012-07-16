@@ -65,7 +65,7 @@ public class BattleBsn
 		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_END_OP_OK, null, game);
 	}
 	
-	public static void procWaitEnterCardOp(CardGameBean game,ICardExtension ext,int elasped){
+	public static void procWaitExOp(CardGameBean game,ICardExtension ext,int elasped){
 		//≥¨ ±¥¶¿Ì TBD
 		if(game.getStateBean().DecDuration(elasped)==false){
 			procLoopReset(game,ext);
@@ -87,8 +87,8 @@ public class BattleBsn
 		case BattleStateBean.ST_INIT_BATTLE:
 			procInitBattle(game,ext);
 			break;
-		case BattleStateBean.ST_WAIT_ENTERCARD_OP:
-			procWaitEnterCardOp(game,ext,elapsed);
+		case BattleStateBean.ST_WAIT_EX_OP:
+			procWaitExOp(game,ext,elapsed);
 			break;
 		case BattleStateBean.ST_WAIT_LOOP_OP:
 			procWaitLoopOP(game,ext,elapsed);
@@ -149,12 +149,16 @@ public class BattleBsn
 			game.getStateBean().setState(BattleStateBean.ST_LOOP_END);
 		}
 	}
-	public static void InitAbilityOp(CardGameBean game,CardBean card,int when){
-		
+	public static void InitAbilityOp(CardGameBean game,CardBean card,CardAbilityBean ability){
+		game.getStateBean().InitExOp(ability.getID());
+		ISFSObject params = SFSObjectBsn.genBattleLoopResetInfo(game);
+		params.putInt("ability", ability.getID());
+		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_WAIT_EX_OP, params,game);
 	}
 	public static void procLoopReset(CardGameBean game,ICardExtension ext){
 		game.getStateBean().resetWaitLoopOp(game.getLoopPlayer());
 		ISFSObject params = SFSObjectBsn.genBattleLoopResetInfo(game);
+		
 		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_LOOP_RESET, params,game);
 	}
 	
