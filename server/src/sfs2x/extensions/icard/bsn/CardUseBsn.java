@@ -11,6 +11,7 @@ import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardInfoBean;
 import sfs2x.extensions.icard.beans.CardSiteBean;
+import sfs2x.extensions.icard.main.ICardExtension;
 
 
 
@@ -24,8 +25,8 @@ public class CardUseBsn
 {	
 	
 	public static void Atk(CardBean card1,CardBean card2){
-		card1.AddHp(-card2.getAtk());
-		card2.AddHp(-card1.getAtk());
+		card1.AddHp(-card2.getAtk(CardAbilityBean.WHEN_ATK));
+		card2.AddHp(-card1.getAtk(CardAbilityBean.WHEN_ATKED));
 		card1.setSide(1);
 		if(BufferBsn.IsCardAbility(card2,CardAbilityBean.WHEN_ATKED,CardAbilityBean.DO_KILL)==true)
 			card1.setDead();
@@ -97,7 +98,7 @@ public class CardUseBsn
 	public static void DoDrawHandCard(CardGameBean game,CardBean cardSrc,CardBean cardDes,
 																	CardAbilityBean ability)
 	{
-		int owner = game.getCardOwner(cardSrc);
+		int owner = game.getCardOwner(cardSrc.getRealID());
 		BattleBsn.drawCard(game,ICardExtension.getExt(),owner,ability.getVal());
 	}
 	
@@ -190,6 +191,6 @@ public class CardUseBsn
 	public static boolean IsSideEnable(CardBean card,int val){
 		if(val!=0)
 			return true;
-		return (BufferBsn.IsExistBuf(card, CardAbilityBean.BUF_SIDE)==false);
+		return (BufferBsn.IsExistBuf(card, CardAbilityBean.BUF_SIDE,CardAbilityBean.WHEN_ALL)==false);
 	}
 }

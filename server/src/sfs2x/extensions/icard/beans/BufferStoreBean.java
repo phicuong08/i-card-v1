@@ -1,6 +1,7 @@
 package sfs2x.extensions.icard.beans;
 
 import java.util.HashMap;
+import java.util.Vector;
 
 /**
  * GameMapBean: class describing a map associated to a game match
@@ -24,10 +25,11 @@ public class BufferStoreBean
 	public Vector<CardAbilityBean> getAbilityOnWhen(int when){
 		if(_bufferMap.size()==0)
 			return null;
-		Vector<CardAbilityBean> vec = new Vector<CardAbilityBean>;
+		Vector<CardAbilityBean> vec = new Vector<CardAbilityBean>();
 		for(BufferBean buf:_bufferMap.values()){
 			if(buf.getWhen()==when)
 				vec.add(buf.getAbility());
 		}
+		return vec;
 	}
 }
