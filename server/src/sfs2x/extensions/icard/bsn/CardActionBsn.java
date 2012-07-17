@@ -133,6 +133,9 @@ public class CardActionBsn
 		case CardActionBean.DO_CARD_2_TASK:
 			procCard2Task(game,site,card,action);
 			break;		
+		case CardActionBean.DO_ABILITY_2_OP:
+			procAbility2Op(game,site,card,action);
+			break;
 		}
 	}
 	public static boolean IsFriendAction(CardGameBean game,CardActionBean action){
@@ -150,7 +153,9 @@ public class CardActionBsn
 	private static boolean procSkill2Cast(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
 		return CardUseBsn.SkillCast(game,site,card,action);
 	}
-	
+	private static boolean procAbility2Op(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
+		return true;
+	}
 	private static boolean procCard2Fight(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
 		switch(card.getCardType()){
 		case CardInfoBean.HERO:

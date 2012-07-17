@@ -52,6 +52,7 @@ public class Commands {
 	public static final String CMD_C2S_CARD_FIGHT 			="1004"; //盟军卡片攻击 
 	//参数1(srcID):int;参数2(target):{realID,...};
 
+	public static final String CMD_C2S_EX_OP              ="1005";//
 	
 
 }

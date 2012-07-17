@@ -52,6 +52,7 @@ public class ICardExtension extends SFSExtension {
 		addRequestHandler(Commands.CMD_C2S_CARD_UPDATE,ClientUpdateCardHandle.class);
 		addRequestHandler(Commands.CMD_C2S_END_OP,ClientEndOpHandle.class);
 		addRequestHandler(Commands.CMD_C2S_CARD_FIGHT,ClientCardFightHandle.class);
+		addRequestHandler(Commands.CMD_C2S_EX_OP,ClientExOpHandle.class);
 		
 		//ÊÂ¼þhandleÌí¼Ó
 		// Event handler: join room
@@ -105,6 +106,7 @@ public class ICardExtension extends SFSExtension {
 		removeRequestHandler(Commands.CMD_C2S_CARD_TASKUSE);
 		removeRequestHandler(Commands.CMD_C2S_CARD_UPDATE);
 		removeRequestHandler(Commands.CMD_C2S_END_OP);
+		removeRequestHandler(Commands.CMD_C2S_EX_OP);
 
 		trace("ICard extension destroyed");
 	}
