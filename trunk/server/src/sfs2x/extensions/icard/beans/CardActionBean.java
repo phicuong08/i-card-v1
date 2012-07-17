@@ -21,6 +21,7 @@ public class CardActionBean
 //	public static final int DO_WEAPON_2_USE=8;        //武器使用
 //	public static final int DO_EQUIP_2_USE=9;        //装备使用
 	public static final int DO_CARD_2_DEF=10;
+	public static final int DO_ABILITY_2_OP=11;
 	
 	private int _type;
 	private int _src;

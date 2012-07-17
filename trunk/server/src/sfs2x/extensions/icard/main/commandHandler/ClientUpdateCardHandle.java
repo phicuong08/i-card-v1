@@ -2,6 +2,7 @@ package sfs2x.extensions.icard.main.commandHandler;
 
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.GameLobbyBean;
+import sfs2x.extensions.icard.bsn.BattleBsn;
 import sfs2x.extensions.icard.bsn.ClientQueryBsn;
 import sfs2x.extensions.icard.utils.ErrorDef;
 
@@ -22,9 +23,7 @@ public class ClientUpdateCardHandle extends ICardClientRequestHandler {
 		CardGameBean game = GameLobbyBean.GetInstance().getGameMap().get(gameId);
 		if(game==null)
 			return;
-		if(game.getStateBean().IsWaitPlayerOp(paramUser.getId())==false)
-			return;
-		if(game.getCardOwner(realID)!= paramUser.getId())
+		if(BattleBsn.VerifyClienRequest(game, paramUser.getId(), realID)==false)
 			return;
 		ClientQueryBsn.updateCardSlot(game,paramUser.getId(),realID,slot);
 		SendOnErr(paramUser);

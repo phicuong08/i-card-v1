@@ -139,7 +139,7 @@ public class BattleStateBean
 	public Boolean IsWaitPlayerOp(int playerID){
 		if(_opPlayerID!=playerID)
 			return false;
-		return (_state==ST_WAIT_LOOP_OP || _state==ST_WAIT_CHAIN_OP);
+		return (_state==ST_WAIT_LOOP_OP || _state==ST_WAIT_CHAIN_OP ||_state==ST_WAIT_EX_OP);
 	}
 
 }

@@ -52,8 +52,6 @@ public class BattleBsn
 	}
 
 	public static void ClientEndOp(CardGameBean game,int playerID){
-		if(game.getStateBean().IsWaitPlayerOp(playerID)==false)
-			return;
 		switch(game.getStateBean().getState()){
 		case BattleStateBean.ST_WAIT_LOOP_OP:
 			game.getStateBean().setState(BattleStateBean.ST_LOOP_END);
@@ -74,14 +72,17 @@ public class BattleBsn
 		CardActionBean curAction = game.getCurAction();
 		if(curAction==null)
 			return;
-			
-		//¼ì²âÊÇ·ñ²Ù×÷·½	
-		if(game.getOpPlayer()!=curAction.getPlayerID())
+		if(curAction.getType()!=CardActionBean.DO_ABILITY_2_OP)
 			return;
 		game.getStateBean().Jump2GodState();
 
 	}
-	
+	public static boolean VerifyClienRequest(CardGameBean game,int playerID,int card){
+		if(card>0 && game.getCardOwner(card)!= playerID)
+			return false;
+		return game.getStateBean().IsWaitPlayerOp(playerID);
+	}
+
 	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext,int elapsed){
 		switch(game.getStateBean().getState()){
 		case BattleStateBean.ST_INIT_BATTLE:
