@@ -55,7 +55,7 @@ public class BufferBsn
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
 		for(int i=0;i<vec.size();i++){
 			CardAbilityBean ability = vec.get(i);
-			if(ability.getWhen()!=when)
+			if(ability.getWhen()==when)
 				return ability;
 		}
 		return null;
