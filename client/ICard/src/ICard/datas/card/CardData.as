@@ -4,7 +4,7 @@ package ICard.datas.card {
 	import ICard.assist.server.CardType;
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.haloer.data.*;
-	
+	import ICard.logic.UseCard;
 	import flash.utils.ByteArray;
 
 	public class CardData {
@@ -134,7 +134,7 @@ package ICard.datas.card {
 		}
 
 		public function get Type():int{
-			return UseCard.getType(CardID);
+			return UseCard.getType(CardID); 
 		}	
 		
 	}
