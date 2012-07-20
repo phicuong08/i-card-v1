@@ -131,6 +131,9 @@ package ICard.logic {
 			_IsTurn = false;
 			_battleField.onEndOpOk();
 		}
+		public function onCardExOp(ability:int):void{
+			
+		}
 		public function PlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
 			_lastPlayer = playerID;
 			_battleField.onPlayerLoopFresh(playerID==_myID,secNum);	

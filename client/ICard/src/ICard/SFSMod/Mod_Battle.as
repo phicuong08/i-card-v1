@@ -80,6 +80,10 @@ package ICard.SFSMod {
 		public function onEndOpOK(params:ISFSObject):void{
 			_battleStage.onEndOpOK();
 		}
+		public function onCardExOp(params:ISFSObject):void{
+			var ability:int = params.getInt("ability");
+			_battleStage.onCardExOp(ability);
+		}
 		public function QueryStartGame():void{
 			var params:ISFSObject = new SFSObject();
 			params.putInt("state", 2);
