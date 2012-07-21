@@ -69,6 +69,10 @@ package ICard.logic {
 			return BattleHelper.getFightTarget(_guy,_fightSrc,PlayerMe,Enemy);
 		}
 		
+		public function getAbilityTarget(id:int):Array{
+			return BattleHelper.getAbilityTarget(id,PlayerMe,Enemy);
+		}
+		
 		public function onUpdateCard(info:Object):void{
 			if(_guy[info["guy"]])
 				_guy[info["guy"]].onUpdateCard(info);
@@ -132,7 +136,7 @@ package ICard.logic {
 			_battleField.onEndOpOk();
 		}
 		public function onCardExOp(ability:int):void{
-			
+			_battleField.onCardExOp(ability);
 		}
 		public function PlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
 			_lastPlayer = playerID;

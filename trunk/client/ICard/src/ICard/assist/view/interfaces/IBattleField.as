@@ -14,6 +14,7 @@ package ICard.assist.view.interfaces {
 			function RemoveCard(realID:int):void;
 			function SideCard(info:Object):void; //横置,重置
 			function LoopFresh(myLoop:Boolean,secNum:int):void;
+			function onCardExOp(realID:int,abilityId:int):void;
 			function onEndOpOk():void;
 			function RunTest():void;
 			function PriFresh(myLoop:Boolean,secNum:int):void;
