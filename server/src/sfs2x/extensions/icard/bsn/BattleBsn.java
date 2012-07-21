@@ -154,6 +154,7 @@ public class BattleBsn
 		game.getStateBean().InitExOp(ability.getID());
 		ISFSObject params = SFSObjectBsn.genBattleLoopResetInfo(game);
 		params.putInt("ability", ability.getID());
+		params.putInt("card", card.getRealID());
 		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_WAIT_EX_OP, params,game);
 	}
 	public static void procLoopReset(CardGameBean game,ICardExtension ext){

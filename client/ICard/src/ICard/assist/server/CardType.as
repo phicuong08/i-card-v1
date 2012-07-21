@@ -18,18 +18,22 @@ package ICard.assist.server {
 		private static var _SkillCards:Object = null;
 		private static var _TaskCards:Object = null;
 		private static var _UseCard:Object = null;
+		private static var _CardAbility:Object = null;
 		
-		public static function get UseCard():Object{
-			if (_UseCard == null){
+		public static function get CardAbility():Object{
+			if (_CardAbility == null){
 				throw (new Error("还未赋值！"));
 			};
-			return (_UseCard);
+			return (_CardAbility);
 		}
-		public static function set UseCard(_arg1:Object):void{
-			if (_UseCard != null){
+		public static function set CardAbility(_arg1:Object):void{
+			if (_CardAbility != null){
 				throw (new Error("非法赋值"));
 			};
-			_UseCard = _arg1;
+			_CardAbility = _arg1;
+		}
+		public static function CardAbilityInfo(id:int):Array{
+			return _UseCard[id];
 		}
 		
 		public static function get HeroCards():Object{

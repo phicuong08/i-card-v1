@@ -143,31 +143,34 @@
 					id++;
 				}	
     }   
-	public function onClickCard(realID:int):void{
-		if(_targetCtl.IsTarget(realID)==false)
-			return;
-		_targetCtl.Empty();
-		_battleStage.AddFightTarget(realID);
-		var card:MovieClip = FindCard(realID);
-		_activeCtl.AddIndicator(card);
-		_fight_but.visible=true;
-	}
-	public function onInitalFight(realID:int):void{
-		_targetCtl.Empty();
-		_activeCtl.Empty();
-		var srcCard:MovieClip = FindCard(realID);
-		_activeCtl.AddIndicator(srcCard);
-		
-		var targetArr:Array = _battleStage.FightTarget;
-		if(targetArr==null)
-			return;
-		
-		for each(var target:int in targetArr){
-			var card:MovieClip = FindCard(target);
-			_targetCtl.AddIndicator(card);
+		public function onClickCard(realID:int):void{
+			if(_targetCtl.IsTarget(realID)==false)
+				return;
+			_targetCtl.Empty();
+			_battleStage.AddFightTarget(realID);
+			var card:MovieClip = FindCard(realID);
+			_activeCtl.AddIndicator(card);
+			_fight_but.visible=true;
 		}
-	}
-		
+		public function onInitalFight(realID:int):void{
+			_targetCtl.Empty();
+			_activeCtl.Empty();
+			var srcCard:MovieClip = FindCard(realID);
+			_activeCtl.AddIndicator(srcCard);
+			
+			var targetArr:Array = _battleStage.FightTarget;
+			FillTargetCtrl(targetArr);
+		}
+		private function FillTargetCtrl(targetArr:Array):void{
+			if(targetArr==null)
+				return;
+			
+			for each(var target:int in targetArr){
+				var card:MovieClip = FindCard(target);
+				_targetCtl.AddIndicator(card);
+			}
+
+		}
 		public function PriFresh(myLoop:Boolean,secNum:int):void{
 		_timerMC.InitTimeMC(secNum);
 		_activeCtl.Empty();
@@ -176,6 +179,14 @@
     public function LoopFresh(myLoop:Boolean,secNum:int):void{
 		_timerMC.InitTimeMC(secNum);
 		_targetCtl.Empty();
+		}
+		public function onCardExOp(realID:intabilityId:int):void{
+			LoopFresh(true,30);
+			var targetArr:Array = _battleStage.getAbilityTarget(abilityId);
+			FillTargetCtrl(targetArr);
+			var card:MovieClip = FindCard(realID);
+			_activeCtl.AddIndicator(card);
+			_fight_but.visible=true;
 		}
 		public function SideCard(info:Object):void{
 		
