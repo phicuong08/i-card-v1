@@ -83,6 +83,9 @@ public class BattleStateBean
 		case ST_WAIT_GOD:
 			ext.trace("STATE== BattleStateBean.ST_WAIT_GOD");
 			break;
+		case ST_WAIT_EX_OP:
+			ext.trace("STATE== BattleStateBean.ST_WAIT_EX_OP");
+			break;	
 		}
 	}
 	public void setOp(int playerID){
@@ -122,7 +125,7 @@ public class BattleStateBean
 	}
 	public void InitExOp(int ability){
 		_waitDuration = Constants.BATTLE_LOOP_TIME;
-		_state = BattleStateBean.ST_WAIT_EX_OP;
+		setState(BattleStateBean.ST_WAIT_EX_OP);
 		_ability = ability;
 	}
 	public void InitWaitOp(int playerID,int during){

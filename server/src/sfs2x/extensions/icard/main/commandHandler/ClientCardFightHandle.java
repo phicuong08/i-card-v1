@@ -3,6 +3,7 @@ package sfs2x.extensions.icard.main.commandHandler;
 import java.util.Collection;
 import java.util.Vector;
 
+import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.GameLobbyBean;
@@ -30,7 +31,17 @@ public class ClientCardFightHandle extends BaseClientRequestHandler {
 			for(Integer targetID:targetCol){
 				des.add(targetID);
 			}
-			CardActionBean action = new CardActionBean(srcID,paramUser.getId(),CardActionBean.DO_CARD_2_FIGHT,des);
+			int actionType;
+			switch(game.getStateBean().getState())
+			{
+			case BattleStateBean.ST_WAIT_EX_OP:
+				actionType = CardActionBean.DO_ABILITY_2_OP;
+				break;
+			default:
+				actionType = CardActionBean.DO_CARD_2_FIGHT;
+				break;
+			}
+			CardActionBean action = new CardActionBean(srcID,paramUser.getId(),actionType,des);
 			game.setCurAction(action);
 	}
 

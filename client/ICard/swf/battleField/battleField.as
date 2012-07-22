@@ -180,12 +180,17 @@
 		_timerMC.InitTimeMC(secNum);
 		_targetCtl.Empty();
 		}
-		public function onCardExOp(realID:intabilityId:int):void{
+		public function onCardExOp(realID:int,abilityId:int):void{
 			LoopFresh(true,30);
+			_battleStage.InitialFight(realID);
+			_targetCtl.Empty();
+			_activeCtl.Empty();
+			var srcCard:MovieClip = FindCard(realID);
+			_activeCtl.AddIndicator(srcCard);
+			_targetCtl.AddIndicator(srcCard);
+			
 			var targetArr:Array = _battleStage.getAbilityTarget(abilityId);
 			FillTargetCtrl(targetArr);
-			var card:MovieClip = FindCard(realID);
-			_activeCtl.AddIndicator(card);
 			_fight_but.visible=true;
 		}
 		public function SideCard(info:Object):void{
