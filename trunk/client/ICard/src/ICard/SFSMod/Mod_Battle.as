@@ -82,7 +82,10 @@ package ICard.SFSMod {
 		}
 		public function onCardExOp(params:ISFSObject):void{
 			var ability:int = params.getInt("ability");
-			_battleStage.onCardExOp(ability);
+			var card:int = params.getInt("card");
+			var playerID:int = params.getInt("playerID");
+			var secNum:int = params.getInt("time");
+			_battleStage.onCardExOp(playerID,card,ability);
 		}
 		public function QueryStartGame():void{
 			var params:ISFSObject = new SFSObject();

@@ -33,7 +33,7 @@ package ICard.assist.server {
 			_CardAbility = _arg1;
 		}
 		public static function CardAbilityInfo(id:int):Array{
-			return _UseCard[id];
+			return _CardAbility[id];
 		}
 		
 		public static function get HeroCards():Object{

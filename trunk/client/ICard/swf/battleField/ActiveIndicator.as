@@ -41,6 +41,7 @@
 			indicator.realID = card.realID;
 			card.addChild(indicator);
 	    	_freeIndex++;
+			trace("add active indicate ok");
 	    }
 			public function Empty():void{
 				var n:int = 0;
@@ -50,6 +51,7 @@
 					n++;
 				}
 				_freeIndex = 0;
+				trace("empty active indicate ok");
 			}
 	  
 	

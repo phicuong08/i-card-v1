@@ -17,11 +17,11 @@ package ICard.views {
     import com.smartfoxserver.v2.core.SFSEvent;
     
     import flash.display.MovieClip;
+    import flash.events.*;
     import flash.events.MouseEvent;
     import flash.geom.Point;
     import flash.net.*;
-	import flash.events.*;
-	import flash.utils.*;
+    import flash.utils.*;
     public class BattleFieldView extends Base implements IView {
 		private var _updateFrameCardNotify:String = "frame_card_notify";
 		private var _battleField:IBattleField;
@@ -102,9 +102,9 @@ package ICard.views {
 		public function onPriPlayerFresh(myLoop:Boolean,secNum:int):void{
 		
 		}
-		public function onCardExOp(ability:int):void{
+		public function onCardExOp(card:int,ability:int):void{
 			_viewMgr.worldNotice.showMessage("",0.8,"select");
-			_battleField.onCardExOp(ability);
+			_battleField.onCardExOp(card,ability);
 		}
 		public function onPlayerLoopFresh(myLoop:Boolean,secNum:int):void{
 			var iconName:String=(myLoop)?"I_turn":"u_turn";
