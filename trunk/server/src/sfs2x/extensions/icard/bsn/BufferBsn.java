@@ -46,13 +46,9 @@ public class BufferBsn
 		case CardAbilityBean.BUF_CURE:
 			card.AddHp(-ability.getVal());
 			break;
-		case CardAbilityBean.DO_HEAL:	
 		case CardAbilityBean.BUF_HEAL:
 			card.AddHp(ability.getVal());
-			break;
-		case CardAbilityBean.DO_KILL:	
-			card.setDead();
-			break;
+			break;	
 		}
 	}
 	public static CardAbilityBean getCardAbility(CardBean card,int when){
