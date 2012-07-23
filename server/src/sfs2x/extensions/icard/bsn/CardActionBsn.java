@@ -175,7 +175,7 @@ public class CardActionBsn
 				continue;
 			CardUseBsn.DoWhatAbility(game,card,desCard,abilityBean);
 		}
-		
+		card.AddHp(0);
 		ISFSObject params = SFSObjectBsn.genBattleResult(game,action);
 		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_CARD_FIGHT_RESULT, params, game);
 		return true;
