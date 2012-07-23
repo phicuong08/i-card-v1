@@ -61,6 +61,9 @@ package ICard {
 			
 			switch(cmd)
 			{
+				case ICardMsgDef.s2c_battle_reset_player_loop:
+					_mod_Battle.onResetPlayerLoop(params);
+					break;
 				case ICardMsgDef.s2c_client_battle_start:
 					_mod_Battle.onBattleStart(params);
 					break;

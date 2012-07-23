@@ -133,7 +133,7 @@ public class BattleStateBean
 		setState(BattleStateBean.ST_WAIT_EX_OP);
 		_ability = ability;
 	}
-	public inte getCurAbility(){
+	public int getCurAbility(){
 		return _ability;
 	}
 	public void InitWaitOp(int playerID,int during){

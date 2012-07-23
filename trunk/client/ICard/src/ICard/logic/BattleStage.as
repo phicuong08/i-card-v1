@@ -141,6 +141,9 @@ package ICard.logic {
 				_battleField.onCardExOp(card,ability);
 			}
 		}
+		public function ResetPlayerLoop(playerID:int,secNum:int):void{
+			_battleField.onResetPlayerLoop(playerID==_myID,secNum);
+		}
 		public function PlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
 			_lastPlayer = playerID;
 			_battleField.onPlayerLoopFresh(playerID==_myID,secNum);	

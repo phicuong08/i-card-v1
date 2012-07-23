@@ -106,6 +106,9 @@ package ICard.views {
 			_viewMgr.worldNotice.showMessage("",0.8,"select");
 			_battleField.onCardExOp(card,ability);
 		}
+		public function onResetPlayerLoop(myLoop:Boolean,secNum:int):void{
+			_battleField.LoopFresh(myLoop,secNum/1000);
+		}
 		public function onPlayerLoopFresh(myLoop:Boolean,secNum:int):void{
 			var iconName:String=(myLoop)?"I_turn":"u_turn";
 			_viewMgr.worldNotice.showMessage("",0.8,iconName);
