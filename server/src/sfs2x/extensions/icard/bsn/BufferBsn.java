@@ -12,6 +12,7 @@ import sfs2x.extensions.icard.beans.CardAbilityBean;
 import sfs2x.extensions.icard.beans.CardAbilityStoreBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
+import sfs2x.extensions.icard.beans.CardInfoBean;
 import sfs2x.extensions.icard.beans.CardSiteBean;
 
 
@@ -97,7 +98,7 @@ public class BufferBsn
 		case CardAbilityBean.WHICH_MY:
 			bMatch = (srcOwner==srcOwner) && (card.getCardType()==CardInfoBean.HERO || card.getCardType()==CardInfoBean.SOLDIER);
 			break;
-		case CardAbilityBean.WHICH_HERO:
+		case CardAbilityBean.WHICH_MYHERO:
 			bMatch = (srcOwner==srcOwner) && (card.getCardType()==CardInfoBean.HERO);
 			break;
 		case CardAbilityBean.WHICH_MYSOLDIER:

@@ -59,6 +59,9 @@ public class BattleBsn
 		case BattleStateBean.ST_WAIT_CHAIN_OP:
 			game.getStateBean().setState(BattleStateBean.ST_WAIT_CHAIN_OVER);
 			break;
+		case BattleStateBean.ST_WAIT_EX_OP:
+			game.getStateBean().setState(BattleStateBean.ST_INIT_LOOP_RESET);
+			break;
 		}
 		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_END_OP_OK, null, game);
 	}
@@ -145,9 +148,9 @@ public class BattleBsn
 		CardActionBean action = game.pickCurAction();
 		if(action!=null){
 			CardActionBsn.procCardAction(game,action,ext);
-					
-			ISFSObject params = SFSObjectBsn.genBattleResult(game,action);
-			ext.SendGameCommand(Commands.CMD_S2C_CARD_FIGHT_RESULT, params, game);
+			ext.SendGameCardUpdate(game);		
+			//ISFSObject params = SFSObjectBsn.genBattleResult(game,action);
+			//ext.SendGameCommand(Commands.CMD_S2C_CARD_FIGHT_RESULT, params, game);
 		
 			if(game.getStateBean().getState()==BattleStateBean.ST_WAIT_GOD) //״̬δ��ת
 				game.getStateBean().setDelayJump(BattleStateBean.ST_INIT_LOOP_RESET,Constants.SHOW_ACTION_TIME);

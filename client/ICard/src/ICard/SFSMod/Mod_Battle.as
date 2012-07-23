@@ -60,6 +60,11 @@ package ICard.SFSMod {
 			var secNum:int = params.getInt("time");
 			_battleStage.PlayerLoopFresh(playerID,secNum);
 		}
+		public function onResetPlayerLoop(params:ISFSObject):void{
+			var secNum:int = params.getInt("time");
+			var playerID:int = params.getInt("playerID");
+			_battleStage.ResetPlayerLoop(playerID,secNum);
+		}
 		public function onPriPlayerLoop(params:ISFSObject):void{
 			var playerID:int = params.getInt("playerID");
 			var secNum:int = params.getInt("time");

@@ -8,6 +8,7 @@ import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.GameLobbyBean;
 import sfs2x.extensions.icard.bsn.BattleBsn;
+import sfs2x.extensions.icard.bsn.CardActionBsn;
 
 import com.smartfoxserver.v2.entities.User;
 import com.smartfoxserver.v2.entities.data.ISFSObject;

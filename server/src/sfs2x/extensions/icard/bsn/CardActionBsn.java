@@ -2,10 +2,14 @@ package sfs2x.extensions.icard.bsn;
 
 import java.util.Vector;
 
+import com.smartfoxserver.v2.entities.data.ISFSObject;
+
 import sfs2x.extensions.icard.beans.CardActionBean;
 
+import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.BufferBean;
 import sfs2x.extensions.icard.beans.CardAbilityBean;
+import sfs2x.extensions.icard.beans.CardAbilityStoreBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardInfoBean;
@@ -14,6 +18,7 @@ import sfs2x.extensions.icard.beans.CardSiteBean;
 import sfs2x.extensions.icard.beans.CardUseBean;
 import sfs2x.extensions.icard.beans.CardUseStoreBean;
 import sfs2x.extensions.icard.main.ICardExtension;
+import sfs2x.extensions.icard.utils.Commands;
 import sfs2x.extensions.icard.utils.Constants;
 
 
@@ -170,6 +175,9 @@ public class CardActionBsn
 				continue;
 			CardUseBsn.DoWhatAbility(game,card,desCard,abilityBean);
 		}
+		
+		ISFSObject params = SFSObjectBsn.genBattleResult(game,action);
+		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_CARD_FIGHT_RESULT, params, game);
 		return true;
 	}
 	
@@ -286,8 +294,8 @@ public class CardActionBsn
 		CardBean card2 = game.getCard(des);
 		if(card1==null ||card2==null)
 			return false;
-		if(card2.getSlotID()==CardBean.HAND_SLOT_ID()||
-				card2.getSlotID()==CardBean.RES_SLOT_ID())
+		if(card2.getSlotID()==CardBean.HAND_SLOT_ID||
+				card2.getSlotID()==CardBean.RES_SLOT_ID)
 				return false;
 		boolean bMatch = false;
 		switch(card1.getCardType()){
