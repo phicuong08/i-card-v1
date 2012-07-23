@@ -153,9 +153,26 @@ public class CardActionBsn
 	private static boolean procSkill2Cast(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
 		return CardUseBsn.SkillCast(game,site,card,action);
 	}
+	
 	private static boolean procAbility2Op(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
+		CardAbilityBean abilityBean = CardAbilityStoreBean.GetInstance().getAbilityOnID(game.getStateBean().getCurAbility());
+		if(abilityBean==null)
+			return false;
+		
+		Vector<Integer> desVect = action.getDes();
+		int targetNum = (desVect.size()>abilityBean.getTargetNum())? abilityBean.getTargetNum():desVect.size();
+		for(int i=0;i<targetNum;i++){
+			int desID = desVect.get(i);
+			if(BufferBsn.IsWhichMatch(card.getRealID(),desID,abilityBean,game)==false)
+				continue;
+			CardBean desCard = game.getCard(desID);
+			if(desCard==null)
+				continue;
+			BufferBsn.callCardAbility(desCard,abilityBean);	
+		}
 		return true;
 	}
+	
 	private static boolean procCard2Fight(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
 		switch(card.getCardType()){
 		case CardInfoBean.HERO:

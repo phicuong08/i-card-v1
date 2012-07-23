@@ -115,6 +115,9 @@ public class BattleBsn
 		case BattleStateBean.ST_INIT_WAIT_CHAIN_OP:
 			InitWaitChainOp(game,ext);
 			break;
+		case BattleStateBean.ST_INIT_LOOP_RESET:
+			procLoopReset(game,ext);
+			break;
 		}
 		
 	}
@@ -142,9 +145,12 @@ public class BattleBsn
 		CardActionBean action = game.pickCurAction();
 		if(action!=null){
 			CardActionBsn.procCardAction(game,action,ext);
-			ext.SendGameCardUpdate(game);
+					
+			ISFSObject params = SFSObjectBsn.genBattleResult(game,action);
+			ext.SendGameCommand(Commands.CMD_S2C_CARD_FIGHT_RESULT, params, game);
+		
 			if(game.getStateBean().getState()==BattleStateBean.ST_WAIT_GOD) //״̬δ��ת
-				procLoopReset(game,ext);
+				game.getStateBean().setDelayJump(BattleStateBean.ST_INIT_LOOP_RESET,Constants.SHOW_ACTION_TIME);
 		}
 		else{
 			game.getStateBean().setState(BattleStateBean.ST_LOOP_END);

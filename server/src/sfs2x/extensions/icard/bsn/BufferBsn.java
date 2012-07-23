@@ -46,9 +46,13 @@ public class BufferBsn
 		case CardAbilityBean.BUF_CURE:
 			card.AddHp(-ability.getVal());
 			break;
+		case CardAbilityBean.DO_HEAL:	
 		case CardAbilityBean.BUF_HEAL:
 			card.AddHp(ability.getVal());
-			break;	
+			break;
+		case CardAbilityBean.DO_KILL:	
+			card.setDead();
+			break;
 		}
 	}
 	public static CardAbilityBean getCardAbility(CardBean card,int when){
@@ -85,6 +89,44 @@ public class BufferBsn
 			}
 		}
 		return val;
+	}
+	public static boolean IsWhichMatch(int src,int des,CardAbilityBean ability,CardGameBean game){
+		int srcOwner = game.getCardOwner(src);
+		int desOwner = game.getCardOwner(des);
+		CardBean card = game.getCard(des);
+		if(card==null)
+			return false;
+		boolean bMatch;
+		switch(ability.getWhich()){
+		case CardAbilityBean.WHICH_MY:
+			bMatch = (srcOwner==srcOwner) && (card.getCardType()==CardInfoBean.HERO || card.getCardType()==CardInfoBean.SOLDIER);
+			break;
+		case CardAbilityBean.WHICH_HERO:
+			bMatch = (srcOwner==srcOwner) && (card.getCardType()==CardInfoBean.HERO);
+			break;
+		case CardAbilityBean.WHICH_MYSOLDIER:
+			bMatch = (srcOwner==srcOwner) && (card.getCardType()==CardInfoBean.SOLDIER);
+			break;	
+		case CardAbilityBean.WHICH_MYWEAPON:
+			bMatch = (srcOwner==srcOwner) && (card.getCardType()==CardInfoBean.WEAPON);
+			break;
+		case CardAbilityBean.WHICH_YOUR:
+			bMatch = (srcOwner!=srcOwner) && (card.getCardType()==CardInfoBean.HERO || card.getCardType()==CardInfoBean.SOLDIER);
+			break;
+		case CardAbilityBean.WHICH_YOURHERO:
+			bMatch = (srcOwner!=srcOwner) && (card.getCardType()==CardInfoBean.HERO);
+			break;
+		case CardAbilityBean.WHICH_YOURSOLDIER:
+			bMatch = (srcOwner!=srcOwner) && (card.getCardType()==CardInfoBean.SOLDIER);
+			break;	
+		case CardAbilityBean.WHICH_YOURWEAPON:
+			bMatch = (srcOwner!=srcOwner) && (card.getCardType()==CardInfoBean.WEAPON);
+			break;		
+		default:
+			bMatch = false;
+			break;
+		}
+		return bMatch;
 	}
 	
 }

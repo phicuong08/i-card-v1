@@ -44,6 +44,10 @@ public class CardAbilityStoreBean {
 			}
 		}
 	}
+	public CardAbilityBean getAbilityOnID(int ability){
+		return _abilityInfoMap.get(ability);
+	}
+	
 	public CardAbilityBean getAbilityBean(int cardID){
 		Vector<CardAbilityBean> vec = getCardAbility(cardID);
 		if(vec.size()==0)
