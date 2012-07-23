@@ -29,6 +29,8 @@ public class BattleStateBean
 	public static final int ST_LOOP_END = 8;
 	public static final int ST_WAIT_EX_OP=9;//牌进场时操作
 	public static final int ST_DELAY_JUMP=10;
+	public static final int ST_INIT_LOOP_RESET=11;
+	
 	
 	
 	private Vector<Integer>  _battleChain;
@@ -85,6 +87,9 @@ public class BattleStateBean
 			break;
 		case ST_WAIT_EX_OP:
 			ext.trace("STATE== BattleStateBean.ST_WAIT_EX_OP");
+			break;
+		case ST_INIT_LOOP_RESET:
+			ext.trace("STATE== BattleStateBean.ST_INIT_LOOP_RESET");
 			break;	
 		}
 	}
@@ -127,6 +132,9 @@ public class BattleStateBean
 		_waitDuration = Constants.BATTLE_LOOP_TIME;
 		setState(BattleStateBean.ST_WAIT_EX_OP);
 		_ability = ability;
+	}
+	public inte getCurAbility(){
+		return _ability;
 	}
 	public void InitWaitOp(int playerID,int during){
 		_opPlayerID = playerID;
