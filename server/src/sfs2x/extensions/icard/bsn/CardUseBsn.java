@@ -25,7 +25,8 @@ public class CardUseBsn
 {	
 	
 	public static void Atk(CardBean card1,CardBean card2){
-		card1.AddHp(-card2.getAtk(CardAbilityBean.WHEN_ATK));
+		if(card1.IsDistAtk(CardAbilityBean.WHEN_ATK)==false) //是否有远程攻击能力
+			card1.AddHp(-card2.getAtk(CardAbilityBean.WHEN_ATK));
 		card2.AddHp(-card1.getAtk(CardAbilityBean.WHEN_ATKED));
 		card1.setSide(1);
 		if(BufferBsn.IsCardAbility(card2,CardAbilityBean.WHEN_ATKED,CardAbilityBean.DO_KILL)==true)

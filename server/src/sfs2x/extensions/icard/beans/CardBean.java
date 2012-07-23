@@ -105,7 +105,16 @@ public class CardBean
 		_side = val;
 		setDirtyFlagBit(SIDE_DIRTY_BIT);
 	}
-	
+	public boolean IsPointable(){
+		if(BufferBsn.IsCardAbility(this,CardAbilityBean.WHEN_ALL,CardAbilityBean.BUF_POINT_UNABLE))
+			return true;
+		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_POINT_UNABLE,CardAbilityBean.WHEN_ALL);
+	}
+	public boolean IsHidden(){
+		if(BufferBsn.IsCardAbility(this,CardAbilityBean.WHEN_ALL,CardAbilityBean.BUF_HIDDEN))
+			return true;
+		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_HIDDEN,CardAbilityBean.WHEN_ALL);
+	}
 	public boolean IsDistAtk(int when){
 		if(BufferBsn.IsCardAbility(this,when,CardAbilityBean.BUF_ATK_DIST))
 			return true;

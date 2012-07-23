@@ -29,8 +29,10 @@ public class ClientCardFightHandle extends BaseClientRequestHandler {
 			Vector<Integer> des = new Vector<Integer>();
 			Collection<Integer> targetCol = paramISFSObject.getIntArray("target"); 
 			for(Integer targetID:targetCol){
-				des.add(targetID);
+				if(CardActionBsn.IsMatchFight(game,srcID,targetID))
+					des.add(targetID);
 			}
+			
 			int actionType;
 			switch(game.getStateBean().getState())
 			{

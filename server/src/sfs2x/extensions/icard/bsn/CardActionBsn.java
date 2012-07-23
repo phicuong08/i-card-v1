@@ -168,7 +168,7 @@ public class CardActionBsn
 			CardBean desCard = game.getCard(desID);
 			if(desCard==null)
 				continue;
-			BufferBsn.callCardAbility(desCard,abilityBean);	
+			CardUseBsn.DoWhatAbility(game,card,desCard,abilityBean);
 		}
 		return true;
 	}
@@ -276,6 +276,36 @@ public class CardActionBsn
 		else{
 			return 911;
 		}
+	}
+	public static boolean IsMatchFight(CardGameBean game,int src,int des){
+	
+		if(game.getStateBean().getState()== BattleStateBean.ST_WAIT_EX_OP)
+			return true;
+			
+		CardBean card1 = game.getCard(src);
+		CardBean card2 = game.getCard(des);
+		if(card1==null ||card2==null)
+			return false;
+		if(card2.getSlotID()==CardBean.HAND_SLOT_ID()||
+				card2.getSlotID()==CardBean.RES_SLOT_ID())
+				return false;
+		boolean bMatch = false;
+		switch(card1.getCardType()){
+		case CardInfoBean.HERO:
+		case CardInfoBean.SOLDIER:
+		case CardInfoBean.WEAPON:
+			bMatch = (card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.SOLDIER) && (card2.IsHidden()==false);
+			break;
+		case CardInfoBean.SKILL:
+				if(card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.SOLDIER)
+				{
+					bMatch = !card2.IsPointable();
+				}
+				else
+					bMatch = true;
+			break;	
+		}
+		return bMatch;
 	}
 	private static int getAtkCost(int cardID){
 		int cost =0;
