@@ -61,33 +61,7 @@ package ICard.logic {
 			if(UseCard.IsCast2YourSoldier(card.CardID))
 				you.CardDB.getCardOnSlot([BattleFieldType.MyFightSlotId],fillArr);	
 		}
-		public static function getAbilityTarget(abilityId:int,me:BattleGuy,you:BattleGuy):Array{
-			var targetArr:Array = [];
-			var ability:CardAbility  = new CardAbility(abilityId);
-			if(ability==null)
-				return null;
-			switch(ability.which){
-				case CardAbility.WHICH_MY:
-					me.CardDB.getCardOnSlot([BattleFieldType.MyFightSlotId,BattleFieldType.MyHeroSlotId],targetArr);
-					break;
-				case CardAbility.WHICH_MYHERO:
-					me.CardDB.getCardOnSlot([BattleFieldType.MyHeroSlotId],targetArr);
-					break;
-				case CardAbility.WHICH_MYSOLDIER:
-					me.CardDB.getCardOnSlot([BattleFieldType.MyFightSlotId],targetArr);
-					break;
-				case CardAbility.WHICH_YOUR:
-					you.CardDB.getCardOnSlot([BattleFieldType.MyFightSlotId,BattleFieldType.MyHeroSlotId],targetArr);
-					break;
-				case CardAbility.WHICH_YOURHERO:
-					you.CardDB.getCardOnSlot([BattleFieldType.MyHeroSlotId],targetArr);
-					break;
-				case CardAbility.WHICH_YOURSOLDIER:
-					you.CardDB.getCardOnSlot([BattleFieldType.MyFightSlotId],targetArr);
-					break;
-			}
-			return targetArr;
-		}
+	
 		public static function getFightTarget(guyDict:Dictionary,srcID:int,me:BattleGuy,you:BattleGuy):Array{
 			var targetArr:Array = [];
 			var card:CardData = getCardData(guyDict,srcID);

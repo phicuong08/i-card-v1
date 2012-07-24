@@ -70,7 +70,7 @@ package ICard.logic {
 		}
 		
 		public function getAbilityTarget(id:int):Array{
-			return BattleHelper.getAbilityTarget(id,PlayerMe,Enemy);
+			return AbilityHelper.getTarget(id,PlayerMe,Enemy);
 		}
 		
 		public function onUpdateCard(info:Object):void{
