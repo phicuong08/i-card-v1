@@ -19,6 +19,12 @@ package ICard.assist.server {
 			
 			return _AbilityDict[id];
 		}
-		
+		public static function getCardBuf(id:int):CardAbility{
+			var ability:CardAbility = getCardAbility(id);
+			if(ability!=null &&ability.IsBuf())
+				return ability;
+			else
+				return null;
+		}
 	}
 }//package com.assist.server 
