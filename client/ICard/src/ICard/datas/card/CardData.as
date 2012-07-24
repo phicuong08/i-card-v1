@@ -132,7 +132,7 @@ package ICard.datas.card {
 					_info[bufName] = 0;
 			}
 		}
-		public function IsBufDif(arg1:CardData):boolean{
+		public function IsBufDif(arg1:CardData):Boolean{
 			for(var i:int=0;i<MaxBufNum;i++){
 				if(getBuf(i) !=arg1.getBuf(i))
 					return true;
@@ -140,7 +140,7 @@ package ICard.datas.card {
 			return false;
 		}
 		public function getBuf(index:int):int{
-			var bufName:String = "buf" +i;
+			var bufName:String = "buf" +index;
 			if(_info.hasOwnProperty(bufName))
 				return _info[bufName];
 			else

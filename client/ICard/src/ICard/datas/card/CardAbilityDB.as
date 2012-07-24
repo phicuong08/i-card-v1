@@ -1,7 +1,8 @@
 ﻿//Created by Action Script Viewer - http://www.buraks.com/asv
-package ICard.assist.server {
+package ICard.datas.card {
 	
 	import flash.utils.Dictionary;
+	import ICard.assist.server.CardType;
 	public class CardAbilityDB {
 		private static var _AbilityDict:Dictionary = new Dictionary;
 		public static function getCardAbility(id:int):CardAbility{
