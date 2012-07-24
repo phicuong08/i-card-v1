@@ -19,6 +19,9 @@ public class BufferStoreBean
 		BufferBean newBuf = new BufferBean(ability,realID);
 		_bufferMap.put(realID,newBuf);
 	}
+	public void DelBuf(int realID){
+		_bufferMap.remove(realID);
+	}
 	public HashMap<Integer, BufferBean> getBufMap(){
 		return _bufferMap;
 	}

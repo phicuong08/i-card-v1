@@ -165,6 +165,9 @@ public class CardActionBsn
 			return false;
 		
 		Vector<Integer> desVect = action.getDes();
+		if(desVect.size()==0)
+			retrun false;
+			
 		int targetNum = (desVect.size()>abilityBean.getTargetNum())? abilityBean.getTargetNum():desVect.size();
 		for(int i=0;i<targetNum;i++){
 			int desID = desVect.get(i);

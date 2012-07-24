@@ -31,8 +31,7 @@ public class BufferBsn
 //		card.getBufStore().AddBuf(type,src,val,loopNum);
 //	}
 	public static void AddBuf(CardBean cardSrc,CardBean cardDes,CardAbilityBean ability){
-		cardDes.getBufStore().AddBuf(ability, cardSrc.getRealID());
-		
+		cardDes.AddBuf(ability, cardSrc.getRealID());
 	}
 	public static boolean IsExistBuf(CardBean card,int type,int when){
 		HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
