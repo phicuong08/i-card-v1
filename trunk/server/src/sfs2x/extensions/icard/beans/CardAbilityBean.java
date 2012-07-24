@@ -46,6 +46,7 @@ public class CardAbilityBean
 	public static final int BUF_POINT_UNABLE      =16;  //不可指定
 	public static final int BUF_DEF_ADD           =17;   //
 	public static final int BUF_DEF_UNABLE        =18;  //无法防御
+	public static final int BUF_AT_ONCE           =19;  //瞬发
 	public static final int BUF_MAX               =99;  //
 	
 	public static final int WHICH_NULL                 =0;  

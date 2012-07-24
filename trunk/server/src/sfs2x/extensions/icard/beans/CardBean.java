@@ -28,6 +28,7 @@ public class CardBean
 	public final static int COST_DIRTY_BIT = 5;
 	public final static int SIDE_DIRTY_BIT = 6;
 	public final static int CARDID_DIRTY_BIT = 7;
+	public final static int BUF_DIRTY_BIT = 8;
 	
 	private int _realID;
 	private int _cardID;
@@ -49,8 +50,16 @@ public class CardBean
 		_bufStore = new BufferStoreBean();
 	}
 	/* GETTERS & SETTERS */
-	public BufferStoreBean getBufStore(){
+	public BufferStoreBean getBufStore2(){
 		return _bufStore;
+	}
+	public void AddBuf(CardAbilityBean ability,int realID){
+		_bufStore.AddBuf(ability,realID);
+		setDirtyFlagBit(BUF_DIRTY_BIT);
+	}
+	public void DelBuf(CardAbilityBean ability,int realID){
+		_bufStore.DelBuf(ability,realID);
+		setDirtyFlagBit(BUF_DIRTY_BIT);
 	}
 	public int getCardID() {
 		return _cardID;
@@ -109,6 +118,11 @@ public class CardBean
 		if(BufferBsn.IsCardAbility(this,CardAbilityBean.WHEN_ALL,CardAbilityBean.BUF_POINT_UNABLE))
 			return true;
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_POINT_UNABLE,CardAbilityBean.WHEN_ALL);
+	}
+	public boolean IsAtOnce(){
+		if(BufferBsn.IsCardAbility(this,CardAbilityBean.WHEN_ALL,CardAbilityBean.BUF_AT_ONCE))
+			return true;
+		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_AT_ONCE,CardAbilityBean.WHEN_ALL);
 	}
 	public boolean IsHidden(){
 		if(BufferBsn.IsCardAbility(this,CardAbilityBean.WHEN_ALL,CardAbilityBean.BUF_HIDDEN))

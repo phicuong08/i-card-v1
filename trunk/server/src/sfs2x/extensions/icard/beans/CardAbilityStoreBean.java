@@ -153,6 +153,8 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.BUF_POINT_UNABLE;
 		else if(whatInfo.equals("BUF_DEF_UNABLE"))
 			return CardAbilityBean.BUF_DEF_UNABLE;
+		else if(whatInfo.equals("BUF_AT_ONCE"))
+			return CardAbilityBean.BUF_AT_ONCE;	
 		else if(whatInfo.equals("DO_ATK_SIDE_ADD"))
 			return CardAbilityBean.DO_ATK_SIDE_ADD;
 		else if(whatInfo.equals("DO_BREAK_SKILL"))

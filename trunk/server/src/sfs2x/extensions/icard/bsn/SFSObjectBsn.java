@@ -44,6 +44,23 @@ public class SFSObjectBsn
 			cardInfo.putInt("turn", card.getTurn());	
 		if(card.getDirtyFlagBit(CardBean.HP_DIRTY_BIT))	
 			cardInfo.putInt("hp", card.getHp());	
+		
+		Collection<Integer> bufArr = new ArrayList<Integer>();	
+		if(card.getDirtyFlagBit(CardBean.BUF_DIRTY_BIT))
+		{
+			HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
+			if(bufMap.size()==0){
+				cardInfo.putInt("buf0", 0);		
+			}
+			else{
+				int y=0;
+				for(BufferBean buf:bufMap.values()){
+					cardInfo.putInt("buf"+y, buf.getID());			
+					y++;
+				}
+			}
+		}		
+
 		cardInfo.putInt("guy", player);
 		return cardInfo;
 	}
