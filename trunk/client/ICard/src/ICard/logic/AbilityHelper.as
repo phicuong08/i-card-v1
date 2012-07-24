@@ -20,7 +20,7 @@ package ICard.logic {
 			var ability:CardAbility  = CardAbilityDB.getCardAbility(abilityId);
 			if(ability==null)
 				return ICON_NULL;
-			int iconID;
+			var iconID:int;
 			switch(ability.what){
 			case CardAbility.BUF_HEAL:
 				iconID = ICON_HEAL;

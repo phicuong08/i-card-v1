@@ -8,7 +8,7 @@ package ICard.views {
     import ICard.assist.view.interfaces.*;
     import ICard.datas.BattleGuyData;
     import ICard.datas.CardDiffData;
-    import ICard.datas.card.CardData;
+    import ICard.datas.card.*;
     import ICard.lang.client.com.views.*;
     import ICard.logic.*;
     import ICard.logic.BattleStage;
@@ -74,7 +74,7 @@ package ICard.views {
 			}
 		}
 		private function fillBufIcon(cardMC:MovieClip,card:CardData):void{
-			for(int i=0;i<CardData.MaxBufNum;i++){
+			for(var i:int=0;i<CardData.MaxBufNum;i++){
 				var bufId:int = card.getBuf(i);
 				var buf:CardAbility = CardAbilityDB.getCardBuf(bufId);
 				if(buf==null)

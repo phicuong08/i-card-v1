@@ -1,5 +1,5 @@
 //Created by Action Script Viewer - http://www.buraks.com/asv
-package ICard.logic {
+package ICard.datas.card {
 
 	import ICard.assist.server.CardType;
 
@@ -13,39 +13,39 @@ package ICard.logic {
 		public static const WHICH_YOURSOLDIER:int = 6;
 		
 		public static const BUF_NULL:int              =0;
-		public static const BUF_ATK_DIST:int          =1;   //Ô¶³Ì
-		public static const BUF_ATK_WITH_EQUIP:int    =2;   //Ã¿×°±¸Ôò¹¥»÷Ôö¼Ó
-		public static const BUF_ATK_ADD:int           =3;   //¹¥»÷Á¦Ôö¼Ó
-		public static const BUF_ATK_UNABLE:int        =4;   //ÎÞ·¨¹¥»÷
-		public static const BUF_CURE:int              =5;   //ÊÜµ½¹¥»÷Ê±ÉËº¦Ôö¼Ó
-		public static const BUF_DAMAGE_UNSTOP:int     =6;   //ÉËº¦²»¿É·ÀÖ¹
-		public static const BUF_GUIDE:int             =7;   //»¤ÎÀÄÜÁ¦
-		public static const BUF_HEAL:int              =8;   //ÖÎÁÆ
-		public static const BUF_HIDDEN:int            =9;   //Òþ¶Ý
-		public static const BUF_HP_WITH_EQUIP:int     =10;  //Ã¿×°±¸ÔòÉúÃüÔö¼Ó
-		public static const BUF_LATENT:int            =11;  //Ç±ÐÐ
-		public static const BUF_SHIELD:int            =12;  //ÎüÊÕÉËº¦
-		public static const BUF_SIDE:int              =13;  //ºáÖÃ
-		public static const BUF_STRIKE_COST_ADD:int   =14;  //ÎäÆ÷´ò»÷·ÑÓÃÔö¼Ó
-		public static const BUF_STRIKE_DAMAGE_ADD:int =15;  //ÎäÆ÷´ò»÷ÉËº¦Ôö¼Ó
-		public static const BUF_POINT_UNABLE:int      =16;  //²»¿ÉÖ¸¶¨
+		public static const BUF_ATK_DIST:int          =1;   //Ô¶ï¿½ï¿½
+		public static const BUF_ATK_WITH_EQUIP:int    =2;   //Ã¿×°ï¿½ï¿½ï¿½ò¹¥»ï¿½ï¿½ï¿½ï¿½ï¿½
+		public static const BUF_ATK_ADD:int           =3;   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		public static const BUF_ATK_UNABLE:int        =4;   //ï¿½Þ·ï¿½ï¿½ï¿½ï¿½ï¿½
+		public static const BUF_CURE:int              =5;   //ï¿½Üµï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½Ëºï¿½ï¿½ï¿½ï¿½ï¿½
+		public static const BUF_DAMAGE_UNSTOP:int     =6;   //ï¿½Ëºï¿½ï¿½ï¿½ï¿½É·ï¿½Ö¹
+		public static const BUF_GUIDE:int             =7;   //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		public static const BUF_HEAL:int              =8;   //ï¿½ï¿½ï¿½ï¿½
+		public static const BUF_HIDDEN:int            =9;   //ï¿½ï¿½ï¿½ï¿½
+		public static const BUF_HP_WITH_EQUIP:int     =10;  //Ã¿×°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		public static const BUF_LATENT:int            =11;  //Ç±ï¿½ï¿½
+		public static const BUF_SHIELD:int            =12;  //ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½
+		public static const BUF_SIDE:int              =13;  //ï¿½ï¿½ï¿½ï¿½
+		public static const BUF_STRIKE_COST_ADD:int   =14;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		public static const BUF_STRIKE_DAMAGE_ADD:int =15;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ëºï¿½ï¿½ï¿½ï¿½ï¿½
+		public static const BUF_POINT_UNABLE:int      =16;  //ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½
 		public static const BUF_DEF_ADD:int           =17;   //
-		public static const BUF_DEF_UNABLE:int        =18;  //ÎÞ·¨·ÀÓù
+		public static const BUF_DEF_UNABLE:int        =18;  //ï¿½Þ·ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 		public static const BUF_MAX:int        				=99;  //
 	
-		public static const DO_ATK_SIDE_ADD:int         =101;  //¹¥»÷ºáÖÃÊ±¼ÓÉËº¦
-		public static const DO_BREAK_SKILL:int          =102;  //´ò¶Ï¼¼ÄÜ
-		public static const DO_DROP_HAND_CARD:int       =103;  //ÆúÊÖÅÆ
-		public static const DO_DRAW_HAND_CARD:int       =104;  //×¥ÅÆ
-		public static const DO_DROP_RES:int             =105;  //Æú×ÊÔ´
-		public static const DO_DAMAGE:int               =106;  //ÉËº¦
-		public static const DO_HEAL:int                 =107;  //ÖÎÁÆ
-		public static const DO_KILL:int                 =108;  //ÏûÃð
-		public static const DO_KILL_COST_UP:int         =109;  //ÏûÃð·ÑÓÃ´óÓÚ
-		public static const DO_KILL_COST_DOWN:int       =110;  //ÏûÃð·ÑÓÃÐ¡ÓÚ
-		public static const DO_RESET:int                =111;  //ÖØÖÃ
-		public static const DO_SIDE:int                 =112;  //ºáÖÃ
+		public static const DO_ATK_SIDE_ADD:int         =101;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ëºï¿½
+		public static const DO_BREAK_SKILL:int          =102;  //ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½
+		public static const DO_DROP_HAND_CARD:int       =103;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		public static const DO_DRAW_HAND_CARD:int       =104;  //×¥ï¿½ï¿½
+		public static const DO_DROP_RES:int             =105;  //ï¿½ï¿½ï¿½ï¿½Ô´
+		public static const DO_DAMAGE:int               =106;  //ï¿½Ëºï¿½
+		public static const DO_HEAL:int                 =107;  //ï¿½ï¿½ï¿½ï¿½
+		public static const DO_KILL:int                 =108;  //ï¿½ï¿½ï¿½ï¿½
+		public static const DO_KILL_COST_UP:int         =109;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã´ï¿½ï¿½ï¿½
+		public static const DO_KILL_COST_DOWN:int       =110;  //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½ï¿½
+		public static const DO_RESET:int                =111;  //ï¿½ï¿½ï¿½ï¿½
+		public static const DO_SIDE:int                 =112;  //ï¿½ï¿½ï¿½ï¿½
 	
 		private var _id:int;
 		private var _which:int = WHICH_NULL;
@@ -58,88 +58,88 @@ package ICard.logic {
 			if(info){
 				parseWhich(info);
 				parseWhat(info);
-				_targetNum = _info[7];
+				_targetNum = info[7];
 			}
 		}
 		
-		public function IsBuf():boolean{
+		public function IsBuf():Boolean{
 			return (_what >=BUF_ATK_DIST && _what <BUF_MAX);
 		}
 		
 		private function parseWhat(info:Array){
-			if(_info[1] = "BUF_ATK_DIST")
+			if(info[1] = "BUF_ATK_DIST")
 				_what = BUF_ATK_DIST;
-			else if(_info[1] = "BUF_ATK_WITH_EQUIP")
+			else if(info[1] = "BUF_ATK_WITH_EQUIP")
 				_what = BUF_ATK_WITH_EQUIP;
-			else if(_info[1] = "BUF_ATK_ADD")
+			else if(info[1] = "BUF_ATK_ADD")
 				_what = BUF_ATK_ADD;
-			else if(_info[1] = "BUF_ATK_UNABLE")
+			else if(info[1] = "BUF_ATK_UNABLE")
 				_what = BUF_ATK_UNABLE;
-			else if(_info[1] = "BUF_CURE")
+			else if(info[1] = "BUF_CURE")
 				_what = BUF_CURE;
-			else if(_info[1] = "BUF_DAMAGE_UNSTOP")
+			else if(info[1] = "BUF_DAMAGE_UNSTOP")
 				_what = BUF_DAMAGE_UNSTOP;
-			else if(_info[1] = "BUF_GUIDE")
+			else if(info[1] = "BUF_GUIDE")
 				_what = BUF_GUIDE;			
-			else if(_info[1] = "BUF_HEAL")
+			else if(info[1] = "BUF_HEAL")
 				_what = BUF_HEAL;
-			else if(_info[1] = "BUF_HIDDEN")
+			else if(info[1] = "BUF_HIDDEN")
 				_what = BUF_HIDDEN;
-			else if(_info[1] = "BUF_HP_WITH_EQUIP")
+			else if(info[1] = "BUF_HP_WITH_EQUIP")
 				_what = BUF_HP_WITH_EQUIP;
-			else if(_info[1] = "BUF_LATENT")
+			else if(info[1] = "BUF_LATENT")
 				_what = BUF_LATENT;
-			else if(_info[1] = "BUF_SHIELD")
+			else if(info[1] = "BUF_SHIELD")
 				_what = BUF_SHIELD;	
-			else if(_info[1] = "BUF_SIDE")
+			else if(info[1] = "BUF_SIDE")
 				_what = BUF_SIDE;
-			else if(_info[1] = "BUF_STRIKE_COST_ADD")
+			else if(info[1] = "BUF_STRIKE_COST_ADD")
 				_what = BUF_STRIKE_COST_ADD;
-			else if(_info[1] = "BUF_STRIKE_DAMAGE_ADD")
+			else if(info[1] = "BUF_STRIKE_DAMAGE_ADD")
 				_what = BUF_STRIKE_DAMAGE_ADD;		
-			else if(_info[1] = "BUF_POINT_UNABLE")
+			else if(info[1] = "BUF_POINT_UNABLE")
 				_what = BUF_POINT_UNABLE;
-			else if(_info[1] = "BUF_DEF_UNABLE")
+			else if(info[1] = "BUF_DEF_UNABLE")
 				_what = BUF_DEF_UNABLE;
-			else if(_info[1] = "DO_ATK_SIDE_ADD")
+			else if(info[1] = "DO_ATK_SIDE_ADD")
 				_what = DO_ATK_SIDE_ADD;
-			else if(_info[1] = "DO_BREAK_SKILL")
+			else if(info[1] = "DO_BREAK_SKILL")
 				_what = DO_BREAK_SKILL;
-			else if(_info[1] = "DO_DROP_HAND_CARD")
+			else if(info[1] = "DO_DROP_HAND_CARD")
 				_what = DO_DROP_HAND_CARD;
-			else if(_info[1] = "DO_DROP_RES")
+			else if(info[1] = "DO_DROP_RES")
 				_what = DO_DROP_RES;
-			else if(_info[1] = "DO_DAMAGE")
+			else if(info[1] = "DO_DAMAGE")
 				_what = DO_DAMAGE;
-			else if(_info[1] = "DO_HEAL")
+			else if(info[1] = "DO_HEAL")
 				_what = DO_HEAL;		
-			else if(_info[1] = "DO_KILL")
+			else if(info[1] = "DO_KILL")
 				_what = DO_KILL;		
-			else if(_info[1] = "DO_KILL_COST_UP")
+			else if(info[1] = "DO_KILL_COST_UP")
 				_what = DO_KILL_COST_UP;	
-			else if(_info[1] = "DO_KILL_COST_DOWN")
+			else if(info[1] = "DO_KILL_COST_DOWN")
 				_what = DO_KILL_COST_DOWN;	
-			else if(_info[1] = "DO_RESET")
+			else if(info[1] = "DO_RESET")
 				_what = DO_RESET;
-			else if(_info[1] = "DO_SIDE")
+			else if(info[1] = "DO_SIDE")
 				_what = DO_SIDE;	
-			else if(_info[1] = "DO_DRAW_HAND_CARD")
+			else if(info[1] = "DO_DRAW_HAND_CARD")
 				_what = DO_DRAW_HAND_CARD;
 			else		
 				_what = BUF_NULL;	 	
 		}
 		private function parseWhich(info:Array){
-			if(_info[1]=="WHICH_MY")
+			if(info[1]=="WHICH_MY")
 				_which = WHICH_MY;
-			else if(_info[1]=="WHICH_MYHERO")
+			else if(info[1]=="WHICH_MYHERO")
 				_which = WHICH_MYHERO;
-			else if(_info[1]=="WHICH_MYSOLDIER")
+			else if(info[1]=="WHICH_MYSOLDIER")
 				_which = WHICH_MYSOLDIER;	
-			else if(_info[1]=="WHICH_YOUR")
+			else if(info[1]=="WHICH_YOUR")
 				_which = WHICH_YOUR;
-			else if(_info[1]=="WHICH_YOURSOLDIER")
+			else if(info[1]=="WHICH_YOURSOLDIER")
 				_which = WHICH_MYSOLDIER;	
-			else if(_info[1]=="WHICH_YOURHERO")
+			else if(info[1]=="WHICH_YOURHERO")
 				_which = WHICH_YOURHERO;
 			else
 				_which = WHICH_NULL;	

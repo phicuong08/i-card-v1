@@ -50,7 +50,7 @@ public class CardBean
 		_bufStore = new BufferStoreBean();
 	}
 	/* GETTERS & SETTERS */
-	public BufferStoreBean getBufStore2(){
+	public BufferStoreBean getBufStore(){
 		return _bufStore;
 	}
 	public void AddBuf(CardAbilityBean ability,int realID){
@@ -58,7 +58,7 @@ public class CardBean
 		setDirtyFlagBit(BUF_DIRTY_BIT);
 	}
 	public void DelBuf(CardAbilityBean ability,int realID){
-		_bufStore.DelBuf(ability,realID);
+		_bufStore.DelBuf(realID);
 		setDirtyFlagBit(BUF_DIRTY_BIT);
 	}
 	public int getCardID() {
