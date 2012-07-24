@@ -11,8 +11,8 @@ package ICard.datas.card {
 		public static const StateNormal:int = 0;
 		public static const StateSide:int = 2;
 		public static const StateTurn:int = 2;
-		
-		public var _info:Object;
+		public static const MaxBufNum:int = 5;
+		public var  _info:Object;
 		public function CardData(info:Object):void{
 			_info = info;
 		}
@@ -24,7 +24,6 @@ package ICard.datas.card {
 			ba.position = 0;
 			return (ba.readObject() as Object);
 		}
-		
 		public function get Info():Object{
 			return _info;
 		}
@@ -122,9 +121,31 @@ package ICard.datas.card {
 				_info["turn"] = info["turn"];
 			if(info.hasOwnProperty("slot"))
 				_info["slot"] = info["slot"];
+			UpdateBuf(info);
 		}
-		
-
+		private function UpdateBuf(info:Object):void{
+			for(var i:int=0;i<MaxBufNum;i++){
+				var bufName:String = "buf" +i;
+				if(info.hasOwnProperty(bufName))
+					_info[bufName] = info[bufName];		
+				else
+					_info[bufName] = 0;
+			}
+		}
+		public function IsBufDif(arg1:CardData):boolean{
+			for(var i:int=0;i<MaxBufNum;i++){
+				if(getBuf(i) !=arg1.getBuf(i))
+					return true;
+			}
+			return false;
+		}
+		public function getBuf(index:int):int{
+			var bufName:String = "buf" +i;
+			if(_info.hasOwnProperty(bufName))
+				return _info[bufName];
+			else
+				return 0;
+		}
 		public function Clone(arg1:CardData):void{
 			_info = arg1.CloneInfo();
 		}
