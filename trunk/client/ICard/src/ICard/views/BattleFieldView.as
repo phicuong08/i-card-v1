@@ -53,7 +53,7 @@ package ICard.views {
 			if(cardInfo!=null)
 			{
 				var cardObj:CardData = (cardInfo[1] as CardData);
-//				 if(CardDiffData.IsAttrDiff(cardInfo[0],cardInfo[1]))
+//				if(CardDiffData.IsAttrDiff(cardInfo[0],cardInfo[1]))
 //				{
 //						var cardMC:MovieClip = _battleField.FindCard(cardObj.RealID);
 //						if(cardMC)
