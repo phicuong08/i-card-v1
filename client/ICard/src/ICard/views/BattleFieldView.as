@@ -65,7 +65,7 @@ package ICard.views {
 //				}
 //				else
 				{
-					var newCard:MovieClip = CreateCard(cardObj.Info);
+					var newCard:MovieClip = CreateCard(cardObj);
 					var slotId:int = _battleStage.GetUISlot(cardObj.Info);
 					if(slotId==BattleFieldType.YouResourceSlotId)
 						trace("slot id=",slotId);
@@ -73,15 +73,26 @@ package ICard.views {
 				}
 			}
 		}
-		private function CreateCard(info:Object,bTip:Boolean=true):MovieClip{
+		private function fillBufIcon(cardMC:MovieClip,card:CardData):void{
+			for(int i=0;i<CardData.MaxBufNum;i++){
+				var bufId:int = card.getBuf(i);
+				var buf:CardAbility = CardAbilityDB.getCardBuf(bufId);
+				if(buf==null)
+					continue;
+				var bufMC:MovieClip = _cardDB.AddCardBuf(cardMC,AbilityHelper.getIconID(bufId));
+				bufMC.tipInfo = cardTipHtml.CreateCardHtmlTip(buf.CardID);
+			}
+		}
+		private function CreateCard(card:CardData,bTip:Boolean=true):MovieClip{
+				var info:Object = card.Info;
 				trace("create card",info["cardID"]);
 				if(info["cardID"]==0)
 					return null;
 				var cardMC:MovieClip = _cardDB.CreateCard(info);
+				fillBufIcon(cardMC,card);
 				if(cardMC==null || bTip==false)
 						return cardMC;
-				var strCardHtml:String = cardTipHtml.CreateCardHtmlTip(info["cardID"]);		
-				cardMC.tipInfo = strCardHtml;
+				cardMC.tipInfo = cardTipHtml.CreateCardHtmlTip(info["cardID"]);		
 				if(info["side"]==1)
 				{
 			//		cardMC.scaleX = 0.5;

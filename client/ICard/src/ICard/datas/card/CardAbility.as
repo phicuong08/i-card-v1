@@ -31,6 +31,8 @@ package ICard.logic {
 		public static const BUF_POINT_UNABLE:int      =16;  //不可指定
 		public static const BUF_DEF_ADD:int           =17;   //
 		public static const BUF_DEF_UNABLE:int        =18;  //无法防御
+		
+		public static const BUF_MAX:int        				=99;  //
 	
 		public static const DO_ATK_SIDE_ADD:int         =101;  //攻击横置时加伤害
 		public static const DO_BREAK_SKILL:int          =102;  //打断技能
@@ -58,6 +60,10 @@ package ICard.logic {
 				parseWhat(info);
 				_targetNum = _info[7];
 			}
+		}
+		
+		public function IsBuf():boolean{
+			return (_what >=BUF_ATK_DIST && _what <BUF_MAX);
 		}
 		
 		private function parseWhat(info:Array){
