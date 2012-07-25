@@ -5,7 +5,7 @@ import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
-import sfs2x.extensions.icard.beans.CardSiteBean;
+import sfs2x.extensions.icard.beans.CardDeckBean;
 import sfs2x.extensions.icard.utils.ErrorDef;
 
 /**
@@ -16,7 +16,7 @@ import sfs2x.extensions.icard.utils.ErrorDef;
  */
 public class ClientQueryBsn
 {	
-	public static int getResNum(CardSiteBean site){
+	public static int getResNum(CardDeckBean site){
 		int num=0;
 		for (CardBean card : site.getCardMap().values()){
 			if(card.getSlotID()==CardBean.RES_SLOT_ID && card.getSide()==0)

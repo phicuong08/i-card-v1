@@ -2,7 +2,7 @@ package sfs2x.extensions.icard.beans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Vector;
+
 
 import com.icard.data.excel.ExcelReader;
 
@@ -33,31 +33,20 @@ public class CardAttrStoreBean {
 			ArrayList<HashMap<String,String>> sheetData = excelCardData.get(sheetName);
 			for(HashMap<String,String> rowData :sheetData){
 				
-				int Id = Integer.parseInt(rowData.get("ID")); // ÅÆµÄid
+				int id = Integer.parseInt(rowData.get("ID")); // ÅÆµÄid
 				CardAttrBean attrBean = new CardAttrBean(id);
 				for(int i=0;i<MAX_ATTR_NUM;i++){
 					String fieldName = "BUF" + i;
 					String attrVal = (rowData.get(fieldName)==null||rowData.get(fieldName).isEmpty())?"":rowData.get(fieldName); // 
 					attrBean.AddAttr(attrVal);
 				}
-				_abilityInfoMap.put(id, attrBean);
+				_attrInfoMap.put(id, attrBean);
 			}
 		}
 	}
 	public CardAttrBean getCardAttr(int cardID){
-		return _abilityInfoMap.get(cardID);
+		return _attrInfoMap.get(cardID);
 	}
 
-	private int ParseLoopInfo(String loop){
-		if(loop.equals("LOOP_ONE"))
-			return CardAttrBean.LOOP_ONE;
-		else if(loop.equals("LOOP_ALL"))
-			return CardAttrBean.LOOP_ALL;
-		else if(loop.equals("LOOP_MY"))
-			return CardAttrBean.LOOP_MY;
-		return 	CardAttrBean.LOOP_ONE;
-	}
-
-	
 
 }

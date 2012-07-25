@@ -25,7 +25,7 @@ public class CardGameBean
 	private int _inc_card_realID=1;
 
 	/** Players */
-	private ConcurrentHashMap<Integer,CardSiteBean> _sites = null;
+	private ConcurrentHashMap<Integer,CardDeckBean> _sites = null;
 
 	/** Game start time */
 	private long gameStartTime = 0L;
@@ -52,7 +52,7 @@ public class CardGameBean
 		this._id = id;
 
 		// Initialize internal data structure
-		_sites = new ConcurrentHashMap<Integer,CardSiteBean>();
+		_sites = new ConcurrentHashMap<Integer,CardDeckBean>();
 		_StateBean = new BattleStateBean();
 		_battleChain = new CardActionChainBean();
 		// Reset game to its initial status
@@ -77,7 +77,7 @@ public class CardGameBean
 	public void setFreshLoop(int playerID){
 		_loopPlayer = playerID;
 		_StateBean.setDelayJump(BattleStateBean.ST_INIT_WAIT_LOOP_OP,Constants.SHOW_ACTION_TIME);
-		CardSiteBean site = _sites.get(playerID);
+		CardDeckBean site = _sites.get(playerID);
 		if (site != null)
 			site.setFreshLoop();
 	}
@@ -93,13 +93,13 @@ public class CardGameBean
 	public void EmptyBattleChain(){
 		_battleChain.Empty();
 		_StateBean.clearWaitChainPass();
-		for(CardSiteBean site:_sites.values()){
+		for(CardDeckBean site:_sites.values()){
 			site.clearChainCost();
 			site.setPassChain(false);
 		}
 	}
 	public Boolean AddCard(int playerID,int cardID,int slotID){
-		CardSiteBean site = _sites.get(playerID);
+		CardDeckBean site = _sites.get(playerID);
 		if(site==null)
 			return false;
 		site.AddCard(new CardBean(getGenCardRealID(),cardID,slotID));
@@ -121,26 +121,26 @@ public class CardGameBean
 		int realID= _inc_card_realID++;
 		return realID;
 	}
-	public ConcurrentHashMap<Integer, CardSiteBean> getSites() {
+	public ConcurrentHashMap<Integer, CardDeckBean> getSites() {
 		return _sites;
 	}
 
-	public void setPlayers(ConcurrentHashMap<Integer, CardSiteBean> sites) {
+	public void setPlayers(ConcurrentHashMap<Integer, CardDeckBean> sites) {
 		_sites = sites;
 	}
 	public void AddPlayer(int playerID,User sfsUser){
-		CardSiteBean site = new CardSiteBean(playerID,sfsUser);
+		CardDeckBean site = new CardDeckBean(playerID,sfsUser);
 		_sites.put(site.getPlayerID(),site);
 	}
 	public void AddAIPlayer(int playerID,User sfsUser){
-		CardSiteBean site = new AICardSiteBean(playerID);
+		CardDeckBean site = new AICardDeckBean(playerID);
 		_sites.put(site.getPlayerID(),site);
 	}
 	public long getGameStartTime() {
 		return gameStartTime;
 	}
 	public int getCardOwner(int realID){
-		for(CardSiteBean site:_sites.values()){
+		for(CardDeckBean site:_sites.values()){
 			CardBean card = site.getCardMap().get(realID);
 			if(card!=null)
 				return site.getPlayerID();
@@ -148,7 +148,7 @@ public class CardGameBean
 		return 0;
 	}
 	public CardBean getCard(int realID){
-		for(CardSiteBean site:_sites.values()){
+		for(CardDeckBean site:_sites.values()){
 			CardBean card = site.getCardMap().get(realID);
 			if(card!=null)
 				return card;
@@ -156,7 +156,7 @@ public class CardGameBean
 		return null;	
 	}
 	public CardInfoBean getCardInfo(int realID){
-		for(CardSiteBean site:_sites.values()){
+		for(CardDeckBean site:_sites.values()){
 			CardBean card = site.getCardMap().get(realID);
 			if(card!=null)
 				return card.getInfo();
@@ -215,7 +215,7 @@ public class CardGameBean
 	}
 	public void gameTick(ICardExtension ext,int elapsed){
 		BattleBsn.RunBattleStateBean(this,ext,elapsed);
-		for (CardSiteBean site : _sites.values())
+		for (CardDeckBean site : _sites.values())
 		{
 			site.gameTick(this,ext);
 		}

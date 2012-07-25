@@ -3,17 +3,12 @@ package sfs2x.extensions.icard.bsn;
 
 
 
-import java.util.HashMap;
-import java.util.Vector;
 
-import sfs2x.extensions.icard.beans.BufferBean;
-import sfs2x.extensions.icard.beans.BufferStoreBean;
-import sfs2x.extensions.icard.beans.CardAbilityBean;
-import sfs2x.extensions.icard.beans.CardAbilityStoreBean;
-import sfs2x.extensions.icard.beans.CardBean;
-import sfs2x.extensions.icard.beans.CardGameBean;
-import sfs2x.extensions.icard.beans.CardInfoBean;
-import sfs2x.extensions.icard.beans.CardSiteBean;
+
+
+import sfs2x.extensions.icard.beans.CardAttrBean;
+import sfs2x.extensions.icard.beans.CardAttrStoreBean;
+
 
 
 /**
@@ -26,7 +21,7 @@ public class AttrBsn
 {	
 
 	public static boolean IsExistAttr(int cardID,int attr){
-		CardAttrBean attrBean = CardAbilityStoreBean.GetInstance().getAbilityBean(cardID);
+		CardAttrBean attrBean = CardAttrStoreBean.GetInstance().getCardAttr(cardID);
 		if(attrBean==null)
 			return false;
 		return attrBean.IsExistAttr(attr);

@@ -10,11 +10,11 @@ import sfs2x.extensions.icard.main.ICardExtension;
  * @author Ing. Ignazio Locatelli
  * @version 1.0
  */
-public class AICardSiteBean extends CardSiteBean
+public class AICardDeckBean extends CardDeckBean
 {
 	public final static  int	THINK_TIME = 20;
 	private int _thinkNeed;
-	public AICardSiteBean(int player) {
+	public AICardDeckBean(int player) {
 		super(player,null);
 		setThinkNeed();
 	}

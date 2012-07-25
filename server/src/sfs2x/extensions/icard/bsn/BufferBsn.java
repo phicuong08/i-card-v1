@@ -7,13 +7,11 @@ import java.util.HashMap;
 import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.BufferBean;
-import sfs2x.extensions.icard.beans.BufferStoreBean;
 import sfs2x.extensions.icard.beans.CardAbilityBean;
 import sfs2x.extensions.icard.beans.CardAbilityStoreBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardInfoBean;
-import sfs2x.extensions.icard.beans.CardSiteBean;
 
 
 /**
@@ -95,28 +93,28 @@ public class BufferBsn
 		boolean bMatch;
 		switch(ability.getWhich()){
 		case CardAbilityBean.WHICH_MY:
-			bMatch = (srcOwner==srcOwner) && (card.getCardType()==CardInfoBean.HERO || card.getCardType()==CardInfoBean.SOLDIER);
+			bMatch = (srcOwner==desOwner) && (card.getCardType()==CardInfoBean.HERO || card.getCardType()==CardInfoBean.SOLDIER);
 			break;
 		case CardAbilityBean.WHICH_MYHERO:
-			bMatch = (srcOwner==srcOwner) && (card.getCardType()==CardInfoBean.HERO);
+			bMatch = (srcOwner==desOwner) && (card.getCardType()==CardInfoBean.HERO);
 			break;
 		case CardAbilityBean.WHICH_MYSOLDIER:
-			bMatch = (srcOwner==srcOwner) && (card.getCardType()==CardInfoBean.SOLDIER);
+			bMatch = (srcOwner==desOwner) && (card.getCardType()==CardInfoBean.SOLDIER);
 			break;	
 		case CardAbilityBean.WHICH_MYWEAPON:
-			bMatch = (srcOwner==srcOwner) && (card.getCardType()==CardInfoBean.WEAPON);
+			bMatch = (srcOwner==desOwner) && (card.getCardType()==CardInfoBean.WEAPON);
 			break;
 		case CardAbilityBean.WHICH_YOUR:
-			bMatch = (srcOwner!=srcOwner) && (card.getCardType()==CardInfoBean.HERO || card.getCardType()==CardInfoBean.SOLDIER);
+			bMatch = (srcOwner!=desOwner) && (card.getCardType()==CardInfoBean.HERO || card.getCardType()==CardInfoBean.SOLDIER);
 			break;
 		case CardAbilityBean.WHICH_YOURHERO:
-			bMatch = (srcOwner!=srcOwner) && (card.getCardType()==CardInfoBean.HERO);
+			bMatch = (srcOwner!=desOwner) && (card.getCardType()==CardInfoBean.HERO);
 			break;
 		case CardAbilityBean.WHICH_YOURSOLDIER:
-			bMatch = (srcOwner!=srcOwner) && (card.getCardType()==CardInfoBean.SOLDIER);
+			bMatch = (srcOwner!=desOwner) && (card.getCardType()==CardInfoBean.SOLDIER);
 			break;	
 		case CardAbilityBean.WHICH_YOURWEAPON:
-			bMatch = (srcOwner!=srcOwner) && (card.getCardType()==CardInfoBean.WEAPON);
+			bMatch = (srcOwner!=desOwner) && (card.getCardType()==CardInfoBean.WEAPON);
 			break;		
 		default:
 			bMatch = false;

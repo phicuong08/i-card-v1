@@ -8,7 +8,6 @@ import java.util.List;
 
 
 import sfs2x.extensions.icard.beans.*;
-import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.*;
 /**
  * GameBsn: class containing utility business classes for game processing
@@ -97,7 +96,7 @@ public class GameBsn
 	}
 	public static void GenCardSource(CardGameBean gameBean,int playerID)
 	{
-		CardSiteBean site = gameBean.getSites().get(playerID);
+		CardDeckBean site = gameBean.getSites().get(playerID);
 		if(site==null)
 			return;
 		List<Integer> Cards = new ArrayList<Integer>();
@@ -111,7 +110,7 @@ public class GameBsn
 	}
 	
 	public static void InitGameCard(CardGameBean newGame){
-		for (CardSiteBean site : newGame.getSites().values())
+		for (CardDeckBean site : newGame.getSites().values())
 		{
 			InitCardSite(newGame, site.getPlayerID());
 		}
@@ -123,7 +122,7 @@ public class GameBsn
 	
 	public static void InitCardSite(CardGameBean gameBean,int playerID){
 		GenCardSource(gameBean,playerID);
-		CardSiteBean site = gameBean.getSites().get(playerID);
+		CardDeckBean site = gameBean.getSites().get(playerID);
 		if(site==null)
 			return;
 		site.setEmptyCardMap();
@@ -151,7 +150,7 @@ public class GameBsn
 		return true;
 	}
 	public static Boolean ExistDirtyCard(CardGameBean game){
-		for (CardSiteBean site : game.getSites().values())
+		for (CardDeckBean site : game.getSites().values())
 		{
 			for(CardBean card:site.getCardMap().values())
 			{

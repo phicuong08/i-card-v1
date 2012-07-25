@@ -10,10 +10,7 @@ import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
-import sfs2x.extensions.icard.beans.CardSiteBean;
-
-import sfs2x.extensions.icard.utils.Constants;
-
+import sfs2x.extensions.icard.beans.CardDeckBean;
 
 import com.smartfoxserver.v2.entities.data.ISFSArray;
 import com.smartfoxserver.v2.entities.data.ISFSObject;
@@ -85,7 +82,7 @@ public class SFSObjectBsn
 		return cardInfo;
 	}
 	
-	public static void fillDirtyCardInfo(ISFSArray sfsa, CardSiteBean site,int player,int receiver){
+	public static void fillDirtyCardInfo(ISFSArray sfsa, CardDeckBean site,int player,int receiver){
 		for (Enumeration<CardBean> e = site.getCardMap().elements(); e.hasMoreElements();){
 			CardBean card = (CardBean) e.nextElement();
 			ISFSObject cardInfo = genCardDirtyInfo(card,player,receiver);
@@ -96,7 +93,7 @@ public class SFSObjectBsn
 	}
 	public static ISFSArray genDirtyGameArr(CardGameBean game,int receiver){
 			ISFSArray sfsa = new SFSArray();
-			for (CardSiteBean site : game.getSites().values())
+			for (CardDeckBean site : game.getSites().values())
 			{
 				fillDirtyCardInfo(sfsa,site,site.getPlayerID(),receiver);
 			}

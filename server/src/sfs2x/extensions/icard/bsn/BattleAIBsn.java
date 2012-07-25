@@ -2,13 +2,13 @@ package sfs2x.extensions.icard.bsn;
 
 import java.util.Vector;
 
-import sfs2x.extensions.icard.beans.AICardSiteBean;
+import sfs2x.extensions.icard.beans.AICardDeckBean;
 import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardInfoBean;
-import sfs2x.extensions.icard.beans.CardSiteBean;
+import sfs2x.extensions.icard.beans.CardDeckBean;
 import sfs2x.extensions.icard.main.ICardExtension;
 
 
@@ -23,7 +23,7 @@ public class BattleAIBsn
 {	
 	// Store directions factors to move left,right,up,down
 	
-	public static void RunBattleAI(CardGameBean game,AICardSiteBean site,ICardExtension ext){
+	public static void RunBattleAI(CardGameBean game,AICardDeckBean site,ICardExtension ext){
 		if(game.getOpPlayer()!= site.getPlayerID())
 			return;
 		if(site.getThinkNeed()>0){
@@ -45,14 +45,14 @@ public class BattleAIBsn
 		
 		//game.getStateBean().Jump2GodState();
 	}
-	private static void procWaitExOp(CardGameBean game,CardSiteBean site,ICardExtension ext){
+	private static void procWaitExOp(CardGameBean game,CardDeckBean site,ICardExtension ext){
 		BattleBsn.ClientEndOp(game,site.getPlayerID());
 	}
-	private static void procWaitChainOp(CardGameBean game,CardSiteBean site,ICardExtension ext){
+	private static void procWaitChainOp(CardGameBean game,CardDeckBean site,ICardExtension ext){
 		BattleBsn.ClientEndOp(game,site.getPlayerID());
 	}
 	
-	private static void procWaitOp(CardGameBean game,CardSiteBean site,ICardExtension ext){
+	private static void procWaitOp(CardGameBean game,CardDeckBean site,ICardExtension ext){
 		if(AddCard2ResSlot(game,site))
 			return;
 		else if(AddCard2FightSlot(game,site))
@@ -62,7 +62,7 @@ public class BattleAIBsn
 		else
 			BattleBsn.ClientEndOp(game,site.getPlayerID());
 	}
-	private static Boolean AddCard2FightSlot(CardGameBean game,CardSiteBean site){
+	private static Boolean AddCard2FightSlot(CardGameBean game,CardDeckBean site){
 		int remainRes = site.getRemainRes();
 		if(remainRes<=0)
 			return false;
@@ -80,7 +80,7 @@ public class BattleAIBsn
 		}
 		return false;	
 	}
-	private static Boolean AddCard2ResSlot(CardGameBean game,CardSiteBean site){
+	private static Boolean AddCard2ResSlot(CardGameBean game,CardDeckBean site){
 		if(site.getAddResAble()==false)
 			return false;
 		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID,-1);
@@ -91,7 +91,7 @@ public class BattleAIBsn
 		game.setCurAction(action);
 		return true;
 	}
-	private static Boolean AddCard2EquipSlot(CardGameBean game,CardSiteBean site){
+	private static Boolean AddCard2EquipSlot(CardGameBean game,CardDeckBean site){
 		int remainRes = site.getRemainRes();
 		if(remainRes<=0)
 			return false;

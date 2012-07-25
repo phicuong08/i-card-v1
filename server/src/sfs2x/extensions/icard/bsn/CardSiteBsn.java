@@ -6,7 +6,7 @@ import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.CardBean;
 
-import sfs2x.extensions.icard.beans.CardSiteBean;
+import sfs2x.extensions.icard.beans.CardDeckBean;
 
 
 
@@ -19,7 +19,7 @@ import sfs2x.extensions.icard.beans.CardSiteBean;
  */
 public class CardSiteBsn
 {	
-	public static int getResNum(CardSiteBean site){
+	public static int getResNum(CardDeckBean site){
 		int num=0;
 		for (CardBean card : site.getCardMap().values()){
 			if(card.getSlotID()==CardBean.RES_SLOT_ID && card.getSide()==0)
@@ -27,7 +27,7 @@ public class CardSiteBsn
 		}
 		return num;
 	}
-	public static void useRes(CardSiteBean site,int resNum){
+	public static void useRes(CardDeckBean site,int resNum){
 		int remain=resNum;
 		for (CardBean card : site.getCardMap().values()){
 			if(card.getSlotID()==CardBean.RES_SLOT_ID && card.getSide()==0)
@@ -40,7 +40,7 @@ public class CardSiteBsn
 		}
 
 	}
-	public static Vector<CardBean> PickSlotCard(CardSiteBean site,int slotID,int cardType){
+	public static Vector<CardBean> PickSlotCard(CardDeckBean site,int slotID,int cardType){
 		Vector<CardBean> pickVect =new Vector<CardBean>();
 		for (CardBean card : site.getCardMap().values())
 		{

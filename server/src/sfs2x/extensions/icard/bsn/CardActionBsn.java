@@ -7,14 +7,13 @@ import com.smartfoxserver.v2.entities.data.ISFSObject;
 import sfs2x.extensions.icard.beans.CardActionBean;
 
 import sfs2x.extensions.icard.beans.BattleStateBean;
-import sfs2x.extensions.icard.beans.BufferBean;
 import sfs2x.extensions.icard.beans.CardAbilityBean;
 import sfs2x.extensions.icard.beans.CardAbilityStoreBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardInfoBean;
 import sfs2x.extensions.icard.beans.CardInfoStoreBean;
-import sfs2x.extensions.icard.beans.CardSiteBean;
+import sfs2x.extensions.icard.beans.CardDeckBean;
 import sfs2x.extensions.icard.beans.CardUseBean;
 import sfs2x.extensions.icard.beans.CardUseStoreBean;
 import sfs2x.extensions.icard.main.ICardExtension;
@@ -43,7 +42,7 @@ public class CardActionBsn
 	}
 	public static Boolean Action2ChainAble(CardGameBean game,CardActionBean action){
 		int cost = getActionCost(game,action);
-		CardSiteBean site = game.getSites().get(action.getPlayerID());
+		CardDeckBean site = game.getSites().get(action.getPlayerID());
 		if(site==null)
 			return false;
 		if(site.getRemainRes()<cost)
@@ -69,6 +68,7 @@ public class CardActionBsn
 			   cardInfo.getType()!=CardInfoBean.SKILL &&
 			   cardInfo.getType()!=CardInfoBean.SOLDIER)
 				return false;
+			return true;
 		}
 	}
 	
@@ -113,7 +113,7 @@ public class CardActionBsn
 	public static void procCardAction(CardGameBean game, CardActionBean action,ICardExtension ext){
 		if(action==null)
 			return;
-		CardSiteBean site = game.getSites().get(action.getPlayerID());
+		CardDeckBean site = game.getSites().get(action.getPlayerID());
 		if(site==null)
 			return;
 		CardBean card = game.getCard(action.getSrc());
@@ -158,11 +158,11 @@ public class CardActionBsn
 		CardBean card2 = game.getCard(desID);
 		CardUseBsn.Atk(card, card2);	
 	}
-	private static boolean procSkill2Cast(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
+	private static boolean procSkill2Cast(CardGameBean game,CardDeckBean site,CardBean card,CardActionBean action){
 		return CardUseBsn.SkillCast(game,site,card,action);
 	}
 	
-	private static boolean procAbility2Op(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
+	private static boolean procAbility2Op(CardGameBean game,CardDeckBean site,CardBean card,CardActionBean action){
 		CardAbilityBean abilityBean = CardAbilityStoreBean.GetInstance().getAbilityOnID(game.getStateBean().getCurAbility());
 		if(abilityBean==null)
 			return false;
@@ -187,7 +187,7 @@ public class CardActionBsn
 		return true;
 	}
 	
-	private static boolean procCard2Fight(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
+	private static boolean procCard2Fight(CardGameBean game,CardDeckBean site,CardBean card,CardActionBean action){
 		switch(card.getCardType()){
 		case CardInfoBean.HERO:
 		case CardInfoBean.SOLDIER:
@@ -246,19 +246,19 @@ public class CardActionBsn
 		return IsMatch;
 	}
 	
-	private static void procCard2Task(CardGameBean game,CardSiteBean site,CardBean card,CardActionBean action){
+	private static void procCard2Task(CardGameBean game,CardDeckBean site,CardBean card,CardActionBean action){
 		if(CardSiteBsn.getResNum(site)< card.getUseCost())
 			return;
 		CardSiteBsn.useRes(site,card.getCost());
 	//	game.getBattleChain().PushAction(action);	
 	}
-	private static void procCard2Turn(CardSiteBean site,CardBean card){
+	private static void procCard2Turn(CardDeckBean site,CardBean card){
 		if(CardSiteBsn.getResNum(site)< card.getUseCost())
 			return;
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setTurn(1);
 	}
-	private static void procCard2FightSlot(CardGameBean game,CardSiteBean site,CardBean card){
+	private static void procCard2FightSlot(CardGameBean game,CardDeckBean site,CardBean card){
 		if(CardSiteBsn.getResNum(site)< card.getCost())
 			return;
 		CardSiteBsn.useRes(site,card.getCost());
@@ -268,14 +268,14 @@ public class CardActionBsn
 		if(ability!=null)
 			BattleBsn.InitAbilityOp(game,card,ability);
 	}
-	private static void procCard2EquipSlot(CardSiteBean site,CardBean card){
+	private static void procCard2EquipSlot(CardDeckBean site,CardBean card){
 		if(CardSiteBsn.getResNum(site)< card.getCost())
 			return;
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setSlotID(CardBean.EQUIP_SLOT_ID);	
 		card.setSide(3);
 	}
-	private static void procCard2Res(CardSiteBean site,CardBean card){
+	private static void procCard2Res(CardDeckBean site,CardBean card){
 		site.setAddResAble(false);
 		if(card.getCardType() !=CardInfoBean.TASK)
 			card.setCardID(Constants.BACK_CARD_ID);
@@ -313,7 +313,7 @@ public class CardActionBsn
 		case CardInfoBean.SKILL:
 				if(card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.SOLDIER)
 				{
-					bMatch = !card2.IsPointable();
+					bMatch = !card2.IsPointUnable();
 				}
 				else
 					bMatch = true;
