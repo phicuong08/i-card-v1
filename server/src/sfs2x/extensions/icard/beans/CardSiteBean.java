@@ -23,6 +23,7 @@ public class CardSiteBean
 	private User _sfsUser=null;
 	private int _chainCost=0;
 	private Boolean _addResAble = false;
+	private Boolean _passChain = false;
 
 	public CardSiteBean(int player,User sfsUser) {
 		_playerID = player;
@@ -50,6 +51,12 @@ public class CardSiteBean
 			   card.getSlotID()!=CardBean.TOMB_SLOT_ID)
 				card.setSide(0);
 		}
+	}
+	public void setPassChain(Boolean flag){
+		_passChain = flag;
+	}
+	public Boolean getPassChain(){
+		return _passChain;
 	}
 	public void setAddResAble(Boolean flag){
 		_addResAble = flag;

@@ -95,6 +95,7 @@ public class CardGameBean
 		_StateBean.clearWaitChainPass();
 		for(CardSiteBean site:_sites.values()){
 			site.clearChainCost();
+			site.setPassChain(false);
 		}
 	}
 	public Boolean AddCard(int playerID,int cardID,int slotID){
