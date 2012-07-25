@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardInfoStoreBean;
-import sfs2x.extensions.icard.beans.CardSiteBean;
+import sfs2x.extensions.icard.beans.CardDeckBean;
 import sfs2x.extensions.icard.beans.GameLobbyBean;
 import sfs2x.extensions.icard.bsn.GameBsn;
 import sfs2x.extensions.icard.bsn.SFSObjectBsn;
@@ -112,8 +112,8 @@ public class ICardExtension extends SFSExtension {
 	}
 	public void SendGameCommand(String command,ISFSObject params,CardGameBean game){
 		trace("send game command",command);
-		for (Enumeration<CardSiteBean> e = game.getSites().elements(); e.hasMoreElements();){
-			CardSiteBean site = (CardSiteBean) e.nextElement();
+		for (Enumeration<CardDeckBean> e = game.getSites().elements(); e.hasMoreElements();){
+			CardDeckBean site = (CardDeckBean) e.nextElement();
 			if(site.getSfsUser()!=null)
 				send(command, params, site.getSfsUser());
 		}
@@ -121,7 +121,7 @@ public class ICardExtension extends SFSExtension {
 	public void SendGameCardUpdate(CardGameBean game){
 		if(GameBsn.ExistDirtyCard(game)==false)
 			return;
-		for(CardSiteBean site :game.getSites().values())
+		for(CardDeckBean site :game.getSites().values())
 		{
 			if(site.getSfsUser()==null)
 				continue;

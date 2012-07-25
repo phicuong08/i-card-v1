@@ -1,5 +1,6 @@
 package sfs2x.extensions.icard.beans;
 
+import sfs2x.extensions.icard.bsn.AttrBsn;
 import sfs2x.extensions.icard.bsn.BufferBsn;
 import sfs2x.extensions.icard.bsn.CardUseBsn;
 import sfs2x.extensions.icard.utils.Constants;
@@ -138,7 +139,7 @@ public class CardBean
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_ATK_UNABLE,when);
 	}
 	public boolean IsGuidable(int when){
-		iif(AttrBsn.IsExistAttr(_cardID,CardAttrBean.DIST_ATK))
+		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.DIST_ATK))
 			return true;
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_GUIDE,when);
 	}

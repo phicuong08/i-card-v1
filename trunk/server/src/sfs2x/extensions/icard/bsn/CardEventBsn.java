@@ -7,10 +7,6 @@ import java.util.Vector;
 import sfs2x.extensions.icard.beans.CardAbilityBean;
 import sfs2x.extensions.icard.beans.CardBean;
 
-import sfs2x.extensions.icard.beans.CardSiteBean;
-
-
-
 
 /**
  * GameBsn: class containing utility business classes for game processing

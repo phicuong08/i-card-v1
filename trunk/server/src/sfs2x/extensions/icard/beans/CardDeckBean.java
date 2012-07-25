@@ -13,7 +13,7 @@ import com.smartfoxserver.v2.entities.User;
  * @author Ing. Ignazio Locatelli
  * @version 1.0
  */
-public class CardSiteBean
+public class CardDeckBean
 {	
 	/** User id */
 	private int _playerID = 0;
@@ -25,7 +25,7 @@ public class CardSiteBean
 	private Boolean _addResAble = false;
 	private Boolean _passChain = false;
 
-	public CardSiteBean(int player,User sfsUser) {
+	public CardDeckBean(int player,User sfsUser) {
 		_playerID = player;
 		_sfsUser = sfsUser;
 	}

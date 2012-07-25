@@ -10,7 +10,7 @@ import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardInfoBean;
-import sfs2x.extensions.icard.beans.CardSiteBean;
+import sfs2x.extensions.icard.beans.CardDeckBean;
 import sfs2x.extensions.icard.main.ICardExtension;
 
 
@@ -172,7 +172,7 @@ public class CardUseBsn
 		}
 	}
 	
-	public static boolean SkillCast(CardGameBean game,CardSiteBean site,
+	public static boolean SkillCast(CardGameBean game,CardDeckBean site,
 										CardBean card,CardActionBean action){
 		CardAbilityBean ability = CardAbilityStoreBean.GetInstance().getAbilityBean(card.getCardID());
 		if(ability==null)

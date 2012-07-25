@@ -5,7 +5,7 @@ import java.util.Vector;
 import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
-import sfs2x.extensions.icard.beans.CardSiteBean;
+import sfs2x.extensions.icard.beans.CardDeckBean;
 import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.Commands;
 import sfs2x.extensions.icard.utils.Constants;
@@ -31,7 +31,7 @@ public class BattleBsn
 		int randomIndex = _Random.nextInt(count);
 		int index = 0;
 		int rndPlayer = 0;
-		for (CardSiteBean site : game.getSites().values()){
+		for (CardDeckBean site : game.getSites().values()){
 			rndPlayer = site.getPlayerID();
 			if(index == randomIndex)
 				break;
@@ -41,7 +41,7 @@ public class BattleBsn
 	}
 	
 	public static void drawCard(CardGameBean game,ICardExtension ext,int playerID,int num){
-		CardSiteBean site = game.getSites().get(playerID);
+		CardDeckBean site = game.getSites().get(playerID);
 		if(site==null)
 			return;
 		for(int i=0;i<num;i++){
@@ -239,7 +239,7 @@ public class BattleBsn
 	}
 	
 	private static void addChainActionCost(CardGameBean game,CardActionBean action){
-		CardSiteBean site = game.getSites().get(action.getPlayerID());
+		CardDeckBean site = game.getSites().get(action.getPlayerID());
 		if(site==null)
 			return;
 		site.addChainCost(CardActionBsn.getActionCost(game,action));
@@ -274,7 +274,7 @@ public class BattleBsn
 	}
 	public static int  getOtherPlayer(CardGameBean game,int meID)
 	{
-		for (CardSiteBean site : game.getSites().values()){
+		for (CardDeckBean site : game.getSites().values()){
 			if(site.getPlayerID() != meID)
 			{
 				return site.getPlayerID();

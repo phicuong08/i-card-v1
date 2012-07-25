@@ -1,5 +1,7 @@
 package sfs2x.extensions.icard.beans;
 
+import java.util.Vector;
+
 /**
  * GameMapBean: class describing a map associated to a game match
  * 
@@ -23,6 +25,9 @@ public class CardAttrBean
 		_id = id;
 		_vals = new Vector<Integer>();
 	}
+	public int getID(){
+		return _id;
+	}
 	public void AddAttr(String val){
 		int attr = parseVal(val);
 		if(attr != ATT_NULL)
@@ -36,19 +41,19 @@ public class CardAttrBean
 		return false;
 	}
 	private int parseVal(String val){
-		if(loop.equals("ATK_UNSTOP"))
+		if(val.equals("ATK_UNSTOP"))
 			return CardAttrBean.ATK_UNSTOP;
-		else if(loop.equals("DIST_ATK"))
+		else if(val.equals("DIST_ATK"))
 			return CardAttrBean.DIST_ATK;
-		else if(loop.equals("GUIDE"))
+		else if(val.equals("GUIDE"))
 			return CardAttrBean.GUIDE;
-		else if(loop.equals("HIDE"))
+		else if(val.equals("HIDE"))
 			return CardAttrBean.HIDE;
-		else if(loop.equals("INSTANT"))
+		else if(val.equals("INSTANT"))
 			return CardAttrBean.INSTANT;
-		else if(loop.equals("LATENT"))
+		else if(val.equals("LATENT"))
 			return CardAttrBean.LATENT;
-		else if(loop.equals("POINT_UNABLE"))
+		else if(val.equals("POINT_UNABLE"))
 			return CardAttrBean.POINT_UNABLE;				
 		return 	CardAttrBean.ATT_NULL;
 	}
