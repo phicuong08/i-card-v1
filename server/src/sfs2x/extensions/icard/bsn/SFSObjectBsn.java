@@ -32,8 +32,8 @@ public class SFSObjectBsn
 		ISFSObject cardInfo = new SFSObject();
 		cardInfo.putInt("realID", card.getRealID());
 		cardInfo.putInt("cardID", card.getClientCardID(player==receiver));
-		if(card.getDirtyFlagBit(CardBean.SLOT_DIRTY_BIT))
-			cardInfo.putInt("slot", card.getSlotID());
+		if(card.getDirtyFlagBit(CardBean.ZONE_DIRTY_BIT))
+			cardInfo.putInt("slot", card.getZoneID());
 		if(card.getDirtyFlagBit(CardBean.SIDE_DIRTY_BIT))	
 		{
 			cardInfo.putInt("side", card.getSide());
@@ -69,8 +69,8 @@ public class SFSObjectBsn
 		ISFSObject cardInfo = new SFSObject();
 		cardInfo.putInt("realID", card.getRealID());
 		cardInfo.putInt("cardID", card.getCardID());
-		if(card.getDirtyFlagBit(CardBean.SLOT_DIRTY_BIT))
-			cardInfo.putInt("slot", card.getSlotID());
+		if(card.getDirtyFlagBit(CardBean.ZONE_DIRTY_BIT))
+			cardInfo.putInt("slot", card.getZoneID());
 		if(card.getDirtyFlagBit(CardBean.SIDE_DIRTY_BIT))	
 		{
 			cardInfo.putInt("side", card.getSide());
@@ -93,7 +93,7 @@ public class SFSObjectBsn
 	}
 	public static ISFSArray genDirtyGameArr(CardGameBean game,int receiver){
 			ISFSArray sfsa = new SFSArray();
-			for (CardDeckBean site : game.getSites().values())
+			for (CardDeckBean site : game.getDeck().values())
 			{
 				fillDirtyCardInfo(sfsa,site,site.getPlayerID(),receiver);
 			}

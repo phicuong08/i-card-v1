@@ -49,7 +49,7 @@ public class ICardExtension extends SFSExtension {
 		
 		addRequestHandler(Commands.CMD_C2S_CLIENT_BATTLE_STATE_UPDATE,ClientBattleStateUpdateHandle.class);
 		addRequestHandler(Commands.CMD_C2S_CARD_TASKUSE,ClientTaskUseHandle.class);
-		addRequestHandler(Commands.CMD_C2S_CARD_UPDATE,ClientUpdateCardHandle.class);
+		addRequestHandler(Commands.CMD_C2S_CARD_UPDATE,ClientPlayCardHandle.class);
 		addRequestHandler(Commands.CMD_C2S_END_OP,ClientEndOpHandle.class);
 		addRequestHandler(Commands.CMD_C2S_CARD_FIGHT,ClientCardFightHandle.class);
 		addRequestHandler(Commands.CMD_C2S_EX_OP,ClientExOpHandle.class);
@@ -112,7 +112,7 @@ public class ICardExtension extends SFSExtension {
 	}
 	public void SendGameCommand(String command,ISFSObject params,CardGameBean game){
 		trace("send game command",command);
-		for (Enumeration<CardDeckBean> e = game.getSites().elements(); e.hasMoreElements();){
+		for (Enumeration<CardDeckBean> e = game.getDeck().elements(); e.hasMoreElements();){
 			CardDeckBean site = (CardDeckBean) e.nextElement();
 			if(site.getSfsUser()!=null)
 				send(command, params, site.getSfsUser());
@@ -121,7 +121,7 @@ public class ICardExtension extends SFSExtension {
 	public void SendGameCardUpdate(CardGameBean game){
 		if(GameBsn.ExistDirtyCard(game)==false)
 			return;
-		for(CardDeckBean site :game.getSites().values())
+		for(CardDeckBean site :game.getDeck().values())
 		{
 			if(site.getSfsUser()==null)
 				continue;

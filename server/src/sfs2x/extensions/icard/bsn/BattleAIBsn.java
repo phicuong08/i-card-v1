@@ -66,7 +66,7 @@ public class BattleAIBsn
 		int remainRes = site.getRemainRes();
 		if(remainRes<=0)
 			return false;
-		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID,CardInfoBean.SOLDIER);
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,CardInfoBean.ALLY);
 		if(cardVect.size()==0)
 			return false;
 		for(int i=0;i<cardVect.size();i++){
@@ -83,7 +83,7 @@ public class BattleAIBsn
 	private static Boolean AddCard2ResSlot(CardGameBean game,CardDeckBean site){
 		if(site.getAddResAble()==false)
 			return false;
-		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID,-1);
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,-1);
 		if(cardVect.size()==0)
 			return false;
 		CardBean card = (CardBean)cardVect.firstElement();
@@ -95,7 +95,7 @@ public class BattleAIBsn
 		int remainRes = site.getRemainRes();
 		if(remainRes<=0)
 			return false;
-		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID,CardInfoBean.WEAPON);
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,CardInfoBean.WEAPON);
 		for(int i=0;i<cardVect.size();i++){
 			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)
@@ -105,7 +105,7 @@ public class BattleAIBsn
 				return true;
 			}
 		}
-		cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_SLOT_ID,CardInfoBean.ARMOR);
+		cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,CardInfoBean.ARMOR);
 		for(int i=0;i<cardVect.size();i++){
 			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)

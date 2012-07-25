@@ -23,7 +23,7 @@ public class ClientBattleStateUpdateHandle extends ICardClientRequestHandler {
 		if(newGame!=null)
 		{
 			Integer ai=0;
-			for (CardDeckBean site : newGame.getSites().values())
+			for (CardDeckBean site : newGame.getDeck().values())
 			{
 				ai = site.getPlayerID();
 				break;

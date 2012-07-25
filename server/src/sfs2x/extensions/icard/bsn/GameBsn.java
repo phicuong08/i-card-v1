@@ -84,7 +84,7 @@ public class GameBsn
 		CardGameBean game = GameLobbyBean.GetInstance().getGameMap().get(gameID);
 		if(game==null)
 			return;
-		if(game.getSites().get(playerID)==null)
+		if(game.getDeck().get(playerID)==null)
 			return;
 		game.setNeedClose();
 	}
@@ -96,7 +96,7 @@ public class GameBsn
 	}
 	public static void GenCardSource(CardGameBean gameBean,int playerID)
 	{
-		CardDeckBean site = gameBean.getSites().get(playerID);
+		CardDeckBean site = gameBean.getDeck().get(playerID);
 		if(site==null)
 			return;
 		List<Integer> Cards = new ArrayList<Integer>();
@@ -110,7 +110,7 @@ public class GameBsn
 	}
 	
 	public static void InitGameCard(CardGameBean newGame){
-		for (CardDeckBean site : newGame.getSites().values())
+		for (CardDeckBean site : newGame.getDeck().values())
 		{
 			InitCardSite(newGame, site.getPlayerID());
 		}
@@ -122,15 +122,15 @@ public class GameBsn
 	
 	public static void InitCardSite(CardGameBean gameBean,int playerID){
 		GenCardSource(gameBean,playerID);
-		CardDeckBean site = gameBean.getSites().get(playerID);
+		CardDeckBean site = gameBean.getDeck().get(playerID);
 		if(site==null)
 			return;
 		site.setEmptyCardMap();
-		gameBean.AddCard(playerID, 20001, CardBean.HERO_SLOT_ID);
+		gameBean.AddCard(playerID, 20001, CardBean.HERO_ZONE_ID);
 		for(int i=0;i<Constants.DEFAULT_HAND_CARD_NUM;i++)
 		{
 			Integer cardID = site.getDrawCard();
-			gameBean.AddCard(playerID, cardID, CardBean.HAND_SLOT_ID);
+			gameBean.AddCard(playerID, cardID, CardBean.HAND_ZONE_ID);
 		}
 	}
 	
@@ -150,7 +150,7 @@ public class GameBsn
 		return true;
 	}
 	public static Boolean ExistDirtyCard(CardGameBean game){
-		for (CardDeckBean site : game.getSites().values())
+		for (CardDeckBean site : game.getDeck().values())
 		{
 			for(CardBean card:site.getCardMap().values())
 			{

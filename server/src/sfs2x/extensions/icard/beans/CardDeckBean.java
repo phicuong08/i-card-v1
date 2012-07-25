@@ -47,8 +47,8 @@ public class CardDeckBean
 	public void setFreshLoop(){
 		_addResAble = true;
 		for(CardBean card:_cardMap.values()){
-			if(card.getSlotID()!=CardBean.HAND_SLOT_ID &&
-			   card.getSlotID()!=CardBean.TOMB_SLOT_ID)
+			if(card.getZoneID()!=CardBean.HAND_ZONE_ID &&
+			   card.getZoneID()!=CardBean.TOMB_ZONE_ID)
 				card.setSide(0);
 		}
 	}
@@ -79,7 +79,7 @@ public class CardDeckBean
 	public int getRemainRes(){
 		int ret = 0;
 		for(CardBean card:_cardMap.values()){
-			if(card.getSlotID()==CardBean.RES_SLOT_ID &&
+			if(card.getZoneID()==CardBean.RES_ZONE_ID &&
 				card.getSide()==0)
 				ret++;
 		}

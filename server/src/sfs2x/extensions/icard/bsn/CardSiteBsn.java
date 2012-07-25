@@ -22,7 +22,7 @@ public class CardSiteBsn
 	public static int getResNum(CardDeckBean site){
 		int num=0;
 		for (CardBean card : site.getCardMap().values()){
-			if(card.getSlotID()==CardBean.RES_SLOT_ID && card.getSide()==0)
+			if(card.getZoneID()==CardBean.RES_ZONE_ID && card.getSide()==0)
 				num++;
 		}
 		return num;
@@ -30,7 +30,7 @@ public class CardSiteBsn
 	public static void useRes(CardDeckBean site,int resNum){
 		int remain=resNum;
 		for (CardBean card : site.getCardMap().values()){
-			if(card.getSlotID()==CardBean.RES_SLOT_ID && card.getSide()==0)
+			if(card.getZoneID()==CardBean.RES_ZONE_ID && card.getSide()==0)
 			{
 				card.setSide(1);
 				remain--;
@@ -44,7 +44,7 @@ public class CardSiteBsn
 		Vector<CardBean> pickVect =new Vector<CardBean>();
 		for (CardBean card : site.getCardMap().values())
 		{
-				if(card.getSlotID() == slotID &&
+				if(card.getZoneID() == slotID &&
 				   (cardType==-1 || card.getCardType()==cardType))
 					pickVect.add(card);
 		}

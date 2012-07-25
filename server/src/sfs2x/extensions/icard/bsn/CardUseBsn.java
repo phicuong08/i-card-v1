@@ -33,13 +33,13 @@ public class CardUseBsn
 			card1.setDead();
 		if(card1.getHp()<=0)
 		{
-			card1.setSlotID(CardBean.TOMB_SLOT_ID);
+			card1.setZoneID(CardBean.TOMB_ZONE_ID);
 			if(BufferBsn.IsCardAbility(card1,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true)
 				card2.setDead();
 		}
 		if(card2.getHp()<=0)
 		{
-			card2.setSlotID(CardBean.TOMB_SLOT_ID);
+			card2.setZoneID(CardBean.TOMB_ZONE_ID);
 			if(BufferBsn.IsCardAbility(card2,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true ||
 			   BufferBsn.IsCardAbility(card2,CardAbilityBean.WHEN_DEF_DEAD,CardAbilityBean.DO_KILL)==true)
 			   card1.setDead();
@@ -52,22 +52,22 @@ public class CardUseBsn
 		boolean bMatch = true;
 		switch(ability.getWhich()){
 		case CardAbilityBean.WHICH_MY:
-			bMatch = (srcOwner==desOwner)&& ((cardDes.getCardType()==CardInfoBean.HERO)||(cardDes.getCardType()==CardInfoBean.SOLDIER));
+			bMatch = (srcOwner==desOwner)&& ((cardDes.getCardType()==CardInfoBean.HERO)||(cardDes.getCardType()==CardInfoBean.ALLY));
 			break;
 		case CardAbilityBean.WHICH_MYHERO:
 			bMatch = ((srcOwner==desOwner)&& (cardDes.getCardType()==CardInfoBean.HERO));
 			break;
 		case CardAbilityBean.WHICH_MYSOLDIER:
-			bMatch = ((srcOwner==desOwner)&& (cardDes.getCardType()==CardInfoBean.SOLDIER));
+			bMatch = ((srcOwner==desOwner)&& (cardDes.getCardType()==CardInfoBean.ALLY));
 			break;
 		case CardAbilityBean.WHICH_YOUR:
-			bMatch = (srcOwner!=desOwner)&& ((cardDes.getCardType()==CardInfoBean.HERO)||(cardDes.getCardType()==CardInfoBean.SOLDIER));
+			bMatch = (srcOwner!=desOwner)&& ((cardDes.getCardType()==CardInfoBean.HERO)||(cardDes.getCardType()==CardInfoBean.ALLY));
 			break;
 		case CardAbilityBean.WHICH_YOURHERO:
 			bMatch = ((srcOwner!=desOwner)&& (cardDes.getCardType()==CardInfoBean.HERO));
 			break;
 		case CardAbilityBean.WHICH_YOURSOLDIER:
-			bMatch = ((srcOwner!=desOwner)&& (cardDes.getCardType()==CardInfoBean.SOLDIER));
+			bMatch = ((srcOwner!=desOwner)&& (cardDes.getCardType()==CardInfoBean.ALLY));
 			break;
 		case CardAbilityBean.WHICH_YOURWEAPON:
 			bMatch = ((srcOwner!=desOwner)&& (cardDes.getCardType()==CardInfoBean.WEAPON));
@@ -156,14 +156,14 @@ public class CardUseBsn
 				bHaveBuf = true;
 		}
 		if(bHaveBuf)
-			cardSrc.setSlotID(CardBean.BUF_SLOT_ID);
+			cardSrc.setZoneID(CardBean.BUF_ZONE_ID);
 		else
 			onCardDead(game,cardSrc);
 		if(cardDes.getIsDead())
 			onCardDead(game,cardDes);
 	}
 	public static void onCardDead(CardGameBean game,CardBean card){
-		card.setSlotID(CardBean.TOMB_SLOT_ID);
+		card.setZoneID(CardBean.TOMB_ZONE_ID);
 		HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
 		for(BufferBean buf:bufMap.values()){
 			CardBean cardBuf = game.getCard(buf.getID());

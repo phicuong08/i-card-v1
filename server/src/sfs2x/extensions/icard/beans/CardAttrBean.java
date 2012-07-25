@@ -18,6 +18,7 @@ public class CardAttrBean
 	public static final int INSTANT        		=5; //瞬发
 	public static final int LATENT        		=6; //潜行
 	public static final int POINT_UNABLE      =7; //不可指定
+	public static final int ONGOING           =8; //持续
 	
 	private int _id;
 	private Vector<Integer> _vals;
@@ -54,7 +55,9 @@ public class CardAttrBean
 		else if(val.equals("LATENT"))
 			return CardAttrBean.LATENT;
 		else if(val.equals("POINT_UNABLE"))
-			return CardAttrBean.POINT_UNABLE;				
+			return CardAttrBean.POINT_UNABLE;		
+		else if(val.equals("ONGOING"))
+			return CardAttrBean.ONGOING;	
 		return 	CardAttrBean.ATT_NULL;
 	}
 
