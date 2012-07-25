@@ -6,7 +6,7 @@ package sfs2x.extensions.icard.beans;
  * @author Ing. Ignazio Locatelli
  * @version 1.0
  */
-public class CardAbilityBean
+public class CardAttrBean
 {
 	public static final int ATT_NULL 	 	      =0; //
 	public static final int ATK_UNSTOP        =1; //¹¥»÷²»¿É·ÀÖ¹
@@ -19,7 +19,7 @@ public class CardAbilityBean
 	
 	private int _id;
 	private Vector<Integer> _vals;
-	public CardAbilityBean(int id){
+	public CardAttrBean(int id){
 		_id = id;
 		_vals = new Vector<Integer>();
 	}

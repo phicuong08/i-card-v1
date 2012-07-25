@@ -114,23 +114,23 @@ public class CardBean
 		_side = val;
 		setDirtyFlagBit(SIDE_DIRTY_BIT);
 	}
-	public boolean IsPointable(){
-		if(BufferBsn.IsCardAbility(this,CardAbilityBean.WHEN_ALL,CardAbilityBean.BUF_POINT_UNABLE))
+	public boolean IsPointUnable(){
+		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.POINT_UNABLE))
 			return true;
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_POINT_UNABLE,CardAbilityBean.WHEN_ALL);
 	}
-	public boolean IsAtOnce(){
-		if(BufferBsn.IsCardAbility(this,CardAbilityBean.WHEN_ALL,CardAbilityBean.BUF_AT_ONCE))
+	public boolean IsInstant(){
+		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.INSTANT))
 			return true;
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_AT_ONCE,CardAbilityBean.WHEN_ALL);
 	}
 	public boolean IsHidden(){
-		if(BufferBsn.IsCardAbility(this,CardAbilityBean.WHEN_ALL,CardAbilityBean.BUF_HIDDEN))
+		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.HIDE))
 			return true;
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_HIDDEN,CardAbilityBean.WHEN_ALL);
 	}
 	public boolean IsDistAtk(int when){
-		if(BufferBsn.IsCardAbility(this,when,CardAbilityBean.BUF_ATK_DIST))
+		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.DIST_ATK))
 			return true;
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_ATK_DIST,when);
 	}
@@ -138,7 +138,7 @@ public class CardBean
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_ATK_UNABLE,when);
 	}
 	public boolean IsGuidable(int when){
-		if(BufferBsn.IsCardAbility(this,when,CardAbilityBean.BUF_GUIDE))
+		iif(AttrBsn.IsExistAttr(_cardID,CardAttrBean.DIST_ATK))
 			return true;
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_GUIDE,when);
 	}
