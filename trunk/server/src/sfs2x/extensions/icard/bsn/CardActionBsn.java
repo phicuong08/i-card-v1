@@ -42,7 +42,7 @@ public class CardActionBsn
 	}
 	public static Boolean Action2ChainAble(CardGameBean game,CardActionBean action){
 		int cost = getActionCost(game,action);
-		CardDeckBean site = game.getSites().get(action.getPlayerID());
+		CardDeckBean site = game.getDeck().get(action.getPlayerID());
 		if(site==null)
 			return false;
 		if(site.getRemainRes()<cost)
@@ -66,7 +66,7 @@ public class CardActionBsn
 				return false;
 			if(cardInfo.getType()!= CardInfoBean.HERO &&
 			   cardInfo.getType()!=CardInfoBean.SKILL &&
-			   cardInfo.getType()!=CardInfoBean.SOLDIER)
+			   cardInfo.getType()!=CardInfoBean.ALLY)
 				return false;
 			return true;
 		}
@@ -113,7 +113,7 @@ public class CardActionBsn
 	public static void procCardAction(CardGameBean game, CardActionBean action,ICardExtension ext){
 		if(action==null)
 			return;
-		CardDeckBean site = game.getSites().get(action.getPlayerID());
+		CardDeckBean site = game.getDeck().get(action.getPlayerID());
 		if(site==null)
 			return;
 		CardBean card = game.getCard(action.getSrc());
@@ -190,7 +190,7 @@ public class CardActionBsn
 	private static boolean procCard2Fight(CardGameBean game,CardDeckBean site,CardBean card,CardActionBean action){
 		switch(card.getCardType()){
 		case CardInfoBean.HERO:
-		case CardInfoBean.SOLDIER:
+		case CardInfoBean.ALLY:
 			procCard2Atk(game,card,action);
 			break;
 		case CardInfoBean.SKILL:
@@ -239,7 +239,7 @@ public class CardActionBsn
 		case CardInfoBean.HERO:
 			IsMatch = (IsFriend==true)? useInfo.getMyHero()>0:useInfo.getYourHero()>0 ;
 			break;
-		case CardInfoBean.SOLDIER:
+		case CardInfoBean.ALLY:
 			IsMatch = (IsFriend==true)? useInfo.getMySoldier()>0:useInfo.getYourSoldier()>0 ;
 			break;	
 		}
@@ -262,7 +262,7 @@ public class CardActionBsn
 		if(CardSiteBsn.getResNum(site)< card.getCost())
 			return;
 		CardSiteBsn.useRes(site,card.getCost());
-		card.setSlotID(CardBean.FIGHT_SLOT_ID);	
+		card.setZoneID(CardBean.FIGHT_ZONE_ID);	
 		card.setSide(3);
 		CardAbilityBean ability = BufferBsn.getCardAbility(card,CardAbilityBean.WHEN_ENTER);
 		if(ability!=null)
@@ -272,14 +272,14 @@ public class CardActionBsn
 		if(CardSiteBsn.getResNum(site)< card.getCost())
 			return;
 		CardSiteBsn.useRes(site,card.getCost());
-		card.setSlotID(CardBean.EQUIP_SLOT_ID);	
+		card.setZoneID(CardBean.EQUIP_ZONE_ID);	
 		card.setSide(3);
 	}
 	private static void procCard2Res(CardDeckBean site,CardBean card){
 		site.setAddResAble(false);
-		if(card.getCardType() !=CardInfoBean.TASK)
+		if(card.getCardType() !=CardInfoBean.QUEST)
 			card.setCardID(Constants.BACK_CARD_ID);
-		card.setSlotID(CardBean.RES_SLOT_ID);
+		card.setZoneID(CardBean.RES_ZONE_ID);
 		card.setSide(0);
 	}
 	private static int getUseCost(int cardID){
@@ -300,18 +300,18 @@ public class CardActionBsn
 		CardBean card2 = game.getCard(des);
 		if(card1==null ||card2==null)
 			return false;
-		if(card2.getSlotID()==CardBean.HAND_SLOT_ID||
-				card2.getSlotID()==CardBean.RES_SLOT_ID)
+		if(card2.getZoneID()==CardBean.HAND_ZONE_ID||
+				card2.getZoneID()==CardBean.RES_ZONE_ID)
 				return false;
 		boolean bMatch = false;
 		switch(card1.getCardType()){
 		case CardInfoBean.HERO:
-		case CardInfoBean.SOLDIER:
+		case CardInfoBean.ALLY:
 		case CardInfoBean.WEAPON:
-			bMatch = (card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.SOLDIER) && (card2.IsHidden()==false);
+			bMatch = (card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.ALLY) && (card2.IsHidden()==false);
 			break;
 		case CardInfoBean.SKILL:
-				if(card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.SOLDIER)
+				if(card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.ALLY)
 				{
 					bMatch = !card2.IsPointUnable();
 				}

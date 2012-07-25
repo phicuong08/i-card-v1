@@ -93,25 +93,25 @@ public class BufferBsn
 		boolean bMatch;
 		switch(ability.getWhich()){
 		case CardAbilityBean.WHICH_MY:
-			bMatch = (srcOwner==desOwner) && (card.getCardType()==CardInfoBean.HERO || card.getCardType()==CardInfoBean.SOLDIER);
+			bMatch = (srcOwner==desOwner) && (card.getCardType()==CardInfoBean.HERO || card.getCardType()==CardInfoBean.ALLY);
 			break;
 		case CardAbilityBean.WHICH_MYHERO:
 			bMatch = (srcOwner==desOwner) && (card.getCardType()==CardInfoBean.HERO);
 			break;
 		case CardAbilityBean.WHICH_MYSOLDIER:
-			bMatch = (srcOwner==desOwner) && (card.getCardType()==CardInfoBean.SOLDIER);
+			bMatch = (srcOwner==desOwner) && (card.getCardType()==CardInfoBean.ALLY);
 			break;	
 		case CardAbilityBean.WHICH_MYWEAPON:
 			bMatch = (srcOwner==desOwner) && (card.getCardType()==CardInfoBean.WEAPON);
 			break;
 		case CardAbilityBean.WHICH_YOUR:
-			bMatch = (srcOwner!=desOwner) && (card.getCardType()==CardInfoBean.HERO || card.getCardType()==CardInfoBean.SOLDIER);
+			bMatch = (srcOwner!=desOwner) && (card.getCardType()==CardInfoBean.HERO || card.getCardType()==CardInfoBean.ALLY);
 			break;
 		case CardAbilityBean.WHICH_YOURHERO:
 			bMatch = (srcOwner!=desOwner) && (card.getCardType()==CardInfoBean.HERO);
 			break;
 		case CardAbilityBean.WHICH_YOURSOLDIER:
-			bMatch = (srcOwner!=desOwner) && (card.getCardType()==CardInfoBean.SOLDIER);
+			bMatch = (srcOwner!=desOwner) && (card.getCardType()==CardInfoBean.ALLY);
 			break;	
 		case CardAbilityBean.WHICH_YOURWEAPON:
 			bMatch = (srcOwner!=desOwner) && (card.getCardType()==CardInfoBean.WEAPON);

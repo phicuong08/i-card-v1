@@ -3,11 +3,11 @@ package sfs2x.extensions.icard.beans;
 public final class CardInfoBean {
 
 	public static final int HERO = 0;
-	public static final int SOLDIER = 1;
+	public static final int ALLY = 1;
 	public static final int WEAPON = 2;
 	public static final int ARMOR = 3;
 	public static final int SKILL = 4;
-	public static final int TASK = 5;
+	public static final int QUEST = 5;
 		
 	private int _cardID = 0; // ÅÆµÄid
 	
@@ -71,7 +71,7 @@ public final class CardInfoBean {
 				case 21:
 				case 22:
 				case 23:
-					ret = SOLDIER;
+					ret = ALLY;
 					break;
 				case 20:
 					ret = HERO;
@@ -80,7 +80,7 @@ public final class CardInfoBean {
 					ret = SKILL;
 					break;
 				case 40:
-					ret = TASK;
+					ret = QUEST;
 					break;
 			}
 			return ret;

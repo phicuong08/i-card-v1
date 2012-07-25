@@ -13,15 +13,15 @@ import sfs2x.extensions.icard.utils.Constants;
  */
 public class CardBean
 {
-	public final static int HAND_SLOT_ID = 1;
-	public final static int RES_SLOT_ID = 2;
-	public final static int EQUIP_SLOT_ID = 3;
-	public final static int FIGHT_SLOT_ID = 4;
-	public final static int TOMB_SLOT_ID = 5;
-	public final static int HERO_SLOT_ID = 6;
-	public final static int BUF_SLOT_ID = 7;
+	public final static int HAND_ZONE_ID = 1;
+	public final static int RES_ZONE_ID = 2;
+	public final static int EQUIP_ZONE_ID = 3;
+	public final static int FIGHT_ZONE_ID = 4;
+	public final static int TOMB_ZONE_ID = 5;
+	public final static int HERO_ZONE_ID = 6;
+	public final static int BUF_ZONE_ID = 7;
 	
-	public final static int SLOT_DIRTY_BIT = 0;
+	public final static int ZONE_DIRTY_BIT = 0;
 	public final static int HP_DIRTY_BIT = 1;
 	public final static int TURN_DIRTY_BIT = 2;
 	public final static int ATK_DIRTY_BIT = 3;
@@ -33,19 +33,19 @@ public class CardBean
 	
 	private int _realID;
 	private int _cardID;
-	private int _slotID;
+	private int _zoneID;
 	private int _turn;
 	private int _side;
 	private int _addHp;
 	private int _dirtyFlag=0;
 	private CardInfoBean _info;
 	private BufferStoreBean _bufStore;
-	public CardBean(int realID, int cardID,int slotID)
+	public CardBean(int realID, int cardID,int zoneID)
 	{
 		_realID = realID;
 		_cardID = cardID;
-		_slotID = slotID;
-		setDirtyFlagBit(SLOT_DIRTY_BIT);
+		_zoneID = zoneID;
+		setDirtyFlagBit(ZONE_DIRTY_BIT);
 		setDirtyFlagBit(CARDID_DIRTY_BIT);
 		_info = CardInfoStoreBean.GetInstance().getCardInfo(cardID);
 		_bufStore = new BufferStoreBean();
@@ -67,7 +67,7 @@ public class CardBean
 	}
 	public int getClientCardID(Boolean bOwner){
 		if(bOwner==false){
-			if(_slotID==CardBean.HAND_SLOT_ID)
+			if(_zoneID==CardBean.HAND_ZONE_ID)
 				return Constants.BACK_CARD_ID;			
 		}
 		return _cardID;
@@ -90,12 +90,12 @@ public class CardBean
 	public void setRealID(int id) {
 		_realID = id;
 	}
-	public int getSlotID(){
-		return _slotID;
+	public int getZoneID(){
+		return _zoneID;
 	}
-	public void setSlotID(int id){
-		_slotID = id;
-		setDirtyFlagBit(SLOT_DIRTY_BIT);
+	public void setZoneID(int id){
+		_zoneID = id;
+		setDirtyFlagBit(ZONE_DIRTY_BIT);
 	}
 	public int getTurn() {
 		return _turn;
@@ -157,7 +157,7 @@ public class CardBean
 	}
 	public void setDead(){
 		AddHp(-10000);
-		setSlotID(TOMB_SLOT_ID);
+		setZoneID(TOMB_ZONE_ID);
 	}
 	public int getHp(){  //ÑªÁ¿
 		return _addHp + _info.getBaseHp() ;

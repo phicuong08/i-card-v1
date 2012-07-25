@@ -27,11 +27,11 @@ public class BattleBsn
 	static private java.util.Random _Random = new java.util.Random();
 
 	private static void procInitBattle(CardGameBean game,ICardExtension ext){
-		int count = game.getSites().size();
+		int count = game.getDeck().size();
 		int randomIndex = _Random.nextInt(count);
 		int index = 0;
 		int rndPlayer = 0;
-		for (CardDeckBean site : game.getSites().values()){
+		for (CardDeckBean site : game.getDeck().values()){
 			rndPlayer = site.getPlayerID();
 			if(index == randomIndex)
 				break;
@@ -41,12 +41,12 @@ public class BattleBsn
 	}
 	
 	public static void drawCard(CardGameBean game,ICardExtension ext,int playerID,int num){
-		CardDeckBean site = game.getSites().get(playerID);
+		CardDeckBean site = game.getDeck().get(playerID);
 		if(site==null)
 			return;
 		for(int i=0;i<num;i++){
 			Integer cardID = site.getDrawCard();
-			game.AddCard(playerID, cardID, CardBean.HAND_SLOT_ID);	
+			game.AddCard(playerID, cardID, CardBean.HAND_ZONE_ID);	
 		}
 		ext.SendGameCardUpdate(game);
 	}
@@ -80,6 +80,7 @@ public class BattleBsn
 		game.getStateBean().Jump2GodState();
 
 	}
+	
 	public static boolean VerifyClienRequest(CardGameBean game,int playerID,int card){
 		if(card>0 && game.getCardOwner(card)!= playerID)
 			return false;
@@ -239,7 +240,7 @@ public class BattleBsn
 	}
 	
 	private static void addChainActionCost(CardGameBean game,CardActionBean action){
-		CardDeckBean site = game.getSites().get(action.getPlayerID());
+		CardDeckBean site = game.getDeck().get(action.getPlayerID());
 		if(site==null)
 			return;
 		site.addChainCost(CardActionBsn.getActionCost(game,action));
@@ -274,7 +275,7 @@ public class BattleBsn
 	}
 	public static int  getOtherPlayer(CardGameBean game,int meID)
 	{
-		for (CardDeckBean site : game.getSites().values()){
+		for (CardDeckBean site : game.getDeck().values()){
 			if(site.getPlayerID() != meID)
 			{
 				return site.getPlayerID();
