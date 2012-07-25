@@ -49,7 +49,10 @@ public class CardActionBsn
 		if(site.getRemainRes()<cost)
 			return false;
 		Vector<CardActionBean> chain = game.getBattleChain().getActionChain();
-		if(chain.size()!=0){
+		if(chain.size()==0){
+			return true;
+		}
+		else {
 			if(action.getDes().size()!=1)
 				return false;
 			if(cardAlreadyInChain(chain,action.getSrc()))
@@ -67,8 +70,8 @@ public class CardActionBsn
 			   cardInfo.getType()!=CardInfoBean.SOLDIER)
 				return false;
 		}
-		return true;
 	}
+	
 	private static boolean cardAlreadyInChain(Vector<CardActionBean> chain,int srcID){
 		for(int i=0;i<chain.size();i++){
 			CardActionBean a1 = (CardActionBean)chain.get(i);

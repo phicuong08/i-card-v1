@@ -269,13 +269,8 @@ public class BattleBsn
 		}
 	}
 	public static boolean needActiveBattleChain(CardGameBean game,CardActionBean curAction){
-		return (curAction.getDes()!=null);
-//			return false;
-//		for(Integer realID:curAction.getDes()){
-//			if(game.getCardOwner(realID)!=game.getOpPlayer())
-//				return true;
-//		}
-//		return false;
+		return true;
+		//return (curAction.getDes()!=null);
 	}
 	public static int  getOtherPlayer(CardGameBean game,int meID)
 	{
