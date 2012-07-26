@@ -18,8 +18,6 @@ public class CardActionBean
 	public static final int DO_PLACE_RESOURCE=5; 	//放资源
 	public static final int DO_PROPOSE_COMBAT=6; 	//发起战斗
 	
-	public static final int DO_CARD_2_RES=1;        //卡到资源
-	public static final int DO_CARD_2_FIGHTSLOT=2;  //卡到战斗区
 	public static final int DO_CARD_2_EQUIPSLOT=3;  //卡到装备
 	public static final int DO_CARD_2_FIGHT=4;      //卡战斗(有目标),人物攻击,使用装备,使用法术 
 	public static final int DO_CARD_2_GUIDE=5;      //卡护卫

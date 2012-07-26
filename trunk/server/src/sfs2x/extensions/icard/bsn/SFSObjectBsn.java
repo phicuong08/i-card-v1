@@ -43,7 +43,6 @@ public class SFSObjectBsn
 		if(card.getDirtyFlagBit(CardBean.HP_DIRTY_BIT))	
 			cardInfo.putInt("hp", card.getHp());	
 		
-		Collection<Integer> bufArr = new ArrayList<Integer>();	
 		if(card.getDirtyFlagBit(CardBean.BUF_DIRTY_BIT))
 		{
 			HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();

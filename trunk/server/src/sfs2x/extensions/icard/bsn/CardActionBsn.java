@@ -56,13 +56,13 @@ public class CardActionBsn
 			return cardAlreadyInChain(chain,action.getDes().get(0)); //作用对象须是链上卡片
 		}
 	}
-	private static boolean cardAlreadyInChain(Vector<CardActionBean> chain,int desID){
+	private static boolean cardAlreadyInChain(Vector<CardActionBean> chain,int target){
 		for(int i=0;i<chain.size();i++){
 			CardActionBean a1 = (CardActionBean)chain.get(i);
-			if(findActionTarget(a1,desID)==true)
+			if(findActionTarget(a1,target)==true)
 				return true;
 		}
-		return false
+		return false;
 	}
 	private static boolean cardAlreadyInChainSrc(Vector<CardActionBean> chain,int srcID){
 		for(int i=0;i<chain.size();i++){
@@ -91,8 +91,7 @@ public class CardActionBsn
 		case CardActionBean.DO_CARD_2_FIGHT:
 			cost = getAtkCost(card.getCardID());
 			break;
-		case CardActionBean.DO_CARD_2_EQUIPSLOT:
-		case CardActionBean.DO_CARD_2_FIGHTSLOT:
+		case CardActionBean.DO_PLAY_CARD:
 			cost = card.getCost();			
 			break;
 		case CardActionBean.DO_CARD_2_TURN:
@@ -126,7 +125,7 @@ public class CardActionBsn
 		if(action==null)
 			return;
 		CardDeckBean deck = game.getDeck().get(action.getPlayerID());
-		if(site==null)
+		if(deck==null)
 			return;
 		CardBean card = game.getCard(action.getSrc());
 		if(card==null)
