@@ -51,18 +51,20 @@ public class CardActionBsn
 		else {
 			if(action.getDes().size()!=1)
 				return false;
-			if(cardAlreadyInChain(chain,action.getSrc()))
+			if(cardAlreadyInChainSrc(chain,action.getSrc())) //不可重复加入
 				return false;
-			int targetID= action.getDes().get(0);
-			CardActionBean topAction = chain.lastElement();
-			if(findActionTarget(topAction,targetID)==false)
-				return false;
-			CardInfoBean cardInfo = game.getCardInfo(action.getSrc());
-			return true;
+			return cardAlreadyInChain(chain,action.getDes().get(0)); //作用对象须是链上卡片
 		}
 	}
-	
-	private static boolean cardAlreadyInChain(Vector<CardActionBean> chain,int srcID){
+	private static boolean cardAlreadyInChain(Vector<CardActionBean> chain,int desID){
+		for(int i=0;i<chain.size();i++){
+			CardActionBean a1 = (CardActionBean)chain.get(i);
+			if(findActionTarget(a1,desID)==true)
+				return true;
+		}
+		return false
+	}
+	private static boolean cardAlreadyInChainSrc(Vector<CardActionBean> chain,int srcID){
 		for(int i=0;i<chain.size();i++){
 			CardActionBean a1 = (CardActionBean)chain.get(i);
 			if(a1.getSrc()==srcID)
