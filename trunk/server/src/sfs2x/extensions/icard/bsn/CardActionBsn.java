@@ -41,11 +41,8 @@ public class CardActionBsn
 		}
 	}
 	public static Boolean Action2ChainAble(CardGameBean game,CardActionBean action){
-		int cost = getActionCost(game,action);
 		CardDeckBean site = game.getDeck().get(action.getPlayerID());
 		if(site==null)
-			return false;
-		if(site.getRemainRes()<cost)
 			return false;
 		Vector<CardActionBean> chain = game.getBattleChain().getActionChain();
 		if(chain.size()==0){
@@ -61,13 +58,6 @@ public class CardActionBsn
 			if(findActionTarget(topAction,targetID)==false)
 				return false;
 			CardInfoBean cardInfo = game.getCardInfo(action.getSrc());
-			if(action.getType()!=CardActionBean.DO_CARD_2_TURN &&  //仅法术卡和英雄翻转才可进战斗链
-			    action.getType()!=CardActionBean.DO_CARD_2_FIGHT)
-				return false;
-			if(cardInfo.getType()!= CardInfoBean.HERO &&
-			   cardInfo.getType()!=CardInfoBean.SKILL &&
-			   cardInfo.getType()!=CardInfoBean.ALLY)
-				return false;
 			return true;
 		}
 	}
@@ -110,39 +100,56 @@ public class CardActionBsn
 		}
 		return cost;
 	}
+	private static void procPlayCard(CardGameBean game,CardDeckBean deck,CardBean card,CardActionBean action){
+		switch(card.getCardType()){
+//		case CardInfoBean.HERO:
+//			break;
+		case CardInfoBean.ALLY:
+			procCard2FightSlot(game,deck,card);
+			break;
+		case CardInfoBean.WEAPON:
+			procCard2EquipSlot(deck,card);
+			break;
+		case CardInfoBean.ARMOR:
+			procCard2EquipSlot(deck,card);
+			break;
+		case CardInfoBean.SKILL:
+			procCard2Fight(game,deck,card,action);
+			break;
+		case CardInfoBean.QUEST:
+			break;					
+		}
+	}
 	public static void procCardAction(CardGameBean game, CardActionBean action,ICardExtension ext){
 		if(action==null)
 			return;
-		CardDeckBean site = game.getDeck().get(action.getPlayerID());
+		CardDeckBean deck = game.getDeck().get(action.getPlayerID());
 		if(site==null)
 			return;
 		CardBean card = game.getCard(action.getSrc());
 		if(card==null)
 			return;
 		switch(action.getType()){
+		case CardActionBean.DO_PLAY_CARD:
+			procPlayCard(game,deck,card,action);
+			break;
 		case CardActionBean.DO_CARD_2_FIGHT:
-			procCard2Fight(game,site,card,action);
+			procCard2Fight(game,deck,card,action);
 			break;
-		case CardActionBean.DO_CARD_2_EQUIPSLOT:
-			procCard2EquipSlot(site,card);
-			break;
-		case CardActionBean.DO_CARD_2_FIGHTSLOT:
-			procCard2FightSlot(game,site,card);
-			break;
-		case CardActionBean.DO_CARD_2_RES:
-			procCard2Res(site,card);
+		case CardActionBean.DO_PLAY_RES_CARD:
+			procPlayResCard(deck,card);
 			break;
 		case CardActionBean.DO_CARD_2_TURN:
-			procCard2Turn(site,card);
+			procCard2Turn(deck,card);
 			break;	
 		case CardActionBean.DO_CARD_2_GUIDE:
-			//procCard2Guide(site,card);
+			//procCard2Guide(deck,card);
 			break;	
 		case CardActionBean.DO_CARD_2_TASK:
-			procCard2Task(game,site,card,action);
+			procCard2Task(game,deck,card,action);
 			break;		
 		case CardActionBean.DO_ABILITY_2_OP:
-			procAbility2Op(game,site,card,action);
+			procAbility2Op(game,deck,card,action);
 			break;
 		}
 	}
@@ -275,7 +282,7 @@ public class CardActionBsn
 		card.setZoneID(CardBean.EQUIP_ZONE_ID);	
 		card.setSide(3);
 	}
-	private static void procCard2Res(CardDeckBean site,CardBean card){
+	private static void procPlayResCard(CardDeckBean site,CardBean card){
 		site.setAddResAble(false);
 		if(card.getCardType() !=CardInfoBean.QUEST)
 			card.setCardID(Constants.BACK_CARD_ID);

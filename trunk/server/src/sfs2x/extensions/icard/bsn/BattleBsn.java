@@ -223,13 +223,10 @@ public class BattleBsn
 		CardActionBean curAction = game.pickCurAction();
 		if(curAction==null)
 			return;
-		if(game.getOpPlayer()!=curAction.getPlayerID())
-			return;
 		if(CardActionBsn.Action2ChainAble(game,curAction)==false)
 			return;
 		
 		game.getStateBean().clearWaitChainPass();
-		//game.getStateBean().setOp(curAction.getPlayerID());
 		game.getBattleChain().PushAction(curAction);
 		addChainActionCost(game,curAction);
 		game.getStateBean().setDelayJump(BattleStateBean.ST_INIT_WAIT_CHAIN_OP,Constants.SHOW_ACTION_TIME);
@@ -257,8 +254,6 @@ public class BattleBsn
 			return;
 			
 		//¼ì²âÊÇ·ñ²Ù×÷·½	
-		if(game.getOpPlayer()!=curAction.getPlayerID())
-			return;
 		if(needActiveBattleChain(game,curAction)){
 			if(CardActionBsn.Action2ChainAble(game,curAction)){
 				game.EmptyBattleChain();

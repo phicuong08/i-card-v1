@@ -40,15 +40,24 @@ public class ClientQueryBsn
 			return false;
 		if(deck.getAddResAble()==false)
 			return false;
+		
+		CardBean card = game.getCard(realID);
+		if(card==null || card.getZoneID()!=CardBean.HAND_ZONE_ID)
+			return false;
+			
 		CardActionBean action = new CardActionBean(realID,playerID,CardActionBean.DO_PLAY_RES_CARD,null);
 		game.setCurAction(action);
 		return true;
 	}
+	//
 	public static boolean procPlayCardRequest(CardGameBean game,int playerID,int realID,int target){
 		CardBean card = game.getCard(realID);
-		if(card==null)
+		if(card==null || card.getZoneID()!=CardBean.HAND_ZONE_ID)
 			return false;
 		
+		if(game.getStateBean().getState()!=BattleStateBean.ST_WAIT_LOOP_OP &&
+				   game.getStateBean().getState()!=BattleStateBean.ST_WAIT_CHAIN_OP)
+				   return false;
 		CardDeckBean deck = game.getDeck().get(playerID);
 		if(deck==null)
 			return false;
@@ -63,10 +72,15 @@ public class ClientQueryBsn
 			bOK  = game.getStateBean().getState()==BattleStateBean.ST_WAIT_LOOP_OP;
 			break;
 		case CardInfoBean.QUEST:
-		case CardInfoBean.SKILL:
-			bOK = (game.getStateBean().getState()==BattleStateBean.ST_WAIT_LOOP_OP ||
-				   game.getStateBean().getState()==BattleStateBean.ST_WAIT_CHAIN_OP);
+			bOK = true;
 			break;
+		case CardInfoBean.SKILL:
+			if(game.getStateBean().getState()==BattleStateBean.ST_WAIT_CHAIN_OP)
+				bOK = (card.IsInstant()==true);
+			break;
+		default:
+			bOK = false;
+			break;	
 		}
 		if(bOK)
 		{
@@ -75,7 +89,6 @@ public class ClientQueryBsn
 				des = new Vector<Integer>();
 				des.add(target);
 			}
-
 			CardActionBean action = new CardActionBean(realID,playerID,CardActionBean.DO_PLAY_CARD,des);
 			game.setCurAction(action);
 		}
