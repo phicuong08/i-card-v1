@@ -48,7 +48,7 @@ public class CardDeckBean
 		_addResAble = true;
 		for(CardBean card:_cardMap.values()){
 			if(card.getZoneID()!=CardBean.HAND_ZONE_ID &&
-			   card.getZoneID()!=CardBean.TOMB_ZONE_ID)
+			   card.getZoneID()!=CardBean.GRAVE_ZONE_ID)
 				card.setSide(0);
 		}
 	}

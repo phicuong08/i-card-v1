@@ -73,7 +73,7 @@ public class BattleAIBsn
 			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)
 			{
-				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_FIGHTSLOT,null);
+				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_PLAY_CARD,null);
 				game.setCurAction(action);
 				return true;
 			}
@@ -87,7 +87,7 @@ public class BattleAIBsn
 		if(cardVect.size()==0)
 			return false;
 		CardBean card = (CardBean)cardVect.firstElement();
-		CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_RES,null);
+		CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_PLAY_CARD,null);
 		game.setCurAction(action);
 		return true;
 	}
@@ -100,7 +100,7 @@ public class BattleAIBsn
 			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)
 			{
-				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_EQUIPSLOT,null);
+				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_PLAY_CARD,null);
 				game.setCurAction(action);
 				return true;
 			}
@@ -110,7 +110,7 @@ public class BattleAIBsn
 			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)
 			{
-				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_CARD_2_EQUIPSLOT,null);
+				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_PLAY_CARD,null);
 				game.setCurAction(action);
 				return true;
 			}

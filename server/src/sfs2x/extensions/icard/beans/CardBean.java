@@ -17,9 +17,10 @@ public class CardBean
 	public final static int RES_ZONE_ID = 2;
 	public final static int EQUIP_ZONE_ID = 3;
 	public final static int FIGHT_ZONE_ID = 4;
-	public final static int TOMB_ZONE_ID = 5;
+	public final static int GRAVE_ZONE_ID = 5;
 	public final static int HERO_ZONE_ID = 6;
 	public final static int BUF_ZONE_ID = 7;
+	public final static int RFG_ZONE_ID = 8; //remove from game
 	
 	public final static int ZONE_DIRTY_BIT = 0;
 	public final static int HP_DIRTY_BIT = 1;
@@ -157,7 +158,7 @@ public class CardBean
 	}
 	public void setDead(){
 		AddHp(-10000);
-		setZoneID(TOMB_ZONE_ID);
+		setZoneID(GRAVE_ZONE_ID);
 	}
 	public int getHp(){  //ÑªÁ¿
 		return _addHp + _info.getBaseHp() ;

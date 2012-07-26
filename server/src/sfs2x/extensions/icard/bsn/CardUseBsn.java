@@ -33,13 +33,13 @@ public class CardUseBsn
 			card1.setDead();
 		if(card1.getHp()<=0)
 		{
-			card1.setZoneID(CardBean.TOMB_ZONE_ID);
+			card1.setZoneID(CardBean.GRAVE_ZONE_ID);
 			if(BufferBsn.IsCardAbility(card1,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true)
 				card2.setDead();
 		}
 		if(card2.getHp()<=0)
 		{
-			card2.setZoneID(CardBean.TOMB_ZONE_ID);
+			card2.setZoneID(CardBean.GRAVE_ZONE_ID);
 			if(BufferBsn.IsCardAbility(card2,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true ||
 			   BufferBsn.IsCardAbility(card2,CardAbilityBean.WHEN_DEF_DEAD,CardAbilityBean.DO_KILL)==true)
 			   card1.setDead();
@@ -163,7 +163,7 @@ public class CardUseBsn
 			onCardDead(game,cardDes);
 	}
 	public static void onCardDead(CardGameBean game,CardBean card){
-		card.setZoneID(CardBean.TOMB_ZONE_ID);
+		card.setZoneID(CardBean.GRAVE_ZONE_ID);
 		HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
 		for(BufferBean buf:bufMap.values()){
 			CardBean cardBuf = game.getCard(buf.getID());
