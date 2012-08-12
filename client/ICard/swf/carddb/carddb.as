@@ -34,6 +34,9 @@
 				return true;
 		}
 		
+		public function AddCardBuf(card:MovieClip,bufId:int):MovieClip{
+			return null;
+		}
 		public function SetHp(card:MovieClip,hp:int):Boolean{
 			var index:int = 0;
 			while(index < card.numChildren)

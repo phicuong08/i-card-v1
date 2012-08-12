@@ -66,69 +66,69 @@ package ICard.datas.card {
 			return (_what >=BUF_ATK_DIST && _what <BUF_MAX);
 		}
 		
-		private function parseWhat(info:Array){
-			if(info[1] = "BUF_ATK_DIST")
+		private function parseWhat(info:Array):void{
+			if(info[1] == "BUF_ATK_DIST")
 				_what = BUF_ATK_DIST;
-			else if(info[1] = "BUF_ATK_WITH_EQUIP")
+			else if(info[1] == "BUF_ATK_WITH_EQUIP")
 				_what = BUF_ATK_WITH_EQUIP;
-			else if(info[1] = "BUF_ATK_ADD")
+			else if(info[1] == "BUF_ATK_ADD")
 				_what = BUF_ATK_ADD;
-			else if(info[1] = "BUF_ATK_UNABLE")
+			else if(info[1] == "BUF_ATK_UNABLE")
 				_what = BUF_ATK_UNABLE;
-			else if(info[1] = "BUF_CURE")
+			else if(info[1] == "BUF_CURE")
 				_what = BUF_CURE;
-			else if(info[1] = "BUF_DAMAGE_UNSTOP")
+			else if(info[1] == "BUF_DAMAGE_UNSTOP")
 				_what = BUF_DAMAGE_UNSTOP;
-			else if(info[1] = "BUF_GUIDE")
+			else if(info[1] == "BUF_GUIDE")
 				_what = BUF_GUIDE;			
-			else if(info[1] = "BUF_HEAL")
+			else if(info[1] == "BUF_HEAL")
 				_what = BUF_HEAL;
-			else if(info[1] = "BUF_HIDDEN")
+			else if(info[1] == "BUF_HIDDEN")
 				_what = BUF_HIDDEN;
-			else if(info[1] = "BUF_HP_WITH_EQUIP")
+			else if(info[1] == "BUF_HP_WITH_EQUIP")
 				_what = BUF_HP_WITH_EQUIP;
-			else if(info[1] = "BUF_LATENT")
+			else if(info[1] == "BUF_LATENT")
 				_what = BUF_LATENT;
-			else if(info[1] = "BUF_SHIELD")
+			else if(info[1] == "BUF_SHIELD")
 				_what = BUF_SHIELD;	
-			else if(info[1] = "BUF_SIDE")
+			else if(info[1] == "BUF_SIDE")
 				_what = BUF_SIDE;
-			else if(info[1] = "BUF_STRIKE_COST_ADD")
+			else if(info[1] == "BUF_STRIKE_COST_ADD")
 				_what = BUF_STRIKE_COST_ADD;
-			else if(info[1] = "BUF_STRIKE_DAMAGE_ADD")
+			else if(info[1] == "BUF_STRIKE_DAMAGE_ADD")
 				_what = BUF_STRIKE_DAMAGE_ADD;		
-			else if(info[1] = "BUF_POINT_UNABLE")
+			else if(info[1] == "BUF_POINT_UNABLE")
 				_what = BUF_POINT_UNABLE;
-			else if(info[1] = "BUF_DEF_UNABLE")
+			else if(info[1] == "BUF_DEF_UNABLE")
 				_what = BUF_DEF_UNABLE;
-			else if(info[1] = "DO_ATK_SIDE_ADD")
+			else if(info[1] == "DO_ATK_SIDE_ADD")
 				_what = DO_ATK_SIDE_ADD;
-			else if(info[1] = "DO_BREAK_SKILL")
+			else if(info[1] == "DO_BREAK_SKILL")
 				_what = DO_BREAK_SKILL;
-			else if(info[1] = "DO_DROP_HAND_CARD")
+			else if(info[1] == "DO_DROP_HAND_CARD")
 				_what = DO_DROP_HAND_CARD;
-			else if(info[1] = "DO_DROP_RES")
+			else if(info[1] == "DO_DROP_RES")
 				_what = DO_DROP_RES;
-			else if(info[1] = "DO_DAMAGE")
+			else if(info[1] == "DO_DAMAGE")
 				_what = DO_DAMAGE;
-			else if(info[1] = "DO_HEAL")
+			else if(info[1] == "DO_HEAL")
 				_what = DO_HEAL;		
-			else if(info[1] = "DO_KILL")
+			else if(info[1] == "DO_KILL")
 				_what = DO_KILL;		
-			else if(info[1] = "DO_KILL_COST_UP")
+			else if(info[1] == "DO_KILL_COST_UP")
 				_what = DO_KILL_COST_UP;	
-			else if(info[1] = "DO_KILL_COST_DOWN")
+			else if(info[1] == "DO_KILL_COST_DOWN")
 				_what = DO_KILL_COST_DOWN;	
-			else if(info[1] = "DO_RESET")
+			else if(info[1] == "DO_RESET")
 				_what = DO_RESET;
-			else if(info[1] = "DO_SIDE")
+			else if(info[1] == "DO_SIDE")
 				_what = DO_SIDE;	
-			else if(info[1] = "DO_DRAW_HAND_CARD")
+			else if(info[1] == "DO_DRAW_HAND_CARD")
 				_what = DO_DRAW_HAND_CARD;
 			else		
 				_what = BUF_NULL;	 	
 		}
-		private function parseWhich(info:Array){
+		private function parseWhich(info:Array):void{
 			if(info[1]=="WHICH_MY")
 				_which = WHICH_MY;
 			else if(info[1]=="WHICH_MYHERO")

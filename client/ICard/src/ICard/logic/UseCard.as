@@ -24,14 +24,14 @@ package ICard.logic {
 			{
 				case CardType.SoldierType:
 				{
-					mod.QueryUpdateCard(card.RealID,BattleFieldType.MyFightSlotId);
+					mod.QueryPlayCard(card.RealID,BattleFieldType.MyFightSlotId);
 					ret = true;
 				}
 					break;
 				case CardType.WeaponType:
 				case CardType.DefType:
 				{
-					mod.QueryUpdateCard(card.RealID,BattleFieldType.MyEquipSlotId);
+					mod.QueryPlayCard(card.RealID,BattleFieldType.MyEquipSlotId);
 					ret = true;
 				}
 					break;
