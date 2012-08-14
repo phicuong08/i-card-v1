@@ -15,25 +15,30 @@ import sfs2x.extensions.icard.utils.Constants;
  */
 public class BattleStateBean
 {	
+	/*
+	 *	TURN_START, (ready +draw)
+	 *  TURN_ACTION,(combat step)
+	 *  TURN_END
+	 */
 	public static final int ST_NONE_STATE= 0;
 	public static final int ST_INIT_BATTLE=1;
-	public static final int ST_INIT_WAIT_LOOP_OP = 2;
-	public static final int ST_WAIT_LOOP_OP = 3;
+	public static final int ST_WAIT_TURN_ACTION = 3;
 	public static final int ST_INIT_WAIT_CHAIN_OP = 4;
 	public static final int ST_WAIT_CHAIN_OP = 5;
 	public static final int ST_WAIT_CHAIN_OVER = 6;
 	public static final int ST_WAIT_GOD = 7;
-	public static final int ST_LOOP_END = 8;
+	public static final int ST_TURN_END = 8;
 	public static final int ST_WAIT_EX_OP=9;//牌进场时操作
 	public static final int ST_DELAY_JUMP=10;
 	public static final int ST_INIT_LOOP_RESET=11;
+	public static final int ST_TURN_BEGIN=12;
 	
 	
 	
 	private Vector<Integer>  _battleChain;
 	/** User id */
-	private int _opPlayerID = 0;  //等待操作的玩家
-	
+	private int _opPlayer = -1;  //等待操作的玩家
+	private int _turnPlayer=-1;
 	private int _state;	
 	private int _waitDuration = 60;
 	private int _waitChainPass;
@@ -67,7 +72,7 @@ public class BattleStateBean
 		case ST_INIT_BATTLE:
 			ext.trace("STATE== BattleStateBean.ST_INIT_BATTLE");
 			break;
-		case ST_WAIT_LOOP_OP:
+		case ST_WAIT_TURN_ACTION:
 			ext.trace("STATE== BattleStateBean.ST_WAIT_LOOP_OP");
 			break;
 		case ST_WAIT_CHAIN_OP:
@@ -76,7 +81,7 @@ public class BattleStateBean
 		case ST_WAIT_CHAIN_OVER:
 			ext.trace("STATE== BattleStateBean.ST_WAIT_CHAIN_OVER");
 			break;
-		case ST_LOOP_END:
+		case ST_TURN_END:
 			ext.trace("STATE== BattleStateBean.ST_LOOP_END");
 			break;
 		case ST_WAIT_GOD:
@@ -90,14 +95,20 @@ public class BattleStateBean
 			break;	
 		}
 	}
-	public void setOp(int playerID){
-		_opPlayerID = playerID;
+	public void setTurnPlayer(int playerID){
+		_turnPlayer = playerID;
+	}
+	public int getTurnPlayer() {
+		return _turnPlayer;
+	}
+	public void setOpPlayer(int playerID){
+		_opPlayer = playerID;
 	}
 	public int getState(){
 		return _state;
 	}
 	public int getOpPlayer() {
-		return _opPlayerID;
+		return _opPlayer;
 	}
 	public int getWaitDuration(){
 		return _waitDuration;
@@ -118,9 +129,9 @@ public class BattleStateBean
 		_waitChainPass = 0;
 	}
 	public void resetWaitLoopOp(int playerID){
-		_opPlayerID = playerID;
+		_opPlayer = playerID;
 		_waitDuration = Constants.BATTLE_LOOP_TIME;
-		_state =  ST_WAIT_LOOP_OP;
+		_state =  ST_WAIT_TURN_ACTION;
 	}
 	public void InitWaitDuration(int during){
 		_waitDuration = during;
@@ -134,7 +145,7 @@ public class BattleStateBean
 		return _ability;
 	}
 	public void InitWaitOp(int playerID,int during){
-		_opPlayerID = playerID;
+		_opPlayer = playerID;
 		_waitDuration = during;
 	}
 	public Boolean DecDuration(int val){
@@ -145,9 +156,9 @@ public class BattleStateBean
 		_battleChain.addElement(realID);
 	}
 	public Boolean IsWaitPlayerOp(int playerID){
-		if(_opPlayerID!=playerID)
+		if(_opPlayer!=playerID)
 			return false;
-		return (_state==ST_WAIT_LOOP_OP || _state==ST_WAIT_CHAIN_OP ||_state==ST_WAIT_EX_OP);
+		return (_state==ST_WAIT_TURN_ACTION || _state==ST_WAIT_CHAIN_OP ||_state==ST_WAIT_EX_OP);
 	}
 
 }

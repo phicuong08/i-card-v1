@@ -35,7 +35,7 @@ public class ClientQueryBsn
 		CardDeckBean deck = game.getDeck().get(playerID);
 		if(deck==null)
 			return false;
-		if(game.getStateBean().getState()!=BattleStateBean.ST_WAIT_LOOP_OP)
+		if(game.getStateBean().getState()!=BattleStateBean.ST_WAIT_TURN_ACTION)
 			return false;
 		if(deck.getAddResAble()==false)
 			return false;
@@ -54,7 +54,7 @@ public class ClientQueryBsn
 		if(card==null || card.getZoneID()!=CardBean.HAND_ZONE_ID)
 			return false;
 		
-		if(game.getStateBean().getState()!=BattleStateBean.ST_WAIT_LOOP_OP &&
+		if(game.getStateBean().getState()!=BattleStateBean.ST_WAIT_TURN_ACTION &&
 				   game.getStateBean().getState()!=BattleStateBean.ST_WAIT_CHAIN_OP)
 				   return false;
 		CardDeckBean deck = game.getDeck().get(playerID);
@@ -68,12 +68,12 @@ public class ClientQueryBsn
 		case CardInfoBean.WEAPON:
 		case CardInfoBean.ARMOR:
 		case CardInfoBean.HERO:
-			bOK  = game.getStateBean().getState()==BattleStateBean.ST_WAIT_LOOP_OP;
+			bOK  = game.getStateBean().getState()==BattleStateBean.ST_WAIT_TURN_ACTION;
 			break;
 		case CardInfoBean.QUEST:
 			bOK = true;
 			break;
-		case CardInfoBean.SKILL:
+		case CardInfoBean.ABILITY:
 			if(game.getStateBean().getState()==BattleStateBean.ST_WAIT_CHAIN_OP)
 				bOK = (card.IsInstant()==true);
 			break;

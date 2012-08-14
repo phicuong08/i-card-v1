@@ -39,7 +39,7 @@ public class CardGameBean
 	private BattleStateBean _StateBean;
 	private CardActionChainBean _battleChain;
 	private CardActionBean _curAction;
-	private int _loopPlayer;
+
 	private int _curLoop;
 	/**
 	 * Constructor
@@ -47,10 +47,8 @@ public class CardGameBean
 	 * @param gameMapBean  The map used to construct the game
 	 * @param id           The id of the match
 	 */
-	public CardGameBean(int id)
-	{
+	public CardGameBean(int id){
 		this._id = id;
-
 		// Initialize internal data structure
 		_deck = new ConcurrentHashMap<Integer,CardDeckBean>();
 		_StateBean = new BattleStateBean();
@@ -74,15 +72,16 @@ public class CardGameBean
 	public void setId(int id) {
 		this._id = id;
 	}
-	public void setFreshLoop(int playerID){
-		_loopPlayer = playerID;
-		_StateBean.setDelayJump(BattleStateBean.ST_INIT_WAIT_LOOP_OP,Constants.SHOW_ACTION_TIME);
-		CardDeckBean deck = _deck.get(playerID);
+	public void setCardReady(){
+		CardDeckBean deck = _deck.get(getTurnPlayer());
 		if (deck != null)
-			deck.setFreshLoop();
+			deck.setCardReady();
 	}
-	public int getLoopPlayer(){
-		return _loopPlayer;
+	public void setTurnPlayer(int playerID){
+		_StateBean.setTurnPlayer(playerID);
+	}
+	public int getTurnPlayer(){
+		return _StateBean.getTurnPlayer();
 	}
 	public int getOpPlayer(){
 		return _StateBean.getOpPlayer();

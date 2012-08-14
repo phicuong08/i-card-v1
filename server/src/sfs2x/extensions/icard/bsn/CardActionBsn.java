@@ -114,7 +114,7 @@ public class CardActionBsn
 		case CardInfoBean.ARMOR:
 			procCard2EquipSlot(deck,card);
 			break;
-		case CardInfoBean.SKILL:
+		case CardInfoBean.ABILITY:
 			procCard2Fight(game,deck,card,action);
 			break;
 		case CardInfoBean.QUEST:
@@ -201,7 +201,7 @@ public class CardActionBsn
 		case CardInfoBean.ALLY:
 			procCard2Atk(game,card,action);
 			break;
-		case CardInfoBean.SKILL:
+		case CardInfoBean.ABILITY:
 			procSkill2Cast(game,site,card,action);
 			break;
 		case CardInfoBean.ARMOR:
@@ -318,7 +318,7 @@ public class CardActionBsn
 		case CardInfoBean.WEAPON:
 			bMatch = (card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.ALLY) && (card2.IsHidden()==false);
 			break;
-		case CardInfoBean.SKILL:
+		case CardInfoBean.ABILITY:
 				if(card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.ALLY)
 				{
 					bMatch = !card2.IsPointUnable();
