@@ -43,7 +43,7 @@ public class Commands {
 	public static final String CMD_C2S_CARD_TASKUSE					="1001"; //使用任务卡片 
 	//参数1(srcID):int;参数2(target):{realID,...};
 	
-	public static final String CMD_C2S_CARD_UPDATE				="1002"; //请求改变卡状态,上牌
+	public static final String CMD_C2S_PLAY_CARD				="1002"; //请求改变卡状态,上牌
 	//参数1(realID):int;参数2(slot):int, 
 	
 	public static final String CMD_C2S_END_OP				="1003"; //请求结束操作

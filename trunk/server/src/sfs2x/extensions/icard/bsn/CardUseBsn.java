@@ -76,7 +76,7 @@ public class CardUseBsn
 			bMatch = ((srcOwner==desOwner)&& (cardDes.getCardType()==CardInfoBean.WEAPON));
 			break;	
 		case CardAbilityBean.WHICH_SKILL:
-			bMatch = (cardDes.getCardType()==CardInfoBean.SKILL);
+			bMatch = (cardDes.getCardType()==CardInfoBean.ABILITY);
 			break;	
 		}
 		return bMatch;

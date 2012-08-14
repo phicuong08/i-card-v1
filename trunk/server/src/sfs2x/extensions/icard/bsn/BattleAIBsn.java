@@ -32,7 +32,7 @@ public class BattleAIBsn
 		}
 		site.setThinkNeed();
 		switch(game.getStateBean().getState()){
-		case BattleStateBean.ST_WAIT_LOOP_OP:
+		case BattleStateBean.ST_WAIT_TURN_ACTION:
 			procWaitOp(game,site,ext);
 			break;
 		case BattleStateBean.ST_WAIT_CHAIN_OP:

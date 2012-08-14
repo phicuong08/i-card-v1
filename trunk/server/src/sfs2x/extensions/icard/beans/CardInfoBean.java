@@ -6,7 +6,7 @@ public final class CardInfoBean {
 	public static final int ALLY = 1;
 	public static final int WEAPON = 2;
 	public static final int ARMOR = 3;
-	public static final int SKILL = 4;
+	public static final int ABILITY = 4;
 	public static final int QUEST = 5;
 		
 	private int _cardID = 0; // ÅÆµÄid
@@ -77,7 +77,7 @@ public final class CardInfoBean {
 					ret = HERO;
 					break;
 				case 50:
-					ret = SKILL;
+					ret = ABILITY;
 					break;
 				case 40:
 					ret = QUEST;

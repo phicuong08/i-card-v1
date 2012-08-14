@@ -44,7 +44,7 @@ public class CardDeckBean
 	public void clearChainCost(){
 		_chainCost = 0 ;
 	}
-	public void setFreshLoop(){
+	public void setCardReady(){
 		_addResAble = true;
 		for(CardBean card:_cardMap.values()){
 			if(card.getZoneID()!=CardBean.HAND_ZONE_ID &&
