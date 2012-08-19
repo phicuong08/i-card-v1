@@ -107,7 +107,7 @@ package ICard.logic {
 			if(!_enable2Res)
 				return false;
 			_enable2Res = false;
-			_Mod_Battle.QueryPlayCard(realID,BattleFieldType.MyResourceSlotId);
+			_Mod_Battle.QueryPlayCard(realID,BattleFieldType.MyResourceSlotId,0);
 			return true;
 		}
 		public function AskTurnCard(realID:int):Boolean{

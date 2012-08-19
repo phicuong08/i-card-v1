@@ -61,7 +61,7 @@ public class BattleBsn
 			game.getStateBean().setState(BattleStateBean.ST_WAIT_CHAIN_OVER);
 			break;
 		case BattleStateBean.ST_WAIT_EX_OP:
-			game.getStateBean().setState(BattleStateBean.ST_INIT_LOOP_RESET);
+			game.getStateBean().setState(BattleStateBean.ST_INIT_TURN_RESET);
 			break;
 		}
 		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_END_OP_OK, null, game);
@@ -70,7 +70,7 @@ public class BattleBsn
 	public static void procWaitExOp(CardGameBean game,ICardExtension ext,int elasped){
 		//超时处理 TBD
 		if(game.getStateBean().DecDuration(elasped)==false){
-			procLoopReset(game,ext);
+			procTurnReset(game,ext);
 			return;
 		}
 		CardActionBean curAction = game.getCurAction();
@@ -87,7 +87,7 @@ public class BattleBsn
 			return false;
 		return game.getStateBean().IsWaitPlayerOp(playerID);
 	}
-	public static void RunBattleStateBean2(CardGameBean game,ICardExtension ext,int elapsed){
+	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext,int elapsed){
 		switch(game.getStateBean().getState()){
 		case BattleStateBean.ST_INIT_BATTLE:
 			procInitBattle(game,ext);
@@ -96,7 +96,7 @@ public class BattleBsn
 			procTurnBegin(game,ext);
 			break;
 		case BattleStateBean.ST_WAIT_TURN_ACTION:
-			procWaitLoopOP(game,ext,elapsed);
+			procWaitTurnOP(game,ext,elapsed);
 			break;
 		case BattleStateBean.ST_INIT_WAIT_CHAIN_OP:
 			InitWaitChainOp(game,ext);
@@ -108,7 +108,7 @@ public class BattleBsn
 			procWaitChainOver(game,ext);
 			break;	
 		case BattleStateBean.ST_TURN_END:
-			procLoopEnd(game,ext);
+			procTurnEnd(game,ext);
 			break;
 		case BattleStateBean.ST_WAIT_GOD:
 			procGodLogic(game,ext);
@@ -119,18 +119,10 @@ public class BattleBsn
 		case BattleStateBean.ST_DELAY_JUMP:
 			game.getStateBean().DecDelayDuration(elapsed);
 			break;
-		case BattleStateBean.ST_INIT_LOOP_RESET:
-			procLoopReset(game,ext);
+		case BattleStateBean.ST_INIT_TURN_RESET:
+			procTurnReset(game,ext);
 			break;	
 		}
-	}
-	public static void RunBattleStateBean(CardGameBean game,ICardExtension ext,int elapsed){
-		switch(game.getStateBean().getState()){
-		
-		
-		
-		}
-		
 	}
 	
 	public static void InitWaitChainOp(CardGameBean game,ICardExtension ext){
@@ -144,6 +136,7 @@ public class BattleBsn
 		if(game.getCurLoop()!=0) //先手不抓牌
 			drawCard(game,ext,game.getStateBean().getOpPlayer(),1);
 		game.getStateBean().resetWaitLoopOp(game.getTurnPlayer());
+		game.getStateBean().setState(BattleStateBean.ST_WAIT_TURN_ACTION);
 		game.incLoop();
 		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getStateBean().getOpPlayer(),
 							Constants.BATTLE_LOOP_TIME);
@@ -160,7 +153,7 @@ public class BattleBsn
 			//ext.SendGameCommand(Commands.CMD_S2C_CARD_FIGHT_RESULT, params, game);
 		
 			if(game.getStateBean().getState()==BattleStateBean.ST_WAIT_GOD) //状态未跳转
-				game.getStateBean().setDelayJump(BattleStateBean.ST_INIT_LOOP_RESET,Constants.SHOW_ACTION_TIME);
+				game.getStateBean().setDelayJump(BattleStateBean.ST_INIT_TURN_RESET,Constants.SHOW_ACTION_TIME);
 		}
 		else{
 			game.getStateBean().setState(BattleStateBean.ST_TURN_END);
@@ -173,11 +166,12 @@ public class BattleBsn
 		params.putInt("card", card.getRealID());
 		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_WAIT_EX_OP, params,game);
 	}
-	public static void procLoopReset(CardGameBean game,ICardExtension ext){
-		game.getStateBean().resetWaitLoopOp(game.getTurnPlayer());
+	public static void procTurnReset(CardGameBean game,ICardExtension ext){
+		game.getStateBean().setState(BattleStateBean.ST_WAIT_TURN_ACTION);
+		game.getStateBean().InitWaitDuration(Constants.BATTLE_LOOP_TIME);
 		ISFSObject params = SFSObjectBsn.genBattleLoopResetInfo(game);
 		
-		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_LOOP_RESET, params,game);
+		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_TURN_RESET, params,game);
 	}
 	
 	public static boolean procBattleChain(CardGameBean game,ICardExtension ext){
@@ -199,11 +193,11 @@ public class BattleBsn
 		else{
 			game.getStateBean().setOpPlayer(game.getTurnPlayer());
 		}
-		game.getStateBean().setDelayJump(BattleStateBean.ST_TURN_BEGIN,Constants.SHOW_ACTION_TIME);
+		game.getStateBean().setDelayJump(BattleStateBean.ST_INIT_TURN_RESET,Constants.SHOW_ACTION_TIME);
 		return true;
 	}
 	
-	public static void procLoopEnd(CardGameBean game,ICardExtension ext){//
+	public static void procTurnEnd(CardGameBean game,ICardExtension ext){//
 		int nextOp = getOtherPlayer(game,game.getTurnPlayer());
 		game.setTurnPlayer(nextOp);
 		game.getStateBean().setDelayJump(BattleStateBean.ST_TURN_BEGIN,Constants.SHOW_ACTION_TIME);
@@ -249,7 +243,7 @@ public class BattleBsn
 		site.addChainCost(CardActionBsn.getActionCost(game,action));
 	}
 	
-	public static void procWaitLoopOP(CardGameBean game,ICardExtension ext,int elasped){
+	public static void procWaitTurnOP(CardGameBean game,ICardExtension ext,int elasped){
 		//超时处理 TBD
 		if(game.getStateBean().DecDuration(elasped)==false){
 			game.getStateBean().setState(BattleStateBean.ST_TURN_END);
@@ -271,8 +265,17 @@ public class BattleBsn
 		}
 	}
 	public static boolean needActiveBattleChain(CardGameBean game,CardActionBean curAction){
-		return true;
-		//return (curAction.getDes()!=null);
+//		boolean ret = true;
+//		switch(curAction.getType()){
+//		case CardActionBean.DO_PLAY_RES_CARD:
+//			ret = false;
+//			break;
+//		default:
+//			ret = true;
+//			break;
+//		}
+//		return ret;
+		return (curAction.getDes()!=null);
 	}
 	public static int  getOtherPlayer(CardGameBean game,int meID)
 	{

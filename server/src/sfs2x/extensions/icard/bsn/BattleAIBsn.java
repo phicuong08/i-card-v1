@@ -87,7 +87,7 @@ public class BattleAIBsn
 		if(cardVect.size()==0)
 			return false;
 		CardBean card = (CardBean)cardVect.firstElement();
-		CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_PLAY_CARD,null);
+		CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_PLAY_RES_CARD,null);
 		game.setCurAction(action);
 		return true;
 	}
