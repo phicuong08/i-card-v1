@@ -123,11 +123,12 @@ package ICard.SFSMod {
 			params.putInt("game",_battleStage.GameID);
 			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_end_op, params) );
 		}
-		public function QueryPlayCard(realID:int,slot:int):void{
+		public function QueryPlayCard(realID:int,slot:int,target:int):void{
 			var params:ISFSObject = new SFSObject();
 			params.putInt("realID", realID);
 			params.putInt("slot", slot);
 			params.putInt("game",_battleStage.GameID);
+			params.putInt("target", target);
 			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_play_card, params) );
 		}	
 		private function procCardArr(params:ISFSObject):void{

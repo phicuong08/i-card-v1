@@ -30,7 +30,7 @@ public class BattleStateBean
 	public static final int ST_TURN_END = 8;
 	public static final int ST_WAIT_EX_OP=9;//牌进场时操作
 	public static final int ST_DELAY_JUMP=10;
-	public static final int ST_INIT_LOOP_RESET=11;
+	public static final int ST_INIT_TURN_RESET=11;
 	public static final int ST_TURN_BEGIN=12;
 	
 	
@@ -90,7 +90,7 @@ public class BattleStateBean
 		case ST_WAIT_EX_OP:
 			ext.trace("STATE== BattleStateBean.ST_WAIT_EX_OP");
 			break;
-		case ST_INIT_LOOP_RESET:
+		case ST_INIT_TURN_RESET:
 			ext.trace("STATE== BattleStateBean.ST_INIT_LOOP_RESET");
 			break;	
 		}
@@ -131,7 +131,6 @@ public class BattleStateBean
 	public void resetWaitLoopOp(int playerID){
 		_opPlayer = playerID;
 		_waitDuration = Constants.BATTLE_LOOP_TIME;
-		_state =  ST_WAIT_TURN_ACTION;
 	}
 	public void InitWaitDuration(int during){
 		_waitDuration = during;
