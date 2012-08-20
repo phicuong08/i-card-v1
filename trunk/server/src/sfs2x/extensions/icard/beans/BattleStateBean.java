@@ -91,7 +91,7 @@ public class BattleStateBean
 			ext.trace("STATE== BattleStateBean.ST_WAIT_EX_OP");
 			break;
 		case ST_INIT_TURN_RESET:
-			ext.trace("STATE== BattleStateBean.ST_INIT_LOOP_RESET");
+			ext.trace("STATE== BattleStateBean.ST_INIT_TURN_RESET");
 			break;	
 		}
 	}
