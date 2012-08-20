@@ -92,6 +92,10 @@ package ICard.logic {
 				
 				if(card["realID"] != srcID)
 					desGuy= FindCardOwner(card["realID"]);
+				else
+					desGuy = srcGuy;
+				if(_guy[desGuy])
+					_guy[desGuy].onUpdateCard(card);
 			}
 			_battleField.onCardFightResult(srcID,targets,oldCards,(srcGuy!=desGuy));
 		}
