@@ -57,7 +57,7 @@
 			_slots[BattleFieldType.MyFightSlotId] = new SlotBar;
 			_slots[BattleFieldType.MyFightSlotId].Init(BattleFieldType.MyFightSlotId,2,350,1180);
 			
-			_slots[BattleFieldType.MyTombSlotId] = new SlotBar;
+			_slots[BattleFieldType.MyTombSlotId] = new TombBar;
 			_slots[BattleFieldType.MyTombSlotId].Init(BattleFieldType.MyTombSlotId,2,350,1180);
 			
 			_slots[BattleFieldType.MyHeroSlotId] = new HeroBar;
@@ -75,7 +75,7 @@
 			_slots[BattleFieldType.YouFightSlotId] = new SlotBar;
 			_slots[BattleFieldType.YouFightSlotId].Init(BattleFieldType.YouFightSlotId,2,200,1180);
 			
-			_slots[BattleFieldType.YouTombSlotId] = new SlotBar;
+			_slots[BattleFieldType.YouTombSlotId] = new TombBar;
 			_slots[BattleFieldType.YouTombSlotId].Init(BattleFieldType.YouTombSlotId,2,350,1180);
 			
 			_slots[BattleFieldType.YouHeroSlotId] = new HeroBar;

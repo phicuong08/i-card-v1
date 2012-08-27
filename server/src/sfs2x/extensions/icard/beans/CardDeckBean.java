@@ -32,6 +32,9 @@ public class CardDeckBean
 	public User getSfsUser() {
 		return _sfsUser;
 	}
+	public CardBean getHero(){
+		return _hero;
+	}
 	public int getPlayerID() {
 		return _playerID;
 	}
@@ -65,6 +68,8 @@ public class CardDeckBean
 		return _addResAble;
 	}
 	public void AddCard(CardBean card){
+		if(card.getCardType()==CardInfoBean.HERO)
+			_hero = card;
 		_cardMap.put(card.getRealID(), card);
 	}
 	public void setCardSource(List<Integer> cards){
