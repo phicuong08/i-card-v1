@@ -142,12 +142,24 @@ public class BattleBsn
 							Constants.BATTLE_LOOP_TIME);
 		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
 	}
+	public static boolean onHeroDead(CardGameBean game){
+		for (CardDeckBean site : game.getDeck().values()){
+			CardBean heroCard = site.getHero();
+			if(heroCard.getHp()<=0){
+				game.getStateBean().setState(BattleStateBean.ST_GAME_END);
+				return true;
+			}
+		}
+		return false;
+	}
 	public static void procGodLogic(CardGameBean game,ICardExtension ext){
 		if(procBattleChain(game,ext))
 			return;
 		CardActionBean action = game.pickCurAction();
 		if(action!=null){
 			CardActionBsn.procCardAction(game,action,ext);
+			if(onHeroDead(game)==true)
+				return;
 			ext.SendGameCardUpdate(game);		
 			//ISFSObject params = SFSObjectBsn.genBattleResult(game,action);
 			//ext.SendGameCommand(Commands.CMD_S2C_CARD_FIGHT_RESULT, params, game);

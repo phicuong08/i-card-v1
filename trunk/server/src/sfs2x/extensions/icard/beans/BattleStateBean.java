@@ -32,6 +32,7 @@ public class BattleStateBean
 	public static final int ST_DELAY_JUMP=10;
 	public static final int ST_INIT_TURN_RESET=11;
 	public static final int ST_TURN_BEGIN=12;
+	public static final int ST_GAME_END=13;
 	
 	
 	

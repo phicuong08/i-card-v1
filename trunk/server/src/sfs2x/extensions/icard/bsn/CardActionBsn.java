@@ -154,6 +154,7 @@ public class CardActionBsn
 			break;
 		}
 	}
+	
 	public static boolean IsFriendAction(CardGameBean game,CardActionBean action){
 		if(action.getDes().size()==0)
 			return true;
