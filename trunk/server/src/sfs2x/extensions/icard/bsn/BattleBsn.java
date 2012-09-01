@@ -49,14 +49,11 @@ public class BattleBsn
 
 	public static void ClientEndOp(CardGameBean game,int playerID){
 		switch(game.getStateBean().getState()){
-		case BattleStateBean.ST_WAIT_TURN_ACTION:
+		case BattleStateBean.ST_WAIT_PLAY_RES:
+			game.getStateBean().setState(BattleStateBean.ST_END_PLAY_RES);
+			break;
+		case BattleStateBean.ST_WAIT_PLAY_CARD:
 			game.getStateBean().setState(BattleStateBean.ST_TURN_END);
-			break;
-		case BattleStateBean.ST_WAIT_CHAIN_OP:
-			game.getStateBean().setState(BattleStateBean.ST_WAIT_CHAIN_OVER);
-			break;
-		case BattleStateBean.ST_WAIT_EX_OP:
-			game.getStateBean().setState(BattleStateBean.ST_INIT_TURN_RESET);
 			break;
 		}
 		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_END_OP_OK, null, game);
@@ -210,13 +207,6 @@ public class BattleBsn
 		int nextOp = getOtherPlayer(game,game.getTurnPlayer());
 		game.setTurnPlayer(nextOp);
 		game.getStateBean().setDelayJump(BattleStateBean.ST_TURN_BEGIN,Constants.SHOW_ACTION_TIME);
-	}
-	
-	private static void addChainActionCost(CardGameBean game,CardActionBean action){
-		CardDeckBean site = game.getDeck().get(action.getPlayerID());
-		if(site==null)
-			return;
-		site.addChainCost(CardActionBsn.getActionCost(game,action));
 	}
 	
 	public static int  getOtherPlayer(CardGameBean game,int meID)

@@ -32,24 +32,23 @@ public class BattleAIBsn
 		}
 		site.setThinkNeed();
 		switch(game.getStateBean().getState()){
-		case BattleStateBean.ST_WAIT_TURN_ACTION:
-			procWaitOp(game,site,ext);
+		case BattleStateBean.ST_WAIT_PLAY_RES:
+			procWaitPlayRes(game,site,ext);
 			break;
-		case BattleStateBean.ST_WAIT_EX_OP:
-			procWaitExOp(game,site,ext);
+		case BattleStateBean.ST_WAIT_PLAY_CARD:
+			procWaitPlayCard(game,site,ext);
 			break;	
 		}
 		
 		//game.getStateBean().Jump2GodState();
 	}
-	private static void procWaitExOp(CardGameBean game,CardDeckBean site,ICardExtension ext){
-		BattleBsn.ClientEndOp(game,site.getPlayerID());
-	}
 	
-	private static void procWaitOp(CardGameBean game,CardDeckBean site,ICardExtension ext){
-		if(AddCard2ResSlot(game,site))
-			return;
-		else if(AddCard2FightSlot(game,site))
+	private static void procWaitPlayRes(CardGameBean game,CardDeckBean site,ICardExtension ext){
+		AddCard2ResSlot(game,site);
+	}
+	private static void procWaitPlayCard(CardGameBean game,CardDeckBean site,ICardExtension ext){
+		
+		if(AddCard2FightSlot(game,site))
 			return;
 //		else if(AddCard2EquipSlot(game,site))
 //			return;
