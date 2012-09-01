@@ -28,6 +28,7 @@ public class BattleStateBean
 	public static final int ST_END_PLAY_RES=5;//等待放置资源
 	public static final int ST_WAIT_PLAY_CARD=6;
 	public static final int ST_END_PLAY_CARD=7;
+	public static final int ST_WAIT_EX_OP=8;
 
 	public static final int ST_TURN_END = 9;
 	public static final int ST_GAME_END=10;
@@ -151,7 +152,7 @@ public class BattleStateBean
 	public Boolean IsWaitPlayerOp(int playerID){
 		if(_opPlayer!=playerID)
 			return false;
-		return (_state==ST_WAIT_TURN_ACTION || _state==ST_WAIT_CHAIN_OP ||_state==ST_WAIT_EX_OP);
+		return (_state==ST_WAIT_PLAY_RES || _state==ST_WAIT_PLAY_CARD);
 	}
 
 }
