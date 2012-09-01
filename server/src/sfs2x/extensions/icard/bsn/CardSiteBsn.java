@@ -27,6 +27,13 @@ public class CardSiteBsn
 		}
 		return num;
 	}
+	public static void onEvent(CardDeckBean site,int when){
+		for (CardBean card : site.getCardMap().values()){
+			if(card.getIsPlayZone()==false)
+				continue;
+			CardEventBsn.onCardEvent(card, when);
+		}
+	}
 	public static void useRes(CardDeckBean site,int resNum){
 		int remain=resNum;
 		for (CardBean card : site.getCardMap().values()){
