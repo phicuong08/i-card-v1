@@ -22,19 +22,17 @@ public class BattleStateBean
 	 */
 	public static final int ST_NONE_STATE= 0;
 	public static final int ST_INIT_BATTLE=1;
-	public static final int ST_WAIT_TURN_ACTION = 3;
-	public static final int ST_INIT_WAIT_CHAIN_OP = 4;
-	public static final int ST_WAIT_CHAIN_OP = 5;
-	public static final int ST_WAIT_CHAIN_OVER = 6;
-	public static final int ST_WAIT_GOD = 7;
-	public static final int ST_TURN_END = 8;
-	public static final int ST_WAIT_EX_OP=9;//牌进场时操作
-	public static final int ST_DELAY_JUMP=10;
-	public static final int ST_INIT_TURN_RESET=11;
-	public static final int ST_TURN_BEGIN=12;
-	public static final int ST_GAME_END=13;
+	public static final int ST_SELECT_TURN_PLAYER=2;//选择回合玩家
+	public static final int ST_TURN_BEGIN=3;//回合前处理
+	public static final int ST_WAIT_PLAY_RES=4;//等待放置资源
+	public static final int ST_END_PLAY_RES=5;//等待放置资源
+	public static final int ST_WAIT_PLAY_CARD=6;
+	public static final int ST_END_PLAY_CARD=7;
+
+	public static final int ST_TURN_END = 9;
+	public static final int ST_GAME_END=10;
 	
-	
+	public static final int ST_DELAY_JUMP=11;
 	
 	private Vector<Integer>  _battleChain;
 	/** User id */
@@ -73,29 +71,27 @@ public class BattleStateBean
 		case ST_INIT_BATTLE:
 			ext.trace("STATE== BattleStateBean.ST_INIT_BATTLE");
 			break;
-		case ST_WAIT_TURN_ACTION:
-			ext.trace("STATE== BattleStateBean.ST_WAIT_LOOP_OP");
+		case ST_SELECT_TURN_PLAYER:
+			ext.trace("STATE== BattleStateBean.ST_SELECT_TURN_PLAYER");
 			break;
-		case ST_WAIT_CHAIN_OP:
-			ext.trace("STATE== BattleStateBean.ST_WAIT_CHAIN_OP");
+		case ST_TURN_BEGIN:
+			ext.trace("STATE== BattleStateBean.ST_TURN_BEGIN");
 			break;
-		case ST_WAIT_CHAIN_OVER:
-			ext.trace("STATE== BattleStateBean.ST_WAIT_CHAIN_OVER");
+		case ST_WAIT_PLAY_RES:
+			ext.trace("STATE== BattleStateBean.ST_WAIT_PLAY_RES");
+			break;
+		case ST_WAIT_PLAY_CARD:
+			ext.trace("STATE== BattleStateBean.ST_WAIT_PLAY_CARD");
 			break;
 		case ST_TURN_END:
-			ext.trace("STATE== BattleStateBean.ST_LOOP_END");
+			ext.trace("STATE== BattleStateBean.ST_TURN_END");
 			break;
-		case ST_WAIT_GOD:
-			ext.trace("STATE== BattleStateBean.ST_WAIT_GOD");
-			break;
-		case ST_WAIT_EX_OP:
-			ext.trace("STATE== BattleStateBean.ST_WAIT_EX_OP");
-			break;
-		case ST_INIT_TURN_RESET:
-			ext.trace("STATE== BattleStateBean.ST_INIT_TURN_RESET");
+		case ST_GAME_END:
+			ext.trace("STATE== BattleStateBean.ST_GAME_END");
 			break;	
 		}
 	}
+	
 	public void setTurnPlayer(int playerID){
 		_turnPlayer = playerID;
 	}
@@ -116,9 +112,6 @@ public class BattleStateBean
 	}
 	public Boolean getIsWaitTimeOut(){
 		return _waitDuration <= 0;
-	}
-	public void Jump2GodState(){
-		setState(ST_WAIT_GOD);
 	}
 	public int getWaitChainPass(){
 		return _waitChainPass;

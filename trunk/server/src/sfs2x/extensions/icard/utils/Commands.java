@@ -29,7 +29,8 @@ public class Commands {
 	public static final String CMD_S2C_BATTLE_TURN_RESET       ="11006";//回合重置
 	public static final String CMD_S2C_END_OP_OK               ="11007";//回合结束完成
 	public static final String CMD_S2C_WAIT_EX_OP              ="11008";//
-	
+	public static final String CMD_S2C_WAIT_PLAY_RES           ="11009";//放置资源
+	public static final String CMD_S2C_WAIT_PLAY_CARD          ="11010";//play card
 	
 
 
