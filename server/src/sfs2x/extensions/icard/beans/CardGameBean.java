@@ -214,6 +214,7 @@ public class CardGameBean
 	}
 	public void gameTick(ICardExtension ext,int elapsed){
 		BattleBsn.RunBattleStateBean(this,ext,elapsed);
+		BattleBsn.onHeroDead(this);
 		for (CardDeckBean site : _deck.values())
 		{
 			site.gameTick(this,ext);

@@ -35,9 +35,6 @@ public class BattleAIBsn
 		case BattleStateBean.ST_WAIT_TURN_ACTION:
 			procWaitOp(game,site,ext);
 			break;
-		case BattleStateBean.ST_WAIT_CHAIN_OP:
-			procWaitChainOp(game,site,ext);
-			break;
 		case BattleStateBean.ST_WAIT_EX_OP:
 			procWaitExOp(game,site,ext);
 			break;	
@@ -46,9 +43,6 @@ public class BattleAIBsn
 		//game.getStateBean().Jump2GodState();
 	}
 	private static void procWaitExOp(CardGameBean game,CardDeckBean site,ICardExtension ext){
-		BattleBsn.ClientEndOp(game,site.getPlayerID());
-	}
-	private static void procWaitChainOp(CardGameBean game,CardDeckBean site,ICardExtension ext){
 		BattleBsn.ClientEndOp(game,site.getPlayerID());
 	}
 	
