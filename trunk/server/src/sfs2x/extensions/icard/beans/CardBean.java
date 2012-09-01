@@ -94,6 +94,11 @@ public class CardBean
 	public int getZoneID(){
 		return _zoneID;
 	}
+	public boolean getIsPlayZone(){
+		return (_zoneID==CardBean.EQUIP_ZONE_ID ||
+				_zoneID==CardBean.FIGHT_ZONE_ID ||
+				_zoneID==CardBean.HERO_ZONE_ID);
+	}
 	public void setZoneID(int id){
 		_zoneID = id;
 		setDirtyFlagBit(ZONE_DIRTY_BIT);

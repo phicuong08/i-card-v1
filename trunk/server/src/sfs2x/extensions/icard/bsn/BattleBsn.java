@@ -131,8 +131,14 @@ public class BattleBsn
 		ISFSObject params = SFSObjectBsn.genBattleLoopResetInfo(game);
 		ext.SendGameCommand(Commands.CMD_S2C_PRI_PLAYER_LOOP, params,game);
 	}
+	public static void onEvent(CardGameBean game,int when){
+		for (CardDeckBean site : game.getDeck().values()){
+			CardSiteBsn.onEvent(site, when);
+		}
+	}
 	public static void procTurnBegin(CardGameBean game,ICardExtension ext){
 		game.setCardReady();
+		onEvent(game,CardAbilityBean.WHEN_MY_LOOP_BEGIN);
 		if(game.getCurLoop()!=0) //先手不抓牌
 			drawCard(game,ext,game.getStateBean().getOpPlayer(),1);
 		game.getStateBean().resetWaitLoopOp(game.getTurnPlayer());
