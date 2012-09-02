@@ -141,7 +141,7 @@ public class SFSObjectBsn
 	}
 	public static ISFSObject genBattleLoopResetInfo(CardGameBean game){
 		ISFSObject params = new SFSObject();
-		params.putInt("playerID", game.getOpPlayer());
+		params.putInt("playerID", game.getTurnPlayer());
 		params.putInt("time", game.getStateBean().getWaitDuration());
 		return params;
 	}

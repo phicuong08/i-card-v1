@@ -41,14 +41,7 @@ package ICard.logic {
 		public static function Is2ResAble(card:CardData):Boolean{
 			return (card.Slot == BattleFieldType.MyHandSlotId);
 		}
-		public static function IsTurnAble(card:CardData,resVal:int):Boolean{
-			if(card.Slot != BattleFieldType.MyHeroSlotId)
-				return false;
-			if( card.Turn==0)
-				return false;
-			return ResEnough(card,resVal);
-		}
-		
+				
 		public static function IsCastAble(card:CardData,resVal:int):Boolean{
 			if(card.Slot != BattleFieldType.MyHandSlotId)
 				return false;
@@ -56,11 +49,7 @@ package ICard.logic {
 				return false;
 			return (card.Cost<= resVal);
 		}
-		public static function IsTaskAble(card:CardData,resVal:int):Boolean{
-			if(card.Slot != BattleFieldType.MyResourceSlotId)
-				return false;
-			return ResEnough(card,resVal);
-		}
+		
 		public static function Is2FightAble(card:CardData,resVal:int):Boolean{
 			if(card.Side!=0)
 				return false;
@@ -102,14 +91,13 @@ package ICard.logic {
 			fillCard["slot"] = card.Slot;
 		}
 		
-		public static function genMenuFlag(card:CardData,enable2Res:Boolean,resNum:int):Object{
+		public static function genMenuFlag(card:CardData,state:int,resNum:int):Object{
 			var flagArr:Object = new Object;
-			flagArr["res"] = (enable2Res)?Is2ResAble(card):false;                             //��Դ
+			flagArr["res"] = (state==BattleStage.state_play_res)?Is2ResAble(card):false;                             //��Դ
 			flagArr["enter"] = Is2EnterAble(card,resNum);  //��
-			flagArr["fight"] = Is2FightAble(card,resNum);  //ս��  
-			flagArr["task"] = IsTaskAble(card,resNum); //����
-			flagArr["cast"] = IsCastAble(card,resNum); //ʩ��
-			flagArr["turn"] = IsTurnAble(card,resNum); //��ת
+			flagArr["fight"] = (state==BattleStage.state_play_card)?Is2FightAble(card,resNum):false;  //ս��  
+			flagArr["cast"] = (state==BattleStage.state_play_card)?IsCastAble(card,resNum):false; //ʩ��
+			flagArr["skip"] = true;
 			return flagArr;
 		}
 		

@@ -83,19 +83,8 @@ public class CardGameBean
 	public int getTurnPlayer(){
 		return _StateBean.getTurnPlayer();
 	}
-	public int getOpPlayer(){
-		return _StateBean.getOpPlayer();
-	}
 	public CardActionChainBean getBattleChain(){
 		return _battleChain;
-	}
-	public void EmptyBattleChain(){
-		_battleChain.Empty();
-		_StateBean.clearWaitChainPass();
-		for(CardDeckBean deck:_deck.values()){
-			deck.clearChainCost();
-			deck.setPassChain(false);
-		}
 	}
 	public Boolean AddCard(int playerID,int cardID,int slotID){
 		CardDeckBean deck = _deck.get(playerID);
@@ -105,7 +94,7 @@ public class CardGameBean
 		return true;
 	}
 	public Boolean setCurAction(CardActionBean action){
-		if(action.getPlayerID()!=getOpPlayer())
+		if(action.getPlayerID()!=getTurnPlayer())
 			return false;
 		synchronized(this)
 		{

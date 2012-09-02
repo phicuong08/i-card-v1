@@ -53,17 +53,16 @@ package ICard.SFSMod {
 			}
 			_battleStage.onCardFightResult(srcID,targets);
 		}
-		//
 		
 		public function onCardPlayerLoop(params:ISFSObject):void{
 			var playerID:int = params.getInt("playerID");
 			var secNum:int = params.getInt("time");
 			_battleStage.PlayerLoopFresh(playerID,secNum);
 		}
-		public function onResetPlayerLoop(params:ISFSObject):void{
+		public function onWaitPlayCard(params:ISFSObject):void{
 			var secNum:int = params.getInt("time");
 			var playerID:int = params.getInt("playerID");
-			_battleStage.ResetPlayerLoop(playerID,secNum);
+			_battleStage.WaitPlayerCard(playerID,secNum);
 		}
 		public function onPriPlayerLoop(params:ISFSObject):void{
 			var playerID:int = params.getInt("playerID");

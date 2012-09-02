@@ -48,5 +48,6 @@ package ICard.SFSMod {
 		public static var  s2c_battle_reset_player_loop:String ="11006";
 		public static var  s2c_end_op_ok:String                ="11007";
 		public static var  s2c_card_ex_op:String                ="11008";
+		public static var  s2c_wait_play_card:String                ="11011";
 	}
 }//package ICard.protocols 

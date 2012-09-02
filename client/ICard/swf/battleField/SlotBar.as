@@ -160,12 +160,10 @@
 				AddMenuBut(card_cast_but,OnCardToCast);
 			if(flagObj["res"]==true)
 				AddMenuBut(card_res_but,OnCardToRes);
-			if(flagObj["task"]==true)
-				AddMenuBut(card_cast_but,OnCardToTask);
 			if(flagObj["fight"]==true)
 				AddMenuBut(card_fight_but,OnCardToFight);
-			if(flagObj["turn"]==true)
-				AddMenuBut(card_cast_but,OnCardToTurn);
+			if(	flagObj["skip"]==true)
+				AddMenuBut(card_enter_but,OnCardToSkip);
 			_cardMenu.x = -_cardMenu.width/2 +5;
 			_cardMenu.y = -28;
 			card.addChild(_cardMenu);
@@ -178,7 +176,9 @@
 			addBut.x = _cardMenu.width + 10;
 			_cardMenu.addChild(addBut);
 		}
-		
+		public function OnCardToSkip(e:MouseEvent):void{
+			_battleStage.AskCard2Skip();	
+		}
 		public function OnCardToEnter(e:MouseEvent):void{
 			_battleStage.AskCard2FightSlot(_selCard.realID);	
 		}
@@ -189,16 +189,10 @@
 			_battleStage.InitialFight(_selCard.realID);
 			_battleField.onInitalFight(_selCard.realID);
 		}
-		public function OnCardToTask(e:MouseEvent):void{
-			trace(_selCard.realID,"To task!");
-		}
 		public function OnCardToFight(e:MouseEvent):void{
 			_battleStage.InitialFight(_selCard.realID);
 			_battleField.onInitalFight(_selCard.realID);
 			//trace(_selCard.realID,"To fight!");
-		}
-		public function OnCardToTurn(e:MouseEvent):void{
-			trace(_selCard.realID,"To turn!");
 		}
 		public function UpdatePos():void{
 			if(this.numChildren<1)

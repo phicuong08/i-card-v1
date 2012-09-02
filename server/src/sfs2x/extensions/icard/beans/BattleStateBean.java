@@ -35,13 +35,10 @@ public class BattleStateBean
 	
 	public static final int ST_DELAY_JUMP=11;
 	
-	private Vector<Integer>  _battleChain;
 	/** User id */
-	private int _opPlayer = -1;  //等待操作的玩家
 	private int _turnPlayer=-1;
 	private int _state;	
 	private int _waitDuration = 60;
-	private int _waitChainPass;
 	private int _delayState;
 	private int _delayDuration;
 	private int _ability;
@@ -99,33 +96,16 @@ public class BattleStateBean
 	public int getTurnPlayer() {
 		return _turnPlayer;
 	}
-	public void setOpPlayer(int playerID){
-		_opPlayer = playerID;
-	}
+
 	public int getState(){
 		return _state;
 	}
-	public int getOpPlayer() {
-		return _opPlayer;
-	}
+
 	public int getWaitDuration(){
 		return _waitDuration;
 	}
 	public Boolean getIsWaitTimeOut(){
 		return _waitDuration <= 0;
-	}
-	public int getWaitChainPass(){
-		return _waitChainPass;
-	}
-	public void addWaitChainPass(){
-		_waitChainPass++;
-	}
-	public void clearWaitChainPass(){
-		_waitChainPass = 0;
-	}
-	public void resetWaitLoopOp(int playerID){
-		_opPlayer = playerID;
-		_waitDuration = Constants.BATTLE_LOOP_TIME;
 	}
 	public void InitWaitDuration(int during){
 		_waitDuration = during;
@@ -139,20 +119,15 @@ public class BattleStateBean
 		return _ability;
 	}
 	public void InitWaitOp(int playerID,int during){
-		_opPlayer = playerID;
 		_waitDuration = during;
 	}
 	public Boolean DecDuration(int val){
 		_waitDuration =_waitDuration - val;
 		return (_waitDuration>0);
 	}
-	public void setChainCard(int realID){
-		_battleChain.addElement(realID);
-	}
 	public Boolean IsWaitPlayerOp(int playerID){
-		if(_opPlayer!=playerID)
+		if(_turnPlayer!=playerID)
 			return false;
 		return (_state==ST_WAIT_PLAY_RES || _state==ST_WAIT_PLAY_CARD);
 	}
-
 }

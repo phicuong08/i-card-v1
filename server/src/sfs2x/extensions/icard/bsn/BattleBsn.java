@@ -134,17 +134,22 @@ public class BattleBsn
 			game.getStateBean().setState(BattleStateBean.ST_END_PLAY_RES);
 			return;
 		}
+		DoPlayRes(game,ext);
+	}
+	public static void DoPlayRes(CardGameBean game,ICardExtension ext){
 		CardActionBean curAction = game.pickCurAction();
 		if(curAction==null || curAction.getType()!=CardActionBean.DO_PLAY_RES_CARD)
 			return;
 		
 		CardActionBsn.procCardAction(game,curAction,ext);
 		//TBD 发送放置资源消息
-		game.getStateBean().setState(BattleStateBean.ST_END_PLAY_RES);
+		game.getStateBean().setDelayJump(BattleStateBean.ST_END_PLAY_RES,Constants.SHOW_ACTION_TIME);
 	}
 	public static void procEndPlayRes(CardGameBean game,ICardExtension ext){
 		InitNewState(game,BattleStateBean.ST_WAIT_PLAY_CARD);
-		ext.SendGameCommand(Commands.CMD_S2C_WAIT_PLAY_CARD, null,game);
+		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getStateBean().getTurnPlayer(),
+				Constants.BATTLE_LOOP_TIME);
+		ext.SendGameCommand(Commands.CMD_S2C_WAIT_PLAY_CARD, params,game);
 	}
 	public static void procSelectTurnPlayer(CardGameBean game,ICardExtension ext){
 		int turnPlayer= game.getTurnPlayer();
@@ -176,13 +181,13 @@ public class BattleBsn
 		game.setCardReady();
 		onEvent(game,CardAbilityBean.WHEN_MY_LOOP_BEGIN);
 		if(game.getCurLoop()!=0) //先手不抓牌
-			drawCard(game,ext,game.getStateBean().getOpPlayer(),1);
+			drawCard(game,ext,game.getStateBean().getTurnPlayer(),1);
 		
 		InitNewState(game,BattleStateBean.ST_WAIT_PLAY_RES);
 		game.incLoop();
-		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getStateBean().getOpPlayer(),
+		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getStateBean().getTurnPlayer(),
 							Constants.BATTLE_LOOP_TIME);
-		ext.SendGameCommand(Commands.CMD_S2C_WAIT_PLAY_RES, params,game);
+		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
 	}
 	public static boolean onHeroDead(CardGameBean game){
 		for (CardDeckBean site : game.getDeck().values()){
