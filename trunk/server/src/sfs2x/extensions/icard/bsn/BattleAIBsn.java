@@ -24,7 +24,7 @@ public class BattleAIBsn
 	// Store directions factors to move left,right,up,down
 	
 	public static void RunBattleAI(CardGameBean game,AICardDeckBean site,ICardExtension ext){
-		if(game.getOpPlayer()!= site.getPlayerID())
+		if(game.getTurnPlayer()!= site.getPlayerID())
 			return;
 		if(site.getThinkNeed()>0){
 			site.decThinkNeed();
@@ -44,7 +44,8 @@ public class BattleAIBsn
 	}
 	
 	private static void procWaitPlayRes(CardGameBean game,CardDeckBean site,ICardExtension ext){
-		AddCard2ResSlot(game,site);
+		AddCard2ResSlot(game,site); 
+		BattleBsn.DoPlayRes(game,ext);
 	}
 	private static void procWaitPlayCard(CardGameBean game,CardDeckBean site,ICardExtension ext){
 		

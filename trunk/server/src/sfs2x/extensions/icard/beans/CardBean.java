@@ -20,7 +20,6 @@ public class CardBean
 	public final static int GRAVE_ZONE_ID = 5;
 	public final static int HERO_ZONE_ID = 6;
 	public final static int BUF_ZONE_ID = 7;
-	public final static int RFG_ZONE_ID = 8; //remove from game
 	
 	public final static int ZONE_DIRTY_BIT = 0;
 	public final static int HP_DIRTY_BIT = 1;

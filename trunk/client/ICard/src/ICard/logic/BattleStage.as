@@ -14,21 +14,25 @@ package ICard.logic {
 	import flash.utils.*;
 	
 	public class BattleStage implements IBattleStage{
+		public static var state_play_null:int = 0;
+		public static var state_play_res:int = 1;
+		public static var state_play_card:int = 2;
+		
 		private var _guy:Dictionary;
 		private var _gameID:int;
 		private var _myID:int;
 		private var _lastPlayer:int;
-		private var _enable2Res:Boolean;
 		protected var _data:IData;
 		private var _IsTurn:Boolean; //操作回合
 		private var _fightSrc:int;
 		private var _fightDes:Array;
+		private var _curState:int;
 		private static var _obj:BattleStage;
 		private static var _battleField:BattleFieldView;
 
 		
 		public function BattleStage():void{
-			_enable2Res = false;
+			_curState = state_play_null;
 		}
 		
 		public function settle(arg1:IData,arg2:BattleFieldView):void{
@@ -76,9 +80,6 @@ package ICard.logic {
 		public function onUpdateCard(info:Object):void{
 			if(_guy[info["guy"]])
 				_guy[info["guy"]].onUpdateCard(info);
-			if(info["slot"] && info["slot"]==BattleFieldType.MyResourceSlotId)
-				_enable2Res = false;
-
 		}
 		
 			
@@ -108,11 +109,14 @@ package ICard.logic {
 		}
 		
 		public function AskCard2ResSlot(realID:int):Boolean{
-			if(!_enable2Res)
+			if(_curState!=state_play_res)
 				return false;
-			_enable2Res = false;
+			_curState = state_play_null;
 			_Mod_Battle.QueryPlayCard(realID,BattleFieldType.MyResourceSlotId,0);
 			return true;
+		}
+		public function AskCard2Skip():void{
+			_Mod_Battle.QueryEndOp();
 		}
 		public function AskTurnCard(realID:int):Boolean{
 			return true;
@@ -145,15 +149,15 @@ package ICard.logic {
 				_battleField.onCardExOp(card,ability);
 			}
 		}
-		public function ResetPlayerLoop(playerID:int,secNum:int):void{
+		public function WaitPlayerCard(playerID:int,secNum:int):void{
+			_curState = state_play_card;
 			_battleField.onResetPlayerLoop(playerID==_myID,secNum);
 		}
 		public function PlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
 			_lastPlayer = playerID;
+			_curState = state_play_res;
 			_battleField.onPlayerLoopFresh(playerID==_myID,secNum);	
 			_IsTurn = (playerID==_myID)?true:false;
-			if(_IsTurn)
-				_enable2Res = true;
 		}
 		public function get _Mod_Battle():Mod_Battle{
 			return (_data._Mod_Battle as Mod_Battle);
@@ -162,7 +166,7 @@ package ICard.logic {
 			var card:CardData =  FindCard(realID);
 			if(!card || card.GuyID!=_myID ||(_IsTurn==false))
 				return null;
-			return UseCard.genMenuFlag(card,_enable2Res,PlayerMe.CardDB.ResNum());
+			return UseCard.genMenuFlag(card,_curState,PlayerMe.CardDB.ResNum());
 		}
 		
 		public function CardInfo(realID:int):Object{

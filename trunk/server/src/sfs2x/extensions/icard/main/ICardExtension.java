@@ -60,6 +60,7 @@ public class ICardExtension extends SFSExtension {
 		// Event handler: user leave game room
 		addEventHandler(SFSEventType.USER_LEAVE_ROOM, UserLeavedRoomEventHandler.class);
 
+		
 		// Event handler: user log out
 		addEventHandler(SFSEventType.USER_LOGOUT, UserDisconnectedEventHandler.class);
 
