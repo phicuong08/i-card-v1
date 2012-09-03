@@ -18,26 +18,7 @@ package ICard.logic {
 			}
 			return (resVal >= useInfo[1]);
 		}
-		public static function Card2FightSlot(card:CardData,mod:Mod_Battle):Boolean{
-			var ret:Boolean=false;
-			switch(card.Type)
-			{
-				case CardType.SoldierType:
-				{
-					mod.QueryEnterCard(card.RealID);
-					ret = true;
-				}
-					break;
-				case CardType.WeaponType:
-				case CardType.DefType:
-				{
-					mod.QueryPlayCard(card.RealID,BattleFieldType.MyEquipSlotId,0);
-					ret = true;
-				}
-					break;
-			}
-			return ret;
-		}
+		
 		public static function Is2ResAble(card:CardData):Boolean{
 			return (card.Slot == BattleFieldType.MyHandSlotId);
 		}
