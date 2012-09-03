@@ -71,5 +71,14 @@ public class ClientQueryBsn
 		game.setCurAction(action);
 		return true;
 	}
-	
+	public static boolean procEnterCardRequest(CardGameBean game,int playerID,int realID){
+		CardBean card = game.getCard(realID);
+		if(card==null || card.getZoneID()!=CardBean.HAND_ZONE_ID)
+			return false;
+		if(game.getStateBean().getState()!=BattleStateBean.ST_WAIT_PLAY_CARD)
+			   return false;
+		CardActionBean action = new CardActionBean(realID,playerID,CardActionBean.DO_ENTER_CARD,null);
+		game.setCurAction(action);
+		return true;
+	}
 }

@@ -101,58 +101,57 @@ public class CardActionBsn
 		}
 		return cost;
 	}
-	private static void procPlayCard(CardGameBean game,CardDeckBean deck,CardBean card,CardActionBean action){
+	private static boolean procEnterCard(CardGameBean game,CardDeckBean deck,CardBean card,CardActionBean action){
+		if(game.getStateBean().getState()!=BattleStateBean.ST_WAIT_PLAY_CARD)
+			return false;
+		if(CardSiteBsn.getResNum(deck)< card.getCost())
+			return false;
+		boolean ret = false;
 		switch(card.getCardType()){
 //		case CardInfoBean.HERO:
 //			break;
 		case CardInfoBean.ALLY:
-			procCard2FightSlot(game,deck,card);
+			ret = procCard2FightSlot(game,deck,card);
 			break;
 		case CardInfoBean.WEAPON:
-			procCard2EquipSlot(deck,card);
+			ret = procCard2EquipSlot(deck,card);
 			break;
 		case CardInfoBean.ARMOR:
-			procCard2EquipSlot(deck,card);
+			ret = procCard2EquipSlot(deck,card);
 			break;
 		case CardInfoBean.ABILITY:
-			procCard2Fight(game,deck,card,action);
+			//procCard2Fight(game,deck,card,action);
 			break;
 		case CardInfoBean.QUEST:
 			break;					
 		}
+		return ret;
 	}
-	public static void procCardAction(CardGameBean game, CardActionBean action,ICardExtension ext){
+	public static boolean procCardAction(CardGameBean game, CardActionBean action,ICardExtension ext){
 		if(action==null)
-			return;
+			return false;
 		CardDeckBean deck = game.getDeck().get(action.getPlayerID());
 		if(deck==null)
-			return;
+			return false;
 		CardBean card = game.getCard(action.getSrc());
 		if(card==null)
-			return;
+			return false;
+		boolean ret = false;
 		switch(action.getType()){
-		case CardActionBean.DO_PLAY_CARD:
-			procPlayCard(game,deck,card,action);
+		case CardActionBean.DO_ENTER_CARD:
+			ret = procEnterCard(game,deck,card,action);
 			break;
 		case CardActionBean.DO_CARD_2_FIGHT:
-			procCard2Fight(game,deck,card,action);
+			ret = procCard2Fight(game,deck,card,action);
 			break;
 		case CardActionBean.DO_PLAY_RES_CARD:
-			procPlayResCard(deck,card);
+			ret = procPlayResCard(deck,card);
 			break;
-		case CardActionBean.DO_CARD_2_TURN:
-			procCard2Turn(deck,card);
-			break;	
-		case CardActionBean.DO_CARD_2_GUIDE:
-			//procCard2Guide(deck,card);
-			break;	
-		case CardActionBean.DO_CARD_2_TASK:
-			procCard2Task(game,deck,card,action);
-			break;		
 		case CardActionBean.DO_ABILITY_2_OP:
-			procAbility2Op(game,deck,card,action);
+			ret =procAbility2Op(game,deck,card,action);
 			break;
 		}
+		return ret;
 	}
 	
 	public static boolean IsFriendAction(CardGameBean game,CardActionBean action){
@@ -192,7 +191,7 @@ public class CardActionBsn
 		}
 		card.AddHp(0);
 		ISFSObject params = SFSObjectBsn.genBattleResult(game,action);
-		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_CARD_FIGHT_RESULT, params, game);
+		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_PLAY_CARD_RESULT, params, game);
 		return true;
 	}
 	
@@ -254,42 +253,28 @@ public class CardActionBsn
 		}
 		return IsMatch;
 	}
-	
-	private static void procCard2Task(CardGameBean game,CardDeckBean site,CardBean card,CardActionBean action){
-		if(CardSiteBsn.getResNum(site)< card.getUseCost())
-			return;
-		CardSiteBsn.useRes(site,card.getCost());
-	//	game.getBattleChain().PushAction(action);	
-	}
-	private static void procCard2Turn(CardDeckBean site,CardBean card){
-		if(CardSiteBsn.getResNum(site)< card.getUseCost())
-			return;
-		CardSiteBsn.useRes(site,card.getCost());
-		card.setTurn(1);
-	}
-	private static void procCard2FightSlot(CardGameBean game,CardDeckBean site,CardBean card){
-		if(CardSiteBsn.getResNum(site)< card.getCost())
-			return;
+
+	private static boolean procCard2FightSlot(CardGameBean game,CardDeckBean site,CardBean card){
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setZoneID(CardBean.FIGHT_ZONE_ID);	
 		card.setSide(3);
 		CardAbilityBean ability = BufferBsn.getCardAbility(card,CardAbilityBean.WHEN_ENTER);
 		if(ability!=null)
 			BattleBsn.InitAbilityOp(game,card,ability);
+		return true;
 	}
-	private static void procCard2EquipSlot(CardDeckBean site,CardBean card){
-		if(CardSiteBsn.getResNum(site)< card.getCost())
-			return;
+	private static boolean procCard2EquipSlot(CardDeckBean site,CardBean card){
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setZoneID(CardBean.EQUIP_ZONE_ID);	
 		card.setSide(3);
+		return true;
 	}
-	private static void procPlayResCard(CardDeckBean site,CardBean card){
+	private static boolean procPlayResCard(CardDeckBean site,CardBean card){
 		site.setAddResAble(false);
-		if(card.getCardType() !=CardInfoBean.QUEST)
-			card.setCardID(Constants.BACK_CARD_ID);
+		card.setCardID(Constants.BACK_CARD_ID);
 		card.setZoneID(CardBean.RES_ZONE_ID);
 		card.setSide(0);
+		return true;
 	}
 	private static int getUseCost(int cardID){
 		CardUseBean useBean= CardUseStoreBean.GetInstance().getCardUse(cardID);

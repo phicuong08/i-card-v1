@@ -21,7 +21,7 @@ public class Commands {
 	//参数1(srcID);参数2(target):目标卡{(realID)...},参数3(time):反应时间(秒),参数4(defender);
 	//卡片使用，包括施法与卡片战斗
 	
-	public static final String CMD_S2C_CARD_FIGHT_RESULT		="11003";
+	public static final String CMD_S2C_PLAY_CARD_RESULT		="11003";
 	//参数1(srcID):, 参数2(target):{ {realID,hpAdd,def,atk,slot,turn,side} ,...}--受作用卡结果,参数3(bEnemy)[0-对已方，1-对敌方]
 	//战斗表现
 	public static final String CMD_S2C_BATTLE_PLAYER_LOOP       ="11004";//回合转化
@@ -54,6 +54,8 @@ public class Commands {
 	//参数1(srcID):int;参数2(target):{realID,...};
 
 	public static final String CMD_C2S_EX_OP              ="1005";//
+	
+	public static final String CMD_C2S_ENTER_CARD		  ="1006"; 
 	
 
 }
