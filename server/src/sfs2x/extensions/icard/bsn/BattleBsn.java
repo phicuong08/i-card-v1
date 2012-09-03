@@ -112,19 +112,28 @@ public class BattleBsn
 			break;
 		}
 	}
+	
 	public static void procWaitPlayCard(CardGameBean game,int elapsed,ICardExtension ext){
 		if(game.getStateBean().DecDuration(elapsed)==false){
 			game.getStateBean().setState(BattleStateBean.ST_TURN_END);
 			return;
 		}
 		CardActionBean curAction = game.pickCurAction();
-		if(curAction==null || curAction.getType()!=CardActionBean.DO_PLAY_CARD)
+		if(curAction==null)
 			return;
-		CardActionBsn.procCardAction(game,curAction,ext);
-		//send msg
+		boolean ret = CardActionBsn.procCardAction(game,curAction,ext);
+		if(ret==false)
+			return;
+		if(curAction.getType()==CardActionBean.DO_ENTER_CARD){
+			ext.SendGameCardUpdate(game);
+		}
+		else if(curAction.getType()==CardActionBean.DO_PLAY_CARD){
+			ISFSObject params = SFSObjectBsn.genBattleResult(game,curAction);
+			ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_PLAY_CARD_RESULT, params, game);
+		}
 		game.getStateBean().setDelayJump(BattleStateBean.ST_END_PLAY_CARD, Constants.SHOW_ACTION_TIME);
-		
 	}
+	
 	private static void procEndPlayCard(CardGameBean game,ICardExtension ext){
 		InitNewState(game,BattleStateBean.ST_WAIT_PLAY_CARD);
 		ext.SendGameCommand(Commands.CMD_S2C_WAIT_PLAY_CARD, null,game);
@@ -143,6 +152,7 @@ public class BattleBsn
 		
 		CardActionBsn.procCardAction(game,curAction,ext);
 		//TBD 发送放置资源消息
+		ext.SendGameCardUpdate(game);
 		game.getStateBean().setDelayJump(BattleStateBean.ST_END_PLAY_RES,Constants.SHOW_ACTION_TIME);
 	}
 	public static void procEndPlayRes(CardGameBean game,ICardExtension ext){
