@@ -11,7 +11,7 @@ import java.util.Vector;
  */
 public class CardActionBean
 {
-	public static final int DO_PLAY_CARD =1;      	//盟军，装备卡到战斗区,使用持续法术卡
+	public static final int DO_FIGHT_CARD =1;      	//盟军，装备卡到战斗区,使用持续法术卡
 	public static final int DO_ENTER_CARD =1;      	//盟军，装备卡到战斗区
 	public static final int DO_PLAY_RES_CARD =2;    //放资源
 	public static final int DO_USE_POWER =3;      	//使用卡的异能

@@ -20,6 +20,9 @@ package ICard.SFSMod {
 		//参数1(gameID):int;
 		
 		public static var c2s_battle_card_fight:String ="1004";       //卡片atk  
+		
+		public static var c2s_battle_ex_op:String="1005";
+		public static var c2s_battle_enter_card:String="1006"; 
 		//参数1(srcID):int;参数2(target):{realID,...};
 		
 		//server msg
@@ -48,6 +51,6 @@ package ICard.SFSMod {
 		public static var  s2c_battle_reset_player_loop:String ="11006";
 		public static var  s2c_end_op_ok:String                ="11007";
 		public static var  s2c_card_ex_op:String                ="11008";
-		public static var  s2c_wait_play_card:String                ="11011";
+		public static var  s2c_wait_play_card:String                ="11010";
 	}
 }//package ICard.protocols 

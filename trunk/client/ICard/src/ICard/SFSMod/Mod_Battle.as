@@ -122,6 +122,12 @@ package ICard.SFSMod {
 			params.putInt("game",_battleStage.GameID);
 			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_end_op, params) );
 		}
+		public function QueryEnterCard(realID:int):void{
+			var params:ISFSObject = new SFSObject();
+			params.putInt("realID", realID);
+			params.putInt("game",_battleStage.GameID);
+			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_enter_card, params) );
+		}
 		public function QueryPlayCard(realID:int,slot:int,target:int):void{
 			var params:ISFSObject = new SFSObject();
 			params.putInt("realID", realID);

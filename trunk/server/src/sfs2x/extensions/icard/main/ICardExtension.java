@@ -48,7 +48,9 @@ public class ICardExtension extends SFSExtension {
 		//客户端准备
 		
 		addRequestHandler(Commands.CMD_C2S_CLIENT_BATTLE_STATE_UPDATE,ClientBattleStateUpdateHandle.class);
-		addRequestHandler(Commands.CMD_C2S_PLAY_CARD,ClientPlayCardHandle.class);
+		addRequestHandler(Commands.CMD_C2S_PLAY_RES,ClientPlayResHandle.class);
+		addRequestHandler(Commands.CMD_C2S_ENTER_CARD,ClientEnterCardHandle.class);
+		addRequestHandler(Commands.CMD_C2S_FIGHT_CARD,ClientFightCardHandle.class);
 		addRequestHandler(Commands.CMD_C2S_END_OP,ClientEndOpHandle.class);
 		
 
@@ -104,7 +106,7 @@ public class ICardExtension extends SFSExtension {
 		removeEventHandler(SFSEventType.ROOM_REMOVED);
 		removeRequestHandler(Commands.CMD_C2S_CLIENT_BATTLE_STATE_UPDATE);
 		removeRequestHandler(Commands.CMD_C2S_CARD_TASKUSE);
-		removeRequestHandler(Commands.CMD_C2S_PLAY_CARD);
+		removeRequestHandler(Commands.CMD_C2S_PLAY_RES);
 		removeRequestHandler(Commands.CMD_C2S_END_OP);
 		removeRequestHandler(Commands.CMD_C2S_EX_OP);
 

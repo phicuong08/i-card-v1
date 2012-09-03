@@ -127,9 +127,9 @@ public class BattleBsn
 		if(curAction.getType()==CardActionBean.DO_ENTER_CARD){
 			ext.SendGameCardUpdate(game);
 		}
-		else if(curAction.getType()==CardActionBean.DO_PLAY_CARD){
-			ISFSObject params = SFSObjectBsn.genBattleResult(game,curAction);
-			ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_PLAY_CARD_RESULT, params, game);
+		else if(curAction.getType()==CardActionBean.DO_FIGHT_CARD){
+			ISFSObject params = SFSObjectBsn.genFightResult(game,curAction);
+			ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_FIGHT_CARD_RESULT, params, game);
 		}
 		game.getStateBean().setDelayJump(BattleStateBean.ST_END_PLAY_CARD, Constants.SHOW_ACTION_TIME);
 	}
