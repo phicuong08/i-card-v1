@@ -113,7 +113,7 @@ package ICard.logic {
 			if(_curState!=state_play_res)
 				return false;
 			_curState = state_play_null;
-			_Mod_Battle.QueryPlayCard(realID,BattleFieldType.MyResourceSlotId,0);
+			_Mod_Battle.QueryPlayRes(realID);
 			return true;
 		}
 		public function AskCard2Skip():void{
@@ -201,7 +201,7 @@ package ICard.logic {
 			if(_fightDes==null || _fightDes.length==0){
 				return false;
 			}
-			_Mod_Battle.QueryCardFight(_fightSrc,_fightDes);
+			_Mod_Battle.QueryFightCard(_fightSrc,_fightDes);
 			return true;
 		}
 		public function PriPlayerLoop(playerID:int,secNum:int):void{

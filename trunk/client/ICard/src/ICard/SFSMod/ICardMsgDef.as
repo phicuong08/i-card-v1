@@ -13,13 +13,13 @@ package ICard.SFSMod {
 		//卡片消息
 		public static var c2s_battle_card_taskuse:String ="1001";       //使用卡片  
 		//参数1(srcID):int;参数2(target):{realID,...};
-		public static var c2s_battle_play_card:String="1002";     //请求改变卡状态
+		public static var c2s_battle_play_res:String="1002";     //请求改变卡状态
 		//参数1(realID):int;参数2(slot):int, 
 	
 		public static var c2s_end_op:String	="1003"; //请求结束操作
 		//参数1(gameID):int;
 		
-		public static var c2s_battle_card_fight:String ="1004";       //卡片atk  
+		public static var c2s_battle_fight_card:String ="1004";       //卡片atk  
 		
 		public static var c2s_battle_ex_op:String="1005";
 		public static var c2s_battle_enter_card:String="1006"; 

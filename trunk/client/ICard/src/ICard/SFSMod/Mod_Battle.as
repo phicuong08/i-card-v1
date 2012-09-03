@@ -107,7 +107,7 @@ package ICard.SFSMod {
 			}
 			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_taskuse, params) );
 		}
-		public function QueryCardFight(realID:int,targets:Array):void{
+		public function QueryFightCard(realID:int,targets:Array):void{
 			var params:ISFSObject = new SFSObject();
 			params.putInt("srcID", realID);
 			params.putInt("game",_battleStage.GameID);
@@ -115,7 +115,7 @@ package ICard.SFSMod {
 			{
 				params.putIntArray("target",targets);
 			}
-			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_card_fight, params) );
+			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_fight_card, params) );
 		}
 		public function QueryEndOp():void{
 			var params:ISFSObject = new SFSObject();
@@ -128,14 +128,13 @@ package ICard.SFSMod {
 			params.putInt("game",_battleStage.GameID);
 			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_enter_card, params) );
 		}
-		public function QueryPlayCard(realID:int,slot:int,target:int):void{
+		public function QueryPlayRes(realID:int):void{
 			var params:ISFSObject = new SFSObject();
 			params.putInt("realID", realID);
-			params.putInt("slot", slot);
 			params.putInt("game",_battleStage.GameID);
-			params.putInt("target", target);
-			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_play_card, params) );
+			_smartFox.send( new ExtensionRequest( ICardMsgDef.c2s_battle_play_res, params) );
 		}	
+		
 		private function procCardArr(params:ISFSObject):void{
 			var cardArr:ISFSArray = params.getSFSArray("card");
 			if(cardArr==null)
