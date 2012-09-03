@@ -163,7 +163,7 @@
 			if(flagObj["fight"]==true)
 				AddMenuBut(card_fight_but,OnCardToFight);
 			if(	flagObj["skip"]==true)
-				AddMenuBut(card_enter_but,OnCardToSkip);
+				AddMenuBut(card_skip_but,OnCardToSkip);
 			_cardMenu.x = -_cardMenu.width/2 +5;
 			_cardMenu.y = -28;
 			card.addChild(_cardMenu);

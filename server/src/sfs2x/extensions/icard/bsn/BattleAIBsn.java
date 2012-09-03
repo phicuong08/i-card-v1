@@ -67,7 +67,7 @@ public class BattleAIBsn
 			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)
 			{
-				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_PLAY_CARD,null);
+				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_FIGHT_CARD,null);
 				game.setCurAction(action);
 				return true;
 			}
@@ -94,7 +94,7 @@ public class BattleAIBsn
 			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)
 			{
-				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_PLAY_CARD,null);
+				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_FIGHT_CARD,null);
 				game.setCurAction(action);
 				return true;
 			}
@@ -104,7 +104,7 @@ public class BattleAIBsn
 			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)
 			{
-				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_PLAY_CARD,null);
+				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_FIGHT_CARD,null);
 				game.setCurAction(action);
 				return true;
 			}

@@ -49,7 +49,7 @@ public class ClientQueryBsn
 		return true;
 	}
 	//
-	public static boolean procPlayCardRequest(CardGameBean game,int playerID,int realID,int target){
+	public static boolean procFightCardRequest(CardGameBean game,int playerID,int realID,int target){
 		CardBean card = game.getCard(realID);
 		if(card==null || card.getZoneID()!=CardBean.HAND_ZONE_ID)
 			return false;
@@ -67,7 +67,7 @@ public class ClientQueryBsn
 			des = new Vector<Integer>();
 			des.add(target);
 		}
-		CardActionBean action = new CardActionBean(realID,playerID,CardActionBean.DO_PLAY_CARD,des);
+		CardActionBean action = new CardActionBean(realID,playerID,CardActionBean.DO_FIGHT_CARD,des);
 		game.setCurAction(action);
 		return true;
 	}

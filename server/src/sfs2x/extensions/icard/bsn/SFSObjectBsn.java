@@ -104,7 +104,7 @@ public class SFSObjectBsn
 		params.putInt("time", time);
 		return params;
 	}
-	public static ISFSObject genBattleResult(CardGameBean game,CardActionBean action){
+	public static ISFSObject genFightResult(CardGameBean game,CardActionBean action){
 		ISFSObject fightInfo = new SFSObject();
 		fightInfo.putInt("srcID",action.getSrc());
 		ISFSArray sfsa = new SFSArray();

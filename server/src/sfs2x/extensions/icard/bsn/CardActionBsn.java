@@ -29,49 +29,6 @@ import sfs2x.extensions.icard.utils.Constants;
  */
 public class CardActionBsn
 {	
-	
-	public static void procAction(CardGameBean game,CardActionBean action){
-		switch(action.getType()){
-			case CardActionBean.DO_CARD_2_FIGHT:
-				break;
-			case CardActionBean.DO_CARD_2_DEF:
-				break;
-			case CardActionBean.DO_CARD_2_TASK:	
-				break;
-		}
-	}
-	public static Boolean Action2ChainAble(CardGameBean game,CardActionBean action){
-		CardDeckBean site = game.getDeck().get(action.getPlayerID());
-		if(site==null)
-			return false;
-		Vector<CardActionBean> chain = game.getBattleChain().getActionChain();
-		if(chain.size()==0){
-			return true;
-		}
-		else {
-			if(action.getDes().size()!=1)
-				return false;
-			if(cardAlreadyInChainSrc(chain,action.getSrc())) //不可重复加入
-				return false;
-			return cardAlreadyInChain(chain,action.getDes().get(0)); //作用对象须是链上卡片
-		}
-	}
-	private static boolean cardAlreadyInChain(Vector<CardActionBean> chain,int target){
-		for(int i=0;i<chain.size();i++){
-			CardActionBean a1 = (CardActionBean)chain.get(i);
-			if(findActionTarget(a1,target)==true)
-				return true;
-		}
-		return false;
-	}
-	private static boolean cardAlreadyInChainSrc(Vector<CardActionBean> chain,int srcID){
-		for(int i=0;i<chain.size();i++){
-			CardActionBean a1 = (CardActionBean)chain.get(i);
-			if(a1.getSrc()==srcID)
-				return true;
-		}
-		return false;
-	}
 	private static boolean findActionTarget(CardActionBean desCard,int targetID){
 		if(desCard.getSrc()==targetID)
 			return true;
@@ -91,7 +48,7 @@ public class CardActionBsn
 		case CardActionBean.DO_CARD_2_FIGHT:
 			cost = getAtkCost(card.getCardID());
 			break;
-		case CardActionBean.DO_PLAY_CARD:
+		case CardActionBean.DO_FIGHT_CARD:
 			cost = card.getCost();			
 			break;
 		case CardActionBean.DO_CARD_2_TURN:
@@ -190,8 +147,8 @@ public class CardActionBsn
 			CardUseBsn.DoWhatAbility(game,card,desCard,abilityBean);
 		}
 		card.AddHp(0);
-		ISFSObject params = SFSObjectBsn.genBattleResult(game,action);
-		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_PLAY_CARD_RESULT, params, game);
+		ISFSObject params = SFSObjectBsn.genFightResult(game,action);
+		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_FIGHT_CARD_RESULT, params, game);
 		return true;
 	}
 	

@@ -105,7 +105,8 @@ package ICard.logic {
 			var card:CardData = PlayerMe.CardDB.FindCard(realID);
 			if(!card)
 				return false;
-			return UseCard.Card2FightSlot(card,_Mod_Battle);
+			_Mod_Battle.QueryEnterCard(card.RealID);
+			return true;
 		}
 		
 		public function AskCard2ResSlot(realID:int):Boolean{

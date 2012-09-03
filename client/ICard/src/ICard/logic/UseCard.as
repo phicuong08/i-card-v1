@@ -24,7 +24,7 @@ package ICard.logic {
 			{
 				case CardType.SoldierType:
 				{
-					mod.QueryPlayCard(card.RealID,BattleFieldType.MyFightSlotId,0);
+					mod.QueryEnterCard(card.RealID);
 					ret = true;
 				}
 					break;
@@ -97,7 +97,6 @@ package ICard.logic {
 			flagArr["enter"] = Is2EnterAble(card,resNum);  //��
 			flagArr["fight"] = (state==BattleStage.state_play_card)?Is2FightAble(card,resNum):false;  //ս��  
 			flagArr["cast"] = (state==BattleStage.state_play_card)?IsCastAble(card,resNum):false; //ʩ��
-			flagArr["skip"] = true;
 			return flagArr;
 		}
 		
