@@ -215,9 +215,6 @@ public class CardActionBsn
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setZoneID(CardBean.FIGHT_ZONE_ID);	
 		card.setSide(3);
-		CardAbilityBean ability = BufferBsn.getCardAbility(card,CardAbilityBean.WHEN_ENTER);
-		if(ability!=null)
-			BattleBsn.InitAbilityOp(game,card,ability);
 		return true;
 	}
 	private static boolean procCard2EquipSlot(CardDeckBean site,CardBean card){
