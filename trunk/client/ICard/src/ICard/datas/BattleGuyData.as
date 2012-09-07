@@ -59,13 +59,11 @@ package ICard.datas {
 			{
 				if(card.IsActive()==false)
 					continue;
-				if(card.Cost>costLimit)
-					continue;
 				var bAdd:Boolean = false;
 				switch(card.Slot)
 				{
 					case BattleFieldType.MyHandSlotId:
-						bAdd = (card.Type==CardType.SkillType || card.Type==CardType.TaskType)?true:false;
+						bAdd = (card.Cost<=costLimit)?true:false;
 						break;
 					case BattleFieldType.MyFightSlotId:
 						bAdd = true;
