@@ -39,15 +39,7 @@ package ICard.datas {
 			
 		}
 		
-	
-		public function ResetRes():void{
-			for each( var card:CardData in _cardArr)
-			{
-				if( card.Slot == BattleFieldType.MyResourceSlotId)
-					card.Side = 0;
-			}
-		}
-		
+
 		public function ResNum():int{
 			var val:int = 0;
 			for each( var card:CardData in _cardArr)
@@ -61,6 +53,30 @@ package ICard.datas {
 				}
 			}
 			return val;
+		}
+		public function getActiveCardOnSlot(costLimit:int,fillArr:Array):void{
+			for each( var card:CardData in _cardArr)
+			{
+				if(card.IsActive()==false)
+					continue;
+				if(card.Cost>costLimit)
+					continue;
+				var bAdd:Boolean = false;
+				switch(card.Slot)
+				{
+					case BattleFieldType.MyHandSlotId:
+						bAdd = (card.Type==CardType.SkillType || card.Type==CardType.TaskType)?true:false;
+						break;
+					case BattleFieldType.MyFightSlotId:
+						bAdd = true;
+						break;
+					case BattleFieldType.MyEquipSlotId:
+						bAdd = (card.Type==CardType.WeaponType)?true:false;
+						break;
+				}
+				if(bAdd)
+					fillArr.push(card.RealID);
+			}
 		}
 		public function getCardOnSlot(slotArr:Array,fillArr:Array):void{
 			for each( var card:CardData in _cardArr)

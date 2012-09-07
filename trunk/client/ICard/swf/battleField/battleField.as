@@ -22,6 +22,7 @@
 		private var _timerMC:TimerMC;
 		private var _targetCtl:TargetIndicator;
 		private var _activeCtl:ActiveIndicator;
+		public  var _secondTick:Timer; 
 		//private var _timer_but2:MovieClip;
 		
     public function battleField(){
@@ -39,6 +40,11 @@
 			this.addChild(_myResNumMC);
 			this.addChild(_yourResNumMC);
 			_fight_but.visible=false;
+			
+			_secondTick = new Timer(500,0);
+			_secondTick.addEventListener(TimerEvent.TIMER, onTick);
+			_secondTick.start();
+			
 		}
 		private function InitSlot():void{
 			_slots  = [];
@@ -104,6 +110,17 @@
 		public function set onFight(_arg1:Function):void
 		{
 			_fight_but.addEventListener(MouseEvent.CLICK,_arg1);
+		}
+		private function ActiveSlotCard(slotId:int):void{
+		trace("active slot card",_slots[slotId].numChildren);
+			_activeCtl.Empty();
+			var index:int = 0;
+			while(index <_slots[slotId].numChildren)
+			{
+				var card:MovieClip = (_slots[slotId].getChildAt(index) as MovieClip);
+				_activeCtl.AddIndicator(card);
+				index++;
+			}
 		}
     public function FindCard(realID:int):MovieClip{
     	var id:int = BattleFieldType.MyHandSlotId;
@@ -172,6 +189,7 @@
 
 		}
 		public function PriFresh(myLoop:Boolean,secNum:int):void{
+		
 		_timerMC.InitTimeMC(secNum);
 		_activeCtl.Empty();
 		}
@@ -179,6 +197,8 @@
     public function LoopFresh(myLoop:Boolean,secNum:int):void{
 		_timerMC.InitTimeMC(secNum);
 		_targetCtl.Empty();
+		if(myLoop)
+			ActiveSlotCard(BattleFieldType.MyHandSlotId);
 		}
 		public function onCardExOp(realID:int,abilityId:int):void{
 			LoopFresh(true,30);
@@ -231,7 +251,22 @@
 			_targetCtl.Empty();
 			_fight_but.visible=false;
 		}
-
+		
+		public function onTick(evt:TimerEvent):void{
+			updateActiveCard();
+      	}
+		private function updateActiveCard():void{
+			if(!_battleStage)
+				return;
+			var arr:Array = _battleStage.getActiveTarget();
+			var cardArr:Array = [];
+			for each(var target:int in arr){
+				var card:MovieClip = FindCard(target);
+				if(card!=null)
+					cardArr.push(card);
+			}
+			_activeCtl.SetActiveArr(cardArr);
+		}
 
 		public function RunTest():void{
 			var index:int=1;

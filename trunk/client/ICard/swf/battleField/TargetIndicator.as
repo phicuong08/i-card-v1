@@ -32,6 +32,7 @@
 		    }
 		    return false;
 	    }
+		
 	    public function AddIndicator(card:MovieClip):void{
 	    	if(_freeIndex>=_maxTargetNum)
 	    		return;

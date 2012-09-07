@@ -32,6 +32,28 @@
 		    }
 		    return false;
 	    }
+		public function SetActiveArr(arr:Array):void{
+			var n:int = 0;
+			var bSame:Boolean=true;
+			if(_freeIndex==arr.length){
+				for each(var card0:MovieClip in arr){
+					if(card0.realID != _ActiveArr[n].realID){
+						bSame = false;
+						break;
+					}
+					n++;
+				} 
+				if(bSame==true)
+				{
+					return;
+				}
+			}
+			Empty();
+			for each(var card:MovieClip in arr){
+				AddIndicator(card);
+			}
+		}
+		
 	    public function AddIndicator(card:MovieClip):void{
 	    	if(card==null)
 	    		return;
@@ -39,7 +61,7 @@
 	    		return;
 	    	var indicator:MovieClip = _ActiveArr[_freeIndex];
 			indicator.realID = card.realID;
-			card.addChild(indicator);
+			card.addChildAt(indicator,card.numChildren);
 	    	_freeIndex++;
 			trace("add active indicate ok");
 	    }

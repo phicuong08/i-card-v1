@@ -17,6 +17,7 @@ package ICard.logic {
 		public static var state_play_null:int = 0;
 		public static var state_play_res:int = 1;
 		public static var state_play_card:int = 2;
+		public static var state_play_card_ex:int = 3;//选目标
 		
 		private var _guy:Dictionary;
 		private var _gameID:int;
@@ -68,7 +69,24 @@ package ICard.logic {
 			}
 			return null;
 		}
-				
+		public function getActiveTarget():Array{
+			var arr:Array=[];
+			if(_IsTurn==false)
+				return arr;
+			
+			switch(_curState)
+			{
+				case state_play_res:
+					PlayerMe.CardDB.getCardOnSlot([BattleFieldType.MyHandSlotId],arr);
+					break;
+				case state_play_card:
+					PlayerMe.CardDB.getActiveCardOnSlot(PlayerMe.CardDB.ResVal(),arr);
+					break;
+				case state_play_card_ex:
+					break;
+			}
+			return arr;
+		}
 		public function get FightTarget():Array{
 			return BattleHelper.getFightTarget(_guy,_fightSrc,PlayerMe,Enemy);
 		}
