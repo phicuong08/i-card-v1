@@ -5,6 +5,7 @@ package ICard.datas.card {
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.haloer.data.*;
 	import ICard.logic.UseCard;
+	
 	import flash.utils.ByteArray;
 
 	public class CardData {
@@ -122,6 +123,11 @@ package ICard.datas.card {
 			if(info.hasOwnProperty("slot"))
 				_info["slot"] = info["slot"];
 			UpdateBuf(info);
+		}
+		public function IsActive():Boolean{
+			if(Side>0)
+				return false;
+			return true;
 		}
 		private function UpdateBuf(info:Object):void{
 			for(var i:int=0;i<MaxBufNum;i++){

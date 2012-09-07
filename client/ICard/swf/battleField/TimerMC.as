@@ -70,7 +70,7 @@
 					_timer_but.removeChildAt(1);
 				}
 			}
-      }
+      	}
 	  
 	
     }
