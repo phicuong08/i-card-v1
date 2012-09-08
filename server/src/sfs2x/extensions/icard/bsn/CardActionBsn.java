@@ -45,10 +45,10 @@ public class CardActionBsn
 			return 911;
 		int cost = 0;
 		switch(action.getType()){
-		case CardActionBean.DO_CARD_2_FIGHT:
+		case CardActionBean.DO_FIGHT_CARD:
 			cost = getAtkCost(card.getCardID());
 			break;
-		case CardActionBean.DO_FIGHT_CARD:
+		case CardActionBean.DO_ENTER_CARD:
 			cost = card.getCost();			
 			break;
 		case CardActionBean.DO_CARD_2_TURN:
@@ -98,7 +98,7 @@ public class CardActionBsn
 		case CardActionBean.DO_ENTER_CARD:
 			ret = procEnterCard(game,deck,card,action);
 			break;
-		case CardActionBean.DO_CARD_2_FIGHT:
+		case CardActionBean.DO_FIGHT_CARD:
 			ret = procCard2Fight(game,deck,card,action);
 			break;
 		case CardActionBean.DO_PLAY_RES_CARD:

@@ -211,6 +211,7 @@ package ICard.logic {
 		public function InitialFight(realID:int):void{
 			_fightSrc = realID;
 			_fightDes = [];
+			_curState = state_play_card_ex;
 		}
 		public function AddFightTarget(realID:int):void{
 			_fightDes.push(realID);

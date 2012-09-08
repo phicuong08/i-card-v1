@@ -12,15 +12,14 @@ import java.util.Vector;
 public class CardActionBean
 {
 	public static final int DO_FIGHT_CARD =1;      	//盟军，装备卡到战斗区,使用持续法术卡
-	public static final int DO_ENTER_CARD =1;      	//盟军，装备卡到战斗区
-	public static final int DO_PLAY_RES_CARD =2;    //放资源
-	public static final int DO_USE_POWER =3;      	//使用卡的异能
-	public static final int DO_COMPLETE_QUEST=4; 	//做任务
-	public static final int DO_PLACE_RESOURCE=5; 	//放资源
-	public static final int DO_PROPOSE_COMBAT=6; 	//发起战斗
+	public static final int DO_ENTER_CARD =2;      	//盟军，装备卡到战斗区
+	public static final int DO_PLAY_RES_CARD =3;    //放资源
+	public static final int DO_USE_POWER =4;      	//使用卡的异能
+	public static final int DO_COMPLETE_QUEST=5; 	//做任务
+	public static final int DO_PLACE_RESOURCE=6; 	//放资源
+	public static final int DO_PROPOSE_COMBAT=7; 	//发起战斗
 	
 	public static final int DO_CARD_2_EQUIPSLOT=3;  //卡到装备
-	public static final int DO_CARD_2_FIGHT=4;      //卡战斗(有目标),人物攻击,使用装备,使用法术 
 	public static final int DO_CARD_2_GUIDE=5;      //卡护卫
 	public static final int DO_CARD_2_TASK=6;        //任务使用
 	public static final int DO_CARD_2_TURN=7;       //英雄卡翻转

@@ -141,6 +141,7 @@
 		public function Add2Slot(slotId:int,cardMC:MovieClip):void{
 			if(cardMC==null)
 				return;
+			
 			RemoveCard(cardMC.realID);
 			_slots[slotId].AddCard(cardMC);
 			freshResNum();
