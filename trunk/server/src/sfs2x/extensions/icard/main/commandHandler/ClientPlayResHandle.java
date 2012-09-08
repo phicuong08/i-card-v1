@@ -1,6 +1,7 @@
 package sfs2x.extensions.icard.main.commandHandler;
 
 
+import sfs2x.extensions.icard.beans.CardAttrStoreBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.GameLobbyBean;
 import sfs2x.extensions.icard.bsn.ClientQueryBsn;
@@ -18,6 +19,7 @@ public class ClientPlayResHandle extends ICardClientRequestHandler {
 		ErrorDef.Empty();
 		int realID = paramISFSObject.getInt("realID");
 		int gameId = paramISFSObject.getInt("game");
+		CardAttrStoreBean.GetInstance();
 		CardGameBean game = GameLobbyBean.GetInstance().getGameMap().get(gameId);
 		if(game==null)
 			return;

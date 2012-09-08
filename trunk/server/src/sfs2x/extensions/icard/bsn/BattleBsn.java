@@ -33,7 +33,7 @@ public class BattleBsn
 		game.getStateBean().setState(BattleStateBean.ST_SELECT_TURN_PLAYER);
 
 	}
-	private static void InitNewState(CardGameBean game,int state){
+	private static void InitNewOpState(CardGameBean game,int state){
 		game.getStateBean().setState(state);
 		game.getStateBean().InitWaitDuration(Constants.PLAY_OP_TIME);	
 	}
@@ -136,19 +136,21 @@ public class BattleBsn
 //				InitAbilityOp(game,card,ability);
 //				return;
 //			}
+			game.getStateBean().setState(BattleStateBean.ST_END_PLAY_CARD);
 		}
 		else if(curAction.getType()==CardActionBean.DO_FIGHT_CARD){
 			ISFSObject params = SFSObjectBsn.genFightResult(game,curAction);
 			ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_FIGHT_CARD_RESULT, params, game);
+			game.getStateBean().setDelayJump(BattleStateBean.ST_END_PLAY_CARD, Constants.SHOW_ACTION_TIME);
 		}
-		game.getStateBean().setDelayJump(BattleStateBean.ST_END_PLAY_CARD, Constants.SHOW_ACTION_TIME);
+		
 	}
 	
 	private static void procEndPlayCard(CardGameBean game,ICardExtension ext){
 		resetWaitPlayCard(game,ext);
 	}
 	private static void resetWaitPlayCard(CardGameBean game,ICardExtension ext){
-		InitNewState(game,BattleStateBean.ST_WAIT_PLAY_CARD);
+		InitNewOpState(game,BattleStateBean.ST_WAIT_PLAY_CARD);
 		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getStateBean().getTurnPlayer(),
 				Constants.BATTLE_LOOP_TIME);
 		ext.SendGameCommand(Commands.CMD_S2C_WAIT_PLAY_CARD, params,game);
@@ -168,7 +170,7 @@ public class BattleBsn
 		CardActionBsn.procCardAction(game,curAction,ext);
 		//TBD 发送放置资源消息
 		ext.SendGameCardUpdate(game);
-		game.getStateBean().setDelayJump(BattleStateBean.ST_END_PLAY_RES,Constants.SHOW_ACTION_TIME);
+		game.getStateBean().setState(BattleStateBean.ST_END_PLAY_RES);
 	}
 	public static void procEndPlayRes(CardGameBean game,ICardExtension ext){
 		resetWaitPlayCard(game,ext);
@@ -205,7 +207,7 @@ public class BattleBsn
 		if(game.getCurLoop()!=0) //先手不抓牌
 			drawCard(game,ext,game.getStateBean().getTurnPlayer(),1);
 		
-		InitNewState(game,BattleStateBean.ST_WAIT_PLAY_RES);
+		InitNewOpState(game,BattleStateBean.ST_WAIT_PLAY_RES);
 		game.incLoop();
 		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getStateBean().getTurnPlayer(),
 							Constants.BATTLE_LOOP_TIME);
@@ -228,7 +230,7 @@ public class BattleBsn
 		params.putInt("ability", ability.getID());
 		params.putInt("card", card.getRealID());
 		ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_WAIT_EX_OP, params,game);
-		InitNewState(game,BattleStateBean.ST_WAIT_EX_OP);
+		InitNewOpState(game,BattleStateBean.ST_WAIT_EX_OP);
 	}
 	
 	public static void procTurnEnd(CardGameBean game,ICardExtension ext){//

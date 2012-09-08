@@ -49,9 +49,9 @@ public class ClientQueryBsn
 		return true;
 	}
 	//
-	public static boolean procFightCardRequest(CardGameBean game,int playerID,int realID,int target){
+	public static boolean procFightCardRequest(CardGameBean game,int playerID,int realID,Vector<Integer> des){
 		CardBean card = game.getCard(realID);
-		if(card==null || card.getZoneID()!=CardBean.HAND_ZONE_ID)
+		if(card==null)
 			return false;
 		
 		if(game.getStateBean().getState()!=BattleStateBean.ST_WAIT_PLAY_CARD)
@@ -62,11 +62,6 @@ public class ClientQueryBsn
 		if(CardSiteBsn.getResNum(deck)< card.getCost())
 			return false;
 
-		Vector<Integer> des = null;
-		if(target>0){
-			des = new Vector<Integer>();
-			des.add(target);
-		}
 		CardActionBean action = new CardActionBean(realID,playerID,CardActionBean.DO_FIGHT_CARD,des);
 		game.setCurAction(action);
 		return true;

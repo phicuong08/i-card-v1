@@ -12,7 +12,6 @@
 		public var _battleStage:IBattleStage;
 		private var _widthMax:int;
 		private var _cardWidth:int;
-		private var _cardMenu:MovieClip;
 		public var _selCard:MovieClip;
 		private var _battleField:battleField;
 		public var _slotID:int;
@@ -75,7 +74,7 @@
 				
 				_selCard = card;
 				ShowCardActionMenu(card);
-				if(_cardMenu && _cardMenu.numChildren>0)
+				if(card.cardmenu && card.cardmenu.numChildren>0)
 					card.y = card.baseY -4;
 				SetCardTip(card);
 			}
@@ -127,16 +126,23 @@
 			_battleField = arg1;
 		}
 		private function HideCardActionMenu(card:MovieClip):void{
-			if(!_cardMenu)
+			if(card.hasOwnProperty("cardmenu")==false || card.cardmenu==null)
 				return;
-			card.removeChild(_cardMenu);
-			while(_cardMenu.numChildren)
+			var hideMenu:MovieClip = card.cardmenu;
+			
+			card.removeChild(hideMenu);
+			trace("HideCardActionMenu 1");
+			while(hideMenu.numChildren)
 			{
-				var obj:SimpleButton = _cardMenu.getChildAt(0) as SimpleButton;
-				obj.removeEventListener(MouseEvent.CLICK,obj["func"]);
-				_cardMenu.removeChild(obj);
+				var obj:SimpleButton = hideMenu.getChildAt(0) as SimpleButton;
+				if(obj)
+				{
+						obj.removeEventListener(MouseEvent.CLICK,obj["func"]);
+						hideMenu.removeChild(obj);
+				}
+	
 			}
-			_cardMenu = null;
+			card.cardmenu=null;
 		}
 		
 		public function SideCard(info:Object):Boolean{
@@ -149,32 +155,34 @@
 		
 		
 		public function ShowCardActionMenu(card:MovieClip):void{
+			trace("call show menu");
 			HideCardActionMenu(card);
 			var flagObj:Object = _battleStage.CardMenuFlag(card.realID);
 			if(!flagObj)
 				return;
-			_cardMenu = new MovieClip;	
+			var showMenu = new MovieClip;
 			if(	flagObj["enter"]==true)
-				AddMenuBut(card_enter_but,OnCardToEnter);
+				AddMenuBut(showMenu,card_enter_but,OnCardToEnter);
 			if(flagObj["cast"]==true)
-				AddMenuBut(card_cast_but,OnCardToCast);
+				AddMenuBut(showMenu,card_cast_but,OnCardToCast);
 			if(flagObj["res"]==true)
-				AddMenuBut(card_res_but,OnCardToRes);
+				AddMenuBut(showMenu,card_res_but,OnCardToRes);
 			if(flagObj["fight"]==true)
-				AddMenuBut(card_fight_but,OnCardToFight);
+				AddMenuBut(showMenu,card_fight_but,OnCardToFight);
 			if(	flagObj["skip"]==true)
-				AddMenuBut(card_skip_but,OnCardToSkip);
-			_cardMenu.x = -_cardMenu.width/2 +5;
-			_cardMenu.y = -28;
-			card.addChild(_cardMenu);
+				AddMenuBut(showMenu,card_skip_but,OnCardToSkip);
+			showMenu.x = -showMenu.width/2 +5;
+			showMenu.y = -28;
+			card.addChild(showMenu);
+			card.cardmenu = showMenu;
 		}
 		
-		private function AddMenuBut( classType:Class,func:Function):void{
+		private function AddMenuBut( cardMenu:MovieClip,classType:Class,func:Function):void{
 			var addBut:SimpleButton = new classType;
 			addBut["func"] = func;
 			addBut.addEventListener(MouseEvent.CLICK,func);
-			addBut.x = _cardMenu.width + 10;
-			_cardMenu.addChild(addBut);
+			addBut.x = cardMenu.width + 10;
+			cardMenu.addChild(addBut);
 		}
 		public function OnCardToSkip(e:MouseEvent):void{
 			_battleStage.AskCard2Skip();	
