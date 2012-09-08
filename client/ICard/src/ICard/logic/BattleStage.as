@@ -170,6 +170,7 @@ package ICard.logic {
 		}
 		public function WaitPlayerCard(playerID:int,secNum:int):void{
 			_curState = state_play_card;
+			_IsTurn = (playerID==_myID)?true:false;
 			_battleField.onResetPlayerLoop(playerID==_myID,secNum);
 		}
 		public function PlayerLoopFresh(playerID:int,secNum:int):void{  //回合转换
