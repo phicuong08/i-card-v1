@@ -16,7 +16,7 @@ public class ClientFightCardHandle extends ICardClientRequestHandler {
 	public void handleClientRequest(User paramUser, ISFSObject paramISFSObject) {
 		trace("start handle Client Request");
 		ErrorDef.Empty();
-		int realID = paramISFSObject.getInt("realID");
+		int realID = paramISFSObject.getInt("srcID");
 		int gameId = paramISFSObject.getInt("game");
 		int target = paramISFSObject.getInt("target");
 		CardGameBean game = GameLobbyBean.GetInstance().getGameMap().get(gameId);
