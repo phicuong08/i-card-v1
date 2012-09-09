@@ -54,7 +54,7 @@ public class GameBsn
 									 23001,23002,23003,23004,21001,
 									 23001,23002,23003,21001,23005,
 									 };								 								 
-	static private java.util.Random _Random = new java.util.Random();
+	static public java.util.Random _Random = new java.util.Random();
 
 
 	

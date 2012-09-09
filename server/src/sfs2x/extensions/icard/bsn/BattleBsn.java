@@ -249,5 +249,14 @@ public class BattleBsn
 		}
 		return 0;		
 	}
-	
+	public static CardDeckBean  getOtherDeck(CardGameBean game,int meID)
+	{
+		for (CardDeckBean site : game.getDeck().values()){
+			if(site.getPlayerID() != meID)
+			{
+				return site;
+			}
+		}
+		return null;		
+	}
 }
