@@ -51,10 +51,64 @@ public class BattleAIBsn
 		
 		if(AddCard2FightSlot(game,site))
 			return;
+		else if(Card2Fight(game,site))
+			return;
 //		else if(AddCard2EquipSlot(game,site))
 //			return;
 		else
 			BattleBsn.ClientEndOp(game,site.getPlayerID());
+	}
+	private static Boolean Card2Fight(CardGameBean game,CardDeckBean site){
+		CardBean atk = getAtkCard(game,site,CardBean.FIGHT_ZONE_ID,CardInfoBean.ALLY);
+		if(atk==null)
+			atk = getAtkCard(game,site,CardBean.EQUIP_ZONE_ID,CardInfoBean.WEAPON);
+		if(atk==null)
+			return false;
+		CardBean def = getDefCard(game,site);
+		if(def==null)
+			return false;
+		Vector<Integer> desVect =new Vector<Integer>();
+		desVect.add(def.getRealID());
+		CardActionBean action = new CardActionBean(atk.getRealID(),site.getPlayerID(),CardActionBean.DO_FIGHT_CARD,desVect);
+		game.setCurAction(action);
+		return true;
+	}
+	private static CardBean getDefCard(CardGameBean game,CardDeckBean site){
+		CardDeckBean enemy = BattleBsn.getOtherDeck(game,site.getPlayerID());
+		if(enemy==null)
+			return null;
+		int randomIndex = GameBsn._Random.nextInt(100);
+		CardBean def = null;
+		if(randomIndex<50)
+		{
+			Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(enemy,CardBean.FIGHT_ZONE_ID,CardInfoBean.ALLY);
+			for(int i=0;i<cardVect.size();i++){
+				CardBean card = cardVect.get(i);
+				if(def==null || def.getHp()>card.getHp())
+					def = card;
+			}
+		}
+		if(def==null)
+			def = enemy.getHero();
+		return def;
+	}
+	private static CardBean getAtkCard(CardGameBean game,CardDeckBean site,int slot,int cardType){
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,slot,cardType);
+		for(int i=0;i<cardVect.size();i++){
+			CardBean card = cardVect.get(i);
+			if(card.getSide()==0)
+				return card;
+		}
+		return null;
+	}
+	private static CardBean getFightAlly(CardGameBean game,CardDeckBean site){
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.FIGHT_ZONE_ID,CardInfoBean.ALLY);
+		for(int i=0;i<cardVect.size();i++){
+			CardBean card = cardVect.get(i);
+			if(card.getSide()==0)
+				return card;
+		}
+		return null;
 	}
 	private static Boolean AddCard2FightSlot(CardGameBean game,CardDeckBean site){
 		int remainRes = site.getRemainRes();
