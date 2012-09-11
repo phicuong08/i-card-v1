@@ -54,7 +54,10 @@ package ICard.views {
 	
 		public function close():void{
 				//_popup.closeView(this);
-				_viewMgr.stage.removeChild(this._fightmovie.content);
+				if(this._fightmovie!=null){
+					_viewMgr.stage.removeChild(this._fightmovie.content);
+					this._fightmovie = null;
+				}
 		}
 		public function clear():void{
 		}
