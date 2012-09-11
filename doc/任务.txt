@@ -11,3 +11,12 @@
 
 
 a.战斗链计算
+
+
+swapChildren () 方法   
+
+public function swapChildren(child1:DisplayObject, child2:DisplayObject):void 
+汪铃(汪铃) 09:55:45
+setChildIndex () 方法   
+
+public function setChildIndex(child:DisplayObject, index:int):void 
