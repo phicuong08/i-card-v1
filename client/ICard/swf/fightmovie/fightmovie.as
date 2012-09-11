@@ -74,6 +74,7 @@
 				if(bCompleted)
 				{
 					trace("fight movie ok!");
+					_timerShowResult.removeEventListener(TimerEvent.TIMER, this.showResult);
 					this._timerShowResult.stop();
 					this._onClose();
 				}
