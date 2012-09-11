@@ -108,13 +108,13 @@ package ICard.logic {
 			for each(var card:Object in targets){
 				var cardOld:Object = BattleHelper.CloneCardInfo(_guy,card["realID"]); 
 				oldCards.push(cardOld);
+				var cardOwner:int =  FindCardOwner(card["realID"]);
+				if(_guy[cardOwner])
+					_guy[cardOwner].onUpdateCard(card);
 				
 				if(card["realID"] != srcID)
-					desGuy= FindCardOwner(card["realID"]);
-				else
-					desGuy = srcGuy;
-				if(_guy[desGuy])
-					_guy[desGuy].onUpdateCard(card);
+					desGuy= cardOwner;
+				
 			}
 			_battleField.onCardFightResult(srcID,targets,oldCards,(srcGuy!=desGuy));
 		}

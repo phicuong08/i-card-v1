@@ -44,6 +44,7 @@
 		public function show(srcID:int,targets:Array,oldCards:Array,bEnemy:Boolean):void{
 		  _infoMC = new MovieClip;
 		  this.addChild(_infoMC);
+		  
 			AddObject(CreateFightCard(srcID,oldCards,targets));
 			var fightIcon:MovieClip = cardFactory.CreateFightIcon(bEnemy);
 			AddObject(fightIcon);
@@ -55,6 +56,7 @@
 				}
 			}
 			UpdatePos();
+			
 		}
 		
 		private function showResult(_arg1:TimerEvent):void{ //牌上的战斗结果渐变显示

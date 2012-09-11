@@ -25,6 +25,19 @@
 			this.x =x;
 			this.y =y;
 		}
+		public function DeactiveAllCard():void{
+			
+			var index:int = 0;
+			while(index <this.numChildren)
+			{
+				var card:MovieClip = (getChildAt(index) as MovieClip);
+				if(card.hasOwnProperty("cir")){
+					card.cir.visible = false;
+				}
+				index++;
+			}
+			
+		}
 		public function FindCard(realID:int):MovieClip{
 			var ret:int = -1;
 			var index:int = 0;
@@ -67,6 +80,10 @@
 		}
 			
 		public function AddCard(card:MovieClip):void{
+			var tt:MovieClip = new circle;
+			card.cir = tt;
+			tt.visible = false;
+			card.addChild(tt);
 			this.addChild(card);
 			UpdatePos();
 			
