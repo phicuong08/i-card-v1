@@ -21,7 +21,6 @@
 		public var _fight_but:SimpleButton;
 		private var _timerMC:TimerMC;
 		private var _targetCtl:TargetIndicator;
-		private var _activeCtl:ActiveIndicator;
 		public  var _secondTick:Timer; 
 		//private var _timer_but2:MovieClip;
 		
@@ -30,7 +29,6 @@
 			//RunTest();
 			_timerMC = new TimerMC(_timer_but);
 			_targetCtl = new TargetIndicator;
-			_activeCtl = new ActiveIndicator;
 			_myResNumMC = new ResNumMC;
 			_yourResNumMC = new ResNumMC;
 			_myResNumMC.x = 60-_myResNumMC.width/2;
@@ -111,17 +109,7 @@
 		{
 			_fight_but.addEventListener(MouseEvent.CLICK,_arg1);
 		}
-		private function ActiveSlotCard(slotId:int):void{
-		trace("active slot card",_slots[slotId].numChildren);
-			_activeCtl.Empty();
-			var index:int = 0;
-			while(index <_slots[slotId].numChildren)
-			{
-				var card:MovieClip = (_slots[slotId].getChildAt(index) as MovieClip);
-				_activeCtl.AddIndicator(card);
-				index++;
-			}
-		}
+		
     public function FindCard(realID:int):MovieClip{
     	var id:int = BattleFieldType.MyHandSlotId;
     	var card:MovieClip;
@@ -166,16 +154,11 @@
 				return;
 			_targetCtl.Empty();
 			_battleStage.AddFightTarget(realID);
-			var card:MovieClip = FindCard(realID);
-			_activeCtl.AddIndicator(card);
 			_fight_but.visible=true;
 		}
 		public function onInitalFight(realID:int):void{
 			_targetCtl.Empty();
-			_activeCtl.Empty();
 			var srcCard:MovieClip = FindCard(realID);
-			_activeCtl.AddIndicator(srcCard);
-			
 			var targetArr:Array = _battleStage.FightTarget;
 			FillTargetCtrl(targetArr);
 		}
@@ -190,24 +173,18 @@
 
 		}
 		public function PriFresh(myLoop:Boolean,secNum:int):void{
-		
-		_timerMC.InitTimeMC(secNum);
-		_activeCtl.Empty();
+			_timerMC.InitTimeMC(secNum);
 		}
 		
     public function LoopFresh(myLoop:Boolean,secNum:int):void{
-		_timerMC.InitTimeMC(secNum);
-		_targetCtl.Empty();
-		if(myLoop)
-			ActiveSlotCard(BattleFieldType.MyHandSlotId);
+			_timerMC.InitTimeMC(secNum);
+			_targetCtl.Empty();
 		}
 		public function onCardExOp(realID:int,abilityId:int):void{
 			LoopFresh(true,30);
 			_battleStage.InitialFight(realID);
 			_targetCtl.Empty();
-			_activeCtl.Empty();
 			var srcCard:MovieClip = FindCard(realID);
-			_activeCtl.AddIndicator(srcCard);
 			_targetCtl.AddIndicator(srcCard);
 			
 			var targetArr:Array = _battleStage.getAbilityTarget(abilityId);
@@ -259,16 +236,27 @@
 		private function updateActiveCard():void{
 			if(!_battleStage)
 				return;
+			DeactiveAllCard();
 			var arr:Array = _battleStage.getActiveTarget();
 			var cardArr:Array = [];
 			for each(var target:int in arr){
 				var card:MovieClip = FindCard(target);
-				if(card!=null)
-					cardArr.push(card);
+				if(card!=null){
+					card.cir.visible=true;
+				}
 			}
-			_activeCtl.SetActiveArr(cardArr);
 		}
-
+		
+		public function DeactiveAllCard():void{
+    		var id:int = BattleFieldType.MyHandSlotId;
+    		var card:MovieClip;
+			while(id <= BattleFieldType.YouHeroSlotId)
+			{
+				_slots[id].DeactiveAllCard();
+				id++;
+			}	
+    	}    
+	
 		public function RunTest():void{
 			var index:int=1;
 			var c1:MovieClip;
