@@ -1,5 +1,7 @@
 package sfs2x.extensions.icard.bsn;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.AICardDeckBean;
@@ -53,10 +55,37 @@ public class BattleAIBsn
 			return;
 		else if(Card2Fight(game,site))
 			return;
+		else if(Card2Cast(game,site))
+			return;
 //		else if(AddCard2EquipSlot(game,site))
 //			return;
 		else
 			BattleBsn.ClientEndOp(game,site.getPlayerID());
+	}
+	private static CardBean thinkAbilityCard(CardGameBean game,CardDeckBean site){
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.RES_ZONE_ID,CardInfoBean.ABILITY);
+		cardVect = WashCard(cardVect);
+		CardBean cast=null;
+		for(int i=0;i<cardVect.size();i++){
+			CardBean card = cardVect.get(i);
+			if(card.getCost()<site.getRemainRes()){
+				return card;
+			}
+		}
+		return null;
+	}
+	private static Vector<Integer>  thinkAbilityTarget(CardGameBean game,CardDeckBean site){
+		return null;
+	}
+	private static Boolean Card2Cast(CardGameBean game,CardDeckBean site){
+		CardBean cast = thinkAbilityCard(game,site);
+		if(cast==null)
+			return false;
+		Vector<Integer>  destVect = thinkAbilityTarget(game,site);
+		CardActionBean action = new CardActionBean(cast.getRealID(),site.getPlayerID(),
+													CardActionBean.DO_FIGHT_CARD,destVect);
+		game.setCurAction(action);
+		return true;
 	}
 	private static Boolean Card2Fight(CardGameBean game,CardDeckBean site){
 		CardBean atk = getAtkCard(game,site,CardBean.FIGHT_ZONE_ID,CardInfoBean.ALLY);
@@ -73,6 +102,7 @@ public class BattleAIBsn
 		game.setCurAction(action);
 		return true;
 	}
+	
 	private static CardBean getDefCard(CardGameBean game,CardDeckBean site){
 		CardDeckBean enemy = BattleBsn.getOtherDeck(game,site.getPlayerID());
 		if(enemy==null)
@@ -165,4 +195,20 @@ public class BattleAIBsn
 		}
 		return false;	
 	}
+	
+	public static Vector<CardBean> WashCard(Vector<CardBean> oldCards){
+		Vector<CardBean> newCards = new Vector<CardBean>();
+		List<CardBean> waitCards = new ArrayList<CardBean>();
+		for(int i=0;i<oldCards.size();i++){
+			waitCards.add(oldCards.get(i));
+		}
+		while(waitCards.size()>0){
+			int count = waitCards.size();
+			int randomIndex = GameBsn._Random.nextInt(count);
+			newCards.add(waitCards.get(randomIndex));
+			waitCards.remove(randomIndex);
+		}
+		return newCards;
+	}
+	
 }
