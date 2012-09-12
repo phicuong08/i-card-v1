@@ -60,6 +60,18 @@ package ICard.assist.server {
 			};
 			_SoldierCards = _arg1;
 		}
+		public static function get UseCard():Object{
+			if (_UseCard == null){
+				throw (new Error("还未赋值！"));
+			};
+			return (_UseCard);
+		}
+		public static function set UseCard(_arg1:Object):void{
+			if (_UseCard != null){
+				throw (new Error("非法赋值"));
+			};
+			_UseCard = _arg1;
+		}
 		public static function get WeaponCards():Object{
 			if (_WeaponCards == null){
 				throw (new Error("还未赋值！"));

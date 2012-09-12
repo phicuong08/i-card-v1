@@ -95,6 +95,14 @@
 					card.y = card.baseY -4;
 				SetCardTip(card);
 			}
+			var handleMuseMove:* = function(e:MouseEvent):void{
+				_selCard = card;
+				if(card.hasOwnProperty("cardmenu")==false){
+					ShowCardActionMenu(card);
+					SetCardTip(card);
+				}
+			}
+			
 			var handleMouseOutCard:* = function(e:MouseEvent):void{
 				card.y = card.baseY;
 				_selCard = null;
@@ -104,7 +112,7 @@
 			var handleMouseClickCard:* = function(e:MouseEvent):void{
 				_battleField.onClickCard(card.realID);
 			}
-			
+			card.addEventListener(MouseEvent.MOUSE_MOVE ,handleMuseMove);
 			card.addEventListener(MouseEvent.ROLL_OVER,handleMouseOverCard);
 			card.addEventListener(MouseEvent.ROLL_OUT,handleMouseOutCard);
 			card.addEventListener(MouseEvent.CLICK,handleMouseClickCard);
