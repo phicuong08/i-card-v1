@@ -6,6 +6,8 @@ import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.AICardDeckBean;
 import sfs2x.extensions.icard.beans.BattleStateBean;
+import sfs2x.extensions.icard.beans.CardAbilityBean;
+import sfs2x.extensions.icard.beans.CardAbilityStoreBean;
 import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
@@ -51,11 +53,11 @@ public class BattleAIBsn
 	}
 	private static void procWaitPlayCard(CardGameBean game,CardDeckBean site,ICardExtension ext){
 		
-		if(AddCard2FightSlot(game,site))
+		if(Card2Cast(game,site)) 
+			return;
+		else if (AddCard2FightSlot(game,site))
 			return;
 		else if(Card2Fight(game,site))
-			return;
-		else if(Card2Cast(game,site))
 			return;
 //		else if(AddCard2EquipSlot(game,site))
 //			return;
@@ -63,9 +65,8 @@ public class BattleAIBsn
 			BattleBsn.ClientEndOp(game,site.getPlayerID());
 	}
 	private static CardBean thinkAbilityCard(CardGameBean game,CardDeckBean site){
-		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.RES_ZONE_ID,CardInfoBean.ABILITY);
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,CardInfoBean.ABILITY);
 		cardVect = WashCard(cardVect);
-		CardBean cast=null;
 		for(int i=0;i<cardVect.size();i++){
 			CardBean card = cardVect.get(i);
 			if(card.getCost()<site.getRemainRes()){
@@ -74,14 +75,24 @@ public class BattleAIBsn
 		}
 		return null;
 	}
-	private static Vector<Integer>  thinkAbilityTarget(CardGameBean game,CardDeckBean site){
-		return null;
+	private static Vector<Integer>  thinkAbilityTarget(CardGameBean game,CardDeckBean site,CardBean cast){
+		Vector<Integer> targets = CardUseBsn.getAbilityTarget(game,site,cast);
+		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(cast.getCardID());
+		if(vec==null||vec.size()==0)
+			return null;
+		CardAbilityBean ability = vec.get(0);
+		while(targets.size()>ability.getTargetNum()){
+			int randomIndex = GameBsn._Random.nextInt(targets.size());
+			targets.remove(randomIndex);
+		}
+		
+		return targets;
 	}
 	private static Boolean Card2Cast(CardGameBean game,CardDeckBean site){
 		CardBean cast = thinkAbilityCard(game,site);
 		if(cast==null)
 			return false;
-		Vector<Integer>  destVect = thinkAbilityTarget(game,site);
+		Vector<Integer>  destVect = thinkAbilityTarget(game,site,cast);
 		CardActionBean action = new CardActionBean(cast.getRealID(),site.getPlayerID(),
 													CardActionBean.DO_FIGHT_CARD,destVect);
 		game.setCurAction(action);
@@ -124,15 +135,6 @@ public class BattleAIBsn
 	}
 	private static CardBean getAtkCard(CardGameBean game,CardDeckBean site,int slot,int cardType){
 		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,slot,cardType);
-		for(int i=0;i<cardVect.size();i++){
-			CardBean card = cardVect.get(i);
-			if(card.getSide()==0)
-				return card;
-		}
-		return null;
-	}
-	private static CardBean getFightAlly(CardGameBean game,CardDeckBean site){
-		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.FIGHT_ZONE_ID,CardInfoBean.ALLY);
 		for(int i=0;i<cardVect.size();i++){
 			CardBean card = cardVect.get(i);
 			if(card.getSide()==0)
