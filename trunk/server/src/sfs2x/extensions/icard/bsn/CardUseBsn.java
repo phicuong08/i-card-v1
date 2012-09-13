@@ -143,6 +143,38 @@ public class CardUseBsn
 			BufferBsn.AddBuf(cardSrc, cardDes, ability);
 		}
 	}
+	public static Vector<Integer>  getAbilityTarget(CardGameBean game,CardDeckBean site,CardBean cast){
+		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(cast.getCardID());
+		Vector<Integer> targets = new Vector<Integer>();
+		Vector<CardBean> myAllies = CardSiteBsn.PickSlotCard(site,CardBean.FIGHT_ZONE_ID,CardInfoBean.ALLY);
+		myAllies.add(site.getHero());
+		CardDeckBean enemy = BattleBsn.getOtherDeck(game,site.getPlayerID());
+		Vector<CardBean> enemyAllies = CardSiteBsn.PickSlotCard(enemy,CardBean.FIGHT_ZONE_ID,CardInfoBean.ALLY);
+		enemyAllies.add(enemy.getHero());
+		
+		for(int i=0;i<vec.size();i++){
+			CardAbilityBean ability = vec.get(i);
+			if(FillAbilityMatch(game,cast,ability,myAllies,targets))
+				myAllies = null;
+			if(FillAbilityMatch(game,cast,ability,enemyAllies,targets))
+				enemyAllies = null;
+		}
+		return targets;
+	}
+	private static boolean FillAbilityMatch(CardGameBean game,CardBean cardSrc,CardAbilityBean ability,Vector<CardBean> vec,Vector<Integer> targets){
+		if(vec==null)
+			return false;
+		boolean ret=false;
+		for(int j=0;j<vec.size();j++)
+		{
+			CardBean desCard =vec.get(j);
+			if(IsWhichMatch(game,cardSrc,desCard,ability)==true && !desCard.IsPointUnable()){
+				targets.add(desCard.getRealID());
+				ret = true;
+			}
+		}
+		return ret;
+	}
 	public static void DoCardAbility(CardGameBean game,CardBean cardSrc,CardBean cardDes){
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(cardSrc.getCardID());
 		
