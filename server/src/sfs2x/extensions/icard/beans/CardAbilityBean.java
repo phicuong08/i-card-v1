@@ -91,18 +91,16 @@ public class CardAbilityBean
 	private int _type;
 	private int _val;
 	private int _op;
-	private int _cost;
 	private int _loopType;
 	private int _targetNum;
 
-	public CardAbilityBean(int id,int when,int which,int type,int val,int op,int cost,int loopType,int tarNum){
+	public CardAbilityBean(int id,int when,int which,int type,int val,int op,int loopType,int tarNum){
 		_id = id;
 		_when = when;
 		_which = which;
 		_type = type;
 		_val = val;
 		_op = op;
-		_cost = cost;
 		_loopType = loopType;
 		_targetNum=tarNum;
 	}
@@ -118,11 +116,15 @@ public class CardAbilityBean
 	public int getVal(){
 		return _val;
 	}
+	public boolean getIsFriendly(){
+		if(_type==DO_HEAL || _type==DO_RESET)
+			return true;
+		else
+			return false;
+		
+	}
 	public int getOP(){
 		return _op;
-	}
-	public int getCost(){
-		return _cost;
 	}
 	public int getLoopType(){
 		return _loopType;

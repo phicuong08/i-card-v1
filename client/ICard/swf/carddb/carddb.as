@@ -116,6 +116,9 @@
 				case 40:
 					cardMC = CreateTaskCard(title);
 					break;
+				case 60:
+					cardMC = CreateSupportCard(title,info);
+					break;
 			}
 			cardMC.realID = info["realID"];
 			cardMC.turn = 0;
@@ -129,7 +132,13 @@
 			return skillMC;
 			
 		}
-		
+		private function CreateSupportCard(title:String,info:Object):MovieClip{
+			var supportMC:MovieClip = new card_skill;
+			supportMC.addChild(CreateTitleMC(title));
+			supportMC.addChild(CreateCostMC(info["cost"]));
+			return supportMC;
+			
+		}
 		private function CreateTaskCard(title:String):MovieClip{
 			var taskMC:MovieClip = new card_yuan;
 			taskMC.addChild(CreateTitleMC(title));

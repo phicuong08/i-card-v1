@@ -18,6 +18,7 @@ package ICard.assist.server {
 		private static var _SkillCards:Object = null;
 		private static var _TaskCards:Object = null;
 		private static var _UseCard:Object = null;
+		private static var _SupportCards:Object = null;
 		private static var _CardAbility:Object = null;
 		
 		public static function get CardAbility():Object{
@@ -59,6 +60,18 @@ package ICard.assist.server {
 				throw (new Error("非法赋值"));
 			};
 			_SoldierCards = _arg1;
+		}
+		public static function get SupportCards():Object{
+			if (_SupportCards == null){
+				throw (new Error("还未赋值！"));
+			};
+			return (_SupportCards);
+		}
+		public static function set SupportCards(_arg1:Object):void{
+			if (_SupportCards != null){
+				throw (new Error("非法赋值"));
+			};
+			_SupportCards = _arg1;
 		}
 		public static function get UseCard():Object{
 			if (_UseCard == null){
@@ -214,7 +227,19 @@ package ICard.assist.server {
 			card["detail"]=cardInfo[5];
 			return card;
 		}
-		
+		private static function CreateSupportCardInfo(id:int):Object{
+			var cardInfo:Array = _SupportCards[id];
+			if(!cardInfo)
+				return null;
+			var card:Object = new Object;
+			card["cardID"] = cardInfo[0];
+			card["title"] = cardInfo[1];
+			card["camp"] = cardInfo[2];
+			card["race"]= cardInfo[3];
+			card["cost"]=cardInfo[4];
+			card["detail"]=cardInfo[5];
+			return card;
+		}
 		public static function CreateCardInfo(id:int):Object{
 			var typeId:int = id/1000;
 			var cardInfo:Object;
@@ -243,6 +268,9 @@ package ICard.assist.server {
 					break;
 				case 40:
 					cardInfo = CreateTaskCardInfo(id);
+					break;
+				case 60:
+					cardInfo = CreateSupportCardInfo(id);
 					break;
 				default:
 					return null;

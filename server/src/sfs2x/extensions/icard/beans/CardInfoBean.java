@@ -8,6 +8,7 @@ public final class CardInfoBean {
 	public static final int ARMOR = 3;
 	public static final int ABILITY = 4;
 	public static final int QUEST = 5;
+	public static final int SUPPORT = 6;
 		
 	private int _cardID = 0; // ÅÆµÄid
 	
@@ -62,25 +63,28 @@ public final class CardInfoBean {
 				int ret=99;
 				switch(_cardID/1000)
 				{
-				case 30:
-					ret = WEAPON;
-					break;
-				case 31:
-					ret = ARMOR;
+				case 20:
+					ret = HERO;
 					break;
 				case 21:
 				case 22:
 				case 23:
 					ret = ALLY;
 					break;
-				case 20:
-					ret = HERO;
+				case 30:
+					ret = WEAPON;
+					break;
+				case 31:
+					ret = ARMOR;
+					break;	
+				case 40:
+					ret = QUEST;
 					break;
 				case 50:
 					ret = ABILITY;
 					break;
-				case 40:
-					ret = QUEST;
+				case 60:
+					ret = SUPPORT;
 					break;
 			}
 			return ret;

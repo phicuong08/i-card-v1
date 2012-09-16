@@ -37,10 +37,9 @@ public class CardAbilityStoreBean {
 				String whichInfo = (rowData.get("WHICH")==null||rowData.get("WHICH").isEmpty())?"":rowData.get("WHICH"); //
 				int val = (rowData.get("VAL")==null||rowData.get("VAL").isEmpty())?0 :Integer.parseInt(rowData.get("VAL")); //
 				String op = (rowData.get("OP")==null||rowData.get("OP").isEmpty())?"":rowData.get("OP");//
-				int cost = (rowData.get("COST")==null||rowData.get("COST").isEmpty())?0 :Integer.parseInt(rowData.get("COST")); //
 				String loop = (rowData.get("LOOP")==null||rowData.get("LOOP").isEmpty())?"":rowData.get("LOOP");//
 				int tarNum = (rowData.get("TARGETNUM")==null||rowData.get("TARGETNUM").isEmpty())?0 :Integer.parseInt(rowData.get("TARGETNUM")); //
-				AddAbilityInfo(Id,whenInfo,whichInfo,whatInfo,val,op,cost,loop,tarNum);
+				AddAbilityInfo(Id,whenInfo,whichInfo,whatInfo,val,op,loop,tarNum);
 			}
 		}
 	}
@@ -67,10 +66,10 @@ public class CardAbilityStoreBean {
 		}while(true);
 		return vec;
 	}
-	private void AddAbilityInfo(int id,String whenInfo,String whichInfo,String whatInfo,int val,String op,int cost,
+	private void AddAbilityInfo(int id,String whenInfo,String whichInfo,String whatInfo,int val,String op,
 								String loop,int tarNum){
 		CardAbilityBean ability = new CardAbilityBean(id,  ParseWhenInfo(whenInfo),ParseWhichInfo(whichInfo),
-									ParseWhatInfo(whatInfo),val,ParseOpInfo(op),cost,ParseLoopInfo(loop),tarNum);
+									ParseWhatInfo(whatInfo),val,ParseOpInfo(op),ParseLoopInfo(loop),tarNum);
 		_abilityInfoMap.put(id, ability);
 	}
 	private int ParseLoopInfo(String loop){

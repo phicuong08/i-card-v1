@@ -114,7 +114,13 @@ public class BattleBsn
 		case BattleStateBean.ST_WAIT_EX_OP:
 			procWaitExOp(game,ext,elapsed);
 			break;
+		case BattleStateBean.ST_GAME_END:
+			procEndGame(game);
+			break;
 		}
+	}
+	private static void procEndGame(CardGameBean game){
+		game.setStarted(false);
 	}
 	public static void procWaitPlayCard(CardGameBean game,int elapsed,ICardExtension ext){
 		if(game.getStateBean().DecDuration(elapsed)==false){

@@ -55,7 +55,9 @@ public class BattleAIBsn
 		
 		if(Card2Cast(game,site)) 
 			return;
-		else if (AddCard2FightSlot(game,site))
+		else if (Card2EnterPlay(game,site,CardInfoBean.SUPPORT))
+			return;
+		else if (Card2EnterPlay(game,site,CardInfoBean.ALLY))
 			return;
 		else if(Card2Fight(game,site))
 			return;
@@ -75,11 +77,37 @@ public class BattleAIBsn
 		}
 		return null;
 	}
+	private static Vector<Integer> filterOnAbility(CardGameBean game,CardBean cast,Vector<CardAbilityBean> abilityVec,Vector<Integer> targets){
+		Vector<Integer> filters = new Vector<Integer>();
+		
+		for(int i=0;i<targets.size();i++){
+			CardBean card = game.getCard(targets.get(i));
+			for(int j=0;j<abilityVec.size();j++){
+				CardAbilityBean ability = abilityVec.get(j);
+				if(ability.getIsFriendly() )
+				{
+					if(cast.getOwner()!= card.getOwner())
+						continue;
+				}
+				else{
+					if(cast.getOwner()== card.getOwner())
+						continue;
+				}
+				if( CardUseBsn.calcAbilityVal(ability,card)>0)
+				{
+					filters.add(card.getRealID());
+					break;
+				}
+			}
+		}
+		return filters;
+	}
 	private static Vector<Integer>  thinkAbilityTarget(CardGameBean game,CardDeckBean site,CardBean cast){
 		Vector<Integer> targets = CardUseBsn.getAbilityTarget(game,site,cast);
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(cast.getCardID());
 		if(vec==null||vec.size()==0)
 			return null;
+		targets = filterOnAbility(game,cast,vec,targets);
 		CardAbilityBean ability = vec.get(0);
 		while(targets.size()>ability.getTargetNum()){
 			int randomIndex = GameBsn._Random.nextInt(targets.size());
@@ -142,11 +170,11 @@ public class BattleAIBsn
 		}
 		return null;
 	}
-	private static Boolean AddCard2FightSlot(CardGameBean game,CardDeckBean site){
+	private static Boolean Card2EnterPlay(CardGameBean game,CardDeckBean site,int cardType){
 		int remainRes = site.getRemainRes();
 		if(remainRes<=0)
 			return false;
-		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,CardInfoBean.ALLY);
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,cardType);
 		if(cardVect.size()==0)
 			return false;
 		for(int i=0;i<cardVect.size();i++){
