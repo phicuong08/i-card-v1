@@ -19,7 +19,8 @@ public class CardBean
 	public final static int FIGHT_ZONE_ID = 4;
 	public final static int GRAVE_ZONE_ID = 5;
 	public final static int HERO_ZONE_ID = 6;
-	public final static int BUF_ZONE_ID = 7;
+	public final static int ATTACH_ZONE_ID = 7;
+	public final static int SUPPORT_ZONE_ID = 8;
 	
 	public final static int ZONE_DIRTY_BIT = 0;
 	public final static int HP_DIRTY_BIT = 1;
@@ -34,17 +35,19 @@ public class CardBean
 	private int _realID;
 	private int _cardID;
 	private int _zoneID;
+	private int _owner;
 	private int _turn;
 	private int _side;
 	private int _addHp;
 	private int _dirtyFlag=0;
 	private CardInfoBean _info;
 	private BufferStoreBean _bufStore;
-	public CardBean(int realID, int cardID,int zoneID)
+	public CardBean(int realID, int cardID,int zoneID,int owner)
 	{
 		_realID = realID;
 		_cardID = cardID;
 		_zoneID = zoneID;
+		_owner = owner;
 		setDirtyFlagBit(ZONE_DIRTY_BIT);
 		setDirtyFlagBit(CARDID_DIRTY_BIT);
 		_info = CardInfoStoreBean.GetInstance().getCardInfo(cardID);
@@ -61,6 +64,9 @@ public class CardBean
 	public void DelBuf(CardAbilityBean ability,int realID){
 		_bufStore.DelBuf(realID);
 		setDirtyFlagBit(BUF_DIRTY_BIT);
+	}
+	public int getOwner(){
+		return _owner;
 	}
 	public int getCardID() {
 		return _cardID;
@@ -119,6 +125,9 @@ public class CardBean
 			return;
 		_side = val;
 		setDirtyFlagBit(SIDE_DIRTY_BIT);
+	}
+	public boolean IsHero(){
+		return (_zoneID==CardBean.HERO_ZONE_ID);
 	}
 	public boolean IsPointUnable(){
 		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.POINT_UNABLE))

@@ -106,6 +106,8 @@
 			if(oldCard==null)
 				return null;
 			var cardMC:MovieClip = cardFactory.CreateCard(oldCard);
+			if(cardMC==null)
+				return cardFactory.CreateCard(newCard);
 			if( newCard==null)
 				return cardMC;
 				

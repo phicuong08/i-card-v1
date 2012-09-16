@@ -175,6 +175,26 @@ public class CardUseBsn
 		}
 		return ret;
 	}
+	public static int calcAbilityVal(CardAbilityBean ability,CardBean card){
+		int ret = 0;
+		switch(ability.getType()){
+		case CardAbilityBean.DO_DAMAGE:
+			if(card.IsHero())
+				ret = ability.getVal()*2;
+			else
+				ret = (card.getHp()<= ability.getVal())? card.getCost()+2:card.getCost();
+			break;
+		case CardAbilityBean.DO_HEAL:
+			ret = card.getMaxHp() - card.getHp();
+			break;
+		case CardAbilityBean.DO_KILL:
+		case CardAbilityBean.DO_KILL_COST_UP:
+		case CardAbilityBean.DO_KILL_COST_DOWN:
+			ret = card.getCost();
+			break;
+		}
+		return ret;
+	}
 	public static void DoCardAbility(CardGameBean game,CardBean cardSrc,CardBean cardDes){
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(cardSrc.getCardID());
 		
@@ -188,7 +208,7 @@ public class CardUseBsn
 				bHaveBuf = true;
 		}
 		if(bHaveBuf)
-			cardSrc.setZoneID(CardBean.BUF_ZONE_ID);
+			cardSrc.setZoneID(CardBean.ATTACH_ZONE_ID);
 		else
 			onCardDead(game,cardSrc);
 		if(cardDes.getIsDead())
@@ -209,9 +229,9 @@ public class CardUseBsn
 		CardAbilityBean ability = CardAbilityStoreBean.GetInstance().getAbilityBean(card.getCardID());
 		if(ability==null)
 			return false;
-		if(CardSiteBsn.getResNum(site)< ability.getCost())
+		if(CardSiteBsn.getResNum(site)< card.getCost())
 			return false;
-		CardSiteBsn.useRes(site,ability.getCost());
+		CardSiteBsn.useRes(site,card.getCost());
 		int targetNum = (ability.getTargetNum()>action.getDes().size())?action.getDes().size():ability.getTargetNum();
 		for(int i=0;i<targetNum;i++){
 			CardBean targetCard = game.getCard(action.getDes().get(i));

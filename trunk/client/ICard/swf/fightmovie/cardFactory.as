@@ -85,6 +85,8 @@
 				case 40:
 					cardMC = CreateTaskCard(title);
 					break;
+				default:
+					return null;
 			}
 			cardMC.realID = info["realID"];
 			cardMC.turn = info["turn"];
