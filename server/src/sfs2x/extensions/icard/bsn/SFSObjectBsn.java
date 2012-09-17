@@ -42,6 +42,8 @@ public class SFSObjectBsn
 			cardInfo.putInt("turn", card.getTurn());	
 		if(card.getDirtyFlagBit(CardBean.HP_DIRTY_BIT))	
 			cardInfo.putInt("hp", card.getHp());	
+		if(card.getDirtyFlagBit(CardBean.ATK_DIRTY_BIT))	
+			cardInfo.putInt("atk", card.getAtk(-1));	
 		
 		if(card.getDirtyFlagBit(CardBean.BUF_DIRTY_BIT))
 		{

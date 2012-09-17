@@ -53,26 +53,12 @@ package ICard.views {
 			if(cardInfo!=null)
 			{
 				var cardObj:CardData = (cardInfo[1] as CardData);
-//				if(CardDiffData.IsAttrDiff(cardInfo[0],cardInfo[1]))
-//				{
-//						var cardMC:MovieClip = _battleField.FindCard(cardObj.RealID);
-//						if(cardMC)
-//							this._cardDB.UpdateAttr(cardMC,cardObj.Info);
-//						if(CardDiffData.IsSideDiff(cardInfo[0],cardInfo[1]))
-//						{
-//								_battleField.SideCard(cardObj.Info);
-//						}		
-//				}
-//				else
-				{
-					var newCard:MovieClip = CreateCard(cardObj);
-					var slotId:int = _battleStage.GetUISlot(cardObj.Info);
-					if(newCard==null)
-						trace("slot id=",slotId);
-					_battleField.Add2Slot(slotId,newCard);
-				}
+				var newCard:MovieClip = CreateCard(cardObj);
+				var slotId:int = _battleStage.GetUISlot(cardObj.Info);
+				_battleField.Add2Slot(slotId,newCard);
 			}
 		}
+		
 		private function fillBufIcon(cardMC:MovieClip,card:CardData):void{
 			for(var i:int=0;i<CardData.MaxBufNum;i++){
 				var bufId:int = card.getBuf(i);

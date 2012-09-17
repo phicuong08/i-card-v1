@@ -167,7 +167,7 @@ public class CardBean
 	public int getDef(int when){ //∑¿”˘¡¶
 		return _info.getBaseDefence() + BufferBsn.getAbilityVal(this,when,CardAbilityBean.BUF_DEF_ADD);
 	}
-	private int getWhich(){
+	public int getWhich(){
 		int which = CardAbilityBean.WHICH_NULL;
 		switch(getCardType()){
 		case CardInfoBean.HERO:

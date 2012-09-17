@@ -217,6 +217,7 @@ public class CardActionBsn
 	private static boolean procCard2FightSlot(CardGameBean game,CardDeckBean site,CardBean card){
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setZoneID(CardBean.FIGHT_ZONE_ID);	
+		card.setDirtyFlagBit(CardBean.ATK_DIRTY_BIT);
 		card.setSide(3);
 		return true;
 	}
@@ -224,6 +225,24 @@ public class CardActionBsn
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setZoneID(CardBean.SUPPORT_ZONE_ID);	
 		card.setSide(0);
+		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.FIGHT_ZONE_ID,CardInfoBean.ALLY);
+		cardVect.add(site.getHero());
+		for(int i=0;i<vec.size();i++){
+			CardAbilityBean ability = vec.get(i);
+			for(int j=0;j<cardVect.size();j++){
+				CardBean c = cardVect.get(j);
+				if(ability.IsWhichMatch(c.getWhich())==false)
+					continue;
+				if(ability.getWhen()!=CardAbilityBean.WHEN_ALL)
+					continue;
+				switch(ability.getType()){
+				case CardAbilityBean.BUF_ATK_ADD:
+					c.setDirtyFlagBit(CardBean.ATK_DIRTY_BIT);
+					break;
+				}
+			}
+		}
 		return true;
 	}
 	private static boolean procCard2EquipSlot(CardDeckBean site,CardBean card){
