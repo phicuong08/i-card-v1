@@ -14,13 +14,13 @@
 		private var _cardWidth:int;
 		public var _selCard:MovieClip;
 		private var _battleField:battleField;
-		public var _slotID:int;
+		public var _IsMyslot:Boolean;
         public function SlotBar():void{
             super();
         }
-		public function Init(slotId:int,x:int,y:int,widthMax:int)
+		public function Init(mySlot:Boolean,x:int,y:int,widthMax:int)
 		{
-			_slotID = slotId;
+			_IsMyslot = mySlot;
 			_widthMax = widthMax;
 			this.x =x;
 			this.y =y;
@@ -129,7 +129,7 @@
 				if(!card || !card.tipInfo)
 					return;	
 				trace("tip info",card.tipInfo);	
-				var pos:Point = (_slotID<=6)?card.localToGlobal(new Point(-100,-card.height/2-40)):card.localToGlobal(new Point(-100,card.height+8));
+				var pos:Point = (_IsMyslot)?card.localToGlobal(new Point(-100,-card.height/2-40)):card.localToGlobal(new Point(-100,card.height+8));
 				if((pos.x +380)>1200)
 					pos.x = 1200 -380;
 				

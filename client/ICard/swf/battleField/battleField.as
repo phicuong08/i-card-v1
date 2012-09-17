@@ -31,10 +31,10 @@
 			_targetCtl = new TargetIndicator;
 			_myResNumMC = new ResNumMC;
 			_yourResNumMC = new ResNumMC;
-			_myResNumMC.x = 60-_myResNumMC.width/2;
-			_myResNumMC.y = 575;
-			_yourResNumMC.x = 60 -_yourResNumMC.width/2;
-			_yourResNumMC.y = 130;
+			_myResNumMC.x = 850-_myResNumMC.width/2;
+			_myResNumMC.y = 630;
+			_yourResNumMC.x = 850 -_yourResNumMC.width/2;
+			_yourResNumMC.y = 185;
 			this.addChild(_myResNumMC);
 			this.addChild(_yourResNumMC);
 			_fight_but.visible=false;
@@ -48,45 +48,54 @@
 			_slots  = [];
 			
 			
-			_slots[BattleFieldType.MyHandSlotId] = new SlotBar;
-			_slots[BattleFieldType.MyHandSlotId].Init(BattleFieldType.MyHandSlotId,2,650,1180);
+			_slots[BattleFieldType.HandSlotId] = new SlotBar;
+			_slots[BattleFieldType.HandSlotId].Init(true,2,650,1180);
+			
+			_slots[BattleFieldType.ResourceSlotId] = new EmptyBar;
+						
+			_slots[BattleFieldType.EquipSlotId] = new EquipBar;
+			_slots[BattleFieldType.EquipSlotId].Init(true,1198,535,1300);
+			
+			_slots[BattleFieldType.FightSlotId] = new SlotBar;
+			_slots[BattleFieldType.FightSlotId].Init(true,2,350,1180);
+			
+			_slots[BattleFieldType.GraveSlotId] = new EmptyBar;
+			_slots[BattleFieldType.GraveSlotId].Init(true,2,350,1180);
+			
+			_slots[BattleFieldType.HeroSlotId] = new HeroBar;
+			_slots[BattleFieldType.HeroSlotId].Init(true,880,500,1180);
+			
+			_slots[BattleFieldType.SupportSlotId] = new SlotBar;
+			_slots[BattleFieldType.SupportSlotId].Init(true,2,500,826);
+			
+			_slots[BattleFieldType.AttachSlotId] = new EmptyBar;
 			
 			
-			_slots[BattleFieldType.MyResourceSlotId] = new ResourceBar;
-			_slots[BattleFieldType.MyResourceSlotId].Init(BattleFieldType.MyResourceSlotId,2,500,826);
 			
-			_slots[BattleFieldType.MyEquipSlotId] = new EquipBar;
-			_slots[BattleFieldType.MyEquipSlotId].Init(BattleFieldType.MyEquipSlotId,1198,535,1300);
+			_slots[BattleFieldType.HandSlotId+BattleFieldType.SlotNum] = new SlotBar;
+			_slots[BattleFieldType.HandSlotId+BattleFieldType.SlotNum].Init(false,2,-100,1180);
+						
+			_slots[BattleFieldType.ResourceSlotId+BattleFieldType.SlotNum] = new EmptyBar;
+
+			_slots[BattleFieldType.EquipSlotId+BattleFieldType.SlotNum] = new EquipBar;
+			_slots[BattleFieldType.EquipSlotId+BattleFieldType.SlotNum].Init(false,2,500,856);
 			
-			_slots[BattleFieldType.MyFightSlotId] = new SlotBar;
-			_slots[BattleFieldType.MyFightSlotId].Init(BattleFieldType.MyFightSlotId,2,350,1180);
+			_slots[BattleFieldType.FightSlotId+BattleFieldType.SlotNum] = new SlotBar;
+			_slots[BattleFieldType.FightSlotId+BattleFieldType.SlotNum].Init(false,2,200,1180);
 			
-			_slots[BattleFieldType.MyTombSlotId] = new TombBar;
-			_slots[BattleFieldType.MyTombSlotId].Init(BattleFieldType.MyTombSlotId,2,350,1180);
+			_slots[BattleFieldType.GraveSlotId+BattleFieldType.SlotNum] = new EmptyBar;
+			_slots[BattleFieldType.GraveSlotId+BattleFieldType.SlotNum].Init(false,2,350,1180);
 			
-			_slots[BattleFieldType.MyHeroSlotId] = new HeroBar;
-			_slots[BattleFieldType.MyHeroSlotId].Init(BattleFieldType.MyHeroSlotId,880,500,1180);
-			
-			_slots[BattleFieldType.YouHandSlotId] = new SlotBar;
-			_slots[BattleFieldType.YouHandSlotId].Init(BattleFieldType.YouHandSlotId,2,-100,1180);
-			
-			_slots[BattleFieldType.YouResourceSlotId] = new ResourceBar;
-			_slots[BattleFieldType.YouResourceSlotId].Init(BattleFieldType.YouResourceSlotId,2,50,826);
-			
-			_slots[BattleFieldType.YouEquipSlotId] = new EquipBar;
-			_slots[BattleFieldType.YouEquipSlotId].Init(BattleFieldType.YouEquipSlotId,2,500,856);
-			
-			_slots[BattleFieldType.YouFightSlotId] = new SlotBar;
-			_slots[BattleFieldType.YouFightSlotId].Init(BattleFieldType.YouFightSlotId,2,200,1180);
-			
-			_slots[BattleFieldType.YouTombSlotId] = new TombBar;
-			_slots[BattleFieldType.YouTombSlotId].Init(BattleFieldType.YouTombSlotId,2,350,1180);
-			
-			_slots[BattleFieldType.YouHeroSlotId] = new HeroBar;
-			_slots[BattleFieldType.YouHeroSlotId].Init(BattleFieldType.YouHeroSlotId,880,50,1180);
+			_slots[BattleFieldType.HeroSlotId+BattleFieldType.SlotNum] = new HeroBar;
+			_slots[BattleFieldType.HeroSlotId+BattleFieldType.SlotNum].Init(false,880,50,1180);
 		
-			var id:int = BattleFieldType.MyHandSlotId;
-			while(id <= BattleFieldType.YouHeroSlotId)
+			_slots[BattleFieldType.SupportSlotId+BattleFieldType.SlotNum] = new SlotBar;
+			_slots[BattleFieldType.SupportSlotId+BattleFieldType.SlotNum].Init(false,2,50,826);
+			
+			_slots[BattleFieldType.AttachSlotId+BattleFieldType.SlotNum] = new EmptyBar;
+			
+			var id:int = BattleFieldType.HandSlotId;
+			while(id <= BattleFieldType.SlotNum*2)
 			{
 				addChild(_slots[id]);
 				id++;
@@ -111,9 +120,9 @@
 		}
 		
     public function FindCard(realID:int):MovieClip{
-    	var id:int = BattleFieldType.MyHandSlotId;
+    	var id:int = BattleFieldType.HandSlotId;
     	var card:MovieClip;
-			while(id <= BattleFieldType.YouHeroSlotId)
+			while(id <= BattleFieldType.SlotNum*2)
 			{
 				card = _slots[id].FindCard(realID);
 				if(card)
@@ -136,9 +145,9 @@
 		}
 		
 		 public function RemoveCard(realID:int):void{
-	    	var id:int = BattleFieldType.MyHandSlotId;
+	    	var id:int = BattleFieldType.HandSlotId;
 	    	var card:MovieClip;
-				while(id <= BattleFieldType.YouHeroSlotId)
+				while(id <= BattleFieldType.SlotNum*2)
 				{
 					card = _slots[id].FindCard(realID);
 					if(card)
@@ -193,8 +202,8 @@
 		}
 		public function SideCard(info:Object):void{
 		
-			var id:int = BattleFieldType.MyHandSlotId;
-			while(id <= BattleFieldType.YouHeroSlotId)
+			var id:int = BattleFieldType.HandSlotId;
+			while(id <= BattleFieldType.SlotNum*2)
 			{
 				if(_slots[id].SideCard(info))
 					return;
@@ -205,8 +214,8 @@
 		public function set BattleStage(arg1:IBattleStage):void{
 			_battleStage = arg1;
 			_timerMC.Init(_battleStage);
-			var id:int = BattleFieldType.MyHandSlotId;
-			while(id <= BattleFieldType.YouHeroSlotId)
+			var id:int = BattleFieldType.HandSlotId;
+			while(id <= BattleFieldType.SlotNum*2)
 			{
 				_slots[id].BattleStage = _battleStage;
 				_slots[id].BattleField = this;
@@ -216,8 +225,8 @@
 		public function set tip(_arg1:ITip):void{
 			_tip = _arg1;
 		   
-			var id:int = BattleFieldType.MyHandSlotId;
-			while(id <= BattleFieldType.YouHeroSlotId)
+			var id:int = BattleFieldType.HandSlotId;
+			while(id <= BattleFieldType.SlotNum*2)
 			{
 				_slots[id].tip = _tip;
 				id++;
@@ -248,9 +257,9 @@
 		}
 		
 		public function DeactiveAllCard():void{
-    		var id:int = BattleFieldType.MyHandSlotId;
+    		var id:int = BattleFieldType.HandSlotId;
     		var card:MovieClip;
-			while(id <= BattleFieldType.YouHeroSlotId)
+			while(id <= BattleFieldType.SlotNum*2)
 			{
 				_slots[id].DeactiveAllCard();
 				id++;
@@ -266,7 +275,7 @@
 				c1.stand ="normal";
 				c1.realID = index;
 				c1.tipInfo = "abc";
-				Add2Slot(BattleFieldType.MyHeroSlotId,c1);
+				Add2Slot(BattleFieldType.HeroSlotId,c1);
 				index++;
 			}
 	//	RemoveCard(BattleFieldType.YouResourceSlotId,3);
