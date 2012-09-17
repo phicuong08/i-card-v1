@@ -103,13 +103,16 @@ package ICard.datas.card {
 			else{
 				if(info.hasOwnProperty("hp"))
 					_info["hp"] = info["hp"];
-				if(info.hasOwnProperty("atk"))
-					_info["atk"] = info["atk"];
+//				if(info.hasOwnProperty("atk"))
+//					_info["atk"] = info["atk"];
 				if(info.hasOwnProperty("def"))
 					_info["def"] = info["def"];
 				if(info.hasOwnProperty("cost"))
 					_info["cost"] = info["cost"];
 			}
+			if(info.hasOwnProperty("atk"))
+				_info["atk"] = info["atk"];
+			
 			if(info.hasOwnProperty("realID"))
 				_info["realID"] = info["realID"];
 			if(info.hasOwnProperty("cardID"))
