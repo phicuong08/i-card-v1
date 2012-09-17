@@ -2,6 +2,7 @@ package sfs2x.extensions.icard.beans;
 
 import sfs2x.extensions.icard.bsn.AttrBsn;
 import sfs2x.extensions.icard.bsn.BufferBsn;
+import sfs2x.extensions.icard.bsn.CardSiteBsn;
 import sfs2x.extensions.icard.bsn.CardUseBsn;
 import sfs2x.extensions.icard.utils.Constants;
 
@@ -35,19 +36,19 @@ public class CardBean
 	private int _realID;
 	private int _cardID;
 	private int _zoneID;
-	private int _owner;
+	private CardDeckBean _deck;
 	private int _turn;
 	private int _side;
 	private int _addHp;
 	private int _dirtyFlag=0;
 	private CardInfoBean _info;
 	private BufferStoreBean _bufStore;
-	public CardBean(int realID, int cardID,int zoneID,int owner)
+	public CardBean(int realID, int cardID,int zoneID,CardDeckBean deck)
 	{
 		_realID = realID;
 		_cardID = cardID;
 		_zoneID = zoneID;
-		_owner = owner;
+		_deck = deck;
 		setDirtyFlagBit(ZONE_DIRTY_BIT);
 		setDirtyFlagBit(CARDID_DIRTY_BIT);
 		_info = CardInfoStoreBean.GetInstance().getCardInfo(cardID);
@@ -66,7 +67,7 @@ public class CardBean
 		setDirtyFlagBit(BUF_DIRTY_BIT);
 	}
 	public int getOwner(){
-		return _owner;
+		return _deck.getPlayerID();
 	}
 	public int getCardID() {
 		return _cardID;
@@ -166,8 +167,23 @@ public class CardBean
 	public int getDef(int when){ //·ÀÓùÁ¦
 		return _info.getBaseDefence() + BufferBsn.getAbilityVal(this,when,CardAbilityBean.BUF_DEF_ADD);
 	}
+	private int getWhich(){
+		int which = CardAbilityBean.WHICH_NULL;
+		switch(getCardType()){
+		case CardInfoBean.HERO:
+			which = CardAbilityBean.WHICH_MYHERO;
+			break;
+		case CardInfoBean.ALLY:
+			which = CardAbilityBean.WHICH_MYSOLDIER;
+			break;
+		case CardInfoBean.WEAPON:
+			which = CardAbilityBean.WHICH_MYWEAPON;
+			break;
+		}
+		return which;
+	}
 	public int getAtk(int when){ //¹¥»÷Á¦
-		return _info.getBaseAttack() + BufferBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
+		return _info.getBaseAttack() + CardSiteBsn.SupportAtk(_deck,getWhich(), when) + BufferBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
 	}
 	public void setDead(){
 		AddHp(-10000);

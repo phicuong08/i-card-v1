@@ -4,6 +4,8 @@ package sfs2x.extensions.icard.bsn;
 import java.util.Vector;
 
 
+import sfs2x.extensions.icard.beans.CardAbilityBean;
+import sfs2x.extensions.icard.beans.CardAbilityStoreBean;
 import sfs2x.extensions.icard.beans.CardBean;
 
 import sfs2x.extensions.icard.beans.CardDeckBean;
@@ -46,6 +48,22 @@ public class CardSiteBsn
 				break;
 		}
 
+	}
+	public static int SupportAtk(CardDeckBean site,int which,int when){
+		int atk = 0;
+		Vector<CardBean> vec = PickSlotCard(site,CardBean.SUPPORT_ZONE_ID,-1);
+		for(int i=0;i<vec.size();i++){
+			CardBean card = vec.get(i);
+			
+			Vector<CardAbilityBean> abiVec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
+			for(int j=0;j<abiVec.size();j++){
+				CardAbilityBean ability = abiVec.get(j);
+				if(ability.getType()==CardAbilityBean.BUF_ATK_ADD && ability.IsWhichMatch(which)&& ability.IsWhenMatch(when))
+					atk += ability.getVal();
+			}
+		}
+		
+		return atk;
 	}
 	public static Vector<CardBean> PickSlotCard(CardDeckBean site,int slotID,int cardType){
 		Vector<CardBean> pickVect =new Vector<CardBean>();

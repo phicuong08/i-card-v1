@@ -138,5 +138,42 @@ public class CardAbilityBean
 	public boolean IsBuf(){
 		return (_type <= BUF_MAX);
 	}
+	public boolean IsWhenMatch(int when){
+		return (_when==when || _when==WHEN_ALL);
+	}
+	public boolean IsWhichMatch(int which){
+		boolean ret = false;
+		switch(which){
+		case WHICH_MYHERO:
+			if(_which == WHICH_MYHERO ||
+				_which == WHICH_MY)
+				ret = true;
+			break;
+		case WHICH_MYSOLDIER:
+			if(_which == WHICH_MYSOLDIER ||
+			_which == WHICH_MY)
+				ret = true;
+			break;
+		case WHICH_MYWEAPON:
+			if(_which == WHICH_MYWEAPON)
+				ret = true;
+			break;
+		case WHICH_YOURHERO:
+			if(_which == WHICH_YOURHERO ||
+			_which == WHICH_YOUR)
+			ret = true;
+			break;
+		case WHICH_YOURSOLDIER:
+			if(_which == WHICH_YOURSOLDIER ||
+			_which == WHICH_YOUR)
+				ret = true;
+			break;
+		case WHICH_YOURWEAPON:
+			if(_which == WHICH_YOURWEAPON)
+				ret = true;
+			break;
+		}
+		return ret;
+	}
 }
 
