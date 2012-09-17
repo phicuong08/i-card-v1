@@ -90,7 +90,7 @@ public class CardGameBean
 		CardDeckBean deck = _deck.get(playerID);
 		if(deck==null)
 			return false;
-		deck.AddCard(new CardBean(getGenCardRealID(),cardID,slotID,playerID));
+		deck.AddCard(new CardBean(getGenCardRealID(),cardID,slotID,deck));
 		return true;
 	}
 	public Boolean setCurAction(CardActionBean action){
