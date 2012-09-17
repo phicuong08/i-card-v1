@@ -67,7 +67,7 @@ package ICard.views {
 				{
 					var newCard:MovieClip = CreateCard(cardObj);
 					var slotId:int = _battleStage.GetUISlot(cardObj.Info);
-					if(slotId==BattleFieldType.YouResourceSlotId)
+					if(newCard==null)
 						trace("slot id=",slotId);
 					_battleField.Add2Slot(slotId,newCard);
 				}
@@ -162,9 +162,9 @@ package ICard.views {
 			//_battleStage.InitGuy(1,2);
 			
 			_battleStage.PlayerLoopFresh(1,30);
-			var card1:Object={playerID:1,realID:1,cardID:20001,slot:BattleFieldType.MyHeroSlotId};
-			var card2:Object={playerID:1,realID:2,cardID:31001,slot:BattleFieldType.MyHandSlotId};
-			var card3:Object={playerID:1,realID:2,cardID:31001,side:1,slot:BattleFieldType.MyEquipSlotId};
+			var card1:Object={playerID:1,realID:1,cardID:20001,slot:BattleFieldType.HeroSlotId};
+			var card2:Object={playerID:1,realID:2,cardID:31001,slot:BattleFieldType.HandSlotId};
+			var card3:Object={playerID:1,realID:2,cardID:31001,side:1,slot:BattleFieldType.EquipSlotId};
 		//	_battleStage.onUpdateCard(card1);
 		//	_battleStage.onUpdateCard(card2);
 			

@@ -46,8 +46,7 @@ package ICard.datas {
 			{
 				if(card.Side!=0)
 					continue;
-				if( card.Slot == BattleFieldType.MyResourceSlotId ||
-					card.Slot == BattleFieldType.YouResourceSlotId)
+				if( card.Slot == BattleFieldType.ResourceSlotId)
 				{
 					val++;
 				}
@@ -62,13 +61,13 @@ package ICard.datas {
 				var bAdd:Boolean = false;
 				switch(card.Slot)
 				{
-					case BattleFieldType.MyHandSlotId:
+					case BattleFieldType.HandSlotId:
 						bAdd = (card.Cost<=costLimit)?true:false;
 						break;
-					case BattleFieldType.MyFightSlotId:
+					case BattleFieldType.FightSlotId:
 						bAdd = true;
 						break;
-					case BattleFieldType.MyEquipSlotId:
+					case BattleFieldType.EquipSlotId:
 						bAdd = (card.Type==CardType.WeaponType)?true:false;
 						break;
 				}
@@ -96,7 +95,7 @@ package ICard.datas {
 			for each( var card:CardData in _cardArr)
 			{
 				
-				if( card.Slot == BattleFieldType.MyResourceSlotId &&
+				if( card.Slot == BattleFieldType.ResourceSlotId &&
 					card.Side ==0)
 				{
 					card.Side = 1;
@@ -112,7 +111,7 @@ package ICard.datas {
 			var resVal:int = 0;
 			for each( var card:CardData in _cardArr)
 			{
-				if( card.Slot == BattleFieldType.MyResourceSlotId &&
+				if( card.Slot == BattleFieldType.ResourceSlotId &&
 					card.Side ==false)
 					resVal++;
 			}

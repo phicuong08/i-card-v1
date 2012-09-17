@@ -53,13 +53,13 @@ package ICard.logic {
 		}
 		private static function getCastTarget(card:CardData,me:BattleGuy,you:BattleGuy,fillArr:Array):void{
 			if(UseCard.IsCast2MyHero(card.CardID))
-				me.CardDB.getCardOnSlot([BattleFieldType.MyHeroSlotId],fillArr);
+				me.CardDB.getCardOnSlot([BattleFieldType.HeroSlotId],fillArr);
 			if(UseCard.IsCast2MySoldier(card.CardID))
-				me.CardDB.getCardOnSlot([BattleFieldType.MyFightSlotId],fillArr);
+				me.CardDB.getCardOnSlot([BattleFieldType.FightSlotId],fillArr);
 			if(UseCard.IsCast2YourHero(card.CardID))
-				you.CardDB.getCardOnSlot([BattleFieldType.MyHeroSlotId],fillArr);
+				you.CardDB.getCardOnSlot([BattleFieldType.HeroSlotId],fillArr);
 			if(UseCard.IsCast2YourSoldier(card.CardID))
-				you.CardDB.getCardOnSlot([BattleFieldType.MyFightSlotId],fillArr);	
+				you.CardDB.getCardOnSlot([BattleFieldType.FightSlotId],fillArr);	
 		}
 	
 		public static function getFightTarget(guyDict:Dictionary,srcID:int,me:BattleGuy,you:BattleGuy):Array{
@@ -70,7 +70,7 @@ package ICard.logic {
 			switch(card.Type){
 				case CardType.SoldierType:
 				case CardType.HeroType:
-					you.CardDB.getCardOnSlot([BattleFieldType.MyFightSlotId,BattleFieldType.MyHeroSlotId],targetArr);
+					you.CardDB.getCardOnSlot([BattleFieldType.FightSlotId,BattleFieldType.HeroSlotId],targetArr);
 					break;
 				case CardType.SkillType:
 					getCastTarget(card,me,you,targetArr);

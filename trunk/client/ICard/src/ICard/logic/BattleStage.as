@@ -77,7 +77,7 @@ package ICard.logic {
 			switch(_curState)
 			{
 				case state_play_res:
-					PlayerMe.CardDB.getCardOnSlot([BattleFieldType.MyHandSlotId],arr);
+					PlayerMe.CardDB.getCardOnSlot([BattleFieldType.HandSlotId],arr);
 					break;
 				case state_play_card:
 					PlayerMe.CardDB.getActiveCardOnSlot(PlayerMe.CardDB.ResVal(),arr);
@@ -147,7 +147,7 @@ package ICard.logic {
 			if(card)
 				return cardInfo["slot"];
 			else
-				return cardInfo["slot"] +6;
+				return cardInfo["slot"] +8;
 		}
 		
 		public function FindCardOwner(realID:int):int{

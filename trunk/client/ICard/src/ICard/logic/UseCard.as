@@ -20,11 +20,11 @@ package ICard.logic {
 		}
 		
 		public static function Is2ResAble(card:CardData):Boolean{
-			return (card.Slot == BattleFieldType.MyHandSlotId);
+			return (card.Slot == BattleFieldType.HandSlotId);
 		}
 				
 		public static function IsCastAble(card:CardData,resVal:int):Boolean{
-			if(card.Slot != BattleFieldType.MyHandSlotId)
+			if(card.Slot != BattleFieldType.HandSlotId)
 				return false;
 			if(card.Type != CardType.SkillType)
 				return false;
@@ -34,8 +34,8 @@ package ICard.logic {
 		public static function Is2FightAble(card:CardData,resVal:int):Boolean{
 			if(card.Side!=0)
 				return false;
-			if(card.Slot != BattleFieldType.MyEquipSlotId &&
-				card.Slot != BattleFieldType.MyFightSlotId)
+			if(card.Slot != BattleFieldType.EquipSlotId &&
+				card.Slot != BattleFieldType.FightSlotId)
 				return false;
 			if(card.Type == CardType.DefType ||
 				card.Type == CardType.SoldierType)
@@ -43,12 +43,13 @@ package ICard.logic {
 			return UseAble(card,resVal);
 		}
 		public static function Is2EnterAble(card:CardData,resVal:int):Boolean{
-			if(card.Slot != BattleFieldType.MyHandSlotId)
+			if(card.Slot != BattleFieldType.HandSlotId)
 				return false;
 			var cardType:int =card.Type;
 			if(cardType != CardType.DefType &&
 				cardType != CardType.WeaponType &&
-				cardType != CardType.SoldierType)
+				cardType != CardType.SoldierType&&
+				cardType != CardType.SupportType)
 				return false;
 			return (card.Cost<=resVal);
 		}
@@ -136,6 +137,9 @@ package ICard.logic {
 				case 40:
 					ret = CardType.TaskType;
 					break;
+				case 60:
+					ret = CardType.SupportType;
+					break;
 			}
 			return ret;
 		}	
@@ -149,35 +153,35 @@ package ICard.logic {
 			{
 				case CardType.HeroType:
 				{
-					if(card.Slot ==BattleFieldType.MyHeroSlotId &&
+					if(card.Slot ==BattleFieldType.HeroSlotId &&
 						card.Turn == false)
 						return true;
 				}
 					break;
 				case CardType.SoldierType:
 				{
-					if(card.Slot ==BattleFieldType.MyFightSlotId &&
+					if(card.Slot ==BattleFieldType.FightSlotId &&
 						card.Turn == false)
 						return true;
 				}
 					break;
 				case CardType.SkillType:
 				{
-					if(card.Slot ==BattleFieldType.MyHandSlotId)
+					if(card.Slot ==BattleFieldType.HandSlotId)
 						return true;
 				}
 					break;
 				case CardType.WeaponType:
 				case CardType.DefType:
 				{
-					if(card.Slot ==BattleFieldType.YouEquipSlotId &&
+					if(card.Slot ==BattleFieldType.EquipSlotId &&
 						card.Turn == false)
 						return true;
 				}
 					break;
 				case CardType.TaskType:
 				{
-					if((card.Slot ==BattleFieldType.MyHandSlotId ||card.Slot ==BattleFieldType.MyResourceSlotId)&&
+					if((card.Slot ==BattleFieldType.HandSlotId ||card.Slot ==BattleFieldType.ResourceSlotId)&&
 						card.Turn == false)
 						return true;
 				}

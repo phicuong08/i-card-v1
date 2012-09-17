@@ -48,22 +48,22 @@ package ICard.logic {
 				return null;
 			switch(ability.which){
 				case CardAbility.WHICH_MY:
-					me.CardDB.getCardOnSlot([BattleFieldType.MyFightSlotId,BattleFieldType.MyHeroSlotId],targetArr);
+					me.CardDB.getCardOnSlot([BattleFieldType.FightSlotId,BattleFieldType.HeroSlotId],targetArr);
 					break;
 				case CardAbility.WHICH_MYHERO:
-					me.CardDB.getCardOnSlot([BattleFieldType.MyHeroSlotId],targetArr);
+					me.CardDB.getCardOnSlot([BattleFieldType.HeroSlotId],targetArr);
 					break;
 				case CardAbility.WHICH_MYSOLDIER:
-					me.CardDB.getCardOnSlot([BattleFieldType.MyFightSlotId],targetArr);
+					me.CardDB.getCardOnSlot([BattleFieldType.FightSlotId],targetArr);
 					break;
 				case CardAbility.WHICH_YOUR:
-					you.CardDB.getCardOnSlot([BattleFieldType.MyFightSlotId,BattleFieldType.MyHeroSlotId],targetArr);
+					you.CardDB.getCardOnSlot([BattleFieldType.FightSlotId,BattleFieldType.HeroSlotId],targetArr);
 					break;
 				case CardAbility.WHICH_YOURHERO:
-					you.CardDB.getCardOnSlot([BattleFieldType.MyHeroSlotId],targetArr);
+					you.CardDB.getCardOnSlot([BattleFieldType.HeroSlotId],targetArr);
 					break;
 				case CardAbility.WHICH_YOURSOLDIER:
-					you.CardDB.getCardOnSlot([BattleFieldType.MyFightSlotId],targetArr);
+					you.CardDB.getCardOnSlot([BattleFieldType.FightSlotId],targetArr);
 					break;
 			}
 			return targetArr;

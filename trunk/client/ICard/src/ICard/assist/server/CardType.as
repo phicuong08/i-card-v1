@@ -9,6 +9,7 @@ package ICard.assist.server {
 		public static const DefType:int = 3;
 		public static const SkillType:int = 4;
 		public static const TaskType:int = 5;
+		public static const SupportType:int = 6;
 		
 		
 		private static var _HeroCards:Object = null;

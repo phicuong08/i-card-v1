@@ -19,8 +19,8 @@ public class CardBean
 	public final static int FIGHT_ZONE_ID = 4;
 	public final static int GRAVE_ZONE_ID = 5;
 	public final static int HERO_ZONE_ID = 6;
-	public final static int ATTACH_ZONE_ID = 7;
-	public final static int SUPPORT_ZONE_ID = 8;
+	public final static int SUPPORT_ZONE_ID = 7;
+	public final static int ATTACH_ZONE_ID = 8;
 	
 	public final static int ZONE_DIRTY_BIT = 0;
 	public final static int HP_DIRTY_BIT = 1;
@@ -84,7 +84,7 @@ public class CardBean
 	public int getCardType(){
 		if(_info!=null)
 			return _info.getType();
-		return 0;
+		return -1;
 	}
 	public CardInfoBean getInfo(){
 		return _info;
