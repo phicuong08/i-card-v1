@@ -112,7 +112,13 @@ public class CardGameBean
 	public ConcurrentHashMap<Integer, CardDeckBean> getDeck() {
 		return _deck;
 	}
-
+	public CardDeckBean getDeck(int id){
+		for(CardDeckBean deck:_deck.values()){
+			if(deck.getPlayerID()==id)
+				return deck;
+		}
+		return null;
+	}
 	public void setPlayers(ConcurrentHashMap<Integer, CardDeckBean> deck) {
 		_deck = deck;
 	}
@@ -142,6 +148,13 @@ public class CardGameBean
 				return card;
 		}
 		return null;	
+	}
+	public CardDeckBean getTurnDeck(){
+		for(CardDeckBean deck:_deck.values()){
+			if(deck.getPlayerID()==_StateBean.getTurnPlayer())
+				return deck;
+		}
+		return null;
 	}
 	public CardInfoBean getCardInfo(int realID){
 		for(CardDeckBean deck:_deck.values()){

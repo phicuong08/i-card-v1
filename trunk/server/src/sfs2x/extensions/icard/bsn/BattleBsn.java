@@ -37,7 +37,8 @@ public class BattleBsn
 		game.getStateBean().setState(state);
 		game.getStateBean().InitWaitDuration(Constants.PLAY_OP_TIME);	
 	}
-	public static void drawCard(CardGameBean game,ICardExtension ext,int playerID,int num){
+	public static void drawCard(CardGameBean game,int playerID,int num){
+		ICardExtension ext = ICardExtension.getExt();
 		CardDeckBean site = game.getDeck().get(playerID);
 		if(site==null)
 			return;
@@ -203,15 +204,17 @@ public class BattleBsn
 	}
 
 	public static void onEvent(CardGameBean game,int when){
-		for (CardDeckBean site : game.getDeck().values()){
-			CardSiteBsn.onEvent(site, when);
+		CardDeckBean desDeck = game.getTurnDeck();
+		CardSiteBsn.onBufEvent(desDeck, when);
+		for (CardDeckBean deck : game.getDeck().values()){
+			CardSiteBsn.onSupportEvent(game,deck,desDeck, when);
 		}
 	}
 	public static void procTurnBegin(CardGameBean game,ICardExtension ext){
 		game.setCardReady();
 		onEvent(game,CardAbilityBean.WHEN_MY_LOOP_BEGIN);
 		if(game.getCurLoop()!=0) //先手不抓牌
-			drawCard(game,ext,game.getStateBean().getTurnPlayer(),1);
+			drawCard(game,game.getStateBean().getTurnPlayer(),1);
 		
 		InitNewOpState(game,BattleStateBean.ST_WAIT_PLAY_RES);
 		game.incLoop();

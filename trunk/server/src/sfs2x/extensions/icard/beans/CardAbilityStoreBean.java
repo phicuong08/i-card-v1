@@ -37,7 +37,7 @@ public class CardAbilityStoreBean {
 				String whichInfo = (rowData.get("WHICH")==null||rowData.get("WHICH").isEmpty())?"":rowData.get("WHICH"); //
 				int val = (rowData.get("VAL")==null||rowData.get("VAL").isEmpty())?0 :Integer.parseInt(rowData.get("VAL")); //
 				String op = (rowData.get("OP")==null||rowData.get("OP").isEmpty())?"":rowData.get("OP");//
-				String loop = (rowData.get("LOOP")==null||rowData.get("LOOP").isEmpty())?"":rowData.get("LOOP");//
+				int loop = (rowData.get("LOOP")==null||rowData.get("LOOP").isEmpty())?999 :Integer.parseInt(rowData.get("LOOP")); 
 				int tarNum = (rowData.get("TARGETNUM")==null||rowData.get("TARGETNUM").isEmpty())?0 :Integer.parseInt(rowData.get("TARGETNUM")); //
 				AddAbilityInfo(Id,whenInfo,whichInfo,whatInfo,val,op,loop,tarNum);
 			}
@@ -67,20 +67,12 @@ public class CardAbilityStoreBean {
 		return vec;
 	}
 	private void AddAbilityInfo(int id,String whenInfo,String whichInfo,String whatInfo,int val,String op,
-								String loop,int tarNum){
+								int loop,int tarNum){
 		CardAbilityBean ability = new CardAbilityBean(id,  ParseWhenInfo(whenInfo),ParseWhichInfo(whichInfo),
-									ParseWhatInfo(whatInfo),val,ParseOpInfo(op),ParseLoopInfo(loop),tarNum);
+									ParseWhatInfo(whatInfo),val,ParseOpInfo(op),loop,tarNum);
 		_abilityInfoMap.put(id, ability);
 	}
-	private int ParseLoopInfo(String loop){
-		if(loop.equals("LOOP_ONE"))
-			return CardAbilityBean.LOOP_ONE;
-		else if(loop.equals("LOOP_ALL"))
-			return CardAbilityBean.LOOP_ALL;
-		else if(loop.equals("LOOP_MY"))
-			return CardAbilityBean.LOOP_MY;
-		return 	CardAbilityBean.LOOP_ONE;
-	}
+	
 	private int ParseOpInfo(String op){
 		if(op.equals("OP_OR"))
 			return CardAbilityBean.OP_OR;
@@ -113,9 +105,12 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.WHICH_SRC;
 		else if(which.equals("WHICH_I"))
 			return CardAbilityBean.WHICH_I;
+		else if(which.equals("WHICH_SOLDIER"))
+			return CardAbilityBean.WHICH_SOLDIER;
+		else if(which.equals("WHICH_IU"))
+			return CardAbilityBean.WHICH_IU;
 		return 	CardAbilityBean.WHICH_NULL;
 	}
-	
 
 	private int ParseWhatInfo(String whatInfo){
 		if(whatInfo.equals("BUF_ATK_DIST"))
@@ -126,6 +121,8 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.BUF_ATK_ADD;
 		else if(whatInfo.equals("BUF_ATK_UNABLE"))
 			return CardAbilityBean.BUF_ATK_UNABLE;
+		else if(whatInfo.equals("BUF_UNABLE_ATKED"))
+			return CardAbilityBean.BUF_UNABLE_ATKED;
 		else if(whatInfo.equals("BUF_CURE"))
 			return CardAbilityBean.BUF_CURE;
 		else if(whatInfo.equals("BUF_DAMAGE_UNSTOP"))
@@ -207,6 +204,13 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.WHEN_MY_LOOP_BEGIN;
 		else if(whenInfo.equals("WHEN_MY_LOOP_END"))
 			return CardAbilityBean.WHEN_MY_LOOP_END;
+		else if(whenInfo.equals("WHEN_LOOP_BEGIN"))
+			return CardAbilityBean.WHEN_LOOP_BEGIN;
+		else if(whenInfo.equals("WHEN_LOOP_END"))
+			return CardAbilityBean.WHEN_LOOP_END;
+		else if(whenInfo.equals("WHEN_LOOP_END"))
+			return CardAbilityBean.WHEN_LOOP_END;
+		
 		return CardAbilityBean.WHEN_NULL;											
 	}
 }

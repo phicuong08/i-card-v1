@@ -7,8 +7,10 @@ import java.util.Vector;
 import sfs2x.extensions.icard.beans.CardAbilityBean;
 import sfs2x.extensions.icard.beans.CardAbilityStoreBean;
 import sfs2x.extensions.icard.beans.CardBean;
+import sfs2x.extensions.icard.beans.CardGameBean;
 
 import sfs2x.extensions.icard.beans.CardDeckBean;
+import sfs2x.extensions.icard.main.ICardExtension;
 
 
 
@@ -29,12 +31,44 @@ public class CardSiteBsn
 		}
 		return num;
 	}
-	public static void onEvent(CardDeckBean site,int when){
-		for (CardBean card : site.getCardMap().values()){
+	public static void onSupportEvent(CardGameBean game,CardDeckBean srcDeck,CardDeckBean desDeck,int when){
+		for (CardBean card: srcDeck.getCardMap().values()){
+			if(card.getZoneID()!=CardBean.SUPPORT_ZONE_ID)
+				continue;
+			card.getZoneID();
+		
+			Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
+			if(vec==null)
+				continue;
+
+			for(int i=0;i<vec.size();i++){
+				CardAbilityBean ability = vec.get(i);
+				if(ability.IsWhenMatch(when)==false)
+					continue;
+				switch(ability.getType()){
+				case CardAbilityBean.DO_DRAW_HAND_CARD:
+					BattleBsn.drawCard(game,desDeck.getPlayerID(),ability.getVal());
+					break;
+				}
+			}
+		}
+	}
+	public static void onBufEvent(CardDeckBean deck,int when){
+		
+		//buf event
+		for (CardBean card : deck.getCardMap().values()){
 			if(card.getIsPlayZone()==false)
 				continue;
-			CardEventBsn.onCardEvent(card, when);
+			Vector<CardAbilityBean> vec = card.getBufStore().getAbilityOnWhen(when);
+			if(vec==null)
+				continue;
+			for(int i=0;i<vec.size();i++){
+				CardAbilityBean ability = vec.get(i);
+				BufferBsn.callCardAbility(card,ability);
+			}
 		}
+		//support event
+		
 	}
 	public static void useRes(CardDeckBean site,int resNum){
 		int remain=resNum;
@@ -49,7 +83,7 @@ public class CardSiteBsn
 		}
 
 	}
-	public static int SupportAtk(CardDeckBean site,int which,int when){
+	public static int supportAtkVal(CardDeckBean site,int which,int when){
 		int atk = 0;
 		Vector<CardBean> vec = PickSlotCard(site,CardBean.SUPPORT_ZONE_ID,-1);
 		for(int i=0;i<vec.size();i++){
@@ -74,5 +108,21 @@ public class CardSiteBsn
 					pickVect.add(card);
 		}
 		return pickVect;
+	}
+	public static Boolean ExistDeckSupport(CardDeckBean deck,int which,int type){
+		for (CardBean card : deck.getCardMap().values())
+		{
+			if(card.getZoneID() != CardBean.SUPPORT_ZONE_ID)
+				continue;
+			Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
+			for(int i=0;i<vec.size();i++){
+				CardAbilityBean ability = vec.get(i);
+				if(ability.getType()!=type)
+					continue;
+				if(ability.IsWhichMatch(which))
+					return true;
+			}
+		}
+		return false;
 	}
 }

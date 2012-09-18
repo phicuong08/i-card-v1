@@ -96,13 +96,6 @@ public class CardUseBsn
 		}
 	}
 	
-	public static void DoDrawHandCard(CardGameBean game,CardBean cardSrc,CardBean cardDes,
-																	CardAbilityBean ability)
-	{
-		int owner = game.getCardOwner(cardSrc.getRealID());
-		BattleBsn.drawCard(game,ICardExtension.getExt(),owner,ability.getVal());
-	}
-	
 	public static void DoWhatAbility(CardGameBean game,CardBean cardSrc,CardBean cardDes,
 										CardAbilityBean ability)
 	{
@@ -137,7 +130,7 @@ public class CardUseBsn
 			cardDes.setSide(1);
 			break;
 		case CardAbilityBean.DO_DRAW_HAND_CARD:
-			DoDrawHandCard(game,cardSrc,cardDes,ability);
+			BattleBsn.drawCard(game,cardSrc.getOwner(),ability.getVal());
 			break;
 		default:
 			BufferBsn.AddBuf(cardSrc, cardDes, ability);
@@ -246,4 +239,5 @@ public class CardUseBsn
 			return true;
 		return (BufferBsn.IsExistBuf(card, CardAbilityBean.BUF_SIDE,CardAbilityBean.WHEN_ALL)==false);
 	}
+	
 }

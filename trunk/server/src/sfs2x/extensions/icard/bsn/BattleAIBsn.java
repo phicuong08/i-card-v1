@@ -162,6 +162,18 @@ public class BattleAIBsn
 		return def;
 	}
 	private static CardBean getAtkCard(CardGameBean game,CardDeckBean site,int slot,int cardType){
+		int which;
+		if(slot ==CardBean.FIGHT_ZONE_ID)
+			which = CardAbilityBean.WHICH_MYSOLDIER;
+		else if(slot ==CardBean.HERO_ZONE_ID)
+			which = CardAbilityBean.WHICH_MYHERO;
+		else
+			which = CardAbilityBean.WHICH_NULL;
+		if(GameBsn.ExistGameSupport(game,which,CardAbilityBean.BUF_ATK_UNABLE))
+			return null;
+		if(CardSiteBsn.ExistDeckSupport(site, which, CardAbilityBean.BUF_ATK_UNABLE))
+			return null;
+		
 		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,slot,cardType);
 		for(int i=0;i<cardVect.size();i++){
 			CardBean card = cardVect.get(i);

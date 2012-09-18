@@ -103,7 +103,8 @@ public class CardBean
 	public boolean getIsPlayZone(){
 		return (_zoneID==CardBean.EQUIP_ZONE_ID ||
 				_zoneID==CardBean.FIGHT_ZONE_ID ||
-				_zoneID==CardBean.HERO_ZONE_ID);
+				_zoneID==CardBean.HERO_ZONE_ID ||
+				_zoneID==CardBean.SUPPORT_ZONE_ID);
 	}
 	public void setZoneID(int id){
 		_zoneID = id;
@@ -153,6 +154,9 @@ public class CardBean
 	public boolean IsAtkUnable(int when){
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_ATK_UNABLE,when);
 	}
+	public boolean IsUnableAtked(int when){
+		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_UNABLE_ATKED,when);
+	}
 	public boolean IsGuidable(int when){
 		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.DIST_ATK))
 			return true;
@@ -183,7 +187,7 @@ public class CardBean
 		return which;
 	}
 	public int getAtk(int when){ //¹¥»÷Á¦
-		return _info.getBaseAttack() + CardSiteBsn.SupportAtk(_deck,getWhich(), when) + BufferBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
+		return _info.getBaseAttack() + CardSiteBsn.supportAtkVal(_deck,getWhich(), when) + BufferBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
 	}
 	public void setDead(){
 		AddHp(-10000);
