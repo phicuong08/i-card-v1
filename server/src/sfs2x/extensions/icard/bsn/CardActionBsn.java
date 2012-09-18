@@ -29,16 +29,6 @@ import sfs2x.extensions.icard.utils.Constants;
  */
 public class CardActionBsn
 {	
-	private static boolean findActionTarget(CardActionBean desCard,int targetID){
-		if(desCard.getSrc()==targetID)
-			return true;
-		Vector<Integer> desVect = desCard.getDes();
-		for(int i=0;i<desVect.size();i++){
-			if(desVect.get(i)==targetID)
-				return true;
-		}
-		return false;
-	}
 	public static int getActionCost(CardGameBean game,CardActionBean action){
 		CardBean card = game.getCard(action.getSrc());
 		if(card==null)
@@ -121,9 +111,29 @@ public class CardActionBsn
 		return (game.getCardOwner(desID) == action.getPlayerID());
 		
 	}
+	public static boolean IsAtkValidate(CardGameBean game,CardBean atk,CardBean def){
+		int which = atk.IsHero()?CardAbilityBean.WHICH_MYHERO:CardAbilityBean.WHICH_MYSOLDIER;
+		if(GameBsn.ExistGameSupport(game,which,CardAbilityBean.BUF_ATK_UNABLE))
+			return false;
+		if(GameBsn.ExistGameSupport(game,which,CardAbilityBean.BUF_UNABLE_ATKED))
+			return false;
+		CardDeckBean atkDeck = game.getDeck(atk.getOwner());
+		if(CardSiteBsn.ExistDeckSupport(atkDeck, which, CardAbilityBean.BUF_ATK_UNABLE))
+			return false;
+		CardDeckBean defDeck = game.getDeck(def.getOwner());
+		if(CardSiteBsn.ExistDeckSupport(defDeck, which, CardAbilityBean.BUF_UNABLE_ATKED))
+			return false;
+		return true;
+	}
 	private static void procCard2Atk(CardGameBean game,CardBean card,CardActionBean action){
 		int desID = action.getDes().get(0);
 		CardBean card2 = game.getCard(desID);
+		if(IsAtkValidate(game,card,card2)==false)
+			return;
+		if(card.IsAtkUnable(CardAbilityBean.WHEN_ATK))
+			return;
+		if(card2.IsUnableAtked(CardAbilityBean.WHEN_ATKED))
+			return;
 		CardUseBsn.Atk(card, card2);	
 	}
 	private static boolean procSkill2Cast(CardGameBean game,CardDeckBean site,CardBean card,CardActionBean action){
@@ -225,6 +235,7 @@ public class CardActionBsn
 		CardSiteBsn.useRes(site,card.getCost());
 		card.setZoneID(CardBean.SUPPORT_ZONE_ID);	
 		card.setSide(0);
+		
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
 		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.FIGHT_ZONE_ID,CardInfoBean.ALLY);
 		cardVect.add(site.getHero());

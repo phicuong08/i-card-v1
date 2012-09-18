@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.CardAbilityBean;
 import sfs2x.extensions.icard.beans.CardBean;
+import sfs2x.extensions.icard.beans.CardDeckBean;
 
 
 /**
@@ -16,7 +17,7 @@ import sfs2x.extensions.icard.beans.CardBean;
  */
 public class CardEventBsn
 {	
-	public static void onCardEvent(CardBean card,int when){
+	public static void onCardBufEvent(CardBean card,CardDeckBean desDeck,int when){
 		Vector<CardAbilityBean> vec = card.getBufStore().getAbilityOnWhen(when);
 		if(vec==null)
 			return;

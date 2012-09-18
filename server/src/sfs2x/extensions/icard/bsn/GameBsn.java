@@ -44,7 +44,7 @@ public class GameBsn
 //									 23001,23002,23003,21001,23005,
 //									 };
 	static private int _cardStore[]={23008,50003,21001,
-									 60001,40002,21001,21001,21001,40006,21001,21001,40010,
+									 60001,60002,60003,60004,21001,40006,21001,21001,40010,
 									 21001,31004,21001,
 									 30001,21001,21001,
 									 21001,21002,21003,21004,21005,
@@ -157,6 +157,14 @@ public class GameBsn
 				if(card.getDirtyFlag()>0)
 					return true;
 			}
+		}
+		return false;
+	}
+	public static Boolean ExistGameSupport(CardGameBean game,int which,int type){
+		for (CardDeckBean deck : game.getDeck().values())
+		{
+			if(CardSiteBsn.ExistDeckSupport(deck,which,type)==true)
+				return true;
 		}
 		return false;
 	}
