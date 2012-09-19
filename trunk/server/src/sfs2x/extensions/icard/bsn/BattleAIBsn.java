@@ -146,6 +146,18 @@ public class BattleAIBsn
 		CardDeckBean enemy = BattleBsn.getOtherDeck(game,site.getPlayerID());
 		if(enemy==null)
 			return null;
+		
+		boolean atkAlly = true;
+		boolean atkHero = true;
+		if(CardSiteBsn.ExistDeckSupport(enemy, CardAbilityBean.WHICH_MYSOLDIER, CardAbilityBean.BUF_UNABLE_ATKED))
+			atkAlly = false;
+		if(CardSiteBsn.ExistDeckSupport(enemy, CardAbilityBean.WHICH_MYHERO, CardAbilityBean.BUF_UNABLE_ATKED))
+			atkHero = false;
+		if(atkAlly==false &&atkHero==false)
+			return null;
+		if(atkAlly==false)
+			return enemy.getHero();
+		
 		int randomIndex = GameBsn._Random.nextInt(100);
 		CardBean def = null;
 		if(randomIndex<50)
