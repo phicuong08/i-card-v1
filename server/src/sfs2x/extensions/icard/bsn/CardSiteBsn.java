@@ -109,6 +109,29 @@ public class CardSiteBsn
 		}
 		return pickVect;
 	}
+	public static void onTurnEnd(CardGameBean game,ICardExtension ext,CardDeckBean deck){
+		boolean bDirty = false;
+		for (CardBean card : deck.getCardMap().values())
+		{
+			card.IncLoop();
+			if(card.getZoneID()!=CardBean.SUPPORT_ZONE_ID)
+				continue;
+			Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
+			if(vec.size()==0)
+				continue;
+			CardAbilityBean ability = vec.get(0);
+			if(card.getLoopNum()>ability.getLoopNum())
+			{
+				card.setDead();
+				bDirty = true;
+			}
+		}
+		if(bDirty)
+			ext.SendGameCardUpdate(game);
+	}
+	public static void IncCardLoop(CardDeckBean deck){
+		
+	}
 	public static Boolean ExistDeckSupport(CardDeckBean deck,int which,int type){
 		for (CardBean card : deck.getCardMap().values())
 		{
