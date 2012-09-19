@@ -146,6 +146,8 @@ public class CardAbilityBean
 		return (_type <= BUF_MAX);
 	}
 	public boolean IsWhenMatch(int when){
+		if(_when==WHEN_ALL)
+			return true;
 		if(_when==when)
 			return true;
 		boolean ret = false;

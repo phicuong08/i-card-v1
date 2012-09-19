@@ -112,16 +112,17 @@ public class CardActionBsn
 		
 	}
 	public static boolean IsAtkValidate(CardGameBean game,CardBean atk,CardBean def){
-		int which = atk.IsHero()?CardAbilityBean.WHICH_MYHERO:CardAbilityBean.WHICH_MYSOLDIER;
-		if(GameBsn.ExistGameSupport(game,which,CardAbilityBean.BUF_ATK_UNABLE))
+		int whichAtk = atk.IsHero()?CardAbilityBean.WHICH_MYHERO:CardAbilityBean.WHICH_MYSOLDIER;
+		int whichDef = def.IsHero()?CardAbilityBean.WHICH_MYHERO:CardAbilityBean.WHICH_MYSOLDIER;
+		if(GameBsn.ExistGameSupport(game,whichAtk,CardAbilityBean.BUF_ATK_UNABLE))
 			return false;
-		if(GameBsn.ExistGameSupport(game,which,CardAbilityBean.BUF_UNABLE_ATKED))
+		if(GameBsn.ExistGameSupport(game,whichDef,CardAbilityBean.BUF_UNABLE_ATKED))
 			return false;
 		CardDeckBean atkDeck = game.getDeck(atk.getOwner());
-		if(CardSiteBsn.ExistDeckSupport(atkDeck, which, CardAbilityBean.BUF_ATK_UNABLE))
+		if(CardSiteBsn.ExistDeckSupport(atkDeck, whichAtk, CardAbilityBean.BUF_ATK_UNABLE))
 			return false;
 		CardDeckBean defDeck = game.getDeck(def.getOwner());
-		if(CardSiteBsn.ExistDeckSupport(defDeck, which, CardAbilityBean.BUF_UNABLE_ATKED))
+		if(CardSiteBsn.ExistDeckSupport(defDeck, whichDef, CardAbilityBean.BUF_UNABLE_ATKED))
 			return false;
 		return true;
 	}
