@@ -4,19 +4,31 @@ package ICard.datas.card {
 	import ICard.assist.server.CardType;
 
 	public class CardAbility {
-		public static const WHICH_NULL:int = 0;
-		public static const WHICH_MY:int = 1;
-		public static const WHICH_MYHERO:int = 2;
-		public static const WHICH_MYSOLDIER:int = 3;
-		public static const WHICH_YOUR:int = 4;
-		public static const WHICH_YOURHERO:int = 5;
-		public static const WHICH_YOURSOLDIER:int = 6;
+	
+		public static const  WHICH_NULL:int                 =0;  
+		public static const  WHICH_MY:int                   =1;  //我方
+		public static const  WHICH_MYHERO:int               =2;  //我方英雄
+		public static const  WHICH_MYSOLDIER:int            =3;  //我方盟军 
+		public static const  WHICH_MYWEAPON:int             =4;  //我方武器
+		public static const  WHICH_YOUR:int                 =5;  //敌方
+		public static const  WHICH_YOURHERO:int             =6;  //敌方英雄
+		public static const  WHICH_YOURSOLDIER:int          =7;  //敌方盟军
+		public static const  WHICH_YOURWEAPON:int           =8;  //敌方武器
+		public static const  WHICH_SKILL:int                =9;  //技能 
+		public static const  WHICH_DES:int                  =10; //目标
+		public static const  WHICH_SRC:int                  =11; //源
+		public static const  WHICH_I:int                    =12; //自己
+		public static const  WHICH_SOLDIER:int              =13; //
+		public static const  WHICH_IU:int                   =14; //双方
+		public static const  WHICH_HERO:int                 =15; //
+		
 		
 		public static const BUF_NULL:int              =0;
 		public static const BUF_ATK_DIST:int          =1;   //Զ��
 		public static const BUF_ATK_WITH_EQUIP:int    =2;   //ÿװ���򹥻�����
 		public static const BUF_ATK_ADD:int           =3;   //����������
 		public static const BUF_ATK_UNABLE:int        =4;   //�޷�����
+		
 		public static const BUF_CURE:int              =5;   //�ܵ�����ʱ�˺�����
 		public static const BUF_DAMAGE_UNSTOP:int     =6;   //�˺����ɷ�ֹ
 		public static const BUF_GUIDE:int             =7;   //��������
@@ -31,6 +43,7 @@ package ICard.datas.card {
 		public static const BUF_POINT_UNABLE:int      =16;  //����ָ��
 		public static const BUF_DEF_ADD:int           =17;   //
 		public static const BUF_DEF_UNABLE:int        =18;  //�޷�����
+		public static	const BUF_UNABLE_ATKED:int      =19;   //无法攻击
 		
 		public static const BUF_MAX:int        				=99;  //
 	
@@ -75,6 +88,8 @@ package ICard.datas.card {
 				_what = BUF_ATK_ADD;
 			else if(info == "BUF_ATK_UNABLE")
 				_what = BUF_ATK_UNABLE;
+			else if(info =="BUF_UNABLE_ATKED")
+				_what = BUF_UNABLE_ATKED;
 			else if(info == "BUF_CURE")
 				_what = BUF_CURE;
 			else if(info == "BUF_DAMAGE_UNSTOP")
@@ -128,21 +143,38 @@ package ICard.datas.card {
 			else		
 				_what = BUF_NULL;	 	
 		}
-		private function parseWhich(info:String):void{
-			if(info=="WHICH_MY")
+		private function parseWhich(which:String):void{
+			if(which=="WHICH_MY")
 				_which = WHICH_MY;
-			else if(info=="WHICH_MYHERO")
-				_which = WHICH_MYHERO;
-			else if(info=="WHICH_MYSOLDIER")
-				_which = WHICH_MYSOLDIER;	
-			else if(info=="WHICH_YOUR")
-				_which = WHICH_YOUR;
-			else if(info=="WHICH_YOURSOLDIER")
-				_which = WHICH_MYSOLDIER;	
-			else if(info=="WHICH_YOURHERO")
-				_which = WHICH_YOURHERO;
+			else if(which=="WHICH_MYHERO")
+				_which=WHICH_MYHERO;
+			else if(which=="WHICH_MYSOLDIER")
+				_which=WHICH_MYSOLDIER;
+			else if(which=="WHICH_MYWEAPON")
+				_which=WHICH_MYWEAPON;
+			else if(which=="WHICH_YOUR")
+				_which=WHICH_YOUR;
+			else if(which=="WHICH_YOURHERO")
+				_which=WHICH_YOURHERO;
+			else if(which=="WHICH_YOURSOLDIER")
+				_which=WHICH_YOURSOLDIER;
+			else if(which=="WHICH_YOURWEAPON")
+				_which=WHICH_YOURWEAPON;
+			else if(which=="WHICH_SKILL")
+				_which=WHICH_SKILL;
+			else if(which=="WHICH_DES")
+				_which=WHICH_DES;
+			else if(which=="WHICH_SRC")
+				_which=WHICH_SRC;
+			else if(which=="WHICH_I")
+				_which=WHICH_I;
+			else if(which=="WHICH_SOLDIER")
+				_which= WHICH_SOLDIER;
+			else if(which=="WHICH_IU")
+				_which=WHICH_IU;
 			else
-				_which = WHICH_NULL;	
+				_which = WHICH_NULL;
+			
 		}
 		
 		public function get CardID():int{
@@ -156,6 +188,30 @@ package ICard.datas.card {
 		}
 		public function get which():int{
 			return _which;
+		}
+		public function IsWhichMatch(which:int):Boolean{
+			if(_which==which)
+				return true;
+			var ret:Boolean = false;
+			switch(which){
+				case WHICH_MYHERO:
+					if(_which == WHICH_HERO)
+						ret = true;
+					break;
+				case WHICH_MYSOLDIER:
+					if(_which == WHICH_SOLDIER)
+						ret = true;
+					break;
+				case WHICH_YOURHERO:
+					if(_which == WHICH_HERO)
+						ret = true;
+					break;
+				case WHICH_YOURSOLDIER:
+					if(_which == WHICH_SOLDIER)
+						ret = true;
+					break;
+			}
+			return ret;
 		}
 	}
 }//package com.assist.data.mission 
