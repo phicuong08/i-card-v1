@@ -31,14 +31,15 @@ package ICard.logic {
 			return (card.Cost<= resVal);
 		}
 		
-		public static function Is2FightAble(card:CardData,resVal:int):Boolean{
+		public static function Is2FightAble(card:CardData,resVal:int,allyFightable:Boolean):Boolean{
 			if(card.Side!=0)
 				return false;
 			if(card.Slot != BattleFieldType.EquipSlotId &&
 				card.Slot != BattleFieldType.FightSlotId)
 				return false;
-			if(card.Type == CardType.DefType ||
-				card.Type == CardType.SoldierType)
+			if(card.Type == CardType.SoldierType)
+				return allyFightable;
+			if(card.Type == CardType.DefType )
 				return true;
 			return UseAble(card,resVal);
 		}
@@ -73,11 +74,11 @@ package ICard.logic {
 			fillCard["slot"] = card.Slot;
 		}
 		
-		public static function genMenuFlag(card:CardData,state:int,resNum:int):Object{
+		public static function genMenuFlag(card:CardData,state:int,resNum:int,allyFightable:Boolean):Object{
 			var flagArr:Object = new Object;
 			flagArr["res"] = (state==BattleStage.state_play_res)?Is2ResAble(card):false;                             //��Դ
 			flagArr["enter"] = (state==BattleStage.state_play_card)?Is2EnterAble(card,resNum):false;  //��
-			flagArr["fight"] = (state==BattleStage.state_play_card)?Is2FightAble(card,resNum):false;  //ս��  
+			flagArr["fight"] = (state==BattleStage.state_play_card)?Is2FightAble(card,resNum,allyFightable):false;  //ս��  
 			flagArr["cast"] = (state==BattleStage.state_play_card)?IsCastAble(card,resNum):false; //ʩ��
 			return flagArr;
 		}

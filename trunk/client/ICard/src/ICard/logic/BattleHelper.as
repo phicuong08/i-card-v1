@@ -76,7 +76,7 @@ package ICard.logic {
 					getCastTarget(card,me,you,targetArr);
 					break;
 			}
-			return targetArr;
+			return AbilityHelper.filterTarget(me.CardDB,you.CardDB,targetArr);
 		}
 	}
 }//package com.assist.data.mission 

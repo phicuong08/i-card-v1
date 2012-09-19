@@ -3,7 +3,7 @@ package ICard.datas {
 	import ICard.assist.server.CardType;
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.datas.card.*;
-	
+	import ICard.logic.AbilityHelper;
 	import flash.utils.*;
 	public class BattleGuyData {
 		private var _cardArr:Dictionary;	
@@ -72,7 +72,7 @@ package ICard.datas {
 						break;
 				}
 				if(bAdd)
-					fillArr.push(card.RealID);
+					fillArr.push(card);
 			}
 		}
 		public function getCardOnSlot(slotArr:Array,fillArr:Array):void{
@@ -82,7 +82,7 @@ package ICard.datas {
 				{
 					if(card.Slot == slot)
 					{
-						fillArr.push(card.RealID);
+						fillArr.push(card);
 						break;
 					}
 				}

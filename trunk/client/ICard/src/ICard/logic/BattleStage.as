@@ -85,14 +85,14 @@ package ICard.logic {
 				case state_play_card_ex:
 					break;
 			}
-			return arr;
+			return AbilityHelper.filterActiveCard(PlayerMe.CardDB,Enemy.CardDB,arr);
 		}
 		public function get FightTarget():Array{
 			return BattleHelper.getFightTarget(_guy,_fightSrc,PlayerMe,Enemy);
 		}
 		
 		public function getAbilityTarget(id:int):Array{
-			return AbilityHelper.getTarget(id,PlayerMe,Enemy);
+			return AbilityHelper.getTarget(id,PlayerMe.CardDB,Enemy.CardDB);
 		}
 		
 		public function onUpdateCard(info:Object):void{
@@ -186,7 +186,8 @@ package ICard.logic {
 			var card:CardData =  FindCard(realID);
 			if(!card || card.GuyID!=_myID ||(_IsTurn==false))
 				return null;
-			return UseCard.genMenuFlag(card,_curState,PlayerMe.CardDB.ResNum());
+			var bAllyFightable:Boolean = AbilityHelper.IsSoldierFightable(PlayerMe.CardDB,Enemy.CardDB);
+			return UseCard.genMenuFlag(card,_curState,PlayerMe.CardDB.ResNum(),bAllyFightable);
 		}
 		
 		public function CardInfo(realID:int):Object{
