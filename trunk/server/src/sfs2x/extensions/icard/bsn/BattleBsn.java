@@ -243,6 +243,8 @@ public class BattleBsn
 	}
 	
 	public static void procTurnEnd(CardGameBean game,ICardExtension ext){//
+		CardDeckBean deck = game.getTurnDeck();
+		CardSiteBsn.onTurnEnd(game,ext,deck);
 		int nextOp = getOtherPlayer(game,game.getTurnPlayer());
 		game.setTurnPlayer(nextOp);
 		game.getStateBean().setDelayJump(BattleStateBean.ST_TURN_BEGIN,Constants.SHOW_ACTION_TIME);

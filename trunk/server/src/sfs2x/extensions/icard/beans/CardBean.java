@@ -41,6 +41,7 @@ public class CardBean
 	private int _side;
 	private int _addHp;
 	private int _dirtyFlag=0;
+	private int _loopNum=0;
 	private CardInfoBean _info;
 	private BufferStoreBean _bufStore;
 	public CardBean(int realID, int cardID,int zoneID,CardDeckBean deck)
@@ -62,7 +63,7 @@ public class CardBean
 		_bufStore.AddBuf(ability,realID);
 		setDirtyFlagBit(BUF_DIRTY_BIT);
 	}
-	public void DelBuf(CardAbilityBean ability,int realID){
+	public void DelBuf(int realID){
 		_bufStore.DelBuf(realID);
 		setDirtyFlagBit(BUF_DIRTY_BIT);
 	}
@@ -104,7 +105,8 @@ public class CardBean
 		return (_zoneID==CardBean.EQUIP_ZONE_ID ||
 				_zoneID==CardBean.FIGHT_ZONE_ID ||
 				_zoneID==CardBean.HERO_ZONE_ID ||
-				_zoneID==CardBean.SUPPORT_ZONE_ID);
+				_zoneID==CardBean.SUPPORT_ZONE_ID||
+				_zoneID==CardBean.ATTACH_ZONE_ID);
 	}
 	public void setZoneID(int id){
 		_zoneID = id;
@@ -185,6 +187,13 @@ public class CardBean
 			break;
 		}
 		return which;
+	}
+	public int getLoopNum(){
+		return _loopNum;
+	}
+	public void IncLoop(){
+		if(getIsPlayZone())
+			_loopNum++;
 	}
 	public int getAtk(int when){ //¹¥»÷Á¦
 		return _info.getBaseAttack() + CardSiteBsn.supportAtkVal(_deck,getWhich(), when) + BufferBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
