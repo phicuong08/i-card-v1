@@ -64,6 +64,7 @@ package ICard.logic {
 	
 		public static function getFightTarget(guyDict:Dictionary,srcID:int,me:BattleGuy,you:BattleGuy):Array{
 			var targetArr:Array = [];
+			var retArr:Array;
 			var card:CardData = getCardData(guyDict,srcID);
 			if(card==null)
 				return null;
@@ -71,12 +72,14 @@ package ICard.logic {
 				case CardType.SoldierType:
 				case CardType.HeroType:
 					you.CardDB.getCardOnSlot([BattleFieldType.FightSlotId,BattleFieldType.HeroSlotId],targetArr);
+					retArr = AbilityHelper.filterFightTarget(me.CardDB,you.CardDB,targetArr);
 					break;
 				case CardType.SkillType:
 					getCastTarget(card,me,you,targetArr);
+					retArr =  AbilityHelper.filterCastTarget(me.CardDB,you.CardDB,targetArr);
 					break;
 			}
-			return AbilityHelper.filterTarget(me.CardDB,you.CardDB,targetArr);
+			return retArr;
 		}
 	}
 }//package com.assist.data.mission 

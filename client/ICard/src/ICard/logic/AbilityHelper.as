@@ -66,9 +66,26 @@ package ICard.logic {
 					you.getCardOnSlot([BattleFieldType.FightSlotId],targetArr);
 					break;
 			}
-			return filterTarget(me,you,targetArr);
+			return filterFightTarget(me,you,targetArr);
 		}
-		public static function filterTarget(me:BattleGuyData,you:BattleGuyData,arr:Array):Array{
+		public static function filterCastTarget(me:BattleGuyData,you:BattleGuyData,arr:Array):Array{
+			var filterArr:Array = [];
+			
+			for each( var card:CardData in arr)
+			{
+				var bAdd:Boolean = true;
+				switch(card.Slot){
+					case BattleFieldType.FightSlotId:
+						break;
+					default:
+						break;
+				}
+				if(bAdd)
+					filterArr.push(card.RealID);
+			}
+			return filterArr;
+		}
+		public static function filterFightTarget(me:BattleGuyData,you:BattleGuyData,arr:Array):Array{
 			var filterArr:Array = [];
 			var bAllyEnable:Boolean = IsSoldierFightable(me,you);
 			for each( var card:CardData in arr)

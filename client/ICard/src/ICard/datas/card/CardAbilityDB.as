@@ -9,10 +9,7 @@ package ICard.datas.card {
 			if(_AbilityDict==null)
 				_AbilityDict = new Dictionary;
 			
-			var info:Array = CardType.CardAbilityInfo(id);	
-			if(info==null)
-				return null;
-			
+		
 			if(_AbilityDict[id]==null){
 				var ability:CardAbility = new CardAbility(id);
 				_AbilityDict[id] = ability;

@@ -28,7 +28,7 @@ package ICard.assist.server {
                 };
             };
 			format(CardType, "CardTypeData", ["HeroCards", "SkillCards",
-								"TaskCards","DefCards","WeaponCards","SoldierCards","SupportCards","UseCard","CardAbility"]);
+								"TaskCards","DefCards","WeaponCards","SoldierCards","SupportCards","UseCard","CardAbility","CardAttr"]);
 
         }
 
