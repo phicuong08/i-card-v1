@@ -217,5 +217,24 @@ package ICard.assist.server.source {
 							600030	:["WHEN_ALL"					,"WHICH_SOLDIER"			,"BUF_ATK_UNABLE"				,2		,"OP_AND"			,2		,99],
 							600040	:["WHEN_LOOP_BEGIN"		,"WHICH_IU"						,"DO_DRAW_HAND_CARD"		,1		,"OP_AND"			,999	,0]
 				};
+				public static const CardAttr:Object={
+							21001	:["POINT_UNABLE"		,"NULL"				,"NULL"				,"NULL"],
+							21003	:["LATENT"					,"NULL"				,"NULL"				,"NULL"],
+							21004	:["POINT_UNABLE"		,"NULL"				,"NULL"				,"NULL"],
+							21005	:["LATENT"					,"NULL"				,"NULL"				,"NULL"],
+							21006	:["HIDE"						,"DIST_ATK"		,"NULL"				,"NULL"],
+							21007	:["DIST_ATK"				,"NULL"				,"NULL"				,"NULL"],
+							22009	:["GUIDE"						,"LATENT"			,"NULL"				,"NULL"],
+							22012	:["GUIDE"						,"NULL"				,"NULL"				,"NULL"],
+							23003	:["ATK_UNSTOP"			,"NULL"				,"NULL"				,"NULL"],
+							30001	:["DIST_ATK"				,"NULL"				,"NULL"				,"NULL"],
+							30002	:["ATK_UNSTOP"			,"NULL"				,"NULL"				,"NULL"],
+							31003	:["GUIDE"						,"NULL"				,"NULL"				,"NULL"],
+							50001	:["ONGOING"					,"NULL"				,"NULL"				,"NULL"],
+							50004	:["ONGOING"					,"NULL"				,"NULL"				,"NULL"],
+							50007	:["ONGOING"					,"NULL"				,"NULL"				,"NULL"],
+							50009	:["INSTANT"					,"NULL"				,"NULL"				,"NULL"]    
+
+				};
     }
 }//package com.assist.server.source 

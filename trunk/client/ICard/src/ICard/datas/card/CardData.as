@@ -5,6 +5,7 @@ package ICard.datas.card {
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.haloer.data.*;
 	import ICard.logic.UseCard;
+	import ICard.logic.CardAttrHelper;
 	
 	import flash.utils.ByteArray;
 
@@ -166,6 +167,12 @@ package ICard.datas.card {
 		public function get Type():int{
 			return UseCard.getType(CardID); 
 		}	
+		
+		public function IsPointUnable():Boolean{
+			if(CardAttrHelper.IsExistAttr(CardID,CardAttr.POINT_UNABLE))
+				return true;
+			return false;//BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_POINT_UNABLE,CardAbilityBean.WHEN_ALL);
+		}
 		
 	}
 }//package com.assist.data.mission 

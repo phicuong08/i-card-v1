@@ -21,6 +21,20 @@ package ICard.assist.server {
 		private static var _UseCard:Object = null;
 		private static var _SupportCards:Object = null;
 		private static var _CardAbility:Object = null;
+		private static var _CardAttr:Object = null;
+		
+		public static function get CardAttr():Object{
+			if (_CardAttr == null){
+				throw (new Error("还未赋值！"));
+			};
+			return (_CardAttr);
+		}
+		public static function set CardAttr(_arg1:Object):void{
+			if (_CardAttr != null){
+				throw (new Error("非法赋值"));
+			};
+			_CardAttr = _arg1;
+		}
 		
 		public static function get CardAbility():Object{
 			if (_CardAbility == null){
@@ -33,6 +47,9 @@ package ICard.assist.server {
 				throw (new Error("非法赋值"));
 			};
 			_CardAbility = _arg1;
+		}
+		public static function CardAttrInfo(id:int):Array{
+			return _CardAttr[id];
 		}
 		public static function CardAbilityInfo(id:int):Array{
 			return _CardAbility[id];
