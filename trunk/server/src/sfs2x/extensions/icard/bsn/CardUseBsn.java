@@ -217,7 +217,7 @@ public class CardUseBsn
 		}
 	}
 	
-	public static boolean SkillCast(CardGameBean game,CardDeckBean site,
+	public static boolean ability2Cast(CardGameBean game,CardDeckBean site,
 										CardBean card,CardActionBean action){
 		CardAbilityBean ability = CardAbilityStoreBean.GetInstance().getAbilityBean(card.getCardID());
 		if(ability==null)

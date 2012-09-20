@@ -58,7 +58,6 @@ public final class CardInfoBean {
 	public int getBaseUseCost() {
 		return _BaseUseCost;
 	}
-	
 	public int getType(){
 				int ret=99;
 				switch(_cardID/1000)
