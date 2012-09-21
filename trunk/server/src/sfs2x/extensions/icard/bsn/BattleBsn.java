@@ -243,6 +243,7 @@ public class BattleBsn
 	}
 	
 	public static void procTurnEnd(CardGameBean game,ICardExtension ext){//
+		onEvent(game,CardAbilityBean.WHEN_MY_LOOP_END);
 		CardDeckBean deck = game.getTurnDeck();
 		CardSiteBsn.onTurnEnd(game,ext,deck);
 		int nextOp = getOtherPlayer(game,game.getTurnPlayer());
