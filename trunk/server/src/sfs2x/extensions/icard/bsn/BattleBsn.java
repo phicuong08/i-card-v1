@@ -1,6 +1,5 @@
 package sfs2x.extensions.icard.bsn;
 
-import java.util.Vector;
 
 import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.CardAbilityBean;
@@ -13,9 +12,6 @@ import sfs2x.extensions.icard.utils.Commands;
 import sfs2x.extensions.icard.utils.Constants;
 
 import com.smartfoxserver.v2.entities.data.ISFSObject;
-import com.smartfoxserver.v2.entities.data.SFSObject;
-
-import sfs2x.extensions.icard.beans.*;
 /**
  * GameBsn: class containing utility business classes for game processing
  * 
@@ -220,6 +216,7 @@ public class BattleBsn
 		game.incLoop();
 		ISFSObject params = SFSObjectBsn.genPlayerLoopInfo(game.getStateBean().getTurnPlayer(),
 							Constants.BATTLE_LOOP_TIME);
+		params.putInt("res", game.getTurnDeck().getCurRes());
 		ext.SendGameCommand(Commands.CMD_S2C_BATTLE_PLAYER_LOOP, params,game);
 	}
 	public static boolean onHeroDead(CardGameBean game){

@@ -29,14 +29,19 @@ package ICard.SFSMod {
 		
 		public function onCardUpdate(params:ISFSObject):void{
 			procCardArr(params);
+			updateTurnPlayerRes(params);
 		}
 		//����1(srcID);����2(target):Ŀ�꿨{(realID)...},����3(time):��Ӧʱ��(��),����4(attacker),����5(defender);
 		public function onCardFight(params:ISFSObject):void{
 			onProcPreActionInfo(params);
 		}
-		
+		private function updateTurnPlayerRes(params:ISFSObject):void{
+			var res:int = params.getInt("res");
+			_battleStage.TurnPlayer.CardDB.ResNum = res;
+		}
 		//����1(srcID):, ����2(target):{ {realID,hpAdd,def,atk,slot,turn,side} ,...}--�����ÿ����
 		public function onCardFightResult(params:ISFSObject):void{
+			updateTurnPlayerRes(params);
 			var srcID:int = params.getInt("srcID");
 			var targetArr:ISFSArray = params.getSFSArray("target");
 			var targets:Array = [];
@@ -64,11 +69,12 @@ package ICard.SFSMod {
 			var playerID:int = params.getInt("playerID");
 			_battleStage.WaitPlayerCard(playerID,secNum);
 		}
-		public function onPriPlayerLoop(params:ISFSObject):void{
+		public function onTurnPlayerLoop(params:ISFSObject):void{
 			var playerID:int = params.getInt("playerID");
 			var secNum:int = params.getInt("time");
 			onProcPreActionInfo(params);
-			_battleStage.PriPlayerLoop(playerID,secNum);
+			updateTurnPlayerRes(params);
+			_battleStage.TurnPlayerLoop(playerID,secNum);
 			//_battleStage.PlayerLoopFresh(playerID,secNum);
 		}
 		private function onProcPreActionInfo(params:ISFSObject):void{

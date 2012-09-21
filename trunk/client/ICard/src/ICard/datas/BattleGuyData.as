@@ -4,10 +4,11 @@ package ICard.datas {
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.datas.card.*;
 	import ICard.logic.AbilityHelper;
+	
 	import flash.utils.*;
 	public class BattleGuyData {
 		private var _cardArr:Dictionary;	
-		
+		private var _resNum:int;
 		public function BattleGuyData():void{
 			_cardArr = new Dictionary;
 		}
@@ -39,19 +40,12 @@ package ICard.datas {
 			
 		}
 		
-
-		public function ResNum():int{
-			var val:int = 0;
-			for each( var card:CardData in _cardArr)
-			{
-				if(card.Side!=0)
-					continue;
-				if( card.Slot == BattleFieldType.ResourceSlotId)
-				{
-					val++;
-				}
-			}
-			return val;
+		public function set ResNum(val:int):void{
+			_resNum = val;
+		}
+		
+		public function get ResNum():int{
+			return _resNum;
 		}
 		public function getActiveCardOnSlot(costLimit:int,fillArr:Array):void{
 			for each( var card:CardData in _cardArr)
@@ -89,33 +83,5 @@ package ICard.datas {
 			}
 		}
 		
-		public function UseRes(val:int):Boolean{ 
-			if(val>ResVal())
-				return false;
-			for each( var card:CardData in _cardArr)
-			{
-				
-				if( card.Slot == BattleFieldType.ResourceSlotId &&
-					card.Side ==0)
-				{
-					card.Side = 1;
-					val++;
-				}
-				if(val==0)
-					break;		
-			}
-			return true;
-		}
-		
-		public function ResVal():int{
-			var resVal:int = 0;
-			for each( var card:CardData in _cardArr)
-			{
-				if( card.Slot == BattleFieldType.ResourceSlotId &&
-					card.Side ==false)
-					resVal++;
-			}
-			return resVal;
-		}
 	}
 }//package com.assist.data.mission 

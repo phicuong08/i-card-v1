@@ -71,7 +71,7 @@ public class BattleAIBsn
 		cardVect = WashCard(cardVect);
 		for(int i=0;i<cardVect.size();i++){
 			CardBean card = cardVect.get(i);
-			if(card.getCost()<site.getRemainRes()){
+			if(card.getCost()<site.getCurRes()){
 				return card;
 			}
 		}
@@ -197,7 +197,7 @@ public class BattleAIBsn
 		return null;
 	}
 	private static Boolean Card2EnterPlay(CardGameBean game,CardDeckBean site,int cardType){
-		int remainRes = site.getRemainRes();
+		int remainRes = site.getCurRes();
 		if(remainRes<=0)
 			return false;
 		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,cardType);
@@ -226,7 +226,7 @@ public class BattleAIBsn
 		return true;
 	}
 	private static Boolean AddCard2EquipSlot(CardGameBean game,CardDeckBean site){
-		int remainRes = site.getRemainRes();
+		int remainRes = site.getCurRes();
 		if(remainRes<=0)
 			return false;
 		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,CardInfoBean.WEAPON);

@@ -108,6 +108,7 @@ public class SFSObjectBsn
 	}
 	public static ISFSObject genFightResult(CardGameBean game,CardActionBean action){
 		ISFSObject fightInfo = new SFSObject();
+		fightInfo.putInt("res", game.getTurnDeck().getCurRes());
 		fightInfo.putInt("srcID",action.getSrc());
 		ISFSArray sfsa = new SFSArray();
 		ISFSObject cardInfo;

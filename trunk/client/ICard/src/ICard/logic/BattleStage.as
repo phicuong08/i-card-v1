@@ -69,6 +69,9 @@ package ICard.logic {
 			}
 			return null;
 		}
+		public function get TurnPlayer():BattleGuy{
+			return (_IsTurn)?PlayerMe:Enemy;
+		}
 		public function getActiveTarget():Array{
 			var arr:Array=[];
 			if(_IsTurn==false)
@@ -80,7 +83,7 @@ package ICard.logic {
 					PlayerMe.CardDB.getCardOnSlot([BattleFieldType.HandSlotId],arr);
 					break;
 				case state_play_card:
-					PlayerMe.CardDB.getActiveCardOnSlot(PlayerMe.CardDB.ResVal(),arr);
+					PlayerMe.CardDB.getActiveCardOnSlot(PlayerMe.CardDB.ResNum,arr);
 					break;
 				case state_play_card_ex:
 					break;
@@ -187,7 +190,7 @@ package ICard.logic {
 			if(!card || card.GuyID!=_myID ||(_IsTurn==false))
 				return null;
 			var bAllyFightable:Boolean = AbilityHelper.IsSoldierFightable(PlayerMe.CardDB,Enemy.CardDB);
-			return UseCard.genMenuFlag(card,_curState,PlayerMe.CardDB.ResNum(),bAllyFightable);
+			return UseCard.genMenuFlag(card,_curState,PlayerMe.CardDB.ResNum,bAllyFightable);
 		}
 		
 		public function CardInfo(realID:int):Object{
@@ -198,11 +201,11 @@ package ICard.logic {
 			if(!PlayerMe)
 				return 0;
 			if(me)
-				return PlayerMe.CardDB.ResNum();
+				return PlayerMe.CardDB.ResNum;
 			else{
 				for each(var guy:BattleGuy in _guy){
 					if(guy.ID!=_myID)
-						return guy.CardDB.ResNum();
+						return guy.CardDB.ResNum;
 				}
 			}
 			return 0;
@@ -225,7 +228,7 @@ package ICard.logic {
 			_Mod_Battle.QueryFightCard(_fightSrc,_fightDes);
 			return true;
 		}
-		public function PriPlayerLoop(playerID:int,secNum:int):void{
+		public function TurnPlayerLoop(playerID:int,secNum:int):void{
 			_battleField.onEndOpOk();
 			
 			var newTurn:Boolean = (playerID==_myID)?true:false;

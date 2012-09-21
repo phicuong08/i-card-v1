@@ -80,7 +80,7 @@ package ICard {
 					_mod_Battle.onCardPlayerLoop(params);
 					break;
 				case ICardMsgDef.s2c_pri_player_loop:
-					_mod_Battle.onPriPlayerLoop(params);
+					_mod_Battle.onTurnPlayerLoop(params);
 					break;
 				case ICardMsgDef.s2c_wait_play_card:
 					_mod_Battle.onWaitPlayCard(params);

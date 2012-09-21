@@ -11,7 +11,6 @@ import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardInfoBean;
 import sfs2x.extensions.icard.beans.CardDeckBean;
-import sfs2x.extensions.icard.main.ICardExtension;
 
 
 
@@ -108,6 +107,7 @@ public class CardUseBsn
 			cardDes.AddHp(-ability.getVal());
 			break;
 		case CardAbilityBean.DO_DROP_HAND_CARD:
+			
 			break;
 		case CardAbilityBean.DO_DROP_RES:
 			break;
@@ -222,9 +222,9 @@ public class CardUseBsn
 		CardAbilityBean ability = CardAbilityStoreBean.GetInstance().getAbilityBean(card.getCardID());
 		if(ability==null)
 			return false;
-		if(CardSiteBsn.getResNum(site)< card.getCost())
+		if(site.getCurRes()< card.getCost())
 			return false;
-		CardSiteBsn.useRes(site,card.getCost());
+		site.useRes(card.getCost());
 		int targetNum = (ability.getTargetNum()>action.getDes().size())?action.getDes().size():ability.getTargetNum();
 		for(int i=0;i<targetNum;i++){
 			CardBean targetCard = game.getCard(action.getDes().get(i));

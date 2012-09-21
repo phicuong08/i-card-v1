@@ -3,7 +3,6 @@ package sfs2x.extensions.icard.beans;
 import sfs2x.extensions.icard.bsn.AttrBsn;
 import sfs2x.extensions.icard.bsn.BufferBsn;
 import sfs2x.extensions.icard.bsn.CardSiteBsn;
-import sfs2x.extensions.icard.bsn.CardUseBsn;
 import sfs2x.extensions.icard.utils.Constants;
 
 /**

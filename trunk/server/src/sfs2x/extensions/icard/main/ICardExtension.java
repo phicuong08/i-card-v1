@@ -123,6 +123,7 @@ public class ICardExtension extends SFSExtension {
 	public void SendGameCardUpdate(CardGameBean game){
 		if(GameBsn.ExistDirtyCard(game)==false)
 			return;
+		CardDeckBean turnDeck = game.getTurnDeck();
 		for(CardDeckBean site :game.getDeck().values())
 		{
 			if(site.getSfsUser()==null)
@@ -130,6 +131,7 @@ public class ICardExtension extends SFSExtension {
 			ISFSObject params = new SFSObject();
 			ISFSArray sfsa = SFSObjectBsn.genDirtyGameArr(game,site.getPlayerID());
 			params.putSFSArray("card", sfsa);
+			params.putInt("res", turnDeck.getCurRes());
 			send(Commands.CMD_S2C_CARD_UPDATE, params, site.getSfsUser());
 		}
 	}
