@@ -125,8 +125,6 @@ public class CardBean
 	}
 
 	public void setSide(int val) {
-		if(CardUseBsn.IsSideEnable(this,val)==false)
-			return;
 		_side = val;
 		setDirtyFlagBit(SIDE_DIRTY_BIT);
 	}
@@ -137,6 +135,9 @@ public class CardBean
 		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.POINT_UNABLE))
 			return true;
 		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_POINT_UNABLE,CardAbilityBean.WHEN_ALL);
+	}
+	public boolean IsResetEnable(){
+		return (BufferBsn.IsExistBuf(this, CardAbilityBean.BUF_SIDE,CardAbilityBean.WHEN_ALL)==false);
 	}
 	public boolean IsInstant(){
 		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.INSTANT))
