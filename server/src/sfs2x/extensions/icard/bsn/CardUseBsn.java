@@ -234,10 +234,4 @@ public class CardUseBsn
 		}
 		return true;
 	}
-	public static boolean IsSideEnable(CardBean card,int val){
-		if(val!=0)
-			return true;
-		return (BufferBsn.IsExistBuf(card, CardAbilityBean.BUF_SIDE,CardAbilityBean.WHEN_ALL)==false);
-	}
-	
 }
