@@ -90,7 +90,7 @@ public class BattleAIBsn
 						continue;
 				}
 				else{
-					if(cast.getOwner()== card.getOwner())
+					if(card.IsPointUnable() || cast.getOwner()== card.getOwner())
 						continue;
 				}
 				if( CardUseBsn.calcAbilityVal(ability,card)>0)
@@ -121,6 +121,8 @@ public class BattleAIBsn
 		if(cast==null)
 			return false;
 		Vector<Integer>  destVect = thinkAbilityTarget(game,site,cast);
+		if(destVect.size()==0)
+			return false;
 		CardActionBean action = new CardActionBean(cast.getRealID(),site.getPlayerID(),
 													CardActionBean.DO_FIGHT_CARD,destVect);
 		game.setCurAction(action);

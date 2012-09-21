@@ -76,6 +76,7 @@ package ICard.logic {
 				var bAdd:Boolean = true;
 				switch(card.Slot){
 					case BattleFieldType.FightSlotId:
+						bAdd = (card.IsPointUnable())?false:true;
 						break;
 					default:
 						break;
