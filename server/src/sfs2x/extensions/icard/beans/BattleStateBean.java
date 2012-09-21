@@ -1,7 +1,6 @@
 package sfs2x.extensions.icard.beans;
 
 
-import java.util.*;
 
 import sfs2x.extensions.icard.main.ICardExtension;
 import sfs2x.extensions.icard.utils.Constants;

@@ -31,11 +31,6 @@ public class CardInfoStoreBean {
 			ArrayList<HashMap<String,String>> sheetData = excelCardData.get(sheetName);
 			for(HashMap<String,String> rowData :sheetData){
 				int Id = Integer.parseInt(rowData.get("编号")); // 牌的id
-				if(Id ==20001)
-				{
-					int kk = 0;
-					kk++;
-				}
 				int BaseCost = (rowData.get("费用")==null||rowData.get("费用").isEmpty())?0:Integer.parseInt(rowData.get("费用")); // 最初始的上场花费（对盟军，技能有效）
 				int BaseAttack = (rowData.get("攻击")==null||rowData.get("攻击").isEmpty())?0:Integer.parseInt(rowData.get("攻击")); // 最初始的攻击力
 				int BaseHp = (rowData.get("生命")==null||rowData.get("生命").isEmpty())?0:Integer.parseInt(rowData.get("生命")); // 最初始的生命

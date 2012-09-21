@@ -21,10 +21,10 @@ public class CardDeckBean
 	private ConcurrentHashMap<Integer, CardBean> _cardMap =new ConcurrentHashMap<Integer, CardBean>();
 	private List<Integer> _drawCardSrc ;
 	private User _sfsUser=null;
-	private int _chainCost=0;
 	private Boolean _addResAble = false;
 	private Boolean _passChain = false;
-
+	private int _maxRes = 0;
+	private int _curRes = 0;
 	public CardDeckBean(int player,User sfsUser) {
 		_playerID = player;
 		_sfsUser = sfsUser;
@@ -38,17 +38,9 @@ public class CardDeckBean
 	public int getPlayerID() {
 		return _playerID;
 	}
-	public int getChainCost(){
-		return _chainCost;
-	}
-	public void addChainCost(int val){
-		_chainCost += val;
-	}
-	public void clearChainCost(){
-		_chainCost = 0 ;
-	}
 	public void setCardReady(){
 		_addResAble = true;
+		_curRes = _maxRes;
 		for(CardBean card:_cardMap.values()){
 			if(card.IsResetEnable()==false)
 				continue;
@@ -63,8 +55,12 @@ public class CardDeckBean
 	public Boolean getPassChain(){
 		return _passChain;
 	}
-	public void setAddResAble(Boolean flag){
-		_addResAble = flag;
+	public void addRes(){
+		if(_addResAble==false)
+			return;
+		_addResAble = false;
+		_maxRes++;
+		_curRes++;
 	}
 	public Boolean getAddResAble(){
 		return _addResAble;
@@ -83,15 +79,11 @@ public class CardDeckBean
 	public ConcurrentHashMap<Integer, CardBean> getCardMap(){
 		return _cardMap;
 	}
-	public int getRemainRes(){
-		int ret = 0;
-		for(CardBean card:_cardMap.values()){
-			if(card.getZoneID()==CardBean.RES_ZONE_ID &&
-				card.getSide()==0)
-				ret++;
-		}
-		ret -= _chainCost;
-		return ret;
+	public void useRes(int val){
+		_curRes -= val;
+	}
+	public int getCurRes(){
+		return _curRes;
 	}
 	public List<Integer> getDrawCardSrc(){
 		return _drawCardSrc;

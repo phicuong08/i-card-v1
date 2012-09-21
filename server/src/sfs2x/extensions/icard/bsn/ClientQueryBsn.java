@@ -8,7 +8,6 @@ import sfs2x.extensions.icard.beans.CardActionBean;
 import sfs2x.extensions.icard.beans.CardBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardDeckBean;
-import sfs2x.extensions.icard.beans.CardInfoBean;
 
 /**
  * GameBsn: class containing utility business classes for game processing
@@ -59,7 +58,7 @@ public class ClientQueryBsn
 		CardDeckBean deck = game.getDeck().get(playerID);
 		if(deck==null)
 			return false;
-		if(CardSiteBsn.getResNum(deck)< card.getCost())
+		if(deck.getCurRes()< card.getCost())
 			return false;
 
 		CardActionBean action = new CardActionBean(realID,playerID,CardActionBean.DO_FIGHT_CARD,des);

@@ -23,14 +23,6 @@ import sfs2x.extensions.icard.main.ICardExtension;
  */
 public class CardSiteBsn
 {	
-	public static int getResNum(CardDeckBean site){
-		int num=0;
-		for (CardBean card : site.getCardMap().values()){
-			if(card.getZoneID()==CardBean.RES_ZONE_ID && card.getSide()==0)
-				num++;
-		}
-		return num;
-	}
 	public static void onSupportEvent(CardGameBean game,CardDeckBean srcDeck,CardDeckBean desDeck,int when){
 		for (CardBean card: srcDeck.getCardMap().values()){
 			if(card.getZoneID()!=CardBean.SUPPORT_ZONE_ID)
@@ -69,19 +61,6 @@ public class CardSiteBsn
 		}
 		//support event
 		
-	}
-	public static void useRes(CardDeckBean site,int resNum){
-		int remain=resNum;
-		for (CardBean card : site.getCardMap().values()){
-			if(card.getZoneID()==CardBean.RES_ZONE_ID && card.getSide()==0)
-			{
-				card.setSide(1);
-				remain--;
-			}
-			if(remain==0)
-				break;
-		}
-
 	}
 	public static int supportAtkVal(CardDeckBean site,int which,int when){
 		int atk = 0;

@@ -49,7 +49,7 @@ public class CardActionBsn
 	private static boolean procEnterCard(CardGameBean game,CardDeckBean deck,CardBean card,CardActionBean action){
 		if(game.getStateBean().getState()!=BattleStateBean.ST_WAIT_PLAY_CARD)
 			return false;
-		if(CardSiteBsn.getResNum(deck)< card.getCost())
+		if(deck.getCurRes()< card.getCost())
 			return false;
 		boolean ret = false;
 		switch(card.getCardType()){
@@ -222,14 +222,14 @@ public class CardActionBsn
 //	}
 
 	private static boolean procCard2FightSlot(CardGameBean game,CardDeckBean site,CardBean card){
-		CardSiteBsn.useRes(site,card.getCost());
+		site.useRes(card.getCost());
 		card.setZoneID(CardBean.FIGHT_ZONE_ID);	
 		card.setDirtyFlagBit(CardBean.ATK_DIRTY_BIT);
 		card.setSide(3);
 		return true;
 	}
 	private static boolean procCard2SupportSlot(CardDeckBean site,CardBean card){
-		CardSiteBsn.useRes(site,card.getCost());
+		site.useRes(card.getCost());
 		card.setZoneID(CardBean.SUPPORT_ZONE_ID);	
 		card.setSide(0);
 		
@@ -254,15 +254,15 @@ public class CardActionBsn
 		return true;
 	}
 	private static boolean procCard2EquipSlot(CardDeckBean site,CardBean card){
-		CardSiteBsn.useRes(site,card.getCost());
+		site.useRes(card.getCost());
 		card.setZoneID(CardBean.EQUIP_ZONE_ID);	
 		card.setSide(3);
 		return true;
 	}
 	private static boolean procPlayResCard(CardDeckBean site,CardBean card){
-		site.setAddResAble(false);
+		site.addRes();
 		card.setCardID(Constants.BACK_CARD_ID);
-		card.setZoneID(CardBean.RES_ZONE_ID);
+		card.setZoneID(CardBean.GRAVE_ZONE_ID);
 		card.setSide(0);
 		return true;
 	}

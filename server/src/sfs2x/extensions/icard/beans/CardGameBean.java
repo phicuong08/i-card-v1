@@ -6,7 +6,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import sfs2x.extensions.icard.bsn.BattleBsn;
 import sfs2x.extensions.icard.main.ICardExtension;
-import sfs2x.extensions.icard.utils.Constants;
 import sfs2x.extensions.icard.utils.SyncGameStart;
 
 import com.smartfoxserver.v2.entities.User;
