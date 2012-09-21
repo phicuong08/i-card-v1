@@ -18,7 +18,7 @@ package ICard.assist.server {
 		private static var _DefCards:Object = null;
 		private static var _SkillCards:Object = null;
 		private static var _TaskCards:Object = null;
-		private static var _UseCard:Object = null;
+//		private static var _UseCard:Object = null;
 		private static var _SupportCards:Object = null;
 		private static var _CardAbility:Object = null;
 		private static var _CardAttr:Object = null;
@@ -91,18 +91,7 @@ package ICard.assist.server {
 			};
 			_SupportCards = _arg1;
 		}
-		public static function get UseCard():Object{
-			if (_UseCard == null){
-				throw (new Error("还未赋值！"));
-			};
-			return (_UseCard);
-		}
-		public static function set UseCard(_arg1:Object):void{
-			if (_UseCard != null){
-				throw (new Error("非法赋值"));
-			};
-			_UseCard = _arg1;
-		}
+
 		public static function get WeaponCards():Object{
 			if (_WeaponCards == null){
 				throw (new Error("还未赋值！"));
@@ -150,10 +139,6 @@ package ICard.assist.server {
 				throw (new Error("非法赋值"));
 			};
 			_TaskCards = _arg1;
-		}
-			
-		public static function UseCardInfo(id:int):Array{
-				return _UseCard[id];
 		}
 		
 		private static function CreateWeaponCardInfo(id:int):Object{

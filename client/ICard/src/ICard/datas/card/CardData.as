@@ -4,8 +4,8 @@ package ICard.datas.card {
 	import ICard.assist.server.CardType;
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.haloer.data.*;
-	import ICard.logic.UseCard;
 	import ICard.logic.CardAttrHelper;
+	import ICard.logic.UseCard;
 	
 	import flash.utils.ByteArray;
 
@@ -91,6 +91,9 @@ package ICard.datas.card {
 			_info["turn"]=val;
 		}
 		
+		public function IsUseResEnough(val:int):Boolean{
+			return true;
+		}
 		public function Update(info:Object):void{
 			if(info.hasOwnProperty("cardID")&& 
 				CardID != info["cardID"])

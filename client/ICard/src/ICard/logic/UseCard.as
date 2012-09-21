@@ -10,15 +10,6 @@ package ICard.logic {
 
 	public class UseCard {
 		
-		public static function ResEnough(card:CardData,resVal:int):Boolean{
-			var useInfo:Array = CardType.UseCardInfo(card.CardID);
-			if(useInfo==null)
-			{
-				return (card.Cost<=resVal);
-			}
-			return (resVal >= useInfo[1]);
-		}
-		
 		public static function Is2ResAble(card:CardData):Boolean{
 			return (card.Slot == BattleFieldType.HandSlotId);
 		}
@@ -84,34 +75,34 @@ package ICard.logic {
 		}
 		
 		public static function IsCast2MyHero(cardID:int):Boolean{
-			var info:Object = CardType.UseCardInfo(cardID);
-			if(info==null)
+			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
+			if(ability==null)
 				return false;
-			return (info[2]>0);
+			return ability.IsWhichMatch(CardAbility.WHICH_MYHERO);
 		}
 		public static function IsCast2MySoldier(cardID:int):Boolean{
-			var info:Object = CardType.UseCardInfo(cardID);
-			if(info==null)
+			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
+			if(ability==null)
 				return false;
-			return (info[3]>0);
+			return ability.IsWhichMatch(CardAbility.WHICH_MYSOLDIER);
 		}
 		public static function IsCast2YourHero(cardID:int):Boolean{
-			var info:Object = CardType.UseCardInfo(cardID);
-			if(info==null)
+			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
+			if(ability==null)
 				return false;
-			return (info[4]>0);
+			return ability.IsWhichMatch(CardAbility.WHICH_YOURHERO);
 		}
 		public static function IsCast2YourSoldier(cardID:int):Boolean{
-			var info:Object = CardType.UseCardInfo(cardID);
-			if(info==null)
+			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
+			if(ability==null)
 				return false;
-			return (info[5]>0);
+			return ability.IsWhichMatch(CardAbility.WHICH_YOURSOLDIER);
 		}
 		public static function getCastTargetNum(cardID:int):int{
-			var info:Object = CardType.UseCardInfo(cardID);
-			if(info==null)
+			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
+			if(ability==null)
 				return 0;
-			return info[1];
+			return ability.targetNum;
 		}
 		public static function  getType(cardID:int):int{
 				var ret:int=0;
@@ -146,7 +137,7 @@ package ICard.logic {
 		}	
 		
 		public static function UseAble(card:CardData,resVal:int):Boolean{
-			if(ResEnough(card,resVal)==false)
+			if(card.IsUseResEnough(resVal)==false)
 			{
 				return false;
 			}

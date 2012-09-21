@@ -195,19 +195,19 @@ package ICard.datas.card {
 			var ret:Boolean = false;
 			switch(which){
 				case WHICH_MYHERO:
-					if(_which == WHICH_HERO)
+					if(_which == WHICH_HERO||_which == WHICH_MY)
 						ret = true;
 					break;
 				case WHICH_MYSOLDIER:
-					if(_which == WHICH_SOLDIER)
+					if(_which == WHICH_SOLDIER|| _which==WHICH_MY)
 						ret = true;
 					break;
 				case WHICH_YOURHERO:
-					if(_which == WHICH_HERO)
+					if(_which == WHICH_HERO||_which==WHICH_YOUR)
 						ret = true;
 					break;
 				case WHICH_YOURSOLDIER:
-					if(_which == WHICH_SOLDIER)
+					if(_which == WHICH_SOLDIER ||_which==WHICH_YOUR)
 						ret = true;
 					break;
 			}
