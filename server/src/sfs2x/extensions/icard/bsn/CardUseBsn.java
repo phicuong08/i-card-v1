@@ -101,7 +101,7 @@ public class CardUseBsn
 		switch(ability.getType()){
 		case CardAbilityBean.DO_ATK_SIDE_ADD:
 			break;
-		case CardAbilityBean.DO_BREAK_SKILL:
+		case CardAbilityBean.DO_REMOVE_SKILL:
 			break;
 		case CardAbilityBean.DO_DAMAGE:
 			cardDes.AddHp(-ability.getVal());
