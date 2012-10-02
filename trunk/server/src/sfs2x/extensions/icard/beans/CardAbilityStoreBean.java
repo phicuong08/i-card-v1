@@ -154,7 +154,7 @@ public class CardAbilityStoreBean {
 		else if(whatInfo.equals("DO_ATK_SIDE_ADD"))
 			return CardAbilityBean.DO_ATK_SIDE_ADD;
 		else if(whatInfo.equals("DO_BREAK_SKILL"))
-			return CardAbilityBean.DO_BREAK_SKILL;
+			return CardAbilityBean.DO_REMOVE_SKILL;
 		else if(whatInfo.equals("DO_DROP_HAND_CARD"))
 			return CardAbilityBean.DO_DROP_HAND_CARD;
 		else if(whatInfo.equals("DO_DROP_RES"))

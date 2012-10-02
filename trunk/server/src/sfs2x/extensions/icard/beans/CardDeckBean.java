@@ -85,6 +85,7 @@ public class CardDeckBean
 	public int getCurRes(){
 		return _curRes;
 	}
+	
 	public List<Integer> getDrawCardSrc(){
 		return _drawCardSrc;
 	}
