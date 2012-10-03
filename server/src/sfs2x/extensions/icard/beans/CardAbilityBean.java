@@ -139,6 +139,9 @@ public class CardAbilityBean
 	public int getTargetNum(){
 		return _targetNum;
 	}
+	public boolean IsRangeTarget(){
+		return (_targetNum>=999);
+	}
 	public int getWhich(){
 		return _which;
 	}

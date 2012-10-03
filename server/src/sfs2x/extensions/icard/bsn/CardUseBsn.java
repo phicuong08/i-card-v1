@@ -225,13 +225,52 @@ public class CardUseBsn
 		if(site.getCurRes()< card.getCost())
 			return false;
 		site.useRes(card.getCost());
-		int targetNum = (ability.getTargetNum()>action.getDes().size())?action.getDes().size():ability.getTargetNum();
-		for(int i=0;i<targetNum;i++){
-			CardBean targetCard = game.getCard(action.getDes().get(i));
-			if(targetCard==null)
-				continue;
-			DoCardAbility(game,card,targetCard);
+		if(ability.IsRangeTarget()){
+			Vector<CardBean> pickVect = PickCardOnWhich(game,site,ability.getWhich());
+			for(int i=0;i<pickVect.size();i++){
+				CardBean targetCard = pickVect.get(i);
+				DoCardAbility(game,card,targetCard);
+			}
 		}
+		else{
+			int targetNum = (ability.getTargetNum()>action.getDes().size())?action.getDes().size():ability.getTargetNum();
+			for(int i=0;i<targetNum;i++){
+				CardBean targetCard = game.getCard(action.getDes().get(i));
+				if(targetCard==null)
+					continue;
+				DoCardAbility(game,card,targetCard);
+			}
+		}
+
 		return true;
+	}
+	
+	public static Vector<CardBean> PickCardOnWhich(CardGameBean game,CardDeckBean site,int which){
+		Vector<CardBean> pickVect =new Vector<CardBean>();
+		CardDeckBean otherDeck = BattleBsn.getOtherDeck(game, site.getPlayerID());
+		switch(which){
+		case CardAbilityBean.WHICH_MY:
+			CardSiteBsn.FillSlotCard(site, CardBean.HERO_ZONE_ID, -1, pickVect);
+			CardSiteBsn.FillSlotCard(site, CardBean.FIGHT_ZONE_ID, -1, pickVect);
+			break;
+		case CardAbilityBean.WHICH_MYSOLDIER:
+			CardSiteBsn.FillSlotCard(site, CardBean.FIGHT_ZONE_ID, -1, pickVect);
+			break;
+		case CardAbilityBean.WHICH_YOUR:
+			CardSiteBsn.FillSlotCard(otherDeck, CardBean.HERO_ZONE_ID, -1, pickVect);
+			CardSiteBsn.FillSlotCard(otherDeck, CardBean.FIGHT_ZONE_ID, -1, pickVect);
+			break;
+		case CardAbilityBean.WHICH_YOURSOLDIER:
+			CardSiteBsn.FillSlotCard(site, CardBean.FIGHT_ZONE_ID, -1, pickVect);
+			break;
+		case CardAbilityBean.WHICH_IU:
+			CardSiteBsn.FillSlotCard(site, CardBean.HERO_ZONE_ID, -1, pickVect);
+			CardSiteBsn.FillSlotCard(site, CardBean.FIGHT_ZONE_ID, -1, pickVect);
+			CardSiteBsn.FillSlotCard(otherDeck, CardBean.HERO_ZONE_ID, -1, pickVect);
+			CardSiteBsn.FillSlotCard(otherDeck, CardBean.FIGHT_ZONE_ID, -1, pickVect);
+			break;
+		}
+
+		return pickVect;
 	}
 }

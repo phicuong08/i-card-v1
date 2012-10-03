@@ -23,8 +23,8 @@ public class CardDeckBean
 	private User _sfsUser=null;
 	private Boolean _addResAble = false;
 	private Boolean _passChain = false;
-	private int _maxRes = 0;
-	private int _curRes = 0;
+	private int _maxRes = 10;
+	private int _curRes = 10;
 	public CardDeckBean(int player,User sfsUser) {
 		_playerID = player;
 		_sfsUser = sfsUser;

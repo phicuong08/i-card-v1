@@ -209,6 +209,8 @@ public class CardBean
 		_addHp += val;
 		if(_addHp > (getMaxHp() - _info.getBaseHp()))
 			_addHp = getMaxHp() - _info.getBaseHp();
+		if(getHp()<0)
+			_addHp = -_info.getBaseHp();
 		setDirtyFlagBit(HP_DIRTY_BIT);	
 	}
 	public Boolean getIsDead(){ 
