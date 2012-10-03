@@ -107,8 +107,10 @@ public class BattleAIBsn
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(cast.getCardID());
 		if(vec==null||vec.size()==0)
 			return null;
-		targets = filterOnAbility(game,cast,vec,targets);
 		CardAbilityBean ability = vec.get(0);
+		if(ability.IsRangeTarget()==false)
+			targets = filterOnAbility(game,cast,vec,targets);
+		
 		while(targets.size()>ability.getTargetNum()){
 			int randomIndex = GameBsn._Random.nextInt(targets.size());
 			targets.remove(randomIndex);

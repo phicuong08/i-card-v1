@@ -78,14 +78,18 @@ public class CardSiteBsn
 		
 		return atk;
 	}
-	public static Vector<CardBean> PickSlotCard(CardDeckBean site,int slotID,int cardType){
-		Vector<CardBean> pickVect =new Vector<CardBean>();
+	public static void FillSlotCard(CardDeckBean site,int slotID,int cardType,Vector<CardBean> pickVect){
 		for (CardBean card : site.getCardMap().values())
 		{
 				if(card.getZoneID() == slotID &&
 				   (cardType==-1 || card.getCardType()==cardType))
 					pickVect.add(card);
 		}
+	}
+	
+	public static Vector<CardBean> PickSlotCard(CardDeckBean site,int slotID,int cardType){
+		Vector<CardBean> pickVect =new Vector<CardBean>();
+		FillSlotCard(site,slotID,cardType,pickVect);
 		return pickVect;
 	}
 	public static void onTurnEnd(CardGameBean game,ICardExtension ext,CardDeckBean deck){
