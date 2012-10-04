@@ -117,7 +117,7 @@ package ICard.SFSMod {
 			var params:ISFSObject = new SFSObject();
 			params.putInt("srcID", realID);
 			params.putInt("game",_battleStage.GameID);
-			if(targets.length >0)
+			if(targets && targets.length >0)
 			{
 				params.putIntArray("target",targets);
 			}

@@ -51,4 +51,7 @@ public class CardActionBean
 	public Vector<Integer> getDes(){
 		return _des;
 	}
+	public void setDes(Vector<Integer> des){
+		_des = des;
+	}
 }

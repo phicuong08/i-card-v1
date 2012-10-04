@@ -31,10 +31,13 @@ public class ClientFightCardHandle extends ICardClientRequestHandler {
 		
 		Vector<Integer> des = new Vector<Integer>();
 		Collection<Integer> targetCol = paramISFSObject.getIntArray("target"); 
-		for(Integer targetID:targetCol){
-			if(CardActionBsn.IsMatchFight(game,srcID,targetID))
-				des.add(targetID);
+		if(targetCol!=null){
+			for(Integer targetID:targetCol){
+				if(CardActionBsn.IsMatchFight(game,srcID,targetID))
+					des.add(targetID);
+			}		
 		}
+
 		ClientQueryBsn.procFightCardRequest(game, paramUser.getId(), srcID,des);
 		SendOnErr(paramUser);
 	}

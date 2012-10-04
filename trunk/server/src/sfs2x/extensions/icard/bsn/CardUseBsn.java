@@ -200,6 +200,7 @@ public class CardUseBsn
 			if(ability.IsBuf())
 				bHaveBuf = true;
 		}
+		cardSrc.setDirtyFlagBit(CardBean.CARDID_DIRTY_BIT);
 		if(bHaveBuf)
 			cardSrc.setZoneID(CardBean.ATTACH_ZONE_ID);
 		else
@@ -226,11 +227,14 @@ public class CardUseBsn
 			return false;
 		site.useRes(card.getCost());
 		if(ability.IsRangeTarget()){
+			Vector<Integer> des = new Vector<Integer>();
 			Vector<CardBean> pickVect = PickCardOnWhich(game,site,ability.getWhich());
 			for(int i=0;i<pickVect.size();i++){
 				CardBean targetCard = pickVect.get(i);
 				DoCardAbility(game,card,targetCard);
+				des.add(targetCard.getRealID());
 			}
+			action.setDes(des);
 		}
 		else{
 			int targetNum = (ability.getTargetNum()>action.getDes().size())?action.getDes().size():ability.getTargetNum();

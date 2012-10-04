@@ -40,7 +40,12 @@ package ICard.logic {
 			}
 			return iconID;
 		}
-		
+		public static function IsAOE(cardID:int):Boolean{
+			var ability:CardAbility  = CardAbilityDB.getCardAbility(cardID*10);
+			if(ability==null)
+				return false;
+			return ability.IsAOE();
+		}
 		public static function getTarget(abilityId:int,me:BattleGuyData,you:BattleGuyData):Array{
 			var targetArr:Array = [];
 			var ability:CardAbility  = CardAbilityDB.getCardAbility(abilityId);
