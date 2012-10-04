@@ -71,14 +71,16 @@ package ICard.datas.card {
 			if(info){
 				parseWhich(info[1]);
 				parseWhat(info[2]);
-				_targetNum = info[7];
+				_targetNum = info[6];
 			}
 		}
 		
 		public function IsBuf():Boolean{
 			return (_what >=BUF_ATK_DIST && _what <BUF_MAX);
 		}
-		
+		public function IsAOE():Boolean{
+			return (_targetNum>=999);
+		}
 		private function parseWhat(info:String):void{
 			if(info == "BUF_ATK_DIST")
 				_what = BUF_ATK_DIST;

@@ -117,6 +117,8 @@ package ICard.logic {
 				
 				if(card["realID"] != srcID)
 					desGuy= cardOwner;
+				var cardInfo:Object =CardType.CreateCardInfo(card["cardID"]);
+				card["cost"] = cardInfo["cost"];
 				
 			}
 			_battleField.onCardFightResult(srcID,targets,oldCards,(srcGuy!=desGuy));
@@ -217,6 +219,10 @@ package ICard.logic {
 			_fightSrc = realID;
 			_fightDes = [];
 			_curState = state_play_card_ex;
+			var card:CardData =  FindCard(realID);
+			if(card&& AbilityHelper.IsAOE(card.CardID)){
+				_Mod_Battle.QueryFightCard(_fightSrc,null);
+			}
 		}
 		public function AddFightTarget(realID:int):void{
 			_fightDes.push(realID);

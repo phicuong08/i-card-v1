@@ -189,7 +189,12 @@ package ICard.assist.server.source {
 							500070	:["WHEN_USE"					,"WHICH_YOUR"					,"BUF_CURE"							,1		,"OP_AND"			,999	,1],
 							500080	:["WHEN_USE"					,"WHICH_YOUR"					,"DO_DAMAGE"						,2		,"OP_AND"			,1	,3],
 							500090	:["WHEN_USE"					,"WHICH_SKILL"				,"DO_BREAK_SKILL"				,0		,"OP_AND"			,1	,1],
-							
+							500100	:["WHEN_USE"					,"WHICH_YOUR"					,"DO_DAMAGE"						,3		,"OP_AND"			,1	,999],
+							500110	:["WHEN_USE"					,"WHICH_YOUR"					,"DO_DAMAGE"						,6		,"OP_AND"			,1	,1],
+							500111	:["WHEN_MY_LOOP_BEGIN","WHICH_YOUR"					,"BUF_HEAL"							,-2		,"OP_AND"			,999	,1],
+							500120	:["WHEN_USE"					,"WHICH_MY"						,"DO_REMOVE_SKILL"		  ,999	,"OP_AND"			,1		,1],
+							500130	:["WHEN_USE"					,"WHICH_IU"						,"DO_REMOVE_SKILL"			,1		,"OP_AND"			,1		,1],
+
 							
 							600010	:["WHEN_ALL"					,"WHICH_MYSOLDIER"		,"BUF_ATK_ADD"					,1		,"OP_AND"			,999	,0],
 							600020	:["WHEN_ALL"					,"WHICH_MYSOLDIER"		,"BUF_UNABLE_ATKED"			,2		,"OP_AND"			,2	,99],
