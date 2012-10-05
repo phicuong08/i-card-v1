@@ -41,6 +41,7 @@ public class CardBean
 	private int _addHp;
 	private int _dirtyFlag=0;
 	private int _loopNum=0;
+	private int _attachTo=0;
 	private CardInfoBean _info;
 	private BufferStoreBean _bufStore;
 	public CardBean(int realID, int cardID,int zoneID,CardDeckBean deck)
@@ -81,6 +82,12 @@ public class CardBean
 	}
 	public void setCardID(int id) {
 		_cardID = id;
+	}
+	public void setAttachTo(int id){
+		_attachTo = id;
+	}
+	public int getAttachTo(){
+		return _attachTo;
 	}
 	public int getCardType(){
 		if(_info!=null)

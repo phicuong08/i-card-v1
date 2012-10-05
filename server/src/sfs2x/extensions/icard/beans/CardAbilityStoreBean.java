@@ -53,6 +53,19 @@ public class CardAbilityStoreBean {
 			return null;
 		return vec.get(0);
 	}
+	public Vector<CardAbilityBean> getCardAbilityOnWhen(int cardID,int when){
+		Vector<CardAbilityBean> vec = new Vector<CardAbilityBean>();
+		int pos=0;
+		do{
+			CardAbilityBean ability = _abilityInfoMap.get(cardID*10+pos);
+			if(ability==null)
+				break;
+			if(ability.IsWhenMatch(when)==true)	
+				vec.add(ability);
+			pos++;	
+		}while(true);
+		return vec;
+	}
 	public Vector<CardAbilityBean> getCardAbility(int cardID){
 		Vector<CardAbilityBean> vec = new Vector<CardAbilityBean>();
 		int pos=0;

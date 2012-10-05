@@ -133,7 +133,7 @@ public class CardUseBsn
 			BattleBsn.drawCard(game,cardSrc.getOwner(),ability.getVal());
 			break;
 		default:
-			BufferBsn.AddBuf(cardSrc, cardDes, ability);
+			;//BufferBsn.AddBuf(cardSrc, cardDes, ability);
 		}
 	}
 	public static Vector<Integer>  getAbilityTarget(CardGameBean game,CardDeckBean site,CardBean cast){
@@ -201,8 +201,10 @@ public class CardUseBsn
 				bHaveBuf = true;
 		}
 		cardSrc.setDirtyFlagBit(CardBean.CARDID_DIRTY_BIT);
-		if(bHaveBuf)
+		if(bHaveBuf){
 			cardSrc.setZoneID(CardBean.ATTACH_ZONE_ID);
+			cardSrc.setAttachTo(cardDes.getRealID());
+		}
 		else
 			onCardDead(game,cardSrc);
 		if(cardDes.getIsDead())
