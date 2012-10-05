@@ -45,18 +45,21 @@ public class CardSiteBsn
 			}
 		}
 	}
-	public static void onBufEvent(CardDeckBean deck,int when){
+	public static void onAttachCardEvent(CardGameBean game,CardDeckBean deck,int when){
 		
 		//buf event
 		for (CardBean card : deck.getCardMap().values()){
-			if(card.getIsPlayZone()==false)
+			if(card.getZoneID()!=CardBean.ATTACH_ZONE_ID)
 				continue;
-			Vector<CardAbilityBean> vec = card.getBufStore().getAbilityOnWhen(when);
+			CardBean desCard = game.getCard(card.getAttachTo());
+			if(desCard==null)
+				continue;
+			Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbilityOnWhen(card.getCardID(),when);
 			if(vec==null)
 				continue;
 			for(int i=0;i<vec.size();i++){
 				CardAbilityBean ability = vec.get(i);
-				BufferBsn.callCardAbility(card,ability);
+				BufferBsn.callCardAbility(desCard,ability);
 			}
 		}
 		//support event
