@@ -3,6 +3,7 @@ package sfs2x.extensions.icard.bsn;
 import java.util.HashMap;
 import java.util.Vector;
 
+import sfs2x.extensions.icard.beans.BattleStateBean;
 import sfs2x.extensions.icard.beans.BufferBean;
 import sfs2x.extensions.icard.beans.CardAbilityBean;
 import sfs2x.extensions.icard.beans.CardAbilityStoreBean;
@@ -102,6 +103,7 @@ public class CardUseBsn
 		case CardAbilityBean.DO_ATK_SIDE_ADD:
 			break;
 		case CardAbilityBean.DO_REMOVE_SKILL:
+			DoRemoveSkill(game,cardDes);
 			break;
 		case CardAbilityBean.DO_DAMAGE:
 			cardDes.AddHp(-ability.getVal());
@@ -188,6 +190,20 @@ public class CardUseBsn
 		}
 		return ret;
 	}
+	public static void DoRemoveSkill(CardGameBean game,CardBean cardDes){
+		for (CardDeckBean deck : game.getDeck().values()){
+			for (CardBean card : deck.getCardMap().values())
+			{
+				if(card.getZoneID() != CardBean.ATTACH_ZONE_ID)
+					continue;
+				if(card.getAttachTo()!=cardDes.getRealID())
+					continue;
+				onCardDead(game,card);
+			}
+		}
+		cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
+	}
+	
 	public static void DoCardAbility(CardGameBean game,CardBean cardSrc,CardBean cardDes){
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(cardSrc.getCardID());
 		
