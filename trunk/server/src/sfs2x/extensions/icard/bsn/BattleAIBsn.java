@@ -222,8 +222,13 @@ public class BattleAIBsn
 		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,-1);
 		if(cardVect.size()==0)
 			return false;
-		CardBean card = (CardBean)cardVect.firstElement();
-		CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_PLAY_RES_CARD,null);
+		CardBean select=null;
+		for(int i=0;i<cardVect.size();i++){
+			CardBean card = cardVect.get(i);
+			if(select==null || select.getCost()>card.getCost())
+				select = card;
+		}
+		CardActionBean action = new CardActionBean(select.getRealID(),site.getPlayerID(),CardActionBean.DO_PLAY_RES_CARD,null);
 		game.setCurAction(action);
 		return true;
 	}

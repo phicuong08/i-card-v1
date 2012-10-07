@@ -133,7 +133,7 @@ public class BattleBsn
 //		CardBean card = game.getCard(curAction.getSrc());
 		
 		if(curAction.getType()==CardActionBean.DO_ENTER_CARD){
-			ext.SendGameCardUpdate(game);
+			
 //			CardAbilityBean ability = BufferBsn.getCardAbility(card,CardAbilityBean.WHEN_ENTER);
 //			if(ability!=null){
 //				InitAbilityOp(game,card,ability);
@@ -146,6 +146,7 @@ public class BattleBsn
 			ICardExtension.getExt().SendGameCommand(Commands.CMD_S2C_FIGHT_CARD_RESULT, params, game);
 			game.getStateBean().setDelayJump(BattleStateBean.ST_END_PLAY_CARD, Constants.SHOW_ACTION_TIME);
 		}
+		ext.SendGameCardUpdate(game);
 		
 	}
 	
