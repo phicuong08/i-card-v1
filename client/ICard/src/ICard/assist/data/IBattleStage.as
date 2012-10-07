@@ -17,5 +17,6 @@ package ICard.assist.data{
 		function AddFightTarget(realID:int):void;
 		function getAbilityTarget(id:int):Array;
 		function getActiveTarget():Array;
+		function getAttachHtml(realID:int):String;
     }
 }//package com.assist.view.interfaces 

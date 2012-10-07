@@ -4,6 +4,7 @@ package ICard.logic {
 	import ICard.SFSMod.*;
 	import ICard.SFSMod.Mod_Battle;
 	import ICard.assist.data.*;
+	import ICard.assist.cardTipHtml;
 	import ICard.assist.server.CardType;
 	import ICard.assist.view.controls.BattleFieldType;
 	import ICard.datas.*;
@@ -195,6 +196,19 @@ package ICard.logic {
 			return UseCard.genMenuFlag(card,_curState,PlayerMe.CardDB.ResNum,bAllyFightable);
 		}
 		
+		public function getAttachHtml(realID:int):String{
+			var info:String = "";
+			var fillArr:Array = [];
+			for each(var guy:BattleGuy in _guy){
+				guy.CardDB.getAttachCard(realID,fillArr);
+			}
+			for each(var card:CardData in fillArr){
+				info += card.Info["title"] + ","
+			}
+			if(info.length==0)
+				return "";
+			return cardTipHtml.CardAttachHtml(info);
+		}
 		public function CardInfo(realID:int):Object{
 			return BattleHelper.CloneCardInfo(_guy,realID);
 		}

@@ -46,6 +46,11 @@ package ICard.assist {
 										HtmlText.FontWraper(info["atk"],HtmlText.FONTSIZE_3,HtmlText.White);
 		}
 		
+		public static function CardAttachHtml(data:String):String{
+			return HtmlText._newLineSign +HtmlText.FontWraper("结附",HtmlText.FONTSIZE_3,HtmlText.Orange) + "   " + 
+				HtmlText.FontWraper(data,HtmlText.FONTSIZE_3,HtmlText.White);
+		}
+		
 		private static function CardCostHtml(info:Object,title:Object):String{
 			return HtmlText.FontWraper(title["cost"],HtmlText.FONTSIZE_3,HtmlText.Green) + 
 											HtmlText.FontWraper(info["cost"],HtmlText.FONTSIZE_3,HtmlText.White);
