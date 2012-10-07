@@ -49,6 +49,15 @@ public class BufferBsn
 			break;	
 		}
 	}
+	public static boolean IsGoodBuf(CardBean card){
+		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
+		for(int i=0;i<vec.size();i++){
+			CardAbilityBean ability = vec.get(i);
+			if(ability.IsGoodBuf())
+				return true;
+		}
+		return false;
+	}
 	public static CardAbilityBean getCardAbility(CardBean card,int when){
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
 		for(int i=0;i<vec.size();i++){
