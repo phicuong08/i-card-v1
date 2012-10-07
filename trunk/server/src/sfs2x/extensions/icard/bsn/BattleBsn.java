@@ -202,6 +202,7 @@ public class BattleBsn
 	public static void onEvent(CardGameBean game,int when){
 		CardDeckBean desDeck = game.getTurnDeck();
 		CardSiteBsn.onAttachCardEvent(game,desDeck, when);
+		
 		for (CardDeckBean deck : game.getDeck().values()){
 			CardSiteBsn.onSupportEvent(game,deck,desDeck, when);
 		}

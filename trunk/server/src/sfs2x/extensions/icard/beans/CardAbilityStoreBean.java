@@ -168,6 +168,10 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.DO_ATK_SIDE_ADD;
 		else if(whatInfo.equals("DO_REMOVE_SKILL"))
 			return CardAbilityBean.DO_REMOVE_SKILL;
+		else if(whatInfo.equals("DO_REMOVE_GOOD_SKILL"))
+			return CardAbilityBean.DO_REMOVE_GOOD_SKILL;
+		else if(whatInfo.equals("DO_REMOVE_BAD_SKILL"))
+			return CardAbilityBean.DO_REMOVE_BAD_SKILL;
 		else if(whatInfo.equals("DO_DROP_HAND_CARD"))
 			return CardAbilityBean.DO_DROP_HAND_CARD;
 		else if(whatInfo.equals("DO_DROP_RES"))

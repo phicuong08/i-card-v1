@@ -74,16 +74,18 @@ public class CardAbilityBean
 	public static final int DO_NULL                 =100;  //
 	public static final int DO_ATK_SIDE_ADD         =101;  //攻击横置时加伤害
 	public static final int DO_REMOVE_SKILL         =102;  //移除技能
-	public static final int DO_DROP_HAND_CARD       =103;  //弃手牌
-	public static final int DO_DRAW_HAND_CARD       =104;  //抓牌
-	public static final int DO_DROP_RES             =105;  //弃资源
-	public static final int DO_DAMAGE               =106;  //伤害
-	public static final int DO_HEAL                 =107;  //治疗
-	public static final int DO_KILL                 =108;  //消灭
-	public static final int DO_KILL_COST_UP         =109;  //消灭费用大于
-	public static final int DO_KILL_COST_DOWN       =110;  //消灭费用小于
-	public static final int DO_RESET                =111;  //重置
-	public static final int DO_SIDE                 =112;  //横置
+	public static final int DO_REMOVE_GOOD_SKILL    =103;  //移除有益技能
+	public static final int DO_REMOVE_BAD_SKILL     =104;  //移除有害技能
+	public static final int DO_DROP_HAND_CARD       =105;  //弃手牌
+	public static final int DO_DRAW_HAND_CARD       =106;  //抓牌
+	public static final int DO_DROP_RES             =107;  //弃资源
+	public static final int DO_DAMAGE               =108;  //伤害
+	public static final int DO_HEAL                 =109;  //治疗
+	public static final int DO_KILL                 =110;  //消灭
+	public static final int DO_KILL_COST_UP         =111;  //消灭费用大于
+	public static final int DO_KILL_COST_DOWN       =112;  //消灭费用小于
+	public static final int DO_RESET                =113;  //重置
+	public static final int DO_SIDE                 =114;  //横置
 
 	public static final int OP_OR             =1;
 	public static final int OP_AND            =2;
@@ -147,6 +149,26 @@ public class CardAbilityBean
 	}
 	public boolean IsBuf(){
 		return (_type <= BUF_MAX);
+	}
+
+	public boolean IsGoodBuf(){
+		if(IsBuf()==false)
+			return false;
+		boolean ret = false;
+		switch(_type){
+		case BUF_GUIDE:
+		case BUF_HIDDEN:
+		case BUF_LATENT:
+		case BUF_SHIELD:
+		case BUF_POINT_UNABLE:
+		case BUF_AT_ONCE:
+			ret = true;
+			break;
+		case BUF_HEAL:
+			ret = (_val>0)? true:false;
+			break;
+		}
+		return ret;
 	}
 	public boolean IsWhenMatch(int when){
 		if(_when==WHEN_ALL)
