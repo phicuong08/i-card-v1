@@ -261,6 +261,7 @@ public class CardUseBsn
 	}
 	public static void onCardDead(CardGameBean game,CardBean card){
 		card.setZoneID(CardBean.GRAVE_ZONE_ID);
+		card.setAttachTo(0);
 		HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
 		for(BufferBean buf:bufMap.values()){
 			CardBean cardBuf = game.getCard(buf.getID());
