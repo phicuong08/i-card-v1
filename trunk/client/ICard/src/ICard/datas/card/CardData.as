@@ -90,7 +90,12 @@ package ICard.datas.card {
 		public function set Turn(val:int):void{
 			_info["turn"]=val;
 		}
-		
+		public function get AttachTo():int{
+			return _info["attachTo"];
+		}
+		public function set AttachTo(val:int):void{
+			_info["attachTo"]=val;
+		}
 		public function IsUseResEnough(val:int):Boolean{
 			return true;
 		}
@@ -129,6 +134,8 @@ package ICard.datas.card {
 				_info["turn"] = info["turn"];
 			if(info.hasOwnProperty("slot"))
 				_info["slot"] = info["slot"];
+			if(info.hasOwnProperty("attach"))
+				_info["attachTo"] = info["attach"];
 			UpdateBuf(info);
 		}
 		public function IsActive():Boolean{

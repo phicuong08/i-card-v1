@@ -132,9 +132,7 @@
 				var pos:Point = (_IsMyslot)?card.localToGlobal(new Point(-100,-card.height/2-40)):card.localToGlobal(new Point(-100,card.height+8));
 				if((pos.x +380)>1200)
 					pos.x = 1200 -380;
-				
-				
-				_tip.addFixedTarget(card, card.tipInfo, pos);
+				_tip.addFixedTarget(card, card.tipInfo+ _battleStage.getAttachHtml(card.realID), pos);
 		}
 		
 		public function RemoveCardTip(card:MovieClip):void{

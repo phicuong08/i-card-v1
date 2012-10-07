@@ -31,6 +31,7 @@ public class CardBean
 	public final static int SIDE_DIRTY_BIT = 6;
 	public final static int CARDID_DIRTY_BIT = 7;
 	public final static int BUF_DIRTY_BIT = 8;
+	public final static int ATTACH_DIRTY_BIT = 9;
 	
 	private int _realID;
 	private int _cardID;
@@ -85,6 +86,7 @@ public class CardBean
 	}
 	public void setAttachTo(int id){
 		_attachTo = id;
+		setDirtyFlagBit(ATTACH_DIRTY_BIT);
 	}
 	public int getAttachTo(){
 		return _attachTo;
