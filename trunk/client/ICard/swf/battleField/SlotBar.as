@@ -99,8 +99,8 @@
 				_selCard = card;
 				if(card.hasOwnProperty("cardmenu")==false){
 					ShowCardActionMenu(card);
-					SetCardTip(card);
 				}
+				SetCardTip(card);
 			}
 			
 			var handleMouseOutCard:* = function(e:MouseEvent):void{
