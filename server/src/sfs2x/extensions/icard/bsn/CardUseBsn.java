@@ -23,7 +23,20 @@ import sfs2x.extensions.icard.beans.CardDeckBean;
  */
 public class CardUseBsn
 {	
-	
+	public static void AtkedCure(CardGameBean game,CardBean cardDes){
+		int cureVal = 0;
+		for (CardDeckBean deck : game.getDeck().values()){
+			for (CardBean card : deck.getCardMap().values())
+			{
+				if(card.getZoneID() != CardBean.ATTACH_ZONE_ID)
+					continue;
+				if(card.getAttachTo()!=cardDes.getRealID())
+					continue;
+				cureVal += BufferBsn.CureVal(card);
+			}
+		}
+		cardDes.AddHp(-cureVal);
+	}
 	public static void Atk(CardBean card1,CardBean card2){
 		if(card1.IsDistAtk(CardAbilityBean.WHEN_ATK)==false) //是否有远程攻击能力
 			card1.AddHp(-card2.getAtk(CardAbilityBean.WHEN_ATK));

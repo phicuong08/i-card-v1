@@ -133,6 +133,7 @@ public class CardActionBsn
 			return;
 		if(card2.IsUnableAtked(CardAbilityBean.WHEN_ATKED))
 			return;
+		CardUseBsn.AtkedCure(game, card2);
 		CardUseBsn.Atk(card, card2);	
 	}
 	private static boolean procAbility2Cast(CardGameBean game,CardDeckBean site,CardBean card,CardActionBean action){
