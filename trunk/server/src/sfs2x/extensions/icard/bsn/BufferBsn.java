@@ -49,6 +49,15 @@ public class BufferBsn
 			break;	
 		}
 	}
+	public static int CureVal(CardBean card){
+		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
+		for(int i=0;i<vec.size();i++){
+			CardAbilityBean ability = vec.get(i);
+			if(ability.getType()== CardAbilityBean.BUF_CURE)
+				return ability.getVal();
+		}
+		return 0;
+	}
 	public static boolean IsGoodBuf(CardBean card){
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
 		for(int i=0;i<vec.size();i++){
