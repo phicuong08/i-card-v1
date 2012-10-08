@@ -141,6 +141,7 @@ public class CardUseBsn
 			BattleBsn.drawCard(game,cardSrc.getOwner(),ability.getVal());
 			break;
 		default:
+			cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
 			;//BufferBsn.AddBuf(cardSrc, cardDes, ability);
 		}
 	}
