@@ -96,18 +96,21 @@
 				SetCardTip(card);
 			}
 			var handleMuseMove:* = function(e:MouseEvent):void{
-				_selCard = card;
+				
 				if(card.hasOwnProperty("cardmenu")==false){
 					ShowCardActionMenu(card);
+					
 				}
 				SetCardTip(card);
+				_selCard = card;
 			}
 			
 			var handleMouseOutCard:* = function(e:MouseEvent):void{
 				card.y = card.baseY;
-				_selCard = null;
+				
 				HideCardActionMenu(card);
 				RemoveCardTip(card);
+				_selCard = null;
 			}
 			var handleMouseClickCard:* = function(e:MouseEvent):void{
 				_battleField.onClickCard(card.realID);
@@ -128,6 +131,8 @@
 				
 				if(!card || !card.tipInfo)
 					return;	
+				if(card ==_selCard)
+					return;
 				trace("tip info",card.tipInfo);	
 				var pos:Point = (_IsMyslot)?card.localToGlobal(new Point(-100,-card.height/2-40)):card.localToGlobal(new Point(-100,card.height+8));
 				if((pos.x +380)>1200)
