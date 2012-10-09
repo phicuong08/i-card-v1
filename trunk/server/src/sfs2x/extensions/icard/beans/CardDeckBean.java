@@ -3,6 +3,7 @@ package sfs2x.extensions.icard.beans;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
+import sfs2x.extensions.icard.bsn.BufferBsn;
 import sfs2x.extensions.icard.main.ICardExtension;
 
 import com.smartfoxserver.v2.entities.User;
@@ -102,5 +103,14 @@ public class CardDeckBean
 	}
 	public void gameTick(CardGameBean game,ICardExtension ext){
 		
+	}
+	public int getHeroAbilityVal(int what){
+		int val = 0;
+		for(CardBean card:_cardMap.values()){
+			if(card.getZoneID()!=CardBean.EQUIP_ZONE_ID)
+				continue;
+			val += BufferBsn.AbilityVal(card,what);
+		}
+		return val;
 	}
 }

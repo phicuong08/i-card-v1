@@ -51,6 +51,7 @@ public class CardAbilityBean
 	public static final int BUF_DEF_ADD           =22;   //
 	public static final int BUF_DEF_UNABLE        =23;  //无法防御
 	public static final int BUF_AT_ONCE           =24;  //瞬发
+	public static final int BUF_CAST_DAMAGE_ADD   =25;  //施法伤害加深
 	public static final int BUF_MAX               =99;  //
 	
 	public static final int WHICH_NULL                 =0;  

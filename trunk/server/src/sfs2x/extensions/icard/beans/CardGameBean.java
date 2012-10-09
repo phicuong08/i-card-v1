@@ -132,6 +132,14 @@ public class CardGameBean
 	public long getGameStartTime() {
 		return gameStartTime;
 	}
+	public CardDeckBean getDeckOnCard(int realID){
+		for(CardDeckBean deck:_deck.values()){
+			CardBean card = deck.getCardMap().get(realID);
+			if(card!=null)
+				return deck;
+		}
+		return null;	
+	}
 	public int getCardOwner(int realID){
 		for(CardDeckBean deck:_deck.values()){
 			CardBean card = deck.getCardMap().get(realID);
