@@ -136,6 +136,8 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.BUF_ATK_UNABLE;
 		else if(whatInfo.equals("BUF_UNABLE_ATKED"))
 			return CardAbilityBean.BUF_UNABLE_ATKED;
+		else if(whatInfo.equals("BUF_CAST_DAMAGE_ADD"))
+			return CardAbilityBean.BUF_CAST_DAMAGE_ADD;
 		else if(whatInfo.equals("BUF_CURE"))
 			return CardAbilityBean.BUF_CURE;
 		else if(whatInfo.equals("BUF_DAMAGE_UNSTOP"))

@@ -32,7 +32,7 @@ public class CardUseBsn
 					continue;
 				if(card.getAttachTo()!=cardDes.getRealID())
 					continue;
-				cureVal += BufferBsn.CureVal(card);
+				cureVal += BufferBsn.AbilityVal(card,CardAbilityBean.BUF_CURE);
 			}
 		}
 		cardDes.AddHp(-cureVal);
@@ -108,7 +108,14 @@ public class CardUseBsn
 			cardDes.setDead();
 		}
 	}
-	
+	private static void DoCastDamage(CardGameBean game,CardBean cardSrc,CardBean cardDes,
+										CardAbilityBean ability)
+	{
+		cardDes.AddHp(-ability.getVal());
+		CardDeckBean deck = game.getDeckOnCard(cardSrc.getRealID());
+		int val = deck.getHeroAbilityVal(CardAbilityBean.BUF_CAST_DAMAGE_ADD);
+		cardDes.AddHp(-val);
+	}
 	public static void DoWhatAbility(CardGameBean game,CardBean cardSrc,CardBean cardDes,
 										CardAbilityBean ability)
 	{
@@ -125,7 +132,8 @@ public class CardUseBsn
 			DoRemoveBadSkill(game,cardDes);
 			break;	
 		case CardAbilityBean.DO_DAMAGE:
-			cardDes.AddHp(-ability.getVal());
+			DoCastDamage(game,cardSrc,cardDes,ability);
+
 			break;
 		case CardAbilityBean.DO_DROP_HAND_CARD:
 			
