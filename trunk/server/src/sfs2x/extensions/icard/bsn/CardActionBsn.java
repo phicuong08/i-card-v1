@@ -198,30 +198,6 @@ public class CardActionBsn
 		return true;
 	}
 	
-//	public static boolean IsMatchUse(CardGameBean game,CardActionBean action,
-//										CardBean card){
-//		if(card.getSide()>0)
-//			return false;								
-//		CardUseBean useInfo = CardUseStoreBean.GetInstance().getCardUse(card.getCardID());
-//		if(useInfo==null)
-//			return false;
-//		if(action.getDes().size()==0)
-//			return false;
-//		if(action.getDes().size()> useInfo.getTargetNum())
-//			return false;
-//		boolean IsFriend = IsFriendAction(game,action);
-//		boolean IsMatch = false;
-//		switch(card.getCardType()){
-//		case CardInfoBean.HERO:
-//			IsMatch = (IsFriend==true)? useInfo.getMyHero()>0:useInfo.getYourHero()>0 ;
-//			break;
-//		case CardInfoBean.ALLY:
-//			IsMatch = (IsFriend==true)? useInfo.getMySoldier()>0:useInfo.getYourSoldier()>0 ;
-//			break;	
-//		}
-//		return IsMatch;
-//	}
-
 	private static boolean procCard2FightSlot(CardGameBean game,CardDeckBean site,CardBean card){
 		site.useRes(card.getCost());
 		card.setZoneID(CardBean.FIGHT_ZONE_ID);	
