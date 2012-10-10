@@ -22,15 +22,6 @@ import sfs2x.extensions.icard.beans.CardInfoBean;
  */
 public class CardAbilityBsn
 {	
-
-	public static boolean IsExistBuf(CardBean card,int type,int when){
-		HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
-		for(BufferBean buf:bufMap.values()){
-			if(buf.getType()==type && (buf.getWhen()== CardAbilityBean.WHEN_ALL|| buf.getWhen()==when))
-				return true;
-		}
-		return false;
-	}
 	public static void callCardAbility(CardBean card,CardAbilityBean ability){
 		switch(ability.getType()){
 		case CardAbilityBean.BUF_CURE:
@@ -40,15 +31,6 @@ public class CardAbilityBsn
 			card.AddHp(ability.getVal());
 			break;	
 		}
-	}
-	public static int AbilityVal(CardBean card,int what){
-		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
-		for(int i=0;i<vec.size();i++){
-			CardAbilityBean ability = vec.get(i);
-			if(ability.getType()== what)
-				return ability.getVal();
-		}
-		return 0;
 	}
 	public static int getAbilityVal(CardBean card,int when,int type){
 		int val = 0;
@@ -62,7 +44,7 @@ public class CardAbilityBsn
 		return val;
 	}
 	
-	public static boolean IsGoodBuf(CardBean card){
+	public static boolean IsGoodAbility(CardBean card){
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
 		for(int i=0;i<vec.size();i++){
 			CardAbilityBean ability = vec.get(i);
@@ -80,16 +62,14 @@ public class CardAbilityBsn
 		}
 		return null;
 	}
-	public static boolean IsCardAbility(CardBean card,int when,int type){
-		return (getCardAbility(card,when,CardAbilityBean.WHICH_I,type)!=null);
+	public static boolean IsCardAbility(CardBean card,int when,int what){
+		return (getCardAbility(card,when,what)!=null);
 	}
-	public static CardAbilityBean getCardAbility(CardBean card,int when,int which,int type){
+	public static CardAbilityBean getCardAbility(CardBean card,int when,int what){
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
 		for(int i=0;i<vec.size();i++){
 			CardAbilityBean ability = vec.get(i);
-			if(ability.getWhich()!=which)
-				continue;
-			if(ability.getType()==type && (ability.getWhen()== CardAbilityBean.WHEN_ALL|| ability.getWhen()==when)){
+			if(ability.getType()==what && (ability.getWhen()== CardAbilityBean.WHEN_ALL|| ability.getWhen()==when)){
 				return ability;
 			}
 		}

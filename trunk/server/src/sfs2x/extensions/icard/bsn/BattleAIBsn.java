@@ -90,7 +90,7 @@ public class BattleAIBsn
 						continue;
 				}
 				else{
-					if(card.IsPointUnable() || cast.getOwner()== card.getOwner())
+					if(card.IsPointUnable(game) || cast.getOwner()== card.getOwner())
 						continue;
 				}
 				if( CardUseBsn.calcAbilityVal(ability,card)>0)

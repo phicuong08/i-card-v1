@@ -3,11 +3,10 @@ package sfs2x.extensions.icard.beans;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-import sfs2x.extensions.icard.bsn.BufferBsn;
 import sfs2x.extensions.icard.main.ICardExtension;
 
 import com.smartfoxserver.v2.entities.User;
-
+import sfs2x.extensions.icard.bsn.CardAbilityBsn;
 /**
  * PlayerBean: class describing a player in a match
  * 
@@ -38,11 +37,11 @@ public class CardDeckBean
 	public int getPlayerID() {
 		return _playerID;
 	}
-	public void setCardReady(){
+	public void setCardReady(CardGameBean game){
 		_addResAble = true;
 		_curRes = _maxRes;
 		for(CardBean card:_cardMap.values()){
-			if(card.IsResetEnable()==false)
+			if(card.IsResetEnable(game)==false)
 				continue;
 			if(card.getZoneID()!=CardBean.HAND_ZONE_ID &&
 			   card.getZoneID()!=CardBean.GRAVE_ZONE_ID)
@@ -98,12 +97,25 @@ public class CardDeckBean
 	public void gameTick(CardGameBean game,ICardExtension ext){
 		
 	}
+	public CardBean getGuideCard(CardGameBean game){
+		for(CardBean card:_cardMap.values()){
+			if(card.getZoneID()!=CardBean.HERO_ZONE_ID &&
+				card.getZoneID()!=CardBean.FIGHT_ZONE_ID)
+				continue;
+			if(card.IsGuidable(game, CardAbilityBean.WHEN_ALL))
+				return card;
+		}
+		if(getHeroAbilityVal(CardAbilityBean.BUF_GUIDE)>0)
+			return _hero;
+		else
+			return null;
+	}
 	public int getHeroAbilityVal(int what){
 		int val = 0;
 		for(CardBean card:_cardMap.values()){
 			if(card.getZoneID()!=CardBean.EQUIP_ZONE_ID)
 				continue;
-			val += BufferBsn.AbilityVal(card,what);
+			val += CardAbilityBsn.getAbilityVal(card,what,CardAbilityBean.WHEN_ALL);
 		}
 		return val;
 	}

@@ -129,12 +129,12 @@ public class CardActionBsn
 		CardBean card2 = game.getCard(desID);
 		if(IsAtkValidate(game,card,card2)==false)
 			return;
-		if(card.IsAtkUnable(CardAbilityBean.WHEN_ATK))
+		if(card.IsAtkUnable(game,CardAbilityBean.WHEN_ATK))
 			return;
-		if(card2.IsUnableAtked(CardAbilityBean.WHEN_ATKED))
+		if(card2.IsUnableAtked(game,CardAbilityBean.WHEN_ATKED))
 			return;
 		CardUseBsn.AtkedCure(game, card2);
-		CardUseBsn.Atk(card, card2);	
+		CardUseBsn.Atk(game,card, card2);	
 	}
 	private static boolean procAbility2Cast(CardGameBean game,CardDeckBean site,CardBean card,CardActionBean action){
 		return CardUseBsn.ability2Cast(game,site,card,action);
@@ -152,7 +152,7 @@ public class CardActionBsn
 		int targetNum = (desVect.size()>abilityBean.getTargetNum())? abilityBean.getTargetNum():desVect.size();
 		for(int i=0;i<targetNum;i++){
 			int desID = desVect.get(i);
-			if(BufferBsn.IsWhichMatch(card.getRealID(),desID,abilityBean,game)==false)
+			if(CardAbilityBsn.IsWhichMatch(card.getRealID(),desID,abilityBean,game)==false)
 				continue;
 			CardBean desCard = game.getCard(desID);
 			if(desCard==null)
@@ -271,12 +271,12 @@ public class CardActionBsn
 		case CardInfoBean.HERO:
 		case CardInfoBean.ALLY:
 		case CardInfoBean.WEAPON:
-			bMatch = (card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.ALLY) && (card2.IsHidden()==false);
+			bMatch = (card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.ALLY) && (card2.IsHidden(game)==false);
 			break;
 		case CardInfoBean.ABILITY:
 				if(card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.ALLY)
 				{
-					bMatch = !card2.IsPointUnable();
+					bMatch = !card2.IsPointUnable(game);
 				}
 				else
 					bMatch = true;
