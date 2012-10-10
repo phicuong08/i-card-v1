@@ -1,10 +1,10 @@
 package sfs2x.extensions.icard.beans;
 
+import sfs2x.extensions.icard.bsn.AttachCardBsn;
 import sfs2x.extensions.icard.bsn.AttrBsn;
-import sfs2x.extensions.icard.bsn.BufferBsn;
 import sfs2x.extensions.icard.bsn.CardSiteBsn;
 import sfs2x.extensions.icard.utils.Constants;
-
+import sfs2x.extensions.icard.bsn.CardAbilityBsn;
 /**
  * BombBean: object describing a bomb on the game map
  * 
@@ -139,39 +139,39 @@ public class CardBean
 	public boolean IsHero(){
 		return (_zoneID==CardBean.HERO_ZONE_ID);
 	}
-	public boolean IsPointUnable(){
+	public boolean IsPointUnable(CardGameBean game){
 		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.POINT_UNABLE))
 			return true;
-		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_POINT_UNABLE,CardAbilityBean.WHEN_ALL);
+		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_POINT_UNABLE,CardAbilityBean.WHEN_ALL);
 	}
-	public boolean IsResetEnable(){
-		return (BufferBsn.IsExistBuf(this, CardAbilityBean.BUF_SIDE,CardAbilityBean.WHEN_ALL)==false);
+	public boolean IsResetEnable(CardGameBean game){
+		return (AttachCardBsn.ExistAbility(game,_realID, CardAbilityBean.BUF_SIDE,CardAbilityBean.WHEN_ALL)==false);
 	}
-	public boolean IsInstant(){
+	public boolean IsInstant(CardGameBean game){
 		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.INSTANT))
 			return true;
-		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_AT_ONCE,CardAbilityBean.WHEN_ALL);
+		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_AT_ONCE,CardAbilityBean.WHEN_ALL);
 	}
-	public boolean IsHidden(){
+	public boolean IsHidden(CardGameBean game){
 		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.HIDE))
 			return true;
-		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_HIDDEN,CardAbilityBean.WHEN_ALL);
+		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_HIDDEN,CardAbilityBean.WHEN_ALL);
 	}
-	public boolean IsDistAtk(int when){
+	public boolean IsDistAtk(CardGameBean game,int when){
 		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.DIST_ATK))
 			return true;
-		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_ATK_DIST,when);
+		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_ATK_DIST,when);
 	}
-	public boolean IsAtkUnable(int when){
-		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_ATK_UNABLE,when);
+	public boolean IsAtkUnable(CardGameBean game,int when){
+		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_ATK_UNABLE,when);
 	}
-	public boolean IsUnableAtked(int when){
-		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_UNABLE_ATKED,when);
+	public boolean IsUnableAtked(CardGameBean game,int when){
+		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_UNABLE_ATKED,when);
 	}
-	public boolean IsGuidable(int when){
+	public boolean IsGuidable(CardGameBean game,int when){
 		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.DIST_ATK))
 			return true;
-		return BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_GUIDE,when);
+		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_GUIDE,when);
 	}
 	public int getCost(){ //费用
 		return _info.getBaseCost();
@@ -180,7 +180,7 @@ public class CardBean
 		return _info.getBaseUseCost();
 	}
 	public int getDef(int when){ //防御力
-		return _info.getBaseDefence() + BufferBsn.getAbilityVal(this,when,CardAbilityBean.BUF_DEF_ADD);
+		return _info.getBaseDefence() + CardAbilityBsn.getAbilityVal(this,when,CardAbilityBean.BUF_DEF_ADD);
 	}
 	public int getWhich(){
 		int which = CardAbilityBean.WHICH_NULL;
@@ -205,7 +205,7 @@ public class CardBean
 			_loopNum++;
 	}
 	public int getAtk(int when){ //攻击力
-		return _info.getBaseAttack() + CardSiteBsn.supportAtkVal(_deck,getWhich(), when) + BufferBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
+		return _info.getBaseAttack() + CardSiteBsn.supportAtkVal(_deck,getWhich(), when) + CardAbilityBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
 	}
 	public void setDead(){
 		AddHp(-10000);

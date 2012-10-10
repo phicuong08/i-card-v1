@@ -74,7 +74,7 @@ public class CardGameBean
 	public void setCardReady(){
 		CardDeckBean deck = _deck.get(getTurnPlayer());
 		if (deck != null)
-			deck.setCardReady();
+			deck.setCardReady(this);
 	}
 	public void setTurnPlayer(int playerID){
 		_StateBean.setTurnPlayer(playerID);

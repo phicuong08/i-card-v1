@@ -32,29 +32,29 @@ public class CardUseBsn
 					continue;
 				if(card.getAttachTo()!=cardDes.getRealID())
 					continue;
-				cureVal += BufferBsn.AbilityVal(card,CardAbilityBean.BUF_CURE);
+				cureVal += CardAbilityBsn.getAbilityVal(card,CardAbilityBean.BUF_CURE,CardAbilityBean.WHEN_ATKED);
 			}
 		}
 		cardDes.AddHp(-cureVal);
 	}
-	public static void Atk(CardBean card1,CardBean card2){
-		if(card1.IsDistAtk(CardAbilityBean.WHEN_ATK)==false) //是否有远程攻击能力
+	public static void Atk(CardGameBean game,CardBean card1,CardBean card2){
+		if(card1.IsDistAtk(game,CardAbilityBean.WHEN_ATK)==false) //是否有远程攻击能力
 			card1.AddHp(-card2.getAtk(CardAbilityBean.WHEN_ATK));
 		card2.AddHp(-card1.getAtk(CardAbilityBean.WHEN_ATKED));
 		card1.setSide(1);
-		if(BufferBsn.IsCardAbility(card2,CardAbilityBean.WHEN_ATKED,CardAbilityBean.DO_KILL)==true)
+		if(CardAbilityBsn.IsCardAbility(card2,CardAbilityBean.WHEN_ATKED,CardAbilityBean.DO_KILL)==true)
 			card1.setDead();
 		if(card1.getHp()<=0)
 		{
 			card1.setZoneID(CardBean.GRAVE_ZONE_ID);
-			if(BufferBsn.IsCardAbility(card1,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true)
+			if(CardAbilityBsn.IsCardAbility(card1,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true)
 				card2.setDead();
 		}
 		if(card2.getHp()<=0)
 		{
 			card2.setZoneID(CardBean.GRAVE_ZONE_ID);
-			if(BufferBsn.IsCardAbility(card2,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true ||
-			   BufferBsn.IsCardAbility(card2,CardAbilityBean.WHEN_DEF_DEAD,CardAbilityBean.DO_KILL)==true)
+			if(CardAbilityBsn.IsCardAbility(card2,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true ||
+					CardAbilityBsn.IsCardAbility(card2,CardAbilityBean.WHEN_DEF_DEAD,CardAbilityBean.DO_KILL)==true)
 			   card1.setDead();
 		}
 	}
@@ -115,6 +115,19 @@ public class CardUseBsn
 		CardDeckBean deck = game.getDeckOnCard(cardSrc.getRealID());
 		int val = deck.getHeroAbilityVal(CardAbilityBean.BUF_CAST_DAMAGE_ADD);
 		cardDes.AddHp(-val);
+	}
+	public static void DoRemoveAttached(CardGameBean game,CardBean cardDes){
+		for (CardDeckBean deck : game.getDeck().values()){
+			for (CardBean card : deck.getCardMap().values())
+			{
+				if(card.getZoneID() != CardBean.ATTACH_ZONE_ID)
+					continue;
+				if(card.getAttachTo()!=cardDes.getRealID())
+					continue;
+				onCardDead(game,card);
+			}
+		}
+		cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
 	}
 	public static void DoWhatAbility(CardGameBean game,CardBean cardSrc,CardBean cardDes,
 										CardAbilityBean ability)
@@ -191,7 +204,7 @@ public class CardUseBsn
 		for(int j=0;j<vec.size();j++)
 		{
 			CardBean desCard =vec.get(j);
-			if(IsWhichMatch(game,cardSrc,desCard,ability)==true && !desCard.IsPointUnable()){
+			if(IsWhichMatch(game,cardSrc,desCard,ability)==true && !desCard.IsPointUnable(game)){
 				targets.add(desCard.getRealID());
 				ret = true;
 			}

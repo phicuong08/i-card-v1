@@ -59,7 +59,7 @@ public class CardSiteBsn
 				continue;
 			for(int i=0;i<vec.size();i++){
 				CardAbilityBean ability = vec.get(i);
-				BufferBsn.callCardAbility(desCard,ability);
+				CardAbilityBsn.callCardAbility(desCard,ability);
 			}
 		}
 		//support event

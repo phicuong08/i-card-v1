@@ -32,7 +32,7 @@ public class AttachCardBsn
 					continue;
 				if(card.getAttachTo()!=cardDes.getRealID())
 					continue;
-				onCardDead(game,card);
+				CardUseBsn.onCardDead(game,card);
 			}
 		}
 		cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
@@ -45,11 +45,25 @@ public class AttachCardBsn
 					continue;
 				if(card.getAttachTo()!=cardDes.getRealID())
 					continue;
-				if(BufferBsn.IsGoodBuf(card))
-					onCardDead(game,card);
+				if(CardAbilityBsn.IsGoodAbility(card))
+					CardUseBsn.onCardDead(game,card);
 			}
 		}
 		cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
+	}
+	public static boolean ExistAbility(CardGameBean game,int realID,int what,int when){
+		for (CardDeckBean deck : game.getDeck().values()){
+			for (CardBean card : deck.getCardMap().values())
+			{
+				if(card.getZoneID() != CardBean.ATTACH_ZONE_ID)
+					continue;
+				if(card.getAttachTo()!=realID)
+					continue;
+				if(CardAbilityBsn.IsCardAbility(card,when,what))
+					return true;
+			}
+		}
+		return false;
 	}
 	public static void DoRemoveBadAttached(CardGameBean game,CardBean cardDes){
 		for (CardDeckBean deck : game.getDeck().values()){
@@ -59,8 +73,8 @@ public class AttachCardBsn
 					continue;
 				if(card.getAttachTo()!=cardDes.getRealID())
 					continue;
-				if(BufferBsn.IsGoodBuf(card)==false)
-					onCardDead(game,card);
+				if(CardAbilityBsn.IsGoodAbility(card)==false)
+					CardUseBsn.onCardDead(game,card);
 			}
 		}
 		cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
