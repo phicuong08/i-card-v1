@@ -123,13 +123,13 @@ public class CardUseBsn
 		case CardAbilityBean.DO_ATK_SIDE_ADD:
 			break;
 		case CardAbilityBean.DO_REMOVE_SKILL:
-			DoRemoveSkill(game,cardDes);
+			AttachCardBsn.DoRemoveAttached(game,cardDes);
 			break;
 		case CardAbilityBean.DO_REMOVE_GOOD_SKILL:
-			DoRemoveGoodSkill(game,cardDes);
+			AttachCardBsn.DoRemoveGoodAttached(game,cardDes);
 			break;
 		case CardAbilityBean.DO_REMOVE_BAD_SKILL:
-			DoRemoveBadSkill(game,cardDes);
+			AttachCardBsn.DoRemoveBadAttached(game,cardDes);
 			break;	
 		case CardAbilityBean.DO_DAMAGE:
 			DoCastDamage(game,cardSrc,cardDes,ability);
@@ -218,47 +218,7 @@ public class CardUseBsn
 		}
 		return ret;
 	}
-	public static void DoRemoveSkill(CardGameBean game,CardBean cardDes){
-		for (CardDeckBean deck : game.getDeck().values()){
-			for (CardBean card : deck.getCardMap().values())
-			{
-				if(card.getZoneID() != CardBean.ATTACH_ZONE_ID)
-					continue;
-				if(card.getAttachTo()!=cardDes.getRealID())
-					continue;
-				onCardDead(game,card);
-			}
-		}
-		cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
-	}
-	public static void DoRemoveGoodSkill(CardGameBean game,CardBean cardDes){
-		for (CardDeckBean deck : game.getDeck().values()){
-			for (CardBean card : deck.getCardMap().values())
-			{
-				if(card.getZoneID() != CardBean.ATTACH_ZONE_ID)
-					continue;
-				if(card.getAttachTo()!=cardDes.getRealID())
-					continue;
-				if(BufferBsn.IsGoodBuf(card))
-					onCardDead(game,card);
-			}
-		}
-		cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
-	}
-	public static void DoRemoveBadSkill(CardGameBean game,CardBean cardDes){
-		for (CardDeckBean deck : game.getDeck().values()){
-			for (CardBean card : deck.getCardMap().values())
-			{
-				if(card.getZoneID() != CardBean.ATTACH_ZONE_ID)
-					continue;
-				if(card.getAttachTo()!=cardDes.getRealID())
-					continue;
-				if(BufferBsn.IsGoodBuf(card)==false)
-					onCardDead(game,card);
-			}
-		}
-		cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
-	}
+	
 	public static void DoCardAbility(CardGameBean game,CardBean cardSrc,CardBean cardDes){
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(cardSrc.getCardID());
 		
