@@ -23,7 +23,6 @@ public class CardDeckBean
 	private List<Integer> _drawCardSrc ;
 	private User _sfsUser=null;
 	private Boolean _addResAble = false;
-	private Boolean _passChain = false;
 	private int _maxRes = 10;
 	private int _curRes = 10;
 	public CardDeckBean(int player,User sfsUser) {
@@ -50,12 +49,7 @@ public class CardDeckBean
 				card.setSide(0);
 		}
 	}
-	public void setPassChain(Boolean flag){
-		_passChain = flag;
-	}
-	public Boolean getPassChain(){
-		return _passChain;
-	}
+	
 	public void addRes(){
 		if(_addResAble==false)
 			return;
