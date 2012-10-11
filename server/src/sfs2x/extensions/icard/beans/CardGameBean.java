@@ -132,6 +132,13 @@ public class CardGameBean
 	public long getGameStartTime() {
 		return gameStartTime;
 	}
+	public boolean IsHero(CardBean card){
+		for(CardDeckBean deck:_deck.values()){
+			if(deck.getHero()==card)
+				return true;
+		}
+		return false;
+	}
 	public CardDeckBean getDeckOnCard(int realID){
 		for(CardDeckBean deck:_deck.values()){
 			CardBean card = deck.getCardMap().get(realID);

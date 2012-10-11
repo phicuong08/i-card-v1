@@ -41,7 +41,7 @@ public class CardUseBsn
 		if(card1.IsDistAtk(game,CardAbilityBean.WHEN_ATK)==false) //是否有远程攻击能力
 			card1.AddHp(-card2.getAtk(CardAbilityBean.WHEN_ATK));
 		card2.AddHp(-card1.getAtk(CardAbilityBean.WHEN_ATKED));
-		card1.setSide(1);
+
 		if(CardAbilityBsn.IsCardAbility(card2,CardAbilityBean.WHEN_ATKED,CardAbilityBean.DO_KILL)==true)
 			card1.setDead();
 		if(card1.getHp()<=0)
@@ -113,7 +113,7 @@ public class CardUseBsn
 	{
 		cardDes.AddHp(-ability.getVal());
 		CardDeckBean deck = game.getDeckOnCard(cardSrc.getRealID());
-		int val = deck.getHeroAbilityVal(CardAbilityBean.BUF_CAST_DAMAGE_ADD);
+		int val = CardSiteBsn.getHeroAbilityVal(deck,CardAbilityBean.BUF_CAST_DAMAGE_ADD);
 		cardDes.AddHp(-val);
 	}
 	public static void DoRemoveAttached(CardGameBean game,CardBean cardDes){

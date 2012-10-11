@@ -28,6 +28,9 @@ public class ClientQueryBsn
 	public static boolean procGeneralVerify(CardGameBean game,int playerID,int realID){
 		if(game.getStateBean().IsWaitPlayerOp(playerID)==false)
 			return false;
+		CardBean card = game.getCard(realID);
+		if(card==null || card.getSide()!=0)
+			return false;
 		return game.getCardOwner(realID)== playerID;
 	}
 	public static boolean procPlayResCardRequest(CardGameBean game,int playerID,int realID){

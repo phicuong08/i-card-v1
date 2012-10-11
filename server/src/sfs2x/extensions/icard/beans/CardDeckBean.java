@@ -97,26 +97,4 @@ public class CardDeckBean
 	public void gameTick(CardGameBean game,ICardExtension ext){
 		
 	}
-	public CardBean getGuideCard(CardGameBean game){
-		for(CardBean card:_cardMap.values()){
-			if(card.getZoneID()!=CardBean.HERO_ZONE_ID &&
-				card.getZoneID()!=CardBean.FIGHT_ZONE_ID)
-				continue;
-			if(card.IsGuidable(game, CardAbilityBean.WHEN_ALL))
-				return card;
-		}
-		if(getHeroAbilityVal(CardAbilityBean.BUF_GUIDE)>0)
-			return _hero;
-		else
-			return null;
-	}
-	public int getHeroAbilityVal(int what){
-		int val = 0;
-		for(CardBean card:_cardMap.values()){
-			if(card.getZoneID()!=CardBean.EQUIP_ZONE_ID)
-				continue;
-			val += CardAbilityBsn.getAbilityVal(card,what,CardAbilityBean.WHEN_ALL);
-		}
-		return val;
-	}
 }

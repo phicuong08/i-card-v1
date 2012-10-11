@@ -32,13 +32,13 @@ public class CardAbilityBsn
 			break;	
 		}
 	}
-	public static int getAbilityVal(CardBean card,int when,int type){
+	public static int getAbilityVal(CardBean card,int when,int what){
 		int val = 0;
-		HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
-		for(BufferBean buf:bufMap.values()){
-			if(buf.getType()==type && (buf.getWhen()== CardAbilityBean.WHEN_ALL|| buf.getWhen()==when))
-			{
-				val += buf.getVal();
+		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
+		for(int i=0;i<vec.size();i++){
+			CardAbilityBean ability = vec.get(i);
+			if(ability.getType()==what && (ability.getWhen()== CardAbilityBean.WHEN_ALL|| ability.getWhen()==when)){
+				val += ability.getVal();
 			}
 		}
 		return val;
@@ -53,15 +53,7 @@ public class CardAbilityBsn
 		}
 		return false;
 	}
-	public static CardAbilityBean getCardAbility(CardBean card,int when){
-		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
-		for(int i=0;i<vec.size();i++){
-			CardAbilityBean ability = vec.get(i);
-			if(ability.getWhen()==when)
-				return ability;
-		}
-		return null;
-	}
+
 	public static boolean IsCardAbility(CardBean card,int when,int what){
 		return (getCardAbility(card,when,what)!=null);
 	}

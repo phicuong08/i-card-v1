@@ -110,6 +110,7 @@ public class CardActionBsn
 		
 	}
 	public static boolean IsAtkValidate(CardGameBean game,CardBean atk,CardBean def){
+		
 		int whichAtk = atk.IsHero()?CardAbilityBean.WHICH_MYHERO:CardAbilityBean.WHICH_MYSOLDIER;
 		int whichDef = def.IsHero()?CardAbilityBean.WHICH_MYHERO:CardAbilityBean.WHICH_MYSOLDIER;
 		if(GameBsn.ExistGameSupport(game,whichAtk,CardAbilityBean.BUF_ATK_UNABLE))
@@ -117,16 +118,19 @@ public class CardActionBsn
 		if(GameBsn.ExistGameSupport(game,whichDef,CardAbilityBean.BUF_UNABLE_ATKED))
 			return false;
 		CardDeckBean atkDeck = game.getDeck(atk.getOwner());
-		if(CardSiteBsn.ExistDeckSupport(atkDeck, whichAtk, CardAbilityBean.BUF_ATK_UNABLE))
+		if(SupportCardBsn.ExistDeckSupport(atkDeck, whichAtk, CardAbilityBean.BUF_ATK_UNABLE))
 			return false;
 		CardDeckBean defDeck = game.getDeck(def.getOwner());
-		if(CardSiteBsn.ExistDeckSupport(defDeck, whichDef, CardAbilityBean.BUF_UNABLE_ATKED))
+		if(SupportCardBsn.ExistDeckSupport(defDeck, whichDef, CardAbilityBean.BUF_UNABLE_ATKED))
+			return false;
+		if(CardSiteBsn.getGuideCard(game,defDeck)!=null && def.IsGuidable(game)==false)
 			return false;
 		return true;
 	}
 	private static void procCard2Atk(CardGameBean game,CardBean card,CardActionBean action){
 		int desID = action.getDes().get(0);
 		CardBean card2 = game.getCard(desID);
+		card.setSide(1);
 		if(IsAtkValidate(game,card,card2)==false)
 			return;
 		if(card.IsAtkUnable(game,CardAbilityBean.WHEN_ATK))
@@ -185,6 +189,7 @@ public class CardActionBsn
 		return true;
 	}
 	private static boolean procWeapon2Use(CardGameBean game,CardBean card,CardActionBean action){
+		card.setSide(1);
 //		CardInfoBean cardInfo = card.getInfo();
 //		if(IsMatchUse(game,action,card)==false)
 //			return false;

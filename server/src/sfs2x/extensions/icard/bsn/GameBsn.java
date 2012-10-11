@@ -44,7 +44,7 @@ public class GameBsn
 //									 23001,23002,23003,21001,23005,
 //									 };
 
-	static private int _cardStore[]={23008,50007,50012,50011,31001,
+	static private int _cardStore[]={23008,50007,50012,50011,31003,
 									 23008,21001,21001,40006,21001,
 									 21001,40010,21001,31004,21001,
 									 30001,21001,21001,
@@ -164,7 +164,7 @@ public class GameBsn
 	public static Boolean ExistGameSupport(CardGameBean game,int which,int type){
 		for (CardDeckBean deck : game.getDeck().values())
 		{
-			if(CardSiteBsn.ExistDeckSupport(deck,which,type)==true)
+			if(SupportCardBsn.ExistDeckSupport(deck,which,type)==true)
 				return true;
 		}
 		return false;

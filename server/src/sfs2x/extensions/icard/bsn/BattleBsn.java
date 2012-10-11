@@ -205,7 +205,7 @@ public class BattleBsn
 		CardSiteBsn.onAttachCardEvent(game,desDeck, when);
 		
 		for (CardDeckBean deck : game.getDeck().values()){
-			CardSiteBsn.onSupportEvent(game,deck,desDeck, when);
+			SupportCardBsn.onSupportEvent(game,deck,desDeck, when);
 		}
 	}
 	public static void procTurnBegin(CardGameBean game,ICardExtension ext){

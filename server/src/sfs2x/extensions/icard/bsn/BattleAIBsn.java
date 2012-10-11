@@ -153,9 +153,9 @@ public class BattleAIBsn
 		
 		boolean atkAlly = true;
 		boolean atkHero = true;
-		if(CardSiteBsn.ExistDeckSupport(enemy, CardAbilityBean.WHICH_MYSOLDIER, CardAbilityBean.BUF_UNABLE_ATKED))
+		if(SupportCardBsn.ExistDeckSupport(enemy, CardAbilityBean.WHICH_MYSOLDIER, CardAbilityBean.BUF_UNABLE_ATKED))
 			atkAlly = false;
-		if(CardSiteBsn.ExistDeckSupport(enemy, CardAbilityBean.WHICH_MYHERO, CardAbilityBean.BUF_UNABLE_ATKED))
+		if(SupportCardBsn.ExistDeckSupport(enemy, CardAbilityBean.WHICH_MYHERO, CardAbilityBean.BUF_UNABLE_ATKED))
 			atkHero = false;
 		if(atkAlly==false &&atkHero==false)
 			return null;
@@ -187,7 +187,7 @@ public class BattleAIBsn
 			which = CardAbilityBean.WHICH_NULL;
 		if(GameBsn.ExistGameSupport(game,which,CardAbilityBean.BUF_ATK_UNABLE))
 			return null;
-		if(CardSiteBsn.ExistDeckSupport(site, which, CardAbilityBean.BUF_ATK_UNABLE))
+		if(SupportCardBsn.ExistDeckSupport(site, which, CardAbilityBean.BUF_ATK_UNABLE))
 			return null;
 		
 		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,slot,cardType);
