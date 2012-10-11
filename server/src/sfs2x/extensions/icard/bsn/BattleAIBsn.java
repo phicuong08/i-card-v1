@@ -153,10 +153,15 @@ public class BattleAIBsn
 		
 		boolean atkAlly = true;
 		boolean atkHero = true;
+		boolean findGuider = (CardSiteBsn.getGuideCard(game,enemy)!=null);
 		if(SupportCardBsn.ExistDeckSupport(enemy, CardAbilityBean.WHICH_MYSOLDIER, CardAbilityBean.BUF_UNABLE_ATKED))
 			atkAlly = false;
 		if(SupportCardBsn.ExistDeckSupport(enemy, CardAbilityBean.WHICH_MYHERO, CardAbilityBean.BUF_UNABLE_ATKED))
 			atkHero = false;
+		if(findGuider){
+			if(enemy.getHero().IsGuidable(game)==false)
+				atkHero = false;
+		}
 		if(atkAlly==false &&atkHero==false)
 			return null;
 		if(atkAlly==false)
@@ -169,11 +174,13 @@ public class BattleAIBsn
 			Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(enemy,CardBean.FIGHT_ZONE_ID,CardInfoBean.ALLY);
 			for(int i=0;i<cardVect.size();i++){
 				CardBean card = cardVect.get(i);
+				if(findGuider && card.IsGuidable(game)==false)
+					continue;
 				if(def==null || def.getHp()>card.getHp())
 					def = card;
 			}
 		}
-		if(def==null)
+		if(def==null && atkHero==true)
 			def = enemy.getHero();
 		return def;
 	}
