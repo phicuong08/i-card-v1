@@ -82,10 +82,7 @@ public class CardSiteBsn
 			if(card.IsGuidable(game))
 				return card;
 		}
-		if(getHeroAbilityVal(deck,CardAbilityBean.BUF_GUIDE)>0)
-			return deck.getHero();
-		else
-			return null;
+		return null;
 	}
 	public static int getHeroAbilityVal(CardDeckBean deck,int what){
 		int val = 0;
