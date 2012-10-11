@@ -140,6 +140,8 @@ public class CardBean
 		return (_zoneID==CardBean.HERO_ZONE_ID);
 	}
 	public boolean IsPointUnable(CardGameBean game){
+		if(IsHero()&& CardSiteBsn.getHeroAbilityVal(_deck,CardAbilityBean.BUF_HIDDEN)>0)
+			return true;
 		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.POINT_UNABLE))
 			return true;
 		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_POINT_UNABLE,CardAbilityBean.WHEN_ALL);
@@ -153,11 +155,15 @@ public class CardBean
 		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_AT_ONCE,CardAbilityBean.WHEN_ALL);
 	}
 	public boolean IsHidden(CardGameBean game){
+		if(IsHero()&& CardSiteBsn.getHeroAbilityVal(_deck,CardAbilityBean.BUF_HIDDEN)>0)
+			return true;
 		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.HIDE))
 			return true;
 		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_HIDDEN,CardAbilityBean.WHEN_ALL);
 	}
 	public boolean IsDistAtk(CardGameBean game,int when){
+		if(IsHero()&& CardSiteBsn.getHeroAbilityVal(_deck,CardAbilityBean.BUF_ATK_DIST)>0)
+			return true;
 		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.DIST_ATK))
 			return true;
 		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_ATK_DIST,when);
@@ -166,12 +172,16 @@ public class CardBean
 		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_ATK_UNABLE,when);
 	}
 	public boolean IsUnableAtked(CardGameBean game,int when){
+		if(IsHero()&& CardSiteBsn.getHeroAbilityVal(_deck,CardAbilityBean.BUF_UNABLE_ATKED)>0)
+			return true;
 		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_UNABLE_ATKED,when);
 	}
-	public boolean IsGuidable(CardGameBean game,int when){
-		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.DIST_ATK))
+	public boolean IsGuidable(CardGameBean game){
+		if(IsHero()&& CardSiteBsn.getHeroAbilityVal(_deck,CardAbilityBean.BUF_GUIDE)>0)
 			return true;
-		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_GUIDE,when);
+		if(AttrBsn.IsExistAttr(_cardID,CardAttrBean.GUIDE))
+			return true;
+		return AttachCardBsn.ExistAbility(game,_realID,CardAbilityBean.BUF_GUIDE,CardAbilityBean.WHEN_ALL);
 	}
 	public int getCost(){ //∑—”√
 		return _info.getBaseCost();

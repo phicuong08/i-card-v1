@@ -23,28 +23,7 @@ import sfs2x.extensions.icard.main.ICardExtension;
  */
 public class CardSiteBsn
 {	
-	public static void onSupportEvent(CardGameBean game,CardDeckBean srcDeck,CardDeckBean desDeck,int when){
-		for (CardBean card: srcDeck.getCardMap().values()){
-			if(card.getZoneID()!=CardBean.SUPPORT_ZONE_ID)
-				continue;
-			card.getZoneID();
-		
-			Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
-			if(vec==null)
-				continue;
 
-			for(int i=0;i<vec.size();i++){
-				CardAbilityBean ability = vec.get(i);
-				if(ability.IsWhenMatch(when)==false)
-					continue;
-				switch(ability.getType()){
-				case CardAbilityBean.DO_DRAW_HAND_CARD:
-					BattleBsn.drawCard(game,desDeck.getPlayerID(),ability.getVal());
-					break;
-				}
-			}
-		}
-	}
 	public static void onAttachCardEvent(CardGameBean game,CardDeckBean deck,int when){
 		
 		//buf event
@@ -95,6 +74,28 @@ public class CardSiteBsn
 		FillSlotCard(site,slotID,cardType,pickVect);
 		return pickVect;
 	}
+	public static CardBean getGuideCard(CardGameBean game,CardDeckBean deck){
+		for(CardBean card:deck.getCardMap().values()){
+			if(card.getZoneID()!=CardBean.HERO_ZONE_ID &&
+				card.getZoneID()!=CardBean.FIGHT_ZONE_ID)
+				continue;
+			if(card.IsGuidable(game))
+				return card;
+		}
+		if(getHeroAbilityVal(deck,CardAbilityBean.BUF_GUIDE)>0)
+			return deck.getHero();
+		else
+			return null;
+	}
+	public static int getHeroAbilityVal(CardDeckBean deck,int what){
+		int val = 0;
+		for(CardBean card:deck.getCardMap().values()){
+			if(card.getZoneID()!=CardBean.EQUIP_ZONE_ID)
+				continue;
+			val += CardAbilityBsn.getAbilityVal(card,CardAbilityBean.WHEN_ALL,what);
+		}
+		return val;
+	}
 	public static void onTurnEnd(CardGameBean game,ICardExtension ext,CardDeckBean deck){
 		boolean bDirty = false;
 		for (CardBean card : deck.getCardMap().values())
@@ -118,20 +119,5 @@ public class CardSiteBsn
 	public static void IncCardLoop(CardDeckBean deck){
 		
 	}
-	public static Boolean ExistDeckSupport(CardDeckBean deck,int which,int type){
-		for (CardBean card : deck.getCardMap().values())
-		{
-			if(card.getZoneID() != CardBean.SUPPORT_ZONE_ID)
-				continue;
-			Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
-			for(int i=0;i<vec.size();i++){
-				CardAbilityBean ability = vec.get(i);
-				if(ability.getType()!=type)
-					continue;
-				if(ability.IsWhichMatch(which))
-					return true;
-			}
-		}
-		return false;
-	}
+	
 }
