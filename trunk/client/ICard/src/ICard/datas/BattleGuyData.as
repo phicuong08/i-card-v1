@@ -12,7 +12,9 @@ package ICard.datas {
 		public function BattleGuyData():void{
 			_cardArr = new Dictionary;
 		}
-	
+		public function GetCardArr():Dictionary{
+			return _cardArr;
+		}
 		public function EmptyCards():void{
 			_cardArr = new Dictionary;
 		}
@@ -32,11 +34,11 @@ package ICard.datas {
 			if(newCard==null)
 			{
 				var cardInfo:Object =CardType.CreateCardInfo(info["cardID"]);
-				newCard = new CardData(cardInfo);
+				newCard = new CardData(cardInfo,this);
 				_cardArr[info["realID"]]=newCard;
 			}
 			newCard.Update(info);
-			CardDiffData.UpdateCard(newCard);
+			CardDiffData.UpdateCard(this,newCard);
 			
 		}
 		
@@ -46,15 +48,6 @@ package ICard.datas {
 		
 		public function get ResNum():int{
 			return _resNum;
-		}
-		public function getAttachCard(attachTo:int,fillArr:Array):void{
-			for each( var card:CardData in _cardArr)
-			{
-				if(card.Slot != BattleFieldType.AttachSlotId)
-					continue;
-				if(card.AttachTo ==attachTo)
-					fillArr.push(card);
-			}
 		}
 		public function getActiveCardOnSlot(costLimit:int,fillArr:Array):void{
 			for each( var card:CardData in _cardArr)

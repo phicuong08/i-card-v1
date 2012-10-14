@@ -3,10 +3,13 @@ package ICard.datas.card {
 	
 	import ICard.assist.server.CardType;
 	import ICard.assist.view.controls.BattleFieldType;
+	import ICard.datas.BattleGuyData;
+	import ICard.datas.card.*;
 	import ICard.haloer.data.*;
+	import ICard.logic.AttachCardHelper;
 	import ICard.logic.CardAttrHelper;
 	import ICard.logic.UseCard;
-	
+	import ICard.logic.AbilityHelper;
 	import flash.utils.ByteArray;
 
 	public class CardData {
@@ -14,9 +17,11 @@ package ICard.datas.card {
 		public static const StateSide:int = 2;
 		public static const StateTurn:int = 2;
 		public static const MaxBufNum:int = 5;
-		public var  _info:Object;
-		public function CardData(info:Object):void{
+		private var  _info:Object;
+		private var _guy:BattleGuyData;
+		public function CardData(info:Object,guy:BattleGuyData):void{
 			_info = info;
+			_guy = guy;
 		}
 
 
@@ -98,6 +103,9 @@ package ICard.datas.card {
 		}
 		public function IsUseResEnough(val:int):Boolean{
 			return true;
+		}
+		public function IsHero():Boolean{
+			return (Slot==BattleFieldType.HeroSlotId);
 		}
 		public function Update(info:Object):void{
 			if(info.hasOwnProperty("cardID")&& 
@@ -181,8 +189,14 @@ package ICard.datas.card {
 		public function IsPointUnable():Boolean{
 			if(CardAttrHelper.IsExistAttr(CardID,CardAttr.POINT_UNABLE))
 				return true;
-			return false;//BufferBsn.IsExistBuf(this,CardAbilityBean.BUF_POINT_UNABLE,CardAbilityBean.WHEN_ALL);
+			return AttachCardHelper.ExistAbility(RealID,CardAbility.BUF_POINT_UNABLE);
 		}
-		
+		public function IsGuidable():Boolean{
+			if(IsHero()&& AbilityHelper.getHeroAbilityVal(_guy,CardAbility.BUF_GUIDE)>0)
+				return true;
+			if(CardAttrHelper.IsExistAttr(CardID,CardAttr.GUIDE))
+				return true;
+			return AttachCardHelper.ExistAbility(RealID,CardAbility.BUF_GUIDE);
+		}
 	}
 }//package com.assist.data.mission 

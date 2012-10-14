@@ -52,13 +52,13 @@ package ICard.logic {
 			return null;
 		}
 		private static function getCastTarget(card:CardData,me:BattleGuy,you:BattleGuy,fillArr:Array):void{
-			if(UseCard.IsCast2MyHero(card.CardID))
+			if(AbilityHelper.IsCast2MyHero(card.CardID))
 				me.CardDB.getCardOnSlot([BattleFieldType.HeroSlotId],fillArr);
-			if(UseCard.IsCast2MySoldier(card.CardID))
+			if(AbilityHelper.IsCast2MySoldier(card.CardID))
 				me.CardDB.getCardOnSlot([BattleFieldType.FightSlotId],fillArr);
-			if(UseCard.IsCast2YourHero(card.CardID))
+			if(AbilityHelper.IsCast2YourHero(card.CardID))
 				you.CardDB.getCardOnSlot([BattleFieldType.HeroSlotId],fillArr);
-			if(UseCard.IsCast2YourSoldier(card.CardID))
+			if(AbilityHelper.IsCast2YourSoldier(card.CardID))
 				you.CardDB.getCardOnSlot([BattleFieldType.FightSlotId],fillArr);	
 		}
 	
