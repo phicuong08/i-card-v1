@@ -94,6 +94,7 @@ package ICard.logic {
 		public static function filterFightTarget(me:BattleGuyData,you:BattleGuyData,arr:Array):Array{
 			var filterArr:Array = [];
 			var bAllyEnable:Boolean = IsSoldierFightable(me,you);
+			var bExistGuider:Boolean = you.IsExistGuideCard();
 			for each( var card:CardData in arr)
 			{
 				var bAdd:Boolean = true;
@@ -104,6 +105,8 @@ package ICard.logic {
 					default:
 						break;
 				}
+				if(bExistGuider && card.IsGuidable()==false)
+					bAdd = false;
 				if(bAdd)
 					filterArr.push(card.RealID);
 			}
