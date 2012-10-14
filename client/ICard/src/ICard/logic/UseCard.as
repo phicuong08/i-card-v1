@@ -73,37 +73,8 @@ package ICard.logic {
 			flagArr["cast"] = (state==BattleStage.state_play_card)?IsCastAble(card,resNum):false; //ʩ��
 			return flagArr;
 		}
+
 		
-		public static function IsCast2MyHero(cardID:int):Boolean{
-			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
-			if(ability==null)
-				return false;
-			return ability.IsWhichMatch(CardAbility.WHICH_MYHERO);
-		}
-		public static function IsCast2MySoldier(cardID:int):Boolean{
-			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
-			if(ability==null)
-				return false;
-			return ability.IsWhichMatch(CardAbility.WHICH_MYSOLDIER);
-		}
-		public static function IsCast2YourHero(cardID:int):Boolean{
-			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
-			if(ability==null)
-				return false;
-			return ability.IsWhichMatch(CardAbility.WHICH_YOURHERO);
-		}
-		public static function IsCast2YourSoldier(cardID:int):Boolean{
-			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
-			if(ability==null)
-				return false;
-			return ability.IsWhichMatch(CardAbility.WHICH_YOURSOLDIER);
-		}
-		public static function getCastTargetNum(cardID:int):int{
-			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
-			if(ability==null)
-				return 0;
-			return ability.targetNum;
-		}
 		public static function  getType(cardID:int):int{
 				var ret:int=0;
 				var typeId:int = cardID/1000;

@@ -64,13 +64,14 @@ package ICard.datas.card {
 		private var _which:int = WHICH_NULL;
 		private var _what:int = BUF_NULL;
 		private var _targetNum:int = 0;
-		
+		private var _val:int = 0;
 		public function CardAbility(id:int){
 			_id = id;
 			var info:Array = CardType.CardAbilityInfo(id);
 			if(info){
 				parseWhich(info[1]);
 				parseWhat(info[2]);
+				_val = info[3];
 				_targetNum = info[6];
 			}
 		}
@@ -80,6 +81,9 @@ package ICard.datas.card {
 		}
 		public function IsAOE():Boolean{
 			return (_targetNum>=999);
+		}
+		public function getVal():int{
+			return _val;
 		}
 		private function parseWhat(info:String):void{
 			if(info == "BUF_ATK_DIST")

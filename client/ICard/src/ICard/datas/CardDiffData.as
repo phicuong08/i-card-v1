@@ -21,7 +21,7 @@ package ICard.datas {
 		
 			
 		
-		public static function UpdateCard(newCard:CardData):void{
+		public static function UpdateCard(guy:BattleGuyData,newCard:CardData):void{
 			for each(var cardArr:Array in _cardDifArr)
 			{
 				var card:CardData = cardArr[0] as CardData;
@@ -32,7 +32,7 @@ package ICard.datas {
 					return;
 				}
 			}
-			var oldCard:CardData = new CardData(new Object);
+			var oldCard:CardData = new CardData(new Object,guy);
 			oldCard.Clone(newCard);
 			
 			var diff:Array = new Array;

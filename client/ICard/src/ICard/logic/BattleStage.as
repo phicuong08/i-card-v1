@@ -20,7 +20,7 @@ package ICard.logic {
 		public static var state_play_card:int = 2;
 		public static var state_play_card_ex:int = 3;//选目标
 		
-		private var _guy:Dictionary;
+		private var _guyDict:Dictionary;
 		private var _gameID:int;
 		private var _myID:int;
 		private var _lastPlayer:int;
@@ -50,20 +50,23 @@ package ICard.logic {
 		}
 			
 		public function InitGuy(me:int,you:int,gameID:int):void{
-			_guy = new Dictionary;
+			_guyDict = new Dictionary;
 			_myID = me;
 			_gameID = gameID;
-			_guy[me] = new BattleGuy(me,true);
-			_guy[you] = new BattleGuy(you,false);
+			_guyDict[me] = new BattleGuy(me,true);
+			_guyDict[you] = new BattleGuy(you,false);
+		}
+		public function get GuyDict():Dictionary{
+			return _guyDict;
 		}
 		public function get GameID():int{
 			return _gameID;
 		}
 		public function get PlayerMe():BattleGuy{
-			return _guy[_myID];
+			return _guyDict[_myID];
 		}
 		public function get Enemy():BattleGuy{
-			for each(var guy:BattleGuy in _guy){
+			for each(var guy:BattleGuy in _guyDict){
 				if(guy.ID != _myID){
 					return guy;
 				}
@@ -92,7 +95,7 @@ package ICard.logic {
 			return AbilityHelper.filterActiveCard(PlayerMe.CardDB,Enemy.CardDB,arr);
 		}
 		public function get FightTarget():Array{
-			return BattleHelper.getFightTarget(_guy,_fightSrc,PlayerMe,Enemy);
+			return BattleHelper.getFightTarget(_guyDict,_fightSrc,PlayerMe,Enemy);
 		}
 		
 		public function getAbilityTarget(id:int):Array{
@@ -100,8 +103,8 @@ package ICard.logic {
 		}
 		
 		public function onUpdateCard(info:Object):void{
-			if(_guy[info["guy"]])
-				_guy[info["guy"]].onUpdateCard(info);
+			if(_guyDict[info["guy"]])
+				_guyDict[info["guy"]].onUpdateCard(info);
 		}
 		
 			
@@ -110,11 +113,11 @@ package ICard.logic {
 			var srcGuy:int = FindCardOwner(srcID);
 			var desGuy:int;
 			for each(var card:Object in targets){
-				var cardOld:Object = BattleHelper.CloneCardInfo(_guy,card["realID"]); 
+				var cardOld:Object = BattleHelper.CloneCardInfo(_guyDict,card["realID"]); 
 				oldCards.push(cardOld);
 				var cardOwner:int =  FindCardOwner(card["realID"]);
-				if(_guy[cardOwner])
-					_guy[cardOwner].onUpdateCard(card);
+				if(_guyDict[cardOwner])
+					_guyDict[cardOwner].onUpdateCard(card);
 				
 				if(card["realID"] != srcID)
 					desGuy= cardOwner;
@@ -157,11 +160,11 @@ package ICard.logic {
 		}
 		
 		public function FindCardOwner(realID:int):int{
-			return BattleHelper.getCardOwner(_guy,realID);
+			return BattleHelper.getCardOwner(_guyDict,realID);
 		}
 		
 		public function FindCard(realID:int):CardData{
-			return  BattleHelper.getCardData(_guy,realID);
+			return  BattleHelper.getCardData(_guyDict,realID);
 		}
 		
 		public function onEndOpOK():void{
@@ -199,9 +202,7 @@ package ICard.logic {
 		public function getAttachHtml(realID:int):String{
 			var info:String = "";
 			var fillArr:Array = [];
-			for each(var guy:BattleGuy in _guy){
-				guy.CardDB.getAttachCard(realID,fillArr);
-			}
+			AttachCardHelper.fillAttachCard(realID,_guyDict,fillArr);
 			for each(var card:CardData in fillArr){
 				info += card.Info["title"] + ","
 			}
@@ -210,7 +211,7 @@ package ICard.logic {
 			return cardTipHtml.CardAttachHtml(info);
 		}
 		public function CardInfo(realID:int):Object{
-			return BattleHelper.CloneCardInfo(_guy,realID);
+			return BattleHelper.CloneCardInfo(_guyDict,realID);
 		}
 		
 		public function GetResNum(me:Boolean):int{
@@ -219,7 +220,7 @@ package ICard.logic {
 			if(me)
 				return PlayerMe.CardDB.ResNum;
 			else{
-				for each(var guy:BattleGuy in _guy){
+				for each(var guy:BattleGuy in _guyDict){
 					if(guy.ID!=_myID)
 						return guy.CardDB.ResNum;
 				}
@@ -260,10 +261,10 @@ package ICard.logic {
 			var cardArr:Array = [];
 			var srcOwner:int = FindCardOwner(srcID);
 			var targetOwner:int = 0;
-			var srcCard:Object = BattleHelper.CloneCardInfo(_guy,srcID); 
+			var srcCard:Object = BattleHelper.CloneCardInfo(_guyDict,srcID); 
 			cardArr.push(srcCard);
 			for each(var targetId:int in targetArr){
-				var cardObj:Object = BattleHelper.CloneCardInfo(_guy,targetId); 
+				var cardObj:Object = BattleHelper.CloneCardInfo(_guyDict,targetId); 
 				cardArr.push(cardObj);
 				if(targetOwner==0)
 					targetOwner = FindCardOwner(targetId);

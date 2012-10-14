@@ -157,5 +157,60 @@ package ICard.logic {
 			return filterArr;
 		}
 		
+		public static function IsCardAbility(cardID:int,what:int):Boolean{
+			return (getCardAbility(cardID,what)!=null);
+		}
+		public static function getCardAbility(cardID:int,what:int):CardAbility{
+			for( var i:int=0;i<5;i++){
+				var ability:CardAbility  = CardAbilityDB.getCardAbility(cardID*10 +i);
+				if(ability==null)
+					continue;
+				if(ability.what == what)
+					return ability;
+			}
+			return null;
+		}
+		public static function getHeroAbilityVal(guy:BattleGuyData,what:int):int{
+			var val:int = 0;
+			for each( var card:CardData in guy.GetCardArr())
+			{
+				if(card.Slot != BattleFieldType.EquipSlotId)
+					continue;
+				var ability:CardAbility = getCardAbility(card.CardID,what);
+				if(ability)
+					val = ability.getVal();
+			}
+			return val;
+		}
+		public static function IsCast2MyHero(cardID:int):Boolean{
+			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
+			if(ability==null)
+				return false;
+			return ability.IsWhichMatch(CardAbility.WHICH_MYHERO);
+		}
+		public static function IsCast2MySoldier(cardID:int):Boolean{
+			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
+			if(ability==null)
+				return false;
+			return ability.IsWhichMatch(CardAbility.WHICH_MYSOLDIER);
+		}
+		public static function IsCast2YourHero(cardID:int):Boolean{
+			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
+			if(ability==null)
+				return false;
+			return ability.IsWhichMatch(CardAbility.WHICH_YOURHERO);
+		}
+		public static function IsCast2YourSoldier(cardID:int):Boolean{
+			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
+			if(ability==null)
+				return false;
+			return ability.IsWhichMatch(CardAbility.WHICH_YOURSOLDIER);
+		}
+		public static function getCastTargetNum(cardID:int):int{
+			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
+			if(ability==null)
+				return 0;
+			return ability.targetNum;
+		}
 	}
 }//package com.assist.data.mission 
