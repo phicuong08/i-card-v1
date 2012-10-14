@@ -84,6 +84,16 @@ package ICard.datas {
 				}
 			}
 		}
-		
+		public function IsExistGuideCard():Boolean{
+			for each( var card:CardData in _cardArr)
+			{
+				if(card.Slot!=BattleFieldType.FightSlotId &&
+					card.Slot!=BattleFieldType.HeroSlotId)
+					continue;
+				if(card.IsGuidable())
+					return true;
+			}
+			return false;
+		}
 	}
 }//package com.assist.data.mission 
