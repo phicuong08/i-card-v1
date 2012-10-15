@@ -185,6 +185,7 @@ package ICard.logic {
 			}
 			return val;
 		}
+		
 		public static function IsCast2MyHero(cardID:int):Boolean{
 			var ability:CardAbility = CardAbilityDB.getCardAbility(cardID*10);
 			if(ability==null)
