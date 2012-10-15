@@ -170,7 +170,7 @@ package ICard.assist.server.source {
 			
 							310010	:["WHEN_USE_SKILL"		,"WHICH_DES"					,"BUF_CURE"							,1		,"OP_AND"			,1	,1],
 							310020	:["WHEN_ALL"					,"WHICH_MYHERO"				,"BUF_STRIKE_DAMAGE_ADD",2		,"OP_AND"			,999	,1],
-							310030	:["WHEN_ALL"					,"WHICH_MYHERO"				,"BUF_GUIDE"						,0		,"OP_AND"			,999	,1],
+							310030	:["WHEN_ALL"					,"WHICH_MYHERO"				,"BUF_GUIDE"						,1		,"OP_AND"			,999	,1],
 							310040	:["WHEN_ALL"					,"WHICH_MYHERO"				,"BUF_STRIKE_COST_ADD"	,-1		,"OP_AND"			,999	,1],
 							310050	:["WHEN_ALL"					,"WHICH_MYHERO"				,"BUF_STRIKE_DAMAGE_ADD",1		,"OP_AND"			,999	,1],
 							310060	:["WHEN_USE"					,"WHICH_MYHERO"				,"DO_RESET"							,0		,"OP_AND"			,1	,1],

@@ -54,7 +54,7 @@
 			_slots[BattleFieldType.ResourceSlotId] = new EmptyBar;
 						
 			_slots[BattleFieldType.EquipSlotId] = new EquipBar;
-			_slots[BattleFieldType.EquipSlotId].Init(true,1198,535,1300);
+			_slots[BattleFieldType.EquipSlotId].Init(true,1198,595,1300);
 			
 			_slots[BattleFieldType.FightSlotId] = new SlotBar;
 			_slots[BattleFieldType.FightSlotId].Init(true,2,350,1180);
@@ -78,7 +78,7 @@
 			_slots[BattleFieldType.ResourceSlotId+BattleFieldType.SlotNum] = new EmptyBar;
 
 			_slots[BattleFieldType.EquipSlotId+BattleFieldType.SlotNum] = new EquipBar;
-			_slots[BattleFieldType.EquipSlotId+BattleFieldType.SlotNum].Init(false,2,500,856);
+			_slots[BattleFieldType.EquipSlotId+BattleFieldType.SlotNum].Init(false,1198,140,856);
 			
 			_slots[BattleFieldType.FightSlotId+BattleFieldType.SlotNum] = new SlotBar;
 			_slots[BattleFieldType.FightSlotId+BattleFieldType.SlotNum].Init(false,2,200,1180);
