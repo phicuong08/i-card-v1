@@ -48,8 +48,9 @@ public class BattleAIBsn
 	}
 	
 	private static void procWaitPlayRes(CardGameBean game,CardDeckBean site,ICardExtension ext){
-		AddCard2ResSlot(game,site); 
-		BattleBsn.DoPlayRes(game,ext);
+		BattleBsn.ClientEndOp(game,site.getPlayerID());
+		//AddCard2ResSlot(game,site); 
+		//BattleBsn.DoPlayRes(game,ext);
 	}
 	private static void procWaitPlayCard(CardGameBean game,CardDeckBean site,ICardExtension ext){
 		
@@ -61,8 +62,8 @@ public class BattleAIBsn
 			return;
 		else if(Card2Fight(game,site))
 			return;
-//		else if(AddCard2EquipSlot(game,site))
-//			return;
+		else if(AddCard2EquipSlot(game,site))
+			return;
 		else
 			BattleBsn.ClientEndOp(game,site.getPlayerID());
 	}
@@ -258,7 +259,7 @@ public class BattleAIBsn
 			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)
 			{
-				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_FIGHT_CARD,null);
+				CardActionBean action = new CardActionBean(card.getRealID(),site.getPlayerID(),CardActionBean.DO_ENTER_CARD,null);
 				game.setCurAction(action);
 				return true;
 			}
