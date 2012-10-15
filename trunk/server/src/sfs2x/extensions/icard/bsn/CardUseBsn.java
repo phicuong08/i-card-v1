@@ -166,7 +166,7 @@ public class CardUseBsn
 			DoKillCostUp(cardSrc,cardDes,ability);
 			break;
 		case CardAbilityBean.DO_RESET:
-			cardDes.setSide(0);
+			cardDes.setReady();
 			break;
 		case CardAbilityBean.DO_SIDE:
 			cardDes.setSide(1);

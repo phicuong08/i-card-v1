@@ -22,8 +22,8 @@ public class CardDeckBean
 	private List<Integer> _drawCardSrc ;
 	private User _sfsUser=null;
 	private Boolean _addResAble = false;
-	private int _maxRes = 10;
-	private int _curRes = 10;
+	private int _maxRes = 20;
+	private int _curRes = 20;
 	public CardDeckBean(int player,User sfsUser) {
 		_playerID = player;
 		_sfsUser = sfsUser;
@@ -45,7 +45,7 @@ public class CardDeckBean
 				continue;
 			if(card.getZoneID()!=CardBean.HAND_ZONE_ID &&
 			   card.getZoneID()!=CardBean.GRAVE_ZONE_ID)
-				card.setSide(0);
+				card.setReady();
 		}
 	}
 	

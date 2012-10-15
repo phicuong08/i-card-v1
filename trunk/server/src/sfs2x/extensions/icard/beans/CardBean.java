@@ -43,6 +43,7 @@ public class CardBean
 	private int _dirtyFlag=0;
 	private int _loopNum=0;
 	private int _attachTo=0;
+	private int _defVal = 0;
 	private CardInfoBean _info;
 	private BufferStoreBean _bufStore;
 	public CardBean(int realID, int cardID,int zoneID,CardDeckBean deck)
@@ -131,7 +132,10 @@ public class CardBean
 	public int getSide() {
 		return _side;
 	}
-
+	public void setReady(){
+		setSide(0);
+		_defVal = 0;
+	}
 	public void setSide(int val) {
 		_side = val;
 		setDirtyFlagBit(SIDE_DIRTY_BIT);
@@ -213,6 +217,17 @@ public class CardBean
 	public void IncLoop(){
 		if(getIsPlayZone())
 			_loopNum++;
+	}
+	public int getDef(){
+		return _info.getBaseDefence() - _defVal ;
+	}
+	public int useDef(int val){
+		if(getDef()<=0)
+			return val;
+		int remainVal = (getDef()> val)? 0 : val - getDef();
+		_defVal += (val -remainVal);
+		setDirtyFlagBit(DEF_DIRTY_BIT);
+		return remainVal;
 	}
 	public int getAtk(int when){ //¹¥»÷Á¦
 		return _info.getBaseAttack() + CardSiteBsn.supportAtkVal(_deck,getWhich(), when) + CardAbilityBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
