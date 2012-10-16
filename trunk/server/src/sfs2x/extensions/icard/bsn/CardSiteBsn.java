@@ -84,6 +84,14 @@ public class CardSiteBsn
 		}
 		return null;
 	}
+	public static CardBean getCard(CardDeckBean deck,int zone,int cardType){
+		for(CardBean card:deck.getCardMap().values()){
+			if(card.getZoneID()==zone &&
+				card.getCardType()==cardType)
+				return card;
+		}
+		return null;
+	}
 	public static int getHeroAbilityVal(CardDeckBean deck,int what){
 		int val = 0;
 		for(CardBean card:deck.getCardMap().values()){
