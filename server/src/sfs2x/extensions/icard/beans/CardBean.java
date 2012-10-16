@@ -72,6 +72,9 @@ public class CardBean
 	public int getOwner(){
 		return _deck.getPlayerID();
 	}
+	public CardDeckBean getDeck(){
+		return _deck;
+	}
 	public int getCardID() {
 		return _cardID;
 	}

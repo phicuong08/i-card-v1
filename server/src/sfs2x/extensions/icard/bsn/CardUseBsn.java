@@ -37,10 +37,21 @@ public class CardUseBsn
 		}
 		cardDes.AddHp(-cureVal);
 	}
+	private static void AtkToHero(CardBean card1,CardBean card2){
+		CardBean defCard = CardSiteBsn.getCard(card2.getDeck(), CardBean.EQUIP_ZONE_ID,CardInfoBean.ARMOR);
+		int damageVal = card1.getAtk(CardAbilityBean.WHEN_ATK);
+		if(defCard!=null){
+			damageVal = defCard.useDef(damageVal);
+		}
+		card2.AddHp(-damageVal);
+	}
 	public static void Atk(CardGameBean game,CardBean card1,CardBean card2){
 		if(card1.IsDistAtk(game,CardAbilityBean.WHEN_ATK)==false) //是否有远程攻击能力
-			card1.AddHp(-card2.getAtk(CardAbilityBean.WHEN_ATK));
-		card2.AddHp(-card1.getAtk(CardAbilityBean.WHEN_ATKED));
+			card1.AddHp(-card2.getAtk(CardAbilityBean.WHEN_ATKED));
+		if(card2.IsHero())
+			AtkToHero(card1,card2);
+		else
+			card2.AddHp(-card1.getAtk(CardAbilityBean.WHEN_ATK));
 
 		if(CardAbilityBsn.IsCardAbility(card2,CardAbilityBean.WHEN_ATKED,CardAbilityBean.DO_KILL)==true)
 			card1.setDead();
