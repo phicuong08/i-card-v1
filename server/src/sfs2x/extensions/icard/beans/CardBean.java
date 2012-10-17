@@ -144,6 +144,9 @@ public class CardBean
 		_side = val;
 		setDirtyFlagBit(SIDE_DIRTY_BIT);
 	}
+	public boolean IsWeapon(){
+		return (_zoneID==CardBean.EQUIP_ZONE_ID && getCardType()==CardInfoBean.WEAPON);
+	}
 	public boolean IsHero(){
 		return (_zoneID==CardBean.HERO_ZONE_ID);
 	}
@@ -234,11 +237,11 @@ public class CardBean
 		return remainVal;
 	}
 	public int getAtk(int when){ //¹¥»÷Á¦
-		if(IsHero())
-			return CardSiteBsn.getHeroAbilityVal(_deck,CardAbilityBean.BUF_STRIKE_DAMAGE_ADD) + 
-											card.getAtk(CardAbilityBean.WHEN_ATK);
-		else
-			return _info.getBaseAttack() + CardSiteBsn.supportAtkVal(_deck,getWhich(), when) + CardAbilityBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
+		int atk = _info.getBaseAttack();
+		if(IsWeapon())
+			atk += CardSiteBsn.getHeroAbilityVal(_deck,CardAbilityBean.BUF_STRIKE_DAMAGE_ADD);
+		atk += CardSiteBsn.supportAtkVal(_deck,getWhich(), when) + CardAbilityBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
+		return atk;
 	}
 	public void setWaitDead(){
 		AddHp(-10000);

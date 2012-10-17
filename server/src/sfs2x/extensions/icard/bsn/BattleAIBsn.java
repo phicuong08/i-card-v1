@@ -62,7 +62,9 @@ public class BattleAIBsn
 			return;
 		else if(Card2Fight(game,site))
 			return;
-		else if(AddCard2EquipSlot(game,site))
+		else if(AddWeapon2EquipSlot(game,site))
+			return;
+		else if(AddArmor2EquipSlot(game,site))
 			return;
 		else
 			BattleBsn.ClientEndOp(game,site.getPlayerID());
@@ -243,7 +245,10 @@ public class BattleAIBsn
 		game.setCurAction(action);
 		return true;
 	}
-	private static Boolean AddCard2EquipSlot(CardGameBean game,CardDeckBean site){
+	private static Boolean AddWeapon2EquipSlot(CardGameBean game,CardDeckBean site){
+		CardBean weapon = CardSiteBsn.getCard(site, CardBean.EQUIP_ZONE_ID, CardInfoBean.WEAPON);
+		if(weapon!=null)
+			return false;
 		int remainRes = site.getCurRes();
 		if(remainRes<=0)
 			return false;
@@ -257,7 +262,17 @@ public class BattleAIBsn
 				return true;
 			}
 		}
-		cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,CardInfoBean.ARMOR);
+		return false;	
+	}
+	
+	private static Boolean AddArmor2EquipSlot(CardGameBean game,CardDeckBean site){
+		CardBean armor = CardSiteBsn.getCard(site, CardBean.EQUIP_ZONE_ID, CardInfoBean.ARMOR);
+		if(armor!=null)
+			return false;
+		int remainRes = site.getCurRes();
+		if(remainRes<=0)
+			return false;
+		Vector<CardBean> cardVect  = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,CardInfoBean.ARMOR);
 		for(int i=0;i<cardVect.size();i++){
 			CardBean card = cardVect.get(i);
 			if(card.getCost()<=remainRes)

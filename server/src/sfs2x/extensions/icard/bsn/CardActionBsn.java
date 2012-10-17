@@ -188,7 +188,7 @@ public class CardActionBsn
 		procWaitingDeadCard(game);
 		return true;
 	}
-	private static boolean procWaitingDeadCard(CardGameBean game){
+	private static void procWaitingDeadCard(CardGameBean game){
 		for (CardDeckBean deck : game.getDeck().values()){
 			for(CardBean card:deck.getCardMap().values()){
 				if(card.getZoneID()!=CardBean.WAITDEAD_ZONE_ID)

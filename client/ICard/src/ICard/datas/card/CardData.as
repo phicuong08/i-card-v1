@@ -191,6 +191,7 @@ package ICard.datas.card {
 				return true;
 			return AttachCardHelper.ExistAbility(RealID,CardAbility.BUF_POINT_UNABLE);
 		}
+		
 		public function IsGuidable():Boolean{
 			if(IsHero()&& AbilityHelper.getHeroAbilityVal(_guy,CardAbility.BUF_GUIDE)>0)
 				return true;

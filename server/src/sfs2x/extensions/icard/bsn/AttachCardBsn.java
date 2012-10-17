@@ -32,7 +32,7 @@ public class AttachCardBsn
 					continue;
 				if(card.getAttachTo()!=cardDes.getRealID())
 					continue;
-				CardUseBsn.onCardDead(game,card);
+				CardUseBsn.DoCardDead(game,card);
 			}
 		}
 		cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
@@ -46,7 +46,7 @@ public class AttachCardBsn
 				if(card.getAttachTo()!=cardDes.getRealID())
 					continue;
 				if(CardAbilityBsn.IsGoodAbility(card))
-					CardUseBsn.onCardDead(game,card);
+					CardUseBsn.DoCardDead(game,card);
 			}
 		}
 		cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
@@ -74,7 +74,7 @@ public class AttachCardBsn
 				if(card.getAttachTo()!=cardDes.getRealID())
 					continue;
 				if(CardAbilityBsn.IsGoodAbility(card)==false)
-					CardUseBsn.onCardDead(game,card);
+					CardUseBsn.DoCardDead(game,card);
 			}
 		}
 		cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
