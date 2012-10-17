@@ -106,7 +106,6 @@ package ICard.logic {
 			if(_guyDict[info["guy"]])
 				_guyDict[info["guy"]].onUpdateCard(info);
 		}
-		
 			
 		public function onCardFightResult(srcID:int,targets:Array):void{
 			var oldCards:Array=[];

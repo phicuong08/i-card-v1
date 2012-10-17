@@ -114,7 +114,7 @@ public class CardSiteBsn
 			CardAbilityBean ability = vec.get(0);
 			if(card.getLoopNum()>ability.getLoopNum())
 			{
-				card.setDead();
+				card.setWaitDead();
 				bDirty = true;
 			}
 		}

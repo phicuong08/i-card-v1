@@ -71,7 +71,7 @@ public class CardUseBsn
 			card2.AddHp(-card1.getAtk(CardAbilityBean.WHEN_ATK));
 
 		if(CardAbilityBsn.IsCardAbility(card2,CardAbilityBean.WHEN_ATKED,CardAbilityBean.DO_KILL)==true)
-			card1.setDead();
+			card1.setWaitDead();
 		if(card1.getHp()<=0){
 			card1.setZoneID(CardBean.WAITDEAD_ZONE_ID);
 			if(CardAbilityBsn.IsCardAbility(card1,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true)
@@ -150,7 +150,7 @@ public class CardUseBsn
 					continue;
 				if(card.getAttachTo()!=cardDes.getRealID())
 					continue;
-				onCardDead(game,card);
+				DoCardDead(game,card);
 			}
 		}
 		cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
@@ -183,7 +183,7 @@ public class CardUseBsn
 			cardDes.AddHp(ability.getVal());
 			break;
 		case CardAbilityBean.DO_KILL:
-			cardDes.setDead();
+			cardDes.setWaitDead();
 			break;
 		case CardAbilityBean.DO_KILL_COST_DOWN:
 			DoKillCostDown(cardSrc,cardDes,ability);
@@ -284,11 +284,14 @@ public class CardUseBsn
 	public static void DoCardDead(CardGameBean game,CardBean card){
 		card.setZoneID(CardBean.GRAVE_ZONE_ID);
 		card.setAttachTo(0);
-		for(CardBean attach:deck.getCardMap().values()){ //卡牌进坟墓时，结附在上面的卡牌也进坟墓
+		for (CardDeckBean deck : game.getDeck().values()){
+			for (CardBean attach : deck.getCardMap().values())
+			{
 				if(attach.getZoneID()!=CardBean.ATTACH_ZONE_ID ||
-				   card.getAttachTo()!=card.getRealID())
-					continue;
-				onCardDead(game,card);	
+						attach.getAttachTo()!=card.getRealID())
+							continue;
+				DoCardDead(game,attach);
+			}
 		}
 	}
 	
