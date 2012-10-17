@@ -131,11 +131,14 @@ public class BattleAIBsn
 		game.setCurAction(action);
 		return true;
 	}
+	
 	private static Boolean Card2Fight(CardGameBean game,CardDeckBean site){
 		CardBean atk = getAtkCard(game,site,CardBean.FIGHT_ZONE_ID,CardInfoBean.ALLY);
 		if(atk==null)
 			atk = getAtkCard(game,site,CardBean.EQUIP_ZONE_ID,CardInfoBean.WEAPON);
 		if(atk==null)
+			return false;
+		if(atk.getUseCost()>site.getCurRes())
 			return false;
 		CardBean def = getDefCard(game,site);
 		if(def==null)

@@ -201,7 +201,11 @@ public class CardActionBsn
 		int desID = action.getDes().get(0);
 		CardBean card2 = game.getCard(desID);
 		card.setSide(1);
+		if(card.getUseCost() >card.getDeck().getCurRes())
+			return false;
+		card.getDeck().useRes(card.getUseCost());
 		CardUseBsn.WeaponAtk(game,card, card2);	
+		return true;
 	}
 	
 	private static boolean procEquip2Use(CardGameBean game,CardBean card,CardActionBean action){
