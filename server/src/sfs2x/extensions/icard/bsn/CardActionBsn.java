@@ -185,17 +185,25 @@ public class CardActionBsn
 			procWeapon2Use(game,card,action);
 			break;
 		}
-
+		procWaitingDeadCard(game);
 		return true;
+	}
+	private static boolean procWaitingDeadCard(CardGameBean game){
+		for (CardDeckBean deck : game.getDeck().values()){
+			for(CardBean card:deck.getCardMap().values()){
+				if(card.getZoneID()!=CardBean.WAITDEAD_ZONE_ID)
+					continue;
+				CardUseBsn.DoCardDead(game,card);
+			}
+		}
 	}
 	private static boolean procWeapon2Use(CardGameBean game,CardBean card,CardActionBean action){
+		int desID = action.getDes().get(0);
+		CardBean card2 = game.getCard(desID);
 		card.setSide(1);
-//		CardInfoBean cardInfo = card.getInfo();
-//		if(IsMatchUse(game,action,card)==false)
-//			return false;
-//		int desID = action.getDes().get(0);	
-		return true;
+		CardUseBsn.WeaponAtk(game,card, card2);	
 	}
+	
 	private static boolean procEquip2Use(CardGameBean game,CardBean card,CardActionBean action){
 //		CardInfoBean cardInfo = card.getInfo();
 //		if(IsMatchUse(game,action,card)==false)

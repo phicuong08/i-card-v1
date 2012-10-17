@@ -45,6 +45,23 @@ public class CardUseBsn
 		}
 		card2.AddHp(-damageVal);
 	}
+	public static void WeaponAtk(CardGameBean game,CardBean card1,CardBean card2){
+		
+											
+		if(card1.IsDistAtk(game,CardAbilityBean.WHEN_ATK)==false) //是否有远程攻击能力
+			card1.getDeck().getHero().AddHp(-card2.getAtk(CardAbilityBean.WHEN_ATKED));
+		if(card2.IsHero())
+			AtkToHero(card1,card2);
+		else
+			card2.AddHp(-card1.getAtk(CardAbilityBean.WHEN_ATK));
+		CheckCardHp(card2);
+		CheckCardHp(card1.getDeck().getHero());
+	}
+	
+	public static void CheckCardHp(CardBean card){
+		if(card.getHp()<=0)
+			card.setZoneID(CardBean.WAITDEAD_ZONE_ID);
+	}
 	public static void Atk(CardGameBean game,CardBean card1,CardBean card2){
 		if(card1.IsDistAtk(game,CardAbilityBean.WHEN_ATK)==false) //是否有远程攻击能力
 			card1.AddHp(-card2.getAtk(CardAbilityBean.WHEN_ATKED));
@@ -55,18 +72,16 @@ public class CardUseBsn
 
 		if(CardAbilityBsn.IsCardAbility(card2,CardAbilityBean.WHEN_ATKED,CardAbilityBean.DO_KILL)==true)
 			card1.setDead();
-		if(card1.getHp()<=0)
-		{
-			card1.setZoneID(CardBean.GRAVE_ZONE_ID);
+		if(card1.getHp()<=0){
+			card1.setZoneID(CardBean.WAITDEAD_ZONE_ID);
 			if(CardAbilityBsn.IsCardAbility(card1,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true)
-				card2.setDead();
+				card2.setWaitDead();
 		}
-		if(card2.getHp()<=0)
-		{
-			card2.setZoneID(CardBean.GRAVE_ZONE_ID);
+		if(card2.getHp()<=0){
+			card2.setZoneID(CardBean.WAITDEAD_ZONE_ID);
 			if(CardAbilityBsn.IsCardAbility(card2,CardAbilityBean.WHEN_DEAD,CardAbilityBean.DO_KILL)==true ||
 					CardAbilityBsn.IsCardAbility(card2,CardAbilityBean.WHEN_DEF_DEAD,CardAbilityBean.DO_KILL)==true)
-			   card1.setDead();
+			   card1.setWaitDead();
 		}
 	}
 	public static boolean IsWhichMatch(CardGameBean game,CardBean cardSrc,CardBean cardDes,
@@ -109,14 +124,14 @@ public class CardUseBsn
 										CardAbilityBean ability)
 	{
 		if(cardDes.getCost() <= ability.getVal()){
-			cardDes.setDead();
+			cardDes.setWaitDead();
 		}
 	}
 	public static void DoKillCostUp(CardBean cardSrc,CardBean cardDes,
 			CardAbilityBean ability)
 	{
 		if(cardDes.getCost() >= ability.getVal()){
-			cardDes.setDead();
+			cardDes.setWaitDead();
 		}
 	}
 	private static void DoCastDamage(CardGameBean game,CardBean cardSrc,CardBean cardDes,
@@ -261,18 +276,19 @@ public class CardUseBsn
 			cardSrc.setAttachTo(cardDes.getRealID());
 		}
 		else
-			onCardDead(game,cardSrc);
+			cardSrc.setZoneID(CardBean.WAITDEAD_ZONE_ID);
 		if(cardDes.getIsDead())
-			onCardDead(game,cardDes);
+			cardDes.setZoneID(CardBean.WAITDEAD_ZONE_ID);
 	}
-	public static void onCardDead(CardGameBean game,CardBean card){
+	
+	public static void DoCardDead(CardGameBean game,CardBean card){
 		card.setZoneID(CardBean.GRAVE_ZONE_ID);
 		card.setAttachTo(0);
-		HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
-		for(BufferBean buf:bufMap.values()){
-			CardBean cardBuf = game.getCard(buf.getID());
-			if(cardBuf!=null)
-				onCardDead(game,cardBuf);
+		for(CardBean attach:deck.getCardMap().values()){ //卡牌进坟墓时，结附在上面的卡牌也进坟墓
+				if(attach.getZoneID()!=CardBean.ATTACH_ZONE_ID ||
+				   card.getAttachTo()!=card.getRealID())
+					continue;
+				onCardDead(game,card);	
 		}
 	}
 	

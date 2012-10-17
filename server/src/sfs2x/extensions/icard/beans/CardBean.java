@@ -21,6 +21,7 @@ public class CardBean
 	public final static int HERO_ZONE_ID = 6;
 	public final static int SUPPORT_ZONE_ID = 7;
 	public final static int ATTACH_ZONE_ID = 8;
+	public final static int WAITDEAD_ZONE_ID = 9;
 	
 	public final static int ZONE_DIRTY_BIT = 0;
 	public final static int HP_DIRTY_BIT = 1;
@@ -233,11 +234,15 @@ public class CardBean
 		return remainVal;
 	}
 	public int getAtk(int when){ //¹¥»÷Á¦
-		return _info.getBaseAttack() + CardSiteBsn.supportAtkVal(_deck,getWhich(), when) + CardAbilityBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
+		if(IsHero())
+			return CardSiteBsn.getHeroAbilityVal(_deck,CardAbilityBean.BUF_STRIKE_DAMAGE_ADD) + 
+											card.getAtk(CardAbilityBean.WHEN_ATK);
+		else
+			return _info.getBaseAttack() + CardSiteBsn.supportAtkVal(_deck,getWhich(), when) + CardAbilityBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
 	}
-	public void setDead(){
+	public void setWaitDead(){
 		AddHp(-10000);
-		setZoneID(GRAVE_ZONE_ID);
+		setZoneID(WAITDEAD_ZONE_ID);
 	}
 	public int getHp(){  //ÑªÁ¿
 		return _addHp + _info.getBaseHp() ;
