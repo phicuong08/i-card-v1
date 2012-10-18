@@ -23,15 +23,44 @@ import sfs2x.extensions.icard.beans.CardInfoBean;
 public class CardAbilityBsn
 {	
 	public static void callCardAbility(CardBean card,CardAbilityBean ability){
+		if(card==null)
+			return;
 		switch(ability.getType()){
 		case CardAbilityBean.BUF_CURE:
 			card.AddHp(-ability.getVal());
 			break;
 		case CardAbilityBean.BUF_HEAL:
 			card.AddHp(ability.getVal());
-			break;	
+			break;
+		case CardAbilityBean.BUF_ATK_OK_ADD_ATK:	
+			card1.AddAtkIndicate(ability.getVal());
+			break;
+		case CardAbilityBean.DO_DROP_RES:
+			card.getDeck().removeRes(ability.getVal());
+			break;
 		}
 	}
+	
+	public static void doCardPostEventAbility(CardBean cardSrc,CardBean cardDes,int when){ //事件发生后的能力响应
+	
+		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
+		for(int i=0;i<vec.size();i++){
+			CardAbilityBean ability = vec.get(i);
+			CardBean match = null;
+			if(ability.getWhen()!=when)
+				continue;
+				switch(ability.getWhich()){
+						case CardAbilityBean.WHICH_SRC:
+							match = cardSrc;
+							break;
+						case CardAbilityBean.WHICH_Des:
+							match = cardDes;
+							break;
+				}
+				callCardAbility(card,ability);
+		}
+	}
+	
 	public static int getAbilityVal(CardBean card,int when,int what){
 		int val = 0;
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
@@ -67,13 +96,14 @@ public class CardAbilityBsn
 		}
 		return null;
 	}
-
+	
 	public static boolean IsWhichMatch(int src,int des,CardAbilityBean ability,CardGameBean game){
 		int srcOwner = game.getCardOwner(src);
 		int desOwner = game.getCardOwner(des);
 		CardBean card = game.getCard(des);
 		if(card==null)
 			return false;
+		CardBean match = getWhichMatch(
 		boolean bMatch;
 		switch(ability.getWhich()){
 		case CardAbilityBean.WHICH_MY:

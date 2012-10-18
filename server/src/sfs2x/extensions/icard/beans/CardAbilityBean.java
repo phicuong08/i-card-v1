@@ -65,6 +65,7 @@ public class CardAbilityBean
 	public static final int WHICH_SOLDIER              =13; //
 	public static final int WHICH_IU                   =14; //Ë«·½
 	public static final int WHICH_HERO                 =15; //
+	public static final int WHICH_U                    =16; //
 
 
 	public static final int DO_NULL                 =100;  //
