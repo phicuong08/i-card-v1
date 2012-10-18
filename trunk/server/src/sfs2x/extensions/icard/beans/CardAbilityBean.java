@@ -8,12 +8,6 @@ package sfs2x.extensions.icard.beans;
  */
 public class CardAbilityBean
 {
-
-
-
-
-
-
 	public static final int WHEN_NULL=0;
 	public static final int WHEN_USE =1; //横置,使用 
 	public static final int WHEN_ALL =2; //持续
@@ -32,9 +26,10 @@ public class CardAbilityBean
 	
 	public static final int BUF_ATK_DIST          =1;   //远程
 	public static final int BUF_ATK_WITH_EQUIP    =2;   //每装备则攻击增加
-	public static final int BUF_ATK_ADD           =3;   //攻击力增加
-	public static final int BUF_ATK_UNABLE        =4;   //无法攻击
-	public static final int BUF_UNABLE_ATKED      =5;   //无法攻击
+	public static final int BUF_ATK_ADD           =3;   //攻击时攻击力增加
+	public static final int BUF_ATK_OK_ADD_ATK    =4;   //攻击成功时攻击力增加
+	public static final int BUF_ATK_UNABLE        =5;   //无法攻击
+	public static final int BUF_UNABLE_ATKED      =6;   //无法被攻击
 	
 	public static final int BUF_CURE              =10;   //受到攻击时伤害增加
 	public static final int BUF_DAMAGE_UNSTOP     =11;   //伤害不可防止
