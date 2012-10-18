@@ -27,7 +27,7 @@ public class CardAbilityBean
 	public static final int BUF_ATK_DIST          =1;   //远程
 	public static final int BUF_ATK_WITH_EQUIP    =2;   //每装备则攻击增加
 	public static final int BUF_ATK_ADD           =3;   //攻击时攻击力增加
-	public static final int BUF_ATK_OK_ADD_ATK    =4;   //攻击成功时攻击力增加
+
 	public static final int BUF_ATK_UNABLE        =5;   //无法攻击
 	public static final int BUF_UNABLE_ATKED      =6;   //无法被攻击
 	
@@ -83,6 +83,7 @@ public class CardAbilityBean
 	public static final int DO_KILL_COST_DOWN       =112;  //消灭费用小于
 	public static final int DO_RESET                =113;  //重置
 	public static final int DO_SIDE                 =114;  //横置
+	public static final int DO_ADD_ATK_INDICATE     =115;
 
 	public static final int OP_OR             =1;
 	public static final int OP_AND            =2;

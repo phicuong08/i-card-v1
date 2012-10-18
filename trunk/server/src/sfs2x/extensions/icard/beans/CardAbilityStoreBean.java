@@ -178,6 +178,8 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.DO_DROP_HAND_CARD;
 		else if(whatInfo.equals("DO_DROP_RES"))
 			return CardAbilityBean.DO_DROP_RES;
+		else if(whatInfo.equals("DO_ADD_ATK_INDICATE"))
+			return CardAbilityBean.DO_ADD_ATK_INDICATE;
 		else if(whatInfo.equals("DO_DAMAGE"))
 			return CardAbilityBean.DO_DAMAGE;
 		else if(whatInfo.equals("DO_HEAL"))

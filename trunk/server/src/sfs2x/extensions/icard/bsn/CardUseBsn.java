@@ -37,9 +37,15 @@ public class CardUseBsn
 		}
 		cardDes.AddHp(-cureVal);
 	}
+	private static int getCardAtk(CardBean card,int when){
+		int damageVal = card.getAtk(CardAbilityBean.WHEN_ATK);
+		if(card.IsWeapon())
+			damageVal += CardSiteBsn.getHeroAbilityVal(card.getDeck(),CardAbilityBean.BUF_STRIKE_DAMAGE_ADD);
+		return damageVal;
+	}
 	private static void AtkToHero(CardBean card1,CardBean card2){
 		CardBean defCard = CardSiteBsn.getCard(card2.getDeck(), CardBean.EQUIP_ZONE_ID,CardInfoBean.ARMOR);
-		int damageVal = card1.getAtk(CardAbilityBean.WHEN_ATK);
+		int damageVal = getCardAtk(card1,CardAbilityBean.WHEN_ATK);
 		if(defCard!=null){
 			damageVal = defCard.useDef(damageVal);
 		}
@@ -61,7 +67,7 @@ public class CardUseBsn
 	private static void onCardDoAtkDamage(CardBean card1,CardBean card2){ //成功造成攻击伤害
 		if(card2.getDirtyFlagBit(CardBean.HP_DIRTY_BIT)==false)
 			return;
-		CardAbilityBsn.doCardPostEventAbility(card1,CardAbilityBean.WHEN_ATK_DAMAGE);
+		CardAbilityBsn.doCardPostEventAbility(card1,card2,CardAbilityBean.WHEN_ATK_DAMAGE);
 	}
 	public static void CheckCardHp(CardBean card){
 		if(card.getHp()<=0)
@@ -73,7 +79,7 @@ public class CardUseBsn
 		if(card2.IsHero())
 			AtkToHero(card1,card2);
 		else
-			card2.AddHp(-card1.getAtk(CardAbilityBean.WHEN_ATK));
+			card2.AddHp(-getCardAtk(card1,CardAbilityBean.WHEN_ATK));
 
 		if(CardAbilityBsn.IsCardAbility(card2,CardAbilityBean.WHEN_ATKED,CardAbilityBean.DO_KILL)==true)
 			card1.setWaitDead();
