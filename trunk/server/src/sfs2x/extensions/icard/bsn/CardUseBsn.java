@@ -61,10 +61,7 @@ public class CardUseBsn
 	private static void onCardDoAtkDamage(CardBean card1,CardBean card2){ //成功造成攻击伤害
 		if(card2.getDirtyFlagBit(CardBean.HP_DIRTY_BIT)==false)
 			return;
-		CardAbilityBean ability = CardAbilityBsn.getCardAbility(card1,CardAbilityBean.WHEN_ATK,CardAbilityBean.BUF_ATK_OK_ADD_ATK);
-		if(ability==null)
-			return;
-		card1.AddAtkIndicate(ability.getVal());
+		CardAbilityBsn.doCardPostEventAbility(card1,CardAbilityBean.WHEN_ATK_DAMAGE);
 	}
 	public static void CheckCardHp(CardBean card){
 		if(card.getHp()<=0)

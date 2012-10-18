@@ -49,6 +49,12 @@ public class CardDeckBean
 		}
 	}
 	
+	public void removeRes(int val){
+		_maxRes = (_maxRes>val)?_maxRes-val : 0;
+		if(_curRes>_maxRes)
+			_curRes = _maxRes;
+	}
+	
 	public void addRes(){
 		if(_addResAble==false)
 			return;
