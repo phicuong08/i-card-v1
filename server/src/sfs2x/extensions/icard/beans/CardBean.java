@@ -45,6 +45,7 @@ public class CardBean
 	private int _loopNum=0;
 	private int _attachTo=0;
 	private int _defVal = 0;
+	private int _atkIndicateVal = 0; //攻击力指示物
 	private CardInfoBean _info;
 	private BufferStoreBean _bufStore;
 	public CardBean(int realID, int cardID,int zoneID,CardDeckBean deck)
@@ -72,6 +73,10 @@ public class CardBean
 	}
 	public int getOwner(){
 		return _deck.getPlayerID();
+	}
+	public void AddAtkIndicate(int val){
+		_atkIndicateVal += val;
+		setDirtyFlagBit(ATK_DIRTY_BIT);
 	}
 	public CardDeckBean getDeck(){
 		return _deck;
@@ -240,7 +245,8 @@ public class CardBean
 		int atk = _info.getBaseAttack();
 		if(IsWeapon())
 			atk += CardSiteBsn.getHeroAbilityVal(_deck,CardAbilityBean.BUF_STRIKE_DAMAGE_ADD);
-		atk += CardSiteBsn.supportAtkVal(_deck,getWhich(), when) + CardAbilityBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
+		
+		atk += _atkIndicateVal +CardSiteBsn.supportAtkVal(_deck,getWhich(), when) + CardAbilityBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
 		return atk;
 	}
 	public void setWaitDead(){
