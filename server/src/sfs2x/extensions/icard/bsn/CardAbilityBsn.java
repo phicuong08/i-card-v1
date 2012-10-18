@@ -32,8 +32,8 @@ public class CardAbilityBsn
 		case CardAbilityBean.BUF_HEAL:
 			card.AddHp(ability.getVal());
 			break;
-		case CardAbilityBean.BUF_ATK_OK_ADD_ATK:	
-			card1.AddAtkIndicate(ability.getVal());
+		case CardAbilityBean.DO_ADD_ATK_INDICATE:	
+			card.AddAtkIndicate(ability.getVal());
 			break;
 		case CardAbilityBean.DO_DROP_RES:
 			card.getDeck().removeRes(ability.getVal());
@@ -43,7 +43,7 @@ public class CardAbilityBsn
 	
 	public static void doCardPostEventAbility(CardBean cardSrc,CardBean cardDes,int when){ //事件发生后的能力响应
 	
-		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(card.getCardID());
+		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(cardSrc.getCardID());
 		for(int i=0;i<vec.size();i++){
 			CardAbilityBean ability = vec.get(i);
 			CardBean match = null;
@@ -53,11 +53,11 @@ public class CardAbilityBsn
 						case CardAbilityBean.WHICH_SRC:
 							match = cardSrc;
 							break;
-						case CardAbilityBean.WHICH_Des:
+						case CardAbilityBean.WHICH_DES:
 							match = cardDes;
 							break;
 				}
-				callCardAbility(card,ability);
+				callCardAbility(match,ability);
 		}
 	}
 	
@@ -103,7 +103,6 @@ public class CardAbilityBsn
 		CardBean card = game.getCard(des);
 		if(card==null)
 			return false;
-		CardBean match = getWhichMatch(
 		boolean bMatch;
 		switch(ability.getWhich()){
 		case CardAbilityBean.WHICH_MY:

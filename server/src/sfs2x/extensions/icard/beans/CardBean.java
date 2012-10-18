@@ -243,9 +243,6 @@ public class CardBean
 	}
 	public int getAtk(int when){ //¹¥»÷Á¦
 		int atk = _info.getBaseAttack();
-		if(IsWeapon())
-			atk += CardSiteBsn.getHeroAbilityVal(_deck,CardAbilityBean.BUF_STRIKE_DAMAGE_ADD);
-		
 		atk += _atkIndicateVal +CardSiteBsn.supportAtkVal(_deck,getWhich(), when) + CardAbilityBsn.getAbilityVal(this,when,CardAbilityBean.BUF_ATK_ADD);
 		return atk;
 	}
