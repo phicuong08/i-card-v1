@@ -3,10 +3,11 @@
     import flash.events.*;
     import flash.display.*;
     import flash.text.*;
-
+	import ICard.assist.view.controls.BattleFieldType;
     public class EquipBar extends SlotBar {
 
 		public function EquipBar():void{
+						_slotId = BattleFieldType.EquipSlotId;
             super();
         }
 		
@@ -22,7 +23,7 @@
 				return true;
 		}
 		
-		override public function AddCard(card:MovieClip):void{
+		override public function AddCard(card:MovieClip,cardInfo:Object):void{
 			var newCard:MovieClip = new equip_bar;
 			var cardInfo:Object =_battleStage.CardInfo(card.realID);
 			if(!cardInfo)
@@ -44,7 +45,15 @@
 			newCard.tipInfo = card.tipInfo;
 			newCard.realID = card.realID;
 
-			super.AddCard(newCard);
+			var valMC:ResNumMC = new ResNumMC;
+			valMC.scaleX = valMC.scaleY = 0.6
+			if(cardInfo.hasOwnProperty("atk"))
+				valMC.setVal(cardInfo["atk"]);
+			else
+				valMC.setVal(cardInfo["def"]);
+			valMC.x = -70;
+			newCard.addChild(valMC);
+			super.AddCard(newCard,cardInfo);
 			SideCard(cardInfo);	
 		}
 		

@@ -3,9 +3,10 @@
     import flash.events.*;
     import flash.display.*;
     import flash.text.*;
-	import flash.geom.*;
-	import ICard.assist.view.interfaces.*;
-	import ICard.assist.data.IBattleStage;
+		import flash.geom.*;
+		import ICard.assist.view.interfaces.*;
+		import ICard.assist.data.IBattleStage;
+		import ICard.assist.view.controls.BattleFieldType;
 		
     public class SlotBar extends MovieClip {
 		private var _tip:ITip;
@@ -15,6 +16,8 @@
 		public var _selCard:MovieClip;
 		private var _battleField:battleField;
 		public var _IsMyslot:Boolean;
+		public var _slotId:int = 0;
+		
         public function SlotBar():void{
             super();
         }
@@ -55,19 +58,17 @@
 		}
 		
 		public function FindCardIndex(realID:int):int{
-			var ret:int = -1;
 			var index:int = 0;
 			while(index <this.numChildren)
 			{
 				var card:MovieClip = (getChildAt(index) as MovieClip);
 				if(card.realID==realID)
 				{
-					ret = index;
-					break;
+					return index;
 				}
 				index++;
 			}
-			return ret;
+			return -1;
 		}
 		public function RemoveCard(realID:int):void{
 			var index:int = FindCardIndex(realID);
@@ -79,12 +80,21 @@
 			}
 		}
 			
-		public function AddCard(card:MovieClip):void{
-			var tt:MovieClip = new circle;
-			card.cir = tt;
-			tt.visible = false;
-			card.addChild(tt);
-			this.addChild(card);
+		public function AddCard(card:MovieClip,cardInfo:Object):void{
+			if(_slotId != BattleFieldType.EquipSlotId){
+				var tt:MovieClip = new circle;
+				card.cir = tt;
+				tt.visible = false;
+				card.addChild(tt);
+			}
+			var oldIndex = FindCardIndex(card.realID);
+			if(oldIndex >=0)
+			{
+				removeChildAt(oldIndex);
+				addChildAt(card,oldIndex);
+			}
+			else
+				this.addChild(card);
 			UpdatePos();
 			
 			var handleMouseOverCard:* = function(e:MouseEvent):void{

@@ -9,7 +9,7 @@
             super();
         }
 	
- 		override public function AddCard(card:MovieClip):void{
+ 		override public function AddCard(card:MovieClip,cardInfo:Object):void{
 		}
 	
     }

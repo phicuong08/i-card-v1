@@ -55,7 +55,7 @@ package ICard.views {
 				var cardObj:CardData = (cardInfo[1] as CardData);
 				var newCard:MovieClip = CreateCard(cardObj);
 				var slotId:int = _battleStage.GetUISlot(cardObj.Info);
-				_battleField.Add2Slot(slotId,newCard);
+				_battleField.Add2Slot(slotId,newCard,cardObj.Info);
 			}
 		}
 		
