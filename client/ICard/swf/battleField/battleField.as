@@ -54,7 +54,7 @@
 			_slots[BattleFieldType.ResourceSlotId] = new EmptyBar;
 						
 			_slots[BattleFieldType.EquipSlotId] = new EquipBar;
-			_slots[BattleFieldType.EquipSlotId].Init(true,1198,595,1300);
+			_slots[BattleFieldType.EquipSlotId].Init(true,1198,535,1300);
 			
 			_slots[BattleFieldType.FightSlotId] = new SlotBar;
 			_slots[BattleFieldType.FightSlotId].Init(true,2,350,1180);
@@ -78,7 +78,7 @@
 			_slots[BattleFieldType.ResourceSlotId+BattleFieldType.SlotNum] = new EmptyBar;
 
 			_slots[BattleFieldType.EquipSlotId+BattleFieldType.SlotNum] = new EquipBar;
-			_slots[BattleFieldType.EquipSlotId+BattleFieldType.SlotNum].Init(false,1198,140,856);
+			_slots[BattleFieldType.EquipSlotId+BattleFieldType.SlotNum].Init(false,1198,85,856);
 			
 			_slots[BattleFieldType.FightSlotId+BattleFieldType.SlotNum] = new SlotBar;
 			_slots[BattleFieldType.FightSlotId+BattleFieldType.SlotNum].Init(false,2,200,1180);
@@ -118,7 +118,18 @@
 		{
 			_fight_but.addEventListener(MouseEvent.CLICK,_arg1);
 		}
-		
+		public function FindCardSlot(realID:int):int{
+    	var id:int = BattleFieldType.HandSlotId;
+    	var card:MovieClip;
+			while(id <= BattleFieldType.SlotNum*2)
+			{
+				card = _slots[id].FindCard(realID);
+				if(card)
+						return id;
+				id++;
+			}	
+			return -1;
+    }    
     public function FindCard(realID:int):MovieClip{
     	var id:int = BattleFieldType.HandSlotId;
     	var card:MovieClip;
@@ -135,12 +146,12 @@
 			
 		}
 		
-		public function Add2Slot(slotId:int,cardMC:MovieClip):void{
+		public function Add2Slot(slotId:int,cardMC:MovieClip,cardInfo:Object):void{
 			if(cardMC==null)
 				return;
-			
-			RemoveCard(cardMC.realID);
-			_slots[slotId].AddCard(cardMC);
+			if(FindCardSlot(cardMC.realID)!=slotId)
+					RemoveCard(cardMC.realID);
+			_slots[slotId].AddCard(cardMC,cardInfo);
 			freshResNum();
 		}
 		
@@ -250,7 +261,7 @@
 			var cardArr:Array = [];
 			for each(var target:int in arr){
 				var card:MovieClip = FindCard(target);
-				if(card!=null){
+				if(card!=null&& card.hasOwnProperty("cir")){
 					card.cir.visible=true;
 				}
 			}
@@ -266,44 +277,7 @@
 			}	
     	}    
 	
-		public function RunTest():void{
-			var index:int=1;
-			var c1:MovieClip;
-			while(index <2)
-			{
-				c1 = new c_20005;
-				c1.stand ="normal";
-				c1.realID = index;
-				c1.tipInfo = "abc";
-				Add2Slot(BattleFieldType.HeroSlotId,c1);
-				index++;
-			}
-	//	RemoveCard(BattleFieldType.YouResourceSlotId,3);
-			
-			
-			index = 1;
-			
-			
-				
-			//while(index <11)
-//			{
-//				c1 = new c_20005;
-//				c1.realId = index;
-//				Add2Slot(BattleFieldType.YouFightSlotId,c1);
-//				index++;
-//			}
-//			index = 1;
-//			while(index <11)
-//			{
-//				c1 = new c_20005;
-//				c1.realId = index;
-//				Add2Slot(BattleFieldType.MyResourceSlotId,c1);
-//				index++;
-//			}
-			
-			//_slots[BattleFieldType.MyFightSlotId].PrintChild();
-			
-		}
+		
 		
 		
     }

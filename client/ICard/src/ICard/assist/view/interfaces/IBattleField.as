@@ -10,13 +10,12 @@ package ICard.assist.view.interfaces {
 			function set tip(_arg1:ITip):void;
 			function set BattleStage(arg1:IBattleStage):void;
 			function FindCard(realID:int):MovieClip;
-			function Add2Slot(slotId:int,card:MovieClip):void;
+			function Add2Slot(slotId:int,card:MovieClip,cardInfo:Object):void;
 			function RemoveCard(realID:int):void;
 			function SideCard(info:Object):void; //横置,重置
 			function LoopFresh(myLoop:Boolean,secNum:int):void;
 			function onCardExOp(realID:int,abilityId:int):void;
 			function onEndOpOk():void;
-			function RunTest():void;
 			function PriFresh(myLoop:Boolean,secNum:int):void;
 			function set onFight(_arg1:Function):void;
 	}

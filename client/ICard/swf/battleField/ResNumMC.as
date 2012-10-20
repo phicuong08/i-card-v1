@@ -9,7 +9,7 @@
 		
     public class ResNumMC extends MovieClip {
 		
-		public var _val:int;
+		public var _val:int=-1;
         public function ResNumMC():void{
             super();
         }

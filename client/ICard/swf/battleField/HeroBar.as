@@ -9,9 +9,9 @@
             super();
         }
 	
- 		override public function AddCard(card:MovieClip):void{
+ 		override public function AddCard(card:MovieClip,cardInfo:Object):void{
 			RemoveAllCard();
-			super.AddCard(card);
+			super.AddCard(card,cardInfo);
 		}
 	
     }
