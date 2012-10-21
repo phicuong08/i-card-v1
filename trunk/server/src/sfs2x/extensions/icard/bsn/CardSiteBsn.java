@@ -121,6 +121,16 @@ public class CardSiteBsn
 		if(bDirty)
 			ext.SendGameCardUpdate(game);
 	}
+	public static void DoRndDropCard(CardDeckBean deck,int val){
+		Vector<CardBean> cardVect = PickSlotCard(deck,CardBean.HAND_ZONE_ID,-1);
+		int dropNum = (cardVect.size()>val)? val : cardVect.size();
+		for(int i=0;i<dropNum;i++){
+			int randomIndex = GameBsn._Random.nextInt(cardVect.size());
+			CardBean dropCard = cardVect.elementAt(randomIndex);
+			cardVect.remove(randomIndex);
+			dropCard.setZoneID(CardBean.GRAVE_ZONE_ID);
+		}
+	}
 	public static void IncCardLoop(CardDeckBean deck){
 		
 	}

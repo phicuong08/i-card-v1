@@ -10,6 +10,7 @@ import sfs2x.extensions.icard.beans.BufferBean;
 import sfs2x.extensions.icard.beans.CardAbilityBean;
 import sfs2x.extensions.icard.beans.CardAbilityStoreBean;
 import sfs2x.extensions.icard.beans.CardBean;
+import sfs2x.extensions.icard.beans.CardDeckBean;
 import sfs2x.extensions.icard.beans.CardGameBean;
 import sfs2x.extensions.icard.beans.CardInfoBean;
 
@@ -38,6 +39,9 @@ public class CardAbilityBsn
 		case CardAbilityBean.DO_DROP_RES:
 			card.getDeck().removeRes(ability.getVal());
 			break;
+		case CardAbilityBean.DO_DROP_HAND_CARD:
+			CardSiteBsn.DoRndDropCard(card.getDeck(),ability.getVal());
+			break;
 		}
 	}
 	
@@ -56,7 +60,10 @@ public class CardAbilityBsn
 						case CardAbilityBean.WHICH_DES:
 							match = cardDes;
 							break;
+						case CardAbilityBean.WHICH_DES_HERO:
+							match = (cardDes.IsHero())?cardDes:null;
 				}
+				
 				callCardAbility(match,ability);
 		}
 	}
