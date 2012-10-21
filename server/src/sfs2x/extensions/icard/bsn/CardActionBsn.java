@@ -59,10 +59,10 @@ public class CardActionBsn
 			ret = procCard2FightSlot(game,deck,card);
 			break;
 		case CardInfoBean.WEAPON:
-			ret = procCard2EquipSlot(deck,card);
+			ret = procWeapon2EquipSlot(deck,card);
 			break;
 		case CardInfoBean.ARMOR:
-			ret = procCard2EquipSlot(deck,card);
+			ret = procArmor2EquipSlot(deck,card);
 			break;
 		case CardInfoBean.SUPPORT:
 			ret = procCard2SupportSlot(deck,card);
@@ -247,7 +247,17 @@ public class CardActionBsn
 		}
 		return true;
 	}
-	private static boolean procCard2EquipSlot(CardDeckBean site,CardBean card){
+	private static boolean procArmor2EquipSlot(CardDeckBean site,CardBean card){
+		if(CardSiteBsn.getCard(site, CardBean.EQUIP_ZONE_ID, CardInfoBean.ARMOR)!=null)
+			return false;
+		site.useRes(card.getCost());
+		card.setZoneID(CardBean.EQUIP_ZONE_ID);	
+		card.setSide(3);
+		return true;
+	}
+	private static boolean procWeapon2EquipSlot(CardDeckBean site,CardBean card){
+		if(CardSiteBsn.getCard(site, CardBean.EQUIP_ZONE_ID, CardInfoBean.WEAPON)!=null)
+			return false;
 		site.useRes(card.getCost());
 		card.setZoneID(CardBean.EQUIP_ZONE_ID);	
 		card.setSide(3);

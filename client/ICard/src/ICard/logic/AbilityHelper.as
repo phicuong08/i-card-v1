@@ -91,6 +91,15 @@ package ICard.logic {
 			}
 			return filterArr;
 		}
+		public static function filterWeaponTarget(me:BattleGuyData,you:BattleGuyData,arr:Array):Array{
+			var filterArr:Array = [];
+			var bExistGuider:Boolean = you.IsExistGuideCard();
+			for each( var card:CardData in arr)
+			{
+				filterArr.push(card.RealID);
+			}
+			return filterArr;
+		}
 		public static function filterFightTarget(me:BattleGuyData,you:BattleGuyData,arr:Array):Array{
 			var filterArr:Array = [];
 			var bAllyEnable:Boolean = IsSoldierFightable(me,you);

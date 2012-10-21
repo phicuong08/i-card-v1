@@ -188,7 +188,8 @@
 			
 			for each(var target:int in targetArr){
 				var card:MovieClip = FindCard(target);
-				_targetCtl.AddIndicator(card);
+				if(card)
+					_targetCtl.AddIndicator(card);
 			}
 
 		}

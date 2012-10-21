@@ -30,8 +30,6 @@ package ICard.logic {
 				return false;
 			if(card.Type == CardType.SoldierType)
 				return allyFightable;
-			if(card.Type == CardType.DefType )
-				return true;
 			return UseAble(card,resVal);
 		}
 		public static function Is2EnterAble(card:CardData,resVal:int):Boolean{
@@ -135,7 +133,6 @@ package ICard.logic {
 				}
 					break;
 				case CardType.WeaponType:
-				case CardType.DefType:
 				{
 					if(card.Slot ==BattleFieldType.EquipSlotId &&
 						card.Turn == false)

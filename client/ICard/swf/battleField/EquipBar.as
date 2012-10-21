@@ -22,6 +22,21 @@
 				icon.visible = (info["side"]==1)? false:true;
 				return true;
 		}
+		override public function ShowCardActionMenu(card:MovieClip):void{
+			trace("call show menu");
+			HideCardActionMenu(card);
+			var flagObj:Object = _battleStage.CardMenuFlag(card.realID);
+			if(!flagObj)
+				return;
+			var showMenu = new MovieClip;
+			if(flagObj["fight"]==true)
+				AddMenuBut(showMenu,card_fight_but,OnCardToFight);
+			showMenu.x = -showMenu.width/2 +5;
+			showMenu.y = 0;
+			card.addChild(showMenu);
+			card.cardmenu = showMenu;
+		}
+		
 		
 		override public function AddCard(card:MovieClip,cardInfo:Object):void{
 			var newCard:MovieClip = new equip_bar;
