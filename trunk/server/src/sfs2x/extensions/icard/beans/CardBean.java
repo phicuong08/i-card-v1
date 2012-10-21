@@ -144,6 +144,7 @@ public class CardBean
 	public void setReady(){
 		setSide(0);
 		_defVal = 0;
+		setDirtyFlagBit(DEF_DIRTY_BIT);
 	}
 	public void setSide(int val) {
 		_side = val;

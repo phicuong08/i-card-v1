@@ -74,6 +74,10 @@ package ICard.logic {
 					you.CardDB.getCardOnSlot([BattleFieldType.FightSlotId,BattleFieldType.HeroSlotId],targetArr);
 					retArr = AbilityHelper.filterFightTarget(me.CardDB,you.CardDB,targetArr);
 					break;
+				case CardType.WeaponType:
+					you.CardDB.getCardOnSlot([BattleFieldType.FightSlotId,BattleFieldType.HeroSlotId],targetArr);
+					retArr = AbilityHelper.filterWeaponTarget(me.CardDB,you.CardDB,targetArr);
+					break;
 				case CardType.SkillType:
 					getCastTarget(card,me,you,targetArr);
 					retArr =  AbilityHelper.filterCastTarget(me.CardDB,you.CardDB,targetArr);

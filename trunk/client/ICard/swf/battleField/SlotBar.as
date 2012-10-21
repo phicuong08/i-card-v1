@@ -163,7 +163,7 @@
 		public function set BattleField(arg1:battleField):void{
 			_battleField = arg1;
 		}
-		private function HideCardActionMenu(card:MovieClip):void{
+		public function HideCardActionMenu(card:MovieClip):void{
 			if(card.hasOwnProperty("cardmenu")==false || card.cardmenu==null)
 				return;
 			var hideMenu:MovieClip = card.cardmenu;
@@ -215,7 +215,7 @@
 			card.cardmenu = showMenu;
 		}
 		
-		private function AddMenuBut( cardMenu:MovieClip,classType:Class,func:Function):void{
+		public function AddMenuBut( cardMenu:MovieClip,classType:Class,func:Function):void{
 			var addBut:SimpleButton = new classType;
 			addBut["func"] = func;
 			addBut.addEventListener(MouseEvent.CLICK,func);
