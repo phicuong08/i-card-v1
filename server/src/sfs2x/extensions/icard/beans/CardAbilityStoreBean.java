@@ -114,6 +114,8 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.WHICH_SKILL;
 		else if(which.equals("WHICH_DES"))
 			return CardAbilityBean.WHICH_DES;
+		else if(which.equals("WHICH_DES_HERO"))
+			return CardAbilityBean.WHICH_DES_HERO;
 		else if(which.equals("WHICH_SRC"))
 			return CardAbilityBean.WHICH_SRC;
 		else if(which.equals("WHICH_I"))
