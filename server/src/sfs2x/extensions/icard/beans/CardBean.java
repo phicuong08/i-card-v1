@@ -156,6 +156,9 @@ public class CardBean
 		_side = val;
 		setDirtyFlagBit(SIDE_DIRTY_BIT);
 	}
+	public boolean IsAbility(){
+		return getCardType()==CardInfoBean.ABILITY;
+	}
 	public boolean IsWeapon(){
 		return (_zoneID==CardBean.EQUIP_ZONE_ID && getCardType()==CardInfoBean.WEAPON);
 	}
