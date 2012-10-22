@@ -47,7 +47,6 @@ public class CardBean
 	private int _defVal = 0;
 	private int _atkIndicateVal = 0; //攻击力指示物
 	private CardInfoBean _info;
-	private BufferStoreBean _bufStore;
 	public CardBean(int realID, int cardID,int zoneID,CardDeckBean deck)
 	{
 		_realID = realID;
@@ -57,20 +56,9 @@ public class CardBean
 		setDirtyFlagBit(ZONE_DIRTY_BIT);
 		setDirtyFlagBit(CARDID_DIRTY_BIT);
 		_info = CardInfoStoreBean.GetInstance().getCardInfo(cardID);
-		_bufStore = new BufferStoreBean();
 	}
 	/* GETTERS & SETTERS */
-	public BufferStoreBean getBufStore(){
-		return _bufStore;
-	}
-	public void AddBuf(CardAbilityBean ability,int realID){
-		_bufStore.AddBuf(ability,realID);
-		setDirtyFlagBit(BUF_DIRTY_BIT);
-	}
-	public void DelBuf(int realID){
-		_bufStore.DelBuf(realID);
-		setDirtyFlagBit(BUF_DIRTY_BIT);
-	}
+	
 	public int getOwner(){
 		return _deck.getPlayerID();
 	}
