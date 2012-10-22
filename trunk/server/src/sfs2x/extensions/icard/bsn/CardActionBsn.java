@@ -171,15 +171,12 @@ public class CardActionBsn
 	
 	private static boolean procCard2Fight(CardGameBean game,CardDeckBean site,CardBean card,CardActionBean action){
 		switch(card.getCardType()){
-		case CardInfoBean.HERO:
 		case CardInfoBean.ALLY:
 			procCard2Atk(game,card,action);
 			break;
 		case CardInfoBean.ABILITY:
+		case CardInfoBean.HERO:
 			procAbility2Cast(game,site,card,action);
-			break;
-		case CardInfoBean.ARMOR:
-			procEquip2Use(game,card,action);
 			break;
 		case CardInfoBean.WEAPON:
 			procWeapon2Use(game,card,action);
@@ -207,14 +204,7 @@ public class CardActionBsn
 		CardUseBsn.WeaponAtk(game,card, card2);	
 		return true;
 	}
-	
-	private static boolean procEquip2Use(CardGameBean game,CardBean card,CardActionBean action){
-//		CardInfoBean cardInfo = card.getInfo();
-//		if(IsMatchUse(game,action,card)==false)
-//			return false;
-		return true;
-	}
-	
+
 	private static boolean procCard2FightSlot(CardGameBean game,CardDeckBean site,CardBean card){
 		site.useRes(card.getCost());
 		card.setZoneID(CardBean.FIGHT_ZONE_ID);	

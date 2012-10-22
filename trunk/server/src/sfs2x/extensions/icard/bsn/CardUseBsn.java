@@ -213,8 +213,10 @@ public class CardUseBsn
 			BattleBsn.drawCard(game,cardSrc.getOwner(),ability.getVal());
 			break;
 		default:
-			cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
-			;//BufferBsn.AddBuf(cardSrc, cardDes, ability);
+			if(ability.IsBuf()){
+				cardDes.AddBuf(ability,cardSrc.getRealID());
+				cardDes.setDirtyFlagBit(CardBean.BUF_DIRTY_BIT);
+			}
 		}
 	}
 	public static Vector<Integer>  getAbilityTarget(CardGameBean game,CardDeckBean site,CardBean cast){
@@ -273,22 +275,25 @@ public class CardUseBsn
 	public static void DoCardAbility(CardGameBean game,CardBean cardSrc,CardBean cardDes){
 		Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbility(cardSrc.getCardID());
 		
-		boolean bHaveBuf = false;
+		boolean bAttach = false;
 		for(int i=0;i<vec.size();i++){
 			CardAbilityBean ability = vec.get(i);
 			if(IsWhichMatch(game,cardSrc,cardDes,ability)==false)
 				continue;
 			DoWhatAbility(game,cardSrc,cardDes,ability);
-			if(ability.IsBuf())
-				bHaveBuf = true;
+			if(ability.IsAttach())
+				bAttach = true;
 		}
 		cardSrc.setDirtyFlagBit(CardBean.CARDID_DIRTY_BIT);
-		if(bHaveBuf){
-			cardSrc.setZoneID(CardBean.ATTACH_ZONE_ID);
-			cardSrc.setAttachTo(cardDes.getRealID());
+		if(cardSrc.IsSkill(){
+				if(bAttach){
+					cardSrc.setZoneID(CardBean.ATTACH_ZONE_ID);
+					cardSrc.setAttachTo(cardDes.getRealID());
+				}
+				else
+					cardSrc.setZoneID(CardBean.WAITDEAD_ZONE_ID);
 		}
-		else
-			cardSrc.setZoneID(CardBean.WAITDEAD_ZONE_ID);
+
 		if(cardDes.getIsDead())
 			cardDes.setZoneID(CardBean.WAITDEAD_ZONE_ID);
 	}
@@ -308,17 +313,22 @@ public class CardUseBsn
 	}
 	public static boolean heroAbility2Cast(CardGameBean game,CardDeckBean site,
 										CardBean card,CardActionBean action){
-			if(card.heroUseMP()==false)
-				return false;
+			
 				
 			Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbilityOnWhen(card.getCardID(),CardAbilityBean.WHEN_USE);
 										
 	}
 	public static boolean ability2Cast(CardGameBean game,CardDeckBean site,
 										CardBean card,CardActionBean action){
-		if(site.getCurRes()< card.getCost())
-			return false;
-		site.useRes(card.getCost());
+		if(card.IsHero()){              //英雄的能力消耗魔力值
+			if(card.heroUseMP()==false)
+				return false;
+		}
+		else{
+			if(site.getCurRes()< card.getCost())
+				return false;
+			site.useRes(card.getCost());
+		}
 		
 		CardAbilityBean ability = CardAbilityStoreBean.GetInstance().getAbilityBean(card.getCardID());
 		if(ability==null)

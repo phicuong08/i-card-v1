@@ -146,8 +146,11 @@ public class CardAbilityBean
 	public int getWhich(){
 		return _which;
 	}
+	public boolean IsAttach(){
+		return (_type <= BUF_MAX && _loopNum>=999);
+	}
 	public boolean IsBuf(){
-		return (_type <= BUF_MAX);
+		return (_type <= BUF_MAX && _loopNum<999);
 	}
 
 	public boolean IsGoodBuf(){
