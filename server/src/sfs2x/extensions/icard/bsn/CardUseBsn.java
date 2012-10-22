@@ -306,15 +306,23 @@ public class CardUseBsn
 			}
 		}
 	}
-	
+	public static boolean heroAbility2Cast(CardGameBean game,CardDeckBean site,
+										CardBean card,CardActionBean action){
+			if(card.heroUseMP()==false)
+				return false;
+				
+			Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbilityOnWhen(card.getCardID(),CardAbilityBean.WHEN_USE);
+										
+	}
 	public static boolean ability2Cast(CardGameBean game,CardDeckBean site,
 										CardBean card,CardActionBean action){
-		CardAbilityBean ability = CardAbilityStoreBean.GetInstance().getAbilityBean(card.getCardID());
-		if(ability==null)
-			return false;
 		if(site.getCurRes()< card.getCost())
 			return false;
 		site.useRes(card.getCost());
+		
+		CardAbilityBean ability = CardAbilityStoreBean.GetInstance().getAbilityBean(card.getCardID());
+		if(ability==null)
+			return false;
 		if(ability.IsRangeTarget()){
 			Vector<Integer> des = new Vector<Integer>();
 			Vector<CardBean> pickVect = PickCardOnWhich(game,site,ability.getWhich());

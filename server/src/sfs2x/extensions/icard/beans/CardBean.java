@@ -33,7 +33,7 @@ public class CardBean
 	public final static int CARDID_DIRTY_BIT = 7;
 	public final static int BUF_DIRTY_BIT = 8;
 	public final static int ATTACH_DIRTY_BIT = 9;
-	
+	public final static int MP_DIRTY_BIT = 10;
 	private int _realID;
 	private int _cardID;
 	private int _zoneID;
@@ -46,7 +46,10 @@ public class CardBean
 	private int _attachTo=0;
 	private int _defVal = 0;
 	private int _atkIndicateVal = 0; //攻击力指示物
+	private int _mp;  //魔力,用于英雄法术
+	private int _mpMax;
 	private CardInfoBean _info;
+	private BufferStoreBean _bufStore;
 	public CardBean(int realID, int cardID,int zoneID,CardDeckBean deck)
 	{
 		_realID = realID;
@@ -56,9 +59,20 @@ public class CardBean
 		setDirtyFlagBit(ZONE_DIRTY_BIT);
 		setDirtyFlagBit(CARDID_DIRTY_BIT);
 		_info = CardInfoStoreBean.GetInstance().getCardInfo(cardID);
+		_bufStore = new BufferStoreBean();
 	}
 	/* GETTERS & SETTERS */
-	
+	public BufferStoreBean getBufStore(){
+		return _bufStore;
+	}
+	public void AddBuf(CardAbilityBean ability,int realID){
+		_bufStore.AddBuf(ability,realID);
+		setDirtyFlagBit(BUF_DIRTY_BIT);
+	}
+	public void DelBuf(int realID){
+		_bufStore.DelBuf(realID);
+		setDirtyFlagBit(BUF_DIRTY_BIT);
+	}
 	public int getOwner(){
 		return _deck.getPlayerID();
 	}
@@ -118,7 +132,14 @@ public class CardBean
 		_zoneID = id;
 		setDirtyFlagBit(ZONE_DIRTY_BIT);
 	}
-	
+	public int getTurn() {
+		return _turn;
+	}
+
+	public void setTurn(int val) {
+		_turn = val;
+		setDirtyFlagBit(TURN_DIRTY_BIT);
+	}
 	public int getSide() {
 		return _side;
 	}
@@ -126,6 +147,10 @@ public class CardBean
 		setSide(0);
 		_defVal = 0;
 		setDirtyFlagBit(DEF_DIRTY_BIT);
+		if(_mp<_mpMax){
+			_mp++;
+			setDirtyFlagBit(MP_DIRTY_BIT);
+		}
 	}
 	public void setSide(int val) {
 		_side = val;
@@ -214,6 +239,18 @@ public class CardBean
 	}
 	public int getDef(){
 		return _info.getBaseDefence() - _defVal ;
+	}
+	public boolean heroUseMP(){
+		if(IsHero()==false)
+			return false;
+		return useMP(getUseCost());
+	}
+	public boolean useMP(int val){
+		if(_mp <val)
+			return false;
+		_mp -= val;
+		setDirtyFlagBit(MP_DIRTY_BIT);
+		return true;
 	}
 	public int useDef(int val){
 		if(getDef()<=0)
