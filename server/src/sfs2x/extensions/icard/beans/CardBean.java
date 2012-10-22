@@ -118,14 +118,7 @@ public class CardBean
 		_zoneID = id;
 		setDirtyFlagBit(ZONE_DIRTY_BIT);
 	}
-	public int getTurn() {
-		return _turn;
-	}
-
-	public void setTurn(int val) {
-		_turn = val;
-		setDirtyFlagBit(TURN_DIRTY_BIT);
-	}
+	
 	public int getSide() {
 		return _side;
 	}
