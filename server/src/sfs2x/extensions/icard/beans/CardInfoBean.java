@@ -6,7 +6,7 @@ public final class CardInfoBean {
 	public static final int ALLY = 1;
 	public static final int WEAPON = 2;
 	public static final int ARMOR = 3;
-	public static final int ABILITY = 4;
+	public static final int Skill = 4;
 	public static final int QUEST = 5;
 	public static final int SUPPORT = 6;
 		
@@ -17,15 +17,17 @@ public final class CardInfoBean {
 	private int _BaseHp = 0; // 最初始的生命
 	private int _BaseDefence = 0;//最初的防御
 	private int _BaseUseCost = 0; // 最初始的使用一次花费（对武器有效）
+	private int _MpMax = 0;
 	
 	public CardInfoBean(int cardID,int BaseCost, int BaseAttack,
-			int BaseHp,int BaseDefence,int BaseUseCost) {
+			int BaseHp,int BaseDefence,int BaseUseCost,int mpMax) {
 		this._cardID = cardID;
 		this._BaseCost=BaseCost;
 		this._BaseAttack =BaseAttack;
 		this._BaseHp =BaseHp;
 		this._BaseDefence = BaseDefence;
 		this._BaseUseCost = BaseUseCost;
+		this._MpMax = mpMax;
 	}
 	
 	public int getCardID() {
@@ -38,7 +40,9 @@ public final class CardInfoBean {
 //			CountOfThisCard--;
 //		}
 //	}
-
+	public int getMpMax(){
+		return _MpMax;
+	}
 	public int getBaseCost() {
 		return _BaseCost;
 	}
@@ -80,7 +84,7 @@ public final class CardInfoBean {
 					ret = QUEST;
 					break;
 				case 50:
-					ret = ABILITY;
+					ret = Skill;
 					break;
 				case 60:
 					ret = SUPPORT;

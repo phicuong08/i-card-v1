@@ -70,7 +70,7 @@ public class BattleAIBsn
 			BattleBsn.ClientEndOp(game,site.getPlayerID());
 	}
 	private static CardBean thinkAbilityCard(CardGameBean game,CardDeckBean site){
-		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,CardInfoBean.ABILITY);
+		Vector<CardBean> cardVect = CardSiteBsn.PickSlotCard(site,CardBean.HAND_ZONE_ID,CardInfoBean.Skill);
 		cardVect = WashCard(cardVect);
 		for(int i=0;i<cardVect.size();i++){
 			CardBean card = cardVect.get(i);
