@@ -127,7 +127,7 @@ public class CardUseBsn
 			bMatch = ((srcOwner==desOwner)&& (cardDes.getCardType()==CardInfoBean.WEAPON));
 			break;	
 		case CardAbilityBean.WHICH_SKILL:
-			bMatch = (cardDes.getCardType()==CardInfoBean.ABILITY);
+			bMatch = (cardDes.getCardType()==CardInfoBean.Skill);
 			break;	
 		}
 		return bMatch;
@@ -285,7 +285,7 @@ public class CardUseBsn
 				bAttach = true;
 		}
 		cardSrc.setDirtyFlagBit(CardBean.CARDID_DIRTY_BIT);
-		if(cardSrc.IsSkill(){
+		if(cardSrc.IsSkill()){
 				if(bAttach){
 					cardSrc.setZoneID(CardBean.ATTACH_ZONE_ID);
 					cardSrc.setAttachTo(cardDes.getRealID());
@@ -311,14 +311,8 @@ public class CardUseBsn
 			}
 		}
 	}
-	public static boolean heroAbility2Cast(CardGameBean game,CardDeckBean site,
-										CardBean card,CardActionBean action){
-			
-				
-			Vector<CardAbilityBean> vec = CardAbilityStoreBean.GetInstance().getCardAbilityOnWhen(card.getCardID(),CardAbilityBean.WHEN_USE);
-										
-	}
-	public static boolean ability2Cast(CardGameBean game,CardDeckBean site,
+	
+	public static boolean Card2Cast(CardGameBean game,CardDeckBean site,
 										CardBean card,CardActionBean action){
 		if(card.IsHero()){              //英雄的能力消耗魔力值
 			if(card.heroUseMP()==false)

@@ -47,7 +47,6 @@ public class CardBean
 	private int _defVal = 0;
 	private int _atkIndicateVal = 0; //攻击力指示物
 	private int _mp;  //魔力,用于英雄法术
-	private int _mpMax;
 	private CardInfoBean _info;
 	private BufferStoreBean _bufStore;
 	public CardBean(int realID, int cardID,int zoneID,CardDeckBean deck)
@@ -147,7 +146,7 @@ public class CardBean
 		setSide(0);
 		_defVal = 0;
 		setDirtyFlagBit(DEF_DIRTY_BIT);
-		if(_mp<_mpMax){
+		if(_mp<_info.getMpMax()){
 			_mp++;
 			setDirtyFlagBit(MP_DIRTY_BIT);
 		}
@@ -156,8 +155,8 @@ public class CardBean
 		_side = val;
 		setDirtyFlagBit(SIDE_DIRTY_BIT);
 	}
-	public boolean IsAbility(){
-		return getCardType()==CardInfoBean.ABILITY;
+	public boolean IsSkill(){
+		return getCardType()==CardInfoBean.Skill;
 	}
 	public boolean IsWeapon(){
 		return (_zoneID==CardBean.EQUIP_ZONE_ID && getCardType()==CardInfoBean.WEAPON);
@@ -247,6 +246,9 @@ public class CardBean
 		if(IsHero()==false)
 			return false;
 		return useMP(getUseCost());
+	}
+	public int getMp(){
+		return _mp;
 	}
 	public boolean useMP(int val){
 		if(_mp <val)

@@ -46,6 +46,8 @@ public class SFSObjectBsn
 			cardInfo.putInt("atk", card.getAtk(-1));	
 		if(card.getDirtyFlagBit(CardBean.DEF_DIRTY_BIT))	
 			cardInfo.putInt("def", card.getDef());
+		if(card.getDirtyFlagBit(CardBean.MP_DIRTY_BIT))	
+			cardInfo.putInt("mp", card.getMp());
 		if(card.getDirtyFlagBit(CardBean.BUF_DIRTY_BIT))
 		{
 			HashMap<Integer, BufferBean> bufMap = card.getBufStore().getBufMap();
@@ -81,6 +83,8 @@ public class SFSObjectBsn
 			cardInfo.putInt("turn", card.getTurn());	
 		if(card.getDirtyFlagBit(CardBean.HP_DIRTY_BIT))	
 			cardInfo.putInt("hp", card.getHp());	
+		if(card.getDirtyFlagBit(CardBean.MP_DIRTY_BIT))	
+			cardInfo.putInt("mp", card.getMp());
 		return cardInfo;
 	}
 	

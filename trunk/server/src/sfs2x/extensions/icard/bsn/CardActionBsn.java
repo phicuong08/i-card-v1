@@ -67,7 +67,7 @@ public class CardActionBsn
 		case CardInfoBean.SUPPORT:
 			ret = procCard2SupportSlot(deck,card);
 			break;
-		case CardInfoBean.ABILITY:
+		case CardInfoBean.Skill:
 			//procCard2Fight(game,deck,card,action);
 			break;
 		case CardInfoBean.QUEST:
@@ -141,7 +141,7 @@ public class CardActionBsn
 		CardUseBsn.Atk(game,card, card2);	
 	}
 	private static boolean procAbility2Cast(CardGameBean game,CardDeckBean site,CardBean card,CardActionBean action){
-		return CardUseBsn.ability2Cast(game,site,card,action);
+		return CardUseBsn.Card2Cast(game,site,card,action);
 	}
 	
 	private static boolean procAbility2Op(CardGameBean game,CardDeckBean site,CardBean card,CardActionBean action){
@@ -174,7 +174,7 @@ public class CardActionBsn
 		case CardInfoBean.ALLY:
 			procCard2Atk(game,card,action);
 			break;
-		case CardInfoBean.ABILITY:
+		case CardInfoBean.Skill:
 		case CardInfoBean.HERO:
 			procAbility2Cast(game,site,card,action);
 			break;
@@ -290,7 +290,7 @@ public class CardActionBsn
 		case CardInfoBean.WEAPON:
 			bMatch = (card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.ALLY) && (card2.IsHidden(game)==false);
 			break;
-		case CardInfoBean.ABILITY:
+		case CardInfoBean.Skill:
 				if(card2.getCardType()==CardInfoBean.HERO || card2.getCardType()==CardInfoBean.ALLY)
 				{
 					bMatch = !card2.IsPointUnable(game);

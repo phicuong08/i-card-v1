@@ -195,8 +195,9 @@ package ICard.assist.server {
 			card["camp"] = cardInfo[2];
 			card["race"]= cardInfo[3];
 			card["cost"]=cardInfo[4];
-			card["hp"]=cardInfo[5];
-			card["detail"]=cardInfo[6];
+			card["mpMax"]=cardInfo[5];
+			card["hp"]=cardInfo[6];
+			card["detail"]=cardInfo[7];
 			return card;
 		}
 		private static function CreateUnKnowCardInfo(id:int):Object{
