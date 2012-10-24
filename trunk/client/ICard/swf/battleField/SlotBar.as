@@ -232,6 +232,7 @@
 			_battleStage.AskCard2ResSlot(_selCard.realID);
 		}
 		public function OnCardToCast(e:MouseEvent):void{
+			e.stopPropagation();
 			_battleStage.InitialFight(_selCard.realID);
 			_battleField.onInitalFight(_selCard.realID);
 		}
