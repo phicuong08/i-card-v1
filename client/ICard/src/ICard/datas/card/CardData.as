@@ -6,10 +6,11 @@ package ICard.datas.card {
 	import ICard.datas.BattleGuyData;
 	import ICard.datas.card.*;
 	import ICard.haloer.data.*;
+	import ICard.logic.AbilityHelper;
 	import ICard.logic.AttachCardHelper;
 	import ICard.logic.CardAttrHelper;
 	import ICard.logic.UseCard;
-	import ICard.logic.AbilityHelper;
+	
 	import flash.utils.ByteArray;
 
 	public class CardData {
@@ -43,6 +44,9 @@ package ICard.datas.card {
 		}
 		public function set GuyID(val:int):void{
 			_info["guy"] = val;
+		}
+		public function get Mp():int{
+			return _info["mp"];
 		}
 		public function get GuyID():int{
 			return _info["guy"];
@@ -144,6 +148,8 @@ package ICard.datas.card {
 				_info["slot"] = info["slot"];
 			if(info.hasOwnProperty("attach"))
 				_info["attachTo"] = info["attach"];
+			if(info.hasOwnProperty("mp"))
+				_info["mp"] = info["mp"];
 			UpdateBuf(info);
 		}
 		public function IsActive():Boolean{

@@ -152,6 +152,8 @@ package ICard.SFSMod {
 				var cardInfo:Object = new Object;
 				for each( var keyVal:String in keyArr)
 				{
+					if(keyVal=="mp")
+						var kk:int = 0;
 					cardInfo[keyVal] = cardObj.getInt(keyVal);
 				}
 				_battleStage.onUpdateCard(cardInfo);

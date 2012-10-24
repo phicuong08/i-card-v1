@@ -46,7 +46,7 @@ public class CardBean
 	private int _attachTo=0;
 	private int _defVal = 0;
 	private int _atkIndicateVal = 0; //攻击力指示物
-	private int _mp;  //魔力,用于英雄法术
+	private int _mp=6;  //魔力,用于英雄法术
 	private CardInfoBean _info;
 	private BufferStoreBean _bufStore;
 	public CardBean(int realID, int cardID,int zoneID,CardDeckBean deck)

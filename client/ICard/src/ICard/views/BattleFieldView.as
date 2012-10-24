@@ -75,6 +75,10 @@ package ICard.views {
 				if(info["cardID"]==0)
 					return null;
 				var cardMC:MovieClip = _cardDB.CreateCard(info);
+				if(info["cardID"]==20001)
+				{
+					var kk:int = 0;
+				}
 				fillBufIcon(cardMC,card);
 				if(cardMC==null || bTip==false)
 						return cardMC;

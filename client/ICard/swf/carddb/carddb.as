@@ -150,6 +150,7 @@
 			var hero:MovieClip = new card_hero;
 			hero.addChild(CreateTitleMC(title));
 			hero.addChild(CreateHpMC(info["hp"]));
+			hero.addChild(CreateMpMC(info["mp"]));
 			return hero;
 			
 		}
@@ -207,6 +208,13 @@
 			atMC.y = _at_y -_cardHeight/2;
 			atMC.cardpart = "atk";
 			return atMC;
+		}
+		private function CreateMpMC(val:int):MovieClip{
+			var mpMC:MovieClip = CreateNum(val);
+			mpMC.x = _at_x- mpMC.width/2 -_cardWidth/2;
+			mpMC.y = _at_y -_cardHeight/2;
+			mpMC.cardpart = "mp";
+			return mpMC;
 		}
 		private function CreateTitleMC(title:String):MovieClip{
 			var classTitle:Class = getDefinitionByName(title) as Class;

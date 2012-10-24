@@ -15,11 +15,16 @@ package ICard.logic {
 		}
 				
 		public static function IsCastAble(card:CardData,resVal:int):Boolean{
-			if(card.Slot != BattleFieldType.HandSlotId)
-				return false;
-			if(card.Type != CardType.SkillType)
-				return false;
-			return (card.Cost<= resVal);
+			if(card.Type == CardType.SkillType){
+				if(card.Slot != BattleFieldType.HandSlotId)
+					return false;
+				return (card.Cost<= resVal);
+			}
+			else if(card.Type == CardType.HeroType){
+				return (card.Mp >= card.Cost);
+			}
+
+			return false;
 		}
 		
 		public static function Is2FightAble(card:CardData,resVal:int,allyFightable:Boolean):Boolean{
