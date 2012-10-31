@@ -27,6 +27,8 @@ public class CardAbilityBsn
 		if(card==null)
 			return;
 		switch(ability.getType()){
+		case CardAbilityBean.BUF_EVIL_KILLER:
+			break;
 		case CardAbilityBean.BUF_CURE:
 			card.AddHp(-ability.getVal());
 			break;

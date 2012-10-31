@@ -124,6 +124,14 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.WHICH_SOLDIER;
 		else if(which.equals("WHICH_IU"))
 			return CardAbilityBean.WHICH_IU;
+		else if(which.equals("WHICH_YOUREQUIP"))
+			return CardAbilityBean.WHICH_YOUREQUIP;
+		else if(which.equals("WHICH_MYEQUIP"))
+			return CardAbilityBean.WHICH_MYEQUIP;
+		else if(which.equals("WHICH_YOURSUPPORT"))
+			return CardAbilityBean.WHICH_YOURSUPPORT;
+		else if(which.equals("WHICH_MYSUPPORT"))
+			return CardAbilityBean.WHICH_MYSUPPORT;
 		return 	CardAbilityBean.WHICH_NULL;
 	}
 
@@ -138,6 +146,8 @@ public class CardAbilityStoreBean {
 			return CardAbilityBean.BUF_ATK_UNABLE;
 		else if(whatInfo.equals("BUF_UNABLE_ATKED"))
 			return CardAbilityBean.BUF_UNABLE_ATKED;
+		else if(whatInfo.equals("BUF_EVIL_KILLER"))
+			return CardAbilityBean.BUF_EVIL_KILLER;
 		else if(whatInfo.equals("BUF_CAST_DAMAGE_ADD"))
 			return CardAbilityBean.BUF_CAST_DAMAGE_ADD;
 		else if(whatInfo.equals("BUF_CURE"))

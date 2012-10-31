@@ -47,6 +47,7 @@ public class CardAbilityBean
 	public static final int BUF_DEF_UNABLE        =23;  //无法防御
 	public static final int BUF_AT_ONCE           =24;  //瞬发
 	public static final int BUF_CAST_DAMAGE_ADD   =25;  //施法伤害加深
+	public static final int BUF_EVIL_KILLER 	  =26;  //造成伤害，则消灭目标盟军
 	public static final int BUF_MAX               =99;  //
 	
 	public static final int WHICH_NULL                 =0;  
@@ -67,6 +68,10 @@ public class CardAbilityBean
 	public static final int WHICH_HERO                 =15; //
 	public static final int WHICH_U                    =16; //
 	public static final int WHICH_DES_HERO             =17; //目标
+	public static final int WHICH_YOUREQUIP            =18; //目标
+	public static final int WHICH_MYEQUIP              =19; //目标
+	public static final int WHICH_YOURSUPPORT          =20; //目标
+	public static final int WHICH_MYSUPPORT            =21; //目标
 
 
 	public static final int DO_NULL                 =100;  //
